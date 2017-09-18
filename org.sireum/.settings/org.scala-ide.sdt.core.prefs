@@ -1,0 +1,10 @@
+P=
+Xplugin=
+Xplugin-disable=
+Xplugin-require=
+eclipse.preferences.version=1
+organizeimports.expandcollapse=expand
+organizeimports.groups=java$scala$org$com
+organizeimports.wildcards=scalaz$scalaz.Scalaz
+scala.compiler.additionalParams=
+scala.compiler.installation=2.12

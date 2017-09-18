@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension point="org.eclipse.ui.commands">
+      <command id="org.sireum.commands.launchsireum"
+               name="Launch Sireum"
+               defaultHandler="org.sireum.handlers.LaunchSireumHandler">
+        <commandParameter id="org.sireum.commands.launchsireum.generator"
+                          name="Generator"/>
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+   </extension>
+   
+   <extension point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.osate.ui.osateMenu">
+         <menu
+               id="org.sireum.BridgeMenu"
+               label="Sireum Bridge">
+            <command
+                  commandId="org.sireum.commands.launchsireum"
+                  label="Generate JSON (model)"
+                  style="push">
+               <parameter name="org.sireum.commands.launchsireum.generator" value="json"/>
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+</plugin>
