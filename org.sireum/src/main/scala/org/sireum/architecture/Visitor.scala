@@ -4,10 +4,12 @@ import org.sireum._
 import org.osate.aadl2._
 import org.osate.aadl2.instance._
 import scala.collection.JavaConversions._
-import org.sireum.lang.ast
+import org.sireum.aadl.ast
 
 object Visitor{
   
+  implicit def _convert[T](a : ast.MyTop) : T = a.asInstanceOf[T] 
+
   def visit(root : Element) : ast.MyTop = {
      val metaId = root.eClass.getClassifierID
      
@@ -19,23 +21,23 @@ object Visitor{
          
          var features = ISZ[ast.Feature]()
          for(fi <- o.getFeatureInstances)
-           features :+= visit(fi).asInstanceOf[ast.Feature]
+           features :+= visit(fi)
          
          var connections = ISZ[ast.Connection]()
          for(ci <- o.getConnectionInstances)
-           connections :+= visit(ci).asInstanceOf[ast.Connection]
+           connections :+= visit(ci)
          
          var properties = ISZ[ast.Property]()
          for(pa <- o.getOwnedPropertyAssociations)
-           properties :+= visit(pa).asInstanceOf[ast.Property]
+           properties :+= visit(pa)
          
          var flows = ISZ[ast.Flow]()
          for(fs <- o.getFlowSpecifications)
-           flows :+= visit(fs).asInstanceOf[ast.Flow]
+           flows :+= visit(fs)
 
          var components = ISZ[ast.Component]()
          for(ci <- o.getComponentInstances)
-           components :+= visit(ci).asInstanceOf[ast.Component]
+           components :+= visit(ci)
          
          import org.osate.aadl2.ComponentCategory._
          val cat = o.getCategory match{

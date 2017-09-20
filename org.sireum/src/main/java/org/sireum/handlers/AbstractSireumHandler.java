@@ -15,8 +15,8 @@ import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.sireum.architecture.Visitor;
 import org.sireum.util.SelectionHelper;
-import org.sireum.lang.ast.MyTop;
-import org.sireum.lang.ast.AadlJSON;
+import org.sireum.aadl.ast.MyTop;
+import org.sireum.aadl.ast.JSON;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
 
@@ -43,7 +43,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		if (root != null) {
 			MyTop _r = Visitor.visit(root);
 
-			System.out.println(AadlJSON.fromMyTop(_r, false));
+			System.out.println(JSON.fromMyTop(_r, false));
 
 		} else {
 			MessageDialog.openError(window.getShell(), "Sireum",
