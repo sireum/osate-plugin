@@ -5,9 +5,9 @@ import org.osate.aadl2._
 import org.osate.aadl2.instance._
 import scala.collection.JavaConversions._
 import org.sireum.lang.ast
-import scala.collection.mutable.ListBuffer
 
-class Visitor {
+object Visitor{
+  
   def visit(root : Element) : ast.MyTop = {
      val metaId = root.eClass.getClassifierID
      
@@ -16,43 +16,43 @@ class Visitor {
             InstancePackage.COMPONENT_INSTANCE =>
          
          val o = root.asInstanceOf[ComponentInstance]
-
-         val id = o.getFullName;
-
-         println("it's a component instance " + id)
          
-         var isFeatures = ISZ[ast.Feature]()
+         var features = ISZ[ast.Feature]()
          for(fi <- o.getFeatureInstances)
-           isFeatures :+= visit(fi).asInstanceOf[ast.Feature]
+           features :+= visit(fi).asInstanceOf[ast.Feature]
          
-         var connections = ListBuffer[ast.Connection]()
+         var connections = ISZ[ast.Connection]()
          for(ci <- o.getConnectionInstances)
-           connections += visit(ci).asInstanceOf[ast.Connection]
-         val isConnections = ISZ[ast.Connection](connections:_*)
+           connections :+= visit(ci).asInstanceOf[ast.Connection]
          
-         var properties = ListBuffer[ast.Property]()
-         for(pa <- o.getOwnedPropertyAssociations){
-           properties += visit(pa).asInstanceOf[ast.Property]
-         }
-         val isProperties = ISZ[ast.Property](properties:_*)
+         var properties = ISZ[ast.Property]()
+         for(pa <- o.getOwnedPropertyAssociations)
+           properties :+= visit(pa).asInstanceOf[ast.Property]
          
-         var flows = ListBuffer[ast.Flow]()
+         var flows = ISZ[ast.Flow]()
          for(fs <- o.getFlowSpecifications)
-           flows += visit(fs).asInstanceOf[ast.Flow]
-         val isFlows = ISZ[ast.Flow](flows:_*)
+           flows :+= visit(fs).asInstanceOf[ast.Flow]
 
-         var components = ListBuffer[ast.Component]()
+         var components = ISZ[ast.Component]()
          for(ci <- o.getComponentInstances)
-           components += visit(ci).asInstanceOf[ast.Component]
-         val isComponents = ISZ[ast.Component](components:_*)
+           components :+= visit(ci).asInstanceOf[ast.Component]
          
          import org.osate.aadl2.ComponentCategory._
          val cat = o.getCategory match{
+           case ABSTRACT => ast.Category.Abstract
+           case BUS => ast.Category.Bus
+           case DATA => ast.Category.Data
+           case DEVICE => ast.Category.Device
+           case MEMORY => ast.Category.Memory
+           case PROCESS => ast.Category.Process           
+           case PROCESSOR => ast.Category.Processor
+           case SUBPROGRAM => ast.Category.Subprogram
+           case SUBPROGRAM_GROUP => ast.Category.SubprogramGroup
            case SYSTEM => ast.Category.System
            case THREAD => ast.Category.Thread
-           case PROCESSOR => ast.Category.Processor
-           case BUS => ast.Category.Bus
-           case DEVICE => ast.Category.Device
+           case THREAD_GROUP => ast.Category.ThreadGroup
+           case VIRTUAL_BUS => ast.Category.VirtualBus
+           case VIRTUAL_PROCESSOR => ast.Category.VirtualProcessor
          }
 
          val comp = 
@@ -61,18 +61,18 @@ class Visitor {
              category = cat,
              
              classifier = ast.Classifier(),
-             features = isFeatures,
-             subComponents = isComponents,
-             connections = isConnections,
-             properties = isProperties,
-             flows = isFlows,
+             features = features,
+             subComponents = components,
+             connections = connections,
+             properties = properties,
+             flows = flows,
              modes = ISZ[ast.Mode](),
              annexes = ISZ[ast.Annex]())
 
          return comp
          
        case InstancePackage.CONNECTION_INSTANCE =>
-         println("It's a connection instance " + root)
+         //println("It's a connection instance " + root)
 
          val o = root.asInstanceOf[ConnectionInstance]
          
