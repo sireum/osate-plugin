@@ -16,8 +16,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
+import org.sireum.aadl.ast.AadlTop;
 import org.sireum.aadl.ast.JSON;
-import org.sireum.aadl.ast.MyTop;
 import org.sireum.architecture.Visitor;
 import org.sireum.util.SelectionHelper;
 
@@ -42,9 +42,9 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		final IWorkbenchWindow window = wb.getActiveWorkbenchWindow();
 
 		if (root != null) {
-			MyTop _r = Visitor.visit(root);
+			AadlTop _r = Visitor.visit(root);
 			// Visitor.displayTypePackages();
-			String str = JSON.fromMyTop(_r, false);
+			String str = JSON.fromAadlTop(_r, false);
 
 			try {
 				String fileName = System.getProperty("user.home") + "/aadl.json";

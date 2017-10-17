@@ -14,7 +14,7 @@ import org.osate.xtext.aadl2.serializer.InstanceEnabledSerializer
 
 object Visitor {
 
-  implicit def _convert[T](a: ast.MyTop): T = a.asInstanceOf[T]
+  implicit def _convert[T](a: ast.AadlTop): T = a.asInstanceOf[T]
 
   var seenSet:ISZ[AadlPackageImpl] = ISZ()
   var typePackages: ISZ[ast.Component] = ISZ()
@@ -41,7 +41,7 @@ object Visitor {
               
             val f = ast.Feature(
               identifier = dt.getQualifiedName,
-              classifier = ast.Classifier("??"),
+              classifier = None[ast.Classifier],
               direction = ast.Direction.None,
               category = ast.FeatureCategory.AbstractFeature,
               properties = properties)
@@ -54,10 +54,10 @@ object Visitor {
 
       val comp =
           ast.Component(
-            identifier = e.getFullName,
+            identifier = Some(e.getFullName),
             category = ast.ComponentCategory.Abstract,
 
-            classifier = ast.Classifier(""),
+            classifier = None[ast.Classifier],
             features = features,
             subComponents = ISZ(),
             connections = ISZ(),
@@ -81,7 +81,7 @@ object Visitor {
     }
   }
 
-  def visit(root: Element): ast.MyTop = {
+  def visit(root: Element): ast.AadlTop = {
     val metaId = root.eClass.getClassifierID
 
     metaId match {
@@ -134,10 +134,10 @@ object Visitor {
 
         val comp =
           ast.Component(
-            identifier = o.getFullName,
+            identifier = Some(o.getFullName),
             category = cat,
 
-            classifier = ast.Classifier(classifier),
+            classifier = Some(ast.Classifier(classifier)),
             features = features,
             subComponents = components,
             connections = connections,
@@ -162,7 +162,7 @@ object Visitor {
           properties +:= visit(p)
 
         return ast.Connection(
-          name = o.getQualifiedName,
+          name = Some(o.getQualifiedName),
           src = ast.EndPoint(
             component = srcComponent,
             feature = srcFeature),
@@ -183,9 +183,9 @@ object Visitor {
           
           handlePackageTypes(er)
 
-          ast.Classifier(dt.getQualifiedName)
+          Some(ast.Classifier(dt.getQualifiedName))
         } else {
-          ast.Classifier("")
+          None[ast.Classifier]
         }
         
         var properties = ISZ[ast.Property]()
@@ -239,7 +239,7 @@ object Visitor {
             case Aadl2Package.RANGE_VALUE =>
               val rv = pe.asInstanceOf[RangeValue]
               return ISZ(ast.RangeProp(
-                  Unit = rv.getMinimum.eClass().getName,
+                  Unit = Some(rv.getMinimum.eClass().getName),
                   ValueLow = if(rv.getMinimumValue != null) rv.getMinimumValue.toString.trim else "IT'S NULL", 
                   ValueHigh = if(rv.getMaximumValue != null) rv.getMaximumValue.toString.trim else "IT'S NULL"))
             case Aadl2Package.CLASSIFIER_VALUE =>
