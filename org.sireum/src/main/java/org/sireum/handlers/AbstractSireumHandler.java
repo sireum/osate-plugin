@@ -1,5 +1,8 @@
 package org.sireum.handlers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -13,10 +16,10 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
+import org.sireum.aadl.ast.JSON;
+import org.sireum.aadl.ast.MyTop;
 import org.sireum.architecture.Visitor;
 import org.sireum.util.SelectionHelper;
-import org.sireum.aadl.ast.MyTop;
-import org.sireum.aadl.ast.JSON;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
 
@@ -35,19 +38,27 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 			root = SelectionHelper.getSelectedSystemImplementation();
 		}
 
-		// System.out.println("root = " + root);
-
 		final IWorkbench wb = PlatformUI.getWorkbench();
 		final IWorkbenchWindow window = wb.getActiveWorkbenchWindow();
 
 		if (root != null) {
 			MyTop _r = Visitor.visit(root);
+			// Visitor.displayTypePackages();
+			String str = JSON.fromMyTop(_r, false);
 
-			System.out.println(JSON.fromMyTop(_r, false));
+			try {
+				String fileName = System.getProperty("user.home") + "/aadl.json";
+				BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+				writer.write(str);
+				writer.close();
+				MessageDialog.openInformation(window.getShell(), "Sireum", "Wrote: " + fileName);
+			} catch (Exception ee) {
+				MessageDialog.openError(window.getShell(), "Sireum", ee.getMessage());
+			}
 
 		} else {
 			MessageDialog.openError(window.getShell(), "Sireum",
-					"Please select a System Implementation (** don't put the cursor in the system's name **");
+					"Please select an instance element");
 		}
 
 		return null;
