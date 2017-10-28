@@ -93,8 +93,9 @@ object Visitor {
         
         // the following picks up the dispatch protocol for threads.  Could use
         // GetProperties.getDispatchProtocol to get it directly
-        for(pa <- o.getSubcomponent.getComponentType.getOwnedPropertyAssociations)
-          properties :+= visit(pa)
+        if(o.getSubcomponent != null)
+          for(pa <- o.getSubcomponent.getComponentType.getOwnedPropertyAssociations)
+            properties :+= visit(pa)
 
         var flows = ISZ[ast.Flow]()
         for (fs <- o.getFlowSpecifications)
@@ -217,7 +218,7 @@ object Visitor {
         val o = root.asInstanceOf[PropertyAssociation]
 
         def getPropertyExpressionValue(pe:PropertyExpression) : ISZ[ast.PropertyValue] = {
-          val eName = pe.eClass().getName        
+          val eName = pe.eClass().getName      
           pe.eClass().getClassifierID match {
             case Aadl2Package.BOOLEAN_LITERAL =>
               val b = pe.asInstanceOf[BooleanLiteral].getValue.toString
@@ -265,10 +266,15 @@ object Visitor {
                   println(s"Not handling $xf $nv2")
                   return ISZ()
               }
-            case Aadl2Package.REFERENCE_VALUE =>
+            case Aadl2Package.REFERENCE_VALUE => 
               val rv = pe.asInstanceOf[ReferenceValue]
               println(s"Need to handle ReferenceValue $rv")
-              return ISZ(ast.UnitProp(unit = eName, value= ""))
+              return ISZ(ast.UnitProp(unit = eName, value= rv.toString))
+            case InstancePackage.INSTANCE_REFERENCE_VALUE =>
+              // FIXME: id is coming from InstancePackage rather than Aadl2Package.  Might cause the 
+              // following cast to fail if there is an id clash
+              val rv = pe.asInstanceOf[InstanceReferenceValue]
+              return ISZ(ast.ReferenceProp(rv.getReferencedInstanceObject.getQualifiedName))
             case e => 
               println("Need to handle " + pe + " " +  pe.eClass().getClassifierID)
               return ISZ(ast.ClassifierProp(pe.getClass.getName))
@@ -278,9 +284,17 @@ object Visitor {
         val prop = o.getProperty
         val cont = o.eContainer.asInstanceOf[NamedElement]
 
-        val pe = PropertyUtils.getSimplePropertyValue(cont, prop)
-        val propValList = getPropertyExpressionValue(pe)
- 
+        val propValList = {
+          try {
+            val pe = PropertyUtils.getSimplePropertyValue(cont, prop)
+            getPropertyExpressionValue(pe)
+          } catch {
+            case e: Throwable =>
+              println(s"Error encountered while trying to fetch property value for ${prop.getQualifiedName} from ${cont.getQualifiedName} : ${e.getMessage}") 
+              ISZ[ast.PropertyValue]()
+          }
+        }
+        
         return ast.Property(
           name = prop.getQualifiedName,
           propertyValues = propValList)
