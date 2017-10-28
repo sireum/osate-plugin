@@ -1,22 +1,25 @@
 package org.sireum.handlers;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
-import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.sireum.aadl.ast.AadlTop;
+import org.sireum.aadl.ast.AadlXml;
 import org.sireum.aadl.ast.JSON;
 import org.sireum.architecture.Visitor;
 import org.sireum.util.SelectionHelper;
@@ -24,7 +27,7 @@ import org.sireum.util.SelectionHelper;
 public abstract class AbstractSireumHandler extends AbstractHandler {
 
 	private String generator = null;
-	private SystemImplementation systemImplementation;
+	// private SystemImplementation systemImplementation;
 
 	@Override
 	public Object execute(ExecutionEvent e) throws ExecutionException {
@@ -40,22 +43,32 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 		final IWorkbench wb = PlatformUI.getWorkbench();
 		final IWorkbenchWindow window = wb.getActiveWorkbenchWindow();
+		final Shell sh = window.getShell();
 
 		if (root != null) {
-			AadlTop _r = Visitor.visit(root);
-			// Visitor.displayTypePackages();
+			AadlXml _r = Visitor.convert(root);
 			String str = JSON.fromAadlTop(_r, false);
 
-			try {
-				String fileName = System.getProperty("user.home") + "/aadl.json";
-				BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-				writer.write(str);
-				writer.close();
-				MessageDialog.openInformation(window.getShell(), "Sireum", "Wrote: " + fileName);
-			} catch (Exception ee) {
-				MessageDialog.openError(window.getShell(), "Sireum", ee.getMessage());
-			}
+			// FileDialog fd = new FileDialog(sh, SWT.SAVE);
+			// fd.setText("Specify output file name");
+			// fd.setFileName(System.getProperty("user.home") + "/aadl.json");
+			// fileName = fd.open();
+			InputDialog fd = new InputDialog(sh, "Output file name",
+					"Specify output file name",
+					System.getProperty("user.home") + "/aadl.json", null);
 
+			if (fd.open() == Window.OK) {
+				File f = new File(fd.getValue());
+				try {
+					BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+					writer.write(str);
+					writer.close();
+					MessageDialog.openInformation(window.getShell(), "Sireum", "Wrote: " + f.getAbsolutePath());
+				} catch (Exception ee) {
+					MessageDialog.openError(window.getShell(), "Sireum",
+							"Error encountered while trying to save file: " + f.getAbsolutePath() + "\n\n" + ee.getMessage());
+				}
+			}
 		} else {
 			MessageDialog.openError(window.getShell(), "Sireum",
 					"Please select an instance element");

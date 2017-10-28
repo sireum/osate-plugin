@@ -6,6 +6,7 @@ import org.osate.aadl2.impl._
 import org.osate.contribution.sei.names._
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
+import org.osate.xtext.aadl2.properties.util.TimingProperties;
 import org.osate.aadl2.instance.util._
 import org.osate.aadl2.instance._
 import scala.collection.JavaConversions._
@@ -17,19 +18,18 @@ object Visitor {
   implicit def _convert[T](a: ast.AadlTop): T = a.asInstanceOf[T]
 
   var seenSet:ISZ[AadlPackageImpl] = ISZ()
-  var typePackages: ISZ[ast.Component] = ISZ()
-  
-  def displayTypePackages() : Unit = {
-    for(t <- typePackages){
-      println(ast.JSON.fromComponent(t, false))
-    }
+  var dataTypes: ISZ[ast.Component] = ISZ()
+    
+  def convert(root: Element): ast.AadlXml = {
+    val t = visit(root).asInstanceOf[ast.Component]
+    return ast.AadlXml(components = ISZ(t) ++ dataTypes)  
   }
-  
-  def handlePackageTypes(e: AadlPackageImpl) : Unit = {
+    
+  private def handlePackageTypes(e: AadlPackageImpl) : Unit = {
     if(!seenSet.elements.contains(e)){
       val p1 = e.getPublicSection
 
-      var features = ISZ[ast.Feature]()
+      var components = ISZ[ast.Component]()
       for(c <- p1.getOwnedClassifiers){
         c.eClass.getClassifierID match {
           case Aadl2Package.DATA_TYPE =>
@@ -38,40 +38,29 @@ object Visitor {
             var properties = ISZ[ast.Property]()
             for (pa <- dt.getOwnedPropertyAssociations)
               properties :+= visit(pa)
+
+            val comp = ast.Component(
+              identifier = Some(dt.getName),
+              category = ast.ComponentCategory.Data,
+              classifier = Some(ast.Classifier(e.getQualifiedName)),
+              features = ISZ(),
+              subComponents = ISZ(),
+              connections = ISZ(),
+              properties = properties,
+              flows = ISZ(),
+              modes = ISZ[ast.Mode](),
+              annexes = ISZ[ast.Annex]())              
               
-            val f = ast.Feature(
-              identifier = dt.getQualifiedName,
-              classifier = None[ast.Classifier],
-              direction = ast.Direction.None,
-              category = ast.FeatureCategory.AbstractFeature,
-              properties = properties)
-              
-            features :+= f  
+            dataTypes :+= comp
           case x =>
             println(s"not handling $e with type $x") 
         }
       }
-
-      val comp =
-          ast.Component(
-            identifier = Some(e.getFullName),
-            category = ast.ComponentCategory.Abstract,
-
-            classifier = None[ast.Classifier],
-            features = features,
-            subComponents = ISZ(),
-            connections = ISZ(),
-            properties = ISZ(),
-            flows = ISZ(),
-            modes = ISZ[ast.Mode](),
-            annexes = ISZ[ast.Annex]())
-            
-        typePackages :+= comp
       seenSet :+= e
     }
   }
   
-  def handleDirection(d: DirectionType): ast.Direction.Type = {
+  private def handleDirection(d: DirectionType): ast.Direction.Type = {
     import org.osate.aadl2.DirectionType._
     return d match {
       case IN => ast.Direction.In
@@ -81,7 +70,7 @@ object Visitor {
     }
   }
 
-  def visit(root: Element): ast.AadlTop = {
+  private def visit(root: Element): ast.AadlTop = {
     val metaId = root.eClass.getClassifierID
 
     metaId match {
@@ -100,6 +89,11 @@ object Visitor {
 
         var properties = ISZ[ast.Property]()
         for (pa <- o.getOwnedPropertyAssociations)
+          properties :+= visit(pa)
+        
+        // the following picks up the dispatch protocol for threads.  Could use
+        // GetProperties.getDispatchProtocol to get it directly
+        for(pa <- o.getSubcomponent.getComponentType.getOwnedPropertyAssociations)
           properties :+= visit(pa)
 
         var flows = ISZ[ast.Flow]()
@@ -129,15 +123,15 @@ object Visitor {
         }
 
         var classifier = 
-          if(o.getClassifier != null) o.getClassifier.getQualifiedName
-          else ""
+          if(o.getClassifier != null) Some(ast.Classifier(o.getClassifier.getQualifiedName))
+          else None[ast.Classifier]
 
         val comp =
           ast.Component(
             identifier = Some(o.getFullName),
             category = cat,
 
-            classifier = Some(ast.Classifier(classifier)),
+            classifier = classifier,
             features = features,
             subComponents = components,
             connections = connections,
@@ -179,9 +173,11 @@ object Visitor {
         val f = o.getFeature
         val classifier = if(f.getFeatureClassifier != null && f.getFeatureClassifier.isInstanceOf[DataTypeImpl]){ 
           val dt = f.getFeatureClassifier.asInstanceOf[DataTypeImpl]
-          val er = dt.getElementRoot.asInstanceOf[AadlPackageImpl]
-          
-          handlePackageTypes(er)
+
+          // uncomment the following to include all the data type defs declared 
+          // within the package that contains dt
+          // val er = dt.getElementRoot.asInstanceOf[AadlPackageImpl]
+          // handlePackageTypes(er)
 
           Some(ast.Classifier(dt.getQualifiedName))
         } else {
