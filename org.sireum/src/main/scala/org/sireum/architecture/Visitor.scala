@@ -93,9 +93,9 @@ object Visitor {
         
         // the following picks up the dispatch protocol for threads.  Could use
         // GetProperties.getDispatchProtocol to get it directly
-        if(o.getSubcomponent != null)
-          for(pa <- o.getSubcomponent.getComponentType.getOwnedPropertyAssociations)
-            properties :+= visit(pa)
+        //if(o.getSubcomponent != null)
+        //  for(pa <- o.getSubcomponent.getComponentType.getOwnedPropertyAssociations)
+        //    properties :+= visit(pa)
 
         var flows = ISZ[ast.Flow]()
         for (fs <- o.getFlowSpecifications)
@@ -258,7 +258,10 @@ object Visitor {
                   return ISZ(ast.UnitProp(unit = nv2Name, value = el.getFullName))
                 case Aadl2Package.PROPERTY =>
                   val _p = nv2.asInstanceOf[Property]
-                  return ISZ(ast.UnitProp(unit = nv2Name, value = _p.getQualifiedName))
+                  if(_p.getDefaultValue != null) 
+                    return getPropertyExpressionValue(_p.getDefaultValue) 
+                  else 
+                    return ISZ(ast.UnitProp(unit = nv2Name, value = _p.getQualifiedName))
                 case Aadl2Package.PROPERTY_CONSTANT =>
                   val pc = nv2.asInstanceOf[PropertyConstant]
                   return ISZ(ast.UnitProp(unit = nv2Name, value=pc.getConstantValue.toString()))
@@ -284,6 +287,10 @@ object Visitor {
         val prop = o.getProperty
         val cont = o.eContainer.asInstanceOf[NamedElement]
 
+        if(prop.getName == "Dimension"){
+          println(prop);
+        }
+        
         val propValList = {
           try {
             val pe = PropertyUtils.getSimplePropertyValue(cont, prop)

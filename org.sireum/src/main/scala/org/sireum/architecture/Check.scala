@@ -30,12 +30,11 @@ object Check {
       allThreads.filter({ c =>
         val protocol = GetProperties.getDispatchProtocol(c)
         protocol == null ||
-          !(protocol.toString.equalsIgnoreCase(AadlProject.PERIODIC_LITERAL)
-            || protocol.toString.equalsIgnoreCase(AadlProject.SPORADIC_LITERAL))
+          !(protocol.getName.equalsIgnoreCase(AadlProject.PERIODIC_LITERAL) || protocol.getName.equalsIgnoreCase(AadlProject.SPORADIC_LITERAL))
       }).map(ErrorReport(_, "Thread needs a Thread_Properties::Dispatch_Protocol property of 'Periodic' or 'Sporadic'"))
 
     // FIXME: how to determine inherited properties
-    errorReports ++= allThreads.filter(GetProperties.getPeriodinMS(_) == 0.0)
+    errorReports ++= allThreads.filter(GetProperties.lookupPropertyDefinition(_, TimingProperties._NAME, TimingProperties.PERIOD) == null)
       .map(ErrorReport(_, "Thread must define the property Timing_Properties::Period"))
 
     errorReports ++= root.getAllComponentInstances.flatMap(_.getAllFeatureInstances)
