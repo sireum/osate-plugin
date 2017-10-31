@@ -287,10 +287,6 @@ object Visitor {
         val prop = o.getProperty
         val cont = o.eContainer.asInstanceOf[NamedElement]
 
-        if(prop.getName == "Dimension"){
-          println(prop);
-        }
-        
         val propValList = {
           try {
             val pe = PropertyUtils.getSimplePropertyValue(cont, prop)

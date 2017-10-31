@@ -10,10 +10,6 @@
                           name="Generator"/>
       </command>
    </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-   </extension>
-   
    <extension point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="menu:org.osate.ui.osateMenu">
@@ -22,11 +18,30 @@
                label="Sireum Bridge">
             <command
                   commandId="org.sireum.commands.launchsireum"
-                  label="Generate JSON (model)"
+                  label="Generate JSON"
                   style="push">
                <parameter name="org.sireum.commands.launchsireum.generator" value="json"/>
             </command>
+            <command
+                  commandId="org.sireum.commands.genslang"
+                  label="Generate Slang Embedded Code"
+                  style="push">
+            </command> 
+            <command
+                  commandId="org.sireum.commands.genawas"
+                  label="Generate AWAS Code"
+                  style="push">
+            </command> 
          </menu>
       </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.sireum.handlers.empty"
+            commandId="org.sireum.commands.genslang">
+         <enabledWhen>
+         </enabledWhen>
+      </handler>
    </extension>
 </plugin>
