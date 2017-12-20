@@ -32,6 +32,7 @@ import org.sireum.aadl.ast.AadlXml;
 import org.sireum.aadl.ast.JSON;
 import org.sireum.architecture.Check;
 import org.sireum.architecture.ErrorReport;
+import org.sireum.architecture.Report;
 import org.sireum.architecture.Visitor;
 import org.sireum.util.SelectionHelper;
 
@@ -67,25 +68,31 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 
 		if (root != null && root instanceof ComponentInstance) {
-			List<ErrorReport> l = Check.check((ComponentInstance) root);
+			List<Report> l = Check.check((ComponentInstance) root);
 			if (!l.isEmpty()) {
+				boolean hasErrors = false;
 				String m = "";
-				for (ErrorReport er : l) {
+				for (Report er : l) {
+					hasErrors |= er instanceof ErrorReport;
 					String name = ((NamedElement) er.component().eContainer()).getQualifiedName() + "."
 							+ er.component().getQualifiedName();
 					m += name + " : " + er.message() + "\n";
 
 					try {
+						int severity = er instanceof ErrorReport ? IMarker.SEVERITY_ERROR : IMarker.SEVERITY_WARNING;
 						IMarker marker = getIResource(er.component().eResource()).createMarker(IMarker.PROBLEM);
 						marker.setAttribute(IMarker.MESSAGE, name + " - " + er.message());
-						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+						marker.setAttribute(IMarker.SEVERITY, severity);
 					} catch (CoreException exception) {
 						exception.printStackTrace();
 					}
 				}
 				System.out.println(m);
 				MessageDialog.openError(window.getShell(), "Sireum", m);
-				return null;
+
+				if (hasErrors) {
+					return null;
+				}
 			}
 
 			AadlXml _r = Visitor.convert(root);

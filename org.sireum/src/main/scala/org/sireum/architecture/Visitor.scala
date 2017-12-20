@@ -156,6 +156,16 @@ object Visitor {
         for (p <- o.getOwnedPropertyAssociations)
           properties +:= visit(p)
 
+        import org.osate.aadl2.instance.ConnectionKind
+        var kind = o.getKind match{
+          case ConnectionKind.ACCESS_CONNECTION => ast.ConnectionKind.Access
+          case ConnectionKind.FEATURE_CONNECTION => ast.ConnectionKind.Feature
+          case ConnectionKind.FEATURE_GROUP_CONNECTION => ast.ConnectionKind.FeatureGroup
+          case ConnectionKind.MODE_TRANSITION_CONNECTION => ast.ConnectionKind.ModeTransition
+          case ConnectionKind.PARAMETER_CONNECTION => ast.ConnectionKind.Parameter
+          case ConnectionKind.PORT_CONNECTION => ast.ConnectionKind.Port
+        }
+        
         return ast.Connection(
           name = Some(o.getQualifiedName),
           src = ast.EndPoint(
@@ -164,6 +174,7 @@ object Visitor {
           dst = ast.EndPoint(
             component = dstComponent,
             feature = dstFeature),
+          kind = kind,  
           properties = properties)
 
       case InstancePackage.FEATURE_INSTANCE =>

@@ -15,18 +15,27 @@ import org.osate.xtext.aadl2.properties.util.TimingProperties;
 
 import scala.collection.mutable.ListBuffer
 
+trait Report {
+  def component: NamedElement
+  def message : String
+}
+
+case class WarningReport(component: NamedElement,
+                         message: String) extends Report {} 
+    
 case class ErrorReport(component: NamedElement,
-                       message: String)
+                       message: String) extends Report {}
 
 object Check {
 
-  def check(root: ComponentInstance): List[ErrorReport] = {
+  def check(root: ComponentInstance): List[Report] = {
 
-    val errorReports = ListBuffer[ErrorReport]()
-
+    val reports = ListBuffer[Report]()
+    
     val allThreads = root.getAllComponentInstances.filter(_.getCategory == ComponentCategory.THREAD)
-
-    errorReports ++=
+    val allConnections = root.getAllComponentInstances.flatMap(_.getConnectionInstances)
+      
+    reports ++=
       allThreads.filter({ c =>
         val protocol = GetProperties.getDispatchProtocol(c)
         protocol == null ||
@@ -34,14 +43,51 @@ object Check {
       }).map(ErrorReport(_, "Thread needs a Thread_Properties::Dispatch_Protocol property of 'Periodic' or 'Sporadic'"))
 
     // FIXME: how to determine inherited properties
-    errorReports ++= allThreads.filter(GetProperties.lookupPropertyDefinition(_, TimingProperties._NAME, TimingProperties.PERIOD) == null)
+    reports ++= allThreads.filter(GetProperties.lookupPropertyDefinition(_, TimingProperties._NAME, TimingProperties.PERIOD) == null)
       .map(ErrorReport(_, "Thread must define the property Timing_Properties::Period"))
 
-    errorReports ++= root.getAllComponentInstances.flatMap(_.getAllFeatureInstances)
+    reports ++= allConnections.filter({ c =>
+      def getBaseType(f: Feature) : Option[String] = {
+          return if(f.getFeatureClassifier != null && f.getFeatureClassifier.isInstanceOf[DataTypeImpl])
+            Some(f.getFeatureClassifier.asInstanceOf[DataTypeImpl].getQualifiedName)
+          else None
+      }
+
+      (c.getSource, c.getDestination) match {
+        case (s:FeatureInstance, d:FeatureInstance) =>
+          getBaseType(s.getFeature) != getBaseType(d.getFeature)
+        case _ => {
+          //println(s"${c.getName} connects ${c.getSource.getClass.getSimpleName} to ${c.getDestination.getClass.getSimpleName}")
+          false
+        }
+      }
+    }).map(ErrorReport(_, "Data types for ports must match"))
+    
+    //errorReports ++= allConnections.filter({ c => c.getSource.getComponentInstance == c.getDestination.getComponentInstance})
+    //.map(ErrorReport(_, "Source and destination ports identical"))
+    
+    /* emit warning if connected port category types are not identical
+     *   event_port -> event_port
+     *   event_data_port -> event_data_port
+     *   data_port -> data_port
+     */
+    reports ++= allConnections.filter({c => 
+      (c.getSource, c.getDestination) match {
+        case (s:FeatureInstance, d:FeatureInstance) =>
+          //println(s"${s.getCategory} -> ${d.getCategory}   ${s.getCategory != d.getCategory}    ${c.getName}   ")
+          s.getCategory != d.getCategory
+        case _ => {
+          //println(s"${c.getName} connects ${c.getSource.getClass.getSimpleName} to ${c.getDestination.getClass.getSimpleName}")
+          false
+        }
+      }      
+    }).map(WarningReport(_, "Connected ports should have the same feature category"))
+    
+    reports ++= root.getAllComponentInstances.flatMap(_.getAllFeatureInstances)
     .filter(p => (p.getCategory == FeatureCategory.DATA_PORT || 
         p.getCategory == FeatureCategory.EVENT_DATA_PORT) && p.getFeature.getFeatureClassifier == null)
         .map(ErrorReport(_, "Data and Event Data ports must be typed"))
     
-    return errorReports
+    return reports
   }
 }
