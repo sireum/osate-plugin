@@ -2,6 +2,7 @@ package org.sireum.handlers;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.sireum.aadl.skema.ast.AadlXml;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override
@@ -13,7 +14,8 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 		}
 
 		this.setGenerator(generator);
-
-		return super.execute(e);
+		AadlXml model = (AadlXml) super.execute(e);
+		writeJSON(model);
+		return null;
 	}
 }

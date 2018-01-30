@@ -5,7 +5,6 @@ import java.util.List
 import org.osate.aadl2._
 import org.osate.aadl2.impl._
 import org.osate.aadl2.instance._
-import org.sireum.aadl.ast
 import scala.collection.JavaConversions._
 
 import org.osate.xtext.aadl2.properties.util.AadlProject;

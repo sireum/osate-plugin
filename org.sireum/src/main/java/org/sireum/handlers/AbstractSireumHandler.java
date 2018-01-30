@@ -1,13 +1,16 @@
 package org.sireum.handlers;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -27,9 +30,10 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
+import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.sireum.aadl.ast.AadlXml;
-import org.sireum.aadl.ast.JSON;
+import org.sireum.aadl.skema.ast.AadlXml;
+import org.sireum.aadl.skema.ast.JSON;
 import org.sireum.architecture.Check;
 import org.sireum.architecture.ErrorReport;
 import org.sireum.architecture.Report;
@@ -90,40 +94,49 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 				System.out.println(m);
 				MessageDialog.openError(window.getShell(), "Sireum", m);
 
-				if (hasErrors) {
-					return null;
-				}
+//				if (hasErrors) {
+//					return null;
+//				}
 			}
 
-			AadlXml _r = Visitor.convert(root);
-			String str = JSON.fromAadlTop(_r, false);
-
-			// FileDialog fd = new FileDialog(sh, SWT.SAVE);
-			// fd.setText("Specify output file name");
-			// fd.setFileName(System.getProperty("user.home") + "/aadl.json");
-			// fileName = fd.open();
-			InputDialog fd = new InputDialog(window.getShell(), "Output file name",
-					"Specify output file name",
-					System.getProperty("user.home") + "/aadl.json", null);
-
-			if (fd.open() == Window.OK) {
-				File f = new File(fd.getValue());
-				try {
-					BufferedWriter writer = new BufferedWriter(new FileWriter(f));
-					writer.write(str);
-					writer.close();
-					MessageDialog.openInformation(window.getShell(), "Sireum", "Wrote: " + f.getAbsolutePath());
-				} catch (Exception ee) {
-					MessageDialog.openError(window.getShell(), "Sireum",
-							"Error encountered while trying to save file: " + f.getAbsolutePath() + "\n\n" + ee.getMessage());
-				}
+			AadlXml _r = Visitor.convert(root).get();
+			if (_r != null) {
+				return _r;
+			} else {
+				return null;
 			}
 		} else {
 			MessageDialog.openError(window.getShell(), "Sireum",
 					"Please select a component instance element");
+			return null;
 		}
 
-		return null;
+	}
+
+	protected void writeJSON(AadlXml model) {
+		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+
+		String str = JSON.fromAadlXml(model, false);
+
+		// FileDialog fd = new FileDialog(sh, SWT.SAVE);
+		// fd.setText("Specify output file name");
+		// fd.setFileName(System.getProperty("user.home") + "/aadl.json");
+		// fileName = fd.open();
+		InputDialog fd = new InputDialog(window.getShell(), "Output file name", "Specify output file name",
+				System.getProperty("user.home") + "/aadl.json", null);
+
+		if (fd.open() == Window.OK) {
+			File f = new File(fd.getValue());
+			try {
+				BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+				writer.write(str);
+				writer.close();
+				MessageDialog.openInformation(window.getShell(), "Sireum", "Wrote: " + f.getAbsolutePath());
+			} catch (Exception ee) {
+				MessageDialog.openError(window.getShell(), "Sireum", "Error encountered while trying to save file: "
+						+ f.getAbsolutePath() + "\n\n" + ee.getMessage());
+			}
+		}
 	}
 
 	protected Object getCurrentSelection(ExecutionEvent event) {
@@ -134,6 +147,37 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		} else {
 			return null;
 		}
+	}
+
+	protected IPath getInstanceFilePath(ExecutionEvent e) {
+		Element root = AadlUtil.getElement(getCurrentSelection(e));
+		Resource res = root.eResource();
+		URI uri = res.getURI();
+		IPath path = OsateResourceUtil.getOsatePath(uri);
+		return path;
+	}
+
+	protected String writeGeneratedFile(ExecutionEvent e, String type, String content) {
+		IPath path = getInstanceFilePath(e);
+		path = path.removeFileExtension();
+		String filename = path.lastSegment() + "__" + type;
+		path = path.removeLastSegments(1).append("/.IR/" + type + "/" + filename);
+		path = path.addFileExtension(type);
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+		if (file != null) {
+			final InputStream input = new ByteArrayInputStream(content.getBytes());
+			try {
+				if (file.exists()) {
+					file.setContents(input, true, true, null);
+				} else {
+					AadlUtil.makeSureFoldersExist(path);
+					file.create(input, true, null);
+				}
+			} catch (final CoreException excp) {
+			}
+			return file.getFullPath().toString();
+		}
+		return null;
 	}
 
 	protected void setGenerator(String v) {
