@@ -1,8 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Sireum
+Bundle-Name: Sireum plug-in for OSATEv2
 Bundle-SymbolicName: org.sireum;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.sireum.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit,
  org.eclipse.emf.ecore,
@@ -33,4 +34,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.osate.xtext.aadl2.errormodel;bundle-version="1.0.0",
  org.osate.xtext.aadl2.errormodel.ui;bundle-version="1.0.0",
  org.eclipse.swt
+Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
