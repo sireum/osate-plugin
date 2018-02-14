@@ -32,7 +32,7 @@ import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.sireum.aadl.skema.ast.AadlXml;
+import org.sireum.aadl.skema.ast.Aadl;
 import org.sireum.aadl.skema.ast.JSON;
 import org.sireum.architecture.Check;
 import org.sireum.architecture.ErrorReport;
@@ -99,7 +99,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 //				}
 			}
 
-			AadlXml _r = Visitor.convert(root).get();
+			Aadl _r = Visitor.convert(root).get();
 			if (_r != null) {
 				return _r;
 			} else {
@@ -113,10 +113,10 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 	}
 
-	protected void writeJSON(AadlXml model) {
+	protected void writeJSON(Aadl model) {
 		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 
-		String str = JSON.fromAadlXml(model, false);
+		String str = JSON.fromAadl(model, false);
 
 		// FileDialog fd = new FileDialog(sh, SWT.SAVE);
 		// fd.setText("Specify output file name");

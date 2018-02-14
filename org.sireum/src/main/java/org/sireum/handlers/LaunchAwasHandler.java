@@ -8,7 +8,7 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import org.sireum.aadl.skema.ast.AadlXml;
+import org.sireum.aadl.skema.ast.Aadl;
 import org.sireum.awas.AADLBridge.AadlHandler;
 import org.sireum.awas.ast.Model;
 import org.sireum.awas.ast.PrettyPrinter;
@@ -21,12 +21,12 @@ public class LaunchAwasHandler extends AbstractSireumHandler {
 			throw new RuntimeException("Unable to retrive generator argument");
 		}
 		this.setGenerator(generator);
-		AadlXml model = (AadlXml) super.execute(e);
+		Aadl model = (Aadl) super.execute(e);
 		Model awas = AadlHandler.buildAwasModel(model);
 		String str = PrettyPrinter.apply(awas);
 		String awasFile = writeGeneratedFile(e, "awas", str);
 		if(awasFile != null) {
-			// generateVisualizer(e, awasFile);
+			generateVisualizer(e, awasFile);
 		}
 		return null;
 	}
