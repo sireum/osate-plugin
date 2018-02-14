@@ -28,14 +28,19 @@
                label="Sireum Bridge">
             <command
                   commandId="org.sireum.commands.launchsireum"
-                  label="Generate JSON"
+                  label="Serialize Slang AST to file"
                   style="push">
-               <parameter name="org.sireum.commands.launchsireum.generator" value="json"/>
+               <parameter 
+                  name="org.sireum.commands.launchsireum.generator" 
+                  value="serialize"/>
             </command>
             <command
-                  commandId="org.sireum.commands.genslang"
+                  commandId="org.sireum.commands.launchsireum"
                   label="Generate Slang Embedded Code"
                   style="push">
+              <parameter 
+                  name="org.sireum.commands.launchsireum.generator" 
+                  value="genslang"/>
             </command> 
             <command
                   commandId="org.sireum.commands.genawas"
@@ -58,4 +63,13 @@
          </enabledWhen>
       </handler>
    </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.osate.internal.ui.preferences.OsatePreferencePage"
+            class="org.sireum.PreferencePage"
+            id="org.sireum.generator.PreferencePage"
+            name="Sireum">
+      </page>
+   </extension>   
 </plugin>

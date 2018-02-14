@@ -32,6 +32,7 @@ import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
+import org.sireum.PreferenceValues;
 import org.sireum.aadl.skema.ast.Aadl;
 import org.sireum.aadl.skema.ast.JSON;
 import org.sireum.architecture.Check;
@@ -111,6 +112,21 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 			return null;
 		}
 
+	}
+
+	protected String serialize(Aadl model, PreferenceValues.SerializerType t) {
+		switch (t) {
+		case JSON:
+			return JSON.fromAadl(model, false);
+		case JSON_COMPACT:
+			return JSON.fromAadl(model, true);
+		case MSG_PACK:
+			org.sireum.IS<org.sireum.Z, org.sireum.U8> x = org.sireum.aadl.skema.ast.MsgPack.fromAadl(model, true);
+			String ret = org.sireum.conversions.String.toBase64(x).toString();
+			return ret;
+		default:
+			return null;
+		}
 	}
 
 	protected void writeJSON(Aadl model) {
