@@ -106,7 +106,7 @@ object Visitor {
         var inErrorTokens = Set.empty[String]
         x.getTypeSet.getTypeTokens.forEach { y =>
           y.getType.forEach { z =>
-            inErrorTokens = inErrorTokens.add(z.getName)
+            inErrorTokens = inErrorTokens + z.getName
           }
         }
         prop :+= ast.Emv2Propagation(
@@ -129,7 +129,7 @@ object Visitor {
     val el = EMV2Util.getErrorModelSubclauseWithUseTypes(root.getComponentClassifier)
     if (el != null) {
       el.foreach { e =>
-        errorLibs = errorLibs.put(EMV2Util.getLibraryName(e), ISZ(e.getTypes.map(s => String(s.getName)).toSeq: _*))
+        errorLibs = errorLibs + (EMV2Util.getLibraryName(e), ISZ(e.getTypes.map(s => String(s.getName)).toSeq: _*))
         libNames :+= EMV2Util.getLibraryName(e)
       }
     }
@@ -202,10 +202,9 @@ object Visitor {
     val context = ISZ(connRef.getContext.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*)
     val name = context :+ String(connRef.getConnection.getName)
     if(compConnMap.get(context).nonEmpty) {
-          compConnMap = compConnMap.put(context, compConnMap.get(context).
-              get.add(connRef))
+          compConnMap = compConnMap + (context, compConnMap.get(context).get + connRef)
     } else {
-      compConnMap = compConnMap.put(context, HashSet.empty.add(connRef))
+      compConnMap = compConnMap + (context, HashSet.empty + connRef)
     }
     ast.ConnectionReference(
     name = ast.Name(name),
@@ -262,12 +261,16 @@ object Visitor {
     val source = buildEndPoint(conn.getSource, path)
     val destination = buildEndPoint(conn.getDestination, path)
     val isBidirect = B(conn.isBidirectional())
-    val connInst = ast.Name(ISZ(InstanceUtil.findConnectionInstance(connRef.getSystemInstance, conn)
-    .getInstanceObjectPath.split('.').map(String(_)).toSeq: _*))
+    val sysInst = connRef.getContext
+    val connInst = sysInst.findConnectionInstance(conn)
+    val connInst2 = if(connInst.nonEmpty) ISZ(connInst.map(ci => 
+      ast.Name(ISZ(ci.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*))).toSeq: _*) 
+      else ISZ(ast.Name(ISZ())) 
+    
     val properties =ISZ[ast.Property](connRef.getOwnedPropertyAssociations.map(op =>
       buildProperty(op, name)).toSeq: _*)
       
-    ast.Connection(ast.Name(name), source, destination, isBidirect, connInst, properties)
+    ast.Connection(ast.Name(name), source, destination, isBidirect, connInst2, properties)
   }
   
   private def buildEndPoint(connElem : ConnectedElement, path :  ISZ[String]) : ast.EndPoint = {
