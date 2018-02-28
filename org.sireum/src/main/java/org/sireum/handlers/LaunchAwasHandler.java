@@ -1,13 +1,21 @@
 package org.sireum.handlers;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.osgi.framework.Bundle;
 import org.sireum.aadl.skema.ast.Aadl;
 import org.sireum.awas.AADLBridge.AadlHandler;
 import org.sireum.awas.ast.Model;
@@ -26,12 +34,22 @@ public class LaunchAwasHandler extends AbstractSireumHandler {
 		String str = PrettyPrinter.apply(awas);
 		String awasFile = writeGeneratedFile(e, "awas", str);
 		if(awasFile != null) {
-			generateVisualizer(e, awasFile);
+			Bundle sireumBundle = Platform.getBundle("org.sireum");
+			System.out.println(sireumBundle.getLocation());
+			try {
+				generateVisualizer(e, awasFile);
+			} catch (URISyntaxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		return null;
 	}
 
-	private void generateVisualizer(ExecutionEvent e, String awasFile) {
+	private void generateVisualizer(ExecutionEvent e, String awasFile) throws URISyntaxException, IOException {
 		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IPath path = getInstanceFilePath(e);
 		path = path.removeLastSegments(1);
@@ -44,7 +62,11 @@ public class LaunchAwasHandler extends AbstractSireumHandler {
 		DirectoryDialog dialog2 = new DirectoryDialog(window.getShell(), SWT.OPEN);
 
 		String outputPath = dialog2.open();
+		Bundle sireumBundle = Platform.getBundle("org.sireum");
+		URL url = sireumBundle.getEntry("lib/sireum.jar");
+		URI uri = FileLocator.toFileURL(url).toURI();
+		String sireumJarLoc = uri.getPath();
 
-		AadlHandler.generateWitness(awasFile, queryFile, outputPath);
+		AadlHandler.generateWitness(awasFile, queryFile, outputPath, sireumJarLoc);
 	}
 }

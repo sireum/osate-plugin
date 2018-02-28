@@ -191,7 +191,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 				}
 			} catch (final CoreException excp) {
 			}
-			return file.getFullPath().toString();
+			return file.getLocation().toString();
 		}
 		return null;
 	}
