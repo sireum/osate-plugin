@@ -3,6 +3,7 @@ package org.sireum.handlers;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.lang.reflect.Method;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -15,7 +16,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.sireum.PreferenceValues;
 import org.sireum.PreferenceValues.SerializerType;
-import org.sireum.aadl.arsit.Runner;
 import org.sireum.aadl.skema.ast.Aadl;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
@@ -32,7 +32,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 
-		System.out.println(getInstanceFilePath(e));
+		// System.out.println(getInstanceFilePath(e));
 
 		if (generator.equals("serialize")) {
 
@@ -63,7 +63,17 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 			if (path != null) {
 				File out = new File(path);
-				Runner.run(out, model);
+				try {
+					Class<?> c = Class.forName("org.sireum.aadl.arsit.Runner");
+					Method m = c.getDeclaredMethod("run", File.class, Aadl.class);
+
+					int ret = ((Integer) m.invoke(null, out, model)).intValue();
+
+				} catch (Exception ex) {
+					String m = "Could not generate Slang-Embedded code.  Please make sure Arsit is present.\n\n"
+							+ ex.getLocalizedMessage();
+					MessageDialog.openError(window.getShell(), "Sireum", m);
+				}
 			}
 		}
 		return null;
