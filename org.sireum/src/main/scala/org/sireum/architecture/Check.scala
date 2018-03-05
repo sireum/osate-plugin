@@ -32,6 +32,7 @@ object Check {
     val reports = ListBuffer[Report]()
     
     val allThreads = root.getAllComponentInstances.filter(_.getCategory == ComponentCategory.THREAD)
+    val allDevices = root.getAllComponentInstances.filter(_.getCategory == ComponentCategory.DEVICE)
     val allConnections = root.getAllComponentInstances.flatMap(_.getConnectionInstances)
       
     reports ++=
@@ -39,8 +40,17 @@ object Check {
         val protocol = GetProperties.getDispatchProtocol(c)
         protocol == null ||
           !(protocol.getName.equalsIgnoreCase(AadlProject.PERIODIC_LITERAL) || protocol.getName.equalsIgnoreCase(AadlProject.SPORADIC_LITERAL))
-      }).map(ErrorReport(_, "Thread needs a Thread_Properties::Dispatch_Protocol property of 'Periodic' or 'Sporadic'"))
+      }).map(ErrorReport(_, "Thread must be periodic or sporadic"))
 
+    reports ++= 
+      (allThreads ++ allDevices).filter(c => {
+        val protocol = GetProperties.getDispatchProtocol(c)
+        c.getFeatureInstances.exists(f =>
+          (protocol == null || protocol.getName.equalsIgnoreCase(AadlProject.PERIODIC_LITERAL)) &&
+          (f.getDirection == DirectionType.IN || f.getDirection == DirectionType.IN_OUT) &&
+          (f.getCategory == FeatureCategory.EVENT_DATA_PORT || f.getCategory == FeatureCategory.EVENT_PORT))
+      }).map(ErrorReport(_, "Threads or devices with 'in event' ports must be sporadic"))
+      
     // FIXME: how to determine inherited properties
     reports ++= allThreads.filter(GetProperties.lookupPropertyDefinition(_, TimingProperties._NAME, TimingProperties.PERIOD) == null)
       .map(ErrorReport(_, "Thread must define the property Timing_Properties::Period"))
