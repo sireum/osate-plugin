@@ -20,9 +20,7 @@ import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 import org.sireum.PreferenceValues.SerializerType;
 import org.sireum.aadl.skema.ast.Aadl;
-import org.sireum.awas.AADLBridge.AadlHandler;
-import org.sireum.awas.ast.Model;
-import org.sireum.awas.ast.PrettyPrinter;
+
 
 public class LaunchAwasHandler extends AbstractSireumHandler {
 	@Override
@@ -38,13 +36,11 @@ public class LaunchAwasHandler extends AbstractSireumHandler {
 		writeGeneratedFile(e, "json", s);
 		try {
 			Class<?> c = Class.forName("org.sireum.awas.AADLBridge.AadlHandler");
-			Method m = c.getDeclaredMethod("buildAwasModel", Aadl.class);
-			Model awas = (Model) m.invoke(null, model);
-			String str = PrettyPrinter.apply(awas);
+			Method m = c.getDeclaredMethod("buildAwasString", Aadl.class);
+			String str = (String) m.invoke(null, model);
 			String awasFile = writeGeneratedFile(e, "awas", str);
 			if (awasFile != null) {
 				Bundle sireumBundle = Platform.getBundle("org.sireum");
-				System.out.println(sireumBundle.getLocation());
 				try {
 					generateVisualizer(e, awasFile);
 				} catch (URISyntaxException e1) {
@@ -53,6 +49,10 @@ public class LaunchAwasHandler extends AbstractSireumHandler {
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				} catch (Exception e3) {
+					String m2 = "Could not invoke visualizer.  Please make sure Awas is configured correctly.\n\n"
+							+ e3.getLocalizedMessage();
+					MessageDialog.openError(window.getShell(), "Sireum", m2);
 				}
 			}
 		} catch (Exception ex) {
@@ -63,7 +63,7 @@ public class LaunchAwasHandler extends AbstractSireumHandler {
 		return null;
 	}
 
-	private void generateVisualizer(ExecutionEvent e, String awasFile) throws URISyntaxException, IOException {
+	private void generateVisualizer(ExecutionEvent e, String awasFile) throws Exception {
 		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IPath path = getInstanceFilePath(e);
 		path = path.removeLastSegments(1);
@@ -80,7 +80,9 @@ public class LaunchAwasHandler extends AbstractSireumHandler {
 		URL url = sireumBundle.getEntry("lib/sireum.jar");
 		URI uri = FileLocator.toFileURL(url).toURI();
 		String sireumJarLoc = uri.getPath();
+		Class<?> c = Class.forName("org.sireum.awas.AADLBridge.AadlHandler");
 
-		AadlHandler.generateWitness(awasFile, queryFile, outputPath, sireumJarLoc);
+		Method m = c.getDeclaredMethod("generateWitness", String.class, String.class, String.class, String.class);
+		m.invoke(null, awasFile, queryFile, outputPath, sireumJarLoc);
 	}
 }
