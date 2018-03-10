@@ -7,12 +7,11 @@ import java.lang.reflect.Method;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.sireum.PreferenceValues;
 import org.sireum.PreferenceValues.SerializerType;
@@ -27,27 +26,21 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			throw new RuntimeException("Unable to retrive generator argument");
 		}
 
-		this.setGenerator(generator);
+		setGenerator(generator);
 		Aadl model = (Aadl) super.execute(e);
 
-		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-
-		// System.out.println(getInstanceFilePath(e));
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
 		if (generator.equals("serialize")) {
 
-			SerializerType ser = PreferenceValues.getSERIALIZER();
+			SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();
 
 			String s = serialize(model, ser);
 
-			IPath path = getInstanceFilePath(e);
-			path = path.removeLastSegments(1);
-
-			FileDialog fd = new FileDialog(window.getShell(), SWT.SAVE);
-
+			FileDialog fd = new FileDialog(shell, SWT.SAVE);
 			fd.setFileName("aadl." + (ser == SerializerType.MSG_PACK ? "msgpack" : "json"));
 			fd.setText("Specify filename");
-			fd.setFilterPath(path.toString());
+			fd.setFilterPath(getProjectPath(e).toString());
 			String fname = fd.open();
 
 			if (fname != null) {
@@ -56,8 +49,22 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			}
 		} else if (generator.equals("genslang")) {
 
-			DirectoryDialog dd = new DirectoryDialog(window.getShell());
-			// dd.setFilterPath(string);
+			if (PreferenceValues.getARSIT_SERIALIZE_OPT()) {
+				String s = serialize(model, SerializerType.JSON);
+				String outputFolder = PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT();
+
+				File f = new File(outputFolder);
+				if (!f.exists()) {
+					f = new File(getProjectPath(e).toFile(), outputFolder);
+					f.mkdir();
+				}
+				String fname = getInstanceFilename(e);
+				fname = fname.substring(0, fname.lastIndexOf(".")) + ".json";
+				writeFile(new File(f, fname), s);
+			}
+
+			DirectoryDialog dd = new DirectoryDialog(shell);
+			dd.setFilterPath(getProjectPath(e).toString());
 			dd.setText("Select directory");
 			String path = dd.open();
 
@@ -69,10 +76,12 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 					int ret = ((Integer) m.invoke(null, out, model)).intValue();
 
+					MessageDialog.openInformation(shell, "Sireum", "Slang-Embedded code "
+							+ (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
 				} catch (Exception ex) {
 					String m = "Could not generate Slang-Embedded code.  Please make sure Arsit is present.\n\n"
 							+ ex.getLocalizedMessage();
-					MessageDialog.openError(window.getShell(), "Sireum", m);
+					MessageDialog.openError(shell, "Sireum", m);
 				}
 			}
 		}
@@ -80,15 +89,15 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 	}
 
 	protected void writeFile(File out, String str) {
-		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(out));
 			writer.write(str);
 			writer.close();
-			MessageDialog.openInformation(window.getShell(), "Sireum", "Wrote: " + out.getAbsolutePath());
+			MessageDialog.openInformation(shell, "Sireum", "Wrote: " + out.getAbsolutePath());
 		} catch (Exception ee) {
-			MessageDialog.openError(window.getShell(), "Sireum",
+			MessageDialog.openError(shell, "Sireum",
 					"Error encountered while trying to save file: " + out.getAbsolutePath() + "\n\n" + ee.getMessage());
 		}
 	}

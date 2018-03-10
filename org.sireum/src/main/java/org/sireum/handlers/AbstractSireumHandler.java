@@ -32,7 +32,10 @@ import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
+import org.sireum.IS;
 import org.sireum.PreferenceValues;
+import org.sireum.U8;
+import org.sireum.Z;
 import org.sireum.aadl.skema.ast.Aadl;
 import org.sireum.aadl.skema.ast.JSON;
 import org.sireum.architecture.Check;
@@ -121,7 +124,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		case JSON_COMPACT:
 			return JSON.fromAadl(model, true);
 		case MSG_PACK:
-			org.sireum.IS<org.sireum.Z, org.sireum.U8> x = org.sireum.aadl.skema.ast.MsgPack.fromAadl(model, true);
+			IS<Z, U8> x = org.sireum.aadl.skema.ast.MsgPack.fromAadl(model, true);
 			String ret = org.sireum.conversions.String.toBase64(x).toString();
 			return ret;
 		default:
@@ -163,6 +166,16 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		} else {
 			return null;
 		}
+	}
+
+	protected String getInstanceFilename(ExecutionEvent e) {
+		Element root = AadlUtil.getElement(getCurrentSelection(e));
+		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getName();
+	}
+
+	protected IPath getProjectPath(ExecutionEvent e) {
+		Element root = AadlUtil.getElement(getCurrentSelection(e));
+		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getProject().getLocation();
 	}
 
 	protected IPath getInstanceFilePath(ExecutionEvent e) {
