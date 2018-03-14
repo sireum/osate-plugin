@@ -1,9 +1,9 @@
 # Osate-Plugin
 
 This repository contains the Sireum Osate-Plugin that translates AADL instance
-models to [AWAS](https://github.com/sireum/v3-awas).
+models to [AIR](https://github.com/sireum/air).
 
-## Installation for Plugin Developers 
+## Installation for Sireum Developers 
 
 The plugin can be developed using an OSATE release (following the installation
 directions [here](http://osate.org/download-and-install.html)) or an OSATE
@@ -22,9 +22,9 @@ IDE as 'Eclipse'.
 
     ```bash
     git clone --recursive -b master git@github.com:sireum/v3.git sireum-v3
-    git clone git@github.com:sireum/aadl-slang-schema.git sireum-v3/aadl/skema
+    git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
     git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
-    git clone git@github.com:santoslab/slang-embedded-translator.git sireum-v3/aadl/arsit
+    git clone git@github.com:santoslab/arsit.git sireum-v3/aadl/arsit
     ./sireum-v3/bin/sbt-launch assembly
     ```
     The jar will be located at ``sireum-v3/bin/sireum.jar``.  Copy it into the plugins 
