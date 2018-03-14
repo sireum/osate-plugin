@@ -1,8 +1,7 @@
 # Osate-Plugin
 
 This repository contains the Sireum Osate-Plugin that translates AADL instance
-models to [AWAS](https://github.com/sireum/v3-awas) or
-[Slang-Embedded](https://github.com/santoslab/slang-embedded).
+models to [AWAS](https://github.com/sireum/v3-awas).
 
 ## Installation for Plugin Developers 
 
