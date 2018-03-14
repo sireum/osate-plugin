@@ -1,7 +1,7 @@
-# Osate-Plugin
+# Sireum OSATE Plugin
 
-This repository contains the Sireum Osate-Plugin that translates AADL instance
-models to [AIR](https://github.com/sireum/air).
+This repository contains the Sireum [OSATE](http://osate.org) Plugin that translates AADL instance
+models to [AIR](https://github.com/sireum/air) and then to downstream Sireum tools such as [AWAS](https://github.com/sireum/v3-awas).
 
 ## Installation for Sireum Developers 
 
