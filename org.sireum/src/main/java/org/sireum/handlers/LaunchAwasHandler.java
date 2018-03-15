@@ -19,7 +19,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 import org.sireum.PreferenceValues.SerializerType;
-import org.sireum.aadl.skema.ast.Aadl;
+import org.sireum.aadl.ir.Aadl;
 
 
 public class LaunchAwasHandler extends AbstractSireumHandler {

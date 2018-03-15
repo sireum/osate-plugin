@@ -36,8 +36,9 @@ import org.sireum.IS;
 import org.sireum.PreferenceValues;
 import org.sireum.U8;
 import org.sireum.Z;
-import org.sireum.aadl.skema.ast.Aadl;
-import org.sireum.aadl.skema.ast.JSON;
+import org.sireum.aadl.ir.Aadl;
+import org.sireum.aadl.ir.JSON;
+import org.sireum.aadl.ir.MsgPack;
 import org.sireum.architecture.Check;
 import org.sireum.architecture.ErrorReport;
 import org.sireum.architecture.Report;
@@ -124,7 +125,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		case JSON_COMPACT:
 			return JSON.fromAadl(model, true);
 		case MSG_PACK:
-			IS<Z, U8> x = org.sireum.aadl.skema.ast.MsgPack.fromAadl(model, true);
+			IS<Z, U8> x = MsgPack.fromAadl(model, true);
 			String ret = org.sireum.conversions.String.toBase64(x).toString();
 			return ret;
 		default:

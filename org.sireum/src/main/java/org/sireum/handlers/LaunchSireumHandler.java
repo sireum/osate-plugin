@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.sireum.PreferenceValues;
 import org.sireum.PreferenceValues.SerializerType;
-import org.sireum.aadl.skema.ast.Aadl;
+import org.sireum.aadl.ir.Aadl;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override
