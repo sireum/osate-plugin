@@ -26,42 +26,9 @@
          <menu
                id="org.sireum.BridgeMenu"
                label="Sireum Bridge">
-            <command
-                  commandId="org.sireum.commands.launchsireum"
-                  label="Serialize Slang AST to file"
-                  style="push">
-               <parameter 
-                  name="org.sireum.commands.launchsireum.generator" 
-                  value="serialize"/>
-            </command>
-            <command
-                  commandId="org.sireum.commands.launchsireum"
-                  label="Generate Slang Embedded Code"
-                  style="push">
-              <parameter 
-                  name="org.sireum.commands.launchsireum.generator" 
-                  value="genslang"/>
-            </command> 
-            <command
-                  commandId="org.sireum.commands.genawas"
-                  label="Generate AWAS Code"
-                  style="push">
-               <parameter
-                     name="org.sireum.commands.genawas.generator"
-                     value="json">
-               </parameter>
-            </command> 
+            <dynamic class="org.sireum.MenuContributions" id="org.sireum.ui.views.menu.MenuItems"/>
          </menu>
       </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="org.sireum.handlers.empty"
-            commandId="org.sireum.commands.genslang">
-         <enabledWhen>
-         </enabledWhen>
-      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.preferencePages">
