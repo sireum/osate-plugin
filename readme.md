@@ -3,7 +3,7 @@
 This repository contains the Sireum [OSATE](http://osate.org) Plugin that translates AADL instance
 models to [AIR](https://github.com/sireum/air) and then to downstream Sireum tools such as [AWAS](https://github.com/sireum/v3-awas).
 
-## Installation for Sireum Developers 
+## Installation for Developers 
 
 The plugin can be developed using an OSATE release (following the installation
 directions [here](http://osate.org/download-and-install.html)) or an OSATE
@@ -24,11 +24,16 @@ IDE as 'Eclipse'.
     git clone --recursive -b master git@github.com:sireum/v3.git sireum-v3
     git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
     git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
-    git clone git@github.com:santoslab/arsit.git sireum-v3/aadl/arsit
     ./sireum-v3/bin/sbt-launch assembly
     ```
     The jar will be located at ``sireum-v3/bin/sireum.jar``.  Copy it into the plugins 
     ``osate-plugin/org.sireum/lib`` directory
+
+    __Optional__ 
+    
+    Sireum developers should also clone [Arsit](https://github.com/santoslab/arsit) prior to invoking ``sbt-launch``
+    
+    ``git clone git@github.com:santoslab/arsit.git sireum-v3/aadl/arsit``
 
 4. In Eclipse go to __File__ -> __Import...__  
 
