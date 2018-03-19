@@ -1,4 +1,4 @@
-package org.sireum;
+package org.sireum.aadl.osate;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.sireum.PreferenceValues.SerializerType;
+import org.sireum.aadl.osate.PreferenceValues.SerializerType;
 
 public class PreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
@@ -34,7 +34,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new RadioGroupFieldEditor(PreferenceConstants.SERIALIZATION_METHOD_OPT,
 				"Method to use when serializing to a file:",
 				1,
-				new java.lang.String[][] { //
+				new String[][] { //
 						{ "JSON", SerializerType.JSON.toString() }, //
 						{ "JSON (compact)", SerializerType.JSON_COMPACT.toString() }, //
 						{ "MsgPack", SerializerType.MSG_PACK.toString() } },
@@ -52,7 +52,7 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		Composite awasTab = addTab(tabFolder, "Awas");
 	}
 
-	private Composite addTab(TabFolder tabFolder, java.lang.String tabName) {
+	private Composite addTab(TabFolder tabFolder, String tabName) {
 		Composite newTab = new Composite(tabFolder, SWT.NULL);
 		newTab.setLayout(new GridLayout());
 		newTab.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

@@ -1,4 +1,4 @@
-package org.sireum;
+package org.sireum.aadl.osate;
 
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -7,7 +7,7 @@ import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.osgi.framework.BundleContext;
 
 public class Activator extends AbstractUIPlugin {
-	public static final java.lang.String PLUGIN_ID = PreferenceConstants.PLUGIN_ID;
+	public static final String PLUGIN_ID = PreferenceConstants.PLUGIN_ID;
 
 	// The shared instance
 	private static Activator plugin;

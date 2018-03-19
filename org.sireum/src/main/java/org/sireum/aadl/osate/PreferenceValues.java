@@ -1,4 +1,4 @@
-package org.sireum;
+package org.sireum.aadl.osate;
 
 import org.eclipse.jface.preference.IPreferenceStore;
 
@@ -18,7 +18,7 @@ public class PreferenceValues {
 		return store.getBoolean(PreferenceConstants.ARSIT_SERIALIZE_OPT);
 	}
 
-	public static java.lang.String getARSIT_OUTPUT_FOLDER_OPT() {
+	public static String getARSIT_OUTPUT_FOLDER_OPT() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		return store.getString(PreferenceConstants.ARSIT_OUTPUT_FOLDER_OPT);
 	}

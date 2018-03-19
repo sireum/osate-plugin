@@ -1,4 +1,4 @@
-package org.sireum.handlers;
+package org.sireum.aadl.osate.handlers;
 
 import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
@@ -33,17 +33,17 @@ import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.sireum.IS;
-import org.sireum.PreferenceValues;
 import org.sireum.U8;
 import org.sireum.Z;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
 import org.sireum.aadl.ir.MsgPack;
-import org.sireum.architecture.Check;
-import org.sireum.architecture.ErrorReport;
-import org.sireum.architecture.Report;
-import org.sireum.architecture.Visitor;
-import org.sireum.util.SelectionHelper;
+import org.sireum.aadl.osate.PreferenceValues;
+import org.sireum.aadl.osate.architecture.Check;
+import org.sireum.aadl.osate.architecture.ErrorReport;
+import org.sireum.aadl.osate.architecture.Report;
+import org.sireum.aadl.osate.architecture.Visitor;
+import org.sireum.aadl.osate.util.SelectionHelper;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
 

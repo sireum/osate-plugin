@@ -5,12 +5,12 @@
    <extension point="org.eclipse.ui.commands">
       <command id="org.sireum.commands.launchsireum"
                name="Launch Sireum"
-               defaultHandler="org.sireum.handlers.LaunchSireumHandler">
+               defaultHandler="org.sireum.aadl.osate.handlers.LaunchSireumHandler">
         <commandParameter id="org.sireum.commands.launchsireum.generator"
                           name="Generator"/>
       </command>
       <command
-            defaultHandler="org.sireum.handlers.LaunchAwasHandler"
+            defaultHandler="org.sireum.aadl.osate.handlers.LaunchAwasHandler"
             id="org.sireum.commands.genawas"
             name="Launch Awas">
          <commandParameter
@@ -26,7 +26,7 @@
          <menu
                id="org.sireum.BridgeMenu"
                label="Sireum Bridge">
-            <dynamic class="org.sireum.MenuContributions" id="org.sireum.ui.views.menu.MenuItems"/>
+            <dynamic class="org.sireum.aadl.osate.MenuContributions" id="org.sireum.ui.views.menu.MenuItems"/>
          </menu>
       </menuContribution>
    </extension>
@@ -34,7 +34,7 @@
          point="org.eclipse.ui.preferencePages">
       <page
             category="org.osate.internal.ui.preferences.OsatePreferencePage"
-            class="org.sireum.PreferencePage"
+            class="org.sireum.aadl.osate.PreferencePage"
             id="org.sireum.generator.PreferencePage"
             name="Sireum">
       </page>

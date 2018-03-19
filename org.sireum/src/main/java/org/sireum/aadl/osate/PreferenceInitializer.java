@@ -1,9 +1,9 @@
-package org.sireum;
+package org.sireum.aadl.osate;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.sireum.PreferenceValues.SerializerType;
+import org.sireum.aadl.osate.PreferenceValues.SerializerType;
 
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 

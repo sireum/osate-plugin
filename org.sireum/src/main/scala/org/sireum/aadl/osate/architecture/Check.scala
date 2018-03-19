@@ -1,4 +1,4 @@
-package org.sireum.architecture
+package org.sireum.aadl.osate.architecture
 
 import java.util.List
 

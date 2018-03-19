@@ -1,4 +1,4 @@
-package org.sireum.util;
+package org.sireum.aadl.osate.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextSelection;
@@ -12,10 +12,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.osate.aadl2.Classifier;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.SystemImplementation;
@@ -50,22 +48,20 @@ public class SelectionHelper {
 	}
 
 	public static EObject getEObjectFromSelection(final ISelection selection) {
-		return getXtextEditor().getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>() {
-			public EObject exec(XtextResource resource) throws Exception {
-				EObject targetElement = null;
-				if (selection instanceof IStructuredSelection) {
-					IStructuredSelection ss = (IStructuredSelection) selection;
-					Object eon = ss.getFirstElement();
-					if (eon instanceof EObjectNode) {
-						targetElement = ((EObjectNode) eon).getEObject(resource);
-					}
-				} else {
-					targetElement = eObjectAtOffsetHelper.resolveElementAt(resource,
-							((ITextSelection) selection).getOffset());
+		return getXtextEditor().getDocument().readOnly(resource -> {
+			EObject targetElement = null;
+			if (selection instanceof IStructuredSelection) {
+				IStructuredSelection ss = (IStructuredSelection) selection;
+				Object eon = ss.getFirstElement();
+				if (eon instanceof EObjectNode) {
+					targetElement = ((EObjectNode) eon).getEObject(resource);
 				}
-
-				return targetElement;
+			} else {
+				targetElement = eObjectAtOffsetHelper.resolveElementAt(resource,
+						((ITextSelection) selection).getOffset());
 			}
+
+			return targetElement;
 		});
 	}
 
@@ -109,7 +105,7 @@ public class SelectionHelper {
 			throw new RuntimeException("Unexpected case. Unable to get active editor");
 		}
 
-		XtextEditor xtextEditor = (XtextEditor) activeEditor.getAdapter(XtextEditor.class);
+		XtextEditor xtextEditor = activeEditor.getAdapter(XtextEditor.class);
 		if (xtextEditor == null) {
 			throw new RuntimeException("Unexpected case. Unable to get Xtext editor");
 		}

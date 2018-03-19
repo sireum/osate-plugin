@@ -1,4 +1,4 @@
-package org.sireum.handlers;
+package org.sireum.aadl.osate.handlers;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,9 +13,9 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-import org.sireum.PreferenceValues;
-import org.sireum.PreferenceValues.SerializerType;
 import org.sireum.aadl.ir.Aadl;
+import org.sireum.aadl.osate.PreferenceValues;
+import org.sireum.aadl.osate.PreferenceValues.SerializerType;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override

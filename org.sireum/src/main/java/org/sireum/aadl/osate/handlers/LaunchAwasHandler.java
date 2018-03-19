@@ -1,4 +1,4 @@
-package org.sireum.handlers;
+package org.sireum.aadl.osate.handlers;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -18,8 +18,8 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
-import org.sireum.PreferenceValues.SerializerType;
 import org.sireum.aadl.ir.Aadl;
+import org.sireum.aadl.osate.PreferenceValues.SerializerType;
 
 
 public class LaunchAwasHandler extends AbstractSireumHandler {

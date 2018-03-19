@@ -1,4 +1,4 @@
-package org.sireum.architecture
+package org.sireum.aadl.osate.architecture
 
 import org.sireum._
 import org.osate.aadl2._

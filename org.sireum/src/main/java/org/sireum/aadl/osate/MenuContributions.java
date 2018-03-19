@@ -1,6 +1,8 @@
-package org.sireum;
+package org.sireum.aadl.osate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.action.IContributionItem;
@@ -13,7 +15,7 @@ public class MenuContributions extends CompoundContributionItem {
 
 	@Override
 	protected IContributionItem[] getContributionItems() {
-		java.util.List<IContributionItem> l = new java.util.ArrayList<IContributionItem>();
+		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
 		l.add(getItem("Serialize Slang AST to file", "org.sireum.commands.launchsireum",
 				map("org.sireum.commands.launchsireum.generator", "serialize"), true));
@@ -29,8 +31,7 @@ public class MenuContributions extends CompoundContributionItem {
 		return l.toArray(new IContributionItem[0]);
 	}
 
-	private IContributionItem getItem(java.lang.String label, java.lang.String commandId,
-			Map<java.lang.String, java.lang.String> params, boolean enabled) {
+	private IContributionItem getItem(String label, String commandId, Map<String, String> params, boolean enabled) {
 
 		return new CommandContributionItem(
 				new CommandContributionItemParameter(
@@ -56,16 +57,16 @@ public class MenuContributions extends CompoundContributionItem {
 		};
 	}
 
-	private Map<java.lang.String, java.lang.String> map(java.lang.String... args) {
+	private Map<String, String> map(String... args) {
 		assert (args.length % 2 == 0);
-		Map<java.lang.String, java.lang.String> m = new HashMap<java.lang.String, java.lang.String>();
+		Map<String, String> m = new HashMap<String, String>();
 		for (int i = 0; i < args.length; i += 2) {
 			m.put(args[i], args[i + 1]);
 		}
 		return m;
 	}
 
-	private boolean classExists(java.lang.String className) {
+	private boolean classExists(String className) {
 		try {
 			Class<?> c = Class.forName(className);
 			return true;

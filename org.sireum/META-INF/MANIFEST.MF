@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Sireum plug-in for OSATEv2
 Bundle-SymbolicName: org.sireum;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.sireum.Activator
+Bundle-Activator: org.sireum.aadl.osate.Activator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit,
  org.eclipse.emf.ecore,
