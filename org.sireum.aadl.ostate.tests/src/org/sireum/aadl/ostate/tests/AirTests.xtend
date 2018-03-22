@@ -55,8 +55,8 @@ class AirTests extends OsateTest {
 
     val ir = TestUtil::getAir(instance) as String
     
-    println(ir)
-    println(expected)
+    println("ir:       " + ir)
+    println("expected: " + expected)
     
     Assert.assertEquals(ir, expected)
   }

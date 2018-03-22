@@ -48,7 +48,7 @@ public class AirTestJava extends OsateTest {
 					expected = readFile(_f);
 				}
 			}
-			Assert.assertTrue("Expected results not found", expected == null);
+			Assert.assertTrue("Expected results not found", expected != null);
 
 			createFiles(l.toArray(new Pair[l.size()]));
 
