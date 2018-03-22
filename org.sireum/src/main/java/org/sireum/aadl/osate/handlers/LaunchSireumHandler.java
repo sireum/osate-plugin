@@ -29,62 +29,65 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 		setGenerator(generator);
 		Aadl model = (Aadl) super.execute(e);
 
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+		if (model != null) {
+			Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
-		if (generator.equals("serialize")) {
+			if (generator.equals("serialize")) {
 
-			SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();
+				SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();
 
-			String s = serialize(model, ser);
+				String s = serialize(model, ser);
 
-			FileDialog fd = new FileDialog(shell, SWT.SAVE);
-			fd.setFileName("aadl." + (ser == SerializerType.MSG_PACK ? "msgpack" : "json"));
-			fd.setText("Specify filename");
-			fd.setFilterPath(getProjectPath(e).toString());
-			String fname = fd.open();
+				FileDialog fd = new FileDialog(shell, SWT.SAVE);
+				fd.setFileName("aadl." + (ser == SerializerType.MSG_PACK ? "msgpack" : "json"));
+				fd.setText("Specify filename");
+				fd.setFilterPath(getProjectPath(e).toString());
+				String fname = fd.open();
 
-			if (fname != null) {
-				File out = new File(fname);
-				writeFile(out, s);
-			}
-		} else if (generator.equals("genslang")) {
-
-			if (PreferenceValues.getARSIT_SERIALIZE_OPT()) {
-				String s = serialize(model, SerializerType.JSON);
-				String outputFolder = PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT();
-
-				File f = new File(outputFolder);
-				if (!f.exists()) {
-					f = new File(getProjectPath(e).toFile(), outputFolder);
-					f.mkdir();
+				if (fname != null) {
+					File out = new File(fname);
+					writeFile(out, s);
 				}
-				String fname = getInstanceFilename(e);
-				fname = fname.substring(0, fname.lastIndexOf(".")) + ".json";
-				writeFile(new File(f, fname), s);
-			}
+			} else if (generator.equals("genslang")) {
 
-			DirectoryDialog dd = new DirectoryDialog(shell);
-			dd.setFilterPath(getProjectPath(e).toString());
-			dd.setText("Select directory");
-			String path = dd.open();
+				if (PreferenceValues.getARSIT_SERIALIZE_OPT()) {
+					String s = serialize(model, SerializerType.JSON);
+					String outputFolder = PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT();
 
-			if (path != null) {
-				File out = new File(path);
-				try {
-					Class<?> c = Class.forName("org.sireum.aadl.arsit.Runner");
-					Method m = c.getDeclaredMethod("run", File.class, Aadl.class);
+					File f = new File(outputFolder);
+					if (!f.exists()) {
+						f = new File(getProjectPath(e).toFile(), outputFolder);
+						f.mkdir();
+					}
+					String fname = getInstanceFilename(e);
+					fname = fname.substring(0, fname.lastIndexOf(".")) + ".json";
+					writeFile(new File(f, fname), s);
+				}
 
-					int ret = ((Integer) m.invoke(null, out, model)).intValue();
+				DirectoryDialog dd = new DirectoryDialog(shell);
+				dd.setFilterPath(getProjectPath(e).toString());
+				dd.setText("Select directory");
+				String path = dd.open();
 
-					MessageDialog.openInformation(shell, "Sireum", "Slang-Embedded code "
-							+ (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
-				} catch (Exception ex) {
-					String m = "Could not generate Slang-Embedded code.  Please make sure Arsit is present.\n\n"
-							+ ex.getLocalizedMessage();
-					MessageDialog.openError(shell, "Sireum", m);
+				if (path != null) {
+					File out = new File(path);
+					try {
+						Class<?> c = Class.forName("org.sireum.aadl.arsit.Runner");
+						Method m = c.getDeclaredMethod("run", File.class, Aadl.class);
+
+						int ret = ((Integer) m.invoke(null, out, model)).intValue();
+
+						MessageDialog.openInformation(shell, "Sireum", "Slang-Embedded code "
+								+ (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
+					} catch (Exception ex) {
+						String m = "Could not generate Slang-Embedded code.  Please make sure Arsit is present.\n\n"
+								+ ex.getLocalizedMessage();
+						MessageDialog.openError(shell, "Sireum", m);
+					}
 				}
 			}
 		}
+
 		return null;
 	}
 

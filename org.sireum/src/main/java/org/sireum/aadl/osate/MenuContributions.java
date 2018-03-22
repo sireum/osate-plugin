@@ -17,7 +17,7 @@ public class MenuContributions extends CompoundContributionItem {
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
-		l.add(getItem("Serialize Slang AST to file", "org.sireum.commands.launchsireum",
+		l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
 				map("org.sireum.commands.launchsireum.generator", "serialize"), true));
 
 		l.add(getItem("Generate Slang Embedded Code", "org.sireum.commands.launchsireum",

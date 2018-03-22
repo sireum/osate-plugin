@@ -30,20 +30,20 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		// addField(new FileFieldEditor(PreferenceConstants.SIREUM_JAR_PATH, "&Path to sireum.jar:", true,
 		// getFieldEditorParent()));
 
-		Composite genTab = addTab(tabFolder, "General");
+		Composite airTab = addTab(tabFolder, "AIR");
 		addField(new RadioGroupFieldEditor(PreferenceConstants.SERIALIZATION_METHOD_OPT,
-				"Method to use when serializing to a file:",
+				"Method to use when serializing AIR to a file:",
 				1,
 				new String[][] { //
 						{ "JSON", SerializerType.JSON.toString() }, //
 						{ "JSON (compact)", SerializerType.JSON_COMPACT.toString() }, //
 						{ "MsgPack", SerializerType.MSG_PACK.toString() } },
-				genTab, true));
+				airTab, true));
 
 
 		Composite arsitTab = addTab(tabFolder, "Arsit");
 		addField(new BooleanFieldEditor(PreferenceConstants.ARSIT_SERIALIZE_OPT,
-				"Also serialize to JSON (non-compact) when generating Slang-Embedded", arsitTab));
+				"Serialize AIR to JSON (non-compact) when generating Slang-Embedded", arsitTab));
 
 		addField(new StringFieldEditor(PreferenceConstants.ARSIT_OUTPUT_FOLDER_OPT, "Output folder",
 				arsitTab));

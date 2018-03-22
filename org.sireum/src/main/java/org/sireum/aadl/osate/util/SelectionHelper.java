@@ -66,7 +66,11 @@ public class SelectionHelper {
 	}
 
 	public static SystemImplementation getSelectedSystemImplementation() {
-		return getSelectedSystemImplementation(getSelection());
+		try {
+			return getSelectedSystemImplementation(getSelection());
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	// Returns the SystemImplementation that is currently selected. If the
