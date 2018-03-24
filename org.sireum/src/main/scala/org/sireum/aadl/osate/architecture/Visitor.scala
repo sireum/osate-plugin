@@ -24,8 +24,8 @@ object Visitor {
 
   var seenSet: ISZ[AadlPackageImpl] = ISZ()
   var dataTypes: ISZ[ir.Component] = ISZ()
-  var errorLibs: HashMap[String, ISZ[String]] = HashMap.empty[String, ISZ[String]]()
-  var compConnMap: HashMap[ISZ[String], HashSet[ConnectionReference]] = HashMap.empty[ISZ[String], HashSet[ConnectionReference]]()
+  var errorLibs: HashSMap[String, ISZ[String]] = HashSMap.empty[String, ISZ[String]]()
+  var compConnMap: HashSMap[ISZ[String], HashSSet[ConnectionReference]] = HashSMap.empty[ISZ[String], HashSSet[ConnectionReference]]()
 
   def convert(root: Element): Option[ir.Aadl] = {
     val t = visit(root)
@@ -76,7 +76,7 @@ object Visitor {
 
   private def visit(root: Element): Option[ir.Component] = {
     val metaId = root.eClass.getClassifierID
-
+    compConnMap = HashSMap.empty[ISZ[String], HashSSet[ConnectionReference]]()
     metaId match {
       case InstancePackage.SYSTEM_INSTANCE |
         InstancePackage.COMPONENT_INSTANCE =>
@@ -204,7 +204,7 @@ object Visitor {
     if(compConnMap.get(context).nonEmpty) {
           compConnMap = compConnMap + (context, compConnMap.get(context).get + connRef)
     } else {
-      compConnMap = compConnMap + (context, HashSet.empty + connRef)
+      compConnMap = compConnMap + (context, HashSSet.empty + connRef)
     }
     ir.ConnectionReference(
     name = ir.Name(name),
