@@ -1,0 +1,117 @@
+package Connection_Translation
+public
+	-------------------------------------
+	-------------Interfaces--------------
+	-------------------------------------
+	system Root
+		features
+			root_in : in feature;
+			root_out: out feature;
+	end Root;
+	
+	system SubSystem
+		features
+			sub_in: in feature;
+			sub_out: out feature;
+			sub_port: in out event data port;
+	end SubSystem;
+	
+	process Sample_Process
+		features
+			proc_in : in data port;
+			proc_out : out data port;
+			proc_in_out: in out event port;
+	end Sample_Process;
+	
+	thread Thread_Dummy
+		features 
+			access_point: in out event port;
+	end Thread_Dummy;
+	
+	-------------------------------------
+	-----------Implementations-----------
+	-------------------------------------
+	
+	-------------------------------------
+	----------Start of One Ref-----------
+	-------------------------------------
+	system implementation SubSystem.impl
+	end SubSystem.impl;
+	
+	system implementation Root.one_reference
+		--all one reference connection, however exercising the bidirectional port and connection 
+		subcomponents
+			Sub1 : system SubSystem.impl;
+			Sub2 : system SubSystem.impl;
+		Connections
+			system_to_comp_in : feature root_in -> Sub1.sub_in;
+			system_to_comp_out: feature Sub2.sub_out -> root_out;
+			comp_to_comp: port sub1.sub_port <-> sub2.sub_port;
+	end Root.one_reference;
+	-------------------------------------
+	-----------End of One Ref------------
+	-------------------------------------
+	
+	-------------------------------------
+	----------Start of Two Ref-----------
+	-------------------------------------
+	
+	process implementation Sample_Process.impl
+	end Sample_Process.impl;
+	
+	system implementation SubSystem.withproc
+		subcomponents
+			sub_proc1 : Process Sample_Process.impl;
+			sub_proc2 : Process Sample_Process.impl;
+		connections
+			parent_to_child_in : feature sub_in -> sub_proc1.proc_in;
+			child_to_child : port sub_proc1.proc_out -> sub_proc2.proc_in;
+			child_to_parent_out: feature sub_proc2.proc_out -> sub_out;
+	end SubSystem.withproc;
+	
+	system implementation Root.two_references
+		--Two reference connection
+		subcomponents
+			Sub1 : system SubSystem.withproc;
+		Connections
+			system_to_comp_in : feature root_in -> Sub1.sub_in;
+			system_to_comp_out: feature Sub1.sub_out -> root_out;
+	end Root.two_references;
+	-------------------------------------
+	-----------End of Two Ref------------
+	-------------------------------------
+	
+	-------------------------------------
+	---------Start of Three Ref----------
+	-------------------------------------
+	thread implementation Thread_Dummy.impl
+	end Thread_Dummy.impl;
+	
+	process implementation Sample_Process.withThreads
+		subcomponents
+			thread1 : thread Thread_Dummy.impl;
+		connections
+			proc_to_thread : port proc_in_out <-> thread1.access_point;
+	end Sample_Process.withThreads;
+	
+	system implementation SubSystem.withproc_and_thread
+		subcomponents
+			sub_proc : Process Sample_Process.withThreads;
+		connections
+			parent_to_child:  feature sub_port -> sub_proc.proc_in_out;
+			child_to_parent: feature sub_proc.proc_in_out -> sub_port;
+	end SubSystem.withproc_and_thread;
+
+	system implementation Root.three_references
+		-- Three reference connection with bi-directional connections in between
+		subcomponents
+			Sub : system SubSystem.withproc_and_thread;
+		Connections
+			system_to_comp_in : feature root_in -> Sub.sub_port;
+			system_to_comp_out: feature Sub.sub_port -> root_out;
+	end Root.three_references;
+	-------------------------------------
+	----------End of Three Ref-----------
+	-------------------------------------
+
+end Connection_Translation;

@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.testing.InjectWith;
@@ -35,19 +37,41 @@ public class AirTestJava extends OsateTest {
 		execute("pca-pump-chasis-gen", "Chassis.aadl", "Chassis_System.i");
 	}
 
+	@Test
+	public void connection_Test_one_reference() {
+		execute("connection-translation-tests", "Connection_Translation.aadl", "Root.one_reference");
+	}
+
+	@Test
+	public void connection_Test_two_references() {
+		execute("connection-translation-tests", "Connection_Translation.aadl", "Root.two_references");
+	}
+
+	@Test
+	public void connection_Test_three_references() {
+		execute("connection-translation-tests", "Connection_Translation.aadl", "Root.three_references");
+	}
+
 	@SuppressWarnings("unchecked")
 	void execute(String dirName, String sysFilename, String sysImplName) {
 		try {
 			File r = new File(root, dirName);
 			ArrayList<Pair<String, String>> l = new ArrayList<>();
 			String expected = null;
+
 			for (File _f : r.listFiles()) {
 				if (_f.getName().endsWith(".aadl")) {
 					l.add(new Pair<>(_f.getName(), readFile(_f)));
-				} else if (_f.getName().equals("expected")) {
-					expected = readFile(_f);
 				}
 			}
+
+			Optional<File> expectedFile = Arrays.stream(r.listFiles())
+					.filter(x -> x.getName().endsWith(sysImplName + ".expected")).findFirst();
+
+			if (expectedFile.isPresent()) {
+				expected = readFile(expectedFile.get());
+			}
+
 			Assert.assertTrue("Expected results not found", expected != null);
 
 			createFiles(l.toArray(new Pair[l.size()]));
@@ -64,9 +88,6 @@ public class AirTestJava extends OsateTest {
 			SystemInstance instance = InstantiateModel.buildInstanceModelFile(sysImpl);
 
 			String ir = TestUtil.getAir(instance);
-
-			System.out.println("ir:       " + ir);
-			System.out.println("expected: " + expected);
 
 			Assert.assertEquals(ir, expected);
 		} catch (Exception e) {
