@@ -66,7 +66,7 @@ public class AirTestJava extends OsateTest {
 			}
 
 			Optional<File> expectedFile = Arrays.stream(r.listFiles())
-					.filter(x -> x.getName().endsWith(sysImplName + ".expected")).findFirst();
+					.filter(x -> x.getName().endsWith(sysImplName + ".json")).findFirst();
 
 			if (expectedFile.isPresent()) {
 				expected = readFile(expectedFile.get());
