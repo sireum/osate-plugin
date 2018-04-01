@@ -18,7 +18,7 @@ import org.osate.xtext.aadl2.errormodel.util.EMV2Util
 import org.osate.xtext.aadl2.errormodel.errorModel.impl._
 import org.osate.aadl2.util.Aadl2Util
 import org.osate.aadl2.ComponentCategory._
- 
+import org.osate.aadl2.instance.impl._
 
 object Visitor {
 
@@ -197,20 +197,19 @@ object Visitor {
 
     ir.Annex("Emv2", ir.Emv2Clause(libNames, inprop ++ outprop, sources ++ sinks ++ paths))
   }
-  
-  private def buildConnectionRef(connRef: ConnectionReference, path: ISZ[String]) : ir.ConnectionReference = {
+
+  private def buildConnectionRef(connRef: ConnectionReference, path: ISZ[String]): ir.ConnectionReference = {
     val context = ISZ(connRef.getContext.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*)
     val name = context :+ String(connRef.getConnection.getName)
-    if(compConnMap.get(context).nonEmpty) {
-          compConnMap = compConnMap + (context, compConnMap.get(context).get + connRef)
+    if (compConnMap.get(context).nonEmpty) {
+      compConnMap = compConnMap + (context, compConnMap.get(context).get + connRef)
     } else {
       compConnMap = compConnMap + (context, HashSSet.empty + connRef)
     }
     ir.ConnectionReference(
-    name = ir.Name(name),
-    context = ir.Name(context),
-    if(path == context) B(true) else B(false)
-    )
+      name = ir.Name(name),
+      context = ir.Name(context),
+      if (path == context) B(true) else B(false))
   }
 
   private def buildConnectionInst(connInst: ConnectionInstance, path: ISZ[String]): ir.ConnectionInstance = {
@@ -218,12 +217,14 @@ object Visitor {
     val currentPath = path :+ connInst.getName
 
     val srcComponent = connInst.getSource.getComponentInstance.getInstanceObjectPath.split('.').map(String(_)).toSeq
-
     val srcFeature = connInst.getSource.getInstanceObjectPath.split('.').map(String(_)).toSeq
+    val srcDirection = connInst.getSource.asInstanceOf[FeatureInstanceImpl].getDirection
 
     val dstComponent = connInst.getDestination.getComponentInstance.getInstanceObjectPath.split('.').map(String(_)).toSeq
     val dstFeature = connInst.getDestination.getInstanceObjectPath.split('.').map(String(_)).toSeq
+    val dstDirection = connInst.getDestination.asInstanceOf[FeatureInstanceImpl].getDirection
 
+    val temp = connInst.getSource
     val properties = ISZ[ir.Property](connInst.getOwnedPropertyAssociations.map(op =>
       buildProperty(op, currentPath)).toSeq: _*)
 
@@ -243,17 +244,27 @@ object Visitor {
       name = ir.Name(currentPath),
       src = ir.EndPoint(
         component = ir.Name(ISZ(srcComponent: _*)),
-        feature = ir.Name(ISZ[String](srcFeature: _*))),
+        feature = ir.Name(ISZ[String](srcFeature: _*)),
+        direction = getAIRDire(srcDirection)),
       dst = ir.EndPoint(
         component = ir.Name(ISZ[String](dstComponent: _*)),
-        feature = ir.Name(ISZ[String](dstFeature: _*))),
+        feature = ir.Name(ISZ[String](dstFeature: _*)),
+        direction = getAIRDire(dstDirection)),
       kind = kind,
       connectionRefs = connRefs,
       properties = properties)
 
   }
-  
-  private def buildConnection(connRef : ConnectionReference, path: ISZ[String]): ir.Connection = {
+
+  private def getAIRDire(dirType: DirectionType): ir.Direction.Type = {
+    dirType match {
+      case DirectionType.IN => ir.Direction.In
+      case DirectionType.OUT => ir.Direction.Out
+      case DirectionType.IN_OUT => ir.Direction.InOut
+    }
+  }
+
+  private def buildConnection(connRef: ConnectionReference, path: ISZ[String]): ir.Connection = {
     val conn = connRef.getConnection
     val name = path :+ conn.getName
     val srcComp = conn.getSource.getContext
@@ -263,23 +274,33 @@ object Visitor {
     val isBidirect = B(conn.isBidirectional())
     val sysInst = connRef.getContext
     val connInst = sysInst.findConnectionInstance(conn)
-    val connInst2 = if(connInst.nonEmpty) ISZ(connInst.map(ci => 
-      ir.Name(ISZ(ci.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*))).toSeq: _*) 
-      else ISZ(ir.Name(ISZ())) 
-    
-    val properties =ISZ[ir.Property](connRef.getOwnedPropertyAssociations.map(op =>
+    val connInst2 = if (connInst.nonEmpty) ISZ(connInst.map(ci =>
+      ir.Name(ISZ(ci.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*))).toSeq: _*)
+    else ISZ(ir.Name(ISZ()))
+
+    val properties = ISZ[ir.Property](connRef.getOwnedPropertyAssociations.map(op =>
       buildProperty(op, name)).toSeq: _*)
-      
+
     ir.Connection(ir.Name(name), source, destination, isBidirect, connInst2, properties)
   }
-  
-  private def buildEndPoint(connElem : ConnectedElement, path :  ISZ[String]) : ir.EndPoint = {
-    val component = if(connElem.getContext != null) {
+
+  private def buildEndPoint(connElem: ConnectedElement, path: ISZ[String]): ir.EndPoint = {
+    val component = if (connElem.getContext != null) {
       path :+ connElem.getContext.getFullName
       // ISZ[String]()
     } else path
     val feature = component :+ connElem.getConnectionEnd.getName
-    ir.EndPoint(ir.Name(component), ir.Name(feature))
+    val inFeature = connElem.getConnectionEnd.asInstanceOf[DirectedFeatureImpl]
+    val dir = if (inFeature.isIn() && inFeature.isOut()) {
+      ir.Direction.InOut
+    } else if (inFeature.isIn() && !inFeature.isOut()) {
+      ir.Direction.In
+    } else {
+      ir.Direction.Out
+    }
+    ir.EndPoint(
+      ir.Name(component),
+      ir.Name(feature), dir)
   }
 
   private def buildComponent(compInst: ComponentInstance, path: ISZ[String]): ir.Component = {
@@ -306,18 +327,16 @@ object Visitor {
     } else {
       None[ir.Classifier]
     }
-    
-    var connections = ISZ[ir.Connection]()
-      
-      if(compConnMap.get(currentPath).nonEmpty) {
-        val res = compConnMap.get(currentPath).get.elements.map{c =>
-          val xx= c
-          buildConnection(c.asInstanceOf[ConnectionReference], currentPath)
-       }
-       connections = ISZ[ir.Connection](res.elements.toSeq: _*)
-      } 
-    
 
+    var connections = ISZ[ir.Connection]()
+
+    if (compConnMap.get(currentPath).nonEmpty) {
+      val res = compConnMap.get(currentPath).get.elements.map { c =>
+        val xx = c
+        buildConnection(c.asInstanceOf[ConnectionReference], currentPath)
+      }
+      connections = ISZ[ir.Connection](res.elements.toSeq: _*)
+    }
 
     val cat = compInst.getCategory match {
       case ABSTRACT => ir.ComponentCategory.Abstract
