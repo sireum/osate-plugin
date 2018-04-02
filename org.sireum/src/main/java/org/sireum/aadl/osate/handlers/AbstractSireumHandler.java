@@ -96,8 +96,6 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 						exception.printStackTrace();
 					}
 				}
-				System.out.println(m);
-				MessageDialog.openError(window.getShell(), "Sireum", m);
 
 //				if (hasErrors) {
 //					return null;
