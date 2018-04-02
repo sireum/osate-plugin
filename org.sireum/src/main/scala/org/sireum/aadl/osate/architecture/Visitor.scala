@@ -218,11 +218,19 @@ object Visitor {
 
     val srcComponent = connInst.getSource.getComponentInstance.getInstanceObjectPath.split('.').map(String(_)).toSeq
     val srcFeature = connInst.getSource.getInstanceObjectPath.split('.').map(String(_)).toSeq
-    val srcDirection = connInst.getSource.asInstanceOf[FeatureInstanceImpl].getDirection
+    val srcDirection = if(connInst.getSource.isInstanceOf[FeatureInstanceImpl]) {
+      org.sireum.Option.some[DirectionType](connInst.getSource.asInstanceOf[FeatureInstanceImpl].getDirection)
+    } else {
+      org.sireum.Option.none[DirectionType]()
+    }
 
     val dstComponent = connInst.getDestination.getComponentInstance.getInstanceObjectPath.split('.').map(String(_)).toSeq
     val dstFeature = connInst.getDestination.getInstanceObjectPath.split('.').map(String(_)).toSeq
-    val dstDirection = connInst.getDestination.asInstanceOf[FeatureInstanceImpl].getDirection
+    val dstDirection = if(connInst.getDestination.isInstanceOf[FeatureInstanceImpl]) {
+      org.sireum.Option.some[DirectionType](connInst.getDestination.asInstanceOf[FeatureInstanceImpl].getDirection)
+    } else {
+      org.sireum.Option.none[DirectionType]()
+    }
 
     val temp = connInst.getSource
     val properties = ISZ[ir.Property](connInst.getOwnedPropertyAssociations.map(op =>
@@ -245,11 +253,11 @@ object Visitor {
       src = ir.EndPoint(
         component = ir.Name(ISZ(srcComponent: _*)),
         feature = ir.Name(ISZ[String](srcFeature: _*)),
-        direction = getAIRDire(srcDirection)),
+        direction = srcDirection.map(getAIRDire)),
       dst = ir.EndPoint(
         component = ir.Name(ISZ[String](dstComponent: _*)),
         feature = ir.Name(ISZ[String](dstFeature: _*)),
-        direction = getAIRDire(dstDirection)),
+        direction = dstDirection.map(getAIRDire)),
       kind = kind,
       connectionRefs = connRefs,
       properties = properties)
@@ -290,17 +298,22 @@ object Visitor {
       // ISZ[String]()
     } else path
     val feature = component :+ connElem.getConnectionEnd.getName
+    if(connElem.getConnectionEnd.isInstanceOf[DirectedFeatureImpl]) {
     val inFeature = connElem.getConnectionEnd.asInstanceOf[DirectedFeatureImpl]
     val dir = if (inFeature.isIn() && inFeature.isOut()) {
-      ir.Direction.InOut
+      org.sireum.Option.some[ir.Direction.Type](ir.Direction.InOut)
     } else if (inFeature.isIn() && !inFeature.isOut()) {
-      ir.Direction.In
+      org.sireum.Option.some[ir.Direction.Type](ir.Direction.In)
     } else {
-      ir.Direction.Out
+      org.sireum.Option.some[ir.Direction.Type](ir.Direction.Out)
     }
-    ir.EndPoint(
+     ir.EndPoint(
       ir.Name(component),
       ir.Name(feature), dir)
+    } else {ir.EndPoint(
+      ir.Name(component),
+      ir.Name(feature), org.sireum.Option.none[ir.Direction.Type]()) }
+
   }
 
   private def buildComponent(compInst: ComponentInstance, path: ISZ[String]): ir.Component = {
