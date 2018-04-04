@@ -25,7 +25,7 @@ object Visitor {
   var seenSet: ISZ[AadlPackageImpl] = ISZ()
   var dataTypes: ISZ[ir.Component] = ISZ()
   var errorLibs: HashSMap[String, ISZ[String]] = HashSMap.empty[String, ISZ[String]]()
-  var compConnMap: HashSMap[ISZ[String], HashSSet[ConnectionReference]] = HashSMap.empty[ISZ[String], HashSSet[ConnectionReference]]()
+  var compConnMap: HashSMap[ISZ[String], HashSSet[Connection]] = HashSMap.empty[ISZ[String], HashSSet[Connection]]()
 
   def convert(root: Element): Option[ir.Aadl] = {
     val t = visit(root)
@@ -76,7 +76,7 @@ object Visitor {
 
   private def visit(root: Element): Option[ir.Component] = {
     val metaId = root.eClass.getClassifierID
-    compConnMap = HashSMap.empty[ISZ[String], HashSSet[ConnectionReference]]()
+    compConnMap = HashSMap.empty[ISZ[String], HashSSet[Connection]]()
     metaId match {
       case InstancePackage.SYSTEM_INSTANCE |
         InstancePackage.COMPONENT_INSTANCE =>
@@ -202,9 +202,9 @@ object Visitor {
     val context = ISZ(connRef.getContext.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*)
     val name = context :+ String(connRef.getConnection.getName)
     if (compConnMap.get(context).nonEmpty) {
-      compConnMap = compConnMap + (context, compConnMap.get(context).get + connRef)
+      compConnMap = compConnMap + (context, compConnMap.get(context).get + connRef.getConnection)
     } else {
-      compConnMap = compConnMap + (context, HashSSet.empty + connRef)
+      compConnMap = compConnMap + (context, HashSSet.empty + connRef.getConnection)
     }
     ir.ConnectionReference(
       name = ir.Name(name),
@@ -272,21 +272,21 @@ object Visitor {
     }
   }
 
-  private def buildConnection(connRef: ConnectionReference, path: ISZ[String]): ir.Connection = {
-    val conn = connRef.getConnection
+  private def buildConnection(conn: Connection, 
+                              path: ISZ[String], 
+                              compInst: ComponentInstance): ir.Connection = {
     val name = path :+ conn.getName
     val srcComp = conn.getSource.getContext
     val dstComp = conn.getDestination.getContext
     val source = buildEndPoint(conn.getSource, path)
     val destination = buildEndPoint(conn.getDestination, path)
     val isBidirect = B(conn.isBidirectional())
-    val sysInst = connRef.getContext
-    val connInst = sysInst.findConnectionInstance(conn)
+    val connInst = compInst.findConnectionInstance(conn)
     val connInst2 = if (connInst.nonEmpty) ISZ(connInst.map(ci =>
       ir.Name(ISZ(ci.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*))).toSeq: _*)
     else ISZ(ir.Name(ISZ()))
 
-    val properties = ISZ[ir.Property](connRef.getOwnedPropertyAssociations.map(op =>
+    val properties = ISZ[ir.Property](conn.getOwnedPropertyAssociations.map(op =>
       buildProperty(op, name)).toSeq: _*)
 
     ir.Connection(ir.Name(name), source, destination, isBidirect, connInst2, properties)
@@ -346,7 +346,7 @@ object Visitor {
     if (compConnMap.get(currentPath).nonEmpty) {
       val res = compConnMap.get(currentPath).get.elements.map { c =>
         val xx = c
-        buildConnection(c.asInstanceOf[ConnectionReference], currentPath)
+        buildConnection(c, currentPath, compInst)
       }
       connections = ISZ[ir.Connection](res.elements.toSeq: _*)
     }
