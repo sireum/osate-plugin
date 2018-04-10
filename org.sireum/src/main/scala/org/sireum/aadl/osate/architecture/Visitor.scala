@@ -111,7 +111,8 @@ object Visitor {
         }
         prop :+= ir.Emv2Propagation(
           if (isIn) ir.PropagationDirection.In else ir.PropagationDirection.Out,
-          path :+ x.getFeatureorPPRef.getFeatureorPP.getName, inErrorTokens.elements)
+          if(x.getFeatureorPPRef == null) (path :+ x.getKind) else path :+ x.getFeatureorPPRef.getFeatureorPP.getName, 
+          inErrorTokens.elements)
       }
       prop
     }
@@ -139,7 +140,7 @@ object Visitor {
       val name = src.getName
       if (src.getSourceModelElement.isInstanceOf[ErrorPropagation]) {
         val s = src.getSourceModelElement.asInstanceOf[ErrorPropagation]
-        val featureName = s.getFeatureorPPRef.getFeatureorPP.getName
+        val featureName = if(s.getFeatureorPPRef == null) s.getKind else s.getFeatureorPPRef.getFeatureorPP.getName
         var prop: Option[ir.Emv2Propagation] = None[ir.Emv2Propagation]
         if (src.getTypeTokenConstraint != null) {
           val errorP = src.getTypeTokenConstraint.getTypeTokens.flatMap(tt =>
@@ -155,7 +156,7 @@ object Visitor {
     var sinks = ISZ[ir.Emv2Flow]()
     EMV2Util.getAllErrorSinks(root.getComponentClassifier).foreach { snk =>
       val name = snk.getName
-      val featureName = snk.getIncoming.getFeatureorPPRef.getFeatureorPP.getName
+      val featureName = if(snk.getIncoming.getFeatureorPPRef==null)snk.getIncoming.getKind else snk.getIncoming.getFeatureorPPRef.getFeatureorPP.getName
       var prop: Option[ir.Emv2Propagation] = None[ir.Emv2Propagation]
       if (snk.getTypeTokenConstraint != null) {
         val errorP = snk.getTypeTokenConstraint.getTypeTokens.flatMap(tt =>
@@ -173,9 +174,10 @@ object Visitor {
       var inerror: Option[ir.Emv2Propagation] = None[ir.Emv2Propagation]
       var outerror: Option[ir.Emv2Propagation] = None[ir.Emv2Propagation]
       if (pth.getTypeTokenConstraint != null) {
+        val pp = if(pth.getIncoming.getFeatureorPPRef == null) pth.getIncoming.getKind else pth.getIncoming.getFeatureorPPRef.getFeatureorPP.getName
         inerror = Some[ir.Emv2Propagation](ir.Emv2Propagation(
           ir.PropagationDirection.In,
-          path :+ pth.getIncoming.getFeatureorPPRef.getFeatureorPP.getName,
+          path :+ pp,
           ISZ(pth.getTypeTokenConstraint.getTypeTokens.flatMap(tt =>
             tt.getType.map(et => String(et.getName))).toSeq: _*)))
       } else {
@@ -183,9 +185,10 @@ object Visitor {
       }
 
       if (pth.getTargetToken != null) {
+        val pp = if(pth.getOutgoing.getFeatureorPPRef == null)pth.getOutgoing.getKind else  pth.getOutgoing.getFeatureorPPRef.getFeatureorPP.getName
         outerror = Some[ir.Emv2Propagation](ir.Emv2Propagation(
           ir.PropagationDirection.Out,
-          path :+ pth.getOutgoing.getFeatureorPPRef.getFeatureorPP.getName,
+          path :+ pp,
           ISZ(pth.getTargetToken.getTypeTokens.flatMap(tt =>
             tt.getType.map(et => String(et.getName))).toSeq: _*)))
       } else {
