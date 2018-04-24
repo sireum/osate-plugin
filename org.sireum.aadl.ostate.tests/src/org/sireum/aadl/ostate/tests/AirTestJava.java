@@ -2,6 +2,7 @@ package org.sireum.aadl.ostate.tests;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ import com.itemis.xtext.testing.FluentIssueCollection;
 @RunWith(XtextRunner.class)
 @InjectWith(Aadl2UiInjectorProvider.class)
 public class AirTestJava extends OsateTest {
+
+	boolean generateExpected = false;
 
 	File root = new File("./projects/org/sireum/aadl/ostate/tests/");
 
@@ -88,6 +91,12 @@ public class AirTestJava extends OsateTest {
 			SystemInstance instance = InstantiateModel.buildInstanceModelFile(sysImpl);
 
 			String ir = TestUtil.getAir(instance);
+
+			if(generateExpected && expectedFile.isPresent()) {
+				Files.write(Paths.get(expectedFile.get().toURI()), ir.getBytes(StandardCharsets.UTF_8));
+				System.out.println("Wrote: " + expectedFile.get().getAbsolutePath());
+				expected = ir;
+			}
 
 			Assert.assertEquals(ir, expected);
 		} catch (Exception e) {

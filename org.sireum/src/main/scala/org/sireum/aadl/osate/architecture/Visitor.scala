@@ -447,28 +447,31 @@ object Visitor {
 
   }
 
-  private def getPropertyExpressionValue(pe: PropertyExpression): ISZ[ir.PropertyValue] = {
-    val eName = pe.eClass().getName
+  private def getPropertyExpressionValue(pe: PropertyExpression, path: ISZ[String]): ISZ[ir.PropertyValue] = {
+    def getUnitProp(nv: NumberValue) : ir.UnitProp = {
+      if(nv == null) ir.UnitProp(value = "??", unit = None[String]())
+      else {
+        val v: Double = org.osate.aadl2.operations.NumberValueOperations.getScaledValue(nv)
+        val u: UnitLiteral = org.osate.aadl2.operations.UnitLiteralOperations.getAbsoluteUnit(nv.getUnit)
+        ir.UnitProp(value = v.toString, unit = if(u == null) None[String]() else Some(u.getName))
+      }
+    }
+    
+    //val eName = pe.eClass().getName
     pe.eClass().getClassifierID match {
       case Aadl2Package.BOOLEAN_LITERAL =>
         val b = pe.asInstanceOf[BooleanLiteral].getValue.toString
-        return ISZ(ir.UnitProp(unit = eName, value = b))
-      case Aadl2Package.INTEGER_LITERAL =>
-        val i = pe.asInstanceOf[IntegerLiteral].getValue.toString
-        return ISZ(ir.UnitProp(unit = eName, value = i))
-      case Aadl2Package.REAL_LITERAL =>
-        val r = pe.asInstanceOf[RealLiteral].getValue.toString
-        return ISZ(ir.UnitProp(unit = eName, value = r))
+        return ISZ(ir.ValueProp(b))
+      case Aadl2Package.INTEGER_LITERAL | Aadl2Package.REAL_LITERAL =>        
+        return ISZ(getUnitProp(pe.asInstanceOf[NumberValue]))
       case Aadl2Package.STRING_LITERAL =>
         val v = pe.asInstanceOf[StringLiteral].getValue
-        return ISZ(ir.UnitProp(unit = eName, value = v))
-
+        return ISZ(ir.ValueProp(v))
       case Aadl2Package.RANGE_VALUE =>
         val rv = pe.asInstanceOf[RangeValue]
         return ISZ(ir.RangeProp(
-          Unit = Some(rv.getMinimum.eClass().getName),
-          ValueLow = if (rv.getMinimumValue != null) rv.getMinimumValue.toString.trim else "IT'S NULL",
-          ValueHigh = if (rv.getMaximumValue != null) rv.getMaximumValue.toString.trim else "IT'S NULL"))
+          low = getUnitProp(rv.getMinimumValue),
+          high = getUnitProp(rv.getMaximumValue)))
       case Aadl2Package.CLASSIFIER_VALUE =>
         val cv = pe.asInstanceOf[ClassifierValue].getClassifier
         return ISZ(ir.ClassifierProp(cv.getQualifiedName))
@@ -476,33 +479,38 @@ object Visitor {
         val lv = pe.asInstanceOf[ListValue]
         var elems = ISZ[ir.PropertyValue]()
         for (e <- lv.getOwnedListElements)
-          elems ++= getPropertyExpressionValue(e)
+          elems ++= getPropertyExpressionValue(e, path)
         return elems
       case Aadl2Package.NAMED_VALUE =>
         val nv = pe.asInstanceOf[NamedValue]
         val nv2 = nv.getNamedValue
-        val nv2Name = nv2.eClass.getName
         nv2.eClass.getClassifierID match {
           case Aadl2Package.ENUMERATION_LITERAL =>
             val el = nv2.asInstanceOf[EnumerationLiteral]
-            return ISZ(ir.UnitProp(unit = nv2Name, value = el.getFullName))
+            return ISZ(ir.ValueProp(el.getFullName))
           case Aadl2Package.PROPERTY =>
             val _p = nv2.asInstanceOf[Property]
             if (_p.getDefaultValue != null)
-              return getPropertyExpressionValue(_p.getDefaultValue)
+              return getPropertyExpressionValue(_p.getDefaultValue, path)
             else
-              return ISZ(ir.UnitProp(unit = nv2Name, value = _p.getQualifiedName))
+              return ISZ(ir.ValueProp(_p.getQualifiedName))
           case Aadl2Package.PROPERTY_CONSTANT =>
             val pc = nv2.asInstanceOf[PropertyConstant]
-            return ISZ(ir.UnitProp(unit = nv2Name, value = pc.getConstantValue.toString()))
+            return ISZ(ir.ValueProp(pc.getConstantValue.toString()))
           case xf =>
             println(s"Not handling $xf $nv2")
             return ISZ()
         }
+      case Aadl2Package.RECORD_VALUE =>
+        val rv = pe.asInstanceOf[RecordValue]
+        return ISZ(ir.RecordProp(
+          ISZ[ir.Property](
+            rv.getOwnedFieldValues.map(fv => ir.Property(
+              name = ir.Name(path :+ fv.getProperty.getQualifiedName),
+              propertyValues = getPropertyExpressionValue(fv.getOwnedValue, path))).toSeq:_*)))
       case Aadl2Package.REFERENCE_VALUE =>
         val rv = pe.asInstanceOf[ReferenceValue]
-        println(s"Need to handle ReferenceValue $rv")
-        return ISZ(ir.UnitProp(unit = eName, value = rv.toString))
+        return ISZ(ir.ReferenceProp(rv.toString))
       case InstancePackage.INSTANCE_REFERENCE_VALUE =>
         // FIXME: id is coming from InstancePackage rather than Aadl2Package.  Might cause the
         // following cast to fail if there is an id clash
@@ -522,7 +530,7 @@ object Visitor {
     val propValList = {
       try {
         val pe = PropertyUtils.getSimplePropertyValue(cont, prop)
-        getPropertyExpressionValue(pe)
+        getPropertyExpressionValue(pe, path)
       } catch {
         case e: Throwable =>
           println(s"Error encountered while trying to fetch property value for ${prop.getQualifiedName} from ${cont.getQualifiedName} : ${e.getMessage}")
