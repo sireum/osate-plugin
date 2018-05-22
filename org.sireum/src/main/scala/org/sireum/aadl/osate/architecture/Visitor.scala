@@ -24,14 +24,16 @@ object Visitor {
 
   var seenSet: ISZ[AadlPackageImpl] = ISZ()
   var dataTypes: ISZ[ir.Component] = ISZ()
-  var errorLibs: HashSMap[String, ISZ[String]] = HashSMap.empty[String, ISZ[String]]()
+  var errorLibs: HashSMap[String, (ISZ[String], ISZ[String], ISZ[(String, String)])] = HashSMap.empty[String, (ISZ[String], ISZ[String], ISZ[(String, String)])]()
   var compConnMap: HashSMap[ISZ[String], HashSSet[Connection]] = HashSMap.empty[ISZ[String], HashSSet[Connection]]()
 
   def convert(root: Element): Option[ir.Aadl] = {
     val t = visit(root)
     if (t.nonEmpty) {
+      //errorLibs.entries.map(f => ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1, HashMap.empty ++ f._2._2))
+      
       return Some[ir.Aadl](ir.Aadl(components = ISZ(t.get) ++ dataTypes, errorLibs.entries.map(f =>
-        ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2))))
+        ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1,  f._2._2, HashMap.empty ++ f._2._3))))
     } else {
       None[ir.Aadl]
     }
@@ -129,8 +131,16 @@ object Visitor {
 
     val el = EMV2Util.getErrorModelSubclauseWithUseTypes(root.getComponentClassifier)
     if (el != null) {
-      el.foreach { e =>
-        errorLibs = errorLibs + (EMV2Util.getLibraryName(e), ISZ(e.getTypes.map(s => String(s.getName)).toSeq: _*))
+      el.foreach { e => 
+        val temp  = (String(EMV2Util.getLibraryName(e)), (
+            ISZ((e.getUseTypes.map(EMV2Util.getLibraryName).map(x => String(x)) ++ 
+                e.getExtends.map(EMV2Util.getLibraryName).map(x => String(x))).toSeq:_*),
+            ISZ(e.getTypes.map(s => String(s.getName)).toSeq: _*), 
+            ISZ(e.getTypes.toSeq.flatMap(s => if(s.getAliasedType != null) {scala.Some((String(s.getName), String(s.getAliasedType.getName))) }
+            else {scala.None}).toSeq: _*)))
+            
+        errorLibs = errorLibs + temp
+        
         libNames :+= EMV2Util.getLibraryName(e)
       }
     }
