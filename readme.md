@@ -33,7 +33,7 @@ IDE as 'Eclipse'.
     
     Sireum developers should also clone [Arsit](https://github.com/santoslab/arsit) prior to invoking ``sbt-launch``
     
-    ``git clone git@github.com:santoslab/arsit.git sireum-v3/aadl/arsit``
+    ``git clone --recursive git@github.com:santoslab/arsit.git sireum-v3/aadl/arsit``
 
 4. In Eclipse go to __File__ -> __Import...__  
 
