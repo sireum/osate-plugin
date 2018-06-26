@@ -3,7 +3,6 @@ package org.sireum.aadl.osate.handlers;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.lang.reflect.Method;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -72,14 +71,19 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 				if (path != null) {
 					File out = new File(path);
 					try {
-						Class<?> c = Class.forName("org.sireum.aadl.arsit.Runner");
-						Method m = c.getDeclaredMethod("run", File.class, Aadl.class);
+						// Class<?> c = Class.forName("org.sireum.aadl.arsit.Runner");
+						// Method m = c.getDeclaredMethod("run", File.class, Aadl.class, Cli$ArsitOption$.class);
+						// int ret = ((Integer) m.invoke(null, out, model)).intValue();
 
-						int ret = ((Integer) m.invoke(null, out, model)).intValue();
+						// Eclipse doesn't seem to like accessing nested scala classes
+						// (e.g. org.sireum.cli.Cli$ArsitOption$) so invoke Arsit from scala instead
+
+						int ret = org.sireum.aadl.osate.util.Util.launchArsit(out, model);
 
 						MessageDialog.openInformation(shell, "Sireum", "Slang-Embedded code "
 								+ (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
 					} catch (Exception ex) {
+						ex.printStackTrace();
 						String m = "Could not generate Slang-Embedded code.  Please make sure Arsit is present.\n\n"
 								+ ex.getLocalizedMessage();
 						MessageDialog.openError(shell, "Sireum", m);
