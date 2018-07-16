@@ -3,32 +3,34 @@ package org.sireum.aadl.osate.util
 import java.io.File
 import org.sireum.aadl.ir.Aadl
 import org.sireum.cli.Cli
-import org.sireum.{ISZ, Some, String, Z}
+import org.sireum.{F, T, ISZ, None, Some, String, Z}
 
 object Util {
-  def launchArsit(out: File, model: Aadl): Int = {
+  def launchArsit(prompt: ArsitPrompt, model: Aadl): Int = {
     val c = Class.forName("org.sireum.aadl.arsit.Runner")
-		val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl], classOf[Cli.ArsitOption])
-    
-		// using sireum's cli parser to populate ArsitOption.  To see the available arsit options, you can run
-		// "java -jar bin/sireum.jar x aadl arsit" from the command line, or just uncomment the '--fakeOpt' entry
-    val args : ISZ[String] = ISZ(
-        // "--fakeOpt" // uncomment this entry to see the available arsit options
-        "--output-dir", out.getAbsolutePath,
-        //"--package-name", "foo_bar",
-        //"--noart",
-        //"--bless",
-        "--trans",
-        //"--ipc", "shared_memory"
-        )
+    val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl], classOf[Cli.ArsitOption])
 
-    val cli = Cli(File.pathSeparatorChar)
-    cli.parseArsit(ISZ(args.elements: _*), Z(0)) match {
-      case Some(o: Cli.ArsitOption) =>
-        m.invoke(null, out, model, o).asInstanceOf[Int].intValue()
-      case _ => 
-        println(cli.parseArsit(ISZ(), 0).get.asInstanceOf[Cli.ArsitOption].help)
-        -1
+    val out: File = new File(prompt.getOptionOutputDirectory());
+
+    val ipcmech = prompt.getOptionIPCMechanism match {
+      case "Message Queue" => Cli.Ipcmech.Message_queue
+      case "Shared Memory" => Cli.Ipcmech.Shared_memory
+      case _ => Cli.Ipcmech.Message_queue
     }
+
+    val opts = Cli.ArsitOption(
+        help = "",
+        args = ISZ(),
+        json = F, // irrelevant since passing the aadl model directly
+        inputFile = None[String],
+        outputDir = Some(prompt.getOptionOutputDirectory),
+        packagename = if(prompt.getOptionBasePackageName == "") None[String] else Some(prompt.getOptionBasePackageName()),
+        noart = !prompt.getOptionEmbedArt,
+        bless = prompt.getOptionGenerateBlessEntryPoints,
+        genTrans = prompt.getOptionGenerateTranspilerArtifacts,
+        ipc = ipcmech
+    )
+
+    m.invoke(null, out, model, opts).asInstanceOf[Int].intValue()
   }
 }

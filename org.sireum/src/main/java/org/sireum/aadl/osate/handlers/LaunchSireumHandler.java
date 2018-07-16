@@ -7,14 +7,15 @@ import java.io.FileWriter;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.PreferenceValues.SerializerType;
+import org.sireum.aadl.osate.util.ArsitPrompt;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override
@@ -60,25 +61,16 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 					}
 					String fname = getInstanceFilename(e);
 					fname = fname.substring(0, fname.lastIndexOf(".")) + ".json";
-					writeFile(new File(f, fname), s);
+					writeFile(new File(f, fname), s, false);
 				}
 
-				DirectoryDialog dd = new DirectoryDialog(shell);
-				dd.setFilterPath(getProjectPath(e).toString());
-				dd.setText("Select directory");
-				String path = dd.open();
-
-				if (path != null) {
-					File out = new File(path);
+				ArsitPrompt p = new ArsitPrompt(getProject(e), shell);
+				if (p.open() == Window.OK) {
 					try {
-						// Class<?> c = Class.forName("org.sireum.aadl.arsit.Runner");
-						// Method m = c.getDeclaredMethod("run", File.class, Aadl.class, Cli$ArsitOption$.class);
-						// int ret = ((Integer) m.invoke(null, out, model)).intValue();
-
 						// Eclipse doesn't seem to like accessing nested scala classes
 						// (e.g. org.sireum.cli.Cli$ArsitOption$) so invoke Arsit from scala instead
 
-						int ret = org.sireum.aadl.osate.util.Util.launchArsit(out, model);
+						int ret = org.sireum.aadl.osate.util.Util.launchArsit(p, model);
 
 						MessageDialog.openInformation(shell, "Sireum", "Slang-Embedded code "
 								+ (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
@@ -96,13 +88,19 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 	}
 
 	protected void writeFile(File out, String str) {
+		writeFile(out, str, true);
+	}
+
+	protected void writeFile(File out, String str, boolean confirm) {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(out));
 			writer.write(str);
 			writer.close();
-			MessageDialog.openInformation(shell, "Sireum", "Wrote: " + out.getAbsolutePath());
+			if (confirm) {
+				MessageDialog.openInformation(shell, "Sireum", "Wrote: " + out.getAbsolutePath());
+			}
 		} catch (Exception ee) {
 			MessageDialog.openError(shell, "Sireum",
 					"Error encountered while trying to save file: " + out.getAbsolutePath() + "\n\n" + ee.getMessage());
