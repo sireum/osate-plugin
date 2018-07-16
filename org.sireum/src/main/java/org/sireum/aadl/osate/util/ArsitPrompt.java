@@ -62,7 +62,7 @@ public class ArsitPrompt extends TitleAreaDialog {
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
-		setMessage("Arsit message here");
+		setMessage("");
 		setTitle("Arsit Options");
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);
