@@ -12,7 +12,6 @@ import java.util.Optional;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
-import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,19 +20,23 @@ import org.osate.aadl2.Classifier;
 import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instantiation.InstantiateModel;
-import org.osate.testsupport.Aadl2UiInjectorProvider;
-import org.osate.testsupport.OsateTest;
+import org.osate.testsupport.Aadl2InjectorProvider;
+import org.osate.testsupport.TestHelper;
 import org.sireum.aadl.osate.util.TestUtil;
 
-import com.itemis.xtext.testing.FluentIssueCollection;
+import com.google.inject.Inject;
+import com.itemis.xtext.testing.XtextTest;
 
 @RunWith(XtextRunner.class)
-@InjectWith(Aadl2UiInjectorProvider.class)
-public class AirTestJava extends OsateTest {
+@InjectWith(Aadl2InjectorProvider.class)
+public class AirTestJava extends XtextTest {
+
+	@Inject
+	TestHelper<AadlPackage> testHelper;
 
 	boolean generateExpected = false;
 
-	File root = new File("./projects/org/sireum/aadl/ostate/tests/");
+	static File ROOT_DIR = new File("./projects/org/sireum/aadl/ostate/tests/");
 
 	@Test
 	public void pca_pump_chassis() {
@@ -55,34 +58,24 @@ public class AirTestJava extends OsateTest {
 		execute("connection-translation-tests", "Connection_Translation.aadl", "Root.three_references");
 	}
 
-	@SuppressWarnings("unchecked")
 	void execute(String dirName, String sysFilename, String sysImplName) {
 		try {
-			File r = new File(root, dirName);
-			ArrayList<Pair<String, String>> l = new ArrayList<>();
-			String expected = null;
+			File r = new File(ROOT_DIR, dirName);
+			String sys = null;
+			ArrayList<String> l = new ArrayList<>();
 
-			for (File _f : r.listFiles()) {
-				if (_f.getName().endsWith(".aadl")) {
-					l.add(new Pair<>(_f.getName(), readFile(_f)));
+			for (File f : r.listFiles()) {
+				if(f.getName().endsWith(".aadl")) {
+					if(f.getName().equals(sysFilename)){
+						sys = readFile(f);
+					} else {
+						l.add(readFile(f));
+					}
 				}
 			}
 
-			Optional<File> expectedFile = Arrays.stream(r.listFiles())
-					.filter(x -> x.getName().endsWith(sysImplName + ".json")).findFirst();
+			AadlPackage pkg = testHelper.parseString(sys, l.toArray(new String[l.size()]));
 
-			if (expectedFile.isPresent()) {
-				expected = readFile(expectedFile.get());
-			}
-
-			Assert.assertTrue("Expected results not found", expected != null);
-
-			createFiles(l.toArray(new Pair[l.size()]));
-
-			suppressSerialization();
-			FluentIssueCollection result = testFile(sysFilename);
-
-			AadlPackage pkg = (AadlPackage) result.getResource().getContents().get(0);
 			assertAllCrossReferencesResolvable(pkg);
 
 			// instantiate
@@ -92,7 +85,12 @@ public class AirTestJava extends OsateTest {
 
 			String ir = TestUtil.getAir(instance);
 
-			if(generateExpected && expectedFile.isPresent()) {
+			Optional<File> expectedFile = Arrays.stream(r.listFiles())
+					.filter(x -> x.getName().endsWith(sysImplName + ".json")).findFirst();
+			Assert.assertTrue("Expected results not found", expectedFile.isPresent());
+			String expected = readFile(expectedFile.get());
+
+			if (generateExpected) {
 				Files.write(Paths.get(expectedFile.get().toURI()), ir.getBytes(StandardCharsets.UTF_8));
 				System.out.println("Wrote: " + expectedFile.get().getAbsolutePath());
 				expected = ir;
