@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Sireum plug-in for OSATEv2
-Bundle-SymbolicName: org.sireum;singleton:=true
+Bundle-SymbolicName: org.sireum.aadl.osate;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.sireum.aadl.osate.Activator
 Require-Bundle: org.eclipse.core.runtime,
