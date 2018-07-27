@@ -23,6 +23,12 @@ import org.osate.aadl2.ComponentCategory._
 import org.osate.aadl2.instance.impl._
 
 object Visitor {
+   def apply(root: Element): Option[ir.Aadl] = {
+    new Visitor().convert(root)
+  }
+}
+
+class Visitor {
 
   var seenSet: ISZ[AadlPackageImpl] = ISZ()
   var dataTypes: ISZ[ir.Component] = ISZ()
@@ -403,9 +409,7 @@ object Visitor {
     val f = featureInst.getFeature
     val currentPath = path :+ f.getName
     val featureInstances = featureInst.getFeatureInstances
-
-    if (featureInstances.isEmpty()) {
-      val classifier = if (f.getFeatureClassifier != null) {
+    val classifier = if (f.getFeatureClassifier != null) {
         val name =
           if (f.getFeatureClassifier.isInstanceOf[NamedElement]) {
             f.getFeatureClassifier.asInstanceOf[NamedElement].getQualifiedName
@@ -416,7 +420,6 @@ object Visitor {
       } else {
         None[ir.Classifier]
       }
-
       val properties = ISZ[ir.Property](featureInst.getOwnedPropertyAssociations.map(op =>
         buildProperty(op, currentPath)).toSeq: _*)
 
@@ -434,7 +437,7 @@ object Visitor {
         case SUBPROGRAM_ACCESS => ir.FeatureCategory.SubprogramAccess
         case SUBPROGRAM_GROUP_ACCESS => ir.FeatureCategory.SubprogramAccessGroup
       }
-
+    if (featureInstances.isEmpty()) {
       return ir.FeatureEnd(
         identifier = ir.Name(currentPath),
         classifier = classifier,
@@ -445,7 +448,11 @@ object Visitor {
       return ir.FeatureGroup(
         identifier = ir.Name(currentPath),
         features = ISZ(featureInstances.map(fi => buildFeature(fi, currentPath)): _*),
-        f.asInstanceOf[FeatureGroupImpl].isInverse())
+        f.asInstanceOf[FeatureGroupImpl].isInverse(), 
+        typ, 
+        classifier, 
+        properties
+        )
     }
   }
 
