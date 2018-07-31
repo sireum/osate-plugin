@@ -8,7 +8,7 @@ import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
 import org.sireum.aadl.ir.MsgPack;
 import org.sireum.aadl.osate.PreferenceValues;
-import org.sireum.aadl.osate.architecture.Visitor;
+import org.sireum.aadl.osate.architecture.Visitor$;
 
 public class TestUtil {
 
@@ -28,7 +28,7 @@ public class TestUtil {
 	}
 
 	public static String getAir(SystemInstance si) {
-		Aadl ir = Visitor.convert(si).get();
+		Aadl ir = Visitor$.MODULE$.apply(si).get();
 		return serialize(ir, PreferenceValues.SerializerType.JSON_COMPACT);
 	}
 }

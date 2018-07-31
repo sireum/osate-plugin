@@ -43,7 +43,7 @@ import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.architecture.Check;
 import org.sireum.aadl.osate.architecture.ErrorReport;
 import org.sireum.aadl.osate.architecture.Report;
-import org.sireum.aadl.osate.architecture.Visitor;
+import org.sireum.aadl.osate.architecture.Visitor$;
 import org.sireum.aadl.osate.util.SelectionHelper;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
@@ -103,7 +103,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 //				}
 			}
 
-			Aadl _r = Visitor.convert(root).get();
+			Aadl _r = Visitor$.MODULE$.apply(root).get();
 			if (_r != null) {
 				return _r;
 			} else {
