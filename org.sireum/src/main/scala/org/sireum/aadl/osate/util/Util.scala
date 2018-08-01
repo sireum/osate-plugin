@@ -17,9 +17,9 @@ object Util {
     val out: File = new File(prompt.getOptionOutputDirectory());
 
     val ipcmech = prompt.getOptionIPCMechanism match {
-      case "Message Queue" => Cli.Ipcmech.Message_queue
-      case "Shared Memory" => Cli.Ipcmech.Shared_memory
-      case _ => Cli.Ipcmech.Message_queue
+      case "Message Queue" => Cli.Ipcmech.MessageQueue
+      case "Shared Memory" => Cli.Ipcmech.SharedMemory
+      case _ => Cli.Ipcmech.MessageQueue
     }
 
     val opts = Cli.ArsitOption(
@@ -28,7 +28,7 @@ object Util {
         json = F, // irrelevant since passing the aadl model directly
         inputFile = None[String],
         outputDir = Some(prompt.getOptionOutputDirectory),
-        packagename = if(prompt.getOptionBasePackageName == "") None[String] else Some(prompt.getOptionBasePackageName()),
+        packageName = if(prompt.getOptionBasePackageName == "") None[String] else Some(prompt.getOptionBasePackageName()),
         noart = !prompt.getOptionEmbedArt,
         bless = prompt.getOptionGenerateBlessEntryPoints,
         genTrans = prompt.getOptionGenerateTranspilerArtifacts,
