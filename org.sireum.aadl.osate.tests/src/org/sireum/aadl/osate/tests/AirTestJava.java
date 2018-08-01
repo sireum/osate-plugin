@@ -1,4 +1,4 @@
-package org.sireum.aadl.ostate.tests;
+package org.sireum.aadl.osate.tests;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class AirTestJava extends XtextTest {
 
 	boolean generateExpected = false;
 
-	static File ROOT_DIR = new File("./projects/org/sireum/aadl/ostate/tests/");
+	static File ROOT_DIR = new File("./projects/org/sireum/aadl/osate/tests/");
 
 	@Test
 	public void pca_pump_chassis() {
