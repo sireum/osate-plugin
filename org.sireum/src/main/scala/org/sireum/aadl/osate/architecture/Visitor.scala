@@ -282,7 +282,7 @@ class Visitor {
     val properties = ISZ[ir.Property](conn.getOwnedPropertyAssociations.map(op =>
       buildProperty(op, name)).toSeq: _*)
 
-    for (s <- source; d <- destination) yield (ir.Connection(ir.Name(name), s, d, isBidirect, connInst2, properties))
+    ISZ(ir.Connection(ir.Name(name), source, destination, isBidirect, connInst2, properties))
 
   }
 
