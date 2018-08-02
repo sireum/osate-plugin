@@ -12,6 +12,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -172,9 +173,13 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getName();
 	}
 
-	protected IPath getProjectPath(ExecutionEvent e) {
+	protected IProject getProject(ExecutionEvent e) {
 		Element root = AadlUtil.getElement(getCurrentSelection(e));
-		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getProject().getLocation();
+		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getProject();
+	}
+
+	protected IPath getProjectPath(ExecutionEvent e) {
+		return getProject(e).getLocation();
 	}
 
 	protected IPath getInstanceFilePath(ExecutionEvent e) {
