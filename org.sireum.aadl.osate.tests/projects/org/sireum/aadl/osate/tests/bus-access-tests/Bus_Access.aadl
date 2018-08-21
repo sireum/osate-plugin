@@ -1,0 +1,33 @@
+package Bus_Access
+public
+	bus VME
+	end VME;
+	
+	memory Memory_Card 
+		features
+			Card_Connector : requires bus access VME;
+ 	end Memory_Card;
+ 	
+ 	processor PowerPC 
+		features
+			Card_Connector : requires bus access VME; 
+	end PowerPC;
+	
+	processor implementation PowerPC.Linux 
+	end PowerPC.Linux;
+	
+	system Dual_Processor end Dual_Processor;
+		
+	system implementation Dual_Processor.PowerPC 
+		subcomponents
+			System_Bus: bus VME;
+			Left: processor PowerPC.Linux; 
+			Right: processor PowerPC.Linux;
+			Shared_Memory: memory Memory_Card;
+		connections
+			LCConn: bus access System_Bus <-> Left.Card_Connector;
+			RCConn: bus access System_Bus <-> Right.Card_Connector; 
+			SMConn: bus access System_Bus <-> Shared_Memory.Card_Connector;
+	end Dual_Processor.PowerPC;
+	
+end Bus_Access;

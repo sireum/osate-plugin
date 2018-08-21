@@ -58,6 +58,16 @@ public class AirTestJava extends XtextTest {
 		execute("connection-translation-tests", "Connection_Translation.aadl", "Root.three_references");
 	}
 
+	@Test
+	public void bus_Access_Test_Dual_Processor_PowerPC() {
+		execute("bus-access-tests", "Bus_Access.aadl", "Dual_Processor.PowerPC");
+	}
+
+//	@Test
+//	public void feature_Grpup_Tests_Concrete_Sys() {
+//		execute("feature-group-tests", "Feature_Group_TestCase.aadl", "Concrete_Sys.impl");
+//	}
+
 	void execute(String dirName, String sysFilename, String sysImplName) {
 		try {
 			File r = new File(ROOT_DIR, dirName);
@@ -89,7 +99,6 @@ public class AirTestJava extends XtextTest {
 					.filter(x -> x.getName().endsWith(sysImplName + ".json")).findFirst();
 			Assert.assertTrue("Expected results not found", expectedFile.isPresent());
 			String expected = readFile(expectedFile.get());
-
 			if (generateExpected) {
 				Files.write(Paths.get(expectedFile.get().toURI()), ir.getBytes(StandardCharsets.UTF_8));
 				System.out.println("Wrote: " + expectedFile.get().getAbsolutePath());

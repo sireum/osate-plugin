@@ -1,0 +1,43 @@
+package Feature_Group_TestCase
+public
+	
+	feature group FG1
+		features
+			f_in : in event port;
+			f_out : out event port;
+	end FG1;
+	
+	feature group child_FG extends FG1
+		features
+			cf_in : in event port;
+			cf_out : out event port;
+	end child_FG;
+	
+	System Abstract_Sys
+		prototypes
+			FG1_types : feature group FG1;
+		features
+			feat : feature group FG1_types;
+	end Abstract_Sys;
+	
+	system Concrete_Sys extends Abstract_Sys
+		(FG1_types=>feature group child_FG) 
+	end Concrete_Sys;
+	
+	system implementation Concrete_Sys.impl
+		subcomponents
+			sub_comp : system dst_sys.impl;
+		connections
+			con : feature group feat <-> sub_comp.dst;
+	end Concrete_Sys.impl;
+	
+	system dst_Sys
+		features
+			dst : feature group child_FG;
+	end dst_Sys;
+	
+	system implementation dst_sys.impl
+		
+	end dst_sys.impl;
+	
+end Feature_Group_TestCase;

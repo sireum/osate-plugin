@@ -21,9 +21,10 @@ import org.osate.xtext.aadl2.errormodel.errorModel.impl._
 import org.osate.aadl2.util.Aadl2Util
 import org.osate.aadl2.ComponentCategory._
 import org.osate.aadl2.instance.impl._
+import org.osate.aadl2.modelsupport.util._
 
 object Visitor {
-   def apply(root: Element): Option[ir.Aadl] = {
+  def apply(root: Element): Option[ir.Aadl] = {
     new Visitor().convert(root)
   }
 }
@@ -247,11 +248,11 @@ class Visitor {
       name = ir.Name(currentPath),
       src = ir.EndPoint(
         component = ir.Name(ISZ(srcComponent: _*)),
-        feature = ir.Name(ISZ[String](srcFeature: _*)),
+        feature = Some(ir.Name(ISZ[String](srcFeature: _*))),
         direction = srcDirection.map(getAIRDire)),
       dst = ir.EndPoint(
         component = ir.Name(ISZ[String](dstComponent: _*)),
-        feature = ir.Name(ISZ[String](dstFeature: _*)),
+        feature = Some(ir.Name(ISZ[String](dstFeature: _*))),
         direction = dstDirection.map(getAIRDire)),
       kind = kind,
       connectionRefs = connRefs,
@@ -279,54 +280,104 @@ class Visitor {
       ir.Name(ISZ(ci.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*))).toSeq: _*)
     else ISZ(ir.Name(ISZ()))
 
+    val kind = conn match {
+      case x: AccessConnection => ir.ConnectionKind.Access
+      case x: FeatureGroupConnection => ir.ConnectionKind.FeatureGroup
+      case x: FeatureConnection => ir.ConnectionKind.Feature
+      case x: ParameterConnection => ir.ConnectionKind.Parameter
+      case x: PortConnection => ir.ConnectionKind.Port
+    }
+
     val properties = ISZ[ir.Property](conn.getOwnedPropertyAssociations.map(op =>
       buildProperty(op, name)).toSeq: _*)
-
-    ISZ(ir.Connection(ir.Name(name), source, destination, isBidirect, connInst2, properties))
+    if (source.length != destination.length) {
+      println("incorrect translation")
+    }
+    ISZ(ir.Connection(ir.Name(name), source, destination, kind, isBidirect, connInst2, properties))
 
   }
 
-  private def getFeatureGroupEndPoint(parentName: String, fg: FeatureGroupType): IVector[String] = {
-    var result = ilistEmpty[String]
-    fg.getAllFeatures.toSeq.forEach(f => result = result :+ String(parentName.value + "_" + f.getFullName))
+  private def getFeatureGroupEndPoint(parentName: String, fg: FeatureGroupType): IVector[(String, ir.Direction.Type)] = {
+    var result = ilistEmpty[(String, ir.Direction.Type)]
+    fg.getAllFeatures.toSeq.forEach(f => result = result :+
+      (String(parentName.value + "_" + f.getFullName),
+        if (AadlUtil.isIncomingFeature(f) && AadlUtil.isOutgoingFeature(f)) {
+          ir.Direction.InOut
+        } else if (AadlUtil.isIncomingFeature(f)) { ir.Direction.In } else ir.Direction.Out))
     result.toVector
   }
 
+  /**
+   * @param connElem
+   * @param path
+   * @return
+   */
   private def buildEndPoint(connElem: ConnectedElement, path: ISZ[String]): ISZ[ir.EndPoint] = {
     var result = ISZ[ir.EndPoint]()
     val component = if (connElem.getContext != null) {
       path :+ connElem.getContext.getFullName
-      // ISZ[String]()
     } else path
     val feature = component :+ connElem.getConnectionEnd.getName
+    var dir = org.sireum.Option.none[ir.Direction.Type]()
     if (connElem.getConnectionEnd.isInstanceOf[DirectedFeatureImpl]) {
       val inFeature = connElem.getConnectionEnd.asInstanceOf[DirectedFeatureImpl]
-      val dir = if (inFeature.isIn() && inFeature.isOut()) {
+      dir = if (inFeature.isIn() && inFeature.isOut()) {
         org.sireum.Option.some[ir.Direction.Type](ir.Direction.InOut)
       } else if (inFeature.isIn() && !inFeature.isOut()) {
         org.sireum.Option.some[ir.Direction.Type](ir.Direction.In)
       } else {
         org.sireum.Option.some[ir.Direction.Type](ir.Direction.Out)
       }
-      if (connElem.getConnectionEnd.isInstanceOf[FeatureGroupImpl]) {
-        val fgce = connElem.getConnectionEnd.asInstanceOf[FeatureGroupImpl]
-        val fgt = fgce.getFeatureGroupType
-        val fgpt = fgce.getFeatureGroupPrototype
-        val ft = fgce.getFeatureType
-        result = result ++ ISZ(getFeatureGroupEndPoint(String(fgce.getName), fgt).map(it => ir.EndPoint(
-          ir.Name(component), ir.Name(component :+ it), dir)).toSeq: _*)
-      } else {
-        result = result :+ (ir.EndPoint(
-          ir.Name(component),
-          ir.Name(feature), dir))
-      }
-      result
-    } else {
-      result = result :+ ir.EndPoint(
-        ir.Name(component),
-        ir.Name(feature), org.sireum.Option.none[ir.Direction.Type]())
-      result
     }
+    if (connElem.getConnectionEnd.isInstanceOf[FeatureGroupImpl]) {
+      val fgce = connElem.getConnectionEnd.asInstanceOf[FeatureGroupImpl]
+      result = result ++ flattenFeatureGroup(component, String(fgce.getFullName), fgce, connElem)
+    } else if (connElem.getConnectionEnd.isInstanceOf[BusSubcomponentImpl]) {
+      result = result :+ (ir.EndPoint(
+        ir.Name(feature), None(),
+        org.sireum.Option.some[ir.Direction.Type](ir.Direction.InOut)))
+    } else if (connElem.getConnectionEnd.isInstanceOf[BusAccessImpl]) {
+      result = result :+ (ir.EndPoint(
+        ir.Name(component),
+        Some(ir.Name(feature)), org.sireum.Option.some[ir.Direction.Type](ir.Direction.InOut)))
+    } else {
+      result = result :+ (ir.EndPoint(
+        ir.Name(component),
+        Some(ir.Name(feature)), dir))
+    }
+    result
+  }
+
+  private def flattenFeatureGroup(
+    component: ISZ[String],
+    parentName: String,
+    fgi: FeatureGroupImpl,
+    connElem: ConnectedElement): ISZ[ir.EndPoint] = {
+    var res = ISZ[ir.EndPoint]()
+    var fgt = fgi.getFeatureGroupType
+    if (fgt == null) {
+      val fgpt = fgi.getFeatureGroupPrototype
+      fgt = ResolvePrototypeUtil.resolveFeatureGroupPrototype(
+        fgpt,
+        if (connElem.getContext == null) connElem.getContainingComponentImpl else connElem.getContext);
+    }
+    fgt.getAllFeatures.toSeq.foreach { f =>
+      var rf = f.getRefined
+      if (rf == null) { rf = f }
+      if (rf.isInstanceOf[FeatureGroupImpl]) {
+
+        res = res ++ flattenFeatureGroup(component, String(parentName.value + "_" + rf.getFullName), rf.asInstanceOf[FeatureGroupImpl], connElem)
+      } else {
+        res = res ++ ISZ(ir.EndPoint(
+          ir.Name(component),
+          Some(ir.Name(component :+ String(parentName.value + "_" + rf.getFullName))),
+          org.sireum.Option.some[ir.Direction.Type](if (AadlUtil.isIncomingFeature(rf) && AadlUtil.isOutgoingFeature(rf)) {
+            ir.Direction.InOut
+          } else if (AadlUtil.isIncomingFeature(rf)) { ir.Direction.In } else ir.Direction.Out)))
+
+      }
+    }
+    res
   }
 
   private def buildComponent(compInst: ComponentInstance, path: ISZ[String]): ir.Component = {
@@ -407,36 +458,36 @@ class Visitor {
 
   private def buildFeature(featureInst: FeatureInstance, path: ISZ[String]): ir.Feature = {
     val f = featureInst.getFeature
-    val currentPath = path :+ f.getName
+    val currentPath = path :+ featureInst.getName
     val featureInstances = featureInst.getFeatureInstances
     val classifier = if (f.getFeatureClassifier != null) {
-        val name =
-          if (f.getFeatureClassifier.isInstanceOf[NamedElement]) {
-            f.getFeatureClassifier.asInstanceOf[NamedElement].getQualifiedName
-          } else {
-            throw new Exception(s"Unexpected classsifier ${f.getFeatureClassifier} for feature $currentPath")
-          }
-        Some(ir.Classifier(name))
-      } else {
-        None[ir.Classifier]
-      }
-      val properties = ISZ[ir.Property](featureInst.getOwnedPropertyAssociations.map(op =>
-        buildProperty(op, currentPath)).toSeq: _*)
+      val name =
+        if (f.getFeatureClassifier.isInstanceOf[NamedElement]) {
+          f.getFeatureClassifier.asInstanceOf[NamedElement].getQualifiedName
+        } else {
+          throw new Exception(s"Unexpected classsifier ${f.getFeatureClassifier} for feature $currentPath")
+        }
+      Some(ir.Classifier(name))
+    } else {
+      None[ir.Classifier]
+    }
+    val properties = ISZ[ir.Property](featureInst.getOwnedPropertyAssociations.map(op =>
+      buildProperty(op, currentPath)).toSeq: _*)
 
-      import org.osate.aadl2.instance.FeatureCategory._
+    import org.osate.aadl2.instance.FeatureCategory._
 
-      val typ = featureInst.getCategory match {
-        case ABSTRACT_FEATURE => ir.FeatureCategory.AbstractFeature
-        case BUS_ACCESS => ir.FeatureCategory.BusAccess
-        case DATA_ACCESS => ir.FeatureCategory.DataAccess
-        case DATA_PORT => ir.FeatureCategory.DataPort
-        case EVENT_PORT => ir.FeatureCategory.EventPort
-        case EVENT_DATA_PORT => ir.FeatureCategory.EventDataPort
-        case FEATURE_GROUP => ir.FeatureCategory.FeatureGroup
-        case PARAMETER => ir.FeatureCategory.Parameter
-        case SUBPROGRAM_ACCESS => ir.FeatureCategory.SubprogramAccess
-        case SUBPROGRAM_GROUP_ACCESS => ir.FeatureCategory.SubprogramAccessGroup
-      }
+    val typ = featureInst.getCategory match {
+      case ABSTRACT_FEATURE => ir.FeatureCategory.AbstractFeature
+      case BUS_ACCESS => ir.FeatureCategory.BusAccess
+      case DATA_ACCESS => ir.FeatureCategory.DataAccess
+      case DATA_PORT => ir.FeatureCategory.DataPort
+      case EVENT_PORT => ir.FeatureCategory.EventPort
+      case EVENT_DATA_PORT => ir.FeatureCategory.EventDataPort
+      case FEATURE_GROUP => ir.FeatureCategory.FeatureGroup
+      case PARAMETER => ir.FeatureCategory.Parameter
+      case SUBPROGRAM_ACCESS => ir.FeatureCategory.SubprogramAccess
+      case SUBPROGRAM_GROUP_ACCESS => ir.FeatureCategory.SubprogramAccessGroup
+    }
     if (featureInstances.isEmpty()) {
       return ir.FeatureEnd(
         identifier = ir.Name(currentPath),
@@ -448,11 +499,10 @@ class Visitor {
       return ir.FeatureGroup(
         identifier = ir.Name(currentPath),
         features = ISZ(featureInstances.map(fi => buildFeature(fi, currentPath)): _*),
-        f.asInstanceOf[FeatureGroupImpl].isInverse(), 
-        typ, 
-        classifier, 
-        properties
-        )
+        f.asInstanceOf[FeatureGroupImpl].isInverse(),
+        typ,
+        //classifier,
+        properties)
     }
   }
 
@@ -469,12 +519,14 @@ class Visitor {
     return ir.Flow(name = ir.Name(currentPath), kind = flowKind,
       if (s != null) {
         val us = ISZ(s.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*) -- path
-        Some(us.elements.map(_.value).mkString("_"))
-      } else None[String],
+        //Some(us.elements.map(_.value).mkString("_"))
+        Some(buildFeature(s, currentPath))
+      } else None[ir.Feature],
       if (d != null) {
         val ud = ISZ(d.getInstanceObjectPath.split('.').map(String(_)).toSeq: _*) -- (path)
-        Some(ud.elements.map(_.value).mkString("_"))
-      } else None[String])
+        //Some(ud.elements.map(_.value).mkString("_"))
+        Some(buildFeature(d, currentPath))
+      } else None[ir.Feature])
 
   }
 
