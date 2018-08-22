@@ -373,7 +373,11 @@ class Visitor {
           Some(ir.Name(component :+ String(parentName.value + "_" + rf.getFullName))),
           org.sireum.Option.some[ir.Direction.Type](if (AadlUtil.isIncomingFeature(rf) && AadlUtil.isOutgoingFeature(rf)) {
             ir.Direction.InOut
-          } else if (AadlUtil.isIncomingFeature(rf)) { ir.Direction.In } else ir.Direction.Out)))
+          } else if (AadlUtil.isIncomingFeature(rf)) {
+            if (fgi.isInverse()) ir.Direction.Out else ir.Direction.In
+          } else {
+            if (fgi.isInverse()) ir.Direction.In else ir.Direction.Out
+          })))
 
       }
     }
