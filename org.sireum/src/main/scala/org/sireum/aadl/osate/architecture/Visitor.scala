@@ -475,8 +475,8 @@ class Visitor {
     } else {
       None[ir.Classifier]
     }
-    val properties = ISZ[ir.Property](featureInst.getOwnedPropertyAssociations.map(op =>
-      buildProperty(op, currentPath)).toSeq: _*)
+    var properties = ISZ[ir.Property](featureInst.getOwnedPropertyAssociations.map(op =>
+      buildProperty(op, currentPath)).toSeq: _*) 
 
     import org.osate.aadl2.instance.FeatureCategory._
 
@@ -492,6 +492,14 @@ class Visitor {
       case SUBPROGRAM_ACCESS => ir.FeatureCategory.SubprogramAccess
       case SUBPROGRAM_GROUP_ACCESS => ir.FeatureCategory.SubprogramAccessGroup
     }
+    if(typ == ir.FeatureCategory.SubprogramAccess){
+      val sai = f.asInstanceOf[SubprogramAccessImpl]
+      val kind = sai.getKind.getName
+      
+      properties = properties :+ ir.Property(name = ir.Name(path :+ "AccessType"), 
+          propertyValues = ISZ(ir.ValueProp(value = kind)))
+    }
+    
     if (featureInstances.isEmpty()) {
       return ir.FeatureEnd(
         identifier = ir.Name(currentPath),
