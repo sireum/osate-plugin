@@ -13,6 +13,10 @@ import org.eclipse.ui.menus.CommandContributionItemParameter;
 
 public class MenuContributions extends CompoundContributionItem {
 
+	public static String CLASSNAME_ARSIT = "org.sireum.aadl.arsit.Runner";
+	public static String CLASSNAME_ACT = "org.sireum.aadl.act.Act";
+	public static String CLASSNAME_AWAS = "org.sireum.awas.AADLBridge.AadlHandler";
+
 	@Override
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
@@ -22,15 +26,15 @@ public class MenuContributions extends CompoundContributionItem {
 
 		l.add(getItem("Generate Slang Embedded Code", "org.sireum.commands.launchsireum",
 				map("org.sireum.commands.launchsireum.generator", "genslang"),
-				classExists("org.sireum.aadl.arsit.Runner")));
+				classExists(CLASSNAME_ARSIT)));
 
 		l.add(getItem("Generate AWAS Code", "org.sireum.commands.genawas",
 				map("org.sireum.commands.genawas.generator", "json"),
-				classExists("org.sireum.awas.AADLBridge.AadlHandler")));
+				classExists(CLASSNAME_AWAS)));
 
 		l.add(getItem("Generate CAmkES", "org.sireum.commands.launchsireum",
 				map("org.sireum.commands.launchsireum.generator", "gencamkes"),
-				classExists("org.sireum.aadl.biji.Biji")));
+				classExists(CLASSNAME_ACT)));
 
 		return l.toArray(new IContributionItem[0]);
 	}

@@ -2,15 +2,17 @@ package org.sireum.aadl.osate.util
 
 import java.io.File
 import org.sireum.aadl.ir.Aadl
+import org.sireum.aadl.osate.MenuContributions
 import org.sireum.cli.Cli
 import org.sireum.{F, T, ISZ, None, Option, Some, String, Z}
 import org.osate.aadl2.Element;
 import org.osate.utils.Aadl2Utils
 import org.osate.aadl2.parsesupport.LocationReference
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+
 object Util {
   def launchArsit(prompt: ArsitPrompt, model: Aadl): Int = {
-    val c = Class.forName("org.sireum.aadl.arsit.Runner")
+    val c = Class.forName(MenuContributions.CLASSNAME_ARSIT)
     val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl], classOf[Cli.ArsitOption])
 
     val out: File = new File(prompt.getOptionOutputDirectory());
@@ -37,8 +39,8 @@ object Util {
     m.invoke(null, out, model, opts).asInstanceOf[Int].intValue()
   }
   
-  def launchBiji(prompt: BijiPrompt, model: Aadl): Int = {
-    val c = Class.forName("org.sireum.aadl.biji.Biji")
+  def launchAct(prompt: ActPrompt, model: Aadl): Int = {
+    val c = Class.forName(MenuContributions.CLASSNAME_ACT)
     val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl])
 
     val out: File = new File(prompt.getOptionOutputDirectory());

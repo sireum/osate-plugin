@@ -15,8 +15,8 @@ import org.eclipse.ui.PlatformUI;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.PreferenceValues.SerializerType;
+import org.sireum.aadl.osate.util.ActPrompt;
 import org.sireum.aadl.osate.util.ArsitPrompt;
-import org.sireum.aadl.osate.util.BijiPrompt;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override
@@ -52,17 +52,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			} else if (generator.equals("genslang")) {
 
 				if (PreferenceValues.getARSIT_SERIALIZE_OPT()) {
-					String s = serialize(model, SerializerType.JSON);
-					String outputFolder = PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT();
-
-					File f = new File(outputFolder);
-					if (!f.exists()) {
-						f = new File(getProjectPath(e).toFile(), outputFolder);
-						f.mkdir();
-					}
-					String fname = getInstanceFilename(e);
-					fname = fname.substring(0, fname.lastIndexOf(".")) + ".json";
-					writeFile(new File(f, fname), s, false);
+					serializeToFile(model, PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT(), e);
 				}
 
 				ArsitPrompt p = new ArsitPrompt(getProject(e), shell);
@@ -83,7 +73,12 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 					}
 				}
 			} else if (generator.equals("gencamkes")) {
-				BijiPrompt p = new BijiPrompt(getProject(e), shell);
+
+				if (PreferenceValues.getACT_SERIALIZE_OPT()) {
+					serializeToFile(model, PreferenceValues.getACT_OUTPUT_FOLDER_OPT(), e);
+				}
+
+				ActPrompt p = new ActPrompt(getProject(e), shell);
 				if (p.open() == Window.OK) {
 					try {
 						File out = new File(p.getOptionOutputDirectory());
@@ -97,13 +92,13 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 								}
 							}
 						}
-						int ret = org.sireum.aadl.osate.util.Util.launchBiji(p, model);
+						int ret = org.sireum.aadl.osate.util.Util.launchAct(p, model);
 
 						MessageDialog.openInformation(shell, "Sireum",
 								"CAmkES code " + (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
 
 					} catch (Exception ex) {
-						String m = "Could not generate CAmkES.  Please make sure Biji is present.\n\n"
+						String m = "Could not generate CAmkES.  Please make sure ACT is present.\n\n"
 								+ ex.getLocalizedMessage();
 						MessageDialog.openError(shell, "Sireum", m);
 					}
@@ -112,6 +107,19 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 		}
 
 		return null;
+	}
+
+	protected void serializeToFile(Aadl model, String outputFolder, ExecutionEvent e) {
+		String s = serialize(model, SerializerType.JSON);
+
+		File f = new File(outputFolder);
+		if (!f.exists()) {
+			f = new File(getProjectPath(e).toFile(), outputFolder);
+			f.mkdir();
+		}
+		String fname = getInstanceFilename(e);
+		fname = fname.substring(0, fname.lastIndexOf(".")) + ".json";
+		writeFile(new File(f, fname), s, false);
 	}
 
 	protected void writeFile(File out, String str) {

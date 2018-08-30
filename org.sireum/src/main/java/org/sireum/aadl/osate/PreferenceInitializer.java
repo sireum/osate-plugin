@@ -17,6 +17,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		store.setDefault(PreferenceConstants.ARSIT_OUTPUT_FOLDER_OPT, ".slang");
 
+		store.setDefault(PreferenceConstants.ACT_SERIALIZE_OPT, true);
+
+		store.setDefault(PreferenceConstants.ACT_OUTPUT_FOLDER_OPT, ".slang");
 
 		if(Platform.getOS().equals(Platform.OS_WIN32)) {
 			store.setDefault(PreferenceConstants.SIREUM_JAR_PATH, "C:\\Sireum\\sireum.jar");

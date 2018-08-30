@@ -20,24 +20,24 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.osgi.service.prefs.BackingStoreException;
 
-public class BijiPrompt extends TitleAreaDialog {
+public class ActPrompt extends TitleAreaDialog {
 	private Text txtOutputDirectory;
 
 	IProject project;
 	IEclipsePreferences projectNode;
 
-	String PREF_KEY = "org.sireum.aadl.biji";
+	String PREF_KEY = "org.sireum.aadl.act";
 
 	private final String KEY_OUTPUT_DIRECTORY = "output.directory";
 
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public BijiPrompt(Shell parentShell) {
+	public ActPrompt(Shell parentShell) {
 		super(parentShell);
 	}
 
-	public BijiPrompt(IProject p, Shell parentShell) {
+	public ActPrompt(IProject p, Shell parentShell) {
 		super(parentShell);
 		project = p;
 		IScopeContext projectScope = new ProjectScope(project);
@@ -51,7 +51,7 @@ public class BijiPrompt extends TitleAreaDialog {
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		setMessage("");
-		setTitle("Biji Options");
+		setTitle("ACT Options");
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);
 		GridData gd_container = new GridData(GridData.FILL_BOTH);

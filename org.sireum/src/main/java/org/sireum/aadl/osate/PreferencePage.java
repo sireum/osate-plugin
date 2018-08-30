@@ -48,6 +48,11 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(new StringFieldEditor(PreferenceConstants.ARSIT_OUTPUT_FOLDER_OPT, "Output folder",
 				arsitTab));
 
+		Composite actTab = addTab(tabFolder, "ACT");
+		addField(new BooleanFieldEditor(PreferenceConstants.ACT_SERIALIZE_OPT,
+				"Serialize AIR to JSON (non-compact) when generating CAmkES", actTab));
+
+		addField(new StringFieldEditor(PreferenceConstants.ACT_OUTPUT_FOLDER_OPT, "Output folder", actTab));
 
 		Composite awasTab = addTab(tabFolder, "Awas");
 	}
