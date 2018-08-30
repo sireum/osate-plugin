@@ -8,7 +8,6 @@ import org.osate.aadl2.Element;
 import org.osate.utils.Aadl2Utils
 import org.osate.aadl2.parsesupport.LocationReference
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-
 object Util {
   def launchArsit(prompt: ArsitPrompt, model: Aadl): Int = {
     val c = Class.forName("org.sireum.aadl.arsit.Runner")
@@ -36,6 +35,15 @@ object Util {
     )
 
     m.invoke(null, out, model, opts).asInstanceOf[Int].intValue()
+  }
+  
+  def launchBiji(prompt: BijiPrompt, model: Aadl): Int = {
+    val c = Class.forName("org.sireum.aadl.biji.Biji")
+    val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl])
+
+    val out: File = new File(prompt.getOptionOutputDirectory());
+
+    m.invoke(null, out, model).asInstanceOf[Int].intValue()
   }
   
   def getLocationReference(e: Element): Option[LocationReference] = {

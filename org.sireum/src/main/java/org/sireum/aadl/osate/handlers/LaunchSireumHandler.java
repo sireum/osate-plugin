@@ -16,6 +16,7 @@ import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.PreferenceValues.SerializerType;
 import org.sireum.aadl.osate.util.ArsitPrompt;
+import org.sireum.aadl.osate.util.BijiPrompt;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override
@@ -77,6 +78,32 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 					} catch (Exception ex) {
 						ex.printStackTrace();
 						String m = "Could not generate Slang-Embedded code.  Please make sure Arsit is present.\n\n"
+								+ ex.getLocalizedMessage();
+						MessageDialog.openError(shell, "Sireum", m);
+					}
+				}
+			} else if (generator.equals("gencamkes")) {
+				BijiPrompt p = new BijiPrompt(getProject(e), shell);
+				if (p.open() == Window.OK) {
+					try {
+						File out = new File(p.getOptionOutputDirectory());
+						if (!out.exists()) {
+							if (MessageDialog.openQuestion(shell, "Create Directory?", "Directory '"
+									+ out.getAbsolutePath() + "' does not exist.  Should it be created?")) {
+								if (!out.mkdirs()) {
+									MessageDialog.openError(shell, "Error",
+											"Could not create directory " + out.getAbsolutePath());
+									return null;
+								}
+							}
+						}
+						int ret = org.sireum.aadl.osate.util.Util.launchBiji(p, model);
+
+						MessageDialog.openInformation(shell, "Sireum",
+								"CAmkES code " + (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
+
+					} catch (Exception ex) {
+						String m = "Could not generate CAmkES.  Please make sure Biji is present.\n\n"
 								+ ex.getLocalizedMessage();
 						MessageDialog.openError(shell, "Sireum", m);
 					}

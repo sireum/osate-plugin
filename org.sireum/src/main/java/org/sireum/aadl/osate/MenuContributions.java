@@ -28,6 +28,10 @@ public class MenuContributions extends CompoundContributionItem {
 				map("org.sireum.commands.genawas.generator", "json"),
 				classExists("org.sireum.awas.AADLBridge.AadlHandler")));
 
+		l.add(getItem("Generate CAmkES", "org.sireum.commands.launchsireum",
+				map("org.sireum.commands.launchsireum.generator", "gencamkes"),
+				classExists("org.sireum.aadl.biji.Biji")));
+
 		return l.toArray(new IContributionItem[0]);
 	}
 
