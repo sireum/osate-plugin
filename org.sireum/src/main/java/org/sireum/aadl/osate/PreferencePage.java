@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.sireum.aadl.osate.PreferenceValues.SerializerType;
+import org.sireum.aadl.osate.util.Util.Tool;
 
 public class PreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
@@ -27,34 +28,33 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		TabFolder tabFolder = new TabFolder(getFieldEditorParent(), SWT.NONE);
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		// addField(new FileFieldEditor(PreferenceConstants.SIREUM_JAR_PATH, "&Path to sireum.jar:", true,
-		// getFieldEditorParent()));
-
 		Composite airTab = addTab(tabFolder, "AIR");
 		addField(new RadioGroupFieldEditor(PreferenceConstants.SERIALIZATION_METHOD_OPT,
-				"Method to use when serializing AIR to a file:",
-				1,
-				new String[][] { //
+				"Method to use when serializing AIR to a file:", 1, new String[][] { //
 						{ "JSON", SerializerType.JSON.toString() }, //
 						{ "JSON (compact)", SerializerType.JSON_COMPACT.toString() }, //
 						{ "MsgPack", SerializerType.MSG_PACK.toString() } },
 				airTab, true));
 
+		if (Tool.ARSIT.exists()) {
+			Composite arsitTab = addTab(tabFolder, "Arsit");
+			addField(new BooleanFieldEditor(PreferenceConstants.ARSIT_SERIALIZE_OPT,
+					"Serialize AIR to JSON (non-compact) when generating Slang-Embedded", arsitTab));
 
-		Composite arsitTab = addTab(tabFolder, "Arsit");
-		addField(new BooleanFieldEditor(PreferenceConstants.ARSIT_SERIALIZE_OPT,
-				"Serialize AIR to JSON (non-compact) when generating Slang-Embedded", arsitTab));
+			addField(new StringFieldEditor(PreferenceConstants.ARSIT_OUTPUT_FOLDER_OPT, "Output folder", arsitTab));
+		}
 
-		addField(new StringFieldEditor(PreferenceConstants.ARSIT_OUTPUT_FOLDER_OPT, "Output folder",
-				arsitTab));
+		if (Tool.ACT.exists()) {
+			Composite actTab = addTab(tabFolder, "ACT");
+			addField(new BooleanFieldEditor(PreferenceConstants.ACT_SERIALIZE_OPT,
+					"Serialize AIR to JSON (non-compact) when generating CAmkES", actTab));
 
-		Composite actTab = addTab(tabFolder, "ACT");
-		addField(new BooleanFieldEditor(PreferenceConstants.ACT_SERIALIZE_OPT,
-				"Serialize AIR to JSON (non-compact) when generating CAmkES", actTab));
+			addField(new StringFieldEditor(PreferenceConstants.ACT_OUTPUT_FOLDER_OPT, "Output folder", actTab));
+		}
 
-		addField(new StringFieldEditor(PreferenceConstants.ACT_OUTPUT_FOLDER_OPT, "Output folder", actTab));
-
-		Composite awasTab = addTab(tabFolder, "Awas");
+		if (Tool.AWAS.exists()) {
+			Composite awasTab = addTab(tabFolder, "Awas");
+		}
 	}
 
 	private Composite addTab(TabFolder tabFolder, String tabName) {

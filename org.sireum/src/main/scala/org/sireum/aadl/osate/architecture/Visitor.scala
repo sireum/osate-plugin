@@ -1,7 +1,6 @@
 package org.sireum.aadl.osate.architecture
 
 import org.sireum._
-import org.sireum.util._
 import org.osate.aadl2._
 import org.osate.aadl2.impl._
 import org.osate.aadl2.util.Aadl2InstanceUtil
@@ -295,16 +294,6 @@ class Visitor {
     }
     ISZ(ir.Connection(ir.Name(name), source, destination, kind, isBidirect, connInst2, properties))
 
-  }
-
-  private def getFeatureGroupEndPoint(parentName: String, fg: FeatureGroupType): IVector[(String, ir.Direction.Type)] = {
-    var result = ilistEmpty[(String, ir.Direction.Type)]
-    fg.getAllFeatures.toSeq.forEach(f => result = result :+
-      (String(parentName.value + "_" + f.getFullName),
-        if (AadlUtil.isIncomingFeature(f) && AadlUtil.isOutgoingFeature(f)) {
-          ir.Direction.InOut
-        } else if (AadlUtil.isIncomingFeature(f)) { ir.Direction.In } else ir.Direction.Out))
-    result.toVector
   }
 
   /**

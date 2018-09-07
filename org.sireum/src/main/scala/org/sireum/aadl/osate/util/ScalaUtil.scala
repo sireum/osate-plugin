@@ -4,15 +4,16 @@ import java.io.File
 import org.sireum.aadl.ir.Aadl
 import org.sireum.aadl.osate.MenuContributions
 import org.sireum.cli.Cli
+import org.sireum.aadl.osate.util.Util.Tool
 import org.sireum.{F, T, ISZ, None, Option, Some, String, Z}
 import org.osate.aadl2.Element;
 import org.osate.utils.Aadl2Utils
 import org.osate.aadl2.parsesupport.LocationReference
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
-object Util {
+object ScalaUtil {
   def launchArsit(prompt: ArsitPrompt, model: Aadl): Int = {
-    val c = Class.forName(MenuContributions.CLASSNAME_ARSIT)
+    val c = Class.forName(Tool.ARSIT.className)
     val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl], classOf[Cli.ArsitOption])
 
     val out: File = new File(prompt.getOptionOutputDirectory());
@@ -40,7 +41,7 @@ object Util {
   }
   
   def launchAct(prompt: ActPrompt, model: Aadl): Int = {
-    val c = Class.forName(MenuContributions.CLASSNAME_ACT)
+    val c = Class.forName(Tool.ACT.className)
     val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl])
 
     val out: File = new File(prompt.getOptionOutputDirectory());

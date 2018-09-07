@@ -10,40 +10,39 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
+import org.sireum.aadl.osate.util.Util.Tool;
 
 public class MenuContributions extends CompoundContributionItem {
-
-	public static String CLASSNAME_ARSIT = "org.sireum.aadl.arsit.Runner";
-	public static String CLASSNAME_ACT = "org.sireum.aadl.act.Act";
-	public static String CLASSNAME_AWAS = "org.sireum.awas.AADLBridge.AadlHandler";
 
 	@Override
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
 		l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
-				map("org.sireum.commands.launchsireum.generator", "serialize"), true));
+				map("org.sireum.commands.launchsireum.generator", "serialize")));
 
-		l.add(getItem("Generate Slang Embedded Code", "org.sireum.commands.launchsireum",
-				map("org.sireum.commands.launchsireum.generator", "genslang"),
-				classExists(CLASSNAME_ARSIT)));
+		if (Tool.ARSIT.exists()) {
+			l.add(getItem("Generate Slang Embedded Code", "org.sireum.commands.launchsireum",
+					map("org.sireum.commands.launchsireum.generator", "genslang")));
+		}
 
-		l.add(getItem("Generate AWAS Code", "org.sireum.commands.genawas",
-				map("org.sireum.commands.genawas.generator", "json"),
-				classExists(CLASSNAME_AWAS)));
+		if (Tool.AWAS.exists()) {
+			l.add(getItem("Generate AWAS Code", "org.sireum.commands.genawas",
+					map("org.sireum.commands.genawas.generator", "json")));
+		}
 
-		l.add(getItem("Generate CAmkES", "org.sireum.commands.launchsireum",
-				map("org.sireum.commands.launchsireum.generator", "gencamkes"),
-				classExists(CLASSNAME_ACT)));
+		if (Tool.ACT.exists()) {
+			l.add(getItem("Generate CAmkES", "org.sireum.commands.launchsireum",
+					map("org.sireum.commands.launchsireum.generator", "gencamkes")));
+		}
 
 		return l.toArray(new IContributionItem[0]);
 	}
 
-	private IContributionItem getItem(String label, String commandId, Map<String, String> params, boolean enabled) {
+	private IContributionItem getItem(String label, String commandId, Map<String, String> params) {
 
 		return new CommandContributionItem(
-				new CommandContributionItemParameter(
-						PlatformUI.getWorkbench().getActiveWorkbenchWindow(), // serviceLocator - non-null
+				new CommandContributionItemParameter(PlatformUI.getWorkbench().getActiveWorkbenchWindow(), // serviceLocator - non-null
 						null, // id
 						commandId, // commandId
 						params, // parameters
@@ -58,10 +57,6 @@ public class MenuContributions extends CompoundContributionItem {
 						false // visibleEnabled
 				)) {
 
-			@Override
-			public boolean isEnabled() {
-				return enabled;
-			}
 		};
 	}
 
@@ -72,14 +67,5 @@ public class MenuContributions extends CompoundContributionItem {
 			m.put(args[i], args[i + 1]);
 		}
 		return m;
-	}
-
-	private boolean classExists(String className) {
-		try {
-			Class<?> c = Class.forName(className);
-			return true;
-		} catch (ClassNotFoundException e) {
-			return false;
-		}
 	}
 }
