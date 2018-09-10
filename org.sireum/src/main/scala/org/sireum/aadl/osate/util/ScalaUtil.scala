@@ -3,7 +3,6 @@ package org.sireum.aadl.osate.util
 import java.io.File
 import org.sireum.aadl.ir.Aadl
 import org.sireum.aadl.osate.MenuContributions
-import org.sireum.cli.Cli
 import org.sireum.aadl.osate.util.Util.Tool
 import org.sireum.{F, T, ISZ, None, Option, Some, String, Z}
 import org.osate.aadl2.Element;
@@ -13,6 +12,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 object ScalaUtil {
   def launchArsit(prompt: ArsitPrompt, model: Aadl): Int = {
+    /*
+    import org.sireum.cli.Cli
+    
     val c = Class.forName(Tool.ARSIT.className)
     val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl], classOf[Cli.ArsitOption])
 
@@ -38,6 +40,8 @@ object ScalaUtil {
     )
 
     m.invoke(null, out, model, opts).asInstanceOf[Int].intValue()
+    */ 
+    -1
   }
   
   def launchAct(prompt: ActPrompt, model: Aadl): Int = {

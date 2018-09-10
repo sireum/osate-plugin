@@ -44,7 +44,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			return null;
 		}
 
-		if (!check(root)) {
+		if (generator.equals("genslang") && !check(root)) {
 			MessageDialog.openError(shell, "Sireum", "Errors found in model");
 			return null;
 		}
