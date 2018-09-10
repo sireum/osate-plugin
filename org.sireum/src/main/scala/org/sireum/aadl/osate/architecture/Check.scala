@@ -42,6 +42,8 @@ object Check {
           !(protocol.getName.equalsIgnoreCase(AadlProject.PERIODIC_LITERAL) || protocol.getName.equalsIgnoreCase(AadlProject.SPORADIC_LITERAL))
       }).map(ErrorReport(_, "Thread must be periodic or sporadic"))
 
+    /*
+    // Threads or devices with 'in event' ports must be sporadic"
     reports ++= 
       (allThreads ++ allDevices).filter(c => {
         val protocol = GetProperties.getDispatchProtocol(c)
@@ -50,6 +52,7 @@ object Check {
           (f.getDirection == DirectionType.IN || f.getDirection == DirectionType.IN_OUT) &&
           (f.getCategory == FeatureCategory.EVENT_DATA_PORT || f.getCategory == FeatureCategory.EVENT_PORT))
       }).map(ErrorReport(_, "Threads or devices with 'in event' ports must be sporadic"))
+    */
       
     // FIXME: how to determine inherited properties
     reports ++= allThreads.filter(GetProperties.lookupPropertyDefinition(_, TimingProperties._NAME, TimingProperties.PERIOD) == null)

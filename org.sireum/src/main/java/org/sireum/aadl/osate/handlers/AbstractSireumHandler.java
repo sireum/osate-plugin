@@ -5,13 +5,11 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -29,7 +27,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
-import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
@@ -40,17 +37,10 @@ import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
 import org.sireum.aadl.ir.MsgPack;
 import org.sireum.aadl.osate.PreferenceValues;
-import org.sireum.aadl.osate.architecture.Check;
-import org.sireum.aadl.osate.architecture.ErrorReport;
-import org.sireum.aadl.osate.architecture.Report;
 import org.sireum.aadl.osate.architecture.Visitor$;
 import org.sireum.aadl.osate.util.SelectionHelper;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
-
-	private String generator = null;
-	// private SystemImplementation systemImplementation;
-
 	protected final String MARKER_TYPE = "org.sireum.aadl.marker";
 
 	protected static IResource getIResource(Resource r) {
@@ -65,56 +55,35 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent e) throws ExecutionException {
-		if(this.generator == null) {
-			throw new RuntimeException("Generator is null");
+		ComponentInstance root = getComponentInstance(e);
+
+		if (root != null) {
+			return getAir(root);
+		} else {
+			final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			MessageDialog.openError(window.getShell(), "Sireum",
+					"Please select a component instance element");
+			return null;
 		}
 
+	}
+
+	ComponentInstance getComponentInstance(ExecutionEvent e) {
 		Element root = AadlUtil.getElement(getCurrentSelection(e));
 
 		if (root == null) {
 			root = SelectionHelper.getSelectedSystemImplementation();
 		}
 
-		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-
 		if (root != null && root instanceof ComponentInstance) {
-			List<Report> l = Check.check((ComponentInstance) root);
-			if (!l.isEmpty()) {
-				boolean hasErrors = false;
-				String m = "";
-				for (Report er : l) {
-					hasErrors |= er instanceof ErrorReport;
-					String name = ((NamedElement) er.component().eContainer()).getQualifiedName() + "."
-							+ er.component().getQualifiedName();
-					m += name + " : " + er.message() + "\n";
-
-					try {
-						int severity = er instanceof ErrorReport ? IMarker.SEVERITY_ERROR : IMarker.SEVERITY_WARNING;
-						IMarker marker = getIResource(er.component().eResource()).createMarker(IMarker.PROBLEM);
-						marker.setAttribute(IMarker.MESSAGE, name + " - " + er.message());
-						marker.setAttribute(IMarker.SEVERITY, severity);
-					} catch (CoreException exception) {
-						exception.printStackTrace();
-					}
-				}
-
-//				if (hasErrors) {
-//					return null;
-//				}
-			}
-
-			Aadl _r = Visitor$.MODULE$.apply(root).get();
-			if (_r != null) {
-				return _r;
-			} else {
-				return null;
-			}
+			return (ComponentInstance) root;
 		} else {
-			MessageDialog.openError(window.getShell(), "Sireum",
-					"Please select a component instance element");
 			return null;
 		}
+	}
 
+	Aadl getAir(ComponentInstance root) {
+		return Visitor$.MODULE$.apply(root).get();
 	}
 
 	protected String serialize(Aadl model, PreferenceValues.SerializerType t) {
@@ -211,9 +180,5 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 			return file.getLocation().toString();
 		}
 		return null;
-	}
-
-	protected void setGenerator(String v) {
-		this.generator = v;
 	}
 }
