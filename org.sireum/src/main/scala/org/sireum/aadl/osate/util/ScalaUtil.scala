@@ -7,12 +7,10 @@ import org.sireum.aadl.osate.util.Util.Tool
 import org.sireum.{F, T, ISZ, None, Option, Some, String, Z}
 import org.osate.aadl2.Element;
 import org.osate.utils.Aadl2Utils
-import org.osate.aadl2.parsesupport.LocationReference
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 object ScalaUtil {
   def launchArsit(prompt: ArsitPrompt, model: Aadl): Int = {
-    /*
     import org.sireum.cli.Cli
     
     val c = Class.forName(Tool.ARSIT.className)
@@ -40,8 +38,6 @@ object ScalaUtil {
     )
 
     m.invoke(null, out, model, opts).asInstanceOf[Int].intValue()
-    */ 
-    -1
   }
   
   def launchAct(prompt: ActPrompt, model: Aadl): Int = {
@@ -54,6 +50,7 @@ object ScalaUtil {
   }
   
   def getLocationReference(e: Element): Option[LocationReference] = {
+    //import org.osate.aadl2.parsesupport.LocationReference
     var ret: Option[LocationReference] = None[LocationReference]()
     
     if(e == null)

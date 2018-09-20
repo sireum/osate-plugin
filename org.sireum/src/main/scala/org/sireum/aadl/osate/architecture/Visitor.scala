@@ -488,6 +488,13 @@ class Visitor {
       properties = properties :+ ir.Property(name = ir.Name(path :+ "AccessType"), 
           propertyValues = ISZ(ir.ValueProp(value = kind)))
     }
+    if(typ == ir.FeatureCategory.SubprogramAccessGroup){
+      val sai = f.asInstanceOf[SubprogramGroupAccessImpl]
+      val kind = sai.getKind.getName
+      
+      properties = properties :+ ir.Property(name = ir.Name(path :+ "AccessType"), 
+          propertyValues = ISZ(ir.ValueProp(value = kind)))
+    }
     
     if (featureInstances.isEmpty()) {
       return ir.FeatureEnd(
