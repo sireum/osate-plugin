@@ -11,6 +11,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 object ScalaUtil {
   def launchArsit(prompt: ArsitPrompt, model: Aadl): Int = {
+    /*
     import org.sireum.cli.Cli
     
     val c = Class.forName(Tool.ARSIT.className)
@@ -38,6 +39,8 @@ object ScalaUtil {
     )
 
     m.invoke(null, out, model, opts).asInstanceOf[Int].intValue()
+    */
+    -1
   }
   
   def launchAct(prompt: ActPrompt, model: Aadl): Int = {
