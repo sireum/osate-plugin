@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.sireum.aadl.osate.feature.act"
+      label="Sireum ACT Plugin"
+      version="1.0.0.qualifier"
+      provider-name="SAnToS">
+
+   <description>
+      Sireum ACT Plugin
+   </description>
+
+   <license url="">
+      Copyright (c) 2018, Kansas State University
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+   </license>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="org.eclipse.ui"/>
+      <import plugin="org.eclipse.core.resources"/>
+      <import plugin="org.osate.aadl2"/>
+      <import plugin="org.osate.aadl2.modelsupport"/>
+      <import plugin="org.osate.ui"/>
+      <import plugin="org.osate.pluginsupport"/>
+      <import plugin="org.osate.workspace"/>
+      <import plugin="org.osate.xtext.aadl2.properties" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.xtext.aadl2.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.apache.commons.lang" version="2.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.expressions"/>
+      <import plugin="org.eclipse.ui.console"/>
+      <import plugin="org.apache.commons.io" version="2.2.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.contribution.sei" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.aadl2.errormodel.analysis" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.aadl2.errormodel.contrib" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.aadl2.errormodel.faulttree" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.aadl2.errormodel.faulttree.design" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.aadl2.errormodel.faulttree.edit" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.aadl2.errormodel.faulttree.generation" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.aadl2.errormodel.propagationgraph" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.xtext.aadl2.errormodel" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.xtext.aadl2.errormodel.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.swt"/>
+      <import plugin="org.osate.utils" version="1.0.0" match="greaterOrEqual"/>
+   </requires>
+
+   <plugin
+         id="org.sireum.aadl.osate"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
