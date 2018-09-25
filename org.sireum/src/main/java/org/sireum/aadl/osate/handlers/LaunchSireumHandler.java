@@ -25,6 +25,7 @@ import org.sireum.aadl.osate.architecture.ErrorReport;
 import org.sireum.aadl.osate.architecture.Report;
 import org.sireum.aadl.osate.util.ActPrompt;
 import org.sireum.aadl.osate.util.ArsitPrompt;
+import org.sireum.aadl.osate.util.ArsitUtil;
 import org.sireum.aadl.osate.util.ScalaUtil;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
@@ -83,7 +84,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 						// Eclipse doesn't seem to like accessing nested scala classes
 						// (e.g. org.sireum.cli.Cli$ArsitOption$) so invoke Arsit from scala instead
 
-						int ret = ScalaUtil.launchArsit(p, model);
+						int ret = ArsitUtil.launchArsit(p, model);
 
 						MessageDialog.openInformation(shell, "Sireum", "Slang-Embedded code "
 								+ (ret == 0 ? "successfully generated" : "generation was unsuccessful"));

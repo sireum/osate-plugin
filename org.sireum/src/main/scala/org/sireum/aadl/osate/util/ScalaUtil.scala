@@ -10,39 +10,7 @@ import org.osate.utils.Aadl2Utils
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 object ScalaUtil {
-  def launchArsit(prompt: ArsitPrompt, model: Aadl): Int = {
-    /*
-    import org.sireum.cli.Cli
-    
-    val c = Class.forName(Tool.ARSIT.className)
-    val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl], classOf[Cli.ArsitOption])
-
-    val out: File = new File(prompt.getOptionOutputDirectory());
-
-    val ipcmech = prompt.getOptionIPCMechanism match {
-      case "Message Queue" => Cli.Ipcmech.MessageQueue
-      case "Shared Memory" => Cli.Ipcmech.SharedMemory
-      case _ => Cli.Ipcmech.MessageQueue
-    }
-
-    val opts = Cli.ArsitOption(
-        help = "",
-        args = ISZ(),
-        json = F, // irrelevant since passing the aadl model directly
-        inputFile = None[String],
-        outputDir = Some(prompt.getOptionOutputDirectory),
-        packageName = if(prompt.getOptionBasePackageName == "") None[String] else Some(prompt.getOptionBasePackageName()),
-        noart = !prompt.getOptionEmbedArt,
-        bless = prompt.getOptionGenerateBlessEntryPoints,
-        genTrans = prompt.getOptionGenerateTranspilerArtifacts,
-        ipc = ipcmech
-    )
-
-    m.invoke(null, out, model, opts).asInstanceOf[Int].intValue()
-    */
-    -1
-  }
-  
+ 
   def launchAct(prompt: ActPrompt, model: Aadl): Int = {
     val c = Class.forName(Tool.ACT.className)
     val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl])
