@@ -83,9 +83,11 @@ class Visitor {
             inErrorTokens = inErrorTokens + z.getName
           }
         }
+        val epDir = EMV2Util.getErrorPropagationFeatureDirection(x)
+        val dirAdd = if(epDir.incoming() && epDir.outgoing()) {if(isIn)"_IN"else "_OUT"}else {""}
         prop :+= ir.Emv2Propagation(
           if (isIn) ir.PropagationDirection.In else ir.PropagationDirection.Out,
-          if (x.getFeatureorPPRef == null) (path :+ x.getKind) else path :+ getFeatureString(x.getFeatureorPPRef),
+          if (x.getFeatureorPPRef == null) (path :+ x.getKind) else path :+ (getFeatureString(x.getFeatureorPPRef)+dirAdd),
           inErrorTokens.elements)
       }
       prop
@@ -98,7 +100,7 @@ class Visitor {
         res = res + "_" + next.getFeatureorPP.getName
         next = next.getNext
       }
-      res
+      res 
     }
 
     val inprop = errorProp2Map(EMV2Util.getAllIncomingErrorPropagations(root)
@@ -132,7 +134,9 @@ class Visitor {
       val name = src.getName
       if (src.getSourceModelElement.isInstanceOf[ErrorPropagation]) {
         val s = src.getSourceModelElement.asInstanceOf[ErrorPropagation]
-        val featureName = if (s.getFeatureorPPRef == null) String(s.getKind) else getFeatureString(s.getFeatureorPPRef)
+        val epDir = EMV2Util.getErrorPropagationFeatureDirection(s)
+        val dirAdd = if(epDir.incoming() && epDir.outgoing()) {"_OUT"}else {""}
+        val featureName = if (s.getFeatureorPPRef == null) String(s.getKind) else {String(getFeatureString(s.getFeatureorPPRef) + dirAdd)}
         var prop: Option[ir.Emv2Propagation] = None[ir.Emv2Propagation]
         if (src.getTypeTokenConstraint != null) {
           val errorP = src.getTypeTokenConstraint.getTypeTokens.flatMap(tt =>
@@ -148,7 +152,13 @@ class Visitor {
     var sinks = ISZ[ir.Emv2Flow]()
     EMV2Util.getAllErrorSinks(root.getComponentClassifier).foreach { snk =>
       val name = snk.getName
-      val featureName = if (snk.getIncoming.getFeatureorPPRef == null) String(snk.getIncoming.getKind) else getFeatureString(snk.getIncoming.getFeatureorPPRef)
+      val epDir = EMV2Util.getErrorPropagationFeatureDirection(snk.getIncoming)
+      val dirAdd = if(epDir.incoming() && epDir.outgoing()) {"_IN"}else {""}
+      val featureName = if (snk.getIncoming.getFeatureorPPRef == null) {
+          String(snk.getIncoming.getKind)
+        } else {
+          String(getFeatureString(snk.getIncoming.getFeatureorPPRef)+dirAdd)
+        }
       var prop: Option[ir.Emv2Propagation] = None[ir.Emv2Propagation]
       if (snk.getTypeTokenConstraint != null) {
         val errorP = snk.getTypeTokenConstraint.getTypeTokens.flatMap(tt =>
@@ -166,7 +176,9 @@ class Visitor {
       var inerror: Option[ir.Emv2Propagation] = None[ir.Emv2Propagation]
       var outerror: Option[ir.Emv2Propagation] = None[ir.Emv2Propagation]
       if (pth.getTypeTokenConstraint != null) {
-        val pp = if (pth.getIncoming.getFeatureorPPRef == null) String(pth.getIncoming.getKind) else getFeatureString(pth.getIncoming.getFeatureorPPRef)
+        val inDir = EMV2Util.getErrorPropagationFeatureDirection(pth.getIncoming)
+        val inDirAdd = if(inDir.incoming() && inDir.outgoing()) {"_IN"}else {""}
+        val pp = if (pth.getIncoming.getFeatureorPPRef == null) String(pth.getIncoming.getKind) else {String(getFeatureString(pth.getIncoming.getFeatureorPPRef) + inDirAdd)}
         inerror = Some[ir.Emv2Propagation](ir.Emv2Propagation(
           ir.PropagationDirection.In,
           path :+ pp.value,
@@ -177,7 +189,9 @@ class Visitor {
       }
 
       if (pth.getTargetToken != null) {
-        val pp = if (pth.getOutgoing.getFeatureorPPRef == null) String(pth.getOutgoing.getKind) else getFeatureString(pth.getOutgoing.getFeatureorPPRef)
+        val outDir = EMV2Util.getErrorPropagationFeatureDirection(pth.getOutgoing)
+        val outDirAdd = if(outDir.incoming() && outDir.outgoing()) {"_OUT"}else {""}
+        val pp = if (pth.getOutgoing.getFeatureorPPRef == null) String(pth.getOutgoing.getKind) else {String(getFeatureString(pth.getOutgoing.getFeatureorPPRef) + outDirAdd)}
         outerror = Some[ir.Emv2Propagation](ir.Emv2Propagation(
           ir.PropagationDirection.Out,
           path :+ pp.value,
@@ -297,15 +311,6 @@ class Visitor {
 
   }
 
-  private def getFeatureGroupEndPoint(parentName: String, fg: FeatureGroupType): IVector[(String, ir.Direction.Type)] = {
-    var result = ilistEmpty[(String, ir.Direction.Type)]
-    fg.getAllFeatures.toSeq.forEach(f => result = result :+
-      (String(parentName.value + "_" + f.getFullName),
-        if (AadlUtil.isIncomingFeature(f) && AadlUtil.isOutgoingFeature(f)) {
-          ir.Direction.InOut
-        } else if (AadlUtil.isIncomingFeature(f)) { ir.Direction.In } else ir.Direction.Out))
-    result.toVector
-  }
 
   /**
    * @param connElem
