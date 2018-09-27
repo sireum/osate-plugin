@@ -41,7 +41,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 		ComponentInstance root = getComponentInstance(e);
 		if (root == null) {
-			MessageDialog.openError(shell, "Sireum", "Please select a component instance element");
+			MessageDialog.openError(shell, "Sireum", "Please select a system implementation or a system instance");
 			return null;
 		}
 
@@ -63,7 +63,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 				FileDialog fd = new FileDialog(shell, SWT.SAVE);
 				fd.setFileName("aadl." + (ser == SerializerType.MSG_PACK ? "msgpack" : "json"));
 				fd.setText("Specify filename");
-				fd.setFilterPath(getProjectPath(e).toString());
+				fd.setFilterPath(getProjectPath(root).toString());
 				String fname = fd.open();
 
 				if (fname != null) {
@@ -75,10 +75,10 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			case "genslang": {
 
 				if (PreferenceValues.getARSIT_SERIALIZE_OPT()) {
-					serializeToFile(model, PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT(), e);
+					serializeToFile(model, PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT(), root);
 				}
 
-				ArsitPrompt p = new ArsitPrompt(getProject(e), shell);
+				ArsitPrompt p = new ArsitPrompt(getProject(root), shell);
 				if (p.open() == Window.OK) {
 					try {
 						// Eclipse doesn't seem to like accessing nested scala classes
@@ -100,10 +100,10 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			case "gencamkes": {
 
 				if (PreferenceValues.getACT_SERIALIZE_OPT()) {
-					serializeToFile(model, PreferenceValues.getACT_OUTPUT_FOLDER_OPT(), e);
+					serializeToFile(model, PreferenceValues.getACT_OUTPUT_FOLDER_OPT(), root);
 				}
 
-				ActPrompt p = new ActPrompt(getProject(e), shell);
+				ActPrompt p = new ActPrompt(getProject(root), shell);
 				if (p.open() == Window.OK) {
 					try {
 						File out = new File(p.getOptionOutputDirectory());
@@ -162,7 +162,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 		return !hasErrors;
 	}
 
-	protected void serializeToFile(Aadl model, String outputFolder, ExecutionEvent e) {
+	protected void serializeToFile(Aadl model, String outputFolder, ComponentInstance e) {
 		String s = serialize(model, SerializerType.JSON);
 
 		File f = new File(outputFolder);

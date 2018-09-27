@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -27,7 +28,10 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
+import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.instance.ComponentInstance;
+import org.osate.aadl2.instantiation.InstantiateModel;
+import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.sireum.IS;
@@ -73,6 +77,21 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 		if (root == null) {
 			root = SelectionHelper.getSelectedSystemImplementation();
+		}
+
+		if (root != null && root instanceof SystemImplementation) {
+			try {
+				SystemImplementation si = (SystemImplementation) root;
+				InstantiateModel im = new InstantiateModel(new NullProgressMonitor(),
+						AnalysisErrorReporterManager.NULL_ERROR_MANANGER);
+				URI uri = OsateResourceUtil.getInstanceModelURI(si);
+				Resource resource = OsateResourceUtil.getEmptyAaxl2Resource(uri);
+				root = im.createSystemInstance(si, resource);
+			} catch (Exception ex) {
+				final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+				MessageDialog.openError(window.getShell(), "Sireum", "Could not instantiate model");
+				return null;
+			}
 		}
 
 		if (root != null && root instanceof ComponentInstance) {
@@ -137,17 +156,15 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		}
 	}
 
-	protected String getInstanceFilename(ExecutionEvent e) {
-		Element root = AadlUtil.getElement(getCurrentSelection(e));
+	protected String getInstanceFilename(ComponentInstance root) {
 		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getName();
 	}
 
-	protected IProject getProject(ExecutionEvent e) {
-		Element root = AadlUtil.getElement(getCurrentSelection(e));
+	protected IProject getProject(ComponentInstance root) {
 		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getProject();
 	}
 
-	protected IPath getProjectPath(ExecutionEvent e) {
+	protected IPath getProjectPath(ComponentInstance e) {
 		return getProject(e).getLocation();
 	}
 
