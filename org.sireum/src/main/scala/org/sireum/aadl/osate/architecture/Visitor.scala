@@ -31,16 +31,16 @@ object Visitor {
 class Visitor {
 
   var seenSet: ISZ[AadlPackageImpl] = ISZ()
-  var dataTypes: ISZ[ir.Component] = ISZ()
   var errorLibs: HashSMap[String, (ISZ[String], ISZ[String], ISZ[(String, String)])] = HashSMap.empty[String, (ISZ[String], ISZ[String], ISZ[(String, String)])]()
   var compConnMap: HashSMap[ISZ[String], HashSSet[Connection]] = HashSMap.empty[ISZ[String], HashSSet[Connection]]()
-
+  var datamap: HashSMap[String, ir.Component] = HashSMap.empty
+  
   def convert(root: Element): Option[ir.Aadl] = {
     val t = visit(root)
     if (t.nonEmpty) {
       //errorLibs.entries.map(f => ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1, HashMap.empty ++ f._2._2))
-
-      return Some[ir.Aadl](ir.Aadl(components = ISZ(t.get) ++ dataTypes, errorLibs.entries.map(f =>
+      
+      return Some[ir.Aadl](ir.Aadl(components = ISZ(t.get) ++ datamap.values, errorLibs.entries.map(f =>
         ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1, f._2._2, HashMap.empty ++ f._2._3))))
     } else {
       None[ir.Aadl]
@@ -456,12 +456,40 @@ class Visitor {
     return comp
 
   }
-
-  /*  private def buildFeatureGroup(featureGroup : FeatureGroup, path : ISZ[String]): ir.Feature = {
-    val currentPath = path :+ featureGroup.getName
-    ir.FeatureGroup(ir.Name(currentPath), featureGroup.get )
+  
+  private def processDataType(f: DataClassifier): ir.Component = {
+    val name: String = f.getQualifiedName
+    if(datamap.contains(name)) {
+      return datamap.get(name).get
+    }
+    
+    val properties = ISZ[ir.Property](f.getOwnedPropertyAssociations.map(op => buildProperty(op, ISZ())).toSeq: _*) 
+    val subComponents: ISZ[ir.Component] = f match {
+      case (dt: DataTypeImpl) => ISZ()
+      case (di: DataImplementationImpl) =>
+        val sb = di.getOwnedDataSubcomponents.map(f => {
+          val c = processDataType(f.getDataSubcomponentType.asInstanceOf[DataClassifier])
+          ir.Component(ir.Name(ISZ(f.getName)), c.category, c.classifier, c.features, c.subComponents,
+              c.connections, c.connectionInstances, c.properties, c.flows, c.modes, c.annexes)
+        })
+        ISZ(sb.toSeq: _*)
+      case _ => throw new Exception(s"Unxepected: ${f}")
+    }
+    val c = ir.Component(
+            identifier = ir.Name(ISZ()),
+            category = ir.ComponentCategory.Data,
+            classifier = Some(ir.Classifier(name)),
+            features = ISZ(),
+            subComponents = subComponents,
+            connections = ISZ(),
+            connectionInstances = ISZ(),
+            properties = properties,
+            flows = ISZ(),
+            modes = ISZ(),
+            annexes = ISZ())
+    datamap = datamap + (name ~> c)
+    return c
   }
-  */
 
   private def buildFeature(featureInst: FeatureInstance, path: ISZ[String]): ir.Feature = {
     val f = featureInst.getFeature
@@ -495,19 +523,14 @@ class Visitor {
       case SUBPROGRAM_ACCESS => ir.FeatureCategory.SubprogramAccess
       case SUBPROGRAM_GROUP_ACCESS => ir.FeatureCategory.SubprogramAccessGroup
     }
-    if(typ == ir.FeatureCategory.SubprogramAccess){
-      val sai = f.asInstanceOf[SubprogramAccessImpl]
-      val kind = sai.getKind.getName
-      
+    if(f.isInstanceOf[AccessImpl]) { // for Subprogram and SubprogramGroup access
+      val sai = f.asInstanceOf[AccessImpl]
       properties = properties :+ ir.Property(name = ir.Name(path :+ "AccessType"), 
-          propertyValues = ISZ(ir.ValueProp(value = kind)))
+          propertyValues = ISZ(ir.ValueProp(value = sai.getKind.getName)))
     }
-    if(typ == ir.FeatureCategory.SubprogramAccessGroup){
-      val sai = f.asInstanceOf[SubprogramGroupAccessImpl]
-      val kind = sai.getKind.getName
-      
-      properties = properties :+ ir.Property(name = ir.Name(path :+ "AccessType"), 
-          propertyValues = ISZ(ir.ValueProp(value = kind)))
+    if((f.isInstanceOf[DataPortImpl] || f.isInstanceOf[EventDataPortImpl]) && 
+          (f.getClassifier.isInstanceOf[DataTypeImpl] || f.getClassifier.isInstanceOf[DataImplementationImpl])){
+      val c = processDataType(f.getClassifier.asInstanceOf[DataClassifier])
     }
     
     if (featureInstances.isEmpty()) {
