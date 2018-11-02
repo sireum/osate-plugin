@@ -28,7 +28,6 @@ object ArsitUtil {
         help = "",
         args = ISZ(),
         json = F, // irrelevant since passing the aadl model directly
-        inputFile = None[String],
         outputDir = Some(prompt.getOptionOutputDirectory),
         packageName = if(prompt.getOptionBasePackageName == "") None[String] else Some(prompt.getOptionBasePackageName()),
         noart = !prompt.getOptionEmbedArt,
