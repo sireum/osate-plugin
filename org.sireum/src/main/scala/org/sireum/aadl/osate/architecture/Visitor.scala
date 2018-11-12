@@ -5,7 +5,6 @@ import org.sireum.util._
 import org.osate.aadl2._
 import org.osate.aadl2.impl._
 import org.osate.aadl2.util.Aadl2InstanceUtil
-import org.osate.contribution.sei.names._
 import org.osate.xtext.aadl2.properties.util.GetProperties;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 import org.osate.xtext.aadl2.properties.util.TimingProperties;

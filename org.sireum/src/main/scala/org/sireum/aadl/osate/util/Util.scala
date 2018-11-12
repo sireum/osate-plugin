@@ -5,7 +5,6 @@ import org.sireum.aadl.ir.Aadl
 import org.sireum.cli.Cli
 import org.sireum.{F, T, ISZ, None, Option, Some, String, Z}
 import org.osate.aadl2.Element;
-import org.osate.utils.Aadl2Utils
 import org.osate.aadl2.parsesupport.LocationReference
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
