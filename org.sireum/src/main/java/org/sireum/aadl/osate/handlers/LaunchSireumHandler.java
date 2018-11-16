@@ -117,7 +117,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 								}
 							}
 						}
-						int ret = ScalaUtil.launchAct(p, model);
+						int ret = ScalaUtil.launchAct(p, model, displayConsole("ACT Console"));
 
 						MessageDialog.openInformation(shell, "Sireum",
 								"CAmkES code " + (ret == 0 ? "successfully generated" : "generation was unsuccessful"));

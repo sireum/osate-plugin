@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
@@ -18,17 +19,19 @@ public class MenuContributions extends CompoundContributionItem {
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
-		l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
-				map("org.sireum.commands.launchsireum.generator", "serialize")));
+		if (isSireumBridgeMenu()) {
+			l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
+					map("org.sireum.commands.launchsireum.generator", "serialize")));
 
-		if (Tool.ARSIT.exists()) {
-			l.add(getItem("Generate Slang Embedded Code", "org.sireum.commands.launchsireum",
-					map("org.sireum.commands.launchsireum.generator", "genslang")));
-		}
+			if (Tool.ARSIT.exists()) {
+				l.add(getItem("Generate Slang Embedded Code", "org.sireum.commands.launchsireum",
+						map("org.sireum.commands.launchsireum.generator", "genslang")));
+			}
 
-		if (Tool.AWAS.exists()) {
-			l.add(getItem("Generate AWAS Code", "org.sireum.commands.genawas",
-					map("org.sireum.commands.genawas.generator", "json")));
+			if (Tool.AWAS.exists()) {
+				l.add(getItem("Generate AWAS Code", "org.sireum.commands.genawas",
+						map("org.sireum.commands.genawas.generator", "json")));
+			}
 		}
 
 		if (Tool.ACT.exists()) {
@@ -37,6 +40,14 @@ public class MenuContributions extends CompoundContributionItem {
 		}
 
 		return l.toArray(new IContributionItem[0]);
+	}
+
+	private boolean isSireumBridgeMenu() {
+		try {
+			return ((MenuManager) this.getParent()).getId().equals("org.sireum.BridgeMenu");
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	private IContributionItem getItem(String label, String commandId, Map<String, String> params) {

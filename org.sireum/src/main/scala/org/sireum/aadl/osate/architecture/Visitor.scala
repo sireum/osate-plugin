@@ -463,14 +463,17 @@ class Visitor {
       return datamap.get(name).get
     }
     
-    val properties = ISZ[ir.Property](f.getOwnedPropertyAssociations.map(op => buildProperty(op, ISZ())).toSeq: _*) 
+    var properties = ISZ[ir.Property](f.getOwnedPropertyAssociations.map(op => buildProperty(op, ISZ())).toSeq: _*) 
     val subComponents: ISZ[ir.Component] = f match {
       case (dt: DataTypeImpl) => ISZ()
       case (di: DataImplementationImpl) =>
+        properties = properties ++ ISZ[ir.Property](di.getType.getOwnedPropertyAssociations.map(op => buildProperty(op, ISZ())).toSeq: _*)
         val sb = di.getOwnedDataSubcomponents.map(f => {
-          val c = processDataType(f.getDataSubcomponentType.asInstanceOf[DataClassifier])
+          val sct = f.getDataSubcomponentType.asInstanceOf[DataClassifier]
+          val c = processDataType(sct)
+          val fProperties = ISZ[ir.Property](f.getOwnedPropertyAssociations.map(op => buildProperty(op, ISZ())).toSeq: _*)
           ir.Component(ir.Name(ISZ(f.getName)), c.category, c.classifier, c.features, c.subComponents,
-              c.connections, c.connectionInstances, c.properties, c.flows, c.modes, c.annexes)
+              c.connections, c.connectionInstances, c.properties ++ fProperties, c.flows, c.modes, c.annexes)
         })
         ISZ(sb.toSeq: _*)
       case _ => throw new Exception(s"Unxepected: ${f}")

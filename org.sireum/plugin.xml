@@ -21,6 +21,16 @@
       </command>
    </extension>
    <extension point="org.eclipse.ui.menus">
+     <menuContribution
+       locationURI="menu:com.rockwellcollins.atc.darpacase.menus.menubar.main">
+       <menu
+         id="org.sireum.SystemBuild"
+         label="System Build">
+         <dynamic class="org.sireum.aadl.osate.MenuContributions" id="org.sireum.ui.views.menu.MenuItems"/>
+       </menu>
+     </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="menu:org.osate.ui.osateMenu">
          <menu

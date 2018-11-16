@@ -1,6 +1,8 @@
 package org.sireum.aadl.osate.util
 
 import java.io.File
+import java.io.ByteArrayOutputStream
+import java.io.PrintStream
 import org.sireum.aadl.ir.Aadl
 import org.sireum.aadl.osate.MenuContributions
 import org.sireum.aadl.osate.util.Util.Tool
@@ -8,16 +10,48 @@ import org.sireum.{F, T, ISZ, None, Option, Some, String, Z}
 import org.osate.aadl2.Element;
 import org.osate.utils.Aadl2Utils
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.ui.console.MessageConsole
 
 object ScalaUtil {
  
-  def launchAct(prompt: ActPrompt, model: Aadl): Int = {
-    val c = Class.forName(Tool.ACT.className)
-    val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl])
+  def launchAct(prompt: ActPrompt, model: Aadl, ms: MessageConsole): Int = {
+    var ret = -1
 
-    val out: File = new File(prompt.getOptionOutputDirectory());
+    val out = new PrintStream(ms.newMessageStream())
+    val outOld = System.out
+    val errOld = System.err
+    
+    System.setOut(out)
+    System.setErr(out)
+    
+    Console.withOut(out) {
+       Console.withErr(out) {
+         try {
+           val c = Class.forName(Tool.ACT.className)
+           val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl], classOf[ISZ[org.sireum.String]])
 
-    m.invoke(null, out, model).asInstanceOf[Int].intValue()
+           val outDir: File = new File(prompt.getOptionOutputDirectory());
+
+           //val auxDir: File = new File(prompt.getOptionOutputDirectory());
+           val auxDirsTemp : ISZ[org.sireum.String] = ISZ()
+
+          ret = m.invoke(null, outDir, model, auxDirsTemp).asInstanceOf[Int].intValue()
+
+        } catch {
+          case e: Exception =>  
+            out.println("Exception raised when invoking ACT")
+            e.printStackTrace(out)
+        } finally {
+          out.flush
+      
+          try { if (out != null) out.close() }
+          catch { case e: Exception => e.printStackTrace() }
+        }
+      }
+    }
+    System.setOut(outOld)
+    System.setErr(errOld)
+    ret
   }
   
   def getLocationReference(e: Element): Option[LocationReference] = {
