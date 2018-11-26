@@ -31,11 +31,9 @@ object ScalaUtil {
            val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl], classOf[ISZ[org.sireum.String]])
 
            val outDir: File = new File(prompt.getOptionOutputDirectory());
+           val auxDirs : ISZ[org.sireum.String] = if(prompt.getOptionCSourceDirectory != "") ISZ(prompt.getOptionCSourceDirectory()) else ISZ()
 
-           //val auxDir: File = new File(prompt.getOptionOutputDirectory());
-           val auxDirsTemp : ISZ[org.sireum.String] = ISZ()
-
-          ret = m.invoke(null, outDir, model, auxDirsTemp).asInstanceOf[Int].intValue()
+          ret = m.invoke(null, outDir, model, auxDirs).asInstanceOf[Int].intValue()
 
         } catch {
           case e: Exception =>  
@@ -51,6 +49,7 @@ object ScalaUtil {
     }
     System.setOut(outOld)
     System.setErr(errOld)
+    
     ret
   }
   

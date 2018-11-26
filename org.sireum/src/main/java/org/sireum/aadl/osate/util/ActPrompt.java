@@ -22,6 +22,7 @@ import org.osgi.service.prefs.BackingStoreException;
 
 public class ActPrompt extends TitleAreaDialog {
 	private Text txtOutputDirectory;
+	private Text txtCSourceDirectory;
 
 	IProject project;
 	IEclipsePreferences projectNode;
@@ -29,6 +30,7 @@ public class ActPrompt extends TitleAreaDialog {
 	String PREF_KEY = "org.sireum.aadl.act";
 
 	private final String KEY_OUTPUT_DIRECTORY = "output.directory";
+	private final String KEY_C_SRC_DIRECTORY = "c.src.directory";
 
 	/**
 	 * @wbp.parser.constructor
@@ -55,7 +57,7 @@ public class ActPrompt extends TitleAreaDialog {
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);
 		GridData gd_container = new GridData(GridData.FILL_BOTH);
-		gd_container.widthHint = 552;
+		gd_container.widthHint = 556;
 		container.setLayoutData(gd_container);
 
 		Button btnOutputDirectory = new Button(container, SWT.NONE);
@@ -65,7 +67,7 @@ public class ActPrompt extends TitleAreaDialog {
 				promptForOutputDirectory();
 			}
 		});
-		btnOutputDirectory.setBounds(477, 3, 42, 28);
+		btnOutputDirectory.setBounds(511, 3, 42, 28);
 		btnOutputDirectory.setText("...");
 
 		Label lblOutputDirectory = new Label(container, SWT.NONE);
@@ -73,7 +75,24 @@ public class ActPrompt extends TitleAreaDialog {
 		lblOutputDirectory.setText("Output Directory");
 
 		txtOutputDirectory = new Text(container, SWT.BORDER);
-		txtOutputDirectory.setBounds(137, 7, 334, 19);
+		txtOutputDirectory.setBounds(166, 7, 334, 19);
+
+		Label lblAuxCDir = new Label(container, SWT.NONE);
+		lblAuxCDir.setText("C Source Code Directory");
+		lblAuxCDir.setBounds(10, 46, 150, 21);
+
+		txtCSourceDirectory = new Text(container, SWT.BORDER);
+		txtCSourceDirectory.setBounds(166, 43, 334, 19);
+
+		Button btnCSourceCode = new Button(container, SWT.NONE);
+		btnCSourceCode.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				promptForCSourceDirectory();
+			}
+		});
+		btnCSourceCode.setText("...");
+		btnCSourceCode.setBounds(511, 39, 42, 28);
 
 		initValues();
 		return area;
@@ -94,7 +113,7 @@ public class ActPrompt extends TitleAreaDialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(530, 372);
+		return new Point(563, 372);
 	}
 
 	@Override
@@ -105,6 +124,7 @@ public class ActPrompt extends TitleAreaDialog {
 
 	void saveOptions() {
 		projectNode.put(KEY_OUTPUT_DIRECTORY, txtOutputDirectory.getText());
+		projectNode.put(KEY_C_SRC_DIRECTORY, txtCSourceDirectory.getText());
 
 		try {
 			projectNode.flush();
@@ -120,10 +140,16 @@ public class ActPrompt extends TitleAreaDialog {
 			outputDirectory = project.getLocation().toString();
 		}
 		txtOutputDirectory.setText(outputDirectory);
+
+		txtCSourceDirectory.setText(this.getOptionCSourceDirectory());
 	}
 
 	public String getOptionOutputDirectory() {
 		return projectNode.get(KEY_OUTPUT_DIRECTORY, "");
+	}
+
+	public String getOptionCSourceDirectory() {
+		return projectNode.get(KEY_C_SRC_DIRECTORY, "");
 	}
 
 	void promptForOutputDirectory() {
@@ -137,6 +163,20 @@ public class ActPrompt extends TitleAreaDialog {
 		String path = d.open();
 		if (path != null) {
 			txtOutputDirectory.setText(path);
+		}
+	}
+
+	void promptForCSourceDirectory() {
+		DirectoryDialog d = new DirectoryDialog(this.getShell());
+		if (!getOptionCSourceDirectory().equals("")) {
+			d.setFilterPath(getOptionCSourceDirectory());
+		} else {
+			d.setFilterPath(project.getLocation().toString());
+		}
+		d.setText("Select C Source Directory Directory");
+		String path = d.open();
+		if (path != null) {
+			txtCSourceDirectory.setText(path);
 		}
 	}
 }
