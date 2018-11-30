@@ -6,16 +6,27 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.sireum.aadl.osate.cli.Activator
 Require-Bundle: org.osate.aadl2,
  org.osate.aadl2.instantiation,
- org.osate.aadl2.modelsupport,
  org.sireum.aadl.osate,
- org.eclipse.core.resources,
- org.osate.xtext.aadl2,
  org.osate.xtext.aadl2.errormodel,
  org.osate.alisa.workbench,
  org.osate.categories,
- com.rockwellcollins.atc.resolute
+ com.rockwellcollins.atc.resolute,
+ org.osate.testsupport;visibility:=reexport,
+ org.osate.aadl2.errormodel.tests,
+ org.osate.xtext.aadl2.ui,
+ org.osate.pluginsupport,
+ org.osate.xtext.aadl2.properties.ui,
+ org.eclipse.equinox.common,
+ org.eclipse.osgi,
+ org.osate.assure.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.sireum.aadl.osate.cli
 Bundle-ActivationPolicy: lazy
-Export-Package: org.sireum.aadl.osate.cli
-Import-Package: org.osate.xtext.aadl2
+Export-Package: org.sireum.aadl.osate.cli;
+  uses:="org.osate.aadl2,
+   org.osgi.framework,
+   org.eclipse.emf.common.util,
+   org.eclipse.equinox.app,
+   org.eclipse.emf.ecore.resource"
+Bundle-ClassPath: .,
+ lib/
