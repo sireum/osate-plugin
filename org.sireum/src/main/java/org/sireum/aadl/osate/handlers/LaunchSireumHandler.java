@@ -19,6 +19,7 @@ import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.PreferenceValues;
+import org.sireum.aadl.osate.PreferenceValues.Generators;
 import org.sireum.aadl.osate.PreferenceValues.SerializerType;
 import org.sireum.aadl.osate.architecture.Check;
 import org.sireum.aadl.osate.architecture.ErrorReport;
@@ -31,30 +32,28 @@ import org.sireum.aadl.osate.util.ScalaUtil;
 public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override
 	public Object execute(ExecutionEvent e) throws ExecutionException {
-
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-
-		String generator = e.getParameter("org.sireum.commands.launchsireum.generator");
-		if (generator == null) {
+		if (e.getParameter("org.sireum.commands.launchsireum.generator") == null) {
 			throw new RuntimeException("Unable to retrive generator argument");
 		}
+		Generators generator = Generators.valueOf(e.getParameter("org.sireum.commands.launchsireum.generator"));
 
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		ComponentInstance root = getComponentInstance(e);
 		if (root == null) {
 			MessageDialog.openError(shell, "Sireum", "Please select a system implementation or a system instance");
 			return null;
 		}
 
-		if (generator.equals("genslang") && !check(root)) {
+		if (generator == Generators.GEN_ARSIT && !check(root)) {
 			MessageDialog.openError(shell, "Sireum", "Errors found in model");
 			return null;
 		}
 
-		Aadl model = getAir(root);
+		Aadl model = getAir(root, generator == Generators.GEN_CAMKES);
 
 		if (model != null) {
 			switch (generator) {
-			case "serialize": {
+			case SERIALIZE: {
 
 				SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();
 
@@ -72,7 +71,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 				}
 				break;
 			}
-			case "genslang": {
+			case GEN_ARSIT: {
 
 				if (PreferenceValues.getARSIT_SERIALIZE_OPT()) {
 					serializeToFile(model, PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT(), root);
@@ -97,7 +96,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 				}
 				break;
 			}
-			case "gencamkes": {
+			case GEN_CAMKES: {
 
 				if (PreferenceValues.getACT_SERIALIZE_OPT()) {
 					serializeToFile(model, PreferenceValues.getACT_OUTPUT_FOLDER_OPT(), root);
@@ -130,6 +129,9 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 				}
 				break;
 			}
+			default:
+				MessageDialog.openError(shell, "Sireum", "Not expecting generator: " + generator);
+				break;
 			}
 		} else {
 			MessageDialog.openError(shell, "Sireum", "Could not generate AIR");

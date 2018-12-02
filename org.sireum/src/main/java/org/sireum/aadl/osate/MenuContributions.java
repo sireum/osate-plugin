@@ -11,6 +11,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
+import org.sireum.aadl.osate.PreferenceValues.Generators;
 import org.sireum.aadl.osate.util.Util.Tool;
 
 public class MenuContributions extends CompoundContributionItem {
@@ -21,22 +22,22 @@ public class MenuContributions extends CompoundContributionItem {
 
 		if (isSireumBridgeMenu()) {
 			l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
-					map("org.sireum.commands.launchsireum.generator", "serialize")));
+					map("org.sireum.commands.launchsireum.generator", Generators.SERIALIZE.toString())));
 
 			if (Tool.ARSIT.exists()) {
 				l.add(getItem("Generate Slang Embedded Code", "org.sireum.commands.launchsireum",
-						map("org.sireum.commands.launchsireum.generator", "genslang")));
+						map("org.sireum.commands.launchsireum.generator", Generators.GEN_ARSIT.toString())));
 			}
 
 			if (Tool.AWAS.exists()) {
 				l.add(getItem("Generate AWAS Code", "org.sireum.commands.genawas",
-						map("org.sireum.commands.genawas.generator", "json")));
+						map("org.sireum.commands.genawas.generator", Generators.GEN_AWAS.toString())));
 			}
 		}
 
 		if (Tool.ACT.exists()) {
 			l.add(getItem("Generate CAmkES", "org.sireum.commands.launchsireum",
-					map("org.sireum.commands.launchsireum.generator", "gencamkes")));
+					map("org.sireum.commands.launchsireum.generator", Generators.GEN_CAMKES.toString())));
 		}
 
 		return l.toArray(new IContributionItem[0]);

@@ -110,7 +110,11 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 	}
 
 	Aadl getAir(ComponentInstance root) {
-		return Visitor$.MODULE$.apply(root).get();
+		return getAir(root, false);
+	}
+
+	Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
+		return Visitor$.MODULE$.apply(root, includeDataComponents).get();
 	}
 
 	protected String serialize(Aadl model, PreferenceValues.SerializerType t) {

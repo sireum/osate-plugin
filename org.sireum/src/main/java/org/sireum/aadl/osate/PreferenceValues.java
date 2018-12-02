@@ -8,6 +8,10 @@ public class PreferenceValues {
 		JSON, JSON_COMPACT, MSG_PACK
 	}
 
+	public enum Generators {
+		SERIALIZE, GEN_ARSIT, GEN_AWAS, GEN_CAMKES
+	}
+
 	public static SerializerType getSERIALIZATION_METHOD_OPT() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		return SerializerType.valueOf(store.getString(PreferenceConstants.SERIALIZATION_METHOD_OPT));

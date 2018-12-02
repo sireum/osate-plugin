@@ -23,8 +23,8 @@ import org.osate.aadl2.instance.impl._
 import org.osate.aadl2.modelsupport.util._
 
 object Visitor {
-  def apply(root: Element): Option[ir.Aadl] = {
-    new Visitor().convert(root)
+  def apply(root: Element, includeDataComponents: Boolean = false): Option[ir.Aadl] = {
+    new Visitor().convert(root, includeDataComponents)
   }
 }
 
@@ -35,13 +35,15 @@ class Visitor {
   var compConnMap: HashSMap[ISZ[String], HashSSet[Connection]] = HashSMap.empty[ISZ[String], HashSSet[Connection]]()
   var datamap: HashSMap[String, ir.Component] = HashSMap.empty
   
-  def convert(root: Element): Option[ir.Aadl] = {
+  def convert(root: Element, includeDataComponents: Boolean): Option[ir.Aadl] = {
     val t = visit(root)
     if (t.nonEmpty) {
       //errorLibs.entries.map(f => ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1, HashMap.empty ++ f._2._2))
       
-      return Some[ir.Aadl](ir.Aadl(components = ISZ(t.get) ++ datamap.values, errorLibs.entries.map(f =>
-        ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1, f._2._2, HashMap.empty ++ f._2._3))))
+      Some(ir.Aadl(
+          components = ISZ(t.get), 
+          errorLib = errorLibs.entries.map(f => ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1, f._2._2, HashMap.empty ++ f._2._3)),
+          dataComponents = if(includeDataComponents) datamap.values else ISZ()))
     } else {
       None[ir.Aadl]
     }
@@ -526,14 +528,16 @@ class Visitor {
       case SUBPROGRAM_ACCESS => ir.FeatureCategory.SubprogramAccess
       case SUBPROGRAM_GROUP_ACCESS => ir.FeatureCategory.SubprogramAccessGroup
     }
-    if(f.isInstanceOf[AccessImpl]) { // for Subprogram and SubprogramGroup access
+    if(f.isInstanceOf[AccessImpl]) { 
+      // TODO: add Subprogram/SubprogramGroup feature type to AIR
       val sai = f.asInstanceOf[AccessImpl]
       properties = properties :+ ir.Property(name = ir.Name(path :+ "AccessType"), 
           propertyValues = ISZ(ir.ValueProp(value = sai.getKind.getName)))
     }
     if((f.isInstanceOf[DataPortImpl] || f.isInstanceOf[EventDataPortImpl]) && 
           (f.getClassifier.isInstanceOf[DataTypeImpl] || f.getClassifier.isInstanceOf[DataImplementationImpl])){
-      val c = processDataType(f.getClassifier.asInstanceOf[DataClassifier])
+      // TODO: add support for the declarative model in AIR
+      processDataType(f.getClassifier.asInstanceOf[DataClassifier])
     }
     
     if (featureInstances.isEmpty()) {
