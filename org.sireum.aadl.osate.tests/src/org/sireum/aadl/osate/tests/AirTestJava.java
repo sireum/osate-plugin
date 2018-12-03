@@ -22,7 +22,7 @@ import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instantiation.InstantiateModel;
 import org.osate.testsupport.Aadl2InjectorProvider;
 import org.osate.testsupport.TestHelper;
-import org.sireum.aadl.osate.util.TestUtil;
+import org.sireum.aadl.osate.util.Util;
 
 import com.google.inject.Inject;
 import com.itemis.xtext.testing.XtextTest;
@@ -93,7 +93,7 @@ public class AirTestJava extends XtextTest {
 					pkg.getOwnedPublicSection().getOwnedClassifiers());
 			SystemInstance instance = InstantiateModel.buildInstanceModelFile(sysImpl);
 
-			String ir = TestUtil.getAir(instance);
+			String ir = Util.getAir(instance);
 
 			Optional<File> expectedFile = Arrays.stream(r.listFiles())
 					.filter(x -> x.getName().endsWith(sysImplName + ".json")).findFirst();

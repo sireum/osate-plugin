@@ -5,18 +5,17 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -25,12 +24,22 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.console.ConsolePlugin;
+import org.eclipse.ui.console.IConsole;
+import org.eclipse.ui.console.IConsoleConstants;
+import org.eclipse.ui.console.IConsoleManager;
+import org.eclipse.ui.console.IConsoleView;
+import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
-import org.osate.aadl2.NamedElement;
+import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.instance.ComponentInstance;
+import org.osate.aadl2.instantiation.InstantiateModel;
+import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.sireum.IS;
@@ -40,17 +49,10 @@ import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
 import org.sireum.aadl.ir.MsgPack;
 import org.sireum.aadl.osate.PreferenceValues;
-import org.sireum.aadl.osate.architecture.Check;
-import org.sireum.aadl.osate.architecture.ErrorReport;
-import org.sireum.aadl.osate.architecture.Report;
 import org.sireum.aadl.osate.architecture.Visitor$;
 import org.sireum.aadl.osate.util.SelectionHelper;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
-
-	private String generator = null;
-	// private SystemImplementation systemImplementation;
-
 	protected final String MARKER_TYPE = "org.sireum.aadl.marker";
 
 	protected static IResource getIResource(Resource r) {
@@ -65,56 +67,54 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent e) throws ExecutionException {
-		if(this.generator == null) {
-			throw new RuntimeException("Generator is null");
+		ComponentInstance root = getComponentInstance(e);
+
+		if (root != null) {
+			return getAir(root);
+		} else {
+			final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			MessageDialog.openError(window.getShell(), "Sireum",
+					"Please select a component instance element");
+			return null;
 		}
 
+	}
+
+	ComponentInstance getComponentInstance(ExecutionEvent e) {
 		Element root = AadlUtil.getElement(getCurrentSelection(e));
 
 		if (root == null) {
 			root = SelectionHelper.getSelectedSystemImplementation();
 		}
 
-		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-
-		if (root != null && root instanceof ComponentInstance) {
-			List<Report> l = Check.check((ComponentInstance) root);
-			if (!l.isEmpty()) {
-				boolean hasErrors = false;
-				String m = "";
-				for (Report er : l) {
-					hasErrors |= er instanceof ErrorReport;
-					String name = ((NamedElement) er.component().eContainer()).getQualifiedName() + "."
-							+ er.component().getQualifiedName();
-					m += name + " : " + er.message() + "\n";
-
-					try {
-						int severity = er instanceof ErrorReport ? IMarker.SEVERITY_ERROR : IMarker.SEVERITY_WARNING;
-						IMarker marker = getIResource(er.component().eResource()).createMarker(IMarker.PROBLEM);
-						marker.setAttribute(IMarker.MESSAGE, name + " - " + er.message());
-						marker.setAttribute(IMarker.SEVERITY, severity);
-					} catch (CoreException exception) {
-						exception.printStackTrace();
-					}
-				}
-
-//				if (hasErrors) {
-//					return null;
-//				}
-			}
-
-			Aadl _r = Visitor$.MODULE$.apply(root).get();
-			if (_r != null) {
-				return _r;
-			} else {
+		if (root != null && root instanceof SystemImplementation) {
+			try {
+				SystemImplementation si = (SystemImplementation) root;
+				InstantiateModel im = new InstantiateModel(new NullProgressMonitor(),
+						AnalysisErrorReporterManager.NULL_ERROR_MANANGER);
+				URI uri = OsateResourceUtil.getInstanceModelURI(si);
+				Resource resource = OsateResourceUtil.getEmptyAaxl2Resource(uri);
+				root = im.createSystemInstance(si, resource);
+			} catch (Exception ex) {
+				final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+				MessageDialog.openError(window.getShell(), "Sireum", "Could not instantiate model");
 				return null;
 			}
-		} else {
-			MessageDialog.openError(window.getShell(), "Sireum",
-					"Please select a component instance element");
-			return null;
 		}
 
+		if (root != null && root instanceof ComponentInstance) {
+			return (ComponentInstance) root;
+		} else {
+			return null;
+		}
+	}
+
+	Aadl getAir(ComponentInstance root) {
+		return getAir(root, false);
+	}
+
+	Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
+		return Visitor$.MODULE$.apply(root, includeDataComponents).get();
 	}
 
 	protected String serialize(Aadl model, PreferenceValues.SerializerType t) {
@@ -168,17 +168,15 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		}
 	}
 
-	protected String getInstanceFilename(ExecutionEvent e) {
-		Element root = AadlUtil.getElement(getCurrentSelection(e));
+	protected String getInstanceFilename(ComponentInstance root) {
 		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getName();
 	}
 
-	protected IProject getProject(ExecutionEvent e) {
-		Element root = AadlUtil.getElement(getCurrentSelection(e));
+	protected IProject getProject(ComponentInstance root) {
 		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getProject();
 	}
 
-	protected IPath getProjectPath(ExecutionEvent e) {
+	protected IPath getProjectPath(ComponentInstance e) {
 		return getProject(e).getLocation();
 	}
 
@@ -213,7 +211,33 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		return null;
 	}
 
-	protected void setGenerator(String v) {
-		this.generator = v;
+	protected MessageConsole displayConsole(String name) {
+		MessageConsole ms = findConsole(name);
+		try {
+			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			IConsoleView view;
+			view = (IConsoleView) page.showView(IConsoleConstants.ID_CONSOLE_VIEW);
+			view.display(ms);
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+		ms.clearConsole();
+		return ms;
+	}
+
+	protected MessageConsole findConsole(String name) {
+		ConsolePlugin plugin = ConsolePlugin.getDefault();
+		IConsoleManager conMan = plugin.getConsoleManager();
+		IConsole[] existing = conMan.getConsoles();
+		for (int i = 0; i < existing.length; i++) {
+			if (name.equals(existing[i].getName())) {
+				return (MessageConsole) existing[i];
+			}
+		}
+		// no console found, so create a new one
+		MessageConsole myConsole = new MessageConsole(name, null);
+		conMan.addConsoles(new IConsole[] { myConsole });
+
+		return myConsole;
 	}
 }

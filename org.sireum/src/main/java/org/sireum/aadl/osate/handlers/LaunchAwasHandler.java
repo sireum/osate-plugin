@@ -25,7 +25,6 @@ public class LaunchAwasHandler extends AbstractSireumHandler {
 		if (generator == null) {
 			throw new RuntimeException("Unable to retrive generator argument");
 		}
-		this.setGenerator(generator);
 		Aadl model = (Aadl) super.execute(e);
 		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		String s = serialize(model, SerializerType.JSON);

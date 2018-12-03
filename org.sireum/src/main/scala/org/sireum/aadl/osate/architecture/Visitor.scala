@@ -1,7 +1,6 @@
 package org.sireum.aadl.osate.architecture
 
 import org.sireum._
-import org.sireum.util._
 import org.osate.aadl2._
 import org.osate.aadl2.impl._
 import org.osate.aadl2.util.Aadl2InstanceUtil
@@ -23,25 +22,27 @@ import org.osate.aadl2.instance.impl._
 import org.osate.aadl2.modelsupport.util._
 
 object Visitor {
-  def apply(root: Element): Option[ir.Aadl] = {
-    new Visitor().convert(root)
+  def apply(root: Element, includeDataComponents: Boolean = false): Option[ir.Aadl] = {
+    new Visitor().convert(root, includeDataComponents)
   }
 }
 
 class Visitor {
 
   var seenSet: ISZ[AadlPackageImpl] = ISZ()
-  var dataTypes: ISZ[ir.Component] = ISZ()
   var errorLibs: HashSMap[String, (ISZ[String], ISZ[String], ISZ[(String, String)])] = HashSMap.empty[String, (ISZ[String], ISZ[String], ISZ[(String, String)])]()
   var compConnMap: HashSMap[ISZ[String], HashSSet[Connection]] = HashSMap.empty[ISZ[String], HashSSet[Connection]]()
-
-  def convert(root: Element): Option[ir.Aadl] = {
+  var datamap: HashSMap[String, ir.Component] = HashSMap.empty
+  
+  def convert(root: Element, includeDataComponents: Boolean): Option[ir.Aadl] = {
     val t = visit(root)
     if (t.nonEmpty) {
       //errorLibs.entries.map(f => ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1, HashMap.empty ++ f._2._2))
-
-      return Some[ir.Aadl](ir.Aadl(components = ISZ(t.get) ++ dataTypes, errorLibs.entries.map(f =>
-        ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1, f._2._2, HashMap.empty ++ f._2._3))))
+      
+      Some(ir.Aadl(
+          components = ISZ(t.get), 
+          errorLib = errorLibs.entries.map(f => ir.Emv2Library(ir.Name(ISZ[String](f._1.value)), f._2._1, f._2._2, HashMap.empty ++ f._2._3)),
+          dataComponents = if(includeDataComponents) datamap.values else ISZ()))
     } else {
       None[ir.Aadl]
     }
@@ -310,7 +311,6 @@ class Visitor {
 
   }
 
-
   /**
    * @param connElem
    * @param path
@@ -457,12 +457,43 @@ class Visitor {
     return comp
 
   }
-
-  /*  private def buildFeatureGroup(featureGroup : FeatureGroup, path : ISZ[String]): ir.Feature = {
-    val currentPath = path :+ featureGroup.getName
-    ir.FeatureGroup(ir.Name(currentPath), featureGroup.get )
+  
+  private def processDataType(f: DataClassifier): ir.Component = {
+    val name: String = f.getQualifiedName
+    if(datamap.contains(name)) {
+      return datamap.get(name).get
+    }
+    
+    var properties = ISZ[ir.Property](f.getOwnedPropertyAssociations.map(op => buildProperty(op, ISZ())).toSeq: _*) 
+    val subComponents: ISZ[ir.Component] = f match {
+      case (dt: DataTypeImpl) => ISZ()
+      case (di: DataImplementationImpl) =>
+        properties = properties ++ ISZ[ir.Property](di.getType.getOwnedPropertyAssociations.map(op => buildProperty(op, ISZ())).toSeq: _*)
+        val sb = di.getOwnedDataSubcomponents.map(f => {
+          val sct = f.getDataSubcomponentType.asInstanceOf[DataClassifier]
+          val c = processDataType(sct)
+          val fProperties = ISZ[ir.Property](f.getOwnedPropertyAssociations.map(op => buildProperty(op, ISZ())).toSeq: _*)
+          ir.Component(ir.Name(ISZ(f.getName)), c.category, c.classifier, c.features, c.subComponents,
+              c.connections, c.connectionInstances, c.properties ++ fProperties, c.flows, c.modes, c.annexes)
+        })
+        ISZ(sb.toSeq: _*)
+      case _ => throw new Exception(s"Unxepected: ${f}")
+    }
+    val c = ir.Component(
+            identifier = ir.Name(ISZ()),
+            category = ir.ComponentCategory.Data,
+            classifier = Some(ir.Classifier(name)),
+            features = ISZ(),
+            subComponents = subComponents,
+            connections = ISZ(),
+            connectionInstances = ISZ(),
+            properties = properties,
+            flows = ISZ(),
+            modes = ISZ(),
+            annexes = ISZ())
+    datamap = datamap + (name ~> c)
+    return c
   }
-  */
 
   private def buildFeature(featureInst: FeatureInstance, path: ISZ[String]): ir.Feature = {
     val f = featureInst.getFeature
@@ -479,8 +510,8 @@ class Visitor {
     } else {
       None[ir.Classifier]
     }
-    val properties = ISZ[ir.Property](featureInst.getOwnedPropertyAssociations.map(op =>
-      buildProperty(op, currentPath)).toSeq: _*)
+    var properties = ISZ[ir.Property](featureInst.getOwnedPropertyAssociations.map(op =>
+      buildProperty(op, currentPath)).toSeq: _*) 
 
     import org.osate.aadl2.instance.FeatureCategory._
 
@@ -496,6 +527,18 @@ class Visitor {
       case SUBPROGRAM_ACCESS => ir.FeatureCategory.SubprogramAccess
       case SUBPROGRAM_GROUP_ACCESS => ir.FeatureCategory.SubprogramAccessGroup
     }
+    if(f.isInstanceOf[AccessImpl]) { 
+      // TODO: add Subprogram/SubprogramGroup feature type to AIR
+      val sai = f.asInstanceOf[AccessImpl]
+      properties = properties :+ ir.Property(name = ir.Name(path :+ "AccessType"), 
+          propertyValues = ISZ(ir.ValueProp(value = sai.getKind.getName)))
+    }
+    if((f.isInstanceOf[DataPortImpl] || f.isInstanceOf[EventDataPortImpl]) && 
+          (f.getClassifier.isInstanceOf[DataTypeImpl] || f.getClassifier.isInstanceOf[DataImplementationImpl])){
+      // TODO: add support for the declarative model in AIR
+      processDataType(f.getClassifier.asInstanceOf[DataClassifier])
+    }
+    
     if (featureInstances.isEmpty()) {
       return ir.FeatureEnd(
         identifier = ir.Name(currentPath),

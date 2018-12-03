@@ -10,7 +10,26 @@ import org.sireum.aadl.ir.MsgPack;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.architecture.Visitor$;
 
-public class TestUtil {
+public class Util {
+
+	public enum Tool {
+		ARSIT("org.sireum.aadl.arsit.Runner"), //
+		ACT("org.sireum.aadl.act.Act"), //
+		AWAS("org.sireum.awas.AADLBridge.AadlHandler");
+
+		String className;
+		Tool(String name) {
+			className = name;
+		}
+
+		public Boolean exists() {
+			return classExists(className);
+		}
+
+		public String className() {
+			return className;
+		}
+	}
 
 	public static String serialize(Aadl model, PreferenceValues.SerializerType t) {
 		switch (t) {
@@ -28,7 +47,16 @@ public class TestUtil {
 	}
 
 	public static String getAir(SystemInstance si) {
-		Aadl ir = Visitor$.MODULE$.apply(si).get();
+		Aadl ir = Visitor$.MODULE$.apply(si, false).get();
 		return serialize(ir, PreferenceValues.SerializerType.JSON_COMPACT);
+	}
+
+	public static boolean classExists(String className) {
+		try {
+			Class.forName(className);
+			return true;
+		} catch (ClassNotFoundException e) {
+			return false;
+		}
 	}
 }

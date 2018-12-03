@@ -1,6 +1,5 @@
 package org.sireum.aadl.osate;
 
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.sireum.aadl.osate.PreferenceValues.SerializerType;
@@ -17,12 +16,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		store.setDefault(PreferenceConstants.ARSIT_OUTPUT_FOLDER_OPT, ".slang");
 
+		store.setDefault(PreferenceConstants.ACT_SERIALIZE_OPT, true);
 
-		if(Platform.getOS().equals(Platform.OS_WIN32)) {
-			store.setDefault(PreferenceConstants.SIREUM_JAR_PATH, "C:\\Sireum\\sireum.jar");
-		} else {
-			store.setDefault(PreferenceConstants.SIREUM_JAR_PATH, "/usr/bin/sireum.jar");
-		}
+		store.setDefault(PreferenceConstants.ACT_OUTPUT_FOLDER_OPT, ".slang");
 	}
 
 }
