@@ -26,22 +26,20 @@
       <import plugin="org.osate.categories"/>
       <import plugin="com.rockwellcollins.atc.resolute"/>
       <import plugin="org.osate.testsupport"/>
-      <import plugin="org.osate.aadl2.errormodel.tests"/>
-      <import plugin="org.osate.xtext.aadl2.ui" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.osate.pluginsupport" version="1.0.0" match="greaterOrEqual"/>
-      <import plugin="org.osate.xtext.aadl2.properties.ui"/>
-      <import plugin="org.eclipse.equinox.common"/>
-      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.osate.xtext.aadl2.ui"/>
+      <import plugin="org.osate.pluginsupport"/>
       <import plugin="org.osate.assure.tests"/>
       <import plugin="org.eclipse.ui.ide" version="3.13.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.core" version="4.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.birt.report.engine" version="4.7.0" match="greaterOrEqual"/>
       <import plugin="org.osate.xtext.aadl2" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.xtext.aadl2.ui" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.pluginsupport" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.osate.results" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.apache.commons.logging"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.hamcrest.core"/>
-      <import plugin="org.junit" version="4.12.0" match="greaterOrEqual"/>
+      <import plugin="org.junit"/>
       <import plugin="org.eclipse.xtext"/>
       <import plugin="org.eclipse.xtext.ide"/>
       <import plugin="org.eclipse.xtend.lib"/>
@@ -61,22 +59,22 @@
       <import plugin="org.osate.aadl2" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.osate.xtext.aadl2.errormodel" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.osate.assure"/>
-      <import plugin="org.osate.assure.ui"/>
-      <import plugin="org.eclipse.xtext.junit4" version="2.0.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.xtext.testing" version="2.12.0" match="compatible"/>
+      <import plugin="org.eclipse.xtext.junit4"/>
+      <import plugin="org.eclipse.xtext.testing"/>
       <import plugin="org.osate.reqspec" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.alisa.workbench.tests"/>
       <import plugin="org.osate.organization" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.osate.alisa.workbench" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.osate.xtext.aadl2.properties" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.osate.verify" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.aadl2.instantiation" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.osate.categories.ui"/>
       <import plugin="org.osate.reqspec.ui"/>
-      <import plugin="org.osate.organization.tests" version="1.0.0" match="greaterOrEqual"/>
+      <import plugin="org.osate.organization.tests"/>
       <import plugin="org.osate.alisa.common" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.osate.verify.ui"/>
       <import plugin="org.osate.organization.ui"/>
       <import plugin="org.osate.alisa.workbench.ui"/>
-      <import plugin="org.osate.alisa.workbench.tests"/>
    </requires>
 
    <plugin

@@ -31,7 +31,7 @@ import org.osate.core.OsateCorePlugin;
 import org.osate.pluginsupport.PluginSupportUtil;
 import org.osate.testsupport.Aadl2InjectorProvider;
 import org.osate.xtext.aadl2.properties.ui.internal.PropertiesActivator;
-import org.sireum.aadl.osate.util.TestUtil;
+import org.sireum.aadl.osate.util.Util;
 
 import com.google.inject.Injector;
 
@@ -84,9 +84,9 @@ public class GenerateAir implements IApplication {
 				AadlPackage ap = (AadlPackage) resource.getContents().get(0);
 				SystemImplementation sysImpl = (SystemImplementation) getResourceByName(appArgs[2],
 						ap.getOwnedPublicSection().getOwnedClassifiers());
-
+				org.osate.aadl2.ComponentImplementation ci;
 				SystemInstance instance = InstantiateModel.instantiate(sysImpl);
-				String ir = TestUtil.getAir(instance);
+				String ir = Util.getAir(instance);
 				Files.write(Paths.get(appArgs[3]), ir.getBytes());
 				Aadl2Package.eINSTANCE.eClass();
 				System.out.println("SUCCESS!! Wrote " + appArgs[3]);

@@ -12,12 +12,8 @@ Require-Bundle: org.osate.aadl2,
  org.osate.categories,
  com.rockwellcollins.atc.resolute,
  org.osate.testsupport;visibility:=reexport,
- org.osate.aadl2.errormodel.tests,
  org.osate.xtext.aadl2.ui,
  org.osate.pluginsupport,
- org.osate.xtext.aadl2.properties.ui,
- org.eclipse.equinox.common,
- org.eclipse.osgi,
  org.osate.assure.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.sireum.aadl.osate.cli
