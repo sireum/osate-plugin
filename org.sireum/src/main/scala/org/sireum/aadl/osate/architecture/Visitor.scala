@@ -527,12 +527,7 @@ class Visitor {
       case SUBPROGRAM_ACCESS => ir.FeatureCategory.SubprogramAccess
       case SUBPROGRAM_GROUP_ACCESS => ir.FeatureCategory.SubprogramAccessGroup
     }
-    if(f.isInstanceOf[AccessImpl]) { 
-      // TODO: add Subprogram/SubprogramGroup feature type to AIR
-      val sai = f.asInstanceOf[AccessImpl]
-      properties = properties :+ ir.Property(name = ir.Name(path :+ "AccessType"), 
-          propertyValues = ISZ(ir.ValueProp(value = sai.getKind.getName)))
-    }
+
     if((f.isInstanceOf[DataPortImpl] || f.isInstanceOf[EventDataPortImpl]) && 
           (f.getClassifier.isInstanceOf[DataTypeImpl] || f.getClassifier.isInstanceOf[DataImplementationImpl])){
       // TODO: add support for the declarative model in AIR
@@ -540,12 +535,36 @@ class Visitor {
     }
     
     if (featureInstances.isEmpty()) {
-      return ir.FeatureEnd(
-        identifier = ir.Name(currentPath),
-        classifier = classifier,
-        direction = handleDirection(featureInst.getDirection),
-        category = typ,
-        properties = properties)
+      if(f.isInstanceOf[AccessImpl]) {
+          val accessImpl = f.asInstanceOf[AccessImpl]
+          val accessType = accessImpl.getKind match {
+            case AccessType.PROVIDES => ir.AccessType.Provides
+            case AccessType.REQUIRES => ir.AccessType.Requires
+          }
+          val accessCategory = accessImpl.getCategory match {
+            case AccessCategory.BUS => ir.AccessCategory.Bus
+            case AccessCategory.DATA => ir.AccessCategory.Data
+            case AccessCategory.SUBPROGRAM => ir.AccessCategory.Subprogram
+            case AccessCategory.SUBPROGRAM_GROUP => ir.AccessCategory.SubprogramGroup
+            case AccessCategory.VIRTUAL_BUS => ir.AccessCategory.VirtualBus
+          }
+          return ir.FeatureAccess(
+              identifier = ir.Name(currentPath),
+              category = typ,
+              classifier = classifier,
+              accessType = accessType,
+              accessCategory = accessCategory,
+              properties = properties)              
+      } else if(f.isInstanceOf[DirectedFeatureImpl]) {
+          return ir.FeatureEnd(
+              identifier = ir.Name(currentPath),
+              classifier = classifier,
+              direction = handleDirection(featureInst.getDirection),
+              category = typ,
+              properties = properties)          
+      } else {
+        throw new Exception("Not expecting feature: " + featureInst)
+      }
     } else {
       return ir.FeatureGroup(
         identifier = ir.Name(currentPath),
