@@ -47,7 +47,7 @@ public class Util {
 	}
 
 	public static String getAir(SystemInstance si) {
-		Aadl ir = Visitor$.MODULE$.apply(si, false).get();
+		Aadl ir = Visitor$.MODULE$.apply(si, true).get();
 		return serialize(ir, PreferenceValues.SerializerType.JSON_COMPACT);
 	}
 
