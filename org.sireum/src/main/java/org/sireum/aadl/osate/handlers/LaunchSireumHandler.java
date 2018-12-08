@@ -28,6 +28,7 @@ import org.sireum.aadl.osate.util.ActPrompt;
 import org.sireum.aadl.osate.util.ArsitPrompt;
 import org.sireum.aadl.osate.util.ArsitUtil;
 import org.sireum.aadl.osate.util.ScalaUtil;
+import org.sireum.aadl.osate.util.Util;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override
@@ -57,7 +58,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 				SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();
 
-				String s = serialize(model, ser);
+				String s = Util.serialize(model, ser);
 
 				FileDialog fd = new FileDialog(shell, SWT.SAVE);
 				fd.setFileName("aadl." + (ser == SerializerType.MSG_PACK ? "msgpack" : "json"));
@@ -166,7 +167,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 	}
 
 	protected void serializeToFile(Aadl model, String outputFolder, ComponentInstance e) {
-		String s = serialize(model, SerializerType.JSON);
+		String s = Util.serialize(model, SerializerType.JSON);
 
 		File f = new File(outputFolder);
 		if (!f.exists()) {

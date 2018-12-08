@@ -42,13 +42,8 @@ import org.osate.aadl2.instantiation.InstantiateModel;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.sireum.IS;
-import org.sireum.U8;
-import org.sireum.Z;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
-import org.sireum.aadl.ir.MsgPack;
-import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.architecture.Visitor$;
 import org.sireum.aadl.osate.util.SelectionHelper;
 
@@ -115,21 +110,6 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 	Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
 		return Visitor$.MODULE$.apply(root, includeDataComponents).get();
-	}
-
-	protected String serialize(Aadl model, PreferenceValues.SerializerType t) {
-		switch (t) {
-		case JSON:
-			return JSON.fromAadl(model, false);
-		case JSON_COMPACT:
-			return JSON.fromAadl(model, true);
-		case MSG_PACK:
-			IS<Z, U8> x = MsgPack.fromAadl(model, true);
-			String ret = org.sireum.conversions.String.toBase64(x).toString();
-			return ret;
-		default:
-			return null;
-		}
 	}
 
 	protected void writeJSON(Aadl model) {
