@@ -24,7 +24,7 @@ IDE as 'Eclipse'.
     git clone --recursive -b master git@github.com:sireum/v3.git sireum-v3
     git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
     git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
-    ./sireum-v3/bin/sbt-launch assembly
+    ./sireum-v3/bin/sbt-launch.sh assembly
     ```
     The jar will be located at ``sireum-v3/bin/sireum.jar``.  Copy it into the plugins 
     ``osate-plugin/org.sireum/lib`` directory
