@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.ui.commands">
+      <command id="org.sireum.commands.launchact"
+               name="Launch Act"
+               defaultHandler="org.sireum.aadl.osate.act.handlers.LaunchAct">
+        <commandParameter id="org.sireum.commands.launchact.generator"
+                          name="Generator"/>
+      </command>
+   </extension>
+   <extension point="org.eclipse.ui.menus">
+     <menuContribution
+       locationURI="menu:com.rockwellcollins.atc.darpacase.menus.menubar.main">
+       <menu
+         id="org.sireum.SystemBuild"
+         label="System Build">
+         <dynamic class="org.sireum.aadl.osate.act.MenuContributions" id="org.sireum.ui.views.menu.MenuItems"/>
+       </menu>
+     </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.osate.ui.osateMenu">
+         <menu
+               id="org.sireum.aadl.osate.BridgeMenu"
+               label="Sireum Bridge">
+            <dynamic class="org.sireum.aadl.osate.act.MenuContributions" id="org.sireum.ui.views.menu.ActMenuItems"/>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.sireum.aadl.osate.preferences.PreferencePage"
+            class="org.sireum.aadl.osate.act.PreferencePage"
+            id="org.sireum.aadl.osate.act.preferences.PreferencePage"
+            name="ACT">
+      </page>
+   </extension>   
+</plugin>
