@@ -7,14 +7,16 @@ import org.sireum.Z;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
 import org.sireum.aadl.ir.MsgPack;
-import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.architecture.Visitor$;
 
 public class Util {
 
+	public enum SerializerType {
+		JSON, JSON_COMPACT, MSG_PACK
+	}
+
 	public enum Tool {
 		ARSIT("org.sireum.aadl.arsit.Runner"), //
-		ACT("org.sireum.aadl.act.Act"), //
 		AWAS("org.sireum.awas.AADLBridge.AadlHandler");
 
 		String className;
@@ -31,7 +33,7 @@ public class Util {
 		}
 	}
 
-	public static String serialize(Aadl model, PreferenceValues.SerializerType t) {
+	public static String serialize(Aadl model, SerializerType t) {
 		switch (t) {
 		case JSON:
 			return JSON.fromAadl(model, false);
@@ -48,7 +50,7 @@ public class Util {
 
 	public static String getAir(SystemInstance si) {
 		Aadl ir = Visitor$.MODULE$.apply(si, true).get();
-		return serialize(ir, PreferenceValues.SerializerType.JSON_COMPACT);
+		return serialize(ir, SerializerType.JSON_COMPACT);
 	}
 
 	public static boolean classExists(String className) {

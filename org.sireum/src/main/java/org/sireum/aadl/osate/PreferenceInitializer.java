@@ -2,7 +2,7 @@ package org.sireum.aadl.osate;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.sireum.aadl.osate.PreferenceValues.SerializerType;
+import org.sireum.aadl.osate.util.Util.SerializerType;
 
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
@@ -15,10 +15,6 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.ARSIT_SERIALIZE_OPT, true);
 
 		store.setDefault(PreferenceConstants.ARSIT_OUTPUT_FOLDER_OPT, ".slang");
-
-		store.setDefault(PreferenceConstants.ACT_SERIALIZE_OPT, true);
-
-		store.setDefault(PreferenceConstants.ACT_OUTPUT_FOLDER_OPT, ".slang");
 	}
 
 }

@@ -12,7 +12,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.sireum.aadl.osate.PreferenceValues.SerializerType;
+import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.aadl.osate.util.Util.Tool;
 
 public class PreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
@@ -42,14 +42,6 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 					"Serialize AIR to JSON (non-compact) when generating Slang-Embedded", arsitTab));
 
 			addField(new StringFieldEditor(PreferenceConstants.ARSIT_OUTPUT_FOLDER_OPT, "Output folder", arsitTab));
-		}
-
-		if (Tool.ACT.exists()) {
-			Composite actTab = addTab(tabFolder, "ACT");
-			addField(new BooleanFieldEditor(PreferenceConstants.ACT_SERIALIZE_OPT,
-					"Serialize AIR to JSON (non-compact) when generating CAmkES", actTab));
-
-			addField(new StringFieldEditor(PreferenceConstants.ACT_OUTPUT_FOLDER_OPT, "Output folder", actTab));
 		}
 
 		if (Tool.AWAS.exists()) {

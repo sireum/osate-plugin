@@ -1,8 +1,6 @@
 package org.sireum.aadl.osate.handlers;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.util.List;
 
 import org.eclipse.core.commands.ExecutionEvent;
@@ -15,19 +13,19 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.PreferenceValues.Generators;
-import org.sireum.aadl.osate.PreferenceValues.SerializerType;
 import org.sireum.aadl.osate.architecture.Check;
 import org.sireum.aadl.osate.architecture.ErrorReport;
 import org.sireum.aadl.osate.architecture.Report;
-import org.sireum.aadl.osate.util.ActPrompt;
 import org.sireum.aadl.osate.util.ArsitPrompt;
 import org.sireum.aadl.osate.util.ArsitUtil;
-import org.sireum.aadl.osate.util.ScalaUtil;
+import org.sireum.aadl.osate.util.Util;
+import org.sireum.aadl.osate.util.Util.SerializerType;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override
@@ -49,15 +47,18 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			return null;
 		}
 
-		Aadl model = getAir(root, generator == Generators.GEN_CAMKES);
+		Aadl model = getAir(root, true);
 
 		if (model != null) {
+
+			MessageConsole console = displayConsole("Sireum Console");
+
 			switch (generator) {
 			case SERIALIZE: {
 
 				SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();
 
-				String s = serialize(model, ser);
+				String s = Util.serialize(model, ser);
 
 				FileDialog fd = new FileDialog(shell, SWT.SAVE);
 				fd.setFileName("aadl." + (ser == SerializerType.MSG_PACK ? "msgpack" : "json"));
@@ -67,14 +68,17 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 				if (fname != null) {
 					File out = new File(fname);
-					writeFile(out, s);
+					writeFile(out, s, false);
+					writeToConsole(console, "Wrote: " + out.getAbsolutePath());
 				}
 				break;
 			}
 			case GEN_ARSIT: {
 
+
 				if (PreferenceValues.getARSIT_SERIALIZE_OPT()) {
-					serializeToFile(model, PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT(), root);
+					File f = serializeToFile(model, PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT(), root);
+					writeToConsole(console, "Wrote: " + f.getAbsolutePath());
 				}
 
 				ArsitPrompt p = new ArsitPrompt(getProject(root), shell);
@@ -83,7 +87,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 						// Eclipse doesn't seem to like accessing nested scala classes
 						// (e.g. org.sireum.cli.Cli$ArsitOption$) so invoke Arsit from scala instead
 
-						int ret = ArsitUtil.launchArsit(p, model, displayConsole("ARSIT Console"));
+						int ret = ArsitUtil.launchArsit(p, model, console);
 
 						MessageDialog.openInformation(shell, "Sireum", "Slang-Embedded code "
 								+ (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
@@ -96,40 +100,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 				}
 				break;
 			}
-			case GEN_CAMKES: {
 
-				if (PreferenceValues.getACT_SERIALIZE_OPT()) {
-					serializeToFile(model, PreferenceValues.getACT_OUTPUT_FOLDER_OPT(), root);
-				}
-
-				ActPrompt p = new ActPrompt(getProject(root), shell);
-				if (p.open() == Window.OK) {
-					try {
-						File out = new File(p.getOptionOutputDirectory());
-						if (!out.exists()) {
-							if (MessageDialog.openQuestion(shell, "Create Directory?", "Directory '"
-									+ out.getAbsolutePath() + "' does not exist.  Should it be created?")) {
-								if (!out.mkdirs()) {
-									MessageDialog.openError(shell, "Error",
-											"Could not create directory " + out.getAbsolutePath());
-									return null;
-								}
-							}
-						}
-						File workspaceRoot = getProjectPath(root).toFile();
-						int ret = ScalaUtil.launchAct(p, model, displayConsole("ACT Console"), workspaceRoot);
-
-						MessageDialog.openInformation(shell, "Sireum",
-								"CAmkES code " + (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
-
-					} catch (Exception ex) {
-						String m = "Could not generate CAmkES.  Please make sure ACT is present.\n\n"
-								+ ex.getLocalizedMessage();
-						MessageDialog.openError(shell, "Sireum", m);
-					}
-				}
-				break;
-			}
 			default:
 				MessageDialog.openError(shell, "Sireum", "Not expecting generator: " + generator);
 				break;
@@ -141,7 +112,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 		return null;
 	}
 
-	protected boolean check(ComponentInstance root) {
+	public boolean check(ComponentInstance root) {
 		boolean hasErrors = false;
 		List<Report> l = Check.check(root);
 		if (!l.isEmpty()) {
@@ -163,38 +134,5 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			}
 		}
 		return !hasErrors;
-	}
-
-	protected void serializeToFile(Aadl model, String outputFolder, ComponentInstance e) {
-		String s = serialize(model, SerializerType.JSON);
-
-		File f = new File(outputFolder);
-		if (!f.exists()) {
-			f = new File(getProjectPath(e).toFile(), outputFolder);
-			f.mkdir();
-		}
-		String fname = getInstanceFilename(e);
-		fname = fname.substring(0, fname.lastIndexOf(".")) + ".json";
-		writeFile(new File(f, fname), s, false);
-	}
-
-	protected void writeFile(File out, String str) {
-		writeFile(out, str, true);
-	}
-
-	protected void writeFile(File out, String str, boolean confirm) {
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(out));
-			writer.write(str);
-			writer.close();
-			if (confirm) {
-				MessageDialog.openInformation(shell, "Sireum", "Wrote: " + out.getAbsolutePath());
-			}
-		} catch (Exception ee) {
-			MessageDialog.openError(shell, "Sireum",
-					"Error encountered while trying to save file: " + out.getAbsolutePath() + "\n\n" + ee.getMessage());
-		}
 	}
 }

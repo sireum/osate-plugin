@@ -14,9 +14,8 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.sireum.aadl.ir.Aadl;
-import org.sireum.aadl.osate.PreferenceValues.SerializerType;
-
-
+import org.sireum.aadl.osate.util.Util;
+import org.sireum.aadl.osate.util.Util.SerializerType;
 
 public class LaunchAwasHandler extends AbstractSireumHandler {
 	@Override
@@ -27,7 +26,7 @@ public class LaunchAwasHandler extends AbstractSireumHandler {
 		}
 		Aadl model = (Aadl) super.execute(e);
 		final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		String s = serialize(model, SerializerType.JSON);
+		String s = Util.serialize(model, SerializerType.JSON);
 		writeGeneratedFile(e, "json", s);
 		try {
 			Class<?> c = Class.forName("org.sireum.awas.AADLBridge.AadlHandler");

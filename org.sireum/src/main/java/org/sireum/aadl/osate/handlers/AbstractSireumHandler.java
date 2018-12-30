@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -24,6 +25,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
@@ -34,6 +36,7 @@ import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.SystemImplementation;
@@ -42,15 +45,12 @@ import org.osate.aadl2.instantiation.InstantiateModel;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.sireum.IS;
-import org.sireum.U8;
-import org.sireum.Z;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
-import org.sireum.aadl.ir.MsgPack;
-import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.architecture.Visitor$;
 import org.sireum.aadl.osate.util.SelectionHelper;
+import org.sireum.aadl.osate.util.Util;
+import org.sireum.aadl.osate.util.Util.SerializerType;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
 	protected final String MARKER_TYPE = "org.sireum.aadl.marker";
@@ -80,7 +80,21 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 	}
 
-	ComponentInstance getComponentInstance(ExecutionEvent e) {
+	public Class<?> getAadlClass() {
+		return Aadl.class;
+	}
+
+	public Class<?> getNamedClass(String s) {
+		try {
+			return Class.forName(s);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public ComponentInstance getComponentInstance(ExecutionEvent e) {
 		Element root = AadlUtil.getElement(getCurrentSelection(e));
 
 		if (root == null) {
@@ -109,27 +123,12 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		}
 	}
 
-	Aadl getAir(ComponentInstance root) {
+	public Aadl getAir(ComponentInstance root) {
 		return getAir(root, false);
 	}
 
-	Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
+	public Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
 		return Visitor$.MODULE$.apply(root, includeDataComponents).get();
-	}
-
-	protected String serialize(Aadl model, PreferenceValues.SerializerType t) {
-		switch (t) {
-		case JSON:
-			return JSON.fromAadl(model, false);
-		case JSON_COMPACT:
-			return JSON.fromAadl(model, true);
-		case MSG_PACK:
-			IS<Z, U8> x = MsgPack.fromAadl(model, true);
-			String ret = org.sireum.conversions.String.toBase64(x).toString();
-			return ret;
-		default:
-			return null;
-		}
 	}
 
 	protected void writeJSON(Aadl model) {
@@ -211,6 +210,41 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		return null;
 	}
 
+	public File serializeToFile(Aadl model, String outputFolder, ComponentInstance e) {
+		String s = Util.serialize(model, SerializerType.JSON);
+
+		File f = new File(outputFolder);
+		if (!f.exists()) {
+			f = new File(getProjectPath(e).toFile(), outputFolder);
+			f.mkdir();
+		}
+		String fname = getInstanceFilename(e);
+		fname = fname.substring(0, fname.lastIndexOf(".")) + ".json";
+		File ret = new File(f, fname);
+		writeFile(ret, s, false);
+		return ret;
+	}
+
+	public void writeFile(File out, String str) {
+		writeFile(out, str, true);
+	}
+
+	public void writeFile(File out, String str, boolean confirm) {
+		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(out));
+			writer.write(str);
+			writer.close();
+			if (confirm) {
+				MessageDialog.openInformation(shell, "Sireum", "Wrote: " + out.getAbsolutePath());
+			}
+		} catch (Exception ee) {
+			MessageDialog.openError(shell, "Sireum",
+					"Error encountered while trying to save file: " + out.getAbsolutePath() + "\n\n" + ee.getMessage());
+		}
+	}
+
 	protected MessageConsole displayConsole(String name) {
 		MessageConsole ms = findConsole(name);
 		try {
@@ -239,5 +273,20 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		conMan.addConsoles(new IConsole[] { myConsole });
 
 		return myConsole;
+	}
+
+	public boolean writeToConsole(MessageConsole m, String text) {
+		boolean isWritten = false;
+		if (m != null) {
+			MessageConsoleStream out = m.newMessageStream();
+			out.println(text);
+			try {
+				out.flush();
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return isWritten;
 	}
 }

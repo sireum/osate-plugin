@@ -13,6 +13,7 @@ object ArsitUtil {
   // Separating this out as it refers to the Sireum v3 artifact Cli.ArsitOption which may not be 
   // present in other builds (e.g. ACT)
   def launchArsit(prompt: ArsitPrompt, model: Aadl, ms: MessageConsole): Int = {
+    /*
     import org.sireum.cli.Cli
     
     val c = Class.forName(Tool.ARSIT.className)
@@ -67,5 +68,7 @@ object ArsitUtil {
     System.setErr(errOld)
     
     ret
+  */    
+  1
   }
 }

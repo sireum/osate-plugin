@@ -9,10 +9,18 @@ Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.aadl2.errormodel.propagationgraph;bundle-version="1.0.0",
  org.osate.xtext.aadl2.errormodel.ui;bundle-version="1.0.0",
  org.eclipse.ui.console;bundle-version="1.0.0",
- org.osate.aadl2.instantiation;bundle-version="1.0.0"
+ org.osate.aadl2.instantiation;bundle-version="1.0.0",
+ org.sireum.aadl.osate.air;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.sireum.aadl.osate.architecture;uses:="org.osate.aadl2,org.osate.aadl2.instance,org.sireum",
+ org.sireum.aadl.osate.handlers;
+  uses:="org.eclipse.core.runtime,
+   org.eclipse.ui.console,
+   org.osate.aadl2.instance,
+   org.eclipse.emf.ecore.resource,
+   org.eclipse.core.resources,
+   org.eclipse.core.commands",
  org.sireum.aadl.osate.util;
   uses:="org.eclipse.emf.ecore,
    org.osate.aadl2,
@@ -22,11 +30,8 @@ Export-Package: org.sireum.aadl.osate.architecture;uses:="org.osate.aadl2,org.os
    org.eclipse.core.resources,
    org.eclipse.core.runtime.preferences,
    org.eclipse.jface.dialogs,
-   org.sireum.aadl.osate,
    org.eclipse.jface.viewers,
    org.eclipse.xtext.ui.editor"
 Automatic-Module-Name: org.sireum.aadl.osate
-Bundle-ClassPath: lib/sireum.jar,
- .,
- bin/,
- lib/act.jar
+Bundle-ClassPath: .,
+ bin/
