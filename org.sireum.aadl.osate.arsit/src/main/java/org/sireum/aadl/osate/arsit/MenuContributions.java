@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate;
+package org.sireum.aadl.osate.arsit;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,8 +10,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
-import org.sireum.aadl.osate.PreferenceValues.Generators;
-import org.sireum.aadl.osate.util.Util.Tool;
+import org.sireum.aadl.osate.arsit.PreferenceValues.Generators;
 
 public class MenuContributions extends CompoundContributionItem {
 
@@ -19,13 +18,8 @@ public class MenuContributions extends CompoundContributionItem {
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
-		l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
-				map("org.sireum.commands.launchsireum.generator", Generators.SERIALIZE.toString())));
-
-		if (Tool.AWAS.exists()) {
-			l.add(getItem("Generate AWAS Code", "org.sireum.commands.genawas",
-					map("org.sireum.commands.genawas.generator", Generators.GEN_AWAS.toString())));
-		}
+		l.add(getItem("Generate Slang Embedded Code", "org.sireum.commands.launcharsit",
+				map("org.sireum.commands.launcharsit.generator", Generators.GEN_ARSIT.toString())));
 
 		return l.toArray(new IContributionItem[0]);
 	}
@@ -59,4 +53,5 @@ public class MenuContributions extends CompoundContributionItem {
 		}
 		return m;
 	}
+
 }

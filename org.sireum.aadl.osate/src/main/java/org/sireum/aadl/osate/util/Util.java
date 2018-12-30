@@ -16,7 +16,6 @@ public class Util {
 	}
 
 	public enum Tool {
-		ARSIT("org.sireum.aadl.arsit.Runner"), //
 		AWAS("org.sireum.awas.AADLBridge.AadlHandler");
 
 		String className;

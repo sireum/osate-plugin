@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate.util;
+package org.sireum.aadl.osate.arsit.handlers;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
