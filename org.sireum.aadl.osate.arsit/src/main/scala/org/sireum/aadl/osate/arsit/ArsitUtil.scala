@@ -1,22 +1,24 @@
-package org.sireum.aadl.osate.util
+package org.sireum.aadl.osate.arsit
 
 import java.io.File
 import java.io.PrintStream
 import org.sireum.aadl.ir.Aadl
-import org.sireum.aadl.osate.MenuContributions
+import org.sireum.aadl.osate.arsit.handlers.ArsitPrompt
 import org.sireum.aadl.osate.util.Util.Tool
 import org.sireum.{F, T, ISZ, None, Option, Some, String, Z}
 import org.eclipse.ui.console.MessageConsole
 
 object ArsitUtil {
 
+  val className = "org.sireum.aadl.arsit.Runner"
+  
   // Separating this out as it refers to the Sireum v3 artifact Cli.ArsitOption which may not be 
   // present in other builds (e.g. ACT)
   def launchArsit(prompt: ArsitPrompt, model: Aadl, ms: MessageConsole): Int = {
-    /*
+
     import org.sireum.cli.Cli
     
-    val c = Class.forName(Tool.ARSIT.className)
+    val c = Class.forName(className)
     val m = c.getDeclaredMethod("run", classOf[File], classOf[Aadl], classOf[Cli.ArsitOption])
 
     val outDir: File = new File(prompt.getOptionOutputDirectory());
@@ -68,7 +70,5 @@ object ArsitUtil {
     System.setErr(errOld)
     
     ret
-  */    
-  1
   }
 }

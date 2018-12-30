@@ -1,7 +1,8 @@
-package org.sireum.aadl.osate;
+package org.sireum.aadl.osate.arsit;
 
+import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.RadioGroupFieldEditor;
+import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -10,8 +11,6 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.sireum.aadl.osate.util.Util.SerializerType;
-import org.sireum.aadl.osate.util.Util.Tool;
 
 public class PreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
@@ -26,17 +25,11 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		TabFolder tabFolder = new TabFolder(getFieldEditorParent(), SWT.NONE);
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		Composite airTab = addTab(tabFolder, "AIR");
-		addField(new RadioGroupFieldEditor(PreferenceConstants.SERIALIZATION_METHOD_OPT,
-				"Method to use when serializing AIR to a file:", 1, new String[][] { //
-						{ "JSON", SerializerType.JSON.toString() }, //
-						{ "JSON (compact)", SerializerType.JSON_COMPACT.toString() }, //
-						{ "MsgPack", SerializerType.MSG_PACK.toString() } },
-				airTab, true));
+		Composite arsitTab = addTab(tabFolder, "Arsit");
+		addField(new BooleanFieldEditor(PreferenceValues.ARSIT_SERIALIZE_OPT,
+				"Serialize AIR to JSON (non-compact) when generating Slang-Embedded", arsitTab));
 
-		if (Tool.AWAS.exists()) {
-			Composite awasTab = addTab(tabFolder, "Awas");
-		}
+		addField(new StringFieldEditor(PreferenceValues.ARSIT_OUTPUT_FOLDER_OPT, "Output folder", arsitTab));
 	}
 
 	private Composite addTab(TabFolder tabFolder, String tabName) {

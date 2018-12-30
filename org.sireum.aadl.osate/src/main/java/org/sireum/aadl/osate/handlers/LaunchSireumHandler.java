@@ -8,7 +8,6 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -22,8 +21,6 @@ import org.sireum.aadl.osate.PreferenceValues.Generators;
 import org.sireum.aadl.osate.architecture.Check;
 import org.sireum.aadl.osate.architecture.ErrorReport;
 import org.sireum.aadl.osate.architecture.Report;
-import org.sireum.aadl.osate.util.ArsitPrompt;
-import org.sireum.aadl.osate.util.ArsitUtil;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 
@@ -39,11 +36,6 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 		ComponentInstance root = getComponentInstance(e);
 		if (root == null) {
 			MessageDialog.openError(shell, "Sireum", "Please select a system implementation or a system instance");
-			return null;
-		}
-
-		if (generator == Generators.GEN_ARSIT && !check(root)) {
-			MessageDialog.openError(shell, "Sireum", "Errors found in model");
 			return null;
 		}
 
@@ -73,34 +65,6 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 				}
 				break;
 			}
-			case GEN_ARSIT: {
-
-
-				if (PreferenceValues.getARSIT_SERIALIZE_OPT()) {
-					File f = serializeToFile(model, PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT(), root);
-					writeToConsole(console, "Wrote: " + f.getAbsolutePath());
-				}
-
-				ArsitPrompt p = new ArsitPrompt(getProject(root), shell);
-				if (p.open() == Window.OK) {
-					try {
-						// Eclipse doesn't seem to like accessing nested scala classes
-						// (e.g. org.sireum.cli.Cli$ArsitOption$) so invoke Arsit from scala instead
-
-						int ret = ArsitUtil.launchArsit(p, model, console);
-
-						MessageDialog.openInformation(shell, "Sireum", "Slang-Embedded code "
-								+ (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
-					} catch (Exception ex) {
-						ex.printStackTrace();
-						String m = "Could not generate Slang-Embedded code.  Please make sure Arsit is present.\n\n"
-								+ ex.getLocalizedMessage();
-						MessageDialog.openError(shell, "Sireum", m);
-					}
-				}
-				break;
-			}
-
 			default:
 				MessageDialog.openError(shell, "Sireum", "Not expecting generator: " + generator);
 				break;

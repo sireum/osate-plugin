@@ -6,8 +6,4 @@ public class PreferenceConstants {
 
 	public static final String SERIALIZATION_METHOD_OPT = "org.sireum.SERIALIZATION_METHOD_OPT";
 
-
-	public static final String ARSIT_SERIALIZE_OPT = "org.sireum.ARSIT_SERIALIZE_OPT";
-
-	public static final String ARSIT_OUTPUT_FOLDER_OPT = "org.sireum.ARSIT_OUTPUT_FOLDER_OPT";
 }
