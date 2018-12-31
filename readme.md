@@ -58,9 +58,7 @@ IDE as 'Eclipse'.
      git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
      git clone --recursive git@github.com:santoslab/arsit.git sireum-v3/aadl/arsit
      git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
-     cd sireum-v3
-     ./bin/sbt-launch assembly
-     export SIREUM_HOME=`pwd`
+     export SIREUM_HOME=`pwd`/sireum-v3
      cd <osate-plugin-dir>/org.sireum.aadl.osate.arsit/lib
      ./build.sh
      ```
