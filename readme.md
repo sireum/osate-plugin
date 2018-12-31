@@ -18,39 +18,53 @@ IDE as 'Eclipse'.
 
 2. Clone this repository ``git clone git@github.com:sireum/osate-plugin.git osate-plugin``
 
-3. Use the following to assemble the Sireum jar
+3. In Eclipse go to __File__ -> __Import...__  
 
-    ```bash
-    git clone --recursive -b master git@github.com:sireum/v3.git sireum-v3
-    git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
-    git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
-    ./sireum-v3/bin/sbt-launch assembly
-    ```
-    The jar will be located at ``sireum-v3/bin/sireum.jar``.  Copy it into the plugins 
-    ``osate-plugin/org.sireum/lib`` directory
-
-    __Optional__ 
-    
-    Sireum developers should also clone [Arsit](https://github.com/santoslab/arsit) prior to invoking ``sbt-launch``
-    
-    ``git clone --recursive git@github.com:santoslab/arsit.git sireum-v3/aadl/arsit``
-
-4. In Eclipse go to __File__ -> __Import...__  
-
-5. Expand the __General__ folder and select __Existing Project into Workspace__, then click 
+4. Expand the __General__ folder and select __Existing Project into Workspace__, then click 
    __Next__.
 
-6. Enter the path to the directory where you cloned the repository and then select __org.sireum__ 
-   from the project listings and click __Finish__.
+5. Enter the path to the directory where you cloned the repository and then select all the 
+   available projects from the project listings and click __Finish__.
 
-7. Switch to the plug-in development perspective: __Window__ -> __Perspective__ -> 
+6. Switch to the plug-in development perspective: __Window__ -> __Perspective__ -> 
    __Open Perspective__ -> __Other...__ -> __Plug-in Development__.
 
-    
-<!---
-## Installation for Users
+7. __Optional:__ Rebuild tool jars
 
-1. Download and install the latest [OSATE release](http://osate.org/download-and-install.html)
+   * AIR
+     
+     ```bash
+     git clone https://github.com/sireum/air.git
+     cd air
+     ./prelude.sh
+     ./mill-standalone air.jvm.assembly
+     cp out/air/jvm/assembly/dest/out.jar <osate-plugin-dir>/org.sireum.aadl.osate.air/air.jar
+     ```
 
-2. TBD
---->
+   * ACT
+   
+     ```bash
+     git clone --recursive https://github.com/sireum/act-plugin.git
+     cd act-plugin
+     ./bin/prelude.sh
+     ./bin/mill act.jvm.jar
+     cp out/act/jvm/jar/dest/out.jar <osate-plugin-dir>/org.sireum.aadl.osate.act/lib/act.jar
+     ```
+     
+   * Arsit
+   
+     ```bash
+     git clone --recursive -b master git@github.com:sireum/v3.git sireum-v3
+     git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
+     git clone --recursive git@github.com:santoslab/arsit.git sireum-v3/aadl/arsit
+     git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
+     cd sireum-v3
+     ./bin/sbt-launch assembly
+     export SIREUM_HOME=`pwd`
+     cd <osate-plugin-dir>/org.sireum.aadl.osate.arsit/lib
+     ./build.sh
+     ```
+     
+   * AWAS
+   
+     __TODO__
