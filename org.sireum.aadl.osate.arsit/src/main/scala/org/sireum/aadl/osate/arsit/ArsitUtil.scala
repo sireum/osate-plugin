@@ -4,7 +4,6 @@ import java.io.File
 import java.io.PrintStream
 import org.sireum.aadl.ir.Aadl
 import org.sireum.aadl.osate.arsit.handlers.ArsitPrompt
-import org.sireum.aadl.osate.util.Util.Tool
 import org.sireum.{F, T, ISZ, None, Option, Some, String, Z}
 import org.eclipse.ui.console.MessageConsole
 

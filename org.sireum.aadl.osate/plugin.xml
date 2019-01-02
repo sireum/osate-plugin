@@ -8,16 +8,6 @@
         <commandParameter id="org.sireum.commands.launchsireum.generator"
                           name="Generator"/>
       </command>
-      <command
-            defaultHandler="org.sireum.aadl.osate.handlers.LaunchAwasHandler"
-            id="org.sireum.commands.genawas"
-            name="Launch Awas">
-         <commandParameter
-               id="org.sireum.commands.genawas.generator"
-               name="Generator"
-               optional="true">
-         </commandParameter>
-      </command>
    </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution

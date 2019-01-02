@@ -6,7 +6,7 @@ import org.sireum.aadl.osate.util.Util.SerializerType;
 public class PreferenceValues {
 
 	public enum Generators {
-		SERIALIZE, GEN_AWAS
+		SERIALIZE
 	}
 
 	public static SerializerType getSERIALIZATION_METHOD_OPT() {
