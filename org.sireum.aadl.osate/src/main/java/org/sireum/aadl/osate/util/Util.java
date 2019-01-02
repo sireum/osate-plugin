@@ -15,23 +15,6 @@ public class Util {
 		JSON, JSON_COMPACT, MSG_PACK
 	}
 
-	public enum Tool {
-		AWAS("org.sireum.awas.AADLBridge.AadlHandler");
-
-		String className;
-		Tool(String name) {
-			className = name;
-		}
-
-		public Boolean exists() {
-			return classExists(className);
-		}
-
-		public String className() {
-			return className;
-		}
-	}
-
 	public static String serialize(Aadl model, SerializerType t) {
 		switch (t) {
 		case JSON:
@@ -50,14 +33,5 @@ public class Util {
 	public static String getAir(SystemInstance si) {
 		Aadl ir = Visitor$.MODULE$.apply(si, true).get();
 		return serialize(ir, SerializerType.JSON_COMPACT);
-	}
-
-	public static boolean classExists(String className) {
-		try {
-			Class.forName(className);
-			return true;
-		} catch (ClassNotFoundException e) {
-			return false;
-		}
 	}
 }

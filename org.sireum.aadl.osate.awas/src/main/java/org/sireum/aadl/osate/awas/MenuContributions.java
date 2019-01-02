@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate;
+package org.sireum.aadl.osate.awas;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
-import org.sireum.aadl.osate.PreferenceValues.Generators;
+import org.sireum.aadl.osate.awas.PreferenceValues.Generators;
 
 public class MenuContributions extends CompoundContributionItem {
 
@@ -18,8 +18,8 @@ public class MenuContributions extends CompoundContributionItem {
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
-		l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
-				map("org.sireum.commands.launchsireum.generator", Generators.SERIALIZE.toString())));
+		l.add(getItem("Generate AWAS Code", "org.sireum.commands.launchawas",
+				map("org.sireum.commands.launchawas.generator", Generators.GEN_AWAS.toString())));
 
 		return l.toArray(new IContributionItem[0]);
 	}
@@ -53,4 +53,5 @@ public class MenuContributions extends CompoundContributionItem {
 		}
 		return m;
 	}
+
 }
