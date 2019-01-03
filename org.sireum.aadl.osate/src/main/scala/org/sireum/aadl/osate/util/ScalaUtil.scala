@@ -3,9 +3,44 @@ package org.sireum.aadl.osate.util
 import org.sireum.{None, Option, Some}
 import org.osate.aadl2.Element
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import java.io.PrintStream
+import org.eclipse.ui.console.MessageConsole
 
 object ScalaUtil {
 
+  def callWrapper(toolName: String, ms: MessageConsole, f: () => Int): Int = {
+    var ret = -1
+
+    val out = new PrintStream(ms.newMessageStream())
+    val outOld = System.out
+    val errOld = System.err
+    
+    System.setOut(out)
+    System.setErr(out)
+    
+    Console.withOut(out) {
+    Console.withErr(out) {
+      
+      try {
+        ret = f()
+      } catch {
+        case e: Exception =>  
+          out.println(s"Exception raised when invoking ${toolName}")
+          e.printStackTrace(out)
+      } finally {
+        out.flush
+      
+        try { if (out != null) out.close() }
+          catch { case e: Exception => e.printStackTrace() }
+        }
+      }
+    }
+    System.setOut(outOld)
+    System.setErr(errOld)
+    
+    ret
+  }
+  
   def getLocationReference(e: Element): Option[LocationReference] = {
     //import org.osate.aadl2.parsesupport.LocationReference
     var ret: Option[LocationReference] = None[LocationReference]()
