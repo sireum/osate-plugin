@@ -44,8 +44,8 @@ IDE as 'Eclipse'.
    * ACT
    
      ```bash
-     git clone --recursive https://github.com/sireum/act-plugin.git
-     cd act-plugin
+     git clone --recursive https://github.com/sireum/act.git
+     cd act
      ./bin/prelude.sh
      ./bin/mill act.jvm.jar
      cp out/act/jvm/jar/dest/out.jar <osate-plugin-dir>/org.sireum.aadl.osate.act/lib/act.jar
