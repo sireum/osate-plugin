@@ -18,7 +18,7 @@ public class MenuContributions extends CompoundContributionItem {
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
-		l.add(getItem("Generate AWAS Code", "org.sireum.commands.launchawas",
+		l.add(getItem("Generate AWAS Visualizer", "org.sireum.commands.launchawas",
 				map("org.sireum.commands.launchawas.generator", Generators.GEN_AWAS.toString())));
 
 		return l.toArray(new IContributionItem[0]);
