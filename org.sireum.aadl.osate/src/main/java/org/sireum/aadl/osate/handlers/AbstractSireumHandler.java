@@ -180,7 +180,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 	}
 
 	protected IPath getInstanceFilePath(ExecutionEvent e) {
-		Element root = AadlUtil.getElement(getCurrentSelection(e));
+		Element root = getComponentInstance(e);
 		Resource res = root.eResource();
 		URI uri = res.getURI();
 		IPath path = OsateResourceUtil.getOsatePath(uri);
