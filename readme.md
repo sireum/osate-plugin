@@ -62,6 +62,12 @@ IDE as 'Eclipse'.
      ./build.sh
      ```
      
-   * AWAS
+   * Awas
    
-     __TODO__
+     ```bash
+     git clone --recursive -b master git@github.com:sireum/v3.git sireum-v3
+     git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
+	 git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
+	 export SIREUM_HOME=`pwd`/sireum-v3
+	 ./sireum-v2/bin/sbt-launch.sh "project awasJar" assembly
+	 ```
