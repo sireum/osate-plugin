@@ -54,12 +54,11 @@ IDE as 'Eclipse'.
    * Arsit
    
      ```bash
-     git clone --recursive -b master git@github.com:sireum/v3.git sireum-v3
-     git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
-     git clone --recursive git@github.com:santoslab/arsit.git sireum-v3/aadl/arsit
-     export SIREUM_HOME=`pwd`/sireum-v3
-     cd <osate-plugin-dir>/org.sireum.aadl.osate.arsit/lib
-     ./build.sh
+     git clone --recursive git@github.com:santoslab/arsit.git
+     cd arsit
+     ./bin/prelude.sh
+     ./bin/mill arsit.jvm.jar
+     cp out/arsit/jvm/jar/dest/out.jar <ostate-plugin-dir>/org.sireum.aadl.osate.arsit/lib/arsit.jar
      ```
      
    * Awas
@@ -67,7 +66,7 @@ IDE as 'Eclipse'.
      ```bash
      git clone --recursive -b master git@github.com:sireum/v3.git sireum-v3
      git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
-	 git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
-	 export SIREUM_HOME=`pwd`/sireum-v3
-	 ./sireum-v2/bin/sbt-launch.sh "project awasJar" assembly
-	 ```
+     git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
+     export SIREUM_HOME=`pwd`/sireum-v3
+     ./sireum-v2/bin/sbt-launch.sh "project awasJar" assembly
+     ```
