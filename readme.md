@@ -68,5 +68,6 @@ IDE as 'Eclipse'.
      git clone git@github.com:sireum/air.git sireum-v3/aadl/ir
      git clone git@github.com:sireum/v3-awas.git sireum-v3/awas
      export SIREUM_HOME=`pwd`/sireum-v3
-     ./sireum-v2/bin/sbt-launch.sh "project awasJar" assembly
+     ./sireum-v3/bin/sbt-launch.sh "project awasJar" assembly
+     cp ./sireum-v3/awasJar/target/scala-2.12/awasJar-assembly-0.1.0-SNAPSHOT.jar <ostate-plugin-dir>/org.sireum.aadl.osate.awas/lib/awasJar-assembly-0.1.0-SNAPSHOT.jar
      ```
