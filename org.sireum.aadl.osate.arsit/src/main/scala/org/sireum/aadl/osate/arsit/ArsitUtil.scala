@@ -5,7 +5,7 @@ import org.sireum.aadl.ir.Aadl
 import org.sireum.aadl.osate.arsit.handlers.ArsitPrompt
 import org.sireum.{F, ISZ, None, Option, Some, String}
 import org.eclipse.ui.console.MessageConsole
-import org.sireum.cli.Cli
+import org.sireum.aadl.arsit.Cli
 import org.sireum.aadl.osate.util.ScalaUtil
 
 
@@ -33,7 +33,7 @@ object ArsitUtil {
         ipc = ipcmech
       )
       
-      org.sireum.aadl.arsit.Runner.run(outDir, model, opts)
+      org.sireum.aadl.arsit.Arsit.run(outDir, model, opts)
     })
   }
 }
