@@ -3,21 +3,21 @@ package org.sireum.aadl.osate.handlers;
 import java.io.File;
 import java.util.List;
 
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.console.MessageConsole;
+import org.osate.aadl2.Element;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
+import org.osate.aadl2.instance.SystemInstance;
+import org.osate.ui.dialogs.Dialog;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.PreferenceValues;
-import org.sireum.aadl.osate.PreferenceValues.Generators;
 import org.sireum.aadl.osate.architecture.Check;
 import org.sireum.aadl.osate.architecture.ErrorReport;
 import org.sireum.aadl.osate.architecture.Report;
@@ -25,55 +25,50 @@ import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
+
 	@Override
-	public Object execute(ExecutionEvent e) throws ExecutionException {
-		if (e.getParameter("org.sireum.commands.launchsireum.generator") == null) {
-			throw new RuntimeException("Unable to retrive generator argument");
-		}
-		Generators generator = Generators.valueOf(e.getParameter("org.sireum.commands.launchsireum.generator"));
+	public IStatus runJob(Element elem, IProgressMonitor monitor) {
 
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		ComponentInstance root = getComponentInstance(e);
-		if (root == null) {
-			MessageDialog.openError(shell, "Sireum", "Please select a system implementation or a system instance");
-			return null;
+		displayConsole().clearConsole();
+
+		SystemInstance si = getSystemInstance(elem);
+		if (si == null) {
+			Dialog.showError(getToolName(), "Please select a system implementation or a system instance");
+			return Status.CANCEL_STATUS;
 		}
 
-		Aadl model = getAir(root, true);
+		writeToConsole("Generating AIR ...");
+
+		Aadl model = getAir(si, true);
 
 		if (model != null) {
+			SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();
 
-			MessageConsole console = displayConsole("Sireum Console");
+			writeToConsole("Serializing AIR to " + ser.name() + " ...");
 
-			switch (generator) {
-			case SERIALIZE: {
+			String s = Util.serialize(model, ser);
 
-				SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();
-
-				String s = Util.serialize(model, ser);
-
-				FileDialog fd = new FileDialog(shell, SWT.SAVE);
+			Display.getDefault().syncExec(() -> {
+				FileDialog fd = new FileDialog(getShell(), SWT.SAVE);
 				fd.setFileName("aadl." + (ser == SerializerType.MSG_PACK ? "msgpack" : "json"));
 				fd.setText("Specify filename");
-				fd.setFilterPath(getProjectPath(root).toString());
+				fd.setFilterPath(getProjectPath(si).toString());
 				String fname = fd.open();
 
 				if (fname != null) {
-					File out = new File(fname);
-					writeFile(out, s, false);
-					writeToConsole(console, "Wrote: " + out.getAbsolutePath());
+					File fout = new File(fname);
+					writeFile(fout, s, false);
+					writeToConsole("Wrote: " + fout.getAbsolutePath());
 				}
-				break;
-			}
-			default:
-				MessageDialog.openError(shell, "Sireum", "Not expecting generator: " + generator);
-				break;
-			}
-		} else {
-			MessageDialog.openError(shell, "Sireum", "Could not generate AIR");
-		}
+			});
 
-		return null;
+			refreshWorkspace();
+
+			return Status.OK_STATUS;
+		} else {
+			Dialog.showError(getToolName(), "Could not generate AIR");
+			return Status.CANCEL_STATUS;
+		}
 	}
 
 	public boolean check(ComponentInstance root) {

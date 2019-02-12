@@ -14,8 +14,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -25,6 +28,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -41,10 +45,12 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.instance.ComponentInstance;
+import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instantiation.InstantiateModel;
 import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
+import org.osate.ui.dialogs.Dialog;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
 import org.sireum.aadl.osate.architecture.Visitor$;
@@ -53,6 +59,17 @@ import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
+
+	protected abstract IStatus runJob(Element sel, IProgressMonitor monitor);
+
+	protected String getToolName() {
+		return "Sireum";
+	}
+
+	protected String getJobName() {
+		return getToolName() + " job";
+	}
+
 	protected final String MARKER_TYPE = "org.sireum.aadl.marker";
 
 	protected static IResource getIResource(Resource r) {
@@ -67,34 +84,58 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent e) throws ExecutionException {
-		ComponentInstance root = getComponentInstance(e);
 
-		if (root != null) {
-			return getAir(root);
-		} else {
-			final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-			MessageDialog.openError(window.getShell(), "Sireum",
-					"Please select a component instance element");
-			return null;
+		Element elem = getElement(e);
+
+		WorkspaceJob j = new WorkspaceJob(getJobName()) {
+			@Override
+			public IStatus runInWorkspace(final IProgressMonitor monitor) {
+				return runJob(elem, monitor);
+			}
+		};
+
+		j.setRule(ResourcesPlugin.getWorkspace().getRoot());
+		j.schedule();
+		return null;
+	}
+
+	private Element getElement(ExecutionEvent e) {
+		Element root = AadlUtil.getElement(getCurrentSelection(e));
+
+		if (root == null) {
+			root = SelectionHelper.getSelectedSystemImplementation();
 		}
 
+		return root;
 	}
 
-	public Class<?> getAadlClass() {
-		return Aadl.class;
-	}
+	protected SystemInstance getSystemInstance(Element e) {
+		if (e != null) {
+			if (e instanceof SystemInstance) {
+				return (SystemInstance) e;
+			}
+			if (e instanceof SystemImplementation) {
+				try {
+					SystemImplementation si = (SystemImplementation) e;
 
-	public Class<?> getNamedClass(String s) {
-		try {
-			return Class.forName(s);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+					writeToConsole("Generating System Instance ...");
+
+					InstantiateModel im = new InstantiateModel(new NullProgressMonitor(),
+							AnalysisErrorReporterManager.NULL_ERROR_MANANGER);
+					URI uri = OsateResourceUtil.getInstanceModelURI(si);
+					Resource resource = OsateResourceUtil.getEmptyAaxl2Resource(uri);
+					return im.createSystemInstance(si, resource);
+				} catch (Exception ex) {
+					Dialog.showError(getToolName(), "Could not instantiate model");
+					ex.printStackTrace();
+				}
+			}
 		}
+
+		return null;
 	}
 
-	public ComponentInstance getComponentInstance(ExecutionEvent e) {
+	protected ComponentInstance getComponentInstance(ExecutionEvent e) {
 		Element root = AadlUtil.getElement(getCurrentSelection(e));
 
 		if (root == null) {
@@ -110,8 +151,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 				Resource resource = OsateResourceUtil.getEmptyAaxl2Resource(uri);
 				root = im.createSystemInstance(si, resource);
 			} catch (Exception ex) {
-				final IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-				MessageDialog.openError(window.getShell(), "Sireum", "Could not instantiate model");
+				Dialog.showError(getToolName(), "Could not instantiate model");
 				return null;
 			}
 		}
@@ -123,11 +163,11 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		}
 	}
 
-	public Aadl getAir(ComponentInstance root) {
+	protected Aadl getAir(ComponentInstance root) {
 		return getAir(root, false);
 	}
 
-	public Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
+	protected Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
 		return Visitor$.MODULE$.apply(root, includeDataComponents).get();
 	}
 
@@ -210,7 +250,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		return null;
 	}
 
-	public File serializeToFile(Aadl model, String outputFolder, ComponentInstance e) {
+	protected File serializeToFile(Aadl model, String outputFolder, ComponentInstance e) {
 		String s = Util.serialize(model, SerializerType.JSON);
 
 		File f = new File(outputFolder);
@@ -225,41 +265,25 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		return ret;
 	}
 
-	public void writeFile(File out, String str) {
+	protected void writeFile(File out, String str) {
 		writeFile(out, str, true);
 	}
 
-	public void writeFile(File out, String str, boolean confirm) {
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-
+	protected void writeFile(File out, String str, boolean confirm) {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(out));
 			writer.write(str);
 			writer.close();
 			if (confirm) {
-				MessageDialog.openInformation(shell, "Sireum", "Wrote: " + out.getAbsolutePath());
+				Dialog.showInfo(getToolName(), "Wrote: " + out.getAbsolutePath());
 			}
 		} catch (Exception ee) {
-			MessageDialog.openError(shell, "Sireum",
+			Dialog.showError(getToolName(),
 					"Error encountered while trying to save file: " + out.getAbsolutePath() + "\n\n" + ee.getMessage());
 		}
 	}
 
-	protected MessageConsole displayConsole(String name) {
-		MessageConsole ms = findConsole(name);
-		try {
-			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			IConsoleView view;
-			view = (IConsoleView) page.showView(IConsoleConstants.ID_CONSOLE_VIEW);
-			view.display(ms);
-		} catch (PartInitException e) {
-			e.printStackTrace();
-		}
-		ms.clearConsole();
-		return ms;
-	}
-
-	protected MessageConsole findConsole(String name) {
+	private MessageConsole getConsole(String name) {
 		ConsolePlugin plugin = ConsolePlugin.getDefault();
 		IConsoleManager conMan = plugin.getConsoleManager();
 		IConsole[] existing = conMan.getConsoles();
@@ -269,13 +293,44 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 			}
 		}
 		// no console found, so create a new one
-		MessageConsole myConsole = new MessageConsole(name, null);
-		conMan.addConsoles(new IConsole[] { myConsole });
+		MessageConsole mc = new MessageConsole(name, null);
+		conMan.addConsoles(new IConsole[] { mc });
 
-		return myConsole;
+		return mc;
 	}
 
-	public boolean writeToConsole(MessageConsole m, String text) {
+	protected MessageConsole displayConsole() {
+		return displayConsole(getToolName());
+	}
+
+	protected MessageConsole displayConsole(String name) {
+		MessageConsole ms = getConsole(name);
+		Display.getDefault().syncExec(() -> {
+			try {
+				IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+				IConsoleView view;
+				view = (IConsoleView) page.showView(IConsoleConstants.ID_CONSOLE_VIEW);
+				view.display(ms);
+			} catch (PartInitException e) {
+				e.printStackTrace();
+			}
+		});
+		return ms;
+	}
+
+	protected boolean writeToConsole(String text) {
+		return writeToConsole(text, false);
+	}
+
+	protected boolean writeToConsole(String text, boolean clearConsole) {
+		MessageConsole ms = displayConsole(getToolName());
+		if (clearConsole) {
+			ms.clearConsole();
+		}
+		return writeToConsole(ms, text);
+	}
+
+	protected boolean writeToConsole(MessageConsole m, String text) {
 		boolean isWritten = false;
 		if (m != null) {
 			MessageConsoleStream out = m.newMessageStream();
@@ -288,5 +343,17 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 			}
 		}
 		return isWritten;
+	}
+
+	protected Shell getShell() {
+		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
+	}
+
+	protected void refreshWorkspace() {
+		try {
+			ResourcesPlugin.getWorkspace().getRoot().refreshLocal(IResource.DEPTH_INFINITE, null);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 }
