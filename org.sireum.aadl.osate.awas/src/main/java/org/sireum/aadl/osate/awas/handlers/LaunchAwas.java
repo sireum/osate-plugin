@@ -7,6 +7,8 @@ import java.net.URISyntaxException;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -15,11 +17,19 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.MessageConsole;
+import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 
 public class LaunchAwas extends AbstractSireumHandler {
+
+	@Override
+	protected IStatus runJob(Element arg0, IProgressMonitor arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public Object execute(ExecutionEvent e) throws ExecutionException {
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();

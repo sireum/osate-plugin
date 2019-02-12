@@ -2,59 +2,80 @@ package org.sireum.aadl.osate.arsit.handlers;
 
 import java.io.File;
 
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.window.Window;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.MessageConsole;
-import org.osate.aadl2.instance.ComponentInstance;
+import org.osate.aadl2.Element;
+import org.osate.aadl2.instance.SystemInstance;
+import org.osate.ui.dialogs.Dialog;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.arsit.ArsitUtil;
 import org.sireum.aadl.osate.arsit.PreferenceValues;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 
 public class LaunchArsit extends AbstractSireumHandler {
+
+	private ArsitPrompt p = null;
+
 	@Override
-	public Object execute(ExecutionEvent e) throws ExecutionException {
-		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-		ComponentInstance root = getComponentInstance(e);
-		if (root == null) {
-			MessageDialog.openError(shell, "Sireum", "Please select a system implementation or a system instance");
-			return null;
+	public String getToolName() {
+		return "Arsit";
+	}
+
+	@Override
+	public IStatus runJob(Element elem, IProgressMonitor monitor) {
+		p = null;
+
+		MessageConsole console = displayConsole();
+		console.clearConsole();
+
+		SystemInstance si = getSystemInstance(elem);
+		if (si == null) {
+			Dialog.showError("Sireum", "Please select a system implementation or a system instance");
+			return Status.CANCEL_STATUS;
 		}
 
-		Aadl model = getAir(root, true);
+		writeToConsole("Generating AIR ...");
+
+		Aadl model = getAir(si, true);
 
 		if (model != null) {
 
-			MessageConsole console = displayConsole("Arsit Console");
-
 			if (PreferenceValues.getARSIT_SERIALIZE_OPT()) {
-				File f = serializeToFile(model, PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT(), root);
+				File f = serializeToFile(model, PreferenceValues.getARSIT_OUTPUT_FOLDER_OPT(), si);
 				writeToConsole(console, "Wrote: " + f.getAbsolutePath());
 			}
 
-			ArsitPrompt p = new ArsitPrompt(getProject(root), shell);
-			if (p.open() == Window.OK) {
+			Display.getDefault().syncExec(() -> {
+				p = new ArsitPrompt(getProject(si), getShell());
+				p.open();
+			});
+
+			if (p.getReturnCode() == Window.OK) {
 				try {
 					// Eclipse doesn't seem to like accessing nested scala classes
 					// (e.g. org.sireum.cli.Cli$ArsitOption$) so invoke Arsit from scala instead
 
 					int ret = ArsitUtil.launchArsit(p, model, console);
 
-					MessageDialog.openInformation(shell, "Sireum", "Slang-Embedded code "
+					refreshWorkspace();
+
+					Dialog.showInfo(getToolName(), "Slang-Embedded code "
 							+ (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
-				} catch (Exception ex) {
+
+				} catch (Throwable ex) {
 					ex.printStackTrace();
 					String m = "Could not generate Slang-Embedded code.  Please make sure Arsit is present.\n\n"
 							+ ex.getLocalizedMessage();
-					MessageDialog.openError(shell, "Sireum", m);
+					Dialog.showError(getToolName(), m);
+					return Status.CANCEL_STATUS;
 				}
 			}
 		}
 
-		return null;
+		return Status.OK_STATUS;
 	}
 }
