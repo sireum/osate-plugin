@@ -11,10 +11,12 @@ import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
+import org.sireum.aadl.arsit.ArsitBridge;
+import org.sireum.aadl.arsit.ArsitBridge.IPCMechanismJava;
 import org.sireum.aadl.ir.Aadl;
-import org.sireum.aadl.osate.arsit.ArsitUtil;
 import org.sireum.aadl.osate.arsit.PreferenceValues;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
+import org.sireum.aadl.osate.util.Util;
 
 public class LaunchArsit extends AbstractSireumHandler {
 
@@ -40,7 +42,9 @@ public class LaunchArsit extends AbstractSireumHandler {
 
 		writeToConsole("Generating AIR ...");
 
-		Aadl model = getAir(si, true);
+		//Aadl model = getAir(si, true);
+
+		Aadl model = getJavaAir(si, true);
 
 		if (model != null) {
 
@@ -59,7 +63,26 @@ public class LaunchArsit extends AbstractSireumHandler {
 					// Eclipse doesn't seem to like accessing nested scala classes
 					// (e.g. org.sireum.cli.Cli$ArsitOption$) so invoke Arsit from scala instead
 
-					int ret = ArsitUtil.launchArsit(p, model, console);
+					// int ret = ArsitUtil.launchArsit(p, model, console);
+
+					int ret = Util.callWrapper("Arsit", console, () -> {
+
+						ArsitBridge.IPCMechanismJava ipc = IPCMechanismJava.MessageQueue;
+
+						if (p.getOptionIPCMechanism().equals("Shared Memory")) {
+							ipc = IPCMechanismJava.SharedMemory;
+						}
+
+						return org.sireum.aadl.arsit.Arsit.run(
+								model,
+								ArsitBridge.sireumOption(p.getOptionOutputDirectory()),
+								ArsitBridge.sireumOption(p.getOptionBasePackageName()),
+								p.getOptionEmbedArt(),
+								p.getOptionGenerateBlessEntryPoints(),
+								p.getOptionGenerateTranspilerArtifacts(),
+								ipc
+								);
+						});
 
 					refreshWorkspace();
 
