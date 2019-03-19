@@ -12,7 +12,6 @@ import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.aadl.ir.Aadl;
-import org.sireum.aadl.osate.act.ActUtil;
 import org.sireum.aadl.osate.act.PreferenceValues;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 
@@ -67,7 +66,8 @@ public class LaunchAct extends AbstractSireumHandler {
 						}
 					}
 					File workspaceRoot = getProjectPath(si).toFile();
-					int ret = ActUtil.launchAct(p, model, console, workspaceRoot);
+					// int ret = ActUtil.launchAct(p, model, console, workspaceRoot);
+					int ret = -1;
 
 					refreshWorkspace();
 

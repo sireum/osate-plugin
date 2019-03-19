@@ -1,10 +1,7 @@
 package org.sireum.aadl.osate.handlers;
 
 import java.io.File;
-import java.util.List;
 
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -12,15 +9,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.osate.aadl2.Element;
-import org.osate.aadl2.NamedElement;
-import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.PreferenceValues;
-import org.sireum.aadl.osate.architecture.Check;
-import org.sireum.aadl.osate.architecture.ErrorReport;
-import org.sireum.aadl.osate.architecture.Report;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 
@@ -70,28 +62,29 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			return Status.CANCEL_STATUS;
 		}
 	}
-
-	public boolean check(ComponentInstance root) {
-		boolean hasErrors = false;
-		List<Report> l = Check.check(root);
-		if (!l.isEmpty()) {
-			String m = "";
-			for (Report er : l) {
-				hasErrors |= er instanceof ErrorReport;
-				String name = ((NamedElement) er.component().eContainer()).getQualifiedName() + "."
-						+ er.component().getQualifiedName();
-				m += name + " : " + er.message() + "\n";
-
-				try {
-					int severity = er instanceof ErrorReport ? IMarker.SEVERITY_ERROR : IMarker.SEVERITY_WARNING;
-					IMarker marker = getIResource(er.component().eResource()).createMarker(IMarker.PROBLEM);
-					marker.setAttribute(IMarker.MESSAGE, name + " - " + er.message());
-					marker.setAttribute(IMarker.SEVERITY, severity);
-				} catch (CoreException exception) {
-					exception.printStackTrace();
-				}
-			}
-		}
-		return !hasErrors;
-	}
+	/*
+	 * public boolean check(ComponentInstance root) {
+	 * boolean hasErrors = false;
+	 * List<Report> l = Check.check(root);
+	 * if (!l.isEmpty()) {
+	 * String m = "";
+	 * for (Report er : l) {
+	 * hasErrors |= er instanceof ErrorReport;
+	 * String name = ((NamedElement) er.component().eContainer()).getQualifiedName() + "."
+	 * + er.component().getQualifiedName();
+	 * m += name + " : " + er.message() + "\n";
+	 *
+	 * try {
+	 * int severity = er instanceof ErrorReport ? IMarker.SEVERITY_ERROR : IMarker.SEVERITY_WARNING;
+	 * IMarker marker = getIResource(er.component().eResource()).createMarker(IMarker.PROBLEM);
+	 * marker.setAttribute(IMarker.MESSAGE, name + " - " + er.message());
+	 * marker.setAttribute(IMarker.SEVERITY, severity);
+	 * } catch (CoreException exception) {
+	 * exception.printStackTrace();
+	 * }
+	 * }
+	 * }
+	 * return !hasErrors;
+	 * }
+	 */
 }

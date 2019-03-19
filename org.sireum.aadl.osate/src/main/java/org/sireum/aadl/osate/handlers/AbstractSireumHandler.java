@@ -54,7 +54,6 @@ import org.osate.ui.dialogs.Dialog;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
 import org.sireum.aadl.osate.architecture.JavaVisitor;
-import org.sireum.aadl.osate.architecture.Visitor$;
 import org.sireum.aadl.osate.util.SelectionHelper;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
@@ -169,10 +168,6 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 	}
 
 	protected Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
-		return Visitor$.MODULE$.apply(root, includeDataComponents).get();
-	}
-	
-	protected Aadl getJavaAir(ComponentInstance root, boolean includeDataComponents) {
 		return new JavaVisitor().convert(root, includeDataComponents).get();
 	}
 
