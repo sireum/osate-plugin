@@ -11,9 +11,12 @@ import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
+import org.sireum.IS;
+import org.sireum.Z;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.act.PreferenceValues;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
+import org.sireum.aadl.osate.util.Util;
 
 public class LaunchAct extends AbstractSireumHandler {
 
@@ -66,8 +69,16 @@ public class LaunchAct extends AbstractSireumHandler {
 						}
 					}
 					File workspaceRoot = getProjectPath(si).toFile();
+
 					// int ret = ActUtil.launchAct(p, model, console, workspaceRoot);
-					int ret = -1;
+
+					int ret = Util.callWrapper(getToolName(), console, () -> {
+						File outDir = new File(p.getOptionOutputDirectory());
+						IS<Z, String> auxDirs = toISZ(p.getOptionCSourceDirectory());
+						org.sireum.Option<File> aadlRootDir = new org.sireum.Some<File>(workspaceRoot);
+
+						return org.sireum.aadl.act.Act.run(outDir, model, auxDirs, aadlRootDir);
+					});
 
 					refreshWorkspace();
 
@@ -85,5 +96,11 @@ public class LaunchAct extends AbstractSireumHandler {
 		}
 
 		return Status.OK_STATUS;
+	}
+
+	private <T> IS<Z, T> toISZ(T... args) {
+		scala.collection.Seq<T> seq = scala.collection.JavaConverters.asScalaBuffer(java.util.Arrays.asList(args));
+		IS<Z, T> ret = org.sireum.IS$.MODULE$.apply(seq, org.sireum.Z$.MODULE$);
+		return ret;
 	}
 }

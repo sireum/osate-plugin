@@ -63,7 +63,7 @@ public class LaunchArsit extends AbstractSireumHandler {
 
 					// int ret = ArsitUtil.launchArsit(p, model, console);
 
-					int ret = Util.callWrapper("Arsit", console, () -> {
+					int ret = Util.callWrapper(getToolName(), console, () -> {
 
 						ArsitBridge.IPCMechanismJava ipc = IPCMechanismJava.MessageQueue;
 
