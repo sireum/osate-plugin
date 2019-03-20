@@ -3,18 +3,24 @@ package org.sireum.aadl.osate.architecture;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.osate.aadl2.Aadl2Package;
 import org.osate.aadl2.AbstractNamedValue;
+import org.osate.aadl2.AccessConnection;
 import org.osate.aadl2.AccessType;
 import org.osate.aadl2.BooleanLiteral;
 import org.osate.aadl2.Classifier;
 import org.osate.aadl2.ClassifierValue;
+import org.osate.aadl2.ConnectedElement;
 import org.osate.aadl2.Connection;
+import org.osate.aadl2.ConnectionEnd;
 import org.osate.aadl2.DataClassifier;
 import org.osate.aadl2.DataImplementation;
 import org.osate.aadl2.DataSubcomponent;
@@ -22,10 +28,16 @@ import org.osate.aadl2.DirectionType;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.EnumerationLiteral;
 import org.osate.aadl2.Feature;
+import org.osate.aadl2.FeatureConnection;
+import org.osate.aadl2.FeatureGroupConnection;
+import org.osate.aadl2.FeatureGroupPrototype;
+import org.osate.aadl2.FeatureGroupType;
 import org.osate.aadl2.ListValue;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.NamedValue;
 import org.osate.aadl2.NumberValue;
+import org.osate.aadl2.ParameterConnection;
+import org.osate.aadl2.PortConnection;
 import org.osate.aadl2.Property;
 import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.PropertyConstant;
@@ -36,6 +48,8 @@ import org.osate.aadl2.ReferenceValue;
 import org.osate.aadl2.StringLiteral;
 import org.osate.aadl2.UnitLiteral;
 import org.osate.aadl2.impl.AccessImpl;
+import org.osate.aadl2.impl.BusAccessImpl;
+import org.osate.aadl2.impl.BusSubcomponentImpl;
 import org.osate.aadl2.impl.DataImplementationImpl;
 import org.osate.aadl2.impl.DataPortImpl;
 import org.osate.aadl2.impl.DataTypeImpl;
@@ -44,12 +58,14 @@ import org.osate.aadl2.impl.EventDataPortImpl;
 import org.osate.aadl2.impl.FeatureGroupImpl;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.ConnectionInstance;
+import org.osate.aadl2.instance.ConnectionReference;
 import org.osate.aadl2.instance.FeatureInstance;
 import org.osate.aadl2.instance.FlowSpecificationInstance;
 import org.osate.aadl2.instance.InstancePackage;
 import org.osate.aadl2.instance.InstanceReferenceValue;
 import org.osate.aadl2.instance.impl.FeatureInstanceImpl;
-import org.osate.aadl2.instance.util.InstanceUtil;
+import org.osate.aadl2.modelsupport.util.AadlUtil;
+import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 import org.sireum.Option;
 import org.sireum.Some;
@@ -57,9 +73,10 @@ import org.sireum.aadl.ir.AadlASTJavaFactory;
 
 public class JavaVisitor {
 
-	org.sireum.aadl.ir.AadlASTFactory factory = new org.sireum.aadl.ir.AadlASTFactory();
+	final org.sireum.aadl.ir.AadlASTFactory factory = new org.sireum.aadl.ir.AadlASTFactory();
 
-	Map<String, org.sireum.aadl.ir.Component> datamap = new LinkedHashMap<String, org.sireum.aadl.ir.Component>();
+	Map<String, org.sireum.aadl.ir.Component> datamap = new LinkedHashMap<>();
+	Map<List<String>, Set<Connection>> compConnMap = new HashMap<>();
 
 	public Option<org.sireum.aadl.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		Option<org.sireum.aadl.ir.Component> t = visit(root);
@@ -67,7 +84,7 @@ public class JavaVisitor {
 			List<org.sireum.aadl.ir.Component> dataComponents =
 					includeDataComponents ? new ArrayList<>(datamap.values()) : ilist();
 			return new Some<org.sireum.aadl.ir.Aadl>(
-					factory.aadl(toList(t.get()),
+					factory.aadl(toImmutableList(t.get()),
 							ilist(), //errorLib // FIXME
 							dataComponents));
 		} else {
@@ -85,6 +102,114 @@ public class JavaVisitor {
 		default:
 			return org.sireum.None.apply();
 		}
+	}
+
+	private List<org.sireum.aadl.ir.Connection> buildConnection(Connection conn, List<String> path,
+			ComponentInstance compInst) {
+		List<String> name = add(path, conn.getName());
+		List<org.sireum.aadl.ir.EndPoint> src = buildEndPoint(conn.getSource(), path);
+		List<org.sireum.aadl.ir.EndPoint> dst = buildEndPoint(conn.getDestination(), path);
+		boolean isBiDirectional = conn.isBidirectional();
+		List<ConnectionInstance> connInst = compInst.findConnectionInstance(conn);
+
+		List<org.sireum.aadl.ir.Name> connectionInstances = ilist();
+		if (!connInst.isEmpty()) {
+			connectionInstances = connInst.stream()
+					.map(ci -> factory.name(Arrays.asList(ci.getInstanceObjectPath().split("\\."))))
+					.collect(Collectors.toList());
+		}
+
+		AadlASTJavaFactory.ConnectionKind kind = null;
+		if (conn instanceof AccessConnection) {
+			kind = AadlASTJavaFactory.ConnectionKind.Access;
+		} else if (conn instanceof FeatureGroupConnection) {
+			kind = AadlASTJavaFactory.ConnectionKind.FeatureGroup;
+		} else if (conn instanceof FeatureConnection) {
+			kind = AadlASTJavaFactory.ConnectionKind.Feature;
+		} else if (conn instanceof ParameterConnection) {
+			kind = AadlASTJavaFactory.ConnectionKind.Parameter;
+		} else if (conn instanceof PortConnection) {
+			kind = AadlASTJavaFactory.ConnectionKind.Port;
+		} else {
+			throw new RuntimeException("Unexpected connection kind: " + conn);
+		}
+
+		List<org.sireum.aadl.ir.Property> properties = conn.getOwnedPropertyAssociations().stream()
+				.map(pa -> buildProperty(pa, name)).collect(Collectors.toList());
+
+		if (src.size() != dst.size()) {
+			throw new RuntimeException("Incorrect translation!");
+		}
+
+		return toImmutableList(factory.connection(factory.name(name), src, dst, kind, isBiDirectional, connectionInstances,
+				properties));
+	}
+
+	private List<org.sireum.aadl.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
+		List<org.sireum.aadl.ir.EndPoint> result = mlist();
+		List<String> component = connElem.getContext() != null ? add(path, connElem.getConnectionEnd().getName())
+				: path;
+		List<String> feature = add(component, connElem.getConnectionEnd().getName());
+		AadlASTJavaFactory.Direction dir = null;
+		if (connElem.getConnectionEnd() instanceof DirectedFeatureImpl) {
+			DirectedFeatureImpl inFeature = (DirectedFeatureImpl) connElem.getConnectionEnd();
+			if (inFeature.isIn() && inFeature.isOut()) {
+				dir = AadlASTJavaFactory.Direction.InOut;
+			} else if (inFeature.isIn() && !inFeature.isOut()) {
+				dir = AadlASTJavaFactory.Direction.In;
+			} else {
+				dir = AadlASTJavaFactory.Direction.Out;
+			}
+		}
+		ConnectionEnd ce = connElem.getConnectionEnd();
+		if (ce instanceof FeatureGroupImpl) {
+			FeatureGroupImpl fgce = (FeatureGroupImpl) ce;
+			addAll(result, flattenFeatureGroup(component, fgce.getFullName(), fgce, connElem));
+		} else if (ce instanceof BusSubcomponentImpl) {
+			add(result, factory.endPoint(factory.name(feature), null, AadlASTJavaFactory.Direction.InOut));
+		} else if (ce instanceof BusAccessImpl) {
+			add(result, factory.endPoint(factory.name(component), factory.name(feature),
+					AadlASTJavaFactory.Direction.InOut));
+		} else {
+			add(result, factory.endPoint(factory.name(component), factory.name(feature), dir));
+		}
+		return result;
+	}
+
+	private List<org.sireum.aadl.ir.EndPoint> flattenFeatureGroup(List<String> component, String parentName,
+			FeatureGroupImpl fgi, ConnectedElement connElem) {
+		List<org.sireum.aadl.ir.EndPoint> res = mlist();
+		FeatureGroupType fgt = fgi.basicGetFeatureGroupType();
+		if (fgt == null) {
+			FeatureGroupPrototype fgpt = fgi.basicGetFeatureGroupPrototype();
+			fgt = ResolvePrototypeUtil.resolveFeatureGroupPrototype(fgpt,
+					connElem.getContext() == null
+					? connElem.getContainingComponentImpl()
+							: connElem.getContext());
+		}
+		for (Feature f : fgt.getAllFeatures()) {
+			Feature rf = f.getRefined();
+			if (rf == null) {
+				rf = f;
+			}
+			if (rf instanceof FeatureGroupImpl) {
+				res = addAll(res, flattenFeatureGroup(component, parentName + "_" + rf.getFullName(),
+						(FeatureGroupImpl) rf, connElem));
+			} else {
+				AadlASTJavaFactory.Direction dir = null;
+				if (AadlUtil.isIncomingFeature(rf) && AadlUtil.isOutgoingFeature(rf)) {
+					dir = AadlASTJavaFactory.Direction.InOut;
+				} else if (AadlUtil.isIncomingFeature(rf)) {
+					dir = fgi.isInverse() ? AadlASTJavaFactory.Direction.Out : AadlASTJavaFactory.Direction.In;
+				} else {
+					dir = fgi.isInverse() ? AadlASTJavaFactory.Direction.In : AadlASTJavaFactory.Direction.Out;
+				}
+
+				add(res, factory.endPoint(factory.name(component),
+						factory.name(add(component, parentName + "_" + rf.getFullName())), dir));
+			}
+		}
+		return res;
 	}
 
 	private org.sireum.aadl.ir.Component buildComponent(ComponentInstance compInst, List<String> path) {
@@ -106,6 +231,13 @@ public class JavaVisitor {
 				.map(ci -> buildComponent(ci, currentPath)).collect(Collectors.toList());
 
 		AadlASTJavaFactory.ComponentCategory category = null;
+
+		List<org.sireum.aadl.ir.Connection> connections = ilist();
+		if (compConnMap.containsKey(currentPath)) {
+			connections = compConnMap.get(currentPath).stream()
+					.flatMap(c -> buildConnection(c, currentPath, compInst).stream())
+					.collect(Collectors.toList());
+		}
 
 		switch(compInst.getCategory()) {
 		case ABSTRACT: category = AadlASTJavaFactory.ComponentCategory.Abstract; break;
@@ -133,8 +265,6 @@ public class JavaVisitor {
 		List<org.sireum.aadl.ir.Mode> modes = ilist(); // TODO
 
 		List<org.sireum.aadl.ir.Annex> annexes = ilist(); // FIXME
-
-		List<org.sireum.aadl.ir.Connection> connections = ilist(); // FIXME
 
 		return factory.component(
 				identifier, category, classifier, features, subComponents,
@@ -212,6 +342,17 @@ public class JavaVisitor {
 		}
 	}
 
+	private org.sireum.aadl.ir.ConnectionReference buildConnectionRef(ConnectionReference connRef, List<String> path) {
+		List<String> context = Arrays.asList(connRef.getContext().getInstanceObjectPath().split("\\."));
+		List<String> name = add(context, connRef.getConnection().getName());
+		if (compConnMap.containsKey(context)) {
+			compConnMap.put(context, add(compConnMap.get(context), connRef.getConnection()));
+		} else {
+			compConnMap.put(context, add(connRef.getConnection()));
+		}
+		return factory.connectionReference(factory.name(name), factory.name(context), path == context);
+	}
+
 	private org.sireum.aadl.ir.ConnectionInstance buildConnectionInst(ConnectionInstance connInst, List<String> path) {
 		List<String> currentPath = add(path, connInst.getName());
 
@@ -244,8 +385,8 @@ public class JavaVisitor {
 		case PORT_CONNECTION: kind = AadlASTJavaFactory.ConnectionKind.Port; break;
 		}
 
-		Connection conn = InstanceUtil.getCrossConnection(connInst);
-		List<org.sireum.aadl.ir.ConnectionReference> connectionRefs = ilist(); // FIXME:
+		List<org.sireum.aadl.ir.ConnectionReference> connectionRefs = connInst.getConnectionReferences().stream()
+				.map(ci -> buildConnectionRef(ci, path)).collect(Collectors.toList());
 
 		org.sireum.aadl.ir.EndPoint src = factory.endPoint(
 				factory.name(srcComponent), factory.name(srcFeature), srcDirection);
@@ -316,21 +457,21 @@ public class JavaVisitor {
 		switch(pe.eClass().getClassifierID()) {
 		case Aadl2Package.BOOLEAN_LITERAL:
 			String b = Boolean.toString(((BooleanLiteral) pe).getValue());
-			return toList(factory.valueProp(b));
+			return toImmutableList(factory.valueProp(b));
 		case Aadl2Package.INTEGER_LITERAL:
 		case Aadl2Package.REAL_LITERAL:
-			return toList(getUnitProp((NumberValue) pe));
+			return toImmutableList(getUnitProp((NumberValue) pe));
 		 case Aadl2Package.STRING_LITERAL:
 			 String v = ((StringLiteral) pe).getValue();
-			 return toList(factory.valueProp(v));
+			 return toImmutableList(factory.valueProp(v));
 		 case Aadl2Package.RANGE_VALUE:
 			 RangeValue rv = (RangeValue) pe;
-			 return toList(factory.rangeProp(
+			 return toImmutableList(factory.rangeProp(
 					 getUnitProp(rv.getMinimumValue()),
 					 getUnitProp(rv.getMaximumValue())));
          case Aadl2Package.CLASSIFIER_VALUE:
         	 Classifier cv = ((ClassifierValue) pe).getClassifier();
-        	 return toList(factory.classifierProp(cv.getQualifiedName()));
+        	 return toImmutableList(factory.classifierProp(cv.getQualifiedName()));
          case Aadl2Package.LIST_VALUE:
         	 ListValue lv = (ListValue) pe;
         	 List<org.sireum.aadl.ir.PropertyValue> elems = mlist();
@@ -345,17 +486,17 @@ public class JavaVisitor {
         	 switch(nv2.eClass().getClassifierID()) {
         	 case Aadl2Package.ENUMERATION_LITERAL:
         		 EnumerationLiteral el = (EnumerationLiteral) nv2;
-        		 return toList(factory.valueProp(el.getFullName()));
+        		 return toImmutableList(factory.valueProp(el.getFullName()));
         	 case Aadl2Package.PROPERTY:
         		 Property _p = (Property) nv2;
         		 if(_p.getDefaultValue() != null) {
         			 return getPropertyExpressionValue(_p.getDefaultValue(), path);
         		 } else {
-        			 return toList(factory.valueProp(_p.getQualifiedName()));
+        			 return toImmutableList(factory.valueProp(_p.getQualifiedName()));
         		 }
         	 case Aadl2Package.PROPERTY_CONSTANT:
         		 PropertyConstant pc = (PropertyConstant) nv2;
-        		 return toList(factory.valueProp(pc.getConstantValue().toString()));
+        		 return toImmutableList(factory.valueProp(pc.getConstantValue().toString()));
         	 default:
         		 java.lang.System.err.println("Not handling " + pe.eClass().getClassifierID() + " " + nv2);
         		 return ilist();
@@ -367,11 +508,11 @@ public class JavaVisitor {
         	    		 factory.name(add(path, fv.getProperty().getQualifiedName())),
         	    		 getPropertyExpressionValue(fv.getOwnedValue(), path))
         	 ).collect(Collectors.toList());
-        	 return toList(factory.recordProp(properties));
+        	 return toImmutableList(factory.recordProp(properties));
          case Aadl2Package.REFERENCE_VALUE:
         	 ReferenceValue rvx = (ReferenceValue) pe;
-        	 org.sireum.aadl.ir.Name refName = factory.name(toList(rvx.toString()));
-        	 return toList(factory.referenceProp(refName));
+        	 org.sireum.aadl.ir.Name refName = factory.name(toImmutableList(rvx.toString()));
+        	 return toImmutableList(factory.referenceProp(refName));
          case InstancePackage.INSTANCE_REFERENCE_VALUE:
              // FIXME: id is coming from InstancePackage rather than Aadl2Package.  Might cause the
              // following cast to fail if there is an id clash
@@ -379,10 +520,10 @@ public class JavaVisitor {
         	 InstanceReferenceValue irv = (InstanceReferenceValue) pe;
         	 String t = irv.getReferencedInstanceObject().getInstanceObjectPath();
 
-        	 return toList(factory.referenceProp(factory.name(Arrays.asList(t.split("\\.")))));
+        	 return toImmutableList(factory.referenceProp(factory.name(Arrays.asList(t.split("\\.")))));
          default:
         	 java.lang.System.err.println("Need to handle " + pe + " " + pe.eClass().getClassifierID());
-        	 return toList(factory.classifierProp(pe.getClass().getName()));
+        	 return toImmutableList(factory.classifierProp(pe.getClass().getName()));
 		}
 	}
 
@@ -418,7 +559,7 @@ public class JavaVisitor {
 				org.sireum.aadl.ir.Classifier classifier = c.classifier().nonEmpty() ? c.classifier().get() : null;
 
 				org.sireum.aadl.ir.Component subby =
-					factory.component(factory.name(toList(f.getName())),
+					factory.component(factory.name(toImmutableList(f.getName())),
 						category, classifier,
 						isz2List(c.features()), isz2List(c.subComponents()),
 						isz2List(c.connections()), isz2List(c.connectionInstances()),
@@ -462,7 +603,7 @@ public class JavaVisitor {
 		return scala.collection.JavaConverters.seqAsJavaList(isz.elements());
 	}
 
-	private <T> List<T> toList(T e) {
+	private <T> List<T> toImmutableList(T e) {
 	  List<T> ret = new ArrayList<T>();
 	  ret.add(e);
 	  return Collections.unmodifiableList(ret);
@@ -472,6 +613,24 @@ public class JavaVisitor {
 		List<T> ret = new ArrayList<T>(l);
 		ret.add(e);
 		return Collections.unmodifiableList(ret);
+	}
+
+	private <T> List<T> addAll(List<T> l, List<T> e) {
+		List<T> ret = new ArrayList<T>(l);
+		ret.addAll(e);
+		return Collections.unmodifiableList(ret);
+	}
+
+	private <T> Set<T> add(T e) {
+		Set<T> ret = new LinkedHashSet<T>();
+		ret.add(e);
+		return ret;
+	}
+
+	private <T> Set<T> add(Set<T> s, T e) {
+		Set<T> ret = new LinkedHashSet<T>(s);
+		ret.add(e);
+		return ret;
 	}
 
 	private <T> List<T> ilist() {
