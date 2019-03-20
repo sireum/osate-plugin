@@ -564,7 +564,7 @@ public class Visitor {
 						: null;
 
 				final org.sireum.aadl.ir.Component subby =
-					factory.component(factory.name(toImmutableList(f.getName())),
+						factory.component(factory.name(toImmutableList(dsc.getName())),
 						category, classifier,
 						isz2List(c.features()), isz2List(c.subComponents()),
 						isz2List(c.connections()), isz2List(c.connectionInstances()),
