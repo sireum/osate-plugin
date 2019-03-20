@@ -71,7 +71,7 @@ import org.sireum.Option;
 import org.sireum.Some;
 import org.sireum.aadl.ir.AadlASTJavaFactory;
 
-public class JavaVisitor {
+public class Visitor {
 
 	final org.sireum.aadl.ir.AadlASTFactory factory = new org.sireum.aadl.ir.AadlASTFactory();
 
