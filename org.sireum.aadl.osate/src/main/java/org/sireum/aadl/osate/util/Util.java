@@ -39,8 +39,12 @@ public class Util {
 	}
 
 	public static String getAir(SystemInstance si) {
-		Aadl ir = (new Visitor()).convert(si,  true).get();
-		return serialize(ir, SerializerType.JSON_COMPACT);
+		return Util.getAir(si, true);
+	}
+
+	public static String getAir(SystemInstance si, boolean includeDataComponents) {
+		Aadl ir = (new Visitor()).convert(si,  includeDataComponents).get();
+		return serialize(ir, SerializerType.JSON);
 	}
 
 	public static int callWrapper(String toolName, MessageConsole ms, IntSupplier f) {
