@@ -11,7 +11,7 @@ import org.sireum.Z;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.ir.JSON;
 import org.sireum.aadl.ir.MsgPack;
-import org.sireum.aadl.osate.architecture.JavaVisitor;
+import org.sireum.aadl.osate.architecture.Visitor;
 
 import scala.Console;
 import scala.Function0;
@@ -39,7 +39,7 @@ public class Util {
 	}
 
 	public static String getAir(SystemInstance si) {
-		Aadl ir = (new JavaVisitor()).convert(si,  true).get();
+		Aadl ir = (new Visitor()).convert(si,  true).get();
 		return serialize(ir, SerializerType.JSON_COMPACT);
 	}
 
@@ -59,7 +59,7 @@ public class Util {
             	try {
             		ret[0] = f.getAsInt();
             	} catch (Throwable t) {
-            		System.out.println("Exception rasied when invoking " + toolName);
+					System.err.println("Exception raised when invoking " + toolName);
             		t.printStackTrace(out);
             	} finally {
             		out.flush();
