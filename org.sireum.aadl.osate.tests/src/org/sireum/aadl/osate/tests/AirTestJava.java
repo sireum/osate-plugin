@@ -35,6 +35,7 @@ public class AirTestJava extends XtextTest {
 	TestHelper<AadlPackage> testHelper;
 
 	boolean generateExpected = false;
+	boolean writeResults = true;
 
 	static File ROOT_DIR = new File("./projects/org/sireum/aadl/osate/tests/");
 
@@ -91,7 +92,7 @@ public class AirTestJava extends XtextTest {
 			// instantiate
 			SystemImplementation sysImpl = (SystemImplementation) getResourceByName(sysImplName,
 					pkg.getOwnedPublicSection().getOwnedClassifiers());
-			SystemInstance instance = InstantiateModel.buildInstanceModelFile(sysImpl);
+			SystemInstance instance = InstantiateModel.instantiate(sysImpl);
 
 			String ir = Util.getAir(instance);
 
@@ -103,6 +104,11 @@ public class AirTestJava extends XtextTest {
 				Files.write(Paths.get(expectedFile.get().toURI()), ir.getBytes(StandardCharsets.UTF_8));
 				System.out.println("Wrote: " + expectedFile.get().getAbsolutePath());
 				expected = ir;
+			}
+			if (writeResults) {
+				File results = new File(r, sysImplName + "_results.json");
+				Files.write(Paths.get(results.toURI()), ir.getBytes(StandardCharsets.UTF_8));
+				System.out.println("Wrote: " + results.getAbsolutePath());
 			}
 
 			Assert.assertEquals(ir, expected);
