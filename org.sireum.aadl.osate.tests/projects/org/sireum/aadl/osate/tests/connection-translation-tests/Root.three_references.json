@@ -5,7 +5,7 @@
       "type" : "Component",
       "identifier" : {
         "type" : "Name",
-        "name" : ["Root_two_references_Instance"]
+        "name" : ["Root_three_references_Instance"]
       },
       "category" : {
         "type" : "ComponentCategory",
@@ -19,7 +19,7 @@
           "type" : "FeatureEnd",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "root_in"]
+            "name" : ["Root_three_references_Instance", "root_in"]
           },
           "direction" : {
             "type" : "Direction",
@@ -39,7 +39,7 @@
           "type" : "FeatureEnd",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "root_out"]
+            "name" : ["Root_three_references_Instance", "root_out"]
           },
           "direction" : {
             "type" : "Direction",
@@ -61,7 +61,7 @@
           "type" : "Component",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "Sub1"]
+            "name" : ["Root_three_references_Instance", "Sub"]
           },
           "category" : {
             "type" : "ComponentCategory",
@@ -71,7 +71,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "Connection_Translation::SubSystem.withproc"
+              "name" : "Connection_Translation::SubSystem.withproc_and_thread"
             }
           },
           "features" : [
@@ -79,7 +79,7 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_in"]
+                "name" : ["Root_three_references_Instance", "Sub", "sub_in"]
               },
               "direction" : {
                 "type" : "Direction",
@@ -99,7 +99,7 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_out"]
+                "name" : ["Root_three_references_Instance", "Sub", "sub_out"]
               },
               "direction" : {
                 "type" : "Direction",
@@ -119,7 +119,7 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_port"]
+                "name" : ["Root_three_references_Instance", "Sub", "sub_port"]
               },
               "direction" : {
                 "type" : "Direction",
@@ -141,7 +141,7 @@
               "type" : "Component",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
+                "name" : ["Root_three_references_Instance", "Sub", "sub_proc"]
               },
               "category" : {
                 "type" : "ComponentCategory",
@@ -151,7 +151,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "Connection_Translation::Sample_Process.impl"
+                  "name" : "Connection_Translation::Sample_Process.withThreads"
                 }
               },
               "features" : [
@@ -159,7 +159,7 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in"]
+                    "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_in"]
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -179,7 +179,7 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out"]
+                    "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_out"]
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -199,7 +199,7 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in_out"]
+                    "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_in_out"]
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -217,114 +217,144 @@
                 }
               ],
               "subComponents" : [
+                {
+                  "type" : "Component",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1"]
+                  },
+                  "category" : {
+                    "type" : "ComponentCategory",
+                    "value" : "Thread"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Connection_Translation::Thread_Dummy.impl"
+                    }
+                  },
+                  "features" : [
+                    {
+                      "type" : "FeatureEnd",
+                      "identifier" : {
+                        "type" : "Name",
+                        "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1", "access_point"]
+                      },
+                      "direction" : {
+                        "type" : "Direction",
+                        "value" : "InOut"
+                      },
+                      "category" : {
+                        "type" : "FeatureCategory",
+                        "value" : "EventPort"
+                      },
+                      "classifier" : {
+                        "type" : "None"
+                      },
+                      "properties" : [
+                      ]
+                    }
+                  ],
+                  "subComponents" : [
+                  ],
+                  "connections" : [
+                  ],
+                  "connectionInstances" : [
+                  ],
+                  "properties" : [
+                  ],
+                  "flows" : [
+                  ],
+                  "modes" : [
+                  ],
+                  "annexes" : [
+                    {
+                      "type" : "Annex",
+                      "name" : "Emv2",
+                      "clause" : {
+                        "type" : "Emv2Clause",
+                        "libraries" : [],
+                        "propagations" : [
+                        ],
+                        "flows" : [
+                        ]
+                      }
+                    }
+                  ]
+                }
               ],
               "connections" : [
-              ],
-              "connectionInstances" : [
-              ],
-              "properties" : [
-              ],
-              "flows" : [
-              ],
-              "modes" : [
-              ],
-              "annexes" : [
                 {
-                  "type" : "Annex",
-                  "name" : "Emv2",
-                  "clause" : {
-                    "type" : "Emv2Clause",
-                    "libraries" : [],
-                    "propagations" : [
-                    ],
-                    "flows" : [
-                    ]
-                  }
-                }
-              ]
-            },
-            {
-              "type" : "Component",
-              "identifier" : {
-                "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
-              },
-              "category" : {
-                "type" : "ComponentCategory",
-                "value" : "Process"
-              },
-              "classifier" : {
-                "type" : "Some",
-                "value" : {
-                  "type" : "Classifier",
-                  "name" : "Connection_Translation::Sample_Process.impl"
-                }
-              },
-              "features" : [
-                {
-                  "type" : "FeatureEnd",
-                  "identifier" : {
+                  "type" : "Connection",
+                  "name" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in"]
+                    "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_to_thread"]
                   },
-                  "direction" : {
-                    "type" : "Direction",
-                    "value" : "In"
+                  "src" : [
+                    {
+                      "type" : "EndPoint",
+                      "component" : {
+                        "type" : "Name",
+                        "name" : ["Root_three_references_Instance", "Sub", "sub_proc"]
+                      },
+                      "feature" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Name",
+                          "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_in_out"]
+                        }
+                      },
+                      "direction" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Direction",
+                          "value" : "InOut"
+                        }
+                      }
+                    }
+                  ],
+                  "dst" : [
+                    {
+                      "type" : "EndPoint",
+                      "component" : {
+                        "type" : "Name",
+                        "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1"]
+                      },
+                      "feature" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Name",
+                          "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1", "access_point"]
+                        }
+                      },
+                      "direction" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Direction",
+                          "value" : "InOut"
+                        }
+                      }
+                    }
+                  ],
+                  "kind" : {
+                    "type" : "ConnectionKind",
+                    "value" : "Port"
                   },
-                  "category" : {
-                    "type" : "FeatureCategory",
-                    "value" : "DataPort"
-                  },
-                  "classifier" : {
-                    "type" : "None"
-                  },
-                  "properties" : [
-                  ]
-                },
-                {
-                  "type" : "FeatureEnd",
-                  "identifier" : {
-                    "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out"]
-                  },
-                  "direction" : {
-                    "type" : "Direction",
-                    "value" : "Out"
-                  },
-                  "category" : {
-                    "type" : "FeatureCategory",
-                    "value" : "DataPort"
-                  },
-                  "classifier" : {
-                    "type" : "None"
-                  },
-                  "properties" : [
-                  ]
-                },
-                {
-                  "type" : "FeatureEnd",
-                  "identifier" : {
-                    "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in_out"]
-                  },
-                  "direction" : {
-                    "type" : "Direction",
-                    "value" : "InOut"
-                  },
-                  "category" : {
-                    "type" : "FeatureCategory",
-                    "value" : "EventPort"
-                  },
-                  "classifier" : {
-                    "type" : "None"
-                  },
+                  "isBiDirectional" : true,
+                  "connectionInstances" : [
+                    {
+                      "type" : "Name",
+                      "name" : ["Root_three_references_Instance", "root_in -> Sub", "sub_proc", "thread1", "access_point"]
+                    },
+                    {
+                      "type" : "Name",
+                      "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1", "access_point -> root_out"]
+                    }
+                  ],
                   "properties" : [
                   ]
                 }
-              ],
-              "subComponents" : [
-              ],
-              "connections" : [
               ],
               "connectionInstances" : [
               ],
@@ -355,27 +385,27 @@
               "type" : "Connection",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "parent_to_child_in"]
+                "name" : ["Root_three_references_Instance", "Sub", "parent_to_child"]
               },
               "src" : [
                 {
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1"]
+                    "name" : ["Root_three_references_Instance", "Sub"]
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_in"]
+                      "name" : ["Root_three_references_Instance", "Sub", "sub_port"]
                     }
                   },
                   "direction" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Direction",
-                      "value" : "In"
+                      "value" : "InOut"
                     }
                   }
                 }
@@ -385,20 +415,20 @@
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
+                    "name" : ["Root_three_references_Instance", "Sub", "sub_proc"]
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in"]
+                      "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_in_out"]
                     }
                   },
                   "direction" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Direction",
-                      "value" : "In"
+                      "value" : "InOut"
                     }
                   }
                 }
@@ -411,7 +441,7 @@
               "connectionInstances" : [
                 {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "root_in -> Sub1", "sub_proc1", "proc_in"]
+                  "name" : ["Root_three_references_Instance", "root_in -> Sub", "sub_proc", "thread1", "access_point"]
                 }
               ],
               "properties" : [
@@ -421,27 +451,27 @@
               "type" : "Connection",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "child_to_parent_out"]
+                "name" : ["Root_three_references_Instance", "Sub", "child_to_parent"]
               },
               "src" : [
                 {
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
+                    "name" : ["Root_three_references_Instance", "Sub", "sub_proc"]
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out"]
+                      "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_in_out"]
                     }
                   },
                   "direction" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Direction",
-                      "value" : "Out"
+                      "value" : "InOut"
                     }
                   }
                 }
@@ -451,20 +481,20 @@
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1"]
+                    "name" : ["Root_three_references_Instance", "Sub"]
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_out"]
+                      "name" : ["Root_three_references_Instance", "Sub", "sub_port"]
                     }
                   },
                   "direction" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Direction",
-                      "value" : "Out"
+                      "value" : "InOut"
                     }
                   }
                 }
@@ -477,73 +507,7 @@
               "connectionInstances" : [
                 {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out -> root_out"]
-                }
-              ],
-              "properties" : [
-              ]
-            },
-            {
-              "type" : "Connection",
-              "name" : {
-                "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "child_to_child"]
-              },
-              "src" : [
-                {
-                  "type" : "EndPoint",
-                  "component" : {
-                    "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
-                  },
-                  "feature" : {
-                    "type" : "Some",
-                    "value" : {
-                      "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out"]
-                    }
-                  },
-                  "direction" : {
-                    "type" : "Some",
-                    "value" : {
-                      "type" : "Direction",
-                      "value" : "Out"
-                    }
-                  }
-                }
-              ],
-              "dst" : [
-                {
-                  "type" : "EndPoint",
-                  "component" : {
-                    "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
-                  },
-                  "feature" : {
-                    "type" : "Some",
-                    "value" : {
-                      "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in"]
-                    }
-                  },
-                  "direction" : {
-                    "type" : "Some",
-                    "value" : {
-                      "type" : "Direction",
-                      "value" : "In"
-                    }
-                  }
-                }
-              ],
-              "kind" : {
-                "type" : "ConnectionKind",
-                "value" : "Port"
-              },
-              "isBiDirectional" : false,
-              "connectionInstances" : [
-                {
-                  "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out -> sub_proc2", "proc_in"]
+                  "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1", "access_point -> root_out"]
                 }
               ],
               "properties" : [
@@ -551,75 +515,6 @@
             }
           ],
           "connectionInstances" : [
-            {
-              "type" : "ConnectionInstance",
-              "name" : {
-                "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1.proc_out -> sub_proc2.proc_in"]
-              },
-              "src" : {
-                "type" : "EndPoint",
-                "component" : {
-                  "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
-                },
-                "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out"]
-                  }
-                },
-                "direction" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Direction",
-                    "value" : "Out"
-                  }
-                }
-              },
-              "dst" : {
-                "type" : "EndPoint",
-                "component" : {
-                  "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
-                },
-                "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in"]
-                  }
-                },
-                "direction" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Direction",
-                    "value" : "In"
-                  }
-                }
-              },
-              "kind" : {
-                "type" : "ConnectionKind",
-                "value" : "Port"
-              },
-              "connectionRefs" : [
-                {
-                  "type" : "ConnectionReference",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "child_to_child"]
-                  },
-                  "context" : {
-                    "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1"]
-                  },
-                  "isParent" : true
-                }
-              ],
-              "properties" : [
-              ]
-            }
           ],
           "properties" : [
           ],
@@ -648,20 +543,20 @@
           "type" : "Connection",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "system_to_comp_in"]
+            "name" : ["Root_three_references_Instance", "system_to_comp_in"]
           },
           "src" : [
             {
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance"]
+                "name" : ["Root_three_references_Instance"]
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "root_in"]
+                  "name" : ["Root_three_references_Instance", "root_in"]
                 }
               },
               "direction" : {
@@ -678,20 +573,20 @@
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1"]
+                "name" : ["Root_three_references_Instance", "Sub"]
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_in"]
+                  "name" : ["Root_three_references_Instance", "Sub", "sub_port"]
                 }
               },
               "direction" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Direction",
-                  "value" : "In"
+                  "value" : "InOut"
                 }
               }
             }
@@ -704,7 +599,7 @@
           "connectionInstances" : [
             {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance", "root_in -> Sub1", "sub_proc1", "proc_in"]
+              "name" : ["Root_three_references_Instance", "root_in -> Sub", "sub_proc", "thread1", "access_point"]
             }
           ],
           "properties" : [
@@ -714,27 +609,27 @@
           "type" : "Connection",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "system_to_comp_out"]
+            "name" : ["Root_three_references_Instance", "system_to_comp_out"]
           },
           "src" : [
             {
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1"]
+                "name" : ["Root_three_references_Instance", "Sub"]
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_out"]
+                  "name" : ["Root_three_references_Instance", "Sub", "sub_port"]
                 }
               },
               "direction" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Direction",
-                  "value" : "Out"
+                  "value" : "InOut"
                 }
               }
             }
@@ -744,13 +639,13 @@
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance"]
+                "name" : ["Root_three_references_Instance"]
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "root_out"]
+                  "name" : ["Root_three_references_Instance", "root_out"]
                 }
               },
               "direction" : {
@@ -770,7 +665,7 @@
           "connectionInstances" : [
             {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out -> root_out"]
+              "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1", "access_point -> root_out"]
             }
           ],
           "properties" : [
@@ -782,19 +677,19 @@
           "type" : "ConnectionInstance",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "root_in -> Sub1.sub_proc1.proc_in"]
+            "name" : ["Root_three_references_Instance", "root_in -> Sub.sub_proc.thread1.access_point"]
           },
           "src" : {
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance"]
+              "name" : ["Root_three_references_Instance"]
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "root_in"]
+                "name" : ["Root_three_references_Instance", "root_in"]
               }
             },
             "direction" : {
@@ -809,20 +704,20 @@
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
+              "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1"]
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in"]
+                "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1", "access_point"]
               }
             },
             "direction" : {
               "type" : "Some",
               "value" : {
                 "type" : "Direction",
-                "value" : "In"
+                "value" : "InOut"
               }
             }
           },
@@ -835,11 +730,11 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "system_to_comp_in"]
+                "name" : ["Root_three_references_Instance", "system_to_comp_in"]
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance"]
+                "name" : ["Root_three_references_Instance"]
               },
               "isParent" : true
             },
@@ -847,11 +742,23 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "parent_to_child_in"]
+                "name" : ["Root_three_references_Instance", "Sub", "parent_to_child"]
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1"]
+                "name" : ["Root_three_references_Instance", "Sub"]
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_to_thread"]
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["Root_three_references_Instance", "Sub", "sub_proc"]
               },
               "isParent" : false
             }
@@ -863,26 +770,26 @@
           "type" : "ConnectionInstance",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "Sub1.sub_proc2.proc_out -> root_out"]
+            "name" : ["Root_three_references_Instance", "Sub.sub_proc.thread1.access_point -> root_out"]
           },
           "src" : {
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
+              "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1"]
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out"]
+                "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1", "access_point"]
               }
             },
             "direction" : {
               "type" : "Some",
               "value" : {
                 "type" : "Direction",
-                "value" : "Out"
+                "value" : "InOut"
               }
             }
           },
@@ -890,13 +797,13 @@
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance"]
+              "name" : ["Root_three_references_Instance"]
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "root_out"]
+                "name" : ["Root_three_references_Instance", "root_out"]
               }
             },
             "direction" : {
@@ -916,11 +823,11 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "child_to_parent_out"]
+                "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_to_thread"]
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1"]
+                "name" : ["Root_three_references_Instance", "Sub", "sub_proc"]
               },
               "isParent" : false
             },
@@ -928,11 +835,23 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "system_to_comp_out"]
+                "name" : ["Root_three_references_Instance", "Sub", "child_to_parent"]
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance"]
+                "name" : ["Root_three_references_Instance", "Sub"]
+              },
+              "isParent" : false
+            },
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Root_three_references_Instance", "system_to_comp_out"]
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["Root_three_references_Instance"]
               },
               "isParent" : true
             }

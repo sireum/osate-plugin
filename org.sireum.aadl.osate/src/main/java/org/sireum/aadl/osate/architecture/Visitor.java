@@ -146,8 +146,8 @@ public class Visitor {
 	}
 
 	private List<org.sireum.aadl.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
-		final List<org.sireum.aadl.ir.EndPoint> result = mlist();
-		final List<String> component = connElem.getContext() != null ? add(path, connElem.getConnectionEnd().getName())
+		List<org.sireum.aadl.ir.EndPoint> result = mlist();
+		final List<String> component = connElem.getContext() != null ? add(path, connElem.getContext().getName())
 				: path;
 		final List<String> feature = add(component, connElem.getConnectionEnd().getName());
 		AadlASTJavaFactory.Direction dir = null;
@@ -164,14 +164,14 @@ public class Visitor {
 		final ConnectionEnd ce = connElem.getConnectionEnd();
 		if (ce instanceof FeatureGroupImpl) {
 			final FeatureGroupImpl fgce = (FeatureGroupImpl) ce;
-			addAll(result, flattenFeatureGroup(component, fgce.getFullName(), fgce, connElem));
+			result = addAll(result, flattenFeatureGroup(component, fgce.getFullName(), fgce, connElem));
 		} else if (ce instanceof BusSubcomponentImpl) {
-			add(result, factory.endPoint(factory.name(feature), null, AadlASTJavaFactory.Direction.InOut));
+			result = add(result, factory.endPoint(factory.name(feature), null, AadlASTJavaFactory.Direction.InOut));
 		} else if (ce instanceof BusAccessImpl) {
-			add(result, factory.endPoint(factory.name(component), factory.name(feature),
+			result = add(result, factory.endPoint(factory.name(component), factory.name(feature),
 					AadlASTJavaFactory.Direction.InOut));
 		} else {
-			add(result, factory.endPoint(factory.name(component), factory.name(feature), dir));
+			result = add(result, factory.endPoint(factory.name(component), factory.name(feature), dir));
 		}
 		return result;
 	}
@@ -351,7 +351,7 @@ public class Visitor {
 		} else {
 			compConnMap.put(context, add(connRef.getConnection()));
 		}
-		return factory.connectionReference(factory.name(name), factory.name(context), path == context);
+		return factory.connectionReference(factory.name(name), factory.name(context), path.equals(context));
 	}
 
 	private org.sireum.aadl.ir.ConnectionInstance buildConnectionInst(ConnectionInstance connInst, List<String> path) {
