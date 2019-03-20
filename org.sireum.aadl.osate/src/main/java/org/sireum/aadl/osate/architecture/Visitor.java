@@ -629,13 +629,13 @@ public class Visitor {
 	private <T> Set<T> add(T e) {
 		final Set<T> ret = new LinkedHashSet<T>();
 		ret.add(e);
-		return ret;
+		return Collections.unmodifiableSet(ret);
 	}
 
 	private <T> Set<T> add(Set<T> s, T e) {
 		final Set<T> ret = new LinkedHashSet<T>(s);
 		ret.add(e);
-		return ret;
+		return Collections.unmodifiableSet(ret);
 	}
 
 	private <T> List<T> ilist() {
