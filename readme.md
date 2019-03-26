@@ -46,9 +46,8 @@ IDE as 'Eclipse'.
      ```bash
      git clone --recursive https://github.com/sireum/act.git
      cd act
-     ./bin/prelude.sh
-     ./bin/mill act.jvm.jar
-     cp out/act/jvm/jar/dest/out.jar <osate-plugin-dir>/org.sireum.aadl.osate.act/lib/act.jar
+     ./bin/build.cmd min-jar
+     cp ./out/act/jvm/jar/dest/out.jar <osate-plugin-dir>/org.sireum.aadl.osate.act/lib/act.jar
      ```
      
    * Arsit
