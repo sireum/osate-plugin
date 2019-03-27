@@ -8,6 +8,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
@@ -21,7 +22,8 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 	@Override
 	public IStatus runJob(Element elem, IProgressMonitor monitor) {
 
-		displayConsole().clearConsole();
+		MessageConsole console = displayConsole();
+		console.clearConsole();
 
 		SystemInstance si = getSystemInstance(elem);
 		if (si == null) {
@@ -31,7 +33,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 		writeToConsole("Generating AIR ...");
 
-		Aadl model = getAir(si, true);
+		Aadl model = Util.getAir(si, true, console);
 
 		if (model != null) {
 			SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();

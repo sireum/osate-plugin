@@ -32,6 +32,7 @@ import org.osate.pluginsupport.PluginSupportUtil;
 import org.osate.testsupport.Aadl2InjectorProvider;
 import org.osate.xtext.aadl2.properties.ui.internal.PropertiesActivator;
 import org.sireum.aadl.osate.util.Util;
+import org.sireum.aadl.osate.util.Util.SerializerType;
 
 import com.google.inject.Injector;
 
@@ -66,17 +67,10 @@ public class GenerateAir implements IApplication {
 			for (final String arg : appArgs) {
 				System.out.println(arg);
 			}
-			String sys = null;
 			File r = new File(appArgs[0]);
 			ArrayList<String> l = new ArrayList<>();
 			for (File f : r.listFiles()) {
-				if (f.getName().endsWith(".aadl")) {
-					if (f.getName().equals(appArgs[1])) {
-						sys = readFile(f);
-					} else {
-						l.add(readFile(f));
-					}
-				}
+				l.add(readFile(f));
 			}
 
 			Resource resource = loadFiles(appArgs[0], appArgs[1], resourceSet);
@@ -84,9 +78,8 @@ public class GenerateAir implements IApplication {
 				AadlPackage ap = (AadlPackage) resource.getContents().get(0);
 				SystemImplementation sysImpl = (SystemImplementation) getResourceByName(appArgs[2],
 						ap.getOwnedPublicSection().getOwnedClassifiers());
-				org.osate.aadl2.ComponentImplementation ci;
 				SystemInstance instance = InstantiateModel.instantiate(sysImpl);
-				String ir = Util.getAir(instance);
+				String ir = Util.serialize(Util.getAir(instance), SerializerType.JSON);
 				Files.write(Paths.get(appArgs[3]), ir.getBytes());
 				Aadl2Package.eINSTANCE.eClass();
 				System.out.println("SUCCESS!! Wrote " + appArgs[3]);
