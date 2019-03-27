@@ -1,10 +1,11 @@
 package org.sireum.aadl.osate.util;
 
+import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.function.IntSupplier;
 
 import org.eclipse.ui.console.MessageConsole;
-import org.osate.aadl2.instance.SystemInstance;
+import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.IS;
 import org.sireum.U8;
 import org.sireum.Z;
@@ -38,13 +39,32 @@ public class Util {
 		}
 	}
 
-	public static String getAir(SystemInstance si) {
-		return Util.getAir(si, true);
+	public static Aadl getAir(ComponentInstance root) {
+		return getAir(root, true);
 	}
 
-	public static String getAir(SystemInstance si, boolean includeDataComponents) {
-		Aadl ir = (new Visitor()).convert(si,  includeDataComponents).get();
-		return serialize(ir, SerializerType.JSON);
+	public static Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
+		return getAir(root, includeDataComponents, System.out);
+	}
+
+	public static Aadl getAir(ComponentInstance root, boolean includeDataComponents, MessageConsole console) {
+		try (OutputStream out = console.newOutputStream()) {
+			return getAir(root, includeDataComponents, out);
+		} catch (Throwable t) {
+			return null;
+		}
+	}
+
+	public static Aadl getAir(ComponentInstance root, boolean includeDataComponents, OutputStream out) {
+		try {
+			return new Visitor().convert(root, includeDataComponents).get();
+		} catch (Throwable t) {
+			PrintStream p = new PrintStream(out);
+			p.println("Error encountered while generating AIR");
+			t.printStackTrace(p);
+			p.close();
+			return null;
+		}
 	}
 
 	public static int callWrapper(String toolName, MessageConsole ms, IntSupplier f) {

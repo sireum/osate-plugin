@@ -20,7 +20,7 @@ import org.sireum.aadl.osate.util.Util;
 
 public class LaunchAct extends AbstractSireumHandler {
 
-	private ActPrompt p = null;
+	private ActPrompt prompt = null;
 
 	@Override
 	public String getToolName() {
@@ -30,7 +30,7 @@ public class LaunchAct extends AbstractSireumHandler {
 	@Override
 	public IStatus runJob(Element elem, IProgressMonitor monitor) {
 
-		p = null;
+		prompt = null;
 
 		MessageConsole console = displayConsole();
 		console.clearConsole();
@@ -43,7 +43,7 @@ public class LaunchAct extends AbstractSireumHandler {
 
 		writeToConsole("Generating AIR ...");
 
-		Aadl model = getAir(si, true);
+		Aadl model = Util.getAir(si, true, console);
 
 		if (model != null) {
 
@@ -53,13 +53,13 @@ public class LaunchAct extends AbstractSireumHandler {
 			}
 
 			Display.getDefault().syncExec(() -> {
-				p = new ActPrompt(getProject(si), getShell());
-				p.open();
+				prompt = new ActPrompt(getProject(si), getShell());
+				prompt.open();
 			});
 
-			if (p.getReturnCode() == Window.OK) {
+			if (prompt.getReturnCode() == Window.OK) {
 				try {
-					File out = new File(p.getOptionOutputDirectory());
+					File out = new File(prompt.getOptionOutputDirectory());
 					if (!out.exists()) {
 						if (Dialog.askQuestion("Create Directory?",
 								"Directory '" + out.getAbsolutePath() + "' does not exist.  Should it be created?")) {
@@ -73,8 +73,8 @@ public class LaunchAct extends AbstractSireumHandler {
 					// int ret = ActUtil.launchAct(p, model, console, workspaceRoot);
 
 					int ret = Util.callWrapper(getToolName(), console, () -> {
-						File outDir = new File(p.getOptionOutputDirectory());
-						IS<Z, String> auxDirs = toISZ(p.getOptionCSourceDirectory());
+						File outDir = new File(prompt.getOptionOutputDirectory());
+						IS<Z, String> auxDirs = toISZ(prompt.getOptionCSourceDirectory());
 						org.sireum.Option<File> aadlRootDir = new org.sireum.Some<File>(workspaceRoot);
 
 						return org.sireum.aadl.act.Act.run(outDir, model, auxDirs, aadlRootDir);

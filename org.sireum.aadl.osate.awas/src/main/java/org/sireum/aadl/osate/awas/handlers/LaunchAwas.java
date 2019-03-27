@@ -21,6 +21,7 @@ import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
+import org.sireum.aadl.osate.util.Util;
 
 public class LaunchAwas extends AbstractSireumHandler {
 
@@ -39,11 +40,11 @@ public class LaunchAwas extends AbstractSireumHandler {
 			return null;
 		}
 
-		Aadl model = getAir(root, true);
+		MessageConsole console = displayConsole("Awas Console");
+
+		Aadl model = Util.getAir(root, true, console);
 
 		if (model != null) {
-
-			MessageConsole console = displayConsole("Awas Console");
 
 			File f = serializeToFile(model, ".IR", root);
 			writeToConsole(console, "Wrote: " + f.getAbsolutePath());

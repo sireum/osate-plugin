@@ -42,7 +42,7 @@ public class LaunchArsit extends AbstractSireumHandler {
 
 		writeToConsole("Generating AIR ...");
 
-		Aadl model = getAir(si, true);
+		Aadl model = Util.getAir(si, true, console);
 
 		if (model != null) {
 

@@ -96,7 +96,7 @@ public class Visitor {
 		switch (root.eClass().getClassifierID()) {
 		case InstancePackage.SYSTEM_INSTANCE:
 		case InstancePackage.COMPONENT_INSTANCE: {
-			org.sireum.aadl.ir.Component c = buildComponent((ComponentInstance) root, mlist());
+			org.sireum.aadl.ir.Component c = buildComponent((ComponentInstance) root, ilist());
 			return new Some<org.sireum.aadl.ir.Component>(c);
 		}
 		default:
@@ -146,7 +146,7 @@ public class Visitor {
 	}
 
 	private List<org.sireum.aadl.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
-		List<org.sireum.aadl.ir.EndPoint> result = mlist();
+		List<org.sireum.aadl.ir.EndPoint> result = ilist();
 		final List<String> component = connElem.getContext() != null ? add(path, connElem.getContext().getName())
 				: path;
 		final List<String> feature = add(component, connElem.getConnectionEnd().getName());
@@ -178,7 +178,7 @@ public class Visitor {
 
 	private List<org.sireum.aadl.ir.EndPoint> flattenFeatureGroup(List<String> component, String parentName,
 			FeatureGroupImpl fgi, ConnectedElement connElem) {
-		List<org.sireum.aadl.ir.EndPoint> res = mlist();
+		List<org.sireum.aadl.ir.EndPoint> res = ilist();
 		FeatureGroupType fgt = fgi.basicGetFeatureGroupType();
 		if (fgt == null) {
 			final FeatureGroupPrototype fgpt = fgi.basicGetFeatureGroupPrototype();
@@ -205,7 +205,7 @@ public class Visitor {
 					dir = fgi.isInverse() ? AadlASTJavaFactory.Direction.In : AadlASTJavaFactory.Direction.Out;
 				}
 
-				add(res, factory.endPoint(factory.name(component),
+				res = add(res, factory.endPoint(factory.name(component),
 						factory.name(add(component, parentName + "_" + rf.getFullName())), dir));
 			}
 		}
@@ -265,8 +265,7 @@ public class Visitor {
 
 		final List<org.sireum.aadl.ir.Mode> modes = ilist(); // TODO
 
-		final List<org.sireum.aadl.ir.Annex> annexes = ilist(); // FIXME
-
+		final List<org.sireum.aadl.ir.Annex> annexes = ilist(); // TODO
 		return factory.component(
 				identifier, category, classifier, features, subComponents,
 				connections, connectionInstances, properties, flows, modes, annexes);
@@ -349,7 +348,7 @@ public class Visitor {
 		if (compConnMap.containsKey(context)) {
 			compConnMap.put(context, add(compConnMap.get(context), connRef.getConnection()));
 		} else {
-			compConnMap.put(context, add(connRef.getConnection()));
+			compConnMap.put(context, toImmutableSet(connRef.getConnection()));
 		}
 		return factory.connectionReference(factory.name(name), factory.name(context), path.equals(context));
 	}
@@ -431,7 +430,7 @@ public class Visitor {
 		final List<String> currentPath = add(path, prop.getQualifiedName());
 		final NamedElement cont = (NamedElement) pa.eContainer();
 
-		List<org.sireum.aadl.ir.PropertyValue> propertyValues = mlist();
+		List<org.sireum.aadl.ir.PropertyValue> propertyValues = ilist();
 		try {
 			PropertyExpression pe = PropertyUtils.getSimplePropertyValue(cont, prop);
 			propertyValues = getPropertyExpressionValue(pe, path);
@@ -475,9 +474,9 @@ public class Visitor {
         	 return toImmutableList(factory.classifierProp(cv.getQualifiedName()));
          case Aadl2Package.LIST_VALUE:
 			final ListValue lv = (ListValue) pe;
-			final List<org.sireum.aadl.ir.PropertyValue> elems = mlist();
+			List<org.sireum.aadl.ir.PropertyValue> elems = ilist();
         	 for(PropertyExpression e : lv.getOwnedListElements()) {
-				elems.addAll(getPropertyExpressionValue(e, path));
+				elems = addAll(elems, getPropertyExpressionValue(e, path));
 			}
         	 return elems;
          case Aadl2Package.NAMED_VALUE:
@@ -534,28 +533,27 @@ public class Visitor {
 			return datamap.get(name);
 		}
 
-		final List<org.sireum.aadl.ir.Property> properties = f.getOwnedPropertyAssociations().stream().map(op ->
-		  buildProperty(op, mlist())).collect(Collectors.toList());
+		List<org.sireum.aadl.ir.Property> properties = f.getOwnedPropertyAssociations().stream().map(op ->
+		buildProperty(op, ilist())).collect(Collectors.toList());
 
-		final List<org.sireum.aadl.ir.Component> subComponents = mlist();
+		List<org.sireum.aadl.ir.Component> subComponents = ilist();
 		if(f instanceof DataTypeImpl) {
 			// do nothing as component types can't have subcomponents
 		} else if(f instanceof DataImplementation) {
 			final DataImplementation di = (DataImplementation) f;
 			final List<org.sireum.aadl.ir.Property> subProps = di.getType().getOwnedPropertyAssociations().stream()
 					.map(op ->
-    			buildProperty(op, mlist())).collect(Collectors.toList());
-			properties.addAll(subProps);
+					buildProperty(op, ilist())).collect(Collectors.toList());
+			properties = addAll(properties, subProps);
 
 			for(DataSubcomponent dsc : di.getOwnedDataSubcomponents()) {
 				final DataClassifier sct = (DataClassifier) dsc.getDataSubcomponentType();
 				final org.sireum.aadl.ir.Component c = processDataType(sct);
 				final List<org.sireum.aadl.ir.Property> fProperties = dsc.getOwnedPropertyAssociations().stream()
 						.map(op ->
-				  buildProperty(op, mlist())).collect(Collectors.toList());
+						buildProperty(op, ilist())).collect(Collectors.toList());
 
-				final List<org.sireum.aadl.ir.Property> cProps = isz2List(c.properties());
-				cProps.addAll(fProperties);
+				final List<org.sireum.aadl.ir.Property> cProps = addAll(isz2List(c.properties()), fProperties);
 
 				final AadlASTJavaFactory.ComponentCategory category = AadlASTJavaFactory.ComponentCategory
 						.valueOf(c.category().name());
@@ -571,7 +569,7 @@ public class Visitor {
 						cProps,
 						isz2List(c.flows()), isz2List(c.modes()), isz2List(c.annexes()));
 
-				subComponents.add(subby);
+				subComponents = add(subComponents, subby);
 			}
 		} else {
 			throw new RuntimeException("Unexpected data type: " + f);
@@ -605,7 +603,7 @@ public class Visitor {
 	}
 
 	private <T> List<T> isz2List(org.sireum.IS<org.sireum.Z, T> isz) {
-		return scala.collection.JavaConverters.seqAsJavaList(isz.elements());
+		return Collections.unmodifiableList(scala.collection.JavaConverters.seqAsJavaList(isz.elements()));
 	}
 
 	private <T> List<T> toImmutableList(T e) {
@@ -626,7 +624,7 @@ public class Visitor {
 		return Collections.unmodifiableList(ret);
 	}
 
-	private <T> Set<T> add(T e) {
+	private <T> Set<T> toImmutableSet(T e) {
 		final Set<T> ret = new LinkedHashSet<T>();
 		ret.add(e);
 		return Collections.unmodifiableSet(ret);
@@ -640,9 +638,5 @@ public class Visitor {
 
 	private <T> List<T> ilist() {
 		return Collections.emptyList();
-	}
-
-	private <T> List<T> mlist() {
-		return new ArrayList<T>();
 	}
 }
