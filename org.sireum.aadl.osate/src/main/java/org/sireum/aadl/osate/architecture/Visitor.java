@@ -82,10 +82,10 @@ public class Visitor {
 		final Option<org.sireum.aadl.ir.Component> t = visit(root);
 		if(t.nonEmpty()) {
 			final List<org.sireum.aadl.ir.Component> dataComponents =
-					includeDataComponents ? new ArrayList<>(datamap.values()) : ilist();
+					includeDataComponents ? new ArrayList<>(datamap.values()) : iList();
 			return new Some<org.sireum.aadl.ir.Aadl>(
-					factory.aadl(toImmutableList(t.get()),
-							ilist(), //errorLib // FIXME
+					factory.aadl(toIList(t.get()),
+							iList(), //errorLib // FIXME
 							dataComponents));
 		} else {
 			return org.sireum.None.apply();
@@ -96,7 +96,7 @@ public class Visitor {
 		switch (root.eClass().getClassifierID()) {
 		case InstancePackage.SYSTEM_INSTANCE:
 		case InstancePackage.COMPONENT_INSTANCE: {
-			org.sireum.aadl.ir.Component c = buildComponent((ComponentInstance) root, ilist());
+			org.sireum.aadl.ir.Component c = buildComponent((ComponentInstance) root, iList());
 			return new Some<org.sireum.aadl.ir.Component>(c);
 		}
 		default:
@@ -112,7 +112,7 @@ public class Visitor {
 		final boolean isBiDirectional = conn.isBidirectional();
 		final List<ConnectionInstance> connInst = compInst.findConnectionInstance(conn);
 
-		List<org.sireum.aadl.ir.Name> connectionInstances = ilist();
+		List<org.sireum.aadl.ir.Name> connectionInstances = iList();
 		if (!connInst.isEmpty()) {
 			connectionInstances = connInst.stream()
 					.map(ci -> factory.name(Arrays.asList(ci.getInstanceObjectPath().split("\\."))))
@@ -141,12 +141,12 @@ public class Visitor {
 			throw new RuntimeException("Incorrect translation!");
 		}
 
-		return toImmutableList(factory.connection(factory.name(name), src, dst, kind, isBiDirectional, connectionInstances,
+		return toIList(factory.connection(factory.name(name), src, dst, kind, isBiDirectional, connectionInstances,
 				properties));
 	}
 
 	private List<org.sireum.aadl.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
-		List<org.sireum.aadl.ir.EndPoint> result = ilist();
+		List<org.sireum.aadl.ir.EndPoint> result = iList();
 		final List<String> component = connElem.getContext() != null ? add(path, connElem.getContext().getName())
 				: path;
 		final List<String> feature = add(component, connElem.getConnectionEnd().getName());
@@ -178,7 +178,7 @@ public class Visitor {
 
 	private List<org.sireum.aadl.ir.EndPoint> flattenFeatureGroup(List<String> component, String parentName,
 			FeatureGroupImpl fgi, ConnectedElement connElem) {
-		List<org.sireum.aadl.ir.EndPoint> res = ilist();
+		List<org.sireum.aadl.ir.EndPoint> res = iList();
 		FeatureGroupType fgt = fgi.basicGetFeatureGroupType();
 		if (fgt == null) {
 			final FeatureGroupPrototype fgpt = fgi.basicGetFeatureGroupPrototype();
@@ -231,7 +231,7 @@ public class Visitor {
 		final List<org.sireum.aadl.ir.Component> subComponents = compInst.getComponentInstances().stream()
 				.map(ci -> buildComponent(ci, currentPath)).collect(Collectors.toList());
 
-		List<org.sireum.aadl.ir.Connection> connections = ilist();
+		List<org.sireum.aadl.ir.Connection> connections = iList();
 		if (compConnMap.containsKey(currentPath)) {
 			connections = compConnMap.get(currentPath).stream()
 					.flatMap(c -> buildConnection(c, currentPath, compInst).stream())
@@ -263,9 +263,9 @@ public class Visitor {
 				? factory.classifier(compInst.getClassifier().getQualifiedName())
 				: null;
 
-		final List<org.sireum.aadl.ir.Mode> modes = ilist(); // TODO
+		final List<org.sireum.aadl.ir.Mode> modes = iList(); // TODO
 
-		final List<org.sireum.aadl.ir.Annex> annexes = ilist(); // TODO
+		final List<org.sireum.aadl.ir.Annex> annexes = iList(); // TODO
 		return factory.component(
 				identifier, category, classifier, features, subComponents,
 				connections, connectionInstances, properties, flows, modes, annexes);
@@ -348,7 +348,7 @@ public class Visitor {
 		if (compConnMap.containsKey(context)) {
 			compConnMap.put(context, add(compConnMap.get(context), connRef.getConnection()));
 		} else {
-			compConnMap.put(context, toImmutableSet(connRef.getConnection()));
+			compConnMap.put(context, toISet(connRef.getConnection()));
 		}
 		return factory.connectionReference(factory.name(name), factory.name(context), path.equals(context));
 	}
@@ -430,7 +430,7 @@ public class Visitor {
 		final List<String> currentPath = add(path, prop.getQualifiedName());
 		final NamedElement cont = (NamedElement) pa.eContainer();
 
-		List<org.sireum.aadl.ir.PropertyValue> propertyValues = ilist();
+		List<org.sireum.aadl.ir.PropertyValue> propertyValues = iList();
 		try {
 			PropertyExpression pe = PropertyUtils.getSimplePropertyValue(cont, prop);
 			propertyValues = getPropertyExpressionValue(pe, path);
@@ -457,24 +457,24 @@ public class Visitor {
 		switch(pe.eClass().getClassifierID()) {
 		case Aadl2Package.BOOLEAN_LITERAL:
 			final String b = Boolean.toString(((BooleanLiteral) pe).getValue());
-			return toImmutableList(factory.valueProp(b));
+			return toIList(factory.valueProp(b));
 		case Aadl2Package.INTEGER_LITERAL:
 		case Aadl2Package.REAL_LITERAL:
-			return toImmutableList(getUnitProp((NumberValue) pe));
+			return toIList(getUnitProp((NumberValue) pe));
 		 case Aadl2Package.STRING_LITERAL:
 			final String v = ((StringLiteral) pe).getValue();
-			 return toImmutableList(factory.valueProp(v));
+			 return toIList(factory.valueProp(v));
 		 case Aadl2Package.RANGE_VALUE:
 			final RangeValue rv = (RangeValue) pe;
-			 return toImmutableList(factory.rangeProp(
+			 return toIList(factory.rangeProp(
 					 getUnitProp(rv.getMinimumValue()),
 					 getUnitProp(rv.getMaximumValue())));
          case Aadl2Package.CLASSIFIER_VALUE:
 			final Classifier cv = ((ClassifierValue) pe).getClassifier();
-        	 return toImmutableList(factory.classifierProp(cv.getQualifiedName()));
+        	 return toIList(factory.classifierProp(cv.getQualifiedName()));
          case Aadl2Package.LIST_VALUE:
 			final ListValue lv = (ListValue) pe;
-			List<org.sireum.aadl.ir.PropertyValue> elems = ilist();
+			List<org.sireum.aadl.ir.PropertyValue> elems = iList();
         	 for(PropertyExpression e : lv.getOwnedListElements()) {
 				elems = addAll(elems, getPropertyExpressionValue(e, path));
 			}
@@ -486,20 +486,20 @@ public class Visitor {
         	 switch(nv2.eClass().getClassifierID()) {
         	 case Aadl2Package.ENUMERATION_LITERAL:
 				final EnumerationLiteral el = (EnumerationLiteral) nv2;
-        		 return toImmutableList(factory.valueProp(el.getFullName()));
+        		 return toIList(factory.valueProp(el.getFullName()));
         	 case Aadl2Package.PROPERTY:
 				final Property _p = (Property) nv2;
         		 if(_p.getDefaultValue() != null) {
         			 return getPropertyExpressionValue(_p.getDefaultValue(), path);
         		 } else {
-        			 return toImmutableList(factory.valueProp(_p.getQualifiedName()));
+        			 return toIList(factory.valueProp(_p.getQualifiedName()));
         		 }
         	 case Aadl2Package.PROPERTY_CONSTANT:
 				final PropertyConstant pc = (PropertyConstant) nv2;
-        		 return toImmutableList(factory.valueProp(pc.getConstantValue().toString()));
+        		 return toIList(factory.valueProp(pc.getConstantValue().toString()));
         	 default:
         		 java.lang.System.err.println("Not handling " + pe.eClass().getClassifierID() + " " + nv2);
-        		 return ilist();
+        		 return iList();
         	 }
          case Aadl2Package.RECORD_VALUE:
 			final RecordValue rvy = (RecordValue) pe;
@@ -508,11 +508,11 @@ public class Visitor {
         	    		 factory.name(add(path, fv.getProperty().getQualifiedName())),
         	    		 getPropertyExpressionValue(fv.getOwnedValue(), path))
         	 ).collect(Collectors.toList());
-        	 return toImmutableList(factory.recordProp(properties));
+        	 return toIList(factory.recordProp(properties));
          case Aadl2Package.REFERENCE_VALUE:
 			final ReferenceValue rvx = (ReferenceValue) pe;
-			final org.sireum.aadl.ir.Name refName = factory.name(toImmutableList(rvx.toString()));
-        	 return toImmutableList(factory.referenceProp(refName));
+			final org.sireum.aadl.ir.Name refName = factory.name(toIList(rvx.toString()));
+        	 return toIList(factory.referenceProp(refName));
          case InstancePackage.INSTANCE_REFERENCE_VALUE:
              // FIXME: id is coming from InstancePackage rather than Aadl2Package.  Might cause the
              // following cast to fail if there is an id clash
@@ -520,10 +520,10 @@ public class Visitor {
 			final InstanceReferenceValue irv = (InstanceReferenceValue) pe;
 			final String t = irv.getReferencedInstanceObject().getInstanceObjectPath();
 
-        	 return toImmutableList(factory.referenceProp(factory.name(Arrays.asList(t.split("\\.")))));
+        	 return toIList(factory.referenceProp(factory.name(Arrays.asList(t.split("\\.")))));
          default:
         	 java.lang.System.err.println("Need to handle " + pe + " " + pe.eClass().getClassifierID());
-        	 return toImmutableList(factory.classifierProp(pe.getClass().getName()));
+        	 return toIList(factory.classifierProp(pe.getClass().getName()));
 		}
 	}
 
@@ -534,59 +534,75 @@ public class Visitor {
 		}
 
 		List<org.sireum.aadl.ir.Property> properties = f.getOwnedPropertyAssociations().stream().map(op ->
-		buildProperty(op, ilist())).collect(Collectors.toList());
+		buildProperty(op, iList())).collect(Collectors.toList());
 
-		List<org.sireum.aadl.ir.Component> subComponents = ilist();
+		List<org.sireum.aadl.ir.Component> subComponents = iList();
 		if(f instanceof DataTypeImpl) {
 			// do nothing as component types can't have subcomponents
 		} else if(f instanceof DataImplementation) {
 			final DataImplementation di = (DataImplementation) f;
 			final List<org.sireum.aadl.ir.Property> subProps = di.getType().getOwnedPropertyAssociations().stream()
 					.map(op ->
-					buildProperty(op, ilist())).collect(Collectors.toList());
+					buildProperty(op, iList())).collect(Collectors.toList());
 			properties = addAll(properties, subProps);
 
 			for(DataSubcomponent dsc : di.getOwnedDataSubcomponents()) {
-				final DataClassifier sct = (DataClassifier) dsc.getDataSubcomponentType();
-				final org.sireum.aadl.ir.Component c = processDataType(sct);
+				final org.sireum.aadl.ir.Name subName = factory.name(toIList(dsc.getName()));
 				final List<org.sireum.aadl.ir.Property> fProperties = dsc.getOwnedPropertyAssociations().stream()
-						.map(op ->
-						buildProperty(op, ilist())).collect(Collectors.toList());
+						.map(op -> buildProperty(op, iList())).collect(Collectors.toList());
 
-				final List<org.sireum.aadl.ir.Property> cProps = addAll(isz2List(c.properties()), fProperties);
+				final DataClassifier sct = (DataClassifier) dsc.getDataSubcomponentType();
+				if (sct != null) {
+					final org.sireum.aadl.ir.Component c = processDataType(sct);
 
-				final AadlASTJavaFactory.ComponentCategory category = AadlASTJavaFactory.ComponentCategory
-						.valueOf(c.category().name());
+					final List<org.sireum.aadl.ir.Property> cProps = addAll(isz2IList(c.properties()), fProperties);
 
-				final org.sireum.aadl.ir.Classifier classifier = c.classifier().nonEmpty() ? c.classifier().get()
-						: null;
+					final AadlASTJavaFactory.ComponentCategory category = AadlASTJavaFactory.ComponentCategory
+							.valueOf(c.category().name());
 
-				final org.sireum.aadl.ir.Component subby =
-						factory.component(factory.name(toImmutableList(dsc.getName())),
-						category, classifier,
-						isz2List(c.features()), isz2List(c.subComponents()),
-						isz2List(c.connections()), isz2List(c.connectionInstances()),
-						cProps,
-						isz2List(c.flows()), isz2List(c.modes()), isz2List(c.annexes()));
+					final org.sireum.aadl.ir.Classifier classifier = c.classifier().nonEmpty() ? c.classifier().get()
+							: null;
 
-				subComponents = add(subComponents, subby);
+					final org.sireum.aadl.ir.Component sub = factory.component(subName,
+							category, classifier, isz2IList(c.features()), isz2IList(c.subComponents()),
+							isz2IList(c.connections()), isz2IList(c.connectionInstances()), cProps,
+							isz2IList(c.flows()), isz2IList(c.modes()), isz2IList(c.annexes()));
+
+					subComponents = add(subComponents, sub);
+				} else {
+					// type not specified for subcomponent/field
+					final org.sireum.aadl.ir.Component sub = factory.component(subName, // name
+							AadlASTJavaFactory.ComponentCategory.Data, // category
+							null, // classifier
+							iList(), // features
+							iList(), // subComponents
+							iList(), // connections
+							iList(), // connectionInstances
+							fProperties, // properties
+							iList(), // flows
+							iList(), // modes
+							iList() // annexes
+					);
+
+					subComponents = add(subComponents, sub);
+				}
 			}
 		} else {
 			throw new RuntimeException("Unexpected data type: " + f);
 		}
 
 		final org.sireum.aadl.ir.Component c = factory.component(
-				factory.name(ilist()), //identifier
+				factory.name(iList()), //identifier
 				AadlASTJavaFactory.ComponentCategory.Data, // category
 				factory.classifier(name),
-				ilist(), // features
+				iList(), // features
 				subComponents,
-				ilist(), // connections
-				ilist(), // connectionInstances
+				iList(), // connections
+				iList(), // connectionInstances
 				properties,
-				ilist(), //flows
-				ilist(), // modes
-				ilist() // annexes
+				iList(), //flows
+				iList(), // modes
+				iList() // annexes
 				);
 		datamap.put(name, c);
 		return c;
@@ -602,11 +618,11 @@ public class Visitor {
 		return direction;
 	}
 
-	private <T> List<T> isz2List(org.sireum.IS<org.sireum.Z, T> isz) {
+	private <T> List<T> isz2IList(org.sireum.IS<org.sireum.Z, T> isz) {
 		return Collections.unmodifiableList(scala.collection.JavaConverters.seqAsJavaList(isz.elements()));
 	}
 
-	private <T> List<T> toImmutableList(T e) {
+	private <T> List<T> toIList(T e) {
 		final List<T> ret = new ArrayList<T>();
 		ret.add(e);
 		return Collections.unmodifiableList(ret);
@@ -624,7 +640,7 @@ public class Visitor {
 		return Collections.unmodifiableList(ret);
 	}
 
-	private <T> Set<T> toImmutableSet(T e) {
+	private <T> Set<T> toISet(T e) {
 		final Set<T> ret = new LinkedHashSet<T>();
 		ret.add(e);
 		return Collections.unmodifiableSet(ret);
@@ -636,7 +652,11 @@ public class Visitor {
 		return Collections.unmodifiableSet(ret);
 	}
 
-	private <T> List<T> ilist() {
+	private <T> List<T> iList() {
 		return Collections.emptyList();
+	}
+
+	private <T> Set<T> iSet() {
+		return Collections.emptySet();
 	}
 }
