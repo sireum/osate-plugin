@@ -46,6 +46,7 @@ import org.osate.aadl2.RangeValue;
 import org.osate.aadl2.RecordValue;
 import org.osate.aadl2.ReferenceValue;
 import org.osate.aadl2.StringLiteral;
+import org.osate.aadl2.Subcomponent;
 import org.osate.aadl2.UnitLiteral;
 import org.osate.aadl2.impl.AccessImpl;
 import org.osate.aadl2.impl.BusAccessImpl;
@@ -546,7 +547,15 @@ public class Visitor {
 					buildProperty(op, iList())).collect(Collectors.toList());
 			properties = addAll(properties, subProps);
 
-			for(DataSubcomponent dsc : di.getOwnedDataSubcomponents()) {
+			for (Subcomponent subcom : di.getAllSubcomponents()) {
+				if (!(subcom instanceof DataSubcomponent)) {
+					throw new RuntimeException(
+							"Unxepcted data subcomponent: " + subcom.getFullName() + " of type "
+									+ subcom.getClass().getSimpleName() + " from " + f.getFullName());
+				}
+
+				DataSubcomponent dsc = (DataSubcomponent) subcom;
+
 				final org.sireum.aadl.ir.Name subName = factory.name(toIList(dsc.getName()));
 				final List<org.sireum.aadl.ir.Property> fProperties = dsc.getOwnedPropertyAssociations().stream()
 						.map(op -> buildProperty(op, iList())).collect(Collectors.toList());
