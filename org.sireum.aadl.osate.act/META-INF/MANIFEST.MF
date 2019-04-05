@@ -14,3 +14,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  bin/,
  lib/act.jar
+Import-Package: org.osate.pluginsupport

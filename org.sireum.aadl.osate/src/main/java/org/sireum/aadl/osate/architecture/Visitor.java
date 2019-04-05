@@ -534,7 +534,8 @@ public class Visitor {
 			return datamap.get(name);
 		}
 
-		List<org.sireum.aadl.ir.Property> properties = f.getOwnedPropertyAssociations().stream().map(op ->
+		List<org.sireum.aadl.ir.Property> properties = f.getAllPropertyAssociations().stream()
+				.map(op ->
 		buildProperty(op, iList())).collect(Collectors.toList());
 
 		List<org.sireum.aadl.ir.Component> subComponents = iList();
@@ -542,7 +543,7 @@ public class Visitor {
 			// do nothing as component types can't have subcomponents
 		} else if(f instanceof DataImplementation) {
 			final DataImplementation di = (DataImplementation) f;
-			final List<org.sireum.aadl.ir.Property> subProps = di.getType().getOwnedPropertyAssociations().stream()
+			final List<org.sireum.aadl.ir.Property> subProps = di.getType().getAllPropertyAssociations().stream()
 					.map(op ->
 					buildProperty(op, iList())).collect(Collectors.toList());
 			properties = addAll(properties, subProps);
