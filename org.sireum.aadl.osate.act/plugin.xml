@@ -36,5 +36,12 @@
             id="org.sireum.aadl.osate.act.preferences.PreferencePage"
             name="ACT">
       </page>
+   </extension>
+   <extension
+         point="org.osate.pluginsupport.aadlcontribution">
+      <aadlcontribution
+            file="resources/TB_SYS.aadl"
+            id="org.sireum.aadl.osate.act.aadlcontribution.tbsys">
+      </aadlcontribution>
    </extension>   
 </plugin>
