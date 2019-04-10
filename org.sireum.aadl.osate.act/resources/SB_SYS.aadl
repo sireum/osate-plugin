@@ -1,0 +1,11 @@
+property set SB_SYS is
+
+    Compute_Entrypoint_Source_Text : list of aadlstring applies to (processor, virtual processor, system, system implementation, port, thread);
+
+    -- For scheduling
+    Thread_Type: enumeration (Active, Passive) => Active applies to (thread);
+
+    -- For integrating with other code
+    Is_External: aadlboolean => false applies to (thread, subprogram group, data);
+
+end SB_SYS;
