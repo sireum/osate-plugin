@@ -51,11 +51,8 @@ import org.osate.aadl2.UnitLiteral;
 import org.osate.aadl2.impl.AccessImpl;
 import org.osate.aadl2.impl.BusAccessImpl;
 import org.osate.aadl2.impl.BusSubcomponentImpl;
-import org.osate.aadl2.impl.DataImplementationImpl;
-import org.osate.aadl2.impl.DataPortImpl;
 import org.osate.aadl2.impl.DataTypeImpl;
 import org.osate.aadl2.impl.DirectedFeatureImpl;
-import org.osate.aadl2.impl.EventDataPortImpl;
 import org.osate.aadl2.impl.FeatureGroupImpl;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.ConnectionInstance;
@@ -75,6 +72,7 @@ import org.sireum.aadl.ir.AadlASTJavaFactory;
 public class Visitor {
 
 	final org.sireum.aadl.ir.AadlASTFactory factory = new org.sireum.aadl.ir.AadlASTFactory();
+
 
 	final Map<String, org.sireum.aadl.ir.Component> datamap = new LinkedHashMap<>();
 	final Map<List<String>, Set<Connection>> compConnMap = new HashMap<>();
@@ -306,12 +304,17 @@ public class Visitor {
 		default: throw new RuntimeException("Unexpected category: " + featureInst.getCategory());
 		}
 
-		final org.sireum.aadl.ir.Name identifier = factory.name(currentPath);
-
-		if((f instanceof DataPortImpl || f instanceof EventDataPortImpl) &&
-				(f.getClassifier() instanceof DataTypeImpl || f.getClassifier() instanceof DataImplementationImpl)) {
-			processDataType((DataClassifier) f.getClassifier());
+		switch (featureInst.getCategory()) {
+		case DATA_PORT:
+		case EVENT_DATA_PORT:
+		case PARAMETER:
+			if (f.getClassifier() instanceof DataClassifier) {
+				processDataType((DataClassifier) f.getClassifier());
+			}
+		default: // do nothing
 		}
+
+		final org.sireum.aadl.ir.Name identifier = factory.name(currentPath);
 
 		final List<FeatureInstance> featureInstances = featureInst.getFeatureInstances();
 		if(featureInstances.isEmpty()) {
