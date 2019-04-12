@@ -305,6 +305,7 @@ public class Visitor {
 		}
 
 		switch (featureInst.getCategory()) {
+		case DATA_ACCESS:
 		case DATA_PORT:
 		case EVENT_DATA_PORT:
 		case PARAMETER:
