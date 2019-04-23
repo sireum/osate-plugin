@@ -241,17 +241,32 @@ public class Emv2Visitor {
 			List<String> cPath = VisitorUtil.add(path, opc.getName());
 			id = factory.name(cPath, VisitorUtil.buildPosInfo(opc));
 		}
-		List<Name> source = VisitorUtil.toIList(factory.name(VisitorUtil.toIList(opc.getState().getFullName()),
-				VisitorUtil.buildPosInfo(opc.getState())));
 
+		List<Name> source = VisitorUtil.iList();
+		if (!opc.isAllStates()) {
+			source = VisitorUtil.toIList(factory.name(VisitorUtil.toIList(opc.getState().getFullName()),
+				VisitorUtil.buildPosInfo(opc.getState())));
+		} else {
+			source = EMV2Util.getAllErrorBehaviorStates(opc.getContainingComponentImpl()).stream()
+					.map(ebs -> getStateName(ebs))
+					.collect(Collectors.toList());
+		}
 		org.sireum.aadl.ir.ErrorCondition ec = null;
 		if (opc.getCondition() != null) {
 			ec = errorCondition(opc.getCondition(), path);
 		}
+		List<org.sireum.aadl.ir.Emv2Propagation> prop = VisitorUtil.iList();
 
-		List<org.sireum.aadl.ir.Emv2Propagation> prop = errorProp2Map(VisitorUtil.toIList(opc.getOutgoing()), false,
+		if (!opc.isAllPropagations()) {
+			prop = errorProp2Map(VisitorUtil.toIList(opc.getOutgoing()), false,
 				path);
-
+		} else {
+			List<ErrorPropagation> errorProp = EMV2Util
+					.getAllOutgoingErrorPropagations(opc.getContainingComponentImpl()).stream()
+					.filter(it -> (it instanceof ErrorPropagationImpl)).map(it -> (ErrorPropagationImpl) it)
+					.collect(Collectors.toList());
+			prop = errorProp2Map(errorProp, false, path);
+		}
 		return factory.errorPropagation(id, source, ec, prop);
 
 	}
