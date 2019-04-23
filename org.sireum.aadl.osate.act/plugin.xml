@@ -11,7 +11,7 @@
    </extension>
    <extension point="org.eclipse.ui.menus">
      <menuContribution
-       locationURI="menu:com.rockwellcollins.atc.darpacase.menus.menubar.main">
+       locationURI="menu:com.collins.fmw.cyres.menus.menubar.main">
        <menu
          id="org.sireum.SystemBuild"
          label="System Build">
