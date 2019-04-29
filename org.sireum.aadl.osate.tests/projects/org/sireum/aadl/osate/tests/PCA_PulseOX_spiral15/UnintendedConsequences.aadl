@@ -1,0 +1,27 @@
+--Copyright (C) 2018 Adventium Labs.
+--This material is based upon work supported by the US Army Medical Research and Material Command under Contract No.W81XWH-16-C-0192.  The views, opinions, and/or findings contained in this report are those of the authors) and should not be construed as an official Department of the Army position, policy or decision unless so designated by other documentation. 
+--The Model is provided "AS IS" without warranty, support, or indemnification of any kind, expressed or implied. The entire risk arising out of use of the model remains with the user.  In no event shall Adventium Labs be liable for any damages arising out of the use or inability to use the Model, even if Adventium Labs has been advised of the possibility of such damages.
+--For more information about using this and other Model Based Engineering tools see: http://www.adventiumlabs.com/our-work/products-services/model-based-engineering-mbe-tools.
+
+property set UnintendedConsequences is
+	with AAMI_80001;
+
+	UC01: constant AAMI_80001::Unintended_Consequence => [
+				ID => "UC01";
+				Description => "Patient is harmed";
+				Severity => Catastrophic;
+				Key_Properties => (Safety);
+			];
+	UC02: constant AAMI_80001::Unintended_Consequence => [
+				ID => "UC02";
+				Description => "Patient's PII or PIH is accessed by unprivileged entity";
+				Severity => High;
+				Key_Properties => (Security);
+			];
+	UC03: constant AAMI_80001::Unintended_Consequence => [
+				ID => "UC03";
+				Description => "Patient experiences discomfort";
+				Severity => Medium;
+				Key_Properties => (Safety, Effectiveness);
+			];
+end UnintendedConsequences;

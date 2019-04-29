@@ -188,7 +188,7 @@ public class Visitor {
 	private List<org.sireum.aadl.ir.EndPoint> flattenFeatureGroup(List<String> component, String parentName,
 			FeatureGroupImpl fgi, ConnectedElement connElem) {
 		List<org.sireum.aadl.ir.EndPoint> res = VisitorUtil.iList();
-		FeatureGroupType fgt = fgi.basicGetFeatureGroupType();
+		FeatureGroupType fgt = fgi.getFeatureGroupType();
 		if (fgt == null) {
 			final FeatureGroupPrototype fgpt = fgi.basicGetFeatureGroupPrototype();
 			fgt = ResolvePrototypeUtil.resolveFeatureGroupPrototype(fgpt,
