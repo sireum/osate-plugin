@@ -1,0 +1,20 @@
+package SSCATE_Errors
+public
+	
+	
+annex EMv2
+{**
+	error types 
+	--App command Error types
+	start_commission : type ; -- base class for errors  
+	start_omission : type ;
+	stop_commission : type ;
+	stop_omission : type ; 
+	
+	--PulseOx Error Types
+	SpO2_ValueError : type;
+	SpO2_Omission : type;
+	end types;
+**};
+
+end SSCATE_Errors;

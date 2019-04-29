@@ -5,7 +5,23 @@
       "type" : "Component",
       "identifier" : {
         "type" : "Name",
-        "name" : ["Root_one_reference_Instance"]
+        "name" : ["Root_one_reference_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "__synthetic0.aadl"
+            },
+            "beginLine" : 41,
+            "beginColumn" : 2,
+            "endLine" : 50,
+            "endColumn" : 25,
+            "offset" : 912,
+            "length" : 420
+          }
+        }
       },
       "category" : {
         "type" : "ComponentCategory",
@@ -19,7 +35,23 @@
           "type" : "FeatureEnd",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "root_in"]
+            "name" : ["Root_one_reference_Instance", "root_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 8,
+                "beginColumn" : 4,
+                "endLine" : 8,
+                "endColumn" : 25,
+                "offset" : 182,
+                "length" : 21
+              }
+            }
           },
           "direction" : {
             "type" : "Direction",
@@ -39,7 +71,23 @@
           "type" : "FeatureEnd",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "root_out"]
+            "name" : ["Root_one_reference_Instance", "root_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 9,
+                "beginColumn" : 4,
+                "endLine" : 9,
+                "endColumn" : 26,
+                "offset" : 207,
+                "length" : 22
+              }
+            }
           },
           "direction" : {
             "type" : "Direction",
@@ -61,7 +109,23 @@
           "type" : "Component",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "Sub1"]
+            "name" : ["Root_one_reference_Instance", "Sub1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 44,
+                "beginColumn" : 4,
+                "endLine" : 44,
+                "endColumn" : 33,
+                "offset" : 1064,
+                "length" : 29
+              }
+            }
           },
           "category" : {
             "type" : "ComponentCategory",
@@ -79,7 +143,23 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub1", "sub_in"]
+                "name" : ["Root_one_reference_Instance", "Sub1", "sub_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 14,
+                    "beginColumn" : 4,
+                    "endLine" : 14,
+                    "endColumn" : 23,
+                    "offset" : 275,
+                    "length" : 19
+                  }
+                }
               },
               "direction" : {
                 "type" : "Direction",
@@ -99,7 +179,23 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub1", "sub_out"]
+                "name" : ["Root_one_reference_Instance", "Sub1", "sub_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 15,
+                    "beginColumn" : 4,
+                    "endLine" : 15,
+                    "endColumn" : 25,
+                    "offset" : 298,
+                    "length" : 21
+                  }
+                }
               },
               "direction" : {
                 "type" : "Direction",
@@ -119,7 +215,23 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub1", "sub_port"]
+                "name" : ["Root_one_reference_Instance", "Sub1", "sub_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 16,
+                    "beginColumn" : 4,
+                    "endLine" : 16,
+                    "endColumn" : 37,
+                    "offset" : 323,
+                    "length" : 33
+                  }
+                }
               },
               "direction" : {
                 "type" : "Direction",
@@ -154,11 +266,24 @@
               "name" : "Emv2",
               "clause" : {
                 "type" : "Emv2Clause",
-                "libraries" : [],
+                "libraries" : [
+                ],
                 "propagations" : [
                 ],
                 "flows" : [
-                ]
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                }
               }
             }
           ]
@@ -167,7 +292,23 @@
           "type" : "Component",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "Sub2"]
+            "name" : ["Root_one_reference_Instance", "Sub2"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 45,
+                "beginColumn" : 4,
+                "endLine" : 45,
+                "endColumn" : 33,
+                "offset" : 1097,
+                "length" : 29
+              }
+            }
           },
           "category" : {
             "type" : "ComponentCategory",
@@ -185,7 +326,23 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub2", "sub_in"]
+                "name" : ["Root_one_reference_Instance", "Sub2", "sub_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 14,
+                    "beginColumn" : 4,
+                    "endLine" : 14,
+                    "endColumn" : 23,
+                    "offset" : 275,
+                    "length" : 19
+                  }
+                }
               },
               "direction" : {
                 "type" : "Direction",
@@ -205,7 +362,23 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub2", "sub_out"]
+                "name" : ["Root_one_reference_Instance", "Sub2", "sub_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 15,
+                    "beginColumn" : 4,
+                    "endLine" : 15,
+                    "endColumn" : 25,
+                    "offset" : 298,
+                    "length" : 21
+                  }
+                }
               },
               "direction" : {
                 "type" : "Direction",
@@ -225,7 +398,23 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub2", "sub_port"]
+                "name" : ["Root_one_reference_Instance", "Sub2", "sub_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 16,
+                    "beginColumn" : 4,
+                    "endLine" : 16,
+                    "endColumn" : 37,
+                    "offset" : 323,
+                    "length" : 33
+                  }
+                }
               },
               "direction" : {
                 "type" : "Direction",
@@ -260,11 +449,24 @@
               "name" : "Emv2",
               "clause" : {
                 "type" : "Emv2Clause",
-                "libraries" : [],
+                "libraries" : [
+                ],
                 "propagations" : [
                 ],
                 "flows" : [
-                ]
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                }
               }
             }
           ]
@@ -275,20 +477,55 @@
           "type" : "Connection",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "system_to_comp_in"]
+            "name" : ["Root_one_reference_Instance", "system_to_comp_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 47,
+                "beginColumn" : 4,
+                "endLine" : 47,
+                "endColumn" : 55,
+                "offset" : 1144,
+                "length" : 51
+              }
+            }
           },
           "src" : [
             {
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance"]
+                "name" : ["Root_one_reference_Instance"],
+                "pos" : {
+                  "type" : "None"
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_one_reference_Instance", "root_in"]
+                  "name" : ["Root_one_reference_Instance", "root_in"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 8,
+                      "beginColumn" : 4,
+                      "endLine" : 8,
+                      "endColumn" : 25,
+                      "offset" : 182,
+                      "length" : 21
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -305,13 +542,45 @@
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub1"]
+                "name" : ["Root_one_reference_Instance", "Sub1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 44,
+                    "beginColumn" : 4,
+                    "endLine" : 44,
+                    "endColumn" : 33,
+                    "offset" : 1064,
+                    "length" : 29
+                  }
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_one_reference_Instance", "Sub1", "sub_in"]
+                  "name" : ["Root_one_reference_Instance", "Sub1", "sub_in"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 14,
+                      "beginColumn" : 4,
+                      "endLine" : 14,
+                      "endColumn" : 23,
+                      "offset" : 275,
+                      "length" : 19
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -331,7 +600,10 @@
           "connectionInstances" : [
             {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "root_in -> Sub1", "sub_in"]
+              "name" : ["Root_one_reference_Instance", "root_in -> Sub1", "sub_in"],
+              "pos" : {
+                "type" : "None"
+              }
             }
           ],
           "properties" : [
@@ -341,20 +613,68 @@
           "type" : "Connection",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "comp_to_comp"]
+            "name" : ["Root_one_reference_Instance", "comp_to_comp"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 49,
+                "beginColumn" : 4,
+                "endLine" : 49,
+                "endColumn" : 55,
+                "offset" : 1256,
+                "length" : 51
+              }
+            }
           },
           "src" : [
             {
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub1"]
+                "name" : ["Root_one_reference_Instance", "Sub1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 44,
+                    "beginColumn" : 4,
+                    "endLine" : 44,
+                    "endColumn" : 33,
+                    "offset" : 1064,
+                    "length" : 29
+                  }
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_one_reference_Instance", "Sub1", "sub_port"]
+                  "name" : ["Root_one_reference_Instance", "Sub1", "sub_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 16,
+                      "beginColumn" : 4,
+                      "endLine" : 16,
+                      "endColumn" : 37,
+                      "offset" : 323,
+                      "length" : 33
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -371,13 +691,45 @@
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub2"]
+                "name" : ["Root_one_reference_Instance", "Sub2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 4,
+                    "endLine" : 45,
+                    "endColumn" : 33,
+                    "offset" : 1097,
+                    "length" : 29
+                  }
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_one_reference_Instance", "Sub2", "sub_port"]
+                  "name" : ["Root_one_reference_Instance", "Sub2", "sub_port"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 16,
+                      "beginColumn" : 4,
+                      "endLine" : 16,
+                      "endColumn" : 37,
+                      "offset" : 323,
+                      "length" : 33
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -397,11 +749,17 @@
           "connectionInstances" : [
             {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "Sub1", "sub_port -> Sub2", "sub_port"]
+              "name" : ["Root_one_reference_Instance", "Sub1", "sub_port -> Sub2", "sub_port"],
+              "pos" : {
+                "type" : "None"
+              }
             },
             {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "Sub2", "sub_port -> Sub1", "sub_port"]
+              "name" : ["Root_one_reference_Instance", "Sub2", "sub_port -> Sub1", "sub_port"],
+              "pos" : {
+                "type" : "None"
+              }
             }
           ],
           "properties" : [
@@ -411,20 +769,68 @@
           "type" : "Connection",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "system_to_comp_out"]
+            "name" : ["Root_one_reference_Instance", "system_to_comp_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 48,
+                "beginColumn" : 4,
+                "endLine" : 48,
+                "endColumn" : 57,
+                "offset" : 1199,
+                "length" : 53
+              }
+            }
           },
           "src" : [
             {
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub2"]
+                "name" : ["Root_one_reference_Instance", "Sub2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 45,
+                    "beginColumn" : 4,
+                    "endLine" : 45,
+                    "endColumn" : 33,
+                    "offset" : 1097,
+                    "length" : 29
+                  }
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_one_reference_Instance", "Sub2", "sub_out"]
+                  "name" : ["Root_one_reference_Instance", "Sub2", "sub_out"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 15,
+                      "beginColumn" : 4,
+                      "endLine" : 15,
+                      "endColumn" : 25,
+                      "offset" : 298,
+                      "length" : 21
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -441,13 +847,32 @@
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance"]
+                "name" : ["Root_one_reference_Instance"],
+                "pos" : {
+                  "type" : "None"
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_one_reference_Instance", "root_out"]
+                  "name" : ["Root_one_reference_Instance", "root_out"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 9,
+                      "beginColumn" : 4,
+                      "endLine" : 9,
+                      "endColumn" : 26,
+                      "offset" : 207,
+                      "length" : 22
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -467,7 +892,10 @@
           "connectionInstances" : [
             {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "Sub2", "sub_out -> root_out"]
+              "name" : ["Root_one_reference_Instance", "Sub2", "sub_out -> root_out"],
+              "pos" : {
+                "type" : "None"
+              }
             }
           ],
           "properties" : [
@@ -479,19 +907,67 @@
           "type" : "ConnectionInstance",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "root_in -> Sub1.sub_in"]
+            "name" : ["Root_one_reference_Instance", "root_in -> Sub1.sub_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 47,
+                "beginColumn" : 4,
+                "endLine" : 47,
+                "endColumn" : 55,
+                "offset" : 1144,
+                "length" : 51
+              }
+            }
           },
           "src" : {
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance"]
+              "name" : ["Root_one_reference_Instance"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 41,
+                  "beginColumn" : 2,
+                  "endLine" : 50,
+                  "endColumn" : 25,
+                  "offset" : 912,
+                  "length" : 420
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "root_in"]
+                "name" : ["Root_one_reference_Instance", "root_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 8,
+                    "beginColumn" : 4,
+                    "endLine" : 8,
+                    "endColumn" : 25,
+                    "offset" : 182,
+                    "length" : 21
+                  }
+                }
               }
             },
             "direction" : {
@@ -506,13 +982,45 @@
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "Sub1"]
+              "name" : ["Root_one_reference_Instance", "Sub1"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 44,
+                  "beginColumn" : 4,
+                  "endLine" : 44,
+                  "endColumn" : 33,
+                  "offset" : 1064,
+                  "length" : 29
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub1", "sub_in"]
+                "name" : ["Root_one_reference_Instance", "Sub1", "sub_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 14,
+                    "beginColumn" : 4,
+                    "endLine" : 14,
+                    "endColumn" : 23,
+                    "offset" : 275,
+                    "length" : 19
+                  }
+                }
               }
             },
             "direction" : {
@@ -532,11 +1040,43 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "system_to_comp_in"]
+                "name" : ["Root_one_reference_Instance", "system_to_comp_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 47,
+                    "beginColumn" : 4,
+                    "endLine" : 47,
+                    "endColumn" : 55,
+                    "offset" : 1144,
+                    "length" : 51
+                  }
+                }
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance"]
+                "name" : ["Root_one_reference_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 2,
+                    "endLine" : 50,
+                    "endColumn" : 25,
+                    "offset" : 912,
+                    "length" : 420
+                  }
+                }
               },
               "isParent" : true
             }
@@ -548,19 +1088,67 @@
           "type" : "ConnectionInstance",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "Sub1.sub_port -> Sub2.sub_port"]
+            "name" : ["Root_one_reference_Instance", "Sub1.sub_port -> Sub2.sub_port"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 49,
+                "beginColumn" : 4,
+                "endLine" : 49,
+                "endColumn" : 55,
+                "offset" : 1256,
+                "length" : 51
+              }
+            }
           },
           "src" : {
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "Sub1"]
+              "name" : ["Root_one_reference_Instance", "Sub1"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 44,
+                  "beginColumn" : 4,
+                  "endLine" : 44,
+                  "endColumn" : 33,
+                  "offset" : 1064,
+                  "length" : 29
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub1", "sub_port"]
+                "name" : ["Root_one_reference_Instance", "Sub1", "sub_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 16,
+                    "beginColumn" : 4,
+                    "endLine" : 16,
+                    "endColumn" : 37,
+                    "offset" : 323,
+                    "length" : 33
+                  }
+                }
               }
             },
             "direction" : {
@@ -575,13 +1163,45 @@
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "Sub2"]
+              "name" : ["Root_one_reference_Instance", "Sub2"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 45,
+                  "beginColumn" : 4,
+                  "endLine" : 45,
+                  "endColumn" : 33,
+                  "offset" : 1097,
+                  "length" : 29
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub2", "sub_port"]
+                "name" : ["Root_one_reference_Instance", "Sub2", "sub_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 16,
+                    "beginColumn" : 4,
+                    "endLine" : 16,
+                    "endColumn" : 37,
+                    "offset" : 323,
+                    "length" : 33
+                  }
+                }
               }
             },
             "direction" : {
@@ -601,11 +1221,43 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "comp_to_comp"]
+                "name" : ["Root_one_reference_Instance", "comp_to_comp"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 49,
+                    "beginColumn" : 4,
+                    "endLine" : 49,
+                    "endColumn" : 55,
+                    "offset" : 1256,
+                    "length" : 51
+                  }
+                }
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance"]
+                "name" : ["Root_one_reference_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 2,
+                    "endLine" : 50,
+                    "endColumn" : 25,
+                    "offset" : 912,
+                    "length" : 420
+                  }
+                }
               },
               "isParent" : true
             }
@@ -617,19 +1269,67 @@
           "type" : "ConnectionInstance",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "Sub2.sub_out -> root_out"]
+            "name" : ["Root_one_reference_Instance", "Sub2.sub_out -> root_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 48,
+                "beginColumn" : 4,
+                "endLine" : 48,
+                "endColumn" : 57,
+                "offset" : 1199,
+                "length" : 53
+              }
+            }
           },
           "src" : {
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "Sub2"]
+              "name" : ["Root_one_reference_Instance", "Sub2"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 45,
+                  "beginColumn" : 4,
+                  "endLine" : 45,
+                  "endColumn" : 33,
+                  "offset" : 1097,
+                  "length" : 29
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub2", "sub_out"]
+                "name" : ["Root_one_reference_Instance", "Sub2", "sub_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 15,
+                    "beginColumn" : 4,
+                    "endLine" : 15,
+                    "endColumn" : 25,
+                    "offset" : 298,
+                    "length" : 21
+                  }
+                }
               }
             },
             "direction" : {
@@ -644,13 +1344,45 @@
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance"]
+              "name" : ["Root_one_reference_Instance"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 41,
+                  "beginColumn" : 2,
+                  "endLine" : 50,
+                  "endColumn" : 25,
+                  "offset" : 912,
+                  "length" : 420
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "root_out"]
+                "name" : ["Root_one_reference_Instance", "root_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 9,
+                    "beginColumn" : 4,
+                    "endLine" : 9,
+                    "endColumn" : 26,
+                    "offset" : 207,
+                    "length" : 22
+                  }
+                }
               }
             },
             "direction" : {
@@ -670,11 +1402,43 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "system_to_comp_out"]
+                "name" : ["Root_one_reference_Instance", "system_to_comp_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 48,
+                    "beginColumn" : 4,
+                    "endLine" : 48,
+                    "endColumn" : 57,
+                    "offset" : 1199,
+                    "length" : 53
+                  }
+                }
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance"]
+                "name" : ["Root_one_reference_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 2,
+                    "endLine" : 50,
+                    "endColumn" : 25,
+                    "offset" : 912,
+                    "length" : 420
+                  }
+                }
               },
               "isParent" : true
             }
@@ -686,19 +1450,67 @@
           "type" : "ConnectionInstance",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_one_reference_Instance", "Sub2.sub_port -> Sub1.sub_port"]
+            "name" : ["Root_one_reference_Instance", "Sub2.sub_port -> Sub1.sub_port"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 49,
+                "beginColumn" : 4,
+                "endLine" : 49,
+                "endColumn" : 55,
+                "offset" : 1256,
+                "length" : 51
+              }
+            }
           },
           "src" : {
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "Sub2"]
+              "name" : ["Root_one_reference_Instance", "Sub2"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 45,
+                  "beginColumn" : 4,
+                  "endLine" : 45,
+                  "endColumn" : 33,
+                  "offset" : 1097,
+                  "length" : 29
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub2", "sub_port"]
+                "name" : ["Root_one_reference_Instance", "Sub2", "sub_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 16,
+                    "beginColumn" : 4,
+                    "endLine" : 16,
+                    "endColumn" : 37,
+                    "offset" : 323,
+                    "length" : 33
+                  }
+                }
               }
             },
             "direction" : {
@@ -713,13 +1525,45 @@
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_one_reference_Instance", "Sub1"]
+              "name" : ["Root_one_reference_Instance", "Sub1"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 44,
+                  "beginColumn" : 4,
+                  "endLine" : 44,
+                  "endColumn" : 33,
+                  "offset" : 1064,
+                  "length" : 29
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "Sub1", "sub_port"]
+                "name" : ["Root_one_reference_Instance", "Sub1", "sub_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 16,
+                    "beginColumn" : 4,
+                    "endLine" : 16,
+                    "endColumn" : 37,
+                    "offset" : 323,
+                    "length" : 33
+                  }
+                }
               }
             },
             "direction" : {
@@ -739,11 +1583,43 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance", "comp_to_comp"]
+                "name" : ["Root_one_reference_Instance", "comp_to_comp"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 49,
+                    "beginColumn" : 4,
+                    "endLine" : 49,
+                    "endColumn" : 55,
+                    "offset" : 1256,
+                    "length" : 51
+                  }
+                }
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_one_reference_Instance"]
+                "name" : ["Root_one_reference_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 2,
+                    "endLine" : 50,
+                    "endColumn" : 25,
+                    "offset" : 912,
+                    "length" : 420
+                  }
+                }
               },
               "isParent" : true
             }
@@ -764,11 +1640,24 @@
           "name" : "Emv2",
           "clause" : {
             "type" : "Emv2Clause",
-            "libraries" : [],
+            "libraries" : [
+            ],
             "propagations" : [
             ],
             "flows" : [
-            ]
+            ],
+            "componentBehavior" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Emv2BehaviorSection",
+                "events" : [
+                ],
+                "transitions" : [
+                ],
+                "propagations" : [
+                ]
+              }
+            }
           }
         }
       ]

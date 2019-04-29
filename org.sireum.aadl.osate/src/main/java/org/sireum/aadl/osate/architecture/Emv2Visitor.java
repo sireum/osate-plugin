@@ -1,7 +1,6 @@
 package org.sireum.aadl.osate.architecture;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,7 +65,7 @@ public class Emv2Visitor {
 			List<String> path) {
 		List<org.sireum.aadl.ir.Emv2Propagation> prop = new ArrayList<>();
 		errorProp.stream().forEach(ep -> {
-			HashSet<Name> inErrorTokens = new HashSet<>();
+			List<Name> inErrorTokens = new ArrayList<>();
 			ep.getTypeSet().getTypeTokens().forEach(tt -> {
 				tt.getType().forEach(t -> {
 					inErrorTokens.add(getErrorType(t));
@@ -151,7 +150,7 @@ public class Emv2Visitor {
 					prop = errorProp2Map(VisitorUtil.toIList(s), false, path).get(0);
 				}
 				sources.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(src)),
-						org.sireum.aadl.ir.AadlASTJavaFactory.FlowKind.Source, prop, null));
+						org.sireum.aadl.ir.AadlASTJavaFactory.FlowKind.Source, null, prop));
 			}
 		});
 		return sources;
@@ -175,7 +174,7 @@ public class Emv2Visitor {
 				prop = errorProp2Map(VisitorUtil.toIList(snk.getIncoming()), false, path).get(0);
 			}
 			sinks.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(snk)),
-					org.sireum.aadl.ir.AadlASTJavaFactory.FlowKind.Source, prop, null));
+					org.sireum.aadl.ir.AadlASTJavaFactory.FlowKind.Sink, prop, null));
 
 		});
 		return sinks;

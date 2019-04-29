@@ -5,7 +5,23 @@
       "type" : "Component",
       "identifier" : {
         "type" : "Name",
-        "name" : ["Chassis_System_i_Instance"]
+        "name" : ["Chassis_System_i_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "__synthetic0.aadl"
+            },
+            "beginLine" : 8,
+            "beginColumn" : 3,
+            "endLine" : 11,
+            "endColumn" : 24,
+            "offset" : 106,
+            "length" : 131
+          }
+        }
       },
       "category" : {
         "type" : "ComponentCategory",
@@ -21,7 +37,23 @@
           "type" : "Component",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Chassis_System_i_Instance", "chassis_process"]
+            "name" : ["Chassis_System_i_Instance", "chassis_process"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 10,
+                "beginColumn" : 7,
+                "endLine" : 10,
+                "endColumn" : 50,
+                "offset" : 170,
+                "length" : 43
+              }
+            }
           },
           "category" : {
             "type" : "ComponentCategory",
@@ -41,7 +73,23 @@
               "type" : "Component",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"]
+                "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 18,
+                    "beginColumn" : 7,
+                    "endLine" : 18,
+                    "endColumn" : 35,
+                    "offset" : 359,
+                    "length" : 28
+                  }
+                }
               },
               "category" : {
                 "type" : "ComponentCategory",
@@ -59,7 +107,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 28,
+                        "beginColumn" : 7,
+                        "endLine" : 28,
+                        "endColumn" : 48,
+                        "offset" : 684,
+                        "length" : 41
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -81,7 +145,23 @@
                       "type" : "Property",
                       "name" : {
                         "type" : "Name",
-                        "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches", "Data_Model::Data_Representation"]
+                        "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 26,
+                            "beginColumn" : 4,
+                            "endLine" : 29,
+                            "endColumn" : 36,
+                            "offset" : 1108,
+                            "length" : 162
+                          }
+                        }
                       },
                       "propertyValues" : [
                         {
@@ -94,7 +174,23 @@
                       "type" : "Property",
                       "name" : {
                         "type" : "Name",
-                        "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches", "Data_Model::Element_Names"]
+                        "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches", "Data_Model::Element_Names"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 43,
+                            "beginColumn" : 4,
+                            "endLine" : 43,
+                            "endColumn" : 68,
+                            "offset" : 1909,
+                            "length" : 64
+                          }
+                        }
                       },
                       "propertyValues" : [
                         {
@@ -119,7 +215,23 @@
                       "type" : "Property",
                       "name" : {
                         "type" : "Name",
-                        "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches", "Data_Model::Base_Type"]
+                        "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches", "Data_Model::Base_Type"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 5,
+                            "beginColumn" : 4,
+                            "endLine" : 5,
+                            "endColumn" : 73,
+                            "offset" : 106,
+                            "length" : 69
+                          }
+                        }
                       },
                       "propertyValues" : [
                         {
@@ -146,7 +258,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "UpdatedChassisSwitches"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "UpdatedChassisSwitches"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 29,
+                        "beginColumn" : 7,
+                        "endLine" : 29,
+                        "endColumn" : 46,
+                        "offset" : 732,
+                        "length" : 39
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -174,7 +302,23 @@
                   "type" : "Property",
                   "name" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "Thread_Properties::Dispatch_Protocol"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "plugin\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 12,
+                        "beginColumn" : 2,
+                        "endLine" : 13,
+                        "endColumn" : 50,
+                        "offset" : 476,
+                        "length" : 97
+                      }
+                    }
                   },
                   "propertyValues" : [
                     {
@@ -187,7 +331,23 @@
                   "type" : "Property",
                   "name" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "Timing_Properties::Period"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "plugin\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 191,
+                        "beginColumn" : 2,
+                        "endLine" : 192,
+                        "endColumn" : 99,
+                        "offset" : 11575,
+                        "length" : 119
+                      }
+                    }
                   },
                   "propertyValues" : [
                     {
@@ -211,11 +371,24 @@
                   "name" : "Emv2",
                   "clause" : {
                     "type" : "Emv2Clause",
-                    "libraries" : [],
+                    "libraries" : [
+                    ],
                     "propagations" : [
                     ],
                     "flows" : [
-                    ]
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    }
                   }
                 }
               ]
@@ -224,7 +397,23 @@
               "type" : "Component",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"]
+                "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 7,
+                    "endLine" : 19,
+                    "endColumn" : 35,
+                    "offset" : 394,
+                    "length" : 28
+                  }
+                }
               },
               "category" : {
                 "type" : "ComponentCategory",
@@ -242,7 +431,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 7,
+                        "endLine" : 41,
+                        "endColumn" : 46,
+                        "offset" : 1003,
+                        "length" : 39
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -264,7 +469,23 @@
                       "type" : "Property",
                       "name" : {
                         "type" : "Name",
-                        "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches", "Data_Model::Data_Representation"]
+                        "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 26,
+                            "beginColumn" : 4,
+                            "endLine" : 29,
+                            "endColumn" : 36,
+                            "offset" : 1108,
+                            "length" : 162
+                          }
+                        }
                       },
                       "propertyValues" : [
                         {
@@ -277,7 +498,23 @@
                       "type" : "Property",
                       "name" : {
                         "type" : "Name",
-                        "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches", "Data_Model::Element_Names"]
+                        "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches", "Data_Model::Element_Names"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 43,
+                            "beginColumn" : 4,
+                            "endLine" : 43,
+                            "endColumn" : 68,
+                            "offset" : 1909,
+                            "length" : 64
+                          }
+                        }
                       },
                       "propertyValues" : [
                         {
@@ -302,7 +539,23 @@
                       "type" : "Property",
                       "name" : {
                         "type" : "Name",
-                        "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches", "Data_Model::Base_Type"]
+                        "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches", "Data_Model::Base_Type"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 5,
+                            "beginColumn" : 4,
+                            "endLine" : 5,
+                            "endColumn" : 73,
+                            "offset" : 106,
+                            "length" : 69
+                          }
+                        }
                       },
                       "propertyValues" : [
                         {
@@ -329,7 +582,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "UpdatedChassisSwitches"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "UpdatedChassisSwitches"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 42,
+                        "beginColumn" : 7,
+                        "endLine" : 42,
+                        "endColumn" : 45,
+                        "offset" : 1049,
+                        "length" : 38
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -357,7 +626,23 @@
                   "type" : "Property",
                   "name" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "Thread_Properties::Dispatch_Protocol"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "plugin\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 12,
+                        "beginColumn" : 2,
+                        "endLine" : 13,
+                        "endColumn" : 50,
+                        "offset" : 476,
+                        "length" : 97
+                      }
+                    }
                   },
                   "propertyValues" : [
                     {
@@ -370,7 +655,23 @@
                   "type" : "Property",
                   "name" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "Timing_Properties::Period"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "plugin\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 191,
+                        "beginColumn" : 2,
+                        "endLine" : 192,
+                        "endColumn" : 99,
+                        "offset" : 11575,
+                        "length" : 119
+                      }
+                    }
                   },
                   "propertyValues" : [
                     {
@@ -394,11 +695,24 @@
                   "name" : "Emv2",
                   "clause" : {
                     "type" : "Emv2Clause",
-                    "libraries" : [],
+                    "libraries" : [
+                    ],
                     "propagations" : [
                     ],
                     "flows" : [
-                    ]
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    }
                   }
                 }
               ]
@@ -409,20 +723,68 @@
               "type" : "Connection",
               "name" : {
                 "type" : "Name",
-                "name" : ["Chassis_System_i_Instance", "chassis_process", "c1"]
+                "name" : ["Chassis_System_i_Instance", "chassis_process", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 21,
+                    "beginColumn" : 7,
+                    "endLine" : 21,
+                    "endColumn" : 69,
+                    "offset" : 446,
+                    "length" : 62
+                  }
+                }
               },
               "src" : [
                 {
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 18,
+                        "beginColumn" : 7,
+                        "endLine" : 18,
+                        "endColumn" : 35,
+                        "offset" : 359,
+                        "length" : 28
+                      }
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches"]
+                      "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 28,
+                          "beginColumn" : 7,
+                          "endLine" : 28,
+                          "endColumn" : 48,
+                          "offset" : 684,
+                          "length" : 41
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -439,13 +801,45 @@
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 19,
+                        "beginColumn" : 7,
+                        "endLine" : 19,
+                        "endColumn" : 35,
+                        "offset" : 394,
+                        "length" : 28
+                      }
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches"]
+                      "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 41,
+                          "beginColumn" : 7,
+                          "endLine" : 41,
+                          "endColumn" : 46,
+                          "offset" : 1003,
+                          "length" : 39
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -465,7 +859,10 @@
               "connectionInstances" : [
                 {
                   "type" : "Name",
-                  "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches -> consumer", "ChassisSwitches"]
+                  "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches -> consumer", "ChassisSwitches"],
+                  "pos" : {
+                    "type" : "None"
+                  }
                 }
               ],
               "properties" : [
@@ -475,20 +872,68 @@
               "type" : "Connection",
               "name" : {
                 "type" : "Name",
-                "name" : ["Chassis_System_i_Instance", "chassis_process", "c2"]
+                "name" : ["Chassis_System_i_Instance", "chassis_process", "c2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 22,
+                    "beginColumn" : 7,
+                    "endLine" : 22,
+                    "endColumn" : 83,
+                    "offset" : 515,
+                    "length" : 76
+                  }
+                }
               },
               "src" : [
                 {
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 18,
+                        "beginColumn" : 7,
+                        "endLine" : 18,
+                        "endColumn" : 35,
+                        "offset" : 359,
+                        "length" : 28
+                      }
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "UpdatedChassisSwitches"]
+                      "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "UpdatedChassisSwitches"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 29,
+                          "beginColumn" : 7,
+                          "endLine" : 29,
+                          "endColumn" : 46,
+                          "offset" : 732,
+                          "length" : 39
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -505,13 +950,45 @@
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 19,
+                        "beginColumn" : 7,
+                        "endLine" : 19,
+                        "endColumn" : 35,
+                        "offset" : 394,
+                        "length" : 28
+                      }
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "UpdatedChassisSwitches"]
+                      "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "UpdatedChassisSwitches"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 42,
+                          "beginColumn" : 7,
+                          "endLine" : 42,
+                          "endColumn" : 45,
+                          "offset" : 1049,
+                          "length" : 38
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -531,7 +1008,10 @@
               "connectionInstances" : [
                 {
                   "type" : "Name",
-                  "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "UpdatedChassisSwitches -> consumer", "UpdatedChassisSwitches"]
+                  "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "UpdatedChassisSwitches -> consumer", "UpdatedChassisSwitches"],
+                  "pos" : {
+                    "type" : "None"
+                  }
                 }
               ],
               "properties" : [
@@ -543,19 +1023,67 @@
               "type" : "ConnectionInstance",
               "name" : {
                 "type" : "Name",
-                "name" : ["Chassis_System_i_Instance", "chassis_process", "producer.ChassisSwitches -> consumer.ChassisSwitches"]
+                "name" : ["Chassis_System_i_Instance", "chassis_process", "producer.ChassisSwitches -> consumer.ChassisSwitches"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 21,
+                    "beginColumn" : 7,
+                    "endLine" : 21,
+                    "endColumn" : 69,
+                    "offset" : 446,
+                    "length" : 62
+                  }
+                }
               },
               "src" : {
                 "type" : "EndPoint",
                 "component" : {
                   "type" : "Name",
-                  "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"]
+                  "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 18,
+                      "beginColumn" : 7,
+                      "endLine" : 18,
+                      "endColumn" : 35,
+                      "offset" : 359,
+                      "length" : 28
+                    }
+                  }
                 },
                 "feature" : {
                   "type" : "Some",
                   "value" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "ChassisSwitches"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 28,
+                        "beginColumn" : 7,
+                        "endLine" : 28,
+                        "endColumn" : 48,
+                        "offset" : 684,
+                        "length" : 41
+                      }
+                    }
                   }
                 },
                 "direction" : {
@@ -570,13 +1098,45 @@
                 "type" : "EndPoint",
                 "component" : {
                   "type" : "Name",
-                  "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"]
+                  "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 19,
+                      "beginColumn" : 7,
+                      "endLine" : 19,
+                      "endColumn" : 35,
+                      "offset" : 394,
+                      "length" : 28
+                    }
+                  }
                 },
                 "feature" : {
                   "type" : "Some",
                   "value" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "ChassisSwitches"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 7,
+                        "endLine" : 41,
+                        "endColumn" : 46,
+                        "offset" : 1003,
+                        "length" : 39
+                      }
+                    }
                   }
                 },
                 "direction" : {
@@ -596,11 +1156,43 @@
                   "type" : "ConnectionReference",
                   "name" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "c1"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "c1"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 21,
+                        "beginColumn" : 7,
+                        "endLine" : 21,
+                        "endColumn" : 69,
+                        "offset" : 446,
+                        "length" : 62
+                      }
+                    }
                   },
                   "context" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 10,
+                        "beginColumn" : 7,
+                        "endLine" : 10,
+                        "endColumn" : 50,
+                        "offset" : 170,
+                        "length" : 43
+                      }
+                    }
                   },
                   "isParent" : true
                 }
@@ -612,19 +1204,67 @@
               "type" : "ConnectionInstance",
               "name" : {
                 "type" : "Name",
-                "name" : ["Chassis_System_i_Instance", "chassis_process", "producer.UpdatedChassisSwitches -> consumer.UpdatedChassisSwitches"]
+                "name" : ["Chassis_System_i_Instance", "chassis_process", "producer.UpdatedChassisSwitches -> consumer.UpdatedChassisSwitches"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 22,
+                    "beginColumn" : 7,
+                    "endLine" : 22,
+                    "endColumn" : 83,
+                    "offset" : 515,
+                    "length" : 76
+                  }
+                }
               },
               "src" : {
                 "type" : "EndPoint",
                 "component" : {
                   "type" : "Name",
-                  "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"]
+                  "name" : ["Chassis_System_i_Instance", "chassis_process", "producer"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 18,
+                      "beginColumn" : 7,
+                      "endLine" : 18,
+                      "endColumn" : 35,
+                      "offset" : 359,
+                      "length" : 28
+                    }
+                  }
                 },
                 "feature" : {
                   "type" : "Some",
                   "value" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "UpdatedChassisSwitches"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "producer", "UpdatedChassisSwitches"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 29,
+                        "beginColumn" : 7,
+                        "endLine" : 29,
+                        "endColumn" : 46,
+                        "offset" : 732,
+                        "length" : 39
+                      }
+                    }
                   }
                 },
                 "direction" : {
@@ -639,13 +1279,45 @@
                 "type" : "EndPoint",
                 "component" : {
                   "type" : "Name",
-                  "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"]
+                  "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 19,
+                      "beginColumn" : 7,
+                      "endLine" : 19,
+                      "endColumn" : 35,
+                      "offset" : 394,
+                      "length" : 28
+                    }
+                  }
                 },
                 "feature" : {
                   "type" : "Some",
                   "value" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "UpdatedChassisSwitches"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "consumer", "UpdatedChassisSwitches"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 42,
+                        "beginColumn" : 7,
+                        "endLine" : 42,
+                        "endColumn" : 45,
+                        "offset" : 1049,
+                        "length" : 38
+                      }
+                    }
                   }
                 },
                 "direction" : {
@@ -665,11 +1337,43 @@
                   "type" : "ConnectionReference",
                   "name" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process", "c2"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process", "c2"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 22,
+                        "beginColumn" : 7,
+                        "endLine" : 22,
+                        "endColumn" : 83,
+                        "offset" : 515,
+                        "length" : 76
+                      }
+                    }
                   },
                   "context" : {
                     "type" : "Name",
-                    "name" : ["Chassis_System_i_Instance", "chassis_process"]
+                    "name" : ["Chassis_System_i_Instance", "chassis_process"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 10,
+                        "beginColumn" : 7,
+                        "endLine" : 10,
+                        "endColumn" : 50,
+                        "offset" : 170,
+                        "length" : 43
+                      }
+                    }
                   },
                   "isParent" : true
                 }
@@ -690,11 +1394,24 @@
               "name" : "Emv2",
               "clause" : {
                 "type" : "Emv2Clause",
-                "libraries" : [],
+                "libraries" : [
+                ],
                 "propagations" : [
                 ],
                 "flows" : [
-                ]
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                }
               }
             }
           ]
@@ -716,11 +1433,24 @@
           "name" : "Emv2",
           "clause" : {
             "type" : "Emv2Clause",
-            "libraries" : [],
+            "libraries" : [
+            ],
             "propagations" : [
             ],
             "flows" : [
-            ]
+            ],
+            "componentBehavior" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Emv2BehaviorSection",
+                "events" : [
+                ],
+                "transitions" : [
+                ],
+                "propagations" : [
+                ]
+              }
+            }
           }
         }
       ]
@@ -733,7 +1463,10 @@
       "type" : "Component",
       "identifier" : {
         "type" : "Name",
-        "name" : []
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
       },
       "category" : {
         "type" : "ComponentCategory",
@@ -759,7 +1492,23 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["Data_Model::Data_Representation"]
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 26,
+                "beginColumn" : 4,
+                "endLine" : 29,
+                "endColumn" : 36,
+                "offset" : 1108,
+                "length" : 162
+              }
+            }
           },
           "propertyValues" : [
             {
@@ -772,7 +1521,23 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["Data_Model::Element_Names"]
+            "name" : ["Data_Model::Element_Names"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 43,
+                "beginColumn" : 4,
+                "endLine" : 43,
+                "endColumn" : 68,
+                "offset" : 1909,
+                "length" : 64
+              }
+            }
           },
           "propertyValues" : [
             {
@@ -797,7 +1562,23 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["Data_Model::Base_Type"]
+            "name" : ["Data_Model::Base_Type"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 5,
+                "beginColumn" : 4,
+                "endLine" : 5,
+                "endColumn" : 73,
+                "offset" : 106,
+                "length" : 69
+              }
+            }
           },
           "propertyValues" : [
             {

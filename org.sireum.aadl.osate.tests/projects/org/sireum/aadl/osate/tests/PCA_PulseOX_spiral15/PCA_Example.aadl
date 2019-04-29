@@ -1,0 +1,579 @@
+--Copyright (C) 2018 Adventium Labs.
+--This material is based upon work supported by the US Army Medical Research and Material Command under Contract No.W81XWH-16-C-0192.  The views, opinions, and/or findings contained in this report are those of the authors) and should not be construed as an official Department of the Army position, policy or decision unless so designated by other documentation. 
+--The Model is provided "AS IS" without warranty, support, or indemnification of any kind, expressed or implied. The entire risk arising out of use of the model remains with the user.  In no event shall Adventium Labs be liable for any damages arising out of the use or inability to use the Model, even if Adventium Labs has been advised of the possibility of such damages.
+--For more information about using this and other Model Based Engineering tools see: http://www.adventiumlabs.com/our-work/products-services/model-based-engineering-mbe-tools.
+
+package PCA_Example
+public
+	with AAMI_80001, HazardousSituations, Hazards, PCA_Error;
+
+	system PCA_PulseOx
+	end PCA_PulseOx;
+
+	system implementation PCA_PulseOx.insecure
+		subcomponents
+			PCA_Pump: device PCA.run_or_shutoff; --PCA Pump
+			PulseOx: device PulseOx.impl; --Pulse Oximeter
+			Patient: system Patient.impl;
+			App: system Application.not_fail_safe; --Control Application
+			wifi_spo2: device wifi.spo2;
+			wifi_command: device wifi.command;
+		connections
+			read: feature group Patient.BloodSat -> PulseOx.FingerClip; --Pulse Oximeter reading the patient's blood O2 saturation
+--			spo2: port PulseOx.SpO2 -> App.SpO2; --IoT Pulse Oximeter sends the SpO2 measurement to the Application over a shared Wifi. Hari has an example of this in an article
+			spo2: port PulseOx.SpO2 -> wifi_spo2.in_interface;
+			spo2_app: port wifi_spo2.out_interface -> App.SpO2;
+--			activate: port App.command -> PCA_Pump.control; --Application issues an infusion permission ticket to the PCA pump
+			activate_app: port App.command -> wifi_command.in_interface;
+			activate_pump: port wifi_command.out_interface -> PCA_Pump.control;
+			administer: feature group PCA_pump.IV -> Patient.Vein; --PCA pump infuses drug to the patient
+--		flows
+--			Control_Loop: end to end flow Patient.BloodSaturation -> read -> PulseOx.Read_SpO2 -> spo2 -> wifi_spo2.transmission_wifi -> spo2_app -> App.Check_Status -> activate_app -> wifi_command.transmission_wifi -> activate_pump -> PCA_Pump.Pump -> administer -> Patient.Absorb;
+		properties
+				--AAMI_80001::Hazards => (Hazards::Haz03) applies to App; --applying hazard of "PIH" to App
+			AAMI_80001::Hazards => (Hazards::Haz02) applies to administer; --applying hazard of "fluid" to IV connection
+--			Actual_Connection_Binding => (reference (wifi)) applies to spo2, activate; -- IoT Pulse Oximeter sends the SpO2 measurement to the Application over a shared Wifi
+			-- confidentiality applied to spo2 connection?
+	end PCA_PulseOx.insecure;
+
+	system implementation PCA_PulseOx.secure
+		subcomponents
+			Patient: system Patient.impl;
+			PulseOx: device PulseOx.impl; --Pulse Oximeter
+			encrypt_spo2: device Confidentiality.sender_spo2;
+			sign_spo2: device Authentication.sender_spo2;
+			wifi_secure_spo2: device wifi.secure_spo2;
+			verify_spo2: device Authentication.receiver_spo2;
+			decrypt_spo2: device Confidentiality.receiver_spo2;
+			App: system Application.secure; --Control Application
+			encrypt_command: device Confidentiality.sender_command;
+			sign_command: device Authentication.sender_command;
+			wifi_secure_command: device wifi.secure_command;
+			verify_command: device Authentication.receiver_command;
+			decrypt_command: device Confidentiality.receiver_command;
+			PCA_Pump: device PCA.secure; --PCA Pump
+		connections
+			read: feature group Patient.BloodSat -> PulseOx.FingerClip; --Pulse Oximeter reading the patient's blood O2 saturation
+			spo2: port PulseOx.SpO2 -> encrypt_spo2.interface; --IoT Pulse Oximeter sends the SpO2 measurement to the Application over a shared Wifi. Hari has an example of this in an article
+			protocol_spo2lvl1_s: port encrypt_spo2.interface -> sign_spo2.interface;
+			protocol_spo2lvl2_s: port sign_spo2.interface -> wifi_secure_spo2.in_interface;
+			wifi_spo2: port wifi_secure_spo2.out_interface -> verify_spo2.interface;
+			protocol_spo2lvl2_r: port verify_spo2.interface -> decrypt_spo2.interface;
+			protocol_spo2lvl1_r: port decrypt_spo2.interface -> App.spo2;
+			activate_app: port App.command -> encrypt_command.interface;
+			protocol_commandlvl1_s: port encrypt_command.interface -> sign_command.interface;
+			protocol_commandlvl2_s: port sign_command.interface -> wifi_secure_command.in_interface;
+			wifi_command: port wifi_secure_command.out_interface -> verify_command.interface;
+			protocol_commandlvl2_r: port verify_command.interface -> decrypt_command.interface;
+			protocol_commandlvl1_r: port decrypt_command.interface -> PCA_Pump.control;
+			administer_secure: feature group PCA_pump.IV -> Patient.Vein;
+--		flows
+--			Control_Loop: end to end flow Patient.BloodSaturation -> read -> PulseOx.Read_SpO2 -> spo2 -> App.Check_Status -> activate -> PCA_Pump.Pump -> administer -> Patient.Absorb;
+		properties
+			AAMI_80001::Hazards => (Hazards::Haz02) applies to administer_secure; --applying hazard of "fluid" to IV connection
+	end PCA_PulseOx.secure;
+
+	feature group PCA_Patient_Interface
+		features
+			infuse: out data port; --administer drug
+	end PCA_Patient_Interface;
+
+	device PCA
+		features
+			IV: feature group PCA_Patient_Interface;
+			control: in data port; --receive command to pump
+--		flows
+--			Pump: flow path control -> IV.infuse;
+	end PCA;
+
+	device implementation PCA.run_or_shutoff
+		-- This is a version for John's "scenario 1". The communication between the app and the PCA Pump is a command telling the pump to shut off or run normally.
+		-- ServiceError on the incoming control port is a missing stop command. (For later revisions, make it an ItemOmission , defined by EMV2 as "An error where one service item is not delivered)
+		properties
+				--this is an example of hazards as applied to a port
+			AAMI_80001::Hazards => (Hazards::Haz01, Hazards::Haz02) applies to IV.infuse;
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors, ErrorLibrary;
+			
+			error propagations 
+				control: in propagation {stop_commission, stop_omission, start_commission, start_omission, SecurityError};
+				IV.infuse: out propagation {EarlyServiceTermination,LateServiceTermination,EarlyServiceStart,LateServiceStart};
+			flows
+				missed_stop: error path control {stop_omission} -> IV.infuse {LateServiceTermination}; -- Missing stop command means the pump continues to administer drugs when not appropriate.
+				unexpected_stop: error path control {stop_commission} -> IV.infuse {EarlyServiceTermination,
+					LateServiceTermination}; -- Stop recieved at an incorrect time can be early or late, causing the service to terminate early or late
+				missing_start: error path control {start_omission} -> IV.infuse {LateServiceStart}; -- This causes no hazard.
+				incorrect_start: error path control {start_commission} -> IV.infuse {EarlyServiceStart, LateServiceStart}; -- This is bad, start administration when inappropriate
+				modified_command: error path control {SecurityError} -> IV.infuse {EarlyServiceTermination,
+					LateServiceTermination,EarlyServiceStart,LateServiceStart};
+			--				sinking_leaks: error sink control{MessageLeak}; -- no implications on acting upon a leaked command
+			--				missing_command: error path control{ItemOmission, NetworkDelay} -> IV.infuse{late_service_termination, late_service_start};
+			--				adversary_actions: error path control{UnauthorizedCommission, UnlikelyUnauthorizedCommission, MessageDuplicate, message_corruption} -> 
+			--					IV.infuse{early_service_termination, late_service_termination,early_service_start,late_service_start};
+			end propagations;
+		**};
+	end PCA.run_or_shutoff;
+
+	device implementation PCA.secure
+		-- This is a version for John's "scenario 1". The communication between the app and the PCA Pump is a command telling the pump to shut off or run normally.
+		-- ServiceError on the incoming control port is a missing stop command. (For later revisions, make it an ItemOmission , defined by EMV2 as "An error where one service item is not delivered)
+		properties
+				--this is an example of hazards as applied to a port
+			AAMI_80001::Hazards => (Hazards::Haz01, Hazards::Haz02) applies to IV.infuse;
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors, ErrorLibrary;
+			
+			error propagations
+				control: in propagation {stop_commission, stop_omission, start_commission, start_omission, unlikely_commission,
+					unlikely_corruption};
+				IV.infuse: out propagation {EarlyServiceTermination,LateServiceTermination,EarlyServiceStart,LateServiceStart};
+			flows
+				missed_stop: error path control {stop_omission} -> IV.infuse {LateServiceTermination}; -- Missing stop command means the pump continues to administer drugs when not appropriate.
+				unexpected_stop: error path control {stop_commission} -> IV.infuse {EarlyServiceTermination,
+					LateServiceStart}; -- Stop recieved at an incorrect time can be early or late, causing the service to terminate early or late
+				missing_start: error path control {start_omission} -> IV.infuse {LateServiceStart}; -- This causes no hazard.
+				incorrect_start: error path control {start_commission} -> IV.infuse {EarlyServiceStart, LateServiceStart}; -- This is bad, start administration when inappropriate
+				adversary_actions: error path control {unlikely_commission,
+					unlikely_corruption} -> IV.infuse {EarlyServiceTermination,LateServiceTermination,EarlyServiceStart,LateServiceStart};
+			end propagations;
+		**};
+	end PCA.secure;
+
+	feature group PulseOx_Patient_Interface
+		features
+			Saturation: in data port; --read value from patient
+	end PulseOx_Patient_Interface;
+
+	device PulseOx
+		features
+			FingerClip: feature group PulseOx_Patient_Interface;
+			SpO2: out data port; --report value to application
+--		flows
+--			Read_SpO2: flow path FingerClip.Saturation -> SpO2;
+	end PulseOx;
+
+	device implementation PulseOx.impl
+		properties
+			AAMI_80001::Hazards => (Hazards::Haz03); --applying hazard of "PIH" to PulseOx
+		annex EMV2 {**
+			use types pca_error, SSCATE_Errors;
+			
+			error propagations
+				spo2: out propagation {SpO2_ValueError, SpO2_Omission, SecurityError};
+			--				saturation: in propagation {ServiceError}; -- Optical sensor failure
+			flows
+				numerical_failure: error source spo2 {SpO2_ValueError}; -- e.g. bad/wrong lookup value in beer-lambert table
+				disloged_sensor: error source spo2 {SpO2_Omission};
+					--				optical_failure: error path saturation{ServiceError} -> spo2{ServiceError}; -- no data in, no data out
+				communicating_out: error source spo2 {SecurityError};
+			end propagations;
+			
+			properties
+				-- This is applying LED related causes to ItemValueError
+				AAMI_80001::Causes => (PulseOxCauses::Pulse_C01, PulseOxCauses::Pulse_C02,
+							PulseOxCauses::Pulse_C03) applies to spo2.SpO2_ValueError;
+				AAMI_80001::Causes => (PulseOxCauses::Pulse_C06, PulseOxCauses::Pulse_C07) applies to spo2.SecurityError;
+					--This is applying "Disconnected from Patient" and "Disconnected fro Device Network" to ServiceError		
+				AAMI_80001::Causes => (PulseOxCauses::Pulse_C04, PulseOxCauses::Pulse_C05) applies to spo2.SpO2_Omission;
+		**};
+	end PulseOx.impl;
+
+	system Application
+		features
+			SpO2: in data port; --read SpO2 value from pulse oximeter
+			command: out data port; --issue permission to pump ticket
+				-- patient_data: in data port; -- programmed in by doctor
+		flows
+			Check_Status: flow path SpO2 -> command; --check SpO2 value against set limit, issue ticket if the value is within acceptable range
+		properties
+			AAMI_80001::Hazards => (Hazards::Haz03);
+	end Application;
+
+	system implementation Application.not_fail_safe
+		--
+		-- This application reads data from an SpO2 sensor and sends commands (start or stop) to a PCA pump based on the input.
+		-- The SpO2 input can be either absent (ServiceError) or have the wrong value (ItemValueError)
+		-- Both start and stop can be provided when inappropriate (ItemCommission) or not provided (ItemOmission)
+		annex EMV2 {**
+			use types SSCATE_Errors, PCA_Error;
+			
+			error propagations
+				command: out propagation {stop_commission, stop_omission, start_commission, start_omission, SecurityError};
+				spo2: in propagation {SpO2_ValueError, SecurityError, SpO2_Omission};
+			flows
+				stop_fault: error source command {stop_omission, stop_commission};
+				command_in_plaintext: error source command {SecurityError};
+				inappropriate_ticket_provided: error path spo2 {SpO2_ValueError, SecurityError} -> command {stop_commission,
+					stop_omission, start_commission, start_omission}; -- ticket provided when inappropriate
+				no_spo2: error path spo2 {SpO2_Omission} -> command {stop_omission, start_omission};
+			--ticket_not_provided_when_necc: error path spo2{ServiceError} -> ticket{ServiceError}; -- Service omission
+			--				mitigation1: error sink spo2{ItemOmission, NetworkDelay, AboveRange}; -- mitigation, fail safe on no data leads to bad data 
+			--			                                                                 -- ticket not provided when necessary
+			--				sinking_leaks: error sink spo2{MessageLeak}; -- a leaked message does not implicate anything in app 
+			--				sinking_corruption: error sink spo2{ UnauthorizedCommission, MessageDuplicate, message_corruption};
+			--				command_leak: error source command{MessageLeak}; --App can transmit command thourgh public n/w insecurly
+			--				communicating: error source command{ItemOmission, UnauthorizedCommission,
+			--					NetworkDelay, MessageLeak, MessageDuplicate, message_corruption};                                               
+			end propagations;
+			
+			properties
+				-- out of bounds risk control applied to mitigation 	
+				--				AAMI_80001::Risk_Controls => (Risk_Controls::RC01) applies to mitigation1;
+				--applying "App crash" cause to command error propagation
+				AAMI_80001::Causes => (AppCauses::App_C01) applies to command.stop_omission;
+				AAMI_80001::Causes => (AppCauses::App_C02, AppCauses::App_C03) applies to command.SecurityError;
+		**};
+	end Application.not_fail_safe;
+
+	system implementation Application.secure
+		--
+		-- This application reads data from an SpO2 sensor and sends commands (start or stop) to a PCA pump based on the input.
+		-- The SpO2 input can be either absent (ServiceError) or have the wrong value (ItemValueError)
+		-- Both start and stop can be provided when inappropriate (ItemCommission) or not provided (ItemOmission)
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				command: out propagation {stop_commission, stop_omission, start_commission, start_omission, SecurityError};
+				spo2: in propagation {unlikely_commission, unlikely_corruption, SpO2_ValueError, SpO2_Omission};
+			flows
+				stop_fault: error source command {stop_omission, stop_commission}; --app crash
+				inappropriate_ticket_provided: error path spo2 {SpO2_ValueError, unlikely_commission,
+					unlikely_corruption} -> command {stop_commission, stop_omission, start_commission, start_omission}; -- ticket provided when inappropriate
+				no_spo2: error path spo2 {SpO2_Omission} -> command {stop_omission, start_omission};
+				comm_plaintext: error source command {SecurityError};
+			--ticket_not_provided_when_necc: error path spo2{ServiceError} -> ticket{ServiceError}; -- Service omission
+			--				mitigation1: error sink spo2{ItemOmission, NetworkDelay, AboveRange}; -- mitigation, fail safe on no data leads to bad data 
+			--			                                                                 -- ticket not provided when necessary
+			--				sinking_leaks: error sink spo2{MessageLeak}; -- a leaked message does not implicate anything in app 
+			--				sinking_corruption: error sink spo2{ UnauthorizedCommission, MessageDuplicate, message_corruption};
+			--				command_leak: error source command{MessageLeak}; --App can transmit command thourgh public n/w insecurly
+			--				communicating: error source command{ItemOmission, UnauthorizedCommission,
+			--					NetworkDelay, MessageLeak, MessageDuplicate, message_corruption};         
+			end propagations;
+			
+			properties
+				-- out of bounds risk control applied to mitigation 	
+				--				AAMI_80001::Risk_Controls => (Risk_Controls::RC01) applies to mitigation1;
+				--applying "App crash" cause to command error propagation
+				AAMI_80001::Causes => (AppCauses::App_C01) applies to command.stop_omission;
+				AAMI_80001::Causes => (AppCauses::App_C02, AppCauses::App_C03) applies to command.SecurityError;
+		**};
+	end Application.secure;
+
+	system Patient
+		features
+			Vein: feature group inverse of PCA_Patient_Interface;
+			BloodSat: feature group inverse of PulseOx_Patient_Interface; --O2 blood saturation level
+--		flows
+--			Absorb: flow sink Vein.infuse; --Absorb drug infused via IV
+--			BloodSaturation: flow source BloodSat.Saturation;
+	end Patient;
+
+	system implementation Patient.impl
+		--
+		-- Patient implementation following John's scenarios.
+		-- The ServiceError on the vein is a late_service_termination, but I'm trying to use the top level of the hierarchy.
+		--
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors, ErrorLibrary;
+			
+			error propagations
+				Vein.infuse: in propagation {EarlyServiceTermination,LateServiceTermination,EarlyServiceStart,LateServiceStart};
+			flows
+				accident: error sink Vein.infuse {EarlyServiceTermination,LateServiceTermination,EarlyServiceStart,LateServiceStart};
+			--stpa_hazard: error path Vein{ServiceError}->Vein{sscate_error};
+			end propagations;
+			
+			properties
+				-- This is an example of hazardous situation declarations
+				AAMI_80001::Hazardous_Situations => (HazardousSituations::HS01,
+							HazardousSituations::HS03) applies to Vein.Infuse.LateServiceTermination;
+				AAMI_80001::Hazardous_Situations => (HazardousSituations::HS02,
+							HazardousSituations::HS04) applies to Vein.Infuse.EarlyServiceTermination;
+				AAMI_80001::Hazardous_Situations => (HazardousSituations::HS01) applies to Vein.Infuse.EarlyServiceStart;
+				AAMI_80001::Hazardous_Situations => (HazardousSituations::HS02) applies to Vein.Infuse.LateServiceStart;
+		**};
+	end Patient.impl;
+
+--	bus wifi
+--	end wifi;
+	device wifi
+		features
+			in_interface: in data port;
+			out_interface: out data port;
+		flows
+			transmission_wifi: flow path in_interface -> out_interface;
+	end wifi;
+
+	device implementation wifi.spo2
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				in_interface: in propagation {SpO2_ValueError, SecurityError, SpO2_Omission};
+				out_interface: out propagation {SpO2_ValueError, SecurityError, SpO2_Omission};
+			flows
+				spoof_message: error source out_interface {SecurityError}; --modified by adversary 
+				replay_message: error path in_interface {SecurityError} -> out_interface {SecurityError};
+				accessable: error sink in_interface {SecurityError}; --accessable by the adversary
+				transmission_value_error: error path in_interface {SpO2_ValueError} -> out_interface {SpO2_ValueError};
+				transmission_omission: error path in_interface {SpO2_Omission} -> out_interface {SpO2_Omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Hazardous_Situations => (HazardousSituations::HS05) applies to in_interface.SecurityError; -- Patient PII or PIH is accessible on the network";
+				AAMI_80001::Causes => (WifiCauses::wifi_C01) applies to out_interface.SecurityError;
+		**};
+	end wifi.spo2;
+
+	device implementation wifi.command
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				in_interface: in propagation {SecurityError, stop_commission, stop_omission, start_commission, start_omission};
+				out_interface: out propagation {SecurityError, stop_commission, stop_omission, start_commission, start_omission};
+			flows
+				spoof_message: error source out_interface {SecurityError}; --modified by adversary 
+				replay_message: error path in_interface {SecurityError} -> out_interface {SecurityError};
+				accessable: error sink in_interface {SecurityError}; --accessable by the adversary
+				transmission_stop_commission: error path in_interface {stop_commission} -> out_interface {stop_commission};
+				transmission_stop_omission: error path in_interface {stop_omission} -> out_interface {stop_omission};
+				transmission_start_commission: error path in_interface {start_commission} -> out_interface {start_commission};
+				transmission_start_omission: error path in_interface {start_omission} -> out_interface {start_omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Hazardous_Situations => (HazardousSituations::HS05) applies to in_interface.SecurityError; -- Patient PII or PIH is accessible on the network";
+				AAMI_80001::Causes => (WifiCauses::wifi_C01) applies to out_interface.SecurityError;
+		**};
+	end wifi.command;
+
+	device Confidentiality
+		features
+			interface: in out data port;
+--		flows
+--			confidential_transmission: flow path interface -> interface;
+	end Confidentiality;
+
+	device Authentication
+		features
+			interface: in out data port;
+--		flows
+--			confidential_transmission: flow path interface -> interface;
+	end Authentication;
+
+	device implementation Confidentiality.sender_spo2
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				interface: in propagation {SpO2_ValueError, SpO2_Omission, SecurityError};
+				interface: out propagation {SpO2_ValueError, SpO2_Omission, unlikely_leak, message_leak_MitM};
+			flows
+				encrypt: error path interface {SecurityError} -> interface {unlikely_leak, message_leak_MitM};
+				transmission_value: error path interface {SpO2_ValueError} -> interface {SpO2_ValueError};
+				transmission_omission: error path interface {SpO2_Omission} -> interface {SpO2_Omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Risk_Controls => (Risk_Controls::RC02) applies to encrypt;
+		**};
+	end Confidentiality.sender_spo2;
+
+	device implementation Authentication.sender_spo2
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				interface: in propagation {SpO2_ValueError, SpO2_Omission, unlikely_leak, message_leak_MitM};
+				interface: out propagation {SpO2_ValueError, SpO2_Omission, unlikely_leak};
+			flows
+				encrypt_sign: error path interface {message_leak_MitM} -> interface {unlikely_leak};
+				transmission_unlikely: error path interface {unlikely_leak} -> interface {unlikely_leak};
+				transmission_value: error path interface {SpO2_ValueError} -> interface {SpO2_ValueError};
+				transmission_omission: error path interface {SpO2_Omission} -> interface {SpO2_Omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Risk_Controls => (Risk_Controls::RC03) applies to encrypt_sign;
+		**};
+	end Authentication.sender_spo2;
+
+	device implementation wifi.secure_spo2
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				in_interface: in propagation {SpO2_ValueError, SpO2_Omission, unlikely_leak};
+				out_interface: out propagation {SpO2_ValueError, SpO2_Omission, message_commission, message_omission,
+					message_replay, message_corruption};
+			flows
+				fabricate_drop: error source out_interface {message_commission, message_omission}; --modified by adversary 
+				accessable: error sink in_interface {unlikely_leak}; --accessable by the adversary
+				modify_replay: error path in_interface {unlikely_leak} -> out_interface {message_replay, message_corruption};
+				transmission_value: error path in_interface {SpO2_ValueError} -> out_interface {SpO2_ValueError};
+				transmission_omission: error path in_interface {SpO2_Omission} -> out_interface {SpO2_Omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Hazardous_Situations => (HazardousSituations::HS05) applies to in_interface.unlikely_leak; -- Patient PII or PIH is accessible on the network";
+				AAMI_80001::Causes => (
+							WifiCauses::wifi_C01) applies to out_interface.message_omission, out_interface.message_commission;
+		**};
+	end wifi.secure_spo2;
+
+	device implementation Authentication.receiver_spo2
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				interface: in propagation {SpO2_ValueError, SpO2_Omission, message_commission, message_omission, message_replay,
+					message_corruption};
+				interface: out propagation {unlikely_commission, unlikely_corruption, SpO2_ValueError, SpO2_Omission};
+			flows
+				fabrication: error path interface {message_commission} -> interface {unlikely_commission, SpO2_Omission};
+				replay_attack: error path interface {message_replay} -> interface {SpO2_Omission};
+				modifying: error path interface {message_corruption} -> interface {SpO2_Omission, unlikely_corruption};
+				denial: error path interface {message_omission} -> interface {SpO2_Omission};
+				transmission_value: error path interface {SpO2_ValueError} -> interface {SpO2_ValueError};
+				transmission_omission: error path interface {SpO2_Omission} -> interface {SpO2_Omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Risk_Controls => (Risk_Controls::RC04) applies to fabrication, replay_attack, modifying;
+		**};
+	end Authentication.receiver_spo2;
+
+	device implementation Confidentiality.receiver_spo2
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				interface: in propagation {unlikely_commission, unlikely_corruption, SpO2_ValueError, SpO2_Omission};
+				interface: out propagation {unlikely_commission, unlikely_corruption, SpO2_ValueError, SpO2_Omission};
+			flows
+				transmission_value: error path interface {SpO2_ValueError} -> interface {SpO2_ValueError};
+				transmission_omission: error path interface {SpO2_Omission} -> interface {SpO2_Omission};
+				transmission_commission: error path interface {unlikely_commission} -> interface {unlikely_commission};
+				transmission_corruption: error path interface {unlikely_corruption} -> interface {unlikely_corruption};
+			end propagations;
+		**};
+	end Confidentiality.receiver_spo2;
+
+	device implementation Confidentiality.sender_command
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				interface: in propagation {stop_commission, stop_omission, start_commission, start_omission, SecurityError};
+				interface: out propagation {stop_commission, stop_omission, start_commission, start_omission, unlikely_leak,
+					message_leak_MitM};
+			flows
+				encrypt_cmd: error path interface {SecurityError} -> interface {unlikely_leak, message_leak_MitM};
+				transmission_stop_commission: error path interface {stop_commission} -> interface {stop_commission};
+				transmission_stop_omission: error path interface {stop_omission} -> interface {stop_omission};
+				transmission_start_commission: error path interface {start_commission} -> interface {start_commission};
+				transmission_start_omission: error path interface {start_omission} -> interface {start_omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Risk_Controls => (Risk_Controls::RC02) applies to encrypt_cmd;
+		**};
+	end Confidentiality.sender_command;
+
+	device implementation Authentication.sender_command
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				interface: in propagation {stop_commission, stop_omission, start_commission, start_omission, unlikely_leak,
+					message_leak_MitM};
+				interface: out propagation {stop_commission, stop_omission, start_commission, start_omission, unlikely_leak};
+			flows
+				encrypt_sign: error path interface {message_leak_MitM} -> interface {unlikely_leak};
+				transmission_unlikely: error path interface {unlikely_leak} -> interface {unlikely_leak};
+				transmission_stop_commission: error path interface {stop_commission} -> interface {stop_commission};
+				transmission_stop_omission: error path interface {stop_omission} -> interface {stop_omission};
+				transmission_start_commission: error path interface {start_commission} -> interface {start_commission};
+				transmission_start_omission: error path interface {start_omission} -> interface {start_omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Risk_Controls => (Risk_Controls::RC03) applies to encrypt_sign;
+		**};
+	end Authentication.sender_command;
+
+	device implementation wifi.secure_command
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				in_interface: in propagation {stop_commission, stop_omission, start_commission, start_omission, unlikely_leak};
+				out_interface: out propagation {stop_commission, stop_omission, start_commission, start_omission,
+					message_commission, message_omission, message_replay, message_corruption};
+			flows
+				spoof_message: error source out_interface {message_commission, message_omission, message_replay,
+					message_corruption}; --modified by adversary 
+				accessable: error sink in_interface {unlikely_leak}; --accessable by the adversary
+				transmission_stop_commission: error path in_interface {stop_commission} -> out_interface {stop_commission};
+				transmission_stop_omission: error path in_interface {stop_omission} -> out_interface {stop_omission};
+				transmission_start_commission: error path in_interface {start_commission} -> out_interface {start_commission};
+				transmission_start_omission: error path in_interface {start_omission} -> out_interface {start_omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Hazardous_Situations => (HazardousSituations::HS05) applies to in_interface.unlikely_leak; -- Patient PII or PIH is accessible on the network";
+				AAMI_80001::Causes => (
+							WifiCauses::wifi_C01) applies to out_interface.message_omission, out_interface.message_commission;
+		**};
+	end wifi.secure_command;
+
+	device implementation Authentication.receiver_command
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				interface: in propagation {stop_commission, stop_omission, start_commission, start_omission, message_commission,
+					message_omission, message_replay, message_corruption};
+				interface: out propagation {unlikely_commission, unlikely_corruption, stop_commission, stop_omission,
+					start_commission, start_omission};
+			flows
+				fabrication: error path interface {message_commission} -> interface {unlikely_commission, stop_omission,
+					start_omission};
+				replay_attack: error path interface {message_replay} -> interface {stop_omission, start_omission};
+				modifying: error path interface {message_corruption} -> interface {stop_omission, start_omission,
+					unlikely_corruption};
+				denial: error path interface {message_omission} -> interface {stop_omission, start_omission};
+				transmission_stop_commission: error path interface {stop_commission} -> interface {stop_commission};
+				transmission_stop_omission: error path interface {stop_omission} -> interface {stop_omission};
+				transmission_start_commission: error path interface {start_commission} -> interface {start_commission};
+				transmission_start_omission: error path interface {start_omission} -> interface {start_omission};
+			end propagations;
+			
+			properties
+				AAMI_80001::Risk_Controls => (Risk_Controls::RC04) applies to fabrication, replay_attack, modifying;
+		**};
+	end Authentication.receiver_command;
+
+	device implementation Confidentiality.receiver_command
+		annex EMV2 {**
+			use types PCA_Error, SSCATE_Errors;
+			
+			error propagations
+				interface: in propagation {unlikely_commission, unlikely_corruption, stop_commission, stop_omission,
+					start_commission, start_omission};
+				interface: out propagation {unlikely_commission, unlikely_corruption, stop_commission, stop_omission,
+					start_commission, start_omission};
+			flows
+				transmission_stop_commission: error path interface {stop_commission} -> interface {stop_commission};
+				transmission_stop_omission: error path interface {stop_omission} -> interface {stop_omission};
+				transmission_start_commission: error path interface {start_commission} -> interface {start_commission};
+				transmission_start_omission: error path interface {start_omission} -> interface {start_omission};
+				transmission_commission: error path interface {unlikely_commission} -> interface {unlikely_commission};
+				transmission_corruption: error path interface {unlikely_corruption} -> interface {unlikely_corruption};
+			end propagations;
+		**};
+	end Confidentiality.receiver_command;
+end PCA_Example;

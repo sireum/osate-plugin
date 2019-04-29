@@ -5,7 +5,23 @@
       "type" : "Component",
       "identifier" : {
         "type" : "Name",
-        "name" : ["Root_two_references_Instance"]
+        "name" : ["Root_two_references_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "__synthetic0.aadl"
+            },
+            "beginLine" : 72,
+            "beginColumn" : 2,
+            "endLine" : 79,
+            "endColumn" : 26,
+            "offset" : 2021,
+            "length" : 275
+          }
+        }
       },
       "category" : {
         "type" : "ComponentCategory",
@@ -19,7 +35,23 @@
           "type" : "FeatureEnd",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "root_in"]
+            "name" : ["Root_two_references_Instance", "root_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 8,
+                "beginColumn" : 4,
+                "endLine" : 8,
+                "endColumn" : 25,
+                "offset" : 182,
+                "length" : 21
+              }
+            }
           },
           "direction" : {
             "type" : "Direction",
@@ -39,7 +71,23 @@
           "type" : "FeatureEnd",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "root_out"]
+            "name" : ["Root_two_references_Instance", "root_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 9,
+                "beginColumn" : 4,
+                "endLine" : 9,
+                "endColumn" : 26,
+                "offset" : 207,
+                "length" : 22
+              }
+            }
           },
           "direction" : {
             "type" : "Direction",
@@ -61,7 +109,23 @@
           "type" : "Component",
           "identifier" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "Sub1"]
+            "name" : ["Root_two_references_Instance", "Sub1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 75,
+                "beginColumn" : 4,
+                "endLine" : 75,
+                "endColumn" : 37,
+                "offset" : 2111,
+                "length" : 33
+              }
+            }
           },
           "category" : {
             "type" : "ComponentCategory",
@@ -79,7 +143,23 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_in"]
+                "name" : ["Root_two_references_Instance", "Sub1", "sub_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 14,
+                    "beginColumn" : 4,
+                    "endLine" : 14,
+                    "endColumn" : 23,
+                    "offset" : 275,
+                    "length" : 19
+                  }
+                }
               },
               "direction" : {
                 "type" : "Direction",
@@ -99,7 +179,23 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_out"]
+                "name" : ["Root_two_references_Instance", "Sub1", "sub_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 15,
+                    "beginColumn" : 4,
+                    "endLine" : 15,
+                    "endColumn" : 25,
+                    "offset" : 298,
+                    "length" : 21
+                  }
+                }
               },
               "direction" : {
                 "type" : "Direction",
@@ -119,7 +215,23 @@
               "type" : "FeatureEnd",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_port"]
+                "name" : ["Root_two_references_Instance", "Sub1", "sub_port"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 16,
+                    "beginColumn" : 4,
+                    "endLine" : 16,
+                    "endColumn" : 37,
+                    "offset" : 323,
+                    "length" : 33
+                  }
+                }
               },
               "direction" : {
                 "type" : "Direction",
@@ -141,7 +253,23 @@
               "type" : "Component",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
+                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 64,
+                    "beginColumn" : 4,
+                    "endLine" : 64,
+                    "endColumn" : 44,
+                    "offset" : 1704,
+                    "length" : 40
+                  }
+                }
               },
               "category" : {
                 "type" : "ComponentCategory",
@@ -159,7 +287,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 21,
+                        "beginColumn" : 4,
+                        "endLine" : 21,
+                        "endColumn" : 27,
+                        "offset" : 413,
+                        "length" : 23
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -179,7 +323,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 22,
+                        "beginColumn" : 4,
+                        "endLine" : 22,
+                        "endColumn" : 29,
+                        "offset" : 440,
+                        "length" : 25
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -199,7 +359,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in_out"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in_out"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 23,
+                        "beginColumn" : 4,
+                        "endLine" : 23,
+                        "endColumn" : 35,
+                        "offset" : 469,
+                        "length" : 31
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -234,11 +410,24 @@
                   "name" : "Emv2",
                   "clause" : {
                     "type" : "Emv2Clause",
-                    "libraries" : [],
+                    "libraries" : [
+                    ],
                     "propagations" : [
                     ],
                     "flows" : [
-                    ]
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    }
                   }
                 }
               ]
@@ -247,7 +436,23 @@
               "type" : "Component",
               "identifier" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
+                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 65,
+                    "beginColumn" : 4,
+                    "endLine" : 65,
+                    "endColumn" : 44,
+                    "offset" : 1748,
+                    "length" : 40
+                  }
+                }
               },
               "category" : {
                 "type" : "ComponentCategory",
@@ -265,7 +470,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 21,
+                        "beginColumn" : 4,
+                        "endLine" : 21,
+                        "endColumn" : 27,
+                        "offset" : 413,
+                        "length" : 23
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -285,7 +506,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 22,
+                        "beginColumn" : 4,
+                        "endLine" : 22,
+                        "endColumn" : 29,
+                        "offset" : 440,
+                        "length" : 25
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -305,7 +542,23 @@
                   "type" : "FeatureEnd",
                   "identifier" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in_out"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in_out"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 23,
+                        "beginColumn" : 4,
+                        "endLine" : 23,
+                        "endColumn" : 35,
+                        "offset" : 469,
+                        "length" : 31
+                      }
+                    }
                   },
                   "direction" : {
                     "type" : "Direction",
@@ -340,11 +593,24 @@
                   "name" : "Emv2",
                   "clause" : {
                     "type" : "Emv2Clause",
-                    "libraries" : [],
+                    "libraries" : [
+                    ],
                     "propagations" : [
                     ],
                     "flows" : [
-                    ]
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    }
                   }
                 }
               ]
@@ -355,20 +621,55 @@
               "type" : "Connection",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "parent_to_child_in"]
+                "name" : ["Root_two_references_Instance", "Sub1", "parent_to_child_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 67,
+                    "beginColumn" : 4,
+                    "endLine" : 67,
+                    "endColumn" : 61,
+                    "offset" : 1806,
+                    "length" : 57
+                  }
+                }
               },
               "src" : [
                 {
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1"]
+                    "name" : ["Root_two_references_Instance", "Sub1"],
+                    "pos" : {
+                      "type" : "None"
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_in"]
+                      "name" : ["Root_two_references_Instance", "Sub1", "sub_in"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 14,
+                          "beginColumn" : 4,
+                          "endLine" : 14,
+                          "endColumn" : 23,
+                          "offset" : 275,
+                          "length" : 19
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -385,13 +686,45 @@
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 64,
+                        "beginColumn" : 4,
+                        "endLine" : 64,
+                        "endColumn" : 44,
+                        "offset" : 1704,
+                        "length" : 40
+                      }
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in"]
+                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 21,
+                          "beginColumn" : 4,
+                          "endLine" : 21,
+                          "endColumn" : 27,
+                          "offset" : 413,
+                          "length" : 23
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -411,7 +744,10 @@
               "connectionInstances" : [
                 {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "root_in -> Sub1", "sub_proc1", "proc_in"]
+                  "name" : ["Root_two_references_Instance", "root_in -> Sub1", "sub_proc1", "proc_in"],
+                  "pos" : {
+                    "type" : "None"
+                  }
                 }
               ],
               "properties" : [
@@ -421,20 +757,68 @@
               "type" : "Connection",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "child_to_parent_out"]
+                "name" : ["Root_two_references_Instance", "Sub1", "child_to_parent_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 69,
+                    "beginColumn" : 4,
+                    "endLine" : 69,
+                    "endColumn" : 63,
+                    "offset" : 1933,
+                    "length" : 59
+                  }
+                }
               },
               "src" : [
                 {
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 65,
+                        "beginColumn" : 4,
+                        "endLine" : 65,
+                        "endColumn" : 44,
+                        "offset" : 1748,
+                        "length" : 40
+                      }
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out"]
+                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 22,
+                          "beginColumn" : 4,
+                          "endLine" : 22,
+                          "endColumn" : 29,
+                          "offset" : 440,
+                          "length" : 25
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -451,13 +835,32 @@
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1"]
+                    "name" : ["Root_two_references_Instance", "Sub1"],
+                    "pos" : {
+                      "type" : "None"
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_out"]
+                      "name" : ["Root_two_references_Instance", "Sub1", "sub_out"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 15,
+                          "beginColumn" : 4,
+                          "endLine" : 15,
+                          "endColumn" : 25,
+                          "offset" : 298,
+                          "length" : 21
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -477,7 +880,10 @@
               "connectionInstances" : [
                 {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out -> root_out"]
+                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out -> root_out"],
+                  "pos" : {
+                    "type" : "None"
+                  }
                 }
               ],
               "properties" : [
@@ -487,20 +893,68 @@
               "type" : "Connection",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "child_to_child"]
+                "name" : ["Root_two_references_Instance", "Sub1", "child_to_child"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 68,
+                    "beginColumn" : 4,
+                    "endLine" : 68,
+                    "endColumn" : 66,
+                    "offset" : 1867,
+                    "length" : 62
+                  }
+                }
               },
               "src" : [
                 {
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 64,
+                        "beginColumn" : 4,
+                        "endLine" : 64,
+                        "endColumn" : 44,
+                        "offset" : 1704,
+                        "length" : 40
+                      }
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out"]
+                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 22,
+                          "beginColumn" : 4,
+                          "endLine" : 22,
+                          "endColumn" : 29,
+                          "offset" : 440,
+                          "length" : 25
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -517,13 +971,45 @@
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 65,
+                        "beginColumn" : 4,
+                        "endLine" : 65,
+                        "endColumn" : 44,
+                        "offset" : 1748,
+                        "length" : 40
+                      }
+                    }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in"]
+                      "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "__synthetic0.aadl"
+                          },
+                          "beginLine" : 21,
+                          "beginColumn" : 4,
+                          "endLine" : 21,
+                          "endColumn" : 27,
+                          "offset" : 413,
+                          "length" : 23
+                        }
+                      }
                     }
                   },
                   "direction" : {
@@ -543,7 +1029,10 @@
               "connectionInstances" : [
                 {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out -> sub_proc2", "proc_in"]
+                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out -> sub_proc2", "proc_in"],
+                  "pos" : {
+                    "type" : "None"
+                  }
                 }
               ],
               "properties" : [
@@ -555,19 +1044,67 @@
               "type" : "ConnectionInstance",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1.proc_out -> sub_proc2.proc_in"]
+                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1.proc_out -> sub_proc2.proc_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 68,
+                    "beginColumn" : 4,
+                    "endLine" : 68,
+                    "endColumn" : 66,
+                    "offset" : 1867,
+                    "length" : 62
+                  }
+                }
               },
               "src" : {
                 "type" : "EndPoint",
                 "component" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
+                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 64,
+                      "beginColumn" : 4,
+                      "endLine" : 64,
+                      "endColumn" : 44,
+                      "offset" : 1704,
+                      "length" : 40
+                    }
+                  }
                 },
                 "feature" : {
                   "type" : "Some",
                   "value" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_out"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 22,
+                        "beginColumn" : 4,
+                        "endLine" : 22,
+                        "endColumn" : 29,
+                        "offset" : 440,
+                        "length" : 25
+                      }
+                    }
                   }
                 },
                 "direction" : {
@@ -582,13 +1119,45 @@
                 "type" : "EndPoint",
                 "component" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
+                  "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 65,
+                      "beginColumn" : 4,
+                      "endLine" : 65,
+                      "endColumn" : 44,
+                      "offset" : 1748,
+                      "length" : 40
+                    }
+                  }
                 },
                 "feature" : {
                   "type" : "Some",
                   "value" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_in"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 21,
+                        "beginColumn" : 4,
+                        "endLine" : 21,
+                        "endColumn" : 27,
+                        "offset" : 413,
+                        "length" : 23
+                      }
+                    }
                   }
                 },
                 "direction" : {
@@ -608,11 +1177,43 @@
                   "type" : "ConnectionReference",
                   "name" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1", "child_to_child"]
+                    "name" : ["Root_two_references_Instance", "Sub1", "child_to_child"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 68,
+                        "beginColumn" : 4,
+                        "endLine" : 68,
+                        "endColumn" : 66,
+                        "offset" : 1867,
+                        "length" : 62
+                      }
+                    }
                   },
                   "context" : {
                     "type" : "Name",
-                    "name" : ["Root_two_references_Instance", "Sub1"]
+                    "name" : ["Root_two_references_Instance", "Sub1"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "__synthetic0.aadl"
+                        },
+                        "beginLine" : 75,
+                        "beginColumn" : 4,
+                        "endLine" : 75,
+                        "endColumn" : 37,
+                        "offset" : 2111,
+                        "length" : 33
+                      }
+                    }
                   },
                   "isParent" : true
                 }
@@ -633,11 +1234,24 @@
               "name" : "Emv2",
               "clause" : {
                 "type" : "Emv2Clause",
-                "libraries" : [],
+                "libraries" : [
+                ],
                 "propagations" : [
                 ],
                 "flows" : [
-                ]
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                }
               }
             }
           ]
@@ -648,20 +1262,55 @@
           "type" : "Connection",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "system_to_comp_in"]
+            "name" : ["Root_two_references_Instance", "system_to_comp_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 77,
+                "beginColumn" : 4,
+                "endLine" : 77,
+                "endColumn" : 55,
+                "offset" : 2162,
+                "length" : 51
+              }
+            }
           },
           "src" : [
             {
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance"]
+                "name" : ["Root_two_references_Instance"],
+                "pos" : {
+                  "type" : "None"
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "root_in"]
+                  "name" : ["Root_two_references_Instance", "root_in"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 8,
+                      "beginColumn" : 4,
+                      "endLine" : 8,
+                      "endColumn" : 25,
+                      "offset" : 182,
+                      "length" : 21
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -678,13 +1327,45 @@
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1"]
+                "name" : ["Root_two_references_Instance", "Sub1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 75,
+                    "beginColumn" : 4,
+                    "endLine" : 75,
+                    "endColumn" : 37,
+                    "offset" : 2111,
+                    "length" : 33
+                  }
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_in"]
+                  "name" : ["Root_two_references_Instance", "Sub1", "sub_in"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 14,
+                      "beginColumn" : 4,
+                      "endLine" : 14,
+                      "endColumn" : 23,
+                      "offset" : 275,
+                      "length" : 19
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -704,7 +1385,10 @@
           "connectionInstances" : [
             {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance", "root_in -> Sub1", "sub_proc1", "proc_in"]
+              "name" : ["Root_two_references_Instance", "root_in -> Sub1", "sub_proc1", "proc_in"],
+              "pos" : {
+                "type" : "None"
+              }
             }
           ],
           "properties" : [
@@ -714,20 +1398,68 @@
           "type" : "Connection",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "system_to_comp_out"]
+            "name" : ["Root_two_references_Instance", "system_to_comp_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 78,
+                "beginColumn" : 4,
+                "endLine" : 78,
+                "endColumn" : 57,
+                "offset" : 2217,
+                "length" : 53
+              }
+            }
           },
           "src" : [
             {
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1"]
+                "name" : ["Root_two_references_Instance", "Sub1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 75,
+                    "beginColumn" : 4,
+                    "endLine" : 75,
+                    "endColumn" : 37,
+                    "offset" : 2111,
+                    "length" : 33
+                  }
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "Sub1", "sub_out"]
+                  "name" : ["Root_two_references_Instance", "Sub1", "sub_out"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 15,
+                      "beginColumn" : 4,
+                      "endLine" : 15,
+                      "endColumn" : 25,
+                      "offset" : 298,
+                      "length" : 21
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -744,13 +1476,32 @@
               "type" : "EndPoint",
               "component" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance"]
+                "name" : ["Root_two_references_Instance"],
+                "pos" : {
+                  "type" : "None"
+                }
               },
               "feature" : {
                 "type" : "Some",
                 "value" : {
                   "type" : "Name",
-                  "name" : ["Root_two_references_Instance", "root_out"]
+                  "name" : ["Root_two_references_Instance", "root_out"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "__synthetic0.aadl"
+                      },
+                      "beginLine" : 9,
+                      "beginColumn" : 4,
+                      "endLine" : 9,
+                      "endColumn" : 26,
+                      "offset" : 207,
+                      "length" : 22
+                    }
+                  }
                 }
               },
               "direction" : {
@@ -770,7 +1521,10 @@
           "connectionInstances" : [
             {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out -> root_out"]
+              "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out -> root_out"],
+              "pos" : {
+                "type" : "None"
+              }
             }
           ],
           "properties" : [
@@ -782,19 +1536,67 @@
           "type" : "ConnectionInstance",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "root_in -> Sub1.sub_proc1.proc_in"]
+            "name" : ["Root_two_references_Instance", "root_in -> Sub1.sub_proc1.proc_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 77,
+                "beginColumn" : 4,
+                "endLine" : 77,
+                "endColumn" : 55,
+                "offset" : 2162,
+                "length" : 51
+              }
+            }
           },
           "src" : {
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance"]
+              "name" : ["Root_two_references_Instance"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 72,
+                  "beginColumn" : 2,
+                  "endLine" : 79,
+                  "endColumn" : 26,
+                  "offset" : 2021,
+                  "length" : 275
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "root_in"]
+                "name" : ["Root_two_references_Instance", "root_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 8,
+                    "beginColumn" : 4,
+                    "endLine" : 8,
+                    "endColumn" : 25,
+                    "offset" : 182,
+                    "length" : 21
+                  }
+                }
               }
             },
             "direction" : {
@@ -809,13 +1611,45 @@
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"]
+              "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 64,
+                  "beginColumn" : 4,
+                  "endLine" : 64,
+                  "endColumn" : 44,
+                  "offset" : 1704,
+                  "length" : 40
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in"]
+                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc1", "proc_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 21,
+                    "beginColumn" : 4,
+                    "endLine" : 21,
+                    "endColumn" : 27,
+                    "offset" : 413,
+                    "length" : 23
+                  }
+                }
               }
             },
             "direction" : {
@@ -835,11 +1669,43 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "system_to_comp_in"]
+                "name" : ["Root_two_references_Instance", "system_to_comp_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 77,
+                    "beginColumn" : 4,
+                    "endLine" : 77,
+                    "endColumn" : 55,
+                    "offset" : 2162,
+                    "length" : 51
+                  }
+                }
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance"]
+                "name" : ["Root_two_references_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 72,
+                    "beginColumn" : 2,
+                    "endLine" : 79,
+                    "endColumn" : 26,
+                    "offset" : 2021,
+                    "length" : 275
+                  }
+                }
               },
               "isParent" : true
             },
@@ -847,11 +1713,43 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "parent_to_child_in"]
+                "name" : ["Root_two_references_Instance", "Sub1", "parent_to_child_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 67,
+                    "beginColumn" : 4,
+                    "endLine" : 67,
+                    "endColumn" : 61,
+                    "offset" : 1806,
+                    "length" : 57
+                  }
+                }
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1"]
+                "name" : ["Root_two_references_Instance", "Sub1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 75,
+                    "beginColumn" : 4,
+                    "endLine" : 75,
+                    "endColumn" : 37,
+                    "offset" : 2111,
+                    "length" : 33
+                  }
+                }
               },
               "isParent" : false
             }
@@ -863,19 +1761,67 @@
           "type" : "ConnectionInstance",
           "name" : {
             "type" : "Name",
-            "name" : ["Root_two_references_Instance", "Sub1.sub_proc2.proc_out -> root_out"]
+            "name" : ["Root_two_references_Instance", "Sub1.sub_proc2.proc_out -> root_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "__synthetic0.aadl"
+                },
+                "beginLine" : 69,
+                "beginColumn" : 4,
+                "endLine" : 69,
+                "endColumn" : 63,
+                "offset" : 1933,
+                "length" : 59
+              }
+            }
           },
           "src" : {
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"]
+              "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 65,
+                  "beginColumn" : 4,
+                  "endLine" : 65,
+                  "endColumn" : 44,
+                  "offset" : 1748,
+                  "length" : 40
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out"]
+                "name" : ["Root_two_references_Instance", "Sub1", "sub_proc2", "proc_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 22,
+                    "beginColumn" : 4,
+                    "endLine" : 22,
+                    "endColumn" : 29,
+                    "offset" : 440,
+                    "length" : 25
+                  }
+                }
               }
             },
             "direction" : {
@@ -890,13 +1836,45 @@
             "type" : "EndPoint",
             "component" : {
               "type" : "Name",
-              "name" : ["Root_two_references_Instance"]
+              "name" : ["Root_two_references_Instance"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "__synthetic0.aadl"
+                  },
+                  "beginLine" : 72,
+                  "beginColumn" : 2,
+                  "endLine" : 79,
+                  "endColumn" : 26,
+                  "offset" : 2021,
+                  "length" : 275
+                }
+              }
             },
             "feature" : {
               "type" : "Some",
               "value" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "root_out"]
+                "name" : ["Root_two_references_Instance", "root_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 9,
+                    "beginColumn" : 4,
+                    "endLine" : 9,
+                    "endColumn" : 26,
+                    "offset" : 207,
+                    "length" : 22
+                  }
+                }
               }
             },
             "direction" : {
@@ -916,11 +1894,43 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1", "child_to_parent_out"]
+                "name" : ["Root_two_references_Instance", "Sub1", "child_to_parent_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 69,
+                    "beginColumn" : 4,
+                    "endLine" : 69,
+                    "endColumn" : 63,
+                    "offset" : 1933,
+                    "length" : 59
+                  }
+                }
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "Sub1"]
+                "name" : ["Root_two_references_Instance", "Sub1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 75,
+                    "beginColumn" : 4,
+                    "endLine" : 75,
+                    "endColumn" : 37,
+                    "offset" : 2111,
+                    "length" : 33
+                  }
+                }
               },
               "isParent" : false
             },
@@ -928,11 +1938,43 @@
               "type" : "ConnectionReference",
               "name" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance", "system_to_comp_out"]
+                "name" : ["Root_two_references_Instance", "system_to_comp_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 78,
+                    "beginColumn" : 4,
+                    "endLine" : 78,
+                    "endColumn" : 57,
+                    "offset" : 2217,
+                    "length" : 53
+                  }
+                }
               },
               "context" : {
                 "type" : "Name",
-                "name" : ["Root_two_references_Instance"]
+                "name" : ["Root_two_references_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "__synthetic0.aadl"
+                    },
+                    "beginLine" : 72,
+                    "beginColumn" : 2,
+                    "endLine" : 79,
+                    "endColumn" : 26,
+                    "offset" : 2021,
+                    "length" : 275
+                  }
+                }
               },
               "isParent" : true
             }
@@ -953,11 +1995,24 @@
           "name" : "Emv2",
           "clause" : {
             "type" : "Emv2Clause",
-            "libraries" : [],
+            "libraries" : [
+            ],
             "propagations" : [
             ],
             "flows" : [
-            ]
+            ],
+            "componentBehavior" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Emv2BehaviorSection",
+                "events" : [
+                ],
+                "transitions" : [
+                ],
+                "propagations" : [
+                ]
+              }
+            }
           }
         }
       ]

@@ -1,0 +1,44 @@
+--Copyright (C) 2018 Adventium Labs.
+--This material is based upon work supported by the US Army Medical Research and Material Command under Contract No.W81XWH-16-C-0192.  The views, opinions, and/or findings contained in this report are those of the authors) and should not be construed as an official Department of the Army position, policy or decision unless so designated by other documentation. 
+--The Model is provided "AS IS" without warranty, support, or indemnification of any kind, expressed or implied. The entire risk arising out of use of the model remains with the user.  In no event shall Adventium Labs be liable for any damages arising out of the use or inability to use the Model, even if Adventium Labs has been advised of the possibility of such damages.
+--For more information about using this and other Model Based Engineering tools see: http://www.adventiumlabs.com/our-work/products-services/model-based-engineering-mbe-tools.
+
+property set PulseOxCauses is
+	with AAMI_80001;
+
+	Pulse_C01: constant AAMI_80001::Cause => [
+				ID => "Pulse_C01";
+				Description => "LED failure";
+				Likelihood => Occasional;
+			];
+	Pulse_C02: constant AAMI_80001::Cause => [
+				ID => "Pulse_C02";
+				Description => "Error in SpO2 value calculation";
+				Likelihood => Remote;
+			];
+	Pulse_C03: constant AAMI_80001::Cause => [
+				ID => "Pulse_C03";
+				Description => "noise in LED measurement";
+				Likelihood => Probable;
+			];
+	Pulse_C04: constant AAMI_80001::Cause => [
+				ID => "Pulse_C04";
+				Description => "Disconnected from Patient";
+				Likelihood => Probable;
+			];
+	Pulse_C05: constant AAMI_80001::Cause => [
+				ID => "Pulse_C05";
+				Description => "Disconnected from Device Network"; -- associated with service error
+				Likelihood => Occasional;
+			];
+	Pulse_C06: constant AAMI_80001::cause => [
+				ID => "Pulse_C06";
+				Description => "Sending PII or PHI";
+				Likelihood => Probable;
+			];
+	Pulse_C07: constant AAMI_80001::cause => [
+				ID => "Pulse_C07";
+				Description => "Data is not protected";
+				Likelihood => Probable; -- Worst case: assume it is unencrypted; will be updated with risk controls.
+			];
+end PulseOxCauses;

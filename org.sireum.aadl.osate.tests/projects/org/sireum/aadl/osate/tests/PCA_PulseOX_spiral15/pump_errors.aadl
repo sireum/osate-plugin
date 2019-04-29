@@ -1,0 +1,15 @@
+package pump_errors
+public
+with ErrorLibrary;	
+	
+annex EMv2
+{**
+	error types extends ErrorLibrary with
+	--Basic Error types
+	start_commission : type ; -- base class for errors  
+	start_omission : type ;
+	stop_commission : type ;
+	stop_omission : type ; 
+	end types;
+**};
+end pump_errors;
