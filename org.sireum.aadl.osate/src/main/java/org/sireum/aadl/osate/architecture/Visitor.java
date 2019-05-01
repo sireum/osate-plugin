@@ -578,6 +578,9 @@ public class Visitor {
 					.toIList(factory.rangeProp(getUnitProp(rv.getMinimumValue()), getUnitProp(rv.getMaximumValue())));
 		case Aadl2Package.CLASSIFIER_VALUE:
 			final Classifier cv = ((ClassifierValue) pe).getClassifier();
+			if (cv instanceof DataClassifier) {
+				processDataType((DataClassifier) cv);
+			}
 			return VisitorUtil.toIList(factory.classifierProp(cv.getQualifiedName()));
 		case Aadl2Package.LIST_VALUE:
 			final ListValue lv = (ListValue) pe;
