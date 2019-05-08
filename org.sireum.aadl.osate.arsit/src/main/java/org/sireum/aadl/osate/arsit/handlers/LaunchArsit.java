@@ -71,10 +71,14 @@ public class LaunchArsit extends AbstractSireumHandler {
 							ipc = IPCMechanismJava.SharedMemory;
 						}
 
+						String outputDir = p.getOptionOutputDirectory().equals("") ? null
+								: p.getOptionOutputDirectory();
+						String base = p.getOptionBasePackageName().equals("") ? null : p.getOptionBasePackageName();
+
 						return org.sireum.aadl.arsit.Arsit.run(
 								model,
-								ArsitBridge.sireumOption(p.getOptionOutputDirectory()),
-								ArsitBridge.sireumOption(p.getOptionBasePackageName()),
+								ArsitBridge.sireumOption(outputDir),
+								ArsitBridge.sireumOption(base),
 								p.getOptionEmbedArt(),
 								p.getOptionGenerateBlessEntryPoints(),
 								p.getOptionGenerateTranspilerArtifacts(),
