@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -47,7 +46,6 @@ import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instantiation.InstantiateModel;
-import org.osate.aadl2.modelsupport.errorreporting.AnalysisErrorReporterManager;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.ui.dialogs.Dialog;
@@ -119,11 +117,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 					writeToConsole("Generating System Instance ...");
 
-					InstantiateModel im = new InstantiateModel(new NullProgressMonitor(),
-							AnalysisErrorReporterManager.NULL_ERROR_MANANGER);
-					URI uri = OsateResourceUtil.getInstanceModelURI(si);
-					Resource resource = OsateResourceUtil.getEmptyAaxl2Resource(uri);
-					return im.createSystemInstance(si, resource);
+					return InstantiateModel.buildInstanceModelFile(si);
 				} catch (Exception ex) {
 					Dialog.showError(getToolName(), "Could not instantiate model");
 					ex.printStackTrace();
@@ -144,11 +138,8 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		if (root != null && root instanceof SystemImplementation) {
 			try {
 				SystemImplementation si = (SystemImplementation) root;
-				InstantiateModel im = new InstantiateModel(new NullProgressMonitor(),
-						AnalysisErrorReporterManager.NULL_ERROR_MANANGER);
-				URI uri = OsateResourceUtil.getInstanceModelURI(si);
-				Resource resource = OsateResourceUtil.getEmptyAaxl2Resource(uri);
-				root = im.createSystemInstance(si, resource);
+
+				root = InstantiateModel.buildInstanceModelFile(si);
 			} catch (Exception ex) {
 				Dialog.showError(getToolName(), "Could not instantiate model");
 				return null;
