@@ -66,6 +66,7 @@ import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 import org.sireum.Option;
 import org.sireum.Some;
 import org.sireum.aadl.ir.AadlASTJavaFactory;
+import org.sireum.aadl.ir.Annex;
 
 public class Visitor {
 
@@ -74,6 +75,7 @@ public class Visitor {
 	final Map<String, org.sireum.aadl.ir.Component> datamap = new LinkedHashMap<>();
 	final Map<List<String>, Set<Connection>> compConnMap = new HashMap<>();
 	final Emv2Visitor ev = new Emv2Visitor();
+	final BlessVisitor bv = new BlessVisitor();
 
 	public Option<org.sireum.aadl.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		final Option<org.sireum.aadl.ir.Component> t = visit(root);
@@ -303,7 +305,13 @@ public class Visitor {
 
 		final List<org.sireum.aadl.ir.Mode> modes = VisitorUtil.iList(); // TODO
 
-		final List<org.sireum.aadl.ir.Annex> annexes = VisitorUtil.toIList(ev.visitEmv2Comp(compInst, currentPath)); // TODO
+		List<org.sireum.aadl.ir.Annex> annexes = VisitorUtil.toIList(ev.visitEmv2Comp(compInst, currentPath));
+
+		Annex blessAnnex = bv.visit(compInst);
+		if (blessAnnex != null) {
+			annexes = VisitorUtil.add(annexes, blessAnnex);
+		}
+
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
 				connectionInstances, properties, flows, modes, annexes);
 	}
@@ -519,13 +527,15 @@ public class Visitor {
 
 		org.sireum.aadl.ir.Feature source = null;
 		if (flowInst.getSource() != null) {
-			// List<String> us = Arrays.asList(flowInst.getSource().getInstanceObjectPath().split("\\."));
+			// List<String> us =
+			// Arrays.asList(flowInst.getSource().getInstanceObjectPath().split("\\."));
 			source = buildFeature(flowInst.getSource(), currentPath);
 		}
 
 		org.sireum.aadl.ir.Feature sink = null;
 		if (flowInst.getDestination() != null) {
-			// List<String> ud = Arrays.asList(flowInst.getDestination().getInstanceObjectPath().split("\\."));
+			// List<String> ud =
+			// Arrays.asList(flowInst.getDestination().getInstanceObjectPath().split("\\."));
 			sink = buildFeature(flowInst.getDestination(), currentPath);
 		}
 
@@ -626,7 +636,8 @@ public class Visitor {
 					VisitorUtil.buildPosInfo(rvx.getPath().getNamedElement()));
 			return VisitorUtil.toIList(factory.referenceProp(refName));
 		case InstancePackage.INSTANCE_REFERENCE_VALUE:
-			// FIXME: id is coming from InstancePackage rather than Aadl2Package. Might cause the
+			// FIXME: id is coming from InstancePackage rather than Aadl2Package. Might
+			// cause the
 			// following cast to fail if there is an id clash
 
 			final InstanceReferenceValue irv = (InstanceReferenceValue) pe;

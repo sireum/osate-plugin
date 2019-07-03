@@ -13,7 +13,10 @@ Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.ui,
  org.osate.aadl2,
  org.osate.xtext.aadl2.errormodel,
- org.osate.annexsupport
+ org.osate.annexsupport,
+ edu.ksu.bless.assertion;bundle-version="1.0.0",
+ edu.ksu.bless.bless;bundle-version="1.0.0",
+ edu.ksu.bless.subbless;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.sireum.aadl.osate.architecture;uses:="org.osate.aadl2,org.osate.aadl2.instance,org.sireum",
  org.sireum.aadl.osate.handlers;
@@ -94,4 +97,5 @@ Automatic-Module-Name: org.sireum.aadl.osate
 Bundle-ClassPath: .,
  bin/,
  lib/air.jar
-Import-Package: org.sireum.message
+Import-Package: org.sireum.aadl.ir,
+ org.sireum.message

@@ -21,6 +21,8 @@ import org.osate.annexsupport.AnnexRegistry;
 import org.osate.annexsupport.AnnexTextPositionResolverRegistry;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelLibrary;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelSubclause;
+import org.sireum.IS;
+import org.sireum.IS$;
 import org.sireum.message.Position;
 
 public class VisitorUtil {
@@ -30,6 +32,11 @@ public class VisitorUtil {
 
 	public static <T> List<T> isz2IList(org.sireum.IS<org.sireum.Z, T> isz) {
 		return Collections.unmodifiableList(scala.collection.JavaConverters.seqAsJavaList(isz.elements()));
+	}
+
+	public static <T> IS<org.sireum.Z, T> list2ISZ(List<T> l) {
+		scala.collection.Seq<T> elems = scala.collection.JavaConverters.asScalaBuffer(l);
+		return IS$.MODULE$.apply(elems, org.sireum.Z$.MODULE$);
 	}
 
 	public static <T> List<T> toIList(T e) {
