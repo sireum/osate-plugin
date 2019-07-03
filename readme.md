@@ -34,7 +34,7 @@ IDE as 'Eclipse'.
      cd air
      ./prelude.sh
      ./mill-standalone air.jvm.assembly
-     cp out/air/jvm/assembly/dest/out.jar <osate-plugin-dir>/org.sireum.aadl.osate.air/air.jar
+     cp out/air/jvm/assembly/dest/out.jar <osate-plugin-dir>/org.sireum.aadl.osate/lib/air.jar
      ```
 
    * ACT
