@@ -307,7 +307,7 @@ public class Visitor {
 
 		List<org.sireum.aadl.ir.Annex> annexes = VisitorUtil.toIList(ev.visitEmv2Comp(compInst, currentPath));
 
-		Annex blessAnnex = bv.visit(compInst);
+		Annex blessAnnex = bv.visit(compInst, currentPath);
 		if (blessAnnex != null) {
 			annexes = VisitorUtil.add(annexes, blessAnnex);
 		}

@@ -14,14 +14,126 @@ import org.sireum.Option;
 import org.sireum.Z;
 import org.sireum.Z$;
 import org.sireum.aadl.ir.*;
+import org.sireum.aadl.ir.Annex;
+import org.sireum.aadl.ir.Annex$;
+import org.sireum.aadl.ir.BLESSIntConst;
+import org.sireum.aadl.ir.BTSAccessExp$;
+import org.sireum.aadl.ir.BTSAction;
+import org.sireum.aadl.ir.BTSAssertedAction;
+import org.sireum.aadl.ir.BTSAssertedAction$;
+import org.sireum.aadl.ir.BTSAssertion;
+import org.sireum.aadl.ir.BTSAssertion$;
+import org.sireum.aadl.ir.BTSAssignmentAction;
+import org.sireum.aadl.ir.BTSAssignmentAction$;
+import org.sireum.aadl.ir.BTSBLESSAnnexClause;
+import org.sireum.aadl.ir.BTSBLESSAnnexClause$;
+import org.sireum.aadl.ir.BTSBehaviorActions;
+import org.sireum.aadl.ir.BTSBehaviorActions$;
+import org.sireum.aadl.ir.BTSBehaviorTime;
+import org.sireum.aadl.ir.BTSBehaviorTime$;
+import org.sireum.aadl.ir.BTSBinaryExp;
+import org.sireum.aadl.ir.BTSBinaryExp$;
+import org.sireum.aadl.ir.BTSBinaryOp;
+import org.sireum.aadl.ir.BTSClassifier$;
+import org.sireum.aadl.ir.BTSConditionalActions;
+import org.sireum.aadl.ir.BTSConditionalActions$;
+import org.sireum.aadl.ir.BTSDispatchCondition;
+import org.sireum.aadl.ir.BTSDispatchCondition$;
+import org.sireum.aadl.ir.BTSDispatchConjunction;
+import org.sireum.aadl.ir.BTSDispatchConjunction$;
+import org.sireum.aadl.ir.BTSDispatchTrigger;
+import org.sireum.aadl.ir.BTSDispatchTriggerPort$;
+import org.sireum.aadl.ir.BTSDispatchTriggerStop;
+import org.sireum.aadl.ir.BTSDispatchTriggerTimeout$;
+import org.sireum.aadl.ir.BTSExecuteCondition;
+import org.sireum.aadl.ir.BTSExecutionOrder;
+import org.sireum.aadl.ir.BTSExistentialLatticeQuantification;
+import org.sireum.aadl.ir.BTSExistentialLatticeQuantification$;
+import org.sireum.aadl.ir.BTSExp;
+import org.sireum.aadl.ir.BTSFormalExpPair;
+import org.sireum.aadl.ir.BTSFormalExpPair$;
+import org.sireum.aadl.ir.BTSFrozenPortAction$;
+import org.sireum.aadl.ir.BTSFunctionCall;
+import org.sireum.aadl.ir.BTSFunctionCall$;
+import org.sireum.aadl.ir.BTSGuardedAction;
+import org.sireum.aadl.ir.BTSGuardedAction$;
+import org.sireum.aadl.ir.BTSIfBAAction;
+import org.sireum.aadl.ir.BTSIfBAAction$;
+import org.sireum.aadl.ir.BTSIfBLESSAction;
+import org.sireum.aadl.ir.BTSIfBLESSAction$;
+import org.sireum.aadl.ir.BTSInternalCondition;
+import org.sireum.aadl.ir.BTSLiteralExp$;
+import org.sireum.aadl.ir.BTSLiteralType;
+import org.sireum.aadl.ir.BTSModeCondition;
+import org.sireum.aadl.ir.BTSNameExp;
+import org.sireum.aadl.ir.BTSNameExp$;
+import org.sireum.aadl.ir.BTSPortInAction;
+import org.sireum.aadl.ir.BTSPortInAction$;
+import org.sireum.aadl.ir.BTSPortOutAction;
+import org.sireum.aadl.ir.BTSPortOutAction$;
+import org.sireum.aadl.ir.BTSSkipAction$;
+import org.sireum.aadl.ir.BTSStateCategory;
+import org.sireum.aadl.ir.BTSStateDeclaration;
+import org.sireum.aadl.ir.BTSStateDeclaration$;
+import org.sireum.aadl.ir.BTSSubprogramCallAction$;
+import org.sireum.aadl.ir.BTSTransition;
+import org.sireum.aadl.ir.BTSTransition$;
+import org.sireum.aadl.ir.BTSTransitionCondition;
+import org.sireum.aadl.ir.BTSTransitionLabel;
+import org.sireum.aadl.ir.BTSTransitionLabel$;
+import org.sireum.aadl.ir.BTSType;
+import org.sireum.aadl.ir.BTSUnaryExp$;
+import org.sireum.aadl.ir.BTSUnaryOp;
+import org.sireum.aadl.ir.BTSUniversalLatticeQuantification;
+import org.sireum.aadl.ir.BTSUniversalLatticeQuantification$;
+import org.sireum.aadl.ir.BTSVariableCategory;
+import org.sireum.aadl.ir.BTSVariableDeclaration;
+import org.sireum.aadl.ir.BTSVariableDeclaration$;
+import org.sireum.aadl.ir.Classifier;
+import org.sireum.aadl.ir.Classifier$;
 import org.sireum.aadl.ir.Name;
+import org.sireum.aadl.ir.TODO;
 
-import edu.ksu.bless.assertion.assertion.*;
+import edu.ksu.bless.assertion.assertion.Assertion;
+import edu.ksu.bless.assertion.assertion.PartialName;
+import edu.ksu.bless.assertion.assertion.Type;
+import edu.ksu.bless.assertion.assertion.ValueConstant;
 import edu.ksu.bless.assertion.assertion.util.AssertionSwitch;
-import edu.ksu.bless.bless.bLESS.*;
+import edu.ksu.bless.bless.bLESS.BLESSAnnexSubclause;
+import edu.ksu.bless.bless.bLESS.BehaviorState;
+import edu.ksu.bless.bless.bLESS.BehaviorTransition;
+import edu.ksu.bless.bless.bLESS.BehaviorVariable;
+import edu.ksu.bless.bless.bLESS.Declarator;
+import edu.ksu.bless.bless.bLESS.DispatchCondition;
+import edu.ksu.bless.bless.bLESS.DispatchConjunction;
+import edu.ksu.bless.bless.bLESS.DispatchTrigger;
+import edu.ksu.bless.bless.bLESS.ExecuteCondition;
+import edu.ksu.bless.bless.bLESS.InternalCondition;
+import edu.ksu.bless.bless.bLESS.ModeCondition;
+import edu.ksu.bless.bless.bLESS.TransitionLabel;
 import edu.ksu.bless.bless.bLESS.impl.BLESSAnnexSubclauseImpl;
 import edu.ksu.bless.bless.bLESS.util.BLESSSwitch;
-import edu.ksu.bless.subbless.subBLESS.*;
+import edu.ksu.bless.subbless.subBLESS.Alternative;
+import edu.ksu.bless.subbless.subBLESS.AssertedAction;
+import edu.ksu.bless.subbless.subBLESS.Assignment;
+import edu.ksu.bless.subbless.subBLESS.BasicAction;
+import edu.ksu.bless.subbless.subBLESS.BehaviorActions;
+import edu.ksu.bless.subbless.subBLESS.BehaviorTime;
+import edu.ksu.bless.subbless.subBLESS.CommunicationAction;
+import edu.ksu.bless.subbless.subBLESS.ExistentialLatticeQuantification;
+import edu.ksu.bless.subbless.subBLESS.Expression;
+import edu.ksu.bless.subbless.subBLESS.ExpressionOrRelation;
+import edu.ksu.bless.subbless.subBLESS.FormalActual;
+import edu.ksu.bless.subbless.subBLESS.FormalExpressionPair;
+import edu.ksu.bless.subbless.subBLESS.FunctionCall;
+import edu.ksu.bless.subbless.subBLESS.GuardedAction;
+import edu.ksu.bless.subbless.subBLESS.PortInput;
+import edu.ksu.bless.subbless.subBLESS.PortOutput;
+import edu.ksu.bless.subbless.subBLESS.Subexpression;
+import edu.ksu.bless.subbless.subBLESS.SubprogramCall;
+import edu.ksu.bless.subbless.subBLESS.UniversalLatticeQuantification;
+import edu.ksu.bless.subbless.subBLESS.Value;
+import edu.ksu.bless.subbless.subBLESS.VariableDeclaration;
 import edu.ksu.bless.subbless.subBLESS.util.SubBLESSSwitch;
 
 public class BlessVisitor {
@@ -34,13 +146,26 @@ public class BlessVisitor {
 
 	public final static String BLESS = "BLESS";
 
-	public Annex visit(ComponentInstance ci) {
+	private List<String> path = null;
+
+	private List<String> featureNames = null;
+	private List<String> subcomponentNames = null;
+
+	public Annex visit(ComponentInstance ci, List<String> path) {
 		if (ci.getClassifier() != null) {
 			List<BLESSAnnexSubclauseImpl> bas = EcoreUtil2.eAllOfType(ci.getClassifier(),
 					BLESSAnnexSubclauseImpl.class);
 			assert (bas.size() <= 1);
 
 			if (bas.size() == 1) {
+				this.path = path;
+
+				this.featureNames = ci.getFeatureInstances().stream().map(f -> f.getName())
+						.collect(Collectors.toList());
+
+				this.subcomponentNames = ci.getComponentInstances().stream().map(c -> c.getName())
+						.collect(Collectors.toList());
+
 				bv.visit(bas.get(0));
 				return Annex$.MODULE$.apply(BLESS, bv.pop());
 			}
@@ -48,7 +173,7 @@ public class BlessVisitor {
 		return null;
 	}
 
-	static void handle(Class<?> c) {
+	void handle(Class<?> c) {
 		System.err.println("Need to handle " + c.getCanonicalName());
 
 		int i = 0;
@@ -60,24 +185,39 @@ public class BlessVisitor {
 		}
 	}
 
-	private <T> IS<Z, T> l2is(List<T> l) {
+	<T> IS<Z, T> l2is(List<T> l) {
 		return VisitorUtil.list2ISZ(l);
 	}
 
-	static Name toName(String n) {
-		return factory.name(VisitorUtil.toIList(n), null);
+	Name toName(String n, List<String> _path) {
+		return factory.name(VisitorUtil.add(_path, n), null);
 	}
 
-	static <T> org.sireum.None<T> toNone() {
+	Name toName(String n) {
+		return toName(n, path);
+	}
+
+	Name toName(Port p) {
+		return toName(p.getName());
+	}
+
+	Name toSimpleName(String s) {
+		if (featureNames.contains(s) || this.subcomponentNames.contains(s)) {
+			return toName(s, path);
+		} else {
+			return toName(s, VisitorUtil.iList());
+		}
+	}
+
+	<T> org.sireum.None<T> toNone() {
 		return org.sireum.None$.MODULE$.apply();
 
 	}
 
-	static <T> org.sireum.Some<T> toSome(T t) {
+	<T> org.sireum.Some<T> toSome(T t) {
 		return org.sireum.Some$.MODULE$.apply(t);
 	}
 
-	// FIXME is bless grammar case sensitive?
 	static BTSBinaryOp.Type toBinaryOp(String r) {
 		if (r.equals("+")) {
 			return BTSBinaryOp.byName("PLUS").get();
@@ -183,7 +323,7 @@ public class BlessVisitor {
 
 		@Override
 		public Boolean caseBehaviorState(BehaviorState object) {
-			Name id = toName(object.getQualifiedName());
+			Name id = toSimpleName(object.getName());
 
 			List<BTSStateCategory.Type> categories = new ArrayList<>();
 			if (object.isInitial()) {
@@ -229,8 +369,7 @@ public class BlessVisitor {
 			}
 
 			av.visit(object.getType());
-			BTSType varType = av.pop(); // TODO update air
-
+			BTSType varType = av.pop();
 
 			Option<BTSExp> assignExpression = toNone();
 			if (object.getExpression() != null) {
@@ -246,12 +385,16 @@ public class BlessVisitor {
 
 			List<BTSVariableDeclaration> names = new ArrayList<>();
 			for (Declarator d : object.getVariable_names()) {
-				Name name = toName(d.getVariable());
+				Name name = toSimpleName(d.getVariable());
 
 				Option<BLESSIntConst> arraySize = toNone();
 
 				for (ValueConstant vc : d.getArray_size()) {
+					av.visit(vc);
+					BTSExp exp = av.pop();
+
 					// TODO ???????
+					throw new RuntimeException("TODO");
 				}
 
 				BTSVariableDeclaration vd = BTSVariableDeclaration$.MODULE$.apply(name, category, varType,
@@ -272,13 +415,13 @@ public class BlessVisitor {
 
 			List<Name> _sourceStates = new ArrayList<>();
 			for (BehaviorState bs : object.getSources()) {
-				String srcName = bs.getQualifiedName(); // just need name
-				_sourceStates.add(toName(srcName));
+				String srcName = bs.getName(); // just need name
+				_sourceStates.add(toSimpleName(srcName));
 			}
 
 			BehaviorState dest = object.getDestination();
-			String destName = dest.getQualifiedName(); // just need name
-			Name destState = toName(destName);
+			String destName = dest.getName(); // just need name
+			Name destState = toSimpleName(destName);
 
 
 			Option<BTSTransitionCondition> _transitionCondition = null;
@@ -330,7 +473,7 @@ public class BlessVisitor {
 
 		@Override
 		public Boolean caseTransitionLabel(TransitionLabel object) {
-			Name id = toName(object.getId());
+			Name id = toSimpleName(object.getId());
 
 			Option<Z> priority = null;
 			if (object.getPriority() != null) {
@@ -357,8 +500,8 @@ public class BlessVisitor {
 			}
 
 			List<Name> frozenPorts = new ArrayList<>();
-			for (Port n : object.getFrozen()) {
-				frozenPorts.add(toName(n.getQualifiedName()));
+			for (Port p : object.getFrozen()) {
+				frozenPorts.add(toName(p));
 			}
 
 			BTSDispatchCondition bdc = BTSDispatchCondition$.MODULE$.apply(l2is(dispatchTriggers), l2is(frozenPorts));
@@ -397,7 +540,7 @@ public class BlessVisitor {
 				List<Name> ports = new ArrayList<>();
 				if (object.isLp()) {
 					for (Port p : object.getPorts()) {
-						ports.add(toName(p.getQualifiedName()));
+						ports.add(toName(p));
 					}
 				}
 
@@ -413,9 +556,7 @@ public class BlessVisitor {
 			if (object.getPort() != null) {
 				assert ret == null;
 
-				Name port = toName(object.getPort().getQualifiedName());
-
-				ret = BTSDispatchTriggerPort$.MODULE$.apply(port);
+				ret = BTSDispatchTriggerPort$.MODULE$.apply(toName(object.getPort()));
 			}
 
 			assert ret != null;
@@ -426,10 +567,22 @@ public class BlessVisitor {
 
 		@Override
 		public Boolean caseExecuteCondition(ExecuteCondition object) {
-			handle(object.getClass());
 
-			BTSExecuteCondition c = BTSExecuteCondition.apply();
-			push(c);
+			if (object.getOtherwise() != null) {
+				push(BTSExecuteConditionOtherwise$.MODULE$.apply());
+			} else if (object.getTimeout() != null) {
+				push(BTSExecuteConditionTimeout$.MODULE$.apply());
+			} else if (object.getEor() != null) {
+
+				sv.visit(object.getEor());
+				BTSExp e = sv.pop();
+
+				BTSExecuteCondition c = BTSExecuteConditionExp$.MODULE$.apply(e);
+				push(c);
+
+			} else {
+				throw new RuntimeException("Unexpected execute condition " + object);
+			}
 
 			return false;
 		}
@@ -489,14 +642,6 @@ public class BlessVisitor {
 		public Boolean caseAssertion(Assertion object) {
 			handle(object.getClass());
 
-			object.getNamedassertion();
-			object.getNamedenumeration();
-			object.getNamedfunction();
-
-			object.getNamelessassertion();
-			object.getNamelessenumeration();
-			object.getNamelessfunction();
-
 			BTSAssertion a = BTSAssertion$.MODULE$.apply();
 			push(a);
 
@@ -507,8 +652,9 @@ public class BlessVisitor {
 		public Boolean caseType(Type object) {
 
 			if (object.getData_component_reference() != null) {
-				DataClassifier c = object.getData_component_reference();
-				push(BTSClassifier$.MODULE$.apply(toName(c.getQualifiedName())));
+				DataClassifier dc = object.getData_component_reference();
+				Classifier c = Classifier$.MODULE$.apply(dc.getQualifiedName());
+				push(BTSClassifier$.MODULE$.apply(c));
 			} else {
 				defaultCase(object); // visit children via default case
 				throw new RuntimeException("TODO");
@@ -539,6 +685,15 @@ public class BlessVisitor {
 			}
 
 			push(BTSLiteralExp$.MODULE$.apply(typ, exp));
+
+			return false;
+		}
+
+		@Override
+		public Boolean casePartialName(PartialName object) {
+			assert (object.getArray_index().isEmpty()); // TODO
+
+			push(BTSNameExp$.MODULE$.apply(toName(object.getRecord_id()))); // TODO
 
 			return false;
 		}
@@ -597,7 +752,7 @@ public class BlessVisitor {
 		public Boolean caseAlternative(Alternative object) {
 
 			if (object.getAlternative() != null && !object.getAlternative().isEmpty()) {
-				Option<String> availability = toNone();
+				Option<TODO> availability = toNone();
 				if (object.getAvailability() != null) {
 					throw new RuntimeException("TODO");
 				}
@@ -619,6 +774,8 @@ public class BlessVisitor {
 
 			} else if (object.getTest() != null) {
 
+				assert (object.getTest().size() == object.getActions().size());
+
 				int i = 0;
 
 				visit(object.getTest().get(i));
@@ -631,10 +788,14 @@ public class BlessVisitor {
 
 				List<BTSConditionalActions> elseIfBranches = new ArrayList<>();
 				for (; i < object.getTest().size(); i++) {
-					object.getTest().get(i);
-					object.getActions().get(i);
+					visit(object.getTest().get(i));
+					BTSExp econd = pop();
 
-					throw new RuntimeException("TODO");
+					visit(object.getActions().get(i));
+					BTSBehaviorActions eactions = pop();
+
+					BTSConditionalActions eb = BTSConditionalActions$.MODULE$.apply(econd, eactions);
+					elseIfBranches.add(eb);
 				}
 
 				Option<BTSBehaviorActions> elseBranch = toNone();
@@ -707,7 +868,7 @@ public class BlessVisitor {
 				throw new RuntimeException(); // TODO
 			}
 
-			Option<String> catchClause = toNone();
+			Option<TODO> catchClause = toNone();
 			if (object.getCatch_clause() != null) {
 				throw new RuntimeException(); // TODO
 			}
@@ -722,14 +883,13 @@ public class BlessVisitor {
 		@Override
 		public Boolean caseVariableDeclaration(VariableDeclaration object) {
 
-			// TODO slang enum types and category needs to be a seq
 			Option<BTSVariableCategory.Type> category = toNone();
 			if (object.isConstant()) {
 				category = BTSVariableCategory.byName("Constant");
 			}
 
 			av.visit(object.getType());
-			BTSType varType = av.pop(); // TODO update air
+			BTSType varType = av.pop();
 
 			Option<BTSExp> assignExpression = toNone();
 			if (object.getExpression() != null) {
@@ -745,7 +905,7 @@ public class BlessVisitor {
 
 			List<BTSVariableDeclaration> names = new ArrayList<>();
 			for (String d : object.getVariable_names()) {
-				Name name = toName(d);
+				Name name = toSimpleName(d);
 
 				Option<BLESSIntConst> arraySize = toNone();
 
@@ -767,7 +927,7 @@ public class BlessVisitor {
 				throw new RuntimeException(); // TODO
 			}
 
-			Option<String> range = toNone();
+			Option<TODO> range = toNone();
 			if(object.getR() != null) {
 				throw new RuntimeException(); // TODO
 			}
@@ -894,11 +1054,18 @@ public class BlessVisitor {
 			String pack = object.getPack().stream().collect(Collectors.joining("::"));
 			String func = object.getFunc();
 
-			Name name = toName(pack + "::" + func);
+			Name name = toName(func);
 
 			List<BTSFormalExpPair> args = new ArrayList<>();
 			if (object.getParameters() != null) {
-				throw new RuntimeException("process params");
+				for (FormalExpressionPair p : object.getParameters().getParameters()) {
+					Option<Name> paramName = toSome(toName(p.getFormal()));
+
+					visit(p.getActual());
+					Option<BTSExp> exp = toSome(pop());
+
+					args.add(BTSFormalExpPair$.MODULE$.apply(paramName, exp));
+				}
 			}
 
 			BTSFunctionCall c = BTSFunctionCall$.MODULE$.apply(name, l2is(args));
@@ -911,8 +1078,7 @@ public class BlessVisitor {
 		public Boolean caseCommunicationAction(CommunicationAction object) {
 
 			if(object.getFrozen_port() != null) {
-				Port p = object.getFrozen_port();
-				push(BTSFrozenPortAction$.MODULE$.apply(toName(p.getQualifiedName())));
+				push(BTSFrozenPortAction$.MODULE$.apply(toName(object.getFrozen_port())));
 			} else {
 				defaultCase(object); // visit children via default case
 			}
@@ -922,7 +1088,9 @@ public class BlessVisitor {
 
 		@Override
 		public Boolean caseSubprogramCall(SubprogramCall object) {
-			Name name = toName(object.getProcedure());
+			assert (subcomponentNames.contains(object.getProcedure()));
+
+			Name name = toSimpleName(object.getProcedure());
 
 			List<BTSFormalExpPair> params = new ArrayList<>();
 			if (object.getParameters() != null) {
@@ -935,11 +1103,12 @@ public class BlessVisitor {
 					Option<BTSExp> exp = toNone();
 					if (fa.getActual() != null) {
 						if (fa.getActual().getVariable() != null) {
-							exp = toSome(BTSNameExp$.MODULE$.apply(toName(fa.getActual().getVariable())));
+							exp = toSome(BTSNameExp$.MODULE$.apply(toSimpleName(fa.getActual().getVariable())));
 						} else if (fa.getActual().getConstant() != null) {
-							throw new RuntimeException("TODO");
+							av.visit(fa.getActual().getConstant());
+							exp = toSome(av.pop());
 						} else {
-							throw new RuntimeException("TODO");
+							throw new RuntimeException("Unexpected");
 						}
 					}
 
@@ -953,8 +1122,7 @@ public class BlessVisitor {
 
 		@Override
 		public Boolean casePortInput(PortInput object) {
-			Port p = object.getPort();
-			Name name = toName(p.getQualifiedName());
+			Name name = toName(object.getPort());
 
 			visit(object.getVariable());
 			BTSExp variable = pop();
@@ -967,9 +1135,7 @@ public class BlessVisitor {
 
 		@Override
 		public Boolean casePortOutput(PortOutput object) {
-
-			Port p = object.getPort();
-			Name name = toName(p.getQualifiedName());
+			Name name = toName(object.getPort());
 
 			Option<BTSExp> exp = toNone();
 			if (object.getEor() != null) {
@@ -986,13 +1152,34 @@ public class BlessVisitor {
 		@Override
 		public Boolean caseName(edu.ksu.bless.subbless.subBLESS.Name object) {
 
-			Name name = toName(object.getId());
+			Name name = toSimpleName(object.getId());
 			BTSNameExp e = BTSNameExp$.MODULE$.apply(name);
-			push(e);
 
 			assert (object.getArray_index().isEmpty()); // TODO
 
-			assert (object.getPn().isEmpty()); // TODO
+			if (!object.getPn().isEmpty()) { // weird grammar
+				// access exp
+				assert (object.getPn().get(0).getArray_index().isEmpty()); // TODO
+				String attribute = object.getPn().get(0).getRecord_id();
+
+				BTSAccessExp t = BTSAccessExp$.MODULE$.apply(e, attribute);
+
+				for(int i = 1; i < object.getPn().size(); i++) {
+					PartialName pn = object.getPn().get(i);
+					assert (pn.getArray_index().isEmpty()); // TODO
+
+					attribute = pn.getRecord_id();
+
+					t = BTSAccessExp$.MODULE$.apply(t, attribute);
+				}
+
+				push(t);
+
+			} else if (!object.getArray_index().isEmpty()) {
+				// indexing exp
+			} else {
+				push(e);
+			}
 
 			return false;
 		}
