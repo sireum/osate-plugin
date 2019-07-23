@@ -95,6 +95,7 @@ import org.sireum.aadl.ir.Name;
 import org.sireum.aadl.ir.TODO;
 
 import edu.ksu.bless.assertion.assertion.Assertion;
+import edu.ksu.bless.assertion.assertion.NumericConstant;
 import edu.ksu.bless.assertion.assertion.PartialName;
 import edu.ksu.bless.assertion.assertion.Type;
 import edu.ksu.bless.assertion.assertion.ValueConstant;
@@ -669,8 +670,16 @@ public class BlessVisitor {
 			String exp = null;
 
 			if (object.getNumber() != null) {
-				visit(object.getNumber());
-				throw new RuntimeException("TODO");
+				NumericConstant nc = object.getNumber();
+				if (nc.getInteger() != null) {
+					typ = BTSLiteralType.byName("INTEGER").get();
+					exp = nc.getInteger();
+				} else if (nc.getReal() != null) {
+					typ = BTSLiteralType.byName("FLOAT").get();
+					exp = nc.getReal();
+				} else {
+					throw new RuntimeException("TODO");
+				}
 			} else if (object.getString_literal() != null) {
 				typ = BTSLiteralType.byName("STRING").get();
 				exp = object.getString_literal();
