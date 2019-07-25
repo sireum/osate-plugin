@@ -13,10 +13,10 @@ import org.sireum.IS;
 import org.sireum.Option;
 import org.sireum.Z;
 import org.sireum.Z$;
-import org.sireum.aadl.ir.*;
 import org.sireum.aadl.ir.Annex;
 import org.sireum.aadl.ir.Annex$;
 import org.sireum.aadl.ir.BLESSIntConst;
+import org.sireum.aadl.ir.BTSAccessExp;
 import org.sireum.aadl.ir.BTSAccessExp$;
 import org.sireum.aadl.ir.BTSAction;
 import org.sireum.aadl.ir.BTSAssertedAction;
@@ -46,6 +46,9 @@ import org.sireum.aadl.ir.BTSDispatchTriggerPort$;
 import org.sireum.aadl.ir.BTSDispatchTriggerStop;
 import org.sireum.aadl.ir.BTSDispatchTriggerTimeout$;
 import org.sireum.aadl.ir.BTSExecuteCondition;
+import org.sireum.aadl.ir.BTSExecuteConditionExp$;
+import org.sireum.aadl.ir.BTSExecuteConditionOtherwise$;
+import org.sireum.aadl.ir.BTSExecuteConditionTimeout$;
 import org.sireum.aadl.ir.BTSExecutionOrder;
 import org.sireum.aadl.ir.BTSExistentialLatticeQuantification;
 import org.sireum.aadl.ir.BTSExistentialLatticeQuantification$;
@@ -161,10 +164,9 @@ public class BlessVisitor {
 			if (bas.size() == 1) {
 				this.path = path;
 
-				this.featureNames = ci.getFeatureInstances().stream().map(f -> f.getName())
-						.collect(Collectors.toList());
+				featureNames = ci.getFeatureInstances().stream().map(f -> f.getName()).collect(Collectors.toList());
 
-				this.subcomponentNames = ci.getComponentInstances().stream().map(c -> c.getName())
+				subcomponentNames = ci.getComponentInstances().stream().map(c -> c.getName())
 						.collect(Collectors.toList());
 
 				bv.visit(bas.get(0));
@@ -203,7 +205,7 @@ public class BlessVisitor {
 	}
 
 	Name toSimpleName(String s) {
-		if (featureNames.contains(s) || this.subcomponentNames.contains(s)) {
+		if (featureNames.contains(s) || subcomponentNames.contains(s)) {
 			return toName(s, path);
 		} else {
 			return toName(s, VisitorUtil.iList());
@@ -263,7 +265,7 @@ public class BlessVisitor {
 	static BTSUnaryOp.Type toUnaryOp(String r) {
 		if (r.equals("-")) {
 			return BTSUnaryOp.byName("NEG").get();
-		} else if(r.equals("not")) {
+		} else if (r.equals("not")) {
 			return BTSUnaryOp.byName("NOT").get();
 		} else if (r.equals("abs")) {
 			return BTSUnaryOp.byName("ABS").get();
@@ -271,7 +273,6 @@ public class BlessVisitor {
 
 		throw new RuntimeException();
 	}
-
 
 	class BTSVisitor extends BLESSSwitch<Boolean> {
 
@@ -424,7 +425,6 @@ public class BlessVisitor {
 			String destName = dest.getName(); // just need name
 			Name destState = toSimpleName(destName);
 
-
 			Option<BTSTransitionCondition> _transitionCondition = null;
 			if (object.getDispatch() != null) {
 				assert (_transitionCondition == null);
@@ -530,13 +530,13 @@ public class BlessVisitor {
 		public Boolean caseDispatchTrigger(DispatchTrigger object) {
 
 			BTSDispatchTrigger ret = null;
-			if(object.isStop()) {
+			if (object.isStop()) {
 				assert ret == null;
 
 				ret = BTSDispatchTriggerStop.apply();
 			}
 
-			if(object.isTimeout()) {
+			if (object.isTimeout()) {
 				assert ret == null;
 				List<Name> ports = new ArrayList<>();
 				if (object.isLp()) {
@@ -716,7 +716,7 @@ public class BlessVisitor {
 		}
 
 		public Boolean visit(EObject o) {
-			assert (this.isSwitchFor(o.eClass().getEPackage()));
+			assert (isSwitchFor(o.eClass().getEPackage()));
 			return doSwitch(o);
 		}
 
@@ -882,8 +882,8 @@ public class BlessVisitor {
 				throw new RuntimeException(); // TODO
 			}
 
-			BTSExistentialLatticeQuantification q = BTSExistentialLatticeQuantification$.MODULE$.apply(
-					l2is(quantifiedVariables), actions, timeout, catchClause);
+			BTSExistentialLatticeQuantification q = BTSExistentialLatticeQuantification$.MODULE$
+					.apply(l2is(quantifiedVariables), actions, timeout, catchClause);
 			push(q);
 
 			return false;
@@ -932,20 +932,20 @@ public class BlessVisitor {
 		public Boolean caseUniversalLatticeQuantification(UniversalLatticeQuantification object) {
 
 			List<Name> latticeVariables = new ArrayList<>();
-			if(object.getLv() != null) {
+			if (object.getLv() != null) {
 				throw new RuntimeException(); // TODO
 			}
 
 			Option<TODO> range = toNone();
-			if(object.getR() != null) {
+			if (object.getR() != null) {
 				throw new RuntimeException(); // TODO
 			}
 
 			visit(object.getElq());
 			BTSExistentialLatticeQuantification elq = pop();
 
-			BTSUniversalLatticeQuantification q = BTSUniversalLatticeQuantification$.MODULE$.apply(
-					l2is(latticeVariables), range, elq);
+			BTSUniversalLatticeQuantification q = BTSUniversalLatticeQuantification$.MODULE$
+					.apply(l2is(latticeVariables), range, elq);
 			push(q);
 
 			return false;
@@ -1005,9 +1005,9 @@ public class BlessVisitor {
 
 		@Override
 		public Boolean caseExpressionOrRelation(ExpressionOrRelation object) {
-			if(object.getExp() != null) {
+			if (object.getExp() != null) {
 				visit(object.getExp());
-			} else if(object.getSub() != null) {
+			} else if (object.getSub() != null) {
 				// FIXME: grammar assumes all ops are the same (e.g. x < y < z)
 				String rs = object.getR();
 				BTSBinaryOp.Type op = toBinaryOp(rs);
@@ -1047,11 +1047,11 @@ public class BlessVisitor {
 			defaultCase(object); // visit children via default case
 
 			// handle unary exp
-			if(object.isNot()) {
+			if (object.isNot()) {
 				push(BTSUnaryExp$.MODULE$.apply(toUnaryOp("not"), pop()));
-			} else if(object.isAbs()) {
+			} else if (object.isAbs()) {
 				push(BTSUnaryExp$.MODULE$.apply(toUnaryOp("abs"), pop()));
-			} else if(object.isMinus()) {
+			} else if (object.isMinus()) {
 				push(BTSUnaryExp$.MODULE$.apply(toUnaryOp("-"), pop()));
 			}
 
@@ -1086,13 +1086,13 @@ public class BlessVisitor {
 		@Override
 		public Boolean caseCommunicationAction(CommunicationAction object) {
 
-			if(object.getFrozen_port() != null) {
+			if (object.getFrozen_port() != null) {
 				push(BTSFrozenPortAction$.MODULE$.apply(toName(object.getFrozen_port())));
 			} else {
 				defaultCase(object); // visit children via default case
 			}
 
-            return false;
+			return false;
 		}
 
 		@Override
@@ -1173,7 +1173,7 @@ public class BlessVisitor {
 
 				BTSAccessExp t = BTSAccessExp$.MODULE$.apply(e, attribute);
 
-				for(int i = 1; i < object.getPn().size(); i++) {
+				for (int i = 1; i < object.getPn().size(); i++) {
 					PartialName pn = object.getPn().get(i);
 					assert (pn.getArray_index().isEmpty()); // TODO
 

@@ -58,10 +58,6 @@ public class LaunchArsit extends AbstractSireumHandler {
 
 			if (p.getReturnCode() == Window.OK) {
 				try {
-					// Eclipse doesn't seem to like accessing nested scala classes
-					// (e.g. org.sireum.cli.Cli$ArsitOption$) so invoke Arsit from scala instead
-
-					// int ret = ArsitUtil.launchArsit(p, model, console);
 
 					int ret = Util.callWrapper(getToolName(), console, () -> {
 
@@ -75,16 +71,11 @@ public class LaunchArsit extends AbstractSireumHandler {
 								: p.getOptionOutputDirectory();
 						String base = p.getOptionBasePackageName().equals("") ? null : p.getOptionBasePackageName();
 
-						return org.sireum.aadl.arsit.Arsit.run(
-								model,
-								ArsitBridge.sireumOption(outputDir),
-								ArsitBridge.sireumOption(base),
-								p.getOptionEmbedArt(),
-								p.getOptionGenerateBlessEntryPoints(),
-								p.getOptionGenerateTranspilerArtifacts(),
-								ipc
-								);
-						});
+						return org.sireum.aadl.arsit.Arsit.run(model, ArsitBridge.sireumOption(outputDir),
+								ArsitBridge.sireumOption(base), p.getOptionEmbedArt(),
+								p.getOptionGenerateTranspilerArtifacts(), ipc, p.getOptionBATranslate(),
+								p.getOptionBAAddViz(), p.getOptionBAExposeState());
+					});
 
 					refreshWorkspace();
 
