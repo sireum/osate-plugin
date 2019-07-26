@@ -9,8 +9,8 @@ import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -23,12 +23,16 @@ import org.eclipse.swt.widgets.Text;
 import org.osgi.service.prefs.BackingStoreException;
 
 public class ArsitPrompt extends TitleAreaDialog {
+	private static String title = "Arsit Options";
+	private static String message = "";
+
 	private Text txtOutputDirectory;
 	private Text txtBasePackageName;
 	private Button btnGenerateTranspilerArtifacts;
 	private Button btnEmbedArtProject;
-	private Button btnGenerateBlessEntryPoints;
 	private Combo cmbIPCMechanism;
+
+	private Button btnGenerateBlessEntryPoints;
 
 	IProject project;
 	IEclipsePreferences projectNode;
@@ -38,9 +42,9 @@ public class ArsitPrompt extends TitleAreaDialog {
 	private final String KEY_OUTPUT_DIRECTORY = "output.directory";
 	private final String KEY_BASE_PACKAGE_NAME = "base.package.name";
 	private final String KEY_EMBED_ART = "embed.art";
-	private final String KEY_GEN_BLESS_ENTRY_POINTS = "gen.bless.entry.points";
 	private final String KEY_GEN_TRANSPILER_ARTIFACTS = "gen.transpiler.artifacts";
 	private final String KEY_IPC_MECHANISM = "ipc.mechanism";
+	private final String KEY_GEN_BLESS_ENTRY_POINTS = "gen.bless.entry.points";
 
 	/**
 	 * @wbp.parser.constructor
@@ -56,69 +60,135 @@ public class ArsitPrompt extends TitleAreaDialog {
 		projectNode = projectScope.getNode(PREF_KEY);
 	}
 
+	@Override
+	public void create() {
+		super.create();
+
+		setTitle(title);
+		setMessage(message);
+	}
+
+	@Override
+	protected boolean isResizable() {
+		return true;
+
+	}
+
+	@Override
+	public boolean isHelpAvailable() {
+		return false;
+	}
+
 	/**
 	 * Create contents of the dialog.
 	 * @param parent
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
-		setMessage("");
-		setTitle("Arsit Options");
+
+		int numCols = 3;
+
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);
-		GridData gd_container = new GridData(GridData.FILL_BOTH);
-		gd_container.widthHint = 552;
-		container.setLayoutData(gd_container);
+		container.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		Button btnOutputDirectory = new Button(container, SWT.NONE);
-		btnOutputDirectory.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				promptForOutputDirectory();
-			}
-		});
-		btnOutputDirectory.setBounds(477, 3, 42, 28);
-		btnOutputDirectory.setText("...");
+		GridLayout layout = new GridLayout(numCols, false);
+		container.setLayout(layout);
 
-		Label lblOutputDirectory = new Label(container, SWT.NONE);
-		lblOutputDirectory.setBounds(10, 10, 121, 21);
-		lblOutputDirectory.setText("Output Directory");
+		/****************************************************************
+		 * ROW
+		 ****************************************************************/
+		{
+			// COL 1
+			Label lblOutputDirectory = new Label(container, SWT.NONE);
+			lblOutputDirectory.setText("Output Directory");
+			lblOutputDirectory.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
-		txtOutputDirectory = new Text(container, SWT.BORDER);
-		txtOutputDirectory.setBounds(137, 7, 334, 19);
+			// COL 2
+			txtOutputDirectory = new Text(container, SWT.BORDER);
+			GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false);
+			gd.widthHint = 334;
+			txtOutputDirectory.setLayoutData(gd);
 
-		txtBasePackageName = new Text(container, SWT.BORDER);
-		txtBasePackageName.setBounds(137, 32, 334, 19);
+			// COL 3
+			Button btnOutputDirectory = new Button(container, SWT.PUSH);
+			btnOutputDirectory.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					promptForOutputDirectory();
+				}
+			});
+			btnOutputDirectory.setText("...");
+			gd = new GridData(SWT.RIGHT, SWT.FILL, false, false);
+			btnOutputDirectory.setLayoutData(gd);
+		}
 
-		Label lblBasePackageName = new Label(container, SWT.NONE);
-		lblBasePackageName.setText("Base Package Name");
-		lblBasePackageName.setBounds(10, 35, 122, 21);
+		/****************************************************************
+		 * ROW
+		 ****************************************************************/
+		{
+			// COL 1
+			Label lblBasePackageName = new Label(container, SWT.NONE);
+			lblBasePackageName.setText("Base Package Name");
+			lblBasePackageName.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
-		btnGenerateBlessEntryPoints = new Button(container, SWT.CHECK);
-		btnGenerateBlessEntryPoints.setBounds(10, 65, 209, 18);
-		btnGenerateBlessEntryPoints.setText("Generate Bless Entry Points");
+			// COL 2
+			txtBasePackageName = new Text(container, SWT.BORDER);
+			txtBasePackageName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
-		btnEmbedArtProject = new Button(container, SWT.CHECK);
-		btnEmbedArtProject.setText("Embed ART project files");
-		btnEmbedArtProject.setBounds(10, 90, 209, 18);
+			// COL 3
+			new Label(container, SWT.NULL); // col padding
+		}
 
-		Group grpTranspilerOptions = new Group(container, SWT.NONE);
-		grpTranspilerOptions.setText("Transpiler Options");
-		grpTranspilerOptions.setBounds(10, 120, 451, 92);
+		fillerRow(container, numCols);
 
-		btnGenerateTranspilerArtifacts = new Button(grpTranspilerOptions, SWT.CHECK);
-		btnGenerateTranspilerArtifacts.setBounds(10, 10, 411, 18);
-		btnGenerateTranspilerArtifacts.setText("Generate Slang/C transpiler artifacts");
+		/****************************************************************
+		 * ROW
+		 ****************************************************************/
+		{
+			btnEmbedArtProject = new Button(container, SWT.CHECK);
+			btnEmbedArtProject.setText("Embed ART project files");
+			btnEmbedArtProject.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 3, 1));
+		}
 
-		cmbIPCMechanism = new Combo(grpTranspilerOptions, SWT.READ_ONLY);
-		cmbIPCMechanism.setItems(new String[] { "Message Queue", "Shared Memory" });
-		cmbIPCMechanism.setBounds(117, 19, 214, 55);
+		/****************************************************************
+		 * ROW
+		 ****************************************************************/
+		{
+			btnGenerateBlessEntryPoints = new Button(container, SWT.CHECK);
+			btnGenerateBlessEntryPoints.setText("Generate BLESS Entrypoints");
+			btnGenerateBlessEntryPoints.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 3, 1));
+		}
 
-		Label lblIPCMechanism = new Label(grpTranspilerOptions, SWT.NONE);
-		lblIPCMechanism.setBounds(10, 38, 101, 14);
-		lblIPCMechanism.setText("IPC Mechanism");
+		fillerRow(container, numCols);
+
+		/****************************************************************
+		 * ROW
+		 ****************************************************************/
+		{
+			// COL 1
+			Group grpTranspilerOptions = new Group(container, SWT.NONE);
+			grpTranspilerOptions.setText("Transpiler Options");
+			grpTranspilerOptions.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 3, 1));
+
+			layout = new GridLayout(2, false);
+			grpTranspilerOptions.setLayout(layout);
+
+			btnGenerateTranspilerArtifacts = new Button(grpTranspilerOptions, SWT.CHECK);
+			btnGenerateTranspilerArtifacts.setText("Generate Slang/C transpiler artifacts");
+			btnGenerateTranspilerArtifacts.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 2, 1));
+
+			Label lblIPCMechanism = new Label(grpTranspilerOptions, SWT.NONE);
+			lblIPCMechanism.setText("IPC Mechanism");
+			lblIPCMechanism.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
+
+			cmbIPCMechanism = new Combo(grpTranspilerOptions, SWT.READ_ONLY);
+			cmbIPCMechanism.setItems(new String[] { "Message Queue", "Shared Memory" });
+			cmbIPCMechanism.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false));
+		}
 
 		initValues();
+
 		return area;
 	}
 
@@ -130,14 +200,6 @@ public class ArsitPrompt extends TitleAreaDialog {
 	protected void createButtonsForButtonBar(Composite parent) {
 		createButton(parent, IDialogConstants.OK_ID, "Run", true);
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
-	}
-
-	/**
-	 * Return the initial size of the dialog.
-	 */
-	@Override
-	protected Point getInitialSize() {
-		return new Point(530, 372);
 	}
 
 	@Override
@@ -153,11 +215,11 @@ public class ArsitPrompt extends TitleAreaDialog {
 
 		projectNode.putBoolean(KEY_EMBED_ART, btnEmbedArtProject.getSelection());
 
-		projectNode.putBoolean(KEY_GEN_BLESS_ENTRY_POINTS, btnGenerateBlessEntryPoints.getSelection());
-
 		projectNode.putBoolean(KEY_GEN_TRANSPILER_ARTIFACTS, btnGenerateTranspilerArtifacts.getSelection());
 
 		projectNode.put(KEY_IPC_MECHANISM, cmbIPCMechanism.getText());
+
+		projectNode.putBoolean(KEY_GEN_BLESS_ENTRY_POINTS, btnGenerateBlessEntryPoints.getSelection());
 
 		try {
 			projectNode.flush();
@@ -168,7 +230,7 @@ public class ArsitPrompt extends TitleAreaDialog {
 
 	void initValues() {
 
-		String outputDirectory = this.getOptionOutputDirectory();
+		String outputDirectory = getOptionOutputDirectory();
 		if (outputDirectory.equals("")) {
 			outputDirectory = project.getLocation().toString();
 		}
@@ -178,14 +240,18 @@ public class ArsitPrompt extends TitleAreaDialog {
 
 		btnEmbedArtProject.setSelection(getOptionEmbedArt());
 
-		btnGenerateBlessEntryPoints.setSelection(getOptionGenerateBlessEntryPoints());
-
 		btnGenerateTranspilerArtifacts.setSelection(getOptionGenerateTranspilerArtifacts());
 
 		String ipcMechanism = getOptionIPCMechanism();
 		if (!ipcMechanism.equals("")) {
 			cmbIPCMechanism.setText(ipcMechanism);
 		}
+
+		btnGenerateBlessEntryPoints.setSelection(getOptionGenerateBlessEntryPoints());
+	}
+
+	public boolean getOptionGenerateBlessEntryPoints() {
+		return projectNode.getBoolean(KEY_GEN_BLESS_ENTRY_POINTS, false);
 	}
 
 	public String getOptionOutputDirectory() {
@@ -200,10 +266,6 @@ public class ArsitPrompt extends TitleAreaDialog {
 		return projectNode.getBoolean(KEY_EMBED_ART, true);
 	}
 
-	public boolean getOptionGenerateBlessEntryPoints() {
-		return projectNode.getBoolean(KEY_GEN_BLESS_ENTRY_POINTS, false);
-	}
-
 	public boolean getOptionGenerateTranspilerArtifacts() {
 		return projectNode.getBoolean(KEY_GEN_TRANSPILER_ARTIFACTS, false);
 	}
@@ -213,7 +275,7 @@ public class ArsitPrompt extends TitleAreaDialog {
 	}
 
 	void promptForOutputDirectory() {
-		DirectoryDialog d = new DirectoryDialog(this.getShell());
+		DirectoryDialog d = new DirectoryDialog(getShell());
 		if (!getOptionOutputDirectory().equals("")) {
 			d.setFilterPath(getOptionOutputDirectory());
 		} else {
@@ -224,5 +286,14 @@ public class ArsitPrompt extends TitleAreaDialog {
 		if (path != null) {
 			txtOutputDirectory.setText(path);
 		}
+	}
+
+	private void fillerRow(Composite container, int numCols) {
+		int height = 10;
+		Label l = new Label(container, SWT.NULL);
+		l.setSize(0, height);
+		GridData x = new GridData(SWT.LEFT, SWT.FILL, false, false, numCols, 1);
+		x.heightHint = height;
+		l.setLayoutData(x);
 	}
 }
