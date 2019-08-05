@@ -1,6 +1,7 @@
 package org.sireum.aadl.osate.architecture;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,14 +16,20 @@ import org.osate.xtext.aadl2.errormodel.errorModel.AllExpression;
 import org.osate.xtext.aadl2.errormodel.errorModel.AndExpression;
 import org.osate.xtext.aadl2.errormodel.errorModel.ConditionElement;
 import org.osate.xtext.aadl2.errormodel.errorModel.ConditionExpression;
+import org.osate.xtext.aadl2.errormodel.errorModel.EMV2Path;
 import org.osate.xtext.aadl2.errormodel.errorModel.EMV2PropertyAssociation;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorBehaviorEvent;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorBehaviorState;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorBehaviorStateMachine;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorBehaviorTransition;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelLibrary;
+import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelSubclause;
+import org.osate.xtext.aadl2.errormodel.errorModel.ErrorPath;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorPropagation;
+import org.osate.xtext.aadl2.errormodel.errorModel.ErrorSink;
+import org.osate.xtext.aadl2.errormodel.errorModel.ErrorSource;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorType;
+import org.osate.xtext.aadl2.errormodel.errorModel.ErrorTypes;
 import org.osate.xtext.aadl2.errormodel.errorModel.EventOrPropagation;
 import org.osate.xtext.aadl2.errormodel.errorModel.FeatureorPPReference;
 import org.osate.xtext.aadl2.errormodel.errorModel.OrExpression;
@@ -31,21 +38,18 @@ import org.osate.xtext.aadl2.errormodel.errorModel.OrmoreExpression;
 import org.osate.xtext.aadl2.errormodel.errorModel.OutgoingPropagationCondition;
 import org.osate.xtext.aadl2.errormodel.errorModel.TypeSet;
 import org.osate.xtext.aadl2.errormodel.errorModel.impl.ErrorPropagationImpl;
+import org.osate.xtext.aadl2.errormodel.util.EMV2Properties;
 import org.osate.xtext.aadl2.errormodel.util.EMV2Util;
 import org.osate.xtext.aadl2.naming.Aadl2QualifiedNameProvider;
-import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 import org.sireum.aadl.ir.Annex;
 import org.sireum.aadl.ir.BehaveStateMachine;
 import org.sireum.aadl.ir.Emv2BehaviorSection;
 import org.sireum.aadl.ir.Emv2Library;
 import org.sireum.aadl.ir.ErrorAliasDef;
-import org.sireum.aadl.ir.ErrorEvent;
-import org.sireum.aadl.ir.ErrorState;
 import org.sireum.aadl.ir.ErrorTransition;
 import org.sireum.aadl.ir.ErrorTypeDef;
 import org.sireum.aadl.ir.ErrorTypeSetDef;
 import org.sireum.aadl.ir.Name;
-import org.sireum.aadl.ir.PropertyValue;
 
 public class Emv2Visitor {
 
@@ -53,12 +57,134 @@ public class Emv2Visitor {
 	final LinkedHashMap<String, ErrorModelLibrary> errorLibs = new LinkedHashMap<>();
 	final Aadl2QualifiedNameProvider eqp = new Aadl2QualifiedNameProvider();
 
+	private Visitor coreVisitor = null;
+
+	public Emv2Visitor(Visitor visitor) {
+		this.coreVisitor = visitor;
+	}
+
 	public Annex visitEmv2Comp(ComponentInstance root, List<String> path) {
 		return new Annex("Emv2",
 				factory.emv2Clause(getLibNames(root), VisitorUtil.addAll(inProp(root, path), outProp(root, path)),
 						VisitorUtil.addAll(flowSource(root, path),
 								VisitorUtil.addAll(flowPath(root, path), flowSink(root, path))),
-						componentBehavior(root, path)));
+						componentBehavior(root, path), buildEmv2Property(root, path)));
+	}
+
+	private org.sireum.aadl.ir.ElementRef buildEmv2ElemRef(EMV2Path emv2path, ComponentInstance root) {
+		NamedElement ne = EMV2Util.getErrorModelElement(emv2path);
+		List<String> path = Arrays
+				.asList(EMV2Util.getLastComponentInstance(emv2path, root).getInstanceObjectPath().split("//."));
+		if (ne instanceof ErrorSource) {
+			ErrorSource es = (ErrorSource) ne;
+			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Source,
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					VisitorUtil.iList());
+		} else if (ne instanceof ErrorSink) {
+			ErrorSink es = (ErrorSink) ne;
+			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Sink,
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					VisitorUtil.iList());
+		} else if (ne instanceof ErrorPath) {
+			ErrorPath es = (ErrorPath) ne;
+			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Path,
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					VisitorUtil.iList());
+		} else if (ne instanceof ErrorPropagation) {
+			ErrorPropagation es = (ErrorPropagation) ne;
+			// es.getFeatureorPPRef()
+			List<Name> errorTypes = new ArrayList<Name>();
+			ErrorTypes ets = EMV2Util.getErrorType(emv2path);
+			if (ets instanceof TypeSet) {
+				TypeSet ts = (TypeSet) ets;
+				ts.getTypeTokens().forEach(tt -> {
+					tt.getType().forEach(t -> {
+						errorTypes.add(getErrorType(t));
+					});
+				});
+			} else {
+				ErrorType et = (ErrorType) ets;
+				errorTypes.add(getErrorType(et));
+			}
+			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Propagation,
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					errorTypes);
+		} else if (ne instanceof ErrorBehaviorState) {
+			ErrorBehaviorState es = (ErrorBehaviorState) ne;
+			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.State,
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					VisitorUtil.iList());
+		} else if (ne instanceof ErrorBehaviorEvent) {
+			ErrorBehaviorEvent es = (ErrorBehaviorEvent) ne;
+			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Event,
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					VisitorUtil.iList());
+		} else if (ne instanceof ErrorBehaviorTransition) {
+			ErrorBehaviorTransition es = (ErrorBehaviorTransition) ne;
+			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Event,
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					VisitorUtil.iList());
+		} else {
+			System.out.println("not matched :" + ne.getClass().getName());
+			return null;
+		}
+	}
+
+	private List<org.sireum.aadl.ir.Property> buildEmv2Property(ComponentInstance root, List<String> path) {
+		EList<ErrorModelSubclause> emscs = EMV2Util.getAllContainingClassifierEMV2Subclauses(root);
+		List<EMV2PropertyAssociation> pas = new ArrayList<EMV2PropertyAssociation>();
+
+		emscs.forEach(emsc -> {
+			pas.addAll(EMV2Properties.getPropertyAssociationListInContext(emsc));
+		});
+		List<org.sireum.aadl.ir.Property> res = pas.stream().map(pa -> {
+			final Property prop = pa.getProperty();
+			List<org.sireum.aadl.ir.ElementRef> elems = pa.getEmv2Path().stream().map(ep -> {
+				org.sireum.aadl.ir.ElementRef eRes = buildEmv2ElemRef(ep, root);
+				return eRes;
+			}).collect(Collectors.toList());
+			final List<String> currentPath = VisitorUtil.add(path, prop.getQualifiedName());
+			final NamedElement cont = (NamedElement) pa.eContainer();
+			List<org.sireum.aadl.ir.PropertyValue> propertyValues = VisitorUtil.iList();
+			try {
+				PropertyExpression pe = EMV2Properties.getPropertyValue(pa);
+				propertyValues = coreVisitor.getPropertyExpressionValue(pe, path);
+			} catch (Throwable t) {
+				java.lang.System.err.println("Error encountered while trying to fetch property value for "
+						+ prop.getQualifiedName() + " from " + cont.getQualifiedName() + " : " + t.getMessage());
+			}
+			return factory.property(factory.name(currentPath, VisitorUtil.buildPosInfo(prop)), propertyValues, elems);
+		}).collect(Collectors.toList());
+
+//				pas.stream().map(pa -> {
+//			List<String> appliesTo = new ArrayList();
+//			final Property prop = pa.getProperty();
+//			pa.getEmv2Path().forEach(ep -> {
+//				// String val = path;
+//				List<String> fqp = VisitorUtil.iList();
+//				ComponentInstance relativeCI = EMV2Util.getLastComponentInstance(ep, root);
+//				if (relativeCI != null) {
+//					fqp.addAll(Arrays
+//							.asList(EMV2Util.getLastComponentInstance(ep, root).getInstanceObjectPath().split("//.")));
+//				} else {
+//					fqp.addAll(path);
+//				}
+//				appliesTo.add(EMV2Util.getPrintName(EMV2Util.getErrorModelElement(ep)));
+//			});
+//			final List<String> currentPath = VisitorUtil.add(path, prop.getQualifiedName());
+//			final NamedElement cont = (NamedElement) pa.eContainer();
+//			List<org.sireum.aadl.ir.PropertyValue> propertyValues = VisitorUtil.iList();
+//			try {
+//				PropertyExpression pe = EMV2Properties.getPropertyValue(pa);
+//				propertyValues = coreVisitor.getPropertyExpressionValue(pe, path);
+//			} catch (Throwable t) {
+//				java.lang.System.err.println("Error encountered while trying to fetch property value for "
+//						+ prop.getQualifiedName() + " from " + cont.getQualifiedName() + " : " + t.getMessage());
+//			}
+//			return factory.property(factory.name(currentPath, VisitorUtil.buildPosInfo(prop)), propertyValues,
+//					appliesTo);
+//		}).collect(Collectors.toList());
+		return res;
 	}
 
 	private List<org.sireum.aadl.ir.Emv2Propagation> errorProp2Map(List<ErrorPropagation> errorProp, boolean isIn,
@@ -220,7 +346,7 @@ public class Emv2Visitor {
 
 	private Emv2BehaviorSection componentBehavior(ComponentInstance root, List<String> path) {
 
-		List<ErrorEvent> events = EMV2Util.getAllErrorBehaviorEvents(root).stream().map(be -> {
+		List<org.sireum.aadl.ir.ErrorEvent> events = EMV2Util.getAllErrorBehaviorEvents(root).stream().map(be -> {
 
 			return factory.errorEvent(factory.name(VisitorUtil.add(path, be.getName()), VisitorUtil.buildPosInfo(be)));
 		}).collect(Collectors.toList());
@@ -244,11 +370,10 @@ public class Emv2Visitor {
 		List<Name> source = VisitorUtil.iList();
 		if (!opc.isAllStates()) {
 			source = VisitorUtil.toIList(factory.name(VisitorUtil.toIList(opc.getState().getFullName()),
-				VisitorUtil.buildPosInfo(opc.getState())));
+					VisitorUtil.buildPosInfo(opc.getState())));
 		} else {
 			source = EMV2Util.getAllErrorBehaviorStates(opc.getContainingComponentImpl()).stream()
-					.map(ebs -> getStateName(ebs))
-					.collect(Collectors.toList());
+					.map(ebs -> getStateName(ebs)).collect(Collectors.toList());
 		}
 		org.sireum.aadl.ir.ErrorCondition ec = null;
 		if (opc.getCondition() != null) {
@@ -257,8 +382,7 @@ public class Emv2Visitor {
 		List<org.sireum.aadl.ir.Emv2Propagation> prop = VisitorUtil.iList();
 
 		if (!opc.isAllPropagations()) {
-			prop = errorProp2Map(VisitorUtil.toIList(opc.getOutgoing()), false,
-				path);
+			prop = errorProp2Map(VisitorUtil.toIList(opc.getOutgoing()), false, path);
 		} else {
 			List<ErrorPropagation> errorProp = EMV2Util
 					.getAllOutgoingErrorPropagations(opc.getContainingComponentImpl()).stream()
@@ -280,6 +404,20 @@ public class Emv2Visitor {
 						factory.name(VisitorUtil.toIList(EMV2Util.getLibraryName(e)), VisitorUtil.buildPosInfo(e)));
 			});
 		}
+
+		EMV2Util.getAllContainingClassifierEMV2Subclauses(root).forEach(clause -> {
+			Name tempName = null;
+			if (clause.getUseBehavior() != null) {
+				tempName = factory.name(
+						VisitorUtil.toIList(clause.getUseBehavior().getElementRoot().getName() + "."
+								+ clause.getUseBehavior().getQualifiedName()),
+						VisitorUtil.buildPosInfo(clause.getUseBehavior()));
+			}
+
+			if (tempName != null && !libNames.contains(tempName)) {
+				libNames.add(tempName);
+			}
+		});
 		return libNames;
 	}
 
@@ -384,12 +522,12 @@ public class Emv2Visitor {
 				VisitorUtil.toIList(EMV2Util.getPrintName(EMV2Util.getContainingErrorModelLibrary(ebsm))),
 				ebsm.getName());
 
-		List<ErrorEvent> events = ebsm.getEvents().stream()
+		List<org.sireum.aadl.ir.ErrorEvent> events = ebsm.getEvents().stream()
 				.map(evnt -> factory.errorEvent(
 						factory.name(VisitorUtil.add(path, evnt.getName()), VisitorUtil.buildPosInfo(evnt))))
 				.collect(Collectors.toList());
 
-		List<ErrorState> states = ebsm.getStates().stream()
+		List<org.sireum.aadl.ir.ErrorState> states = ebsm.getStates().stream()
 				.map(st -> factory.errorState(
 						factory.name(VisitorUtil.add(path, st.getName()), VisitorUtil.buildPosInfo(st)), st.isIntial()))
 				.collect(Collectors.toList());
@@ -397,30 +535,30 @@ public class Emv2Visitor {
 		List<ErrorTransition> transitions = ebsm.getTransitions().stream().map(trans -> errorTransition(trans, path))
 				.collect(Collectors.toList());
 
-		List<org.sireum.aadl.ir.Property> properties = ebsm.getProperties().stream().map(pa -> emv2Property(pa, path))
-				.collect(Collectors.toList());
+		List<org.sireum.aadl.ir.Property> properties = VisitorUtil.iList();// ebsm.getProperties().stream().map(pa -> emv2Property(pa,
+																			// path)).collect(Collectors.toList());
 
 		return factory.behaveStateMachine(id, events, states, transitions, properties);
 
 	}
 
-	private org.sireum.aadl.ir.Property emv2Property(EMV2PropertyAssociation epa, List<String> path) {
-		Property prop = epa.getProperty();
-		final NamedElement cont = (NamedElement) epa.eContainer();
-
-		List<PropertyValue> values = VisitorUtil.iList();
-		try {
-			PropertyExpression pe = PropertyUtils.getSimplePropertyValue(cont, prop);
-			values = new Visitor().getPropertyExpressionValue(pe, path);
-		} catch (Throwable t) {
-			java.lang.System.err.println("Error encountered while trying to fetch property value for "
-					+ prop.getQualifiedName() + " from " + cont.getQualifiedName() + " : " + t.getMessage());
-		}
-
-		return factory.property(
-				factory.name(VisitorUtil.add(path, epa.getProperty().getName()), VisitorUtil.buildPosInfo(prop)),
-				values);
-	}
+//	private org.sireum.aadl.ir.Property emv2Property(EMV2PropertyAssociation epa, List<String> path) {
+//		Property prop = epa.getProperty();
+//		final NamedElement cont = (NamedElement) epa.eContainer();
+//
+//		List<PropertyValue> values = VisitorUtil.iList();
+//		try {
+//			PropertyExpression pe = PropertyUtils.getSimplePropertyValue(cont, prop);
+//			values = new Visitor().getPropertyExpressionValue(pe, path);
+//		} catch (Throwable t) {
+//			java.lang.System.err.println("Error encountered while trying to fetch property value for "
+//					+ prop.getQualifiedName() + " from " + cont.getQualifiedName() + " : " + t.getMessage());
+//		}
+//
+//		return factory.property(
+//				factory.name(VisitorUtil.add(path, epa.getProperty().getName()), VisitorUtil.buildPosInfo(prop)),
+//				values);
+//	}
 
 	private org.sireum.aadl.ir.ErrorTransition errorTransition(ErrorBehaviorTransition ebt, List<String> path) {
 		List<String> cp = (ebt.getName() != null) ? VisitorUtil.add(path, ebt.getName()) : path;

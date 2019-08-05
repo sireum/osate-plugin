@@ -40,6 +40,7 @@ import org.osate.aadl2.Property;
 import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.PropertyConstant;
 import org.osate.aadl2.PropertyExpression;
+import org.osate.aadl2.PropertyType;
 import org.osate.aadl2.RangeValue;
 import org.osate.aadl2.RecordValue;
 import org.osate.aadl2.ReferenceValue;
@@ -73,7 +74,7 @@ public class Visitor {
 
 	final Map<String, org.sireum.aadl.ir.Component> datamap = new LinkedHashMap<>();
 	final Map<List<String>, Set<Connection>> compConnMap = new HashMap<>();
-	final Emv2Visitor ev = new Emv2Visitor();
+	final Emv2Visitor ev = new Emv2Visitor(this);
 
 	public Option<org.sireum.aadl.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		final Option<org.sireum.aadl.ir.Component> t = visit(root);
@@ -536,7 +537,7 @@ public class Visitor {
 		final Property prop = pa.getProperty();
 		final List<String> currentPath = VisitorUtil.add(path, prop.getQualifiedName());
 		final NamedElement cont = (NamedElement) pa.eContainer();
-
+		PropertyType propName = prop.getPropertyType();
 		List<org.sireum.aadl.ir.PropertyValue> propertyValues = VisitorUtil.iList();
 		try {
 			PropertyExpression pe = PropertyUtils.getSimplePropertyValue(cont, prop);
@@ -546,7 +547,8 @@ public class Visitor {
 					+ prop.getQualifiedName() + " from " + cont.getQualifiedName() + " : " + t.getMessage());
 		}
 
-		return factory.property(factory.name(currentPath, VisitorUtil.buildPosInfo(prop)), propertyValues);
+		return factory.property(factory.name(currentPath, VisitorUtil.buildPosInfo(prop)), propertyValues,
+				VisitorUtil.iList());
 	}
 
 	private org.sireum.aadl.ir.UnitProp getUnitProp(NumberValue nv) {
@@ -606,7 +608,7 @@ public class Visitor {
 				}
 			case Aadl2Package.PROPERTY_CONSTANT:
 				final PropertyConstant pc = (PropertyConstant) nv2;
-				return VisitorUtil.toIList(factory.valueProp(pc.getConstantValue().toString()));
+				return getPropertyExpressionValue(pc.getConstantValue(), path);
 			default:
 				java.lang.System.err.println("Not handling " + pe.eClass().getClassifierID() + " " + nv2);
 				return VisitorUtil.iList();
@@ -617,7 +619,7 @@ public class Visitor {
 					.map(fv -> factory.property(
 							factory.name(VisitorUtil.add(path, fv.getProperty().getQualifiedName()),
 									VisitorUtil.buildPosInfo(fv.getProperty())),
-							getPropertyExpressionValue(fv.getOwnedValue(), path)))
+							getPropertyExpressionValue(fv.getOwnedValue(), path), VisitorUtil.iList()))
 					.collect(Collectors.toList());
 			return VisitorUtil.toIList(factory.recordProp(properties));
 		case Aadl2Package.REFERENCE_VALUE:
