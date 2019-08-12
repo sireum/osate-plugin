@@ -9,15 +9,25 @@
                           name="Generator"/>
       </command>
    </extension>
+   <extension point="org.eclipse.ui.commands">
+      <command id="org.sireum.commands.launchhamr"
+               name="Launch HAMR"
+               defaultHandler="org.sireum.aadl.osate.hamr.handlers.LaunchHAMR">
+        <commandParameter id="org.sireum.commands.launchhamr.generator"
+                          name="Generator"/>
+      </command>
+   </extension>   
    <extension point="org.eclipse.ui.menus">
      <menuContribution
-       locationURI="menu:com.collins.fmw.cyres.menus.menubar.main">
-       <menu
-         id="org.sireum.SystemBuild"
-         label="System Build">
-         <dynamic class="org.sireum.aadl.osate.act.MenuContributions" id="org.sireum.ui.views.menu.MenuItems"/>
-       </menu>
+       locationURI="menu:com.collins.fmw.cyres.menus.menubar.build">
+       <dynamic class="org.sireum.aadl.osate.act.MenuContributions" 
+         id="org.sireum.ui.views.menu.MenuItems"/>
      </menuContribution>
+     <menuContribution
+       locationURI="menu:com.collins.fmw.cyres.menus.menubar.build">
+       <dynamic class="org.sireum.aadl.osate.hamr.MenuContributions" 
+         id="org.sireum.ui.views.menu.HAMRMenuItems"/>
+     </menuContribution>     
    </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution
@@ -28,6 +38,14 @@
             <dynamic class="org.sireum.aadl.osate.act.MenuContributions" id="org.sireum.ui.views.menu.ActMenuItems"/>
          </menu>
       </menuContribution>
+      <menuContribution
+            locationURI="menu:org.osate.ui.osateMenu">
+         <menu
+               id="org.sireum.aadl.osate.BridgeMenu"
+               label="HAMR">
+            <dynamic class="org.sireum.aadl.osate.hamr.MenuContributions" id="org.sireum.ui.views.menu.HAMRMenuItems"/>
+         </menu>
+      </menuContribution>      
    </extension>
    <extension point="org.eclipse.ui.preferencePages">
       <page
@@ -37,6 +55,14 @@
             name="ACT">
       </page>
    </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.sireum.aadl.osate.preferences.PreferencePage"
+            class="org.sireum.aadl.osate.hamr.PreferencePage"
+            id="org.sireum.aadl.osate.hamr.preferences.PreferencePage"
+            name="HAMR">
+      </page>
+   </extension>   
    <extension
          point="org.osate.pluginsupport.aadlcontribution">
       <aadlcontribution
