@@ -18,7 +18,7 @@ public class MenuContributions extends CompoundContributionItem {
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
-		l.add(getItem("Generate CAmkES", "org.sireum.commands.launchact",
+		l.add(getItem("AADL-to-CAmkES Translator (ACT)", "org.sireum.commands.launchact",
 				map("org.sireum.commands.launchact.generator", Generators.GEN_CAMKES.toString())));
 
 		return l.toArray(new IContributionItem[0]);

@@ -3,6 +3,7 @@ package org.sireum.aadl.osate.hamr.handlers;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.InputStream;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -11,6 +12,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.mylyn.commons.ui.dialogs.AbstractNotificationPopup;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.console.MessageConsoleStream;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
@@ -72,6 +74,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 					// always run Arsit
 					int toolRet = Util.callWrapper(getToolName(), console, () -> {
 
+						writeToConsole("Generating ART artifacts...");
+
 						// always gen shared mem for HAMR
 						ArsitBridge.IPCMechanismJava ipc = IPCMechanismJava.SharedMemory;
 
@@ -83,6 +87,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								ArsitBridge.sireumOption(base), //
 								true, // always embed ART
 								false, // never gen bless entrypoints
+								false, // no verbose
 								true, // always gen transpiler artifacts
 								ipc, //
 								prompt.getOptionExcludesSlangImplementations(),
@@ -91,18 +96,16 @@ public class LaunchHAMR extends AbstractSireumHandler {
 					});
 
 					if (toolRet == 0) {
+						String transpilerScript = slangOutputDir + "/bin/transpile.sh";
+
 						if (prompt.getOptionOutputProfile() == OutputProfile.seL4) {
+							writeToConsole("Generating CAmkES artifacts...");
+
+							transpilerScript = slangOutputDir + "/bin/transpile-camkes.sh";
 							{
-								String fname = slangOutputDir + "/bin/transpile-camkes.sh";
-								BufferedWriter writer = new BufferedWriter(new FileWriter(fname, true));
-								writer.newLine();
-								writer.newLine();
-								writer.write("# remove apps from transpiler generated slang cmakelists\n");
-								writer.write("FILE=$OUTPUT_DIR/CMakeLists.txt\n");
-								writer.write(
-										"echo \"$(grep -v \"CAMKES\\|add_executable\\|target_link_libraries\\|set_target_properties\" $FILE)\" > $FILE");
-								writer.newLine();
-								writer.write("echo \"add_definitions(-DCAMKES)\" >> $FILE");
+								BufferedWriter writer = new BufferedWriter(new FileWriter(transpilerScript, true));
+								writer.write("\n\nFILE=$OUTPUT_DIR/CMakeLists.txt\n");
+								writer.write("echo -e \"\\n\\nadd_definitions(-DCAMKES)\" >> $FILE");
 								writer.close();
 							}
 
@@ -114,25 +117,29 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 								return org.sireum.aadl.act.Act.run(outDir, model, auxDirs, aadlRootDir);
 							});
-						} else {
+						}
+
+						if (toolRet == 0) {
 							// run the transpiler
-							/*
-							 * String transpilerScript = slangOutputDir + "/bin/transpile.sh";
-							 *
-							 * ProcessBuilder pb = new ProcessBuilder("/bin/bash", "--login", "-c", transpilerScript);
-							 *
-							 * pb.redirectErrorStream(true);
-							 * pb.environment().put("HOME", "/home/sireum");
-							 * pb.environment().put("SIREUM_HOME", "/home/sireum/devel/sireum/kekinian");
-							 *
-							 * InputStream is = pb.start().getInputStream();
-							 * MessageConsoleStream mcs = console.newMessageStream();
-							 *
-							 * int c;
-							 * while ((c = is.read()) != -1) {
-							 * mcs.write(c);
-							 * }
-							 */
+
+							writeToConsole("Running " + transpilerScript);
+
+							ProcessBuilder pb = new ProcessBuilder("/bin/bash", "--login", "-c", transpilerScript);
+
+							pb.redirectErrorStream(true);
+							pb.environment().put("HOME", "/home/sireum");
+							pb.environment().put("PATH",
+									"/home/sireum/devel/sireum/kekinian/bin:/home/sireum/devel/sireum/kekinian/bin/linux/java/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:.");
+							pb.environment().put("SIREUM_HOME", "/home/sireum/devel/sireum/kekinian");
+
+							InputStream is = pb.start().getInputStream();
+
+							MessageConsoleStream mcs = console.newMessageStream();
+
+							int c;
+							while ((c = is.read()) != -1) {
+								mcs.write(c);
+							}
 						}
 					}
 

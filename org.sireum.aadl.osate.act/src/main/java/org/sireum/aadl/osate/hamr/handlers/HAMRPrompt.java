@@ -14,6 +14,8 @@ import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -55,6 +57,9 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	Map<String, List<Control>> controls = new HashMap<>();
 
+	// The image to display
+	private Image image;
+
 	public HAMRPrompt(Shell parentShell) {
 		super(parentShell);
 	}
@@ -72,6 +77,17 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 		setTitle(title);
 		setMessage(message);
+
+		image = new Image(null, new ImageData(this.getClass().getResourceAsStream("/resources/hamr.png")));
+		setTitleImage(image);
+	}
+
+	@Override
+	public boolean close() {
+		if (image != null) {
+			image.dispose();
+		}
+		return super.close();
 	}
 
 	@Override
