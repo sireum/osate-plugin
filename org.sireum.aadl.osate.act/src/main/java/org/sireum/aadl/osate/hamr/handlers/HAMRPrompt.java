@@ -185,7 +185,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 		{
 			// COL 1
 			Label lblOutputDirectory = new Label(container, SWT.NONE);
-			lblOutputDirectory.setText("SeL4/CAmkES Output Directory");
+			lblOutputDirectory.setText("seL4/CAmkES Output Directory");
 			lblOutputDirectory.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
 			// COL 2
