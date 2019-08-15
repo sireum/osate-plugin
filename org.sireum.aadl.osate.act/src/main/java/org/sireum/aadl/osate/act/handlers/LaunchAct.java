@@ -59,20 +59,22 @@ public class LaunchAct extends AbstractSireumHandler {
 
 			if (prompt.getReturnCode() == Window.OK) {
 				try {
+
 					File out = new File(prompt.getOptionOutputDirectory());
 					if (!out.exists()) {
 						if (Dialog.askQuestion("Create Directory?",
 								"Directory '" + out.getAbsolutePath() + "' does not exist.  Should it be created?")) {
 							if (!out.mkdirs()) {
 								Dialog.showError(getToolName(), "Could not create directory " + out.getAbsolutePath());
+								return Status.CANCEL_STATUS;
 							}
+						} else {
+							return Status.CANCEL_STATUS;
 						}
 					}
 					File workspaceRoot = getProjectPath(si).toFile();
 
-					// int ret = ActUtil.launchAct(p, model, console, workspaceRoot);
-
-					int ret = Util.callWrapper(getToolName(), console, () -> {
+					int toolRet = Util.callWrapper(getToolName(), console, () -> {
 						File outDir = new File(prompt.getOptionOutputDirectory());
 						IS<Z, String> auxDirs = toISZ(prompt.getOptionCSourceDirectory());
 						org.sireum.Option<File> aadlRootDir = new org.sireum.Some<File>(workspaceRoot);
@@ -83,7 +85,7 @@ public class LaunchAct extends AbstractSireumHandler {
 					refreshWorkspace();
 
 					Dialog.showInfo(getToolName(),
-							"CAmkES code " + (ret == 0 ? "successfully generated" : "generation was unsuccessful"));
+							"CAmkES code " + (toolRet == 0 ? "successfully generated" : "generation was unsuccessful"));
 
 				} catch (Throwable ex) {
 					ex.printStackTrace();

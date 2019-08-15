@@ -66,15 +66,17 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 			if (prompt.getReturnCode() == Window.OK) {
 				try {
+
 					File workspaceRoot = getProjectPath(si).toFile();
 
-					String slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("") ? null
+					String slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("")
+							? workspaceRoot.getAbsolutePath()
 							: prompt.getSlangOptionOutputDirectory();
+
+					writeToConsole("Generating HAMR artifacts...");
 
 					// always run Arsit
 					int toolRet = Util.callWrapper(getToolName(), console, () -> {
-
-						writeToConsole("Generating ART artifacts...");
 
 						// always gen shared mem for HAMR
 						ArsitBridge.IPCMechanismJava ipc = IPCMechanismJava.SharedMemory;
@@ -95,51 +97,65 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						);
 					});
 
+
 					if (toolRet == 0) {
+
 						String transpilerScript = slangOutputDir + "/bin/transpile.sh";
 
 						if (prompt.getOptionOutputProfile() == OutputProfile.seL4) {
-							writeToConsole("Generating CAmkES artifacts...");
-
 							transpilerScript = slangOutputDir + "/bin/transpile-camkes.sh";
-							{
-								BufferedWriter writer = new BufferedWriter(new FileWriter(transpilerScript, true));
-								writer.write("\n\nFILE=$OUTPUT_DIR/CMakeLists.txt\n");
-								writer.write("echo -e \"\\n\\nadd_definitions(-DCAMKES)\" >> $FILE");
-								writer.close();
+
+							BufferedWriter writer = new BufferedWriter(new FileWriter(transpilerScript, true));
+							writer.write("\n\nFILE=$OUTPUT_DIR/CMakeLists.txt\n");
+							writer.write("echo -e \"\\n\\nadd_definitions(-DCAMKES)\" >> $FILE");
+							writer.close();
+						}
+
+						// run the transpiler
+
+						ProcessBuilder pb = new ProcessBuilder("/bin/bash", "--login", "-c", transpilerScript);
+
+						pb.redirectErrorStream(true);
+						pb.environment().put("HOME", "/home/sireum");
+						pb.environment().put("PATH",
+								"/home/sireum/devel/sireum/kekinian/bin:/home/sireum/devel/sireum/kekinian/bin/linux/java/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:.");
+						pb.environment().put("SIREUM_HOME", "/home/sireum/devel/sireum/kekinian");
+
+						InputStream is = pb.start().getInputStream();
+
+						MessageConsoleStream mcs = console.newMessageStream();
+
+						int c;
+						while ((c = is.read()) != -1) {
+							mcs.write(c);
+						}
+
+						if (prompt.getOptionOutputProfile() == OutputProfile.seL4) {
+
+							File camkesOutDir = new File(prompt.getCamkesOptionOutputDirectory());
+							if (!camkesOutDir.exists()) {
+								if (Dialog.askQuestion("Create Directory?",
+										"Directory '" + camkesOutDir.getAbsolutePath()
+										+ "' does not exist.  Should it be created?")) {
+									if (!camkesOutDir.mkdirs()) {
+										Dialog.showError(getToolName(),
+												"Could not create directory " + camkesOutDir.getAbsolutePath());
+										return Status.CANCEL_STATUS;
+									}
+								} else {
+									return Status.CANCEL_STATUS;
+								}
 							}
+
+							writeToConsole("\nGenerating CAmkES artifacts ...");
 
 							// run ACT
 							toolRet = Util.callWrapper(getToolName(), console, () -> {
-								File outDir = new File(prompt.getCamkesOptionOutputDirectory());
 								IS<Z, String> auxDirs = toISZ(prompt.getOptionCSourceDirectory());
 								org.sireum.Option<File> aadlRootDir = new org.sireum.Some<>(workspaceRoot);
 
-								return org.sireum.aadl.act.Act.run(outDir, model, auxDirs, aadlRootDir);
+								return org.sireum.aadl.act.Act.run(camkesOutDir, model, auxDirs, aadlRootDir);
 							});
-						}
-
-						if (toolRet == 0) {
-							// run the transpiler
-
-							writeToConsole("Running " + transpilerScript);
-
-							ProcessBuilder pb = new ProcessBuilder("/bin/bash", "--login", "-c", transpilerScript);
-
-							pb.redirectErrorStream(true);
-							pb.environment().put("HOME", "/home/sireum");
-							pb.environment().put("PATH",
-									"/home/sireum/devel/sireum/kekinian/bin:/home/sireum/devel/sireum/kekinian/bin/linux/java/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:.");
-							pb.environment().put("SIREUM_HOME", "/home/sireum/devel/sireum/kekinian");
-
-							InputStream is = pb.start().getInputStream();
-
-							MessageConsoleStream mcs = console.newMessageStream();
-
-							int c;
-							while ((c = is.read()) != -1) {
-								mcs.write(c);
-							}
 						}
 					}
 
