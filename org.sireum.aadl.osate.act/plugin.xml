@@ -63,7 +63,8 @@
          <command
                commandId="org.sireum.commands.launchhamr"
                icon="resources/hamr16x16.png"
-               label="HAMR">
+               label="HAMR"
+               mode="FORCE_TEXT">
          </command>
        </toolbar>
      </menuContribution>

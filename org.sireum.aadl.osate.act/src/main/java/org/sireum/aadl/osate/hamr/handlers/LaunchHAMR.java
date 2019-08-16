@@ -90,6 +90,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								true, // always embed ART
 								false, // never gen bless entrypoints
 								false, // no verbose
+								false, // don't treat devices as threads
 								true, // always gen transpiler artifacts
 								ipc, //
 								prompt.getOptionExcludesSlangImplementations(),
@@ -159,8 +160,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						}
 					}
 
-					displayPopup(
-							"HAMR code " + (toolRet == 0 ? "successfully generated" : "generation was unsuccessful"));
+					String msg = "HAMR code "
+							+ (toolRet == 0 ? "successfully generated" : "generation was unsuccessful");
+					writeToConsole(msg);
+					displayPopup(msg);
 
 					refreshWorkspace();
 
