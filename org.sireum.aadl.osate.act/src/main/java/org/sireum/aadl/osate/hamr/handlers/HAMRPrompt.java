@@ -34,6 +34,7 @@ enum OutputProfile {
 
 public class HAMRPrompt extends TitleAreaDialog {
 	private static String title = "HAMR Options";
+	private String subTitle = "";
 	private static String message = "";
 
 	private Combo cmbOutputProfile;
@@ -64,8 +65,9 @@ public class HAMRPrompt extends TitleAreaDialog {
 		super(parentShell);
 	}
 
-	public HAMRPrompt(IProject p, Shell parentShell) {
+	public HAMRPrompt(IProject p, Shell parentShell, String title) {
 		super(parentShell);
+		subTitle = title;
 		project = p;
 		IScopeContext projectScope = new ProjectScope(project);
 		projectNode = projectScope.getNode(PREF_KEY);
@@ -75,7 +77,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 	public void create() {
 		super.create();
 
-		setTitle(title);
+		setTitle(title + ": " + subTitle);
 		setMessage(message);
 
 		image = new Image(null, new ImageData(this.getClass().getResourceAsStream("/resources/hamr.png")));
