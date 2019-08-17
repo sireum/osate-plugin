@@ -60,7 +60,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 			}
 
 			Display.getDefault().syncExec(() -> {
-				prompt = new HAMRPrompt(getProject(si), getShell());
+				prompt = new HAMRPrompt(getProject(si), getShell(), si.getComponentImplementation().getFullName());
 				prompt.open();
 			});
 
@@ -75,13 +75,20 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 					writeToConsole("Generating HAMR artifacts...");
 
+					boolean seL4 = prompt.getOptionOutputProfile() == OutputProfile.seL4;
+
 					// always run Arsit
 					int toolRet = Util.callWrapper(getToolName(), console, () -> {
+
+						String behaviorDir = prompt.getOptionCSourceDirectory() == "" ? null
+								: prompt.getOptionCSourceDirectory();
 
 						// always gen shared mem for HAMR
 						ArsitBridge.IPCMechanismJava ipc = IPCMechanismJava.SharedMemory;
 
 						String base = null;
+
+						String cDir = new File(slangOutputDir, seL4 ? "src/c/sel4" : "src/c/linux").getAbsolutePath();
 
 						return org.sireum.aadl.arsit.Arsit.run( //
 								model, //
@@ -94,7 +101,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								true, // always gen transpiler artifacts
 								ipc, //
 								prompt.getOptionExcludesSlangImplementations(),
-								prompt.getOptionOutputProfile() == OutputProfile.seL4 // removes ipc.c if true
+								seL4, // removes ipc.c if true
+								ArsitBridge.sireumOption(behaviorDir), // c extension dir
+								ArsitBridge.sireumOption(cDir) // c output directory
 						);
 					});
 
