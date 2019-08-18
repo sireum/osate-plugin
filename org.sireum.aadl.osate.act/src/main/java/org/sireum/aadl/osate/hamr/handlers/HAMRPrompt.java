@@ -33,7 +33,7 @@ enum OutputProfile {
 }
 
 public class HAMRPrompt extends TitleAreaDialog {
-	private static String title = "HAMR Options";
+	private static String title = "HAMR Configuration";
 	private String subTitle = "";
 	private static String message = "";
 
@@ -42,6 +42,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 	private Text txtSlangOutputDirectory;
 	private Text txtCamkesOutputDirectory;
 	private Button btnExcludeSlangImplementations;
+	private Text txtBasePackageName;
 
 	IProject project;
 	IEclipsePreferences projectNode;
@@ -55,6 +56,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 	private final String KEY_CAMKES_OUTPUT_DIRECTORY = "camkes.output.directory";
 
 	private final String KEY_EXCLUDE_SLANG_IMPL = "exclude.slang.impl";
+
+	private final String KEY_BASE_PACKAGE_NAME = "base.package.name";
 
 	Map<String, List<Control>> controls = new HashMap<>();
 
@@ -181,6 +184,39 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 
 		/****************************************************************
+		 * ROW - C Source Code Directory
+		 ****************************************************************/
+		{
+			// COL 1
+			Label lblAuxCDir = new Label(container, SWT.NONE);
+			lblAuxCDir.setText("C Source Code Directory");
+			lblAuxCDir.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
+
+			// COL 2
+			txtCSourceDirectory = new Text(container, SWT.BORDER);
+			txtCSourceDirectory.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+			txtCSourceDirectory.setToolTipText("Directory containing component implementations");
+
+			// COL 3
+			Button btnCSourceCode = new Button(container, SWT.NONE);
+			btnCSourceCode.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					String path = promptForDirectory("Select C Source Directory Directory",
+							getOptionCSourceDirectory());
+					if (path != null) {
+						txtCSourceDirectory.setText(path);
+					}
+				}
+			});
+			btnCSourceCode.setText("...");
+			btnCSourceCode.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
+
+			controls.put(KEY_C_SRC_DIRECTORY, Arrays.asList(lblAuxCDir, txtCSourceDirectory, btnCSourceCode));
+			this.setOptionsVisible(KEY_C_SRC_DIRECTORY, true);
+		}
+
+		/****************************************************************
 		 * ROW - Camkes Output Directory
 		 ****************************************************************/
 
@@ -218,7 +254,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			setCamkesOptionsVisible();
 		}
 
-		fillerRow(container, numCols);
+		// fillerRow(container, numCols);
 
 		/****************************************************************
 		 * ROW - Exclude Slang Impl
@@ -232,38 +268,26 @@ public class HAMRPrompt extends TitleAreaDialog {
 			this.setOptionsVisible(KEY_EXCLUDE_SLANG_IMPL, false);
 		}
 
-		fillerRow(container, numCols);
+		// fillerRow(container, numCols);
 
 		/****************************************************************
-		 * ROW - C Source Code Directory
+		 * ROW
 		 ****************************************************************/
 		{
 			// COL 1
-			Label lblAuxCDir = new Label(container, SWT.NONE);
-			lblAuxCDir.setText("C Source Code Directory");
-			lblAuxCDir.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
+			Label lblBasePackageName = new Label(container, SWT.NONE);
+			lblBasePackageName.setText("Base Package Name");
+			lblBasePackageName.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
 
 			// COL 2
-			txtCSourceDirectory = new Text(container, SWT.BORDER);
-			txtCSourceDirectory.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+			txtBasePackageName = new Text(container, SWT.BORDER);
+			txtBasePackageName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 			// COL 3
-			Button btnCSourceCode = new Button(container, SWT.NONE);
-			btnCSourceCode.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					String path = promptForDirectory("Select C Source Directory Directory",
-							getOptionCSourceDirectory());
-					if (path != null) {
-						txtCSourceDirectory.setText(path);
-					}
-				}
-			});
-			btnCSourceCode.setText("...");
-			btnCSourceCode.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
+			new Label(container, SWT.NULL); // col padding
 
-			controls.put(KEY_C_SRC_DIRECTORY, Arrays.asList(lblAuxCDir, txtCSourceDirectory, btnCSourceCode));
-			this.setOptionsVisible(KEY_C_SRC_DIRECTORY, false);
+			controls.put(KEY_BASE_PACKAGE_NAME, Arrays.asList(lblBasePackageName, txtBasePackageName));
+			this.setOptionsVisible(KEY_BASE_PACKAGE_NAME, false);
 		}
 
 		initValues();
@@ -310,6 +334,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 		projectNode.put(KEY_CAMKES_OUTPUT_DIRECTORY, txtCamkesOutputDirectory.getText());
 
+		projectNode.put(KEY_BASE_PACKAGE_NAME, txtBasePackageName.getText());
+
 		try {
 			projectNode.flush();
 		} catch (BackingStoreException e) {
@@ -338,7 +364,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 		txtCamkesOutputDirectory.setText(camkesOutputDirectory);
 
-
+		txtBasePackageName.setText(getOptionBasePackageName());
 	}
 
 	public OutputProfile getOptionOutputProfile() {
@@ -364,6 +390,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	public String getCamkesOptionOutputDirectory() {
 		return projectNode.get(KEY_CAMKES_OUTPUT_DIRECTORY, "");
+	}
+
+	public String getOptionBasePackageName() {
+		return projectNode.get(KEY_BASE_PACKAGE_NAME, "");
 	}
 
 	String promptForDirectory(String title, String init) {

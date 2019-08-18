@@ -80,13 +80,15 @@ public class LaunchHAMR extends AbstractSireumHandler {
 					// always run Arsit
 					int toolRet = Util.callWrapper(getToolName(), console, () -> {
 
-						String behaviorDir = prompt.getOptionCSourceDirectory() == "" ? null
+						String behaviorDir = prompt.getOptionCSourceDirectory().equals("") ? null
 								: prompt.getOptionCSourceDirectory();
+
 
 						// always gen shared mem for HAMR
 						ArsitBridge.IPCMechanismJava ipc = IPCMechanismJava.SharedMemory;
 
-						String base = null;
+						String base = prompt.getOptionBasePackageName().equals("") ? null
+								: prompt.getOptionBasePackageName();
 
 						String cDir = new File(slangOutputDir, seL4 ? "src/c/sel4" : "src/c/linux").getAbsolutePath();
 
@@ -143,6 +145,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						if (prompt.getOptionOutputProfile() == OutputProfile.seL4) {
 
 							File camkesOutDir = new File(prompt.getCamkesOptionOutputDirectory());
+							/*
 							if (!camkesOutDir.exists()) {
 								if (Dialog.askQuestion("Create Directory?",
 										"Directory '" + camkesOutDir.getAbsolutePath()
@@ -156,12 +159,21 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									return Status.CANCEL_STATUS;
 								}
 							}
+							*/
+							camkesOutDir.mkdirs(); // FIXME should be done in ACT
 
 							writeToConsole("\nGenerating CAmkES artifacts ...");
 
 							// run ACT
 							toolRet = Util.callWrapper(getToolName(), console, () -> {
-								IS<Z, String> auxDirs = toISZ(prompt.getOptionCSourceDirectory());
+
+								// FIXME: aux_code contains the ipc for camkes+slang along
+								// with the data conversions. ipc.c could be placed in camkes'
+								// includes dir and the converts won't be needed when we
+								// switch to slang derived types
+								IS<Z, String> auxDirs = toISZ(
+										"/home/sireum/uav-project-extern/src/aadl/ACT_Demo_Dec2018/aux_code");
+
 								org.sireum.Option<File> aadlRootDir = new org.sireum.Some<>(workspaceRoot);
 
 								return org.sireum.aadl.act.Act.run(camkesOutDir, model, auxDirs, aadlRootDir);
