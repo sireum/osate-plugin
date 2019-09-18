@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStream;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -17,16 +19,17 @@ import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
+import org.sireum.Option;
 import org.sireum.Z;
 import org.sireum.aadl.arsit.ArsitBridge;
-import org.sireum.aadl.arsit.ArsitBridge.IPCMechanismJava;
 import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
+import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
+import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
 
 public class LaunchHAMR extends AbstractSireumHandler {
-
 	private HAMRPrompt prompt = null;
 
 	@Override
@@ -54,13 +57,37 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 		if (model != null) {
 
+			final int bit_width = HAMRPropertyProvider.getDefaultBitWidthFromElement(si);
+			if (!HAMRPropertyProvider.bitWidths.contains(bit_width)) {
+				String options = HAMRPropertyProvider.bitWidths.stream().map(Object::toString)
+						.collect(Collectors.joining(", "));
+				displayPopup("Invalid bit width: " + bit_width + ".  Valid options are " + options);
+				return Status.CANCEL_STATUS;
+			}
+
+			final int max_seq_size = HAMRPropertyProvider.getDefaultMaxSequenceSizeFromElement(si);
+			if (max_seq_size < 0) {
+				displayPopup("Max sequence size must be greater than or equal to 0");
+				return Status.CANCEL_STATUS;
+			}
+
+			final int max_string_size = HAMRPropertyProvider.getDefaultMaxStringSizeFromElement(si);
+			if (max_string_size < 0) {
+				displayPopup("Max string size must be greater than or equal to 0");
+				return Status.CANCEL_STATUS;
+			}
+
+			List<Platform> platforms = HAMRPropertyProvider.getPlatformsFromElement(si);
+			List<HW> hardwares = HAMRPropertyProvider.getHWsFromElement(si);
+
 			if (PreferenceValues.getHAMR_SERIALIZE_OPT()) {
 				File f = serializeToFile(model, PreferenceValues.getHAMR_OUTPUT_FOLDER_OPT(), si);
 				writeToConsole("Wrote: " + f.getAbsolutePath());
 			}
 
 			Display.getDefault().syncExec(() -> {
-				prompt = new HAMRPrompt(getProject(si), getShell(), si.getComponentImplementation().getFullName());
+				prompt = new HAMRPrompt(getProject(si), getShell(), si.getComponentImplementation().getFullName(),
+						platforms, hardwares, bit_width, max_seq_size, max_string_size);
 				prompt.open();
 			});
 
@@ -73,48 +100,52 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							? workspaceRoot.getAbsolutePath()
 							: prompt.getSlangOptionOutputDirectory();
 
-					writeToConsole("Generating HAMR artifacts...");
+					writeToConsole("Generating " + getToolName() + " artifacts...");
 
-					boolean seL4 = prompt.getOptionOutputProfile() == OutputProfile.seL4;
+					int toolRet = 0;
 
-					// always run Arsit
-					int toolRet = Util.callWrapper(getToolName(), console, () -> {
+					if (!prompt.getOptionTrustedBuildProfile()) {
+						Util.callWrapper(getToolName(), console, () -> {
 
-						String behaviorDir = prompt.getOptionCSourceDirectory().equals("") ? null
-								: prompt.getOptionCSourceDirectory();
+							assert (!prompt.getOptionTrustedBuildProfile()); // don't run arsit if TB profile choosen
 
+							String _behaviorDir = prompt.getOptionCSourceDirectory().equals("") ? null
+									: prompt.getOptionCSourceDirectory();
 
-						// always gen shared mem for HAMR
-						ArsitBridge.IPCMechanismJava ipc = IPCMechanismJava.SharedMemory;
+							String _base = prompt.getOptionBasePackageName().equals("") ? null
+									: prompt.getOptionBasePackageName();
 
-						String base = prompt.getOptionBasePackageName().equals("") ? null
-								: prompt.getOptionBasePackageName();
+							String _cDir = new File(slangOutputDir,
+									prompt.getOptionPlatform() == ArsitBridge.Platform.Sel4 ? "src/c/sel4"
+											: "src/c/nix").getAbsolutePath();
 
-						String cDir = new File(slangOutputDir, seL4 ? "src/c/sel4" : "src/c/linux").getAbsolutePath();
+							Option<String> optOutputDir = ArsitBridge.sireumOption(slangOutputDir);
+							Option<String> optBasePackageName = ArsitBridge.sireumOption(_base);
+							boolean embedArt = PreferenceValues.getHAMR_EMBED_ART_OPT();
+							boolean genBlessEntryPoints = false;
+							boolean verbose = PreferenceValues.getHAMR_VERBOSE_OPT();
+							boolean devicesAsThreads = PreferenceValues.getHAMR_DEVICES_AS_THREADS_OPT();
+							ArsitBridge.IPCMechanism ipcMechanism = ArsitBridge.IPCMechanism.SharedMemory;
+							boolean excludeImpl = prompt.getOptionExcludesSlangImplementations();
+							Option<String> behaviorDir = ArsitBridge.sireumOption(_behaviorDir);
+							Option<String> outputCDir = ArsitBridge.sireumOption(_cDir);
+							ArsitBridge.Platform platform = prompt.getOptionPlatform();
+							int bitWidth = bit_width;
+							int maxStringSize = max_string_size;
+							int maxArraySize = max_seq_size;
 
-						return org.sireum.aadl.arsit.Arsit.run( //
-								model, //
-								ArsitBridge.sireumOption(slangOutputDir), //
-								ArsitBridge.sireumOption(base), //
-								true, // always embed ART
-								false, // never gen bless entrypoints
-								false, // no verbose
-								false, // don't treat devices as threads
-								true, // always gen transpiler artifacts
-								ipc, //
-								prompt.getOptionExcludesSlangImplementations(),
-								seL4, // removes ipc.c if true
-								ArsitBridge.sireumOption(behaviorDir), // c extension dir
-								ArsitBridge.sireumOption(cDir) // c output directory
-						);
-					});
-
+							return org.sireum.aadl.arsit.Arsit.run( //
+									model, optOutputDir, optBasePackageName, embedArt, genBlessEntryPoints, verbose,
+									devicesAsThreads, ipcMechanism, excludeImpl, behaviorDir,
+									outputCDir, platform, bitWidth, maxStringSize, maxArraySize);
+						});
+					}
 
 					if (toolRet == 0) {
 
 						String transpilerScript = slangOutputDir + "/bin/transpile.sh";
 
-						if (prompt.getOptionOutputProfile() == OutputProfile.seL4) {
+						if (prompt.getOptionPlatform() == ArsitBridge.Platform.Sel4) {
 							transpilerScript = slangOutputDir + "/bin/transpile-camkes.sh";
 
 							BufferedWriter writer = new BufferedWriter(new FileWriter(transpilerScript, true));
@@ -142,24 +173,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							mcs.write(c);
 						}
 
-						if (prompt.getOptionOutputProfile() == OutputProfile.seL4) {
+						if (prompt.getOptionPlatform() == ArsitBridge.Platform.Sel4) {
 
-							File camkesOutDir = new File(prompt.getCamkesOptionOutputDirectory());
-							/*
-							if (!camkesOutDir.exists()) {
-								if (Dialog.askQuestion("Create Directory?",
-										"Directory '" + camkesOutDir.getAbsolutePath()
-										+ "' does not exist.  Should it be created?")) {
-									if (!camkesOutDir.mkdirs()) {
-										Dialog.showError(getToolName(),
-												"Could not create directory " + camkesOutDir.getAbsolutePath());
-										return Status.CANCEL_STATUS;
-									}
-								} else {
-									return Status.CANCEL_STATUS;
-								}
-							}
-							*/
+							File camkesOutDir = new File(prompt.getOptionCamkesOptionOutputDirectory());
+
 							camkesOutDir.mkdirs(); // FIXME should be done in ACT
 
 							writeToConsole("\nGenerating CAmkES artifacts ...");
@@ -183,7 +200,6 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 					String msg = "HAMR code "
 							+ (toolRet == 0 ? "successfully generated" : "generation was unsuccessful");
-					writeToConsole(msg);
 					displayPopup(msg);
 
 					refreshWorkspace();
@@ -202,7 +218,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 	private void displayPopup(String msg) {
 		Display.getDefault().syncExec(() -> {
-			AbstractNotificationPopup notification = new EclipseNotification(Display.getCurrent(), "HAMR Message", msg);
+			writeToConsole(msg);
+			AbstractNotificationPopup notification = new EclipseNotification(Display.getCurrent(),
+					getToolName() + " Message", msg);
 			notification.open();
 		});
 	}

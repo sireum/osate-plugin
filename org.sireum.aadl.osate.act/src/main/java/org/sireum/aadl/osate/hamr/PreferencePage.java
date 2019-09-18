@@ -26,11 +26,19 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		TabFolder tabFolder = new TabFolder(getFieldEditorParent(), SWT.NONE);
 		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		Composite actTab = addTab(tabFolder, "HAMR");
-		addField(new BooleanFieldEditor(PreferenceValues.HAMR_SERIALIZE_OPT,
-				"Serialize AIR to JSON (non-compact) when generating CAmkES", actTab));
+		Composite hamrTab = addTab(tabFolder, "HAMR");
 
-		addField(new StringFieldEditor(PreferenceValues.HAMR_OUTPUT_FOLDER_OPT, "Output folder", actTab));
+		addField(new BooleanFieldEditor(PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT, "Treat AADL devices as threads",
+				hamrTab));
+
+		addField(new BooleanFieldEditor(PreferenceValues.HAMR_EMBED_ART_OPT, "Embed ART", hamrTab));
+
+		addField(new BooleanFieldEditor(PreferenceValues.HAMR_SERIALIZE_OPT,
+				"Serialize AIR to JSON (non-compact) when generating CAmkES", hamrTab));
+
+		addField(new BooleanFieldEditor(PreferenceValues.HAMR_VERBOSE_OPT, "Verbose output", hamrTab));
+
+		addField(new StringFieldEditor(PreferenceValues.HAMR_OUTPUT_FOLDER_OPT, "Output folder", hamrTab));
 	}
 
 	private Composite addTab(TabFolder tabFolder, String tabName) {

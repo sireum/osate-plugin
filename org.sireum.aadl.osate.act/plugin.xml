@@ -109,12 +109,13 @@
             file="resources/TB_SYS.aadl"
             id="org.sireum.aadl.osate.act.aadlcontribution.tbsys">
       </aadlcontribution>
-   </extension>
-   <extension
-         point="org.osate.pluginsupport.aadlcontribution">
       <aadlcontribution
             file="resources/SB_SYS.aadl"
             id="org.sireum.aadl.osate.act.aadlcontribution.sbsys">
       </aadlcontribution>
-   </extension>      
+     <aadlcontribution
+            file="resources/HAMR.aadl"
+            id="org.sireum.aadl.osate.act.aadlcontribution.hamr">
+      </aadlcontribution>
+   </extension>     
 </plugin>
