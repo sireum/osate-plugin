@@ -1,9 +1,13 @@
 package org.sireum.aadl.osate.hamr.handlers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
@@ -23,55 +27,182 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.osate.ui.dialogs.Dialog;
 import org.osgi.service.prefs.BackingStoreException;
-
-enum OutputProfile {
-	Linux, seL4
-}
+import org.sireum.Option;
+import org.sireum.aadl.arsit.ArsitBridge;
+import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
+import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 
 public class HAMRPrompt extends TitleAreaDialog {
+
+	private final String KEY_PLATFORM = "platform";
+
+	private final String KEY_SLANG_OUTPUT_DIRECTORY = "slang.output.directory";
+	private final String KEY_BASE_PACKAGE_NAME = "base.package.name";
+
+	private final String KEY_HW = "hw";
+
+	private final String KEY_EXCLUDE_SLANG_IMPL = "exclude.slang.impl";
+	private final String KEY_BIT_WIDTH = "bit.width";
+	private final String KEY_MAX_SEQUENCE_SIZE = "max.sequence.size";
+	private final String KEY_MAX_STRING_SIZE = "max.string.size";
+	private final String KEY_C_SRC_DIRECTORY = "c.src.directory";
+
+	private final String KEY_CAMKES_OUTPUT_DIRECTORY = "camkes.output.directory";
+	private final String KEY_TRUSTED_BUILD_PROFILE = "trusted.build.profile";
+
+	public ArsitBridge.Platform getOptionPlatform() {
+		Platform p = Platform.valueOf(getSavedStringOption(KEY_PLATFORM));
+		switch(p) {
+		case JVM:
+			return ArsitBridge.Platform.Jvm;
+		case Linux:
+			return ArsitBridge.Platform.Linux;
+		case macOS:
+			return ArsitBridge.Platform.Mac;
+		case Cygwin:
+			return ArsitBridge.Platform.Cygwin;
+		case seL4:
+			return ArsitBridge.Platform.Sel4;
+		default:
+			throw new RuntimeException("Not expecting platform type: " + p);
+		}
+	}
+
+	public HW getOptionHW() {
+		return HW.valueOf(getSavedStringOption(KEY_HW));
+	}
+
+	public String getOptionCSourceDirectory() {
+		return getSavedStringOption(KEY_C_SRC_DIRECTORY);
+	}
+
+	public String getSlangOptionOutputDirectory() {
+		return getSavedStringOption(KEY_SLANG_OUTPUT_DIRECTORY);
+	}
+
+	public boolean getOptionExcludesSlangImplementations() {
+		return getSavedBooleanOption(KEY_EXCLUDE_SLANG_IMPL);
+	}
+
+	public String getOptionBasePackageName() {
+		return getSavedStringOption(KEY_BASE_PACKAGE_NAME);
+	}
+
+	public int getOptionMaxSequenceSize() {
+		return Integer.valueOf(getSavedStringOption(KEY_MAX_SEQUENCE_SIZE));
+	}
+
+	public int getOptionMaxStringSize() {
+		return Integer.valueOf(getSavedStringOption(KEY_MAX_STRING_SIZE));
+	}
+
+	public int getOptionBitWidth() {
+		return Integer.valueOf(getSavedStringOption(KEY_BIT_WIDTH));
+	}
+
+	public String getOptionCamkesOptionOutputDirectory() {
+		return getSavedStringOption(KEY_CAMKES_OUTPUT_DIRECTORY);
+	}
+
+	public boolean getOptionTrustedBuildProfile() {
+		return getSavedBooleanOption(KEY_TRUSTED_BUILD_PROFILE);
+	}
+
+	/* runs after controls have been created */
+	private void initControlValues() {
+		// get previous values from eclipse project
+		for (Entry<String, Control> option : optionControls.entrySet()) {
+			if (option.getValue() instanceof Text) {
+				((Text) option.getValue()).setText(getSavedStringOption(option.getKey()));
+			} else if (option.getValue() instanceof Combo) {
+				((Combo) option.getValue()).setText(getSavedStringOption(option.getKey()));
+			} else if (option.getValue() instanceof Button) {
+				((Button) option.getValue()).setSelection(getSavedBooleanOption(option.getKey()));
+			} else {
+				throw new RuntimeException();
+			}
+		}
+
+		// SPECIAL INIT CASES
+		String slangOutputDirectory = getSlangOptionOutputDirectory();
+		if (slangOutputDirectory.equals("")) {
+			slangOutputDirectory = project.getLocation().toString();
+		}
+		getTextControl(KEY_SLANG_OUTPUT_DIRECTORY).setText(slangOutputDirectory);
+
+		String camkesOutputDirectory = getOptionCamkesOptionOutputDirectory();
+		if (camkesOutputDirectory.equals("")) {
+			camkesOutputDirectory = project.getLocation().toString();
+		}
+		getTextControl(KEY_CAMKES_OUTPUT_DIRECTORY).setText(camkesOutputDirectory);
+
+		getComboControl(KEY_BIT_WIDTH).select(HAMRPropertyProvider.bitWidths.indexOf(theBitWidth));
+		getTextControl(KEY_MAX_SEQUENCE_SIZE).setText(Integer.toString(theMaxSequenceSize));
+		getTextControl(KEY_MAX_STRING_SIZE).setText(Integer.toString(theMaxStringSize));
+	}
+
+	private boolean validate() {
+		Option<Integer> mss = getIntFromControl(KEY_MAX_SEQUENCE_SIZE);
+		if (mss.isEmpty() || mss.get().intValue() < 0) {
+			Dialog.showError("Input Error", "Max Sequence Size must be a number greater than or equal to 0");
+			return false;
+		}
+
+		Option<Integer> mstring = getIntFromControl(KEY_MAX_STRING_SIZE);
+		if (mstring.isEmpty() || mstring.get().intValue() < 0) {
+			Dialog.showError("Input Error", "Max String Size must be a number greater than or equal to 0");
+			return false;
+		}
+
+		return true;
+	}
+
+	/*
+	 * EVERYTHING ELSE
+	 */
 	private static String title = "HAMR Configuration";
 	private String subTitle = "";
 	private static String message = "";
 
-	private Combo cmbOutputProfile;
-	private Text txtCSourceDirectory;
-	private Text txtSlangOutputDirectory;
-	private Text txtCamkesOutputDirectory;
-	private Button btnExcludeSlangImplementations;
-	private Text txtBasePackageName;
+	private IProject project;
+	private IEclipsePreferences projectNode;
 
-	IProject project;
-	IEclipsePreferences projectNode;
+	private final String PREF_KEY = "org.sireum.aadl.hamr";
 
-	String PREF_KEY = "org.sireum.aadl.hamr";
-
-	private final String KEY_OUTPUT_PROFILE = "output.profile";
-	private final String KEY_C_SRC_DIRECTORY = "c.src.directory";
-
-	private final String KEY_SLANG_OUTPUT_DIRECTORY = "slang.output.directory";
-	private final String KEY_CAMKES_OUTPUT_DIRECTORY = "camkes.output.directory";
-
-	private final String KEY_EXCLUDE_SLANG_IMPL = "exclude.slang.impl";
-
-	private final String KEY_BASE_PACKAGE_NAME = "base.package.name";
-
-	Map<String, List<Control>> controls = new HashMap<>();
+	private final String KEY_TRANSPILER_GROUP = "KEY_GROUP_TRANSPILER";
+	private final String KEY_CAMKES_GROUP = "KEY_GROUP_CAMKES";
 
 	// The image to display
 	private Image image;
+
+	private List<Platform> thePlatforms = null;
+	private List<HW> theHardwares = null;
+	private int theBitWidth = -1;
+	private int theMaxSequenceSize = -1;
+	private int theMaxStringSize = -1;
 
 	public HAMRPrompt(Shell parentShell) {
 		super(parentShell);
 	}
 
-	public HAMRPrompt(IProject p, Shell parentShell, String title) {
+	public HAMRPrompt(IProject p, Shell parentShell, String title, List<Platform> platforms, List<HW> hardwares,
+			int bitWidth, int maxSequenceSize, int maxStringSize) {
 		super(parentShell);
 		subTitle = title;
 		project = p;
+
+		thePlatforms = platforms;
+		theHardwares = hardwares;
+		theBitWidth = bitWidth;
+		theMaxSequenceSize = maxSequenceSize;
+		theMaxStringSize = maxStringSize;
+
 		IScopeContext projectScope = new ProjectScope(project);
 		projectNode = projectScope.getNode(PREF_KEY);
 	}
@@ -112,161 +243,147 @@ public class HAMRPrompt extends TitleAreaDialog {
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
-		int numCols = 3;
+		final int numCols = 3;
 
-		Composite area = (Composite) super.createDialogArea(parent);
-		Composite container = new Composite(area, SWT.NONE);
+		final Composite area = (Composite) super.createDialogArea(parent);
+
+		final Composite container = new Composite(area, SWT.NONE);
 		container.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		GridLayout layout = new GridLayout(numCols, false);
+		final GridLayout layout = new GridLayout(numCols, false);
 		container.setLayout(layout);
 
 		/****************************************************************
-		 * ROW - Target Platform
+		 * ROW - Platform
 		 ****************************************************************/
 		{
+			final String key = KEY_PLATFORM;
+
 			// COL 1
-			Label lblOutputProfile = new Label(container, SWT.NONE);
-			lblOutputProfile.setText("Target Platform");
-			lblOutputProfile.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
+			addLabel("Platform", container, key);
 
 			// COL 2
-			cmbOutputProfile = new Combo(container, SWT.READ_ONLY);
-			String[] vals = Arrays.asList(OutputProfile.values()).stream().map(f -> f.toString()).toArray(String[]::new);
-			cmbOutputProfile.setItems(vals);
+			Combo cmb = new Combo(container, SWT.READ_ONLY);
+			cmb.setItems(getPlatforms());
 			GridData gd = new GridData(SWT.LEFT, SWT.CENTER, true, false);
 			gd.widthHint = 100;
-			cmbOutputProfile.setLayoutData(gd);
+			cmb.setLayoutData(gd);
+			registerOptionControl(key, cmb);
 
-			cmbOutputProfile.addSelectionListener(new SelectionAdapter() {
+			cmb.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					setCamkesOptionsVisible();
+					String selection = cmb.getItem(cmb.getSelectionIndex());
+					Platform p = HAMRPropertyProvider.Platform.valueOf(selection);
+
+					List<String> JVM_controls = Arrays.asList( //
+							KEY_PLATFORM, KEY_SLANG_OUTPUT_DIRECTORY, KEY_BASE_PACKAGE_NAME);
+
+					List<String> NIX_controls = addAll(JVM_controls, Arrays.asList( //
+							KEY_HW, KEY_C_SRC_DIRECTORY, KEY_EXCLUDE_SLANG_IMPL, //
+							KEY_TRANSPILER_GROUP));
+
+					List<String> SEL4_controls = addAll(NIX_controls, Arrays.asList( //
+							KEY_CAMKES_GROUP));
+
+					List<String> toShow = JVM_controls;
+
+					String[] hwItems = null;
+					switch (p) {
+					case JVM:
+						hwItems = filterHW();
+						break;
+					case Linux:
+						hwItems = filterHW(HW.x86, HW.amd64);
+						toShow = NIX_controls;
+						break;
+					case macOS:
+						hwItems = filterHW(HW.amd64);
+						toShow = NIX_controls;
+						break;
+					case Cygwin:
+						hwItems = filterHW(HW.x86, HW.amd64);
+						toShow = NIX_controls;
+						break;
+					case seL4:
+						hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
+						toShow = SEL4_controls;
+						break;
+					}
+					getComboControl(KEY_HW).setItems(hwItems);
+
+					// show(showControls, container, JVM_controls);
+					showOnly(container, toShow);
 				}
 			});
 
 			// COL 3
-			new Label(container, SWT.NULL); // col padding
+			registerViewControl(key, addColumnPad(container)); // col padding
 		}
 
+		/****************************************************************
+		 * ROW - HW
+		 ****************************************************************/
+		{
+			final String key = KEY_HW;
+
+			// COL 1
+			addLabel("HW", container, key);
+
+			// COL 2
+			Combo cmb = new Combo(container, SWT.READ_ONLY);
+			GridData gd = new GridData(SWT.LEFT, SWT.CENTER, true, false);
+			gd.widthHint = 100;
+			cmb.setLayoutData(gd);
+			cmb.setItems(getHWs());
+			registerOptionControl(key, cmb);
+
+			cmb.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+
+				}
+			});
+
+			// COL 3
+			registerViewControl(key, addColumnPad(container)); // col padding
+		}
 
 		/****************************************************************
 		 * ROW - Slang Output Directory
 		 ****************************************************************/
 
 		{
+			final String key = KEY_SLANG_OUTPUT_DIRECTORY;
+
 			// COL 1
-			Label lblOutputDirectory = new Label(container, SWT.NONE);
-			lblOutputDirectory.setText("Output Directory");
-			lblOutputDirectory.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
+			addLabel("Output Directory", container, key);
 
 			// COL 2
-			txtSlangOutputDirectory = new Text(container, SWT.BORDER);
+			Text txt = new Text(container, SWT.BORDER);
 			GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false);
 			gd.widthHint = 334;
-			txtSlangOutputDirectory.setLayoutData(gd);
+			txt.setLayoutData(gd);
+			registerOptionControl(key, txt);
 
 			// COL 3
-			Button btnOutputDirectory = new Button(container, SWT.PUSH);
-			btnOutputDirectory.addSelectionListener(new SelectionAdapter() {
+			Button btn = new Button(container, SWT.PUSH);
+			btn.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					String path = promptForDirectory("Select Slang Output Directory",
-							getSlangOptionOutputDirectory());
+					String path = promptForDirectory("Select Slang Output Directory", getSlangOptionOutputDirectory());
 					if (path != null) {
-						txtSlangOutputDirectory.setText(path);
+						txt.setText(path);
 					}
 				}
 			});
-			btnOutputDirectory.setText("...");
+			btn.setText("...");
 			gd = new GridData(SWT.RIGHT, SWT.FILL, false, false);
-			btnOutputDirectory.setLayoutData(gd);
-		}
-
-		/****************************************************************
-		 * ROW - C Source Code Directory
-		 ****************************************************************/
-		{
-			// COL 1
-			Label lblAuxCDir = new Label(container, SWT.NONE);
-			lblAuxCDir.setText("C Source Code Directory");
-			lblAuxCDir.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
-
-			// COL 2
-			txtCSourceDirectory = new Text(container, SWT.BORDER);
-			txtCSourceDirectory.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-			txtCSourceDirectory.setToolTipText("Directory containing component implementations");
-
-			// COL 3
-			Button btnCSourceCode = new Button(container, SWT.NONE);
-			btnCSourceCode.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					String path = promptForDirectory("Select C Source Directory Directory",
-							getOptionCSourceDirectory());
-					if (path != null) {
-						txtCSourceDirectory.setText(path);
-					}
-				}
-			});
-			btnCSourceCode.setText("...");
-			btnCSourceCode.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
-
-			controls.put(KEY_C_SRC_DIRECTORY, Arrays.asList(lblAuxCDir, txtCSourceDirectory, btnCSourceCode));
-			this.setOptionsVisible(KEY_C_SRC_DIRECTORY, true);
-		}
-
-		/****************************************************************
-		 * ROW - Camkes Output Directory
-		 ****************************************************************/
-
-		{
-			// COL 1
-			Label lblOutputDirectory = new Label(container, SWT.NONE);
-			lblOutputDirectory.setText("seL4/CAmkES Output Directory");
-			lblOutputDirectory.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
-
-			// COL 2
-			txtCamkesOutputDirectory = new Text(container, SWT.BORDER);
-			GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false);
-			gd.widthHint = 334;
-			txtCamkesOutputDirectory.setLayoutData(gd);
-
-			// COL 3
-			Button btnOutputDirectory = new Button(container, SWT.PUSH);
-			btnOutputDirectory.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					String path = promptForDirectory("Select SeL4/CAmkES Output Directory",
-							getCamkesOptionOutputDirectory());
-					if (path != null) {
-						txtCamkesOutputDirectory.setText(path);
-					}
-				}
-			});
-			btnOutputDirectory.setText("...");
-			gd = new GridData(SWT.RIGHT, SWT.FILL, false, false);
-			btnOutputDirectory.setLayoutData(gd);
-
-			controls.put(KEY_CAMKES_OUTPUT_DIRECTORY,
-					Arrays.asList(lblOutputDirectory, txtCamkesOutputDirectory, btnOutputDirectory));
-
-			setCamkesOptionsVisible();
+			btn.setLayoutData(gd);
+			registerViewControl(key, btn);
 		}
 
 		// fillerRow(container, numCols);
-
-		/****************************************************************
-		 * ROW - Exclude Slang Impl
-		 ****************************************************************/
-		{
-			btnExcludeSlangImplementations = new Button(container, SWT.CHECK);
-			btnExcludeSlangImplementations.setText("Exclude Slang Component Implementations");
-			btnExcludeSlangImplementations.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 3, 1));
-
-			controls.put(KEY_EXCLUDE_SLANG_IMPL, Arrays.asList(btnExcludeSlangImplementations));
-			this.setOptionsVisible(KEY_EXCLUDE_SLANG_IMPL, false);
-		}
 
 		// fillerRow(container, numCols);
 
@@ -274,36 +391,302 @@ public class HAMRPrompt extends TitleAreaDialog {
 		 * ROW
 		 ****************************************************************/
 		{
+			final String key = KEY_BASE_PACKAGE_NAME;
+
 			// COL 1
-			Label lblBasePackageName = new Label(container, SWT.NONE);
-			lblBasePackageName.setText("Base Package Name");
-			lblBasePackageName.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
+			addLabel("Base Package Name", container, key);
 
 			// COL 2
-			txtBasePackageName = new Text(container, SWT.BORDER);
-			txtBasePackageName.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+			Text txt = new Text(container, SWT.BORDER);
+			txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+			registerOptionControl(key, txt);
 
 			// COL 3
-			new Label(container, SWT.NULL); // col padding
-
-			controls.put(KEY_BASE_PACKAGE_NAME, Arrays.asList(lblBasePackageName, txtBasePackageName));
-			this.setOptionsVisible(KEY_BASE_PACKAGE_NAME, false);
+			registerViewControl(key, addColumnPad(container)); // col padding
 		}
 
-		initValues();
+		/****************************************************************
+		 * ROW
+		 ****************************************************************/
+		{
+			final String key = KEY_TRANSPILER_GROUP;
+			final int numGroupCols = 3;
+
+			// COL 1
+			Group grpContainer = new Group(container, SWT.NONE);
+			grpContainer.setText("Transpiler Options");
+			grpContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, numCols, 1));
+			registerViewControl(key, grpContainer);
+
+			final GridLayout grpLayout = new GridLayout(numGroupCols, false);
+			grpContainer.setLayout(grpLayout);
+
+			/****************************************************************
+			 * GROUP ROW - Exclude Slang Impl
+			 ****************************************************************/
+			{
+				String subKey = KEY_EXCLUDE_SLANG_IMPL;
+
+				Button btn = new Button(grpContainer, SWT.CHECK);
+				btn.setText("Exclude Slang Component Implementations");
+				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
+				registerOptionControl(subKey, btn, false);
+			}
+
+			/****************************************************************
+			 * GROUP ROW - Bit Width
+			 ****************************************************************/
+			{
+				String subKey = KEY_BIT_WIDTH;
+
+				// COL 1
+				addLabel("Bit Width", grpContainer);
+
+				// COL 2
+				Combo cmb = new Combo(grpContainer, SWT.READ_ONLY);
+				cmb.setItems(getBitWidths());
+				GridData gd = new GridData(SWT.LEFT, SWT.CENTER, true, false);
+				gd.widthHint = 100;
+				cmb.setLayoutData(gd);
+				registerOptionControl(subKey, cmb, false);
+
+				// COL 3
+				addColumnPad(grpContainer);
+			}
+
+			/****************************************************************
+			 * GROUP ROW - Max Sequence Size
+			 ****************************************************************/
+			{
+				String subKey = KEY_MAX_SEQUENCE_SIZE;
+
+				// COL 1
+				addLabel("Max Sequence Size", grpContainer);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+				registerOptionControl(subKey, txt, false);
+
+				// COL 3
+				addColumnPad(grpContainer);
+			}
+
+			/****************************************************************
+			 * GROUP ROW - Max String Size
+			 ****************************************************************/
+			{
+				String subKey = KEY_MAX_STRING_SIZE;
+
+				// COL 1
+				addLabel("Max String Size", grpContainer);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+				registerOptionControl(subKey, txt, false);
+
+				// COL 3
+				addColumnPad(grpContainer);
+			}
+
+			/****************************************************************
+			 * GROUP ROW - C Source Code Directory
+			 ****************************************************************/
+			{
+				String subKey = KEY_C_SRC_DIRECTORY;
+
+				// COL 1
+				addLabel("C Source Code Directory", grpContainer);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+				txt.setToolTipText("Directory containing component implementations");
+				registerOptionControl(subKey, txt, false);
+
+				// COL 3
+				Button btn = new Button(grpContainer, SWT.NONE);
+				btn.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						String path = promptForDirectory("Select C Source Directory Directory",
+								getOptionCSourceDirectory());
+						if (path != null) {
+							txt.setText(path);
+						}
+					}
+				});
+				btn.setText("...");
+				btn.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
+				// registerViewControl(subKey, btn);
+			}
+		}
+
+		/****************************************************************
+		 * ROW
+		 ****************************************************************/
+		{
+			final String key = KEY_CAMKES_GROUP;
+			final int numGroupCols = 3;
+
+			// COL 1
+			Group grpContainer = new Group(container, SWT.NONE);
+			grpContainer.setText("CAmkES Options");
+			grpContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, numCols, 1));
+			registerViewControl(key, grpContainer);
+
+			final GridLayout grpLayout = new GridLayout(numGroupCols, false);
+			grpContainer.setLayout(grpLayout);
+
+
+			/****************************************************************
+			 * ROW - trusted build profile
+			 ****************************************************************/
+
+			{
+				final String subKey = this.KEY_TRUSTED_BUILD_PROFILE;
+
+				// COL 1
+				Button btn = new Button(grpContainer, SWT.CHECK);
+				btn.setText("Trusted Build Profile");
+				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
+				registerOptionControl(subKey, btn, false);
+			}
+
+			/****************************************************************
+			 * ROW - Camkes Output Directory
+			 ****************************************************************/
+
+			{
+				final String subKey = KEY_CAMKES_OUTPUT_DIRECTORY;
+
+				// COL 1
+				addLabel("seL4/CAmkES Output Directory", grpContainer);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false);
+				gd.widthHint = 334;
+				txt.setLayoutData(gd);
+				registerOptionControl(subKey, txt, false);
+
+				// COL 3
+				Button btn = new Button(grpContainer, SWT.PUSH);
+				btn.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						String path = promptForDirectory("Select SeL4/CAmkES Output Directory",
+								getOptionCamkesOptionOutputDirectory());
+						if (path != null) {
+							txt.setText(path);
+						}
+					}
+				});
+				btn.setText("...");
+				gd = new GridData(SWT.RIGHT, SWT.FILL, false, false);
+				btn.setLayoutData(gd);
+				// registerViewControl(subKey, btn);
+			}
+
+		}
+
+		initControlValues();
+
 		return area;
 	}
 
-	void setCamkesOptionsVisible() {
-		String val = cmbOutputProfile.getText();
-		boolean visible = (val != null && !val.isEmpty() && OutputProfile.valueOf(val) == OutputProfile.seL4);
-		setOptionsVisible(KEY_CAMKES_OUTPUT_DIRECTORY, visible);
+	protected List<String> addAll(List<String> controls, List<String> other) {
+		List<String> ret = new ArrayList<>(controls);
+		ret.addAll(other);
+		return ret;
 	}
 
-	void setOptionsVisible(String key, boolean b) {
-		List<Control> cntls = controls.get(key);
-		for (Control c : cntls) {
-			c.setVisible(b);
+	private Label addLabel(String label, Composite container) {
+		Label l = new Label(container, SWT.NONE);
+		l.setText(label);
+		l.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false));
+		return l;
+	}
+
+	private Label addLabel(String label, Composite container, String key) {
+		Label l = addLabel(label, container);
+		registerViewControl(key, l);
+		return l;
+	}
+
+	private Control addColumnPad(Composite container) {
+		Label l = new Label(container, SWT.NULL); // col padding
+		GridData d = new GridData(SWT.LEFT, SWT.CENTER, false, false);
+		l.setLayoutData(d);
+		return l;
+	}
+
+	private final Map<String, Collection<Control>> viewControlMap = new HashMap<>();
+	private final Map<String, Control> optionControls = new HashMap<>();
+
+	private Combo getComboControl(String key) {
+		if (optionControls.containsKey(key) && optionControls.get(key) instanceof Combo) {
+			return (Combo) optionControls.get(key);
+		} else {
+			return null;
+		}
+	}
+
+	private Text getTextControl(String key) {
+		if (optionControls.containsKey(key) && optionControls.get(key) instanceof Text) {
+			return (Text) optionControls.get(key);
+		} else {
+			return null;
+		}
+	}
+
+	private Control registerOptionControl(String KEY, Control control) {
+		return registerOptionControl(KEY, control, true);
+	}
+
+	private Control registerOptionControl(String KEY, Control control, boolean addToViewControl) {
+		assert (!optionControls.containsKey(KEY));
+		optionControls.put(KEY, control);
+		if (addToViewControl) {
+			registerViewControl(KEY, control);
+		}
+		return control;
+	}
+
+	private Control registerViewControl(String KEY, Control control) {
+		assert (control.getLayoutData() instanceof GridData);
+		if (!viewControlMap.containsKey(KEY)) {
+			viewControlMap.put(KEY, new ArrayList<>());
+		}
+		viewControlMap.get(KEY).add(control);
+		return control;
+	}
+
+	protected void showOnly(Composite container, List<String> keys) {
+		for (Entry<String, Collection<Control>> e : viewControlMap.entrySet()) {
+			boolean makeVisible = keys.contains(e.getKey());
+			for (Control c : e.getValue()) {
+				GridData gd = (GridData) c.getLayoutData();
+				gd.exclude = !makeVisible;
+				c.setVisible(makeVisible);
+			}
+			getShell().pack();
+			getShell().layout();
+		}
+	}
+
+	private void show(boolean show, Composite container, String... KEYS) {
+		for (String KEY : KEYS) {
+			if (viewControlMap.containsKey(KEY)) {
+				for (Control c : viewControlMap.get(KEY)) {
+					GridData gd = (GridData) c.getLayoutData();
+					gd.exclude = !show;
+					c.setVisible(show);
+				}
+				getShell().pack();
+				getShell().layout();
+			}
 		}
 	}
 
@@ -319,22 +702,25 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	@Override
 	protected void okPressed() {
-		saveOptions();
-		super.okPressed();
+		if(validate()) {
+			saveOptions();
+			super.okPressed();
+		}
 	}
 
-	void saveOptions() {
-		projectNode.put(KEY_OUTPUT_PROFILE, cmbOutputProfile.getText());
-
-		projectNode.putBoolean(KEY_EXCLUDE_SLANG_IMPL, btnExcludeSlangImplementations.getSelection());
-
-		projectNode.put(KEY_C_SRC_DIRECTORY, txtCSourceDirectory.getText());
-
-		projectNode.put(KEY_SLANG_OUTPUT_DIRECTORY, txtSlangOutputDirectory.getText());
-
-		projectNode.put(KEY_CAMKES_OUTPUT_DIRECTORY, txtCamkesOutputDirectory.getText());
-
-		projectNode.put(KEY_BASE_PACKAGE_NAME, txtBasePackageName.getText());
+	/* save value of option fields to eclipse project */
+	private void saveOptions() {
+		for (Entry<String, Control> option : optionControls.entrySet()) {
+			if (option.getValue() instanceof Text) {
+				projectNode.put(option.getKey(), ((Text) option.getValue()).getText());
+			} else if (option.getValue() instanceof Combo) {
+				projectNode.put(option.getKey(), ((Combo) option.getValue()).getText());
+			} else if (option.getValue() instanceof Button) {
+				projectNode.putBoolean(option.getKey(), ((Button) option.getValue()).getSelection());
+			} else {
+				throw new RuntimeException();
+			}
+		}
 
 		try {
 			projectNode.flush();
@@ -343,60 +729,15 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 	}
 
-	void initValues() {
-
-		cmbOutputProfile.setText(getOptionOutputProfile().name());
-		setCamkesOptionsVisible();
-
-		btnExcludeSlangImplementations.setSelection(getOptionExcludesSlangImplementations());
-
-		txtCSourceDirectory.setText(getOptionCSourceDirectory());
-
-		String slangOutputDirectory = getSlangOptionOutputDirectory();
-		if (slangOutputDirectory.equals("")) {
-			slangOutputDirectory = project.getLocation().toString();
-		}
-		txtSlangOutputDirectory.setText(slangOutputDirectory);
-
-		String camkesOutputDirectory = getCamkesOptionOutputDirectory();
-		if (camkesOutputDirectory.equals("")) {
-			camkesOutputDirectory = project.getLocation().toString();
-		}
-		txtCamkesOutputDirectory.setText(camkesOutputDirectory);
-
-		txtBasePackageName.setText(getOptionBasePackageName());
+	private boolean getSavedBooleanOption(String key) {
+		return projectNode.getBoolean(key, false);
 	}
 
-	public OutputProfile getOptionOutputProfile() {
-		String val = projectNode.get(KEY_OUTPUT_PROFILE, "");
-		if (val.isEmpty()) {
-			return OutputProfile.Linux;
-		} else {
-			return OutputProfile.valueOf(val);
-		}
+	private String getSavedStringOption(String key) {
+		return projectNode.get(key, "");
 	}
 
-	public boolean getOptionExcludesSlangImplementations() {
-		return projectNode.getBoolean(KEY_EXCLUDE_SLANG_IMPL, false);
-	}
-
-	public String getOptionCSourceDirectory() {
-		return projectNode.get(KEY_C_SRC_DIRECTORY, "");
-	}
-
-	public String getSlangOptionOutputDirectory() {
-		return projectNode.get(KEY_SLANG_OUTPUT_DIRECTORY, "");
-	}
-
-	public String getCamkesOptionOutputDirectory() {
-		return projectNode.get(KEY_CAMKES_OUTPUT_DIRECTORY, "");
-	}
-
-	public String getOptionBasePackageName() {
-		return projectNode.get(KEY_BASE_PACKAGE_NAME, "");
-	}
-
-	String promptForDirectory(String title, String init) {
+	private String promptForDirectory(String title, String init) {
 		DirectoryDialog d = new DirectoryDialog(getShell());
 		if (init != null && !init.equals("")) {
 			d.setFilterPath(init);
@@ -415,4 +756,48 @@ public class HAMRPrompt extends TitleAreaDialog {
 		x.heightHint = height;
 		l.setLayoutData(x);
 	}
+
+	private String[] getBitWidths() {
+		return HAMRPropertyProvider.bitWidths.stream().map(f -> f.toString()).toArray(String[]::new);
+	}
+
+	private String[] getHWs() {
+		return Arrays.asList(HAMRPropertyProvider.HW.values()).stream().map(f -> f.toString()).toArray(String[]::new);
+	}
+
+	private String[] getPlatforms() {
+		if (thePlatforms.isEmpty()) {
+			return Arrays.asList(Platform.values()).stream().map(f -> f.toString()).toArray(String[]::new);
+		} else {
+			return thePlatforms.stream().map(f -> f.toString()).toArray(String[]::new);
+		}
+	}
+
+	private String[] filterHW(HW... validOption) {
+		return Arrays.asList(validOption).stream().distinct().filter(theHardwares::contains).collect(Collectors.toSet())
+				.stream().map(f -> f.toString()).toArray(String[]::new);
+	}
+
+	private Option<String> getStringFromControl(String key) {
+		if (optionControls.containsKey(key)) {
+			Control c = optionControls.get(key);
+			if (c instanceof Text) {
+				return org.sireum.Some$.MODULE$.apply(((Text) c).getText());
+			} else if (c instanceof Combo) {
+				return org.sireum.Some$.MODULE$.apply(((Combo) c).getText());
+			} else if (c instanceof Button) {
+				return org.sireum.Some$.MODULE$.apply(((Button) c).getText());
+			}
+		}
+		return org.sireum.None.apply();
+	}
+
+	private Option<Integer> getIntFromControl(String key) {
+		try {
+			return org.sireum.Some$.MODULE$.apply(new Integer(getStringFromControl(key).get()));
+		} catch (Exception nfe) {
+		}
+		return org.sireum.None.apply();
+	}
+
 }
