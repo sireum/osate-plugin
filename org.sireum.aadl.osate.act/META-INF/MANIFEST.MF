@@ -14,6 +14,5 @@ Automatic-Module-Name: Act
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  bin/,
- lib/act.jar,
- lib/arsit.jar
+ lib/act.jar
 Import-Package: org.osate.pluginsupport
