@@ -25,10 +25,12 @@ public class HAMRPropertyProvider {
 	final static int DEFAULT_MAX_SEQUENCE_SIZE = 16;
 	final static int DEFAULT_MAX_STRING_SIZE = 256;
 
+	// should match Platform in HAMR.aadl
 	enum Platform {
 		JVM, Linux, macOS, Cygwin, seL4
 	}
 
+	// should match HW in HAMR.aadl
 	enum HW {
 		ODROID_XU4, QEMU, x86, amd64
 	}

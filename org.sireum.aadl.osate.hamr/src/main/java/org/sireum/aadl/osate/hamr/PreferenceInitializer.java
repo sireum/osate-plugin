@@ -2,7 +2,6 @@ package org.sireum.aadl.osate.hamr;
 
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.sireum.aadl.osate.act.Activator;
 
 public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
@@ -19,5 +18,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceValues.HAMR_SERIALIZE_OPT, true);
 
 		store.setDefault(PreferenceValues.HAMR_VERBOSE_OPT, true);
+
+		store.setDefault(PreferenceValues.HAMR_SIREUM_HOME, "");
 	}
 }

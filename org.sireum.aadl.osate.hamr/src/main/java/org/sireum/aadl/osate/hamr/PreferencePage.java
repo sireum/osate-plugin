@@ -11,34 +11,36 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-import org.sireum.aadl.osate.act.Activator;
 
 public class PreferencePage extends FieldEditorPreferencePage implements IWorkbenchPreferencePage {
 
 	public PreferencePage() {
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("Sireum configuration page");
+		// setDescription("Code generation configuration page");
 	}
 
 	@Override
 	protected void createFieldEditors() {
-		TabFolder tabFolder = new TabFolder(getFieldEditorParent(), SWT.NONE);
-		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
+		// TabFolder tabFolder = new TabFolder(getFieldEditorParent(), SWT.NONE);
+		// tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 
-		Composite hamrTab = addTab(tabFolder, "HAMR");
+		// Composite comp = addTab(tabFolder, "Code Generation");
+		Composite comp = getFieldEditorParent();
 
 		addField(new BooleanFieldEditor(PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT, "Treat AADL devices as threads",
-				hamrTab));
+				comp));
 
-		addField(new BooleanFieldEditor(PreferenceValues.HAMR_EMBED_ART_OPT, "Embed ART", hamrTab));
+		addField(new BooleanFieldEditor(PreferenceValues.HAMR_EMBED_ART_OPT, "Embed ART", comp));
 
 		addField(new BooleanFieldEditor(PreferenceValues.HAMR_SERIALIZE_OPT,
-				"Serialize AIR to JSON (non-compact) when generating CAmkES", hamrTab));
+				"Serialize AIR to JSON (non-compact) when generating CAmkES", comp));
 
-		addField(new BooleanFieldEditor(PreferenceValues.HAMR_VERBOSE_OPT, "Verbose output", hamrTab));
+		addField(new BooleanFieldEditor(PreferenceValues.HAMR_VERBOSE_OPT, "Verbose output", comp));
 
-		addField(new StringFieldEditor(PreferenceValues.HAMR_OUTPUT_FOLDER_OPT, "Output folder", hamrTab));
+		addField(new StringFieldEditor(PreferenceValues.HAMR_OUTPUT_FOLDER_OPT, "Output folder", comp));
+
+		addField(new StringFieldEditor(PreferenceValues.HAMR_SIREUM_HOME, "SIREUM_HOME", comp));
 	}
 
 	private Composite addTab(TabFolder tabFolder, String tabName) {

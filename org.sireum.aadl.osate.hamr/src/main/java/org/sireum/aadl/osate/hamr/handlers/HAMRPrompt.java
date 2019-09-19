@@ -55,23 +55,12 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	private final String KEY_CAMKES_OUTPUT_DIRECTORY = "camkes.output.directory";
 	private final String KEY_TRUSTED_BUILD_PROFILE = "trusted.build.profile";
+	private final String KEY_CAMKES_AUX_SRC_DIR = "camkes.aux.src.dir";
 
 	public ArsitBridge.Platform getOptionPlatform() {
 		Platform p = Platform.valueOf(getSavedStringOption(KEY_PLATFORM));
-		switch(p) {
-		case JVM:
-			return ArsitBridge.Platform.Jvm;
-		case Linux:
-			return ArsitBridge.Platform.Linux;
-		case macOS:
-			return ArsitBridge.Platform.Mac;
-		case Cygwin:
-			return ArsitBridge.Platform.Cygwin;
-		case seL4:
-			return ArsitBridge.Platform.Sel4;
-		default:
-			throw new RuntimeException("Not expecting platform type: " + p);
-		}
+		// slang cligen causes first letter of enum value to always be upper case
+		return ArsitBridge.Platform.valueOf(p.name().substring(0, 1).toUpperCase() + p.name().substring(1));
 	}
 
 	public HW getOptionHW() {
@@ -112,6 +101,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	public boolean getOptionTrustedBuildProfile() {
 		return getSavedBooleanOption(KEY_TRUSTED_BUILD_PROFILE);
+	}
+
+	public String getOptionCamkesAuxSrcDir() {
+		return getSavedStringOption(KEY_CAMKES_AUX_SRC_DIR);
 	}
 
 	/* runs after controls have been created */
@@ -264,7 +257,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 			// COL 2
 			Combo cmb = new Combo(container, SWT.READ_ONLY);
-			cmb.setItems(getPlatforms());
+			cmb.setItems(filterPlatforms());
 			GridData gd = new GridData(SWT.LEFT, SWT.CENTER, true, false);
 			gd.widthHint = 100;
 			cmb.setLayoutData(gd);
@@ -273,47 +266,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			cmb.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					String selection = cmb.getItem(cmb.getSelectionIndex());
-					Platform p = HAMRPropertyProvider.Platform.valueOf(selection);
-
-					List<String> JVM_controls = Arrays.asList( //
-							KEY_PLATFORM, KEY_SLANG_OUTPUT_DIRECTORY, KEY_BASE_PACKAGE_NAME);
-
-					List<String> NIX_controls = addAll(JVM_controls, Arrays.asList( //
-							KEY_HW, KEY_C_SRC_DIRECTORY, KEY_EXCLUDE_SLANG_IMPL, //
-							KEY_TRANSPILER_GROUP));
-
-					List<String> SEL4_controls = addAll(NIX_controls, Arrays.asList( //
-							KEY_CAMKES_GROUP));
-
-					List<String> toShow = JVM_controls;
-
-					String[] hwItems = null;
-					switch (p) {
-					case JVM:
-						hwItems = filterHW();
-						break;
-					case Linux:
-						hwItems = filterHW(HW.x86, HW.amd64);
-						toShow = NIX_controls;
-						break;
-					case macOS:
-						hwItems = filterHW(HW.amd64);
-						toShow = NIX_controls;
-						break;
-					case Cygwin:
-						hwItems = filterHW(HW.x86, HW.amd64);
-						toShow = NIX_controls;
-						break;
-					case seL4:
-						hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
-						toShow = SEL4_controls;
-						break;
-					}
-					getComboControl(KEY_HW).setItems(hwItems);
-
-					// show(showControls, container, JVM_controls);
-					showOnly(container, toShow);
+					computeVisibilityAndPack(container);
 				}
 			});
 
@@ -383,10 +336,6 @@ public class HAMRPrompt extends TitleAreaDialog {
 			registerViewControl(key, btn);
 		}
 
-		// fillerRow(container, numCols);
-
-		// fillerRow(container, numCols);
-
 		/****************************************************************
 		 * ROW
 		 ****************************************************************/
@@ -404,6 +353,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 			// COL 3
 			registerViewControl(key, addColumnPad(container)); // col padding
 		}
+
+		fillerRow(container, numCols);
 
 		/****************************************************************
 		 * ROW
@@ -497,12 +448,12 @@ public class HAMRPrompt extends TitleAreaDialog {
 				String subKey = KEY_C_SRC_DIRECTORY;
 
 				// COL 1
-				addLabel("C Source Code Directory", grpContainer);
+				addLabel("Aux Code Directory", grpContainer);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
 				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-				txt.setToolTipText("Directory containing component implementations");
+				txt.setToolTipText("Directory containing C code to be included in HAMR project");
 				registerOptionControl(subKey, txt, false);
 
 				// COL 3
@@ -523,6 +474,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 			}
 		}
 
+		fillerRow(container, numCols);
+
 		/****************************************************************
 		 * ROW
 		 ****************************************************************/
@@ -539,16 +492,21 @@ public class HAMRPrompt extends TitleAreaDialog {
 			final GridLayout grpLayout = new GridLayout(numGroupCols, false);
 			grpContainer.setLayout(grpLayout);
 
-
 			/****************************************************************
 			 * ROW - trusted build profile
 			 ****************************************************************/
 
 			{
-				final String subKey = this.KEY_TRUSTED_BUILD_PROFILE;
+				final String subKey = KEY_TRUSTED_BUILD_PROFILE;
 
 				// COL 1
 				Button btn = new Button(grpContainer, SWT.CHECK);
+				btn.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						computeVisibilityAndPack(container);
+					}
+				});
 				btn.setText("Trusted Build Profile");
 				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
 				registerOptionControl(subKey, btn, false);
@@ -589,9 +547,42 @@ public class HAMRPrompt extends TitleAreaDialog {
 				// registerViewControl(subKey, btn);
 			}
 
+			/****************************************************************
+			 * ROW - Camkes Aux Source Directory
+			 ****************************************************************/
+
+			{
+				final String subKey = KEY_CAMKES_AUX_SRC_DIR;
+
+				// COL 1
+				addLabel("Aux Code Directory for CAmkES", grpContainer);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+				txt.setToolTipText("Directory containing C code to be included in CAmkES project");
+				registerOptionControl(subKey, txt, false);
+
+				// COL 3
+				Button btn = new Button(grpContainer, SWT.NONE);
+				btn.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						String path = promptForDirectory("Select Aux Source Directory Directory",
+								getOptionCSourceDirectory());
+						if (path != null) {
+							txt.setText(path);
+						}
+					}
+				});
+				btn.setText("...");
+				btn.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
+			}
 		}
 
 		initControlValues();
+
+		computeVisibility(container);
 
 		return area;
 	}
@@ -671,8 +662,6 @@ public class HAMRPrompt extends TitleAreaDialog {
 				gd.exclude = !makeVisible;
 				c.setVisible(makeVisible);
 			}
-			getShell().pack();
-			getShell().layout();
 		}
 	}
 
@@ -684,8 +673,6 @@ public class HAMRPrompt extends TitleAreaDialog {
 					gd.exclude = !show;
 					c.setVisible(show);
 				}
-				getShell().pack();
-				getShell().layout();
 			}
 		}
 	}
@@ -702,13 +689,13 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	@Override
 	protected void okPressed() {
-		if(validate()) {
+		if (validate()) {
 			saveOptions();
 			super.okPressed();
 		}
 	}
 
-	/* save value of option fields to eclipse project */
+	/* save value of the control fields to eclipse project */
 	private void saveOptions() {
 		for (Entry<String, Control> option : optionControls.entrySet()) {
 			if (option.getValue() instanceof Text) {
@@ -765,7 +752,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return Arrays.asList(HAMRPropertyProvider.HW.values()).stream().map(f -> f.toString()).toArray(String[]::new);
 	}
 
-	private String[] getPlatforms() {
+	private String[] filterPlatforms() {
 		if (thePlatforms.isEmpty()) {
 			return Arrays.asList(Platform.values()).stream().map(f -> f.toString()).toArray(String[]::new);
 		} else {
@@ -786,7 +773,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			} else if (c instanceof Combo) {
 				return org.sireum.Some$.MODULE$.apply(((Combo) c).getText());
 			} else if (c instanceof Button) {
-				return org.sireum.Some$.MODULE$.apply(((Button) c).getText());
+				return org.sireum.Some$.MODULE$.apply(new Boolean(((Button) c).getSelection()).toString());
 			}
 		}
 		return org.sireum.None.apply();
@@ -800,4 +787,75 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return org.sireum.None.apply();
 	}
 
+	private Option<Boolean> getBooleanFromControl(String key) {
+		try {
+			return org.sireum.Some$.MODULE$.apply(new Boolean(getStringFromControl(key).get()));
+		} catch (Exception nfe) {
+		}
+		return org.sireum.None.apply();
+	}
+
+	private void computeVisibilityAndPack(Composite container) {
+		computeVisibility(container);
+		container.pack();
+		getShell().pack();
+		getShell().layout();
+	}
+
+	private void computeVisibility(Composite container) {
+		Combo cmb = getComboControl(KEY_PLATFORM);
+
+		if (cmb.getSelectionIndex() < 0) {
+			showOnly(container, Arrays.asList(KEY_PLATFORM));
+			return;
+		}
+
+		String selection = cmb.getItem(cmb.getSelectionIndex());
+		Platform p = HAMRPropertyProvider.Platform.valueOf(selection);
+
+		List<String> JVM_controls = Arrays.asList( //
+				KEY_PLATFORM, KEY_SLANG_OUTPUT_DIRECTORY, KEY_BASE_PACKAGE_NAME);
+
+		List<String> NIX_controls = addAll(JVM_controls, Arrays.asList( //
+				KEY_HW, KEY_C_SRC_DIRECTORY, KEY_EXCLUDE_SLANG_IMPL, //
+				KEY_TRANSPILER_GROUP));
+
+		List<String> SEL4_controls = addAll(NIX_controls, Arrays.asList( //
+				KEY_CAMKES_GROUP));
+
+		List<String> toShow = JVM_controls;
+
+		String[] hwItems = null;
+		switch (p) {
+		case JVM:
+			hwItems = filterHW();
+			break;
+		case Linux:
+			hwItems = filterHW(HW.x86, HW.amd64);
+			toShow = NIX_controls;
+			break;
+		case macOS:
+			hwItems = filterHW(HW.amd64);
+			toShow = NIX_controls;
+			break;
+		case Cygwin:
+			hwItems = filterHW(HW.x86, HW.amd64);
+			toShow = NIX_controls;
+			break;
+		case seL4:
+			hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
+			toShow = SEL4_controls;
+			break;
+		}
+		getComboControl(KEY_HW).setItems(hwItems);
+
+		Option<Boolean> tb = getBooleanFromControl(KEY_TRUSTED_BUILD_PROFILE);
+		if (p == Platform.seL4 && tb.nonEmpty() && tb.get()) {
+			toShow = Arrays.asList(KEY_PLATFORM, KEY_HW, KEY_CAMKES_GROUP);
+		}
+
+		// show(showControls, container, JVM_controls);
+		showOnly(container, toShow);
+
+	}
 }

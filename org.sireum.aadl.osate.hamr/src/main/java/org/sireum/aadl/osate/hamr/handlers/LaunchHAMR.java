@@ -1,9 +1,8 @@
 package org.sireum.aadl.osate.hamr.handlers;
 
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -94,9 +93,11 @@ public class LaunchHAMR extends AbstractSireumHandler {
 			if (prompt.getReturnCode() == Window.OK) {
 				try {
 
-					File workspaceRoot = getProjectPath(si).toFile();
+					final boolean targetingSel4 = prompt.getOptionPlatform() == ArsitBridge.Platform.SeL4;
 
-					String slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("")
+					final File workspaceRoot = getProjectPath(si).toFile();
+
+					final String slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("")
 							? workspaceRoot.getAbsolutePath()
 							: prompt.getSlangOptionOutputDirectory();
 
@@ -104,20 +105,19 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 					int toolRet = 0;
 
+					final String _base = prompt.getOptionBasePackageName().equals("")
+							? cleanupPackageName(new File(slangOutputDir).getName())
+							: cleanupPackageName(prompt.getOptionBasePackageName());
+
+					final String outputCDirectory = targetingSel4
+							? new File(prompt.getOptionCamkesOptionOutputDirectory(), "hamr").getAbsolutePath()
+							: new File(slangOutputDir, "src/c/nix").getAbsolutePath();
+
 					if (!prompt.getOptionTrustedBuildProfile()) {
 						Util.callWrapper(getToolName(), console, () -> {
 
-							assert (!prompt.getOptionTrustedBuildProfile()); // don't run arsit if TB profile choosen
-
 							String _behaviorDir = prompt.getOptionCSourceDirectory().equals("") ? null
 									: prompt.getOptionCSourceDirectory();
-
-							String _base = prompt.getOptionBasePackageName().equals("") ? null
-									: prompt.getOptionBasePackageName();
-
-							String _cDir = new File(slangOutputDir,
-									prompt.getOptionPlatform() == ArsitBridge.Platform.Sel4 ? "src/c/sel4"
-											: "src/c/nix").getAbsolutePath();
 
 							Option<String> optOutputDir = ArsitBridge.sireumOption(slangOutputDir);
 							Option<String> optBasePackageName = ArsitBridge.sireumOption(_base);
@@ -128,7 +128,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							ArsitBridge.IPCMechanism ipcMechanism = ArsitBridge.IPCMechanism.SharedMemory;
 							boolean excludeImpl = prompt.getOptionExcludesSlangImplementations();
 							Option<String> behaviorDir = ArsitBridge.sireumOption(_behaviorDir);
-							Option<String> outputCDir = ArsitBridge.sireumOption(_cDir);
+							Option<String> outputCDir = ArsitBridge.sireumOption(outputCDirectory);
 							ArsitBridge.Platform platform = prompt.getOptionPlatform();
 							int bitWidth = bit_width;
 							int maxStringSize = max_string_size;
@@ -136,66 +136,68 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							return org.sireum.aadl.arsit.Arsit.run( //
 									model, optOutputDir, optBasePackageName, embedArt, genBlessEntryPoints, verbose,
-									devicesAsThreads, ipcMechanism, excludeImpl, behaviorDir,
-									outputCDir, platform, bitWidth, maxStringSize, maxArraySize);
+									devicesAsThreads, ipcMechanism, excludeImpl, behaviorDir, outputCDir, platform,
+									bitWidth, maxStringSize, maxArraySize);
 						});
 					}
 
-					if (toolRet == 0) {
+					if (toolRet == 0 && shouldTranspile(prompt)) {
 
-						String transpilerScript = slangOutputDir + "/bin/transpile.sh";
+						String sireumHome = PreferenceValues.getHAMR_SIREUM_HOME();
+						if (sireumHome.equals("") || !new File(sireumHome).exists()) {
+							writeToConsole("SIREUM_HOME not set.");
+							writeToConsole("Install Sireum (https://github.com/sireum/kekinian#installing) and then add its install directory to \"Sireum HAMR >> Code Generation >> SIREUM_HOME\"");
 
-						if (prompt.getOptionPlatform() == ArsitBridge.Platform.Sel4) {
-							transpilerScript = slangOutputDir + "/bin/transpile-camkes.sh";
-
-							BufferedWriter writer = new BufferedWriter(new FileWriter(transpilerScript, true));
-							writer.write("\n\nFILE=$OUTPUT_DIR/CMakeLists.txt\n");
-							writer.write("echo -e \"\\n\\nadd_definitions(-DCAMKES)\" >> $FILE");
-							writer.close();
+							toolRet = 1;
 						}
 
-						// run the transpiler
+						String transpilerScript = slangOutputDir
+								+ (prompt.getOptionPlatform() == ArsitBridge.Platform.SeL4 ? "/bin/transpile-sel4.sh"
+										: "/bin/transpile.sh");
 
-						ProcessBuilder pb = new ProcessBuilder("/bin/bash", "--login", "-c", transpilerScript);
+						String[] commands = new String[] { "chmod", "700", transpilerScript };
 
-						pb.redirectErrorStream(true);
-						pb.environment().put("HOME", "/home/sireum");
-						pb.environment().put("PATH",
-								"/home/sireum/devel/sireum/kekinian/bin:/home/sireum/devel/sireum/kekinian/bin/linux/java/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:.");
-						pb.environment().put("SIREUM_HOME", "/home/sireum/devel/sireum/kekinian");
-
-						InputStream is = pb.start().getInputStream();
-
-						MessageConsoleStream mcs = console.newMessageStream();
-
-						int c;
-						while ((c = is.read()) != -1) {
-							mcs.write(c);
+						if (toolRet == 0) {
+							toolRet = invoke(console, commands);
 						}
 
-						if (prompt.getOptionPlatform() == ArsitBridge.Platform.Sel4) {
+						if (toolRet == 0) {
+							commands = new String[] { transpilerScript };
+							toolRet = invoke(console, commands);
+						}
+					}
 
-							File camkesOutDir = new File(prompt.getOptionCamkesOptionOutputDirectory());
+					if (toolRet == 0 && prompt.getOptionPlatform() == ArsitBridge.Platform.SeL4) {
 
-							camkesOutDir.mkdirs(); // FIXME should be done in ACT
+						// run ACT
+						toolRet = Util.callWrapper(getToolName(), console, () -> {
+
+							File _camkesOutDir = new File(prompt.getOptionCamkesOptionOutputDirectory());
+							_camkesOutDir.mkdirs();
+
+							Option<String> camkesOutDir = ArsitBridge.sireumOption(_camkesOutDir.getAbsolutePath());
 
 							writeToConsole("\nGenerating CAmkES artifacts ...");
 
-							// run ACT
-							toolRet = Util.callWrapper(getToolName(), console, () -> {
+							IS<Z, String> auxDirs = prompt.getOptionCamkesAuxSrcDir().equals("") ? this.toISZ()
+									: this.toISZ(prompt.getOptionCamkesAuxSrcDir());
 
-								// FIXME: aux_code contains the ipc for camkes+slang along
-								// with the data conversions. ipc.c could be placed in camkes'
-								// includes dir and the converts won't be needed when we
-								// switch to slang derived types
-								IS<Z, String> auxDirs = toISZ(
-										"/home/sireum/uav-project-extern/src/aadl/ACT_Demo_Dec2018/aux_code");
+							Option<String> aadlRootDir = ArsitBridge.sireumOption(workspaceRoot.getAbsolutePath());
 
-								org.sireum.Option<File> aadlRootDir = new org.sireum.Some<>(workspaceRoot);
+							boolean hamrIntegration = !prompt.getOptionTrustedBuildProfile();
 
-								return org.sireum.aadl.act.Act.run(camkesOutDir, model, auxDirs, aadlRootDir);
-							});
-						}
+							IS<Z, String> hamrIncludeDirs = toISZ(outputCDirectory);
+
+							String hsl = new File(outputCDirectory, "sel4-build/libmain.a").getAbsolutePath();
+
+							org.sireum.Option<String> hamrStaticLib = new org.sireum.Some<>(hsl);
+
+							Option<String> hamrBasePackageName = ArsitBridge.sireumOption(_base);
+
+							return org.sireum.aadl.act.Act.run(camkesOutDir, model, auxDirs, aadlRootDir,
+									hamrIntegration, hamrIncludeDirs, hamrStaticLib, hamrBasePackageName);
+						});
+
 					}
 
 					String msg = "HAMR code "
@@ -206,7 +208,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 				} catch (Throwable ex) {
 					ex.printStackTrace();
-					displayPopup("Could not generate CAmkES.  Please make sure HAMR is present.\n\n"
+					displayPopup("Error encountered while running HAMR.\n\n"
 							+ ex.getLocalizedMessage());
 					return Status.CANCEL_STATUS;
 				}
@@ -214,6 +216,54 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		}
 
 		return Status.OK_STATUS;
+	}
+
+	private int invoke(MessageConsole console, String[] commands) {
+		MessageConsoleStream mcs = console.newMessageStream();
+		try {
+			Runtime rt = Runtime.getRuntime();
+			String[] envp = new String[] { "SIREUM_HOME=" + PreferenceValues.getHAMR_SIREUM_HOME() };
+			Process p = rt.exec(commands, envp);
+
+			BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+			String line;
+			while ((line = input.readLine()) != null) {
+				mcs.write(line + "\n");
+			}
+
+			BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+			while ((line = error.readLine()) != null) {
+				mcs.write(line + "\n");
+			}
+
+			p.waitFor();
+
+			return p.exitValue();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 1;
+		}
+	}
+
+	private String cleanupPackageName(String p) {
+		return p.replaceAll("-", "_");
+	}
+
+	private boolean shouldTranspile(HAMRPrompt p) {
+		switch (p.getOptionPlatform()) {
+		case JVM:
+			return false;
+		case SeL4:
+			return !p.getOptionTrustedBuildProfile();
+		case Linux:
+		case MacOS:
+		case Cygwin:
+			return true;
+		default:
+			throw new RuntimeException("Unexpected platform: " + p.getOptionPlatform());
+		}
 	}
 
 	private void displayPopup(String msg) {
