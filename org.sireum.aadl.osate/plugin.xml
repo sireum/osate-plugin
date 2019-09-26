@@ -14,7 +14,7 @@
             locationURI="menu:org.osate.ui.osateMenu">
          <menu
                id="org.sireum.aadl.osate.BridgeMenu"
-               label="Sireum Bridge">
+               label="Sireum HAMR">
             <dynamic class="org.sireum.aadl.osate.MenuContributions" id="org.sireum.ui.views.menu.MenuItems"/>
          </menu>
       </menuContribution>
@@ -24,7 +24,7 @@
             category="org.osate.internal.ui.preferences.OsatePreferencePage"
             class="org.sireum.aadl.osate.PreferencePage"
             id="org.sireum.aadl.osate.preferences.PreferencePage"
-            name="Sireum">
+            name="Sireum HAMR">
       </page>
    </extension>
 </plugin>

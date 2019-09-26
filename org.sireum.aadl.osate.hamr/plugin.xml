@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension point="org.eclipse.ui.commands">
+      <command id="org.sireum.commands.launchhamr"
+               name="Launch HAMR"
+               defaultHandler="org.sireum.aadl.osate.hamr.handlers.LaunchHAMR">
+        <commandParameter id="org.sireum.commands.launchhamr.generator"
+                          name="Generator"/>
+      </command>
+   </extension>   
+   <extension point="org.eclipse.ui.menus">
+     <!-- CASE menu bar-->
+     <menuContribution
+       locationURI="menu:com.collins.fmw.cyres.menus.menubar.build">
+       <dynamic class="org.sireum.aadl.osate.act.MenuContributions" 
+         id="org.sireum.ui.views.menu.MenuItems"/>
+     </menuContribution>
+     <menuContribution
+       locationURI="menu:com.collins.fmw.cyres.menus.menubar.build">
+       <dynamic class="org.sireum.aadl.osate.hamr.MenuContributions" 
+         id="org.sireum.ui.views.menu.HAMRMenuItems"/>
+     </menuContribution>
+     
+     <!-- CASE menu outline view -->
+     <menuContribution
+       locationURI="popup:com.collins.fmw.cyres.menus.outline.build">
+       <dynamic class="org.sireum.aadl.osate.act.MenuContributions" 
+         id="org.sireum.ui.views.menu.MenuItems"/>
+     </menuContribution>     
+     <menuContribution
+       locationURI="popup:com.collins.fmw.cyres.menus.outline.build">
+       <dynamic class="org.sireum.aadl.osate.hamr.MenuContributions" 
+         id="org.sireum.ui.views.menu.HAMRMenuItems"/>
+     </menuContribution>
+     
+     <!-- CASE menu editor -->
+     <menuContribution
+       locationURI="popup:com.collins.fmw.cyres.menus.editor.build">
+       <dynamic class="org.sireum.aadl.osate.act.MenuContributions" 
+         id="org.sireum.ui.views.menu.MenuItems"/>
+     </menuContribution>     
+     <menuContribution
+       locationURI="popup:com.collins.fmw.cyres.menus.editor.build">
+       <dynamic class="org.sireum.aadl.osate.hamr.MenuContributions" 
+         id="org.sireum.ui.views.menu.HAMRMenuItems"/>
+     </menuContribution>
+     
+     <!-- eclipse toolbar -->
+     <menuContribution
+       allPopups="false"
+       locationURI="toolbar:org.eclipse.ui.main.toolbar">
+       <toolbar id="sireum.toolbar"
+                label="Sireum Toolbar">
+         <command
+               commandId="org.sireum.commands.launchhamr"
+               icon="resources/hamr16x16.png"
+               label="HAMR"
+               mode="FORCE_TEXT">
+         </command>
+       </toolbar>
+     </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.osate.ui.osateMenu">
+         <menu
+               id="org.sireum.aadl.osate.BridgeMenu"
+               label="--set by class--">
+            <dynamic class="org.sireum.aadl.osate.hamr.MenuContributions" id="org.sireum.ui.views.menu.HAMRMenuItems"/>
+         </menu>
+      </menuContribution>      
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+      <page
+            category="org.sireum.aadl.osate.preferences.PreferencePage"
+            class="org.sireum.aadl.osate.hamr.PreferencePage"
+            id="org.sireum.aadl.osate.hamr.preferences.PreferencePage"
+            name="Code Generation">
+      </page>
+   </extension>   
+   <extension
+         point="org.osate.pluginsupport.aadlcontribution">
+      <aadlcontribution
+            file="resources/TB_SYS.aadl"
+            id="org.sireum.aadl.osate.hamr.aadlcontribution.tbsys">
+      </aadlcontribution>
+      <aadlcontribution
+            file="resources/SB_SYS.aadl"
+            id="org.sireum.aadl.osate.hamr.aadlcontribution.sbsys">
+      </aadlcontribution>
+     <aadlcontribution
+            file="resources/HAMR.aadl"
+            id="org.sireum.aadl.osate.hamr.aadlcontribution.hamr">
+      </aadlcontribution>
+   </extension>     
+</plugin>

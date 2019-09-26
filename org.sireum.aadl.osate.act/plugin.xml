@@ -10,16 +10,6 @@
       </command>
    </extension>
    <extension point="org.eclipse.ui.menus">
-     <menuContribution
-       locationURI="menu:com.collins.fmw.cyres.menus.menubar.main">
-       <menu
-         id="org.sireum.SystemBuild"
-         label="System Build">
-         <dynamic class="org.sireum.aadl.osate.act.MenuContributions" id="org.sireum.ui.views.menu.MenuItems"/>
-       </menu>
-     </menuContribution>
-   </extension>
-   <extension point="org.eclipse.ui.menus">
       <menuContribution
             locationURI="menu:org.osate.ui.osateMenu">
          <menu
@@ -27,7 +17,7 @@
                label="Sireum Bridge">
             <dynamic class="org.sireum.aadl.osate.act.MenuContributions" id="org.sireum.ui.views.menu.ActMenuItems"/>
          </menu>
-      </menuContribution>
+      </menuContribution>   
    </extension>
    <extension point="org.eclipse.ui.preferencePages">
       <page
@@ -36,19 +26,5 @@
             id="org.sireum.aadl.osate.act.preferences.PreferencePage"
             name="ACT">
       </page>
-   </extension>
-   <extension
-         point="org.osate.pluginsupport.aadlcontribution">
-      <aadlcontribution
-            file="resources/TB_SYS.aadl"
-            id="org.sireum.aadl.osate.act.aadlcontribution.tbsys">
-      </aadlcontribution>
-   </extension>
-   <extension
-         point="org.osate.pluginsupport.aadlcontribution">
-      <aadlcontribution
-            file="resources/SB_SYS.aadl"
-            id="org.sireum.aadl.osate.act.aadlcontribution.sbsys">
-      </aadlcontribution>
-   </extension>      
+   </extension>   
 </plugin>

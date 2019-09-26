@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate.act;
+package org.sireum.aadl.osate.hamr;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.CompoundContributionItem;
 import org.eclipse.ui.menus.CommandContributionItem;
 import org.eclipse.ui.menus.CommandContributionItemParameter;
-import org.sireum.aadl.osate.act.PreferenceValues.Generators;
+import org.sireum.aadl.osate.hamr.PreferenceValues.Generators;
 
 public class MenuContributions extends CompoundContributionItem {
 
@@ -18,8 +18,8 @@ public class MenuContributions extends CompoundContributionItem {
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
-		l.add(getItem("AADL-to-CAmkES Translator (ACT)", "org.sireum.commands.launchact",
-				map("org.sireum.commands.launchact.generator", Generators.GEN_CAMKES.toString())));
+		l.add(getItem("Code Generation", "org.sireum.commands.launchhamr",
+				map("org.sireum.commands.launchhamr.generator", Generators.GEN_CAMKES.toString())));
 
 		return l.toArray(new IContributionItem[0]);
 	}
