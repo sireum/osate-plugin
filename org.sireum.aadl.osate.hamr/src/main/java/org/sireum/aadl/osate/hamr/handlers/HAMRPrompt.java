@@ -40,77 +40,82 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 
 public class HAMRPrompt extends TitleAreaDialog {
 
-	private final String KEY_PLATFORM = "platform";
+	public final HAMROption OPTION_PLATFORM = new HAMROption("platform", "Platform");
 
-	private final String KEY_SLANG_OUTPUT_DIRECTORY = "slang.output.directory";
-	private final String KEY_BASE_PACKAGE_NAME = "base.package.name";
+	public final HAMROption OPTION_SLANG_OUTPUT_DIRECTORY = new HAMROption("slang.output.directory",
+			"Output Directory");
+	public final HAMROption OPTION_BASE_PACKAGE_NAME = new HAMROption("base.package.name", "Base Package Name");
 
-	private final String KEY_HW = "hw";
+	public final HAMROption OPTION_HW = new HAMROption("hw", "HW");
 
-	private final String KEY_EXCLUDE_SLANG_IMPL = "exclude.slang.impl";
-	private final String KEY_BIT_WIDTH = "bit.width";
-	private final String KEY_MAX_SEQUENCE_SIZE = "max.sequence.size";
-	private final String KEY_MAX_STRING_SIZE = "max.string.size";
-	private final String KEY_C_SRC_DIRECTORY = "c.src.directory";
+	public final HAMROption OPTION_EXCLUDE_SLANG_IMPL = new HAMROption("exclude.slang.impl",
+			"Exclude Slang Component Implementations");
+	public final HAMROption OPTION_BIT_WIDTH = new HAMROption("bit.width", "Bit Width");
+	public final HAMROption OPTION_MAX_SEQUENCE_SIZE = new HAMROption("max.sequence.size", "Bit Sequence Size");
+	public final HAMROption OPTION_MAX_STRING_SIZE = new HAMROption("max.string.size", "Max String Size");
+	public final HAMROption OPTION_C_SRC_DIRECTORY = new HAMROption("c.src.directory", "Aux Code Directory");
 
-	private final String KEY_CAMKES_OUTPUT_DIRECTORY = "camkes.output.directory";
-	private final String KEY_TRUSTED_BUILD_PROFILE = "trusted.build.profile";
-	private final String KEY_CAMKES_AUX_SRC_DIR = "camkes.aux.src.dir";
+	public final HAMROption OPTION_CAMKES_OUTPUT_DIRECTORY = new HAMROption("camkes.output.directory",
+			"seL4/CAmkES Output Directory");
+	public final HAMROption OPTION_TRUSTED_BUILD_PROFILE = new HAMROption("trusted.build.profile",
+			"Trusted Build Profile");
+	public final HAMROption OPTION_CAMKES_AUX_SRC_DIR = new HAMROption("camkes.aux.src.dir",
+			"Aux Code Directory for CAmkES");
 
 	public ArsitBridge.Platform getOptionPlatform() {
-		Platform p = Platform.valueOf(getSavedStringOption(KEY_PLATFORM));
+		Platform p = Platform.valueOf(getSavedStringOption(OPTION_PLATFORM));
 		// slang cligen causes first letter of enum value to always be upper case
 		return ArsitBridge.Platform.valueOf(p.name().substring(0, 1).toUpperCase() + p.name().substring(1));
 	}
 
 	public HW getOptionHW() {
-		return HW.valueOf(getSavedStringOption(KEY_HW));
+		return HW.valueOf(getSavedStringOption(OPTION_HW));
 	}
 
 	public String getOptionCSourceDirectory() {
-		return getSavedStringOption(KEY_C_SRC_DIRECTORY);
+		return getSavedStringOption(OPTION_C_SRC_DIRECTORY);
 	}
 
 	public String getSlangOptionOutputDirectory() {
-		return getSavedStringOption(KEY_SLANG_OUTPUT_DIRECTORY);
+		return getSavedStringOption(OPTION_SLANG_OUTPUT_DIRECTORY);
 	}
 
 	public boolean getOptionExcludesSlangImplementations() {
-		return getSavedBooleanOption(KEY_EXCLUDE_SLANG_IMPL);
+		return getSavedBooleanOption(OPTION_EXCLUDE_SLANG_IMPL);
 	}
 
 	public String getOptionBasePackageName() {
-		return getSavedStringOption(KEY_BASE_PACKAGE_NAME);
+		return getSavedStringOption(OPTION_BASE_PACKAGE_NAME);
 	}
 
 	public int getOptionMaxSequenceSize() {
-		return Integer.valueOf(getSavedStringOption(KEY_MAX_SEQUENCE_SIZE));
+		return Integer.valueOf(getSavedStringOption(OPTION_MAX_SEQUENCE_SIZE));
 	}
 
 	public int getOptionMaxStringSize() {
-		return Integer.valueOf(getSavedStringOption(KEY_MAX_STRING_SIZE));
+		return Integer.valueOf(getSavedStringOption(OPTION_MAX_STRING_SIZE));
 	}
 
 	public int getOptionBitWidth() {
-		return Integer.valueOf(getSavedStringOption(KEY_BIT_WIDTH));
+		return Integer.valueOf(getSavedStringOption(OPTION_BIT_WIDTH));
 	}
 
 	public String getOptionCamkesOptionOutputDirectory() {
-		return getSavedStringOption(KEY_CAMKES_OUTPUT_DIRECTORY);
+		return getSavedStringOption(OPTION_CAMKES_OUTPUT_DIRECTORY);
 	}
 
 	public boolean getOptionTrustedBuildProfile() {
-		return getSavedBooleanOption(KEY_TRUSTED_BUILD_PROFILE);
+		return getSavedBooleanOption(OPTION_TRUSTED_BUILD_PROFILE);
 	}
 
 	public String getOptionCamkesAuxSrcDir() {
-		return getSavedStringOption(KEY_CAMKES_AUX_SRC_DIR);
+		return getSavedStringOption(OPTION_CAMKES_AUX_SRC_DIR);
 	}
 
 	/* runs after controls have been created */
 	private void initControlValues() {
 		// get previous values from eclipse project
-		for (Entry<String, Control> option : optionControls.entrySet()) {
+		for (Entry<HAMROption, Control> option : optionControls.entrySet()) {
 			if (option.getValue() instanceof Text) {
 				((Text) option.getValue()).setText(getSavedStringOption(option.getKey()));
 			} else if (option.getValue() instanceof Combo) {
@@ -127,27 +132,27 @@ public class HAMRPrompt extends TitleAreaDialog {
 		if (slangOutputDirectory.equals("")) {
 			slangOutputDirectory = project.getLocation().toString();
 		}
-		getTextControl(KEY_SLANG_OUTPUT_DIRECTORY).setText(slangOutputDirectory);
+		getTextControl(OPTION_SLANG_OUTPUT_DIRECTORY).setText(slangOutputDirectory);
 
 		String camkesOutputDirectory = getOptionCamkesOptionOutputDirectory();
 		if (camkesOutputDirectory.equals("")) {
 			camkesOutputDirectory = project.getLocation().toString();
 		}
-		getTextControl(KEY_CAMKES_OUTPUT_DIRECTORY).setText(camkesOutputDirectory);
+		getTextControl(OPTION_CAMKES_OUTPUT_DIRECTORY).setText(camkesOutputDirectory);
 
-		getComboControl(KEY_BIT_WIDTH).select(HAMRPropertyProvider.bitWidths.indexOf(theBitWidth));
-		getTextControl(KEY_MAX_SEQUENCE_SIZE).setText(Integer.toString(theMaxSequenceSize));
-		getTextControl(KEY_MAX_STRING_SIZE).setText(Integer.toString(theMaxStringSize));
+		getComboControl(OPTION_BIT_WIDTH).select(HAMRPropertyProvider.bitWidths.indexOf(theBitWidth));
+		getTextControl(OPTION_MAX_SEQUENCE_SIZE).setText(Integer.toString(theMaxSequenceSize));
+		getTextControl(OPTION_MAX_STRING_SIZE).setText(Integer.toString(theMaxStringSize));
 	}
 
 	private boolean validate() {
-		Option<Integer> mss = getIntFromControl(KEY_MAX_SEQUENCE_SIZE);
+		Option<Integer> mss = getIntFromControl(OPTION_MAX_SEQUENCE_SIZE);
 		if (mss.isEmpty() || mss.get().intValue() < 0) {
 			Dialog.showError("Input Error", "Max Sequence Size must be a number greater than or equal to 0");
 			return false;
 		}
 
-		Option<Integer> mstring = getIntFromControl(KEY_MAX_STRING_SIZE);
+		Option<Integer> mstring = getIntFromControl(OPTION_MAX_STRING_SIZE);
 		if (mstring.isEmpty() || mstring.get().intValue() < 0) {
 			Dialog.showError("Input Error", "Max String Size must be a number greater than or equal to 0");
 			return false;
@@ -168,8 +173,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	private final String PREF_KEY = "org.sireum.aadl.hamr";
 
-	private final String KEY_TRANSPILER_GROUP = "KEY_GROUP_TRANSPILER";
-	private final String KEY_CAMKES_GROUP = "KEY_GROUP_CAMKES";
+	private final HAMRGroup GROUP_TRANSPILER = new HAMRGroup("KEY_GROUP_TRANSPILER", "Transpiler Options");
+	private final HAMRGroup GROUP_CAMKES = new HAMRGroup("KEY_GROUP_CAMKES", "CAmkES Options");
 
 	// The image to display
 	private Image image;
@@ -250,10 +255,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 		 * ROW - Platform
 		 ****************************************************************/
 		{
-			final String key = KEY_PLATFORM;
+			final HAMROption key = OPTION_PLATFORM;
 
 			// COL 1
-			addLabel("Platform", container, key);
+			addLabel(key.displayText, container, key);
 
 			// COL 2
 			Combo cmb = new Combo(container, SWT.READ_ONLY);
@@ -278,10 +283,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 		 * ROW - HW
 		 ****************************************************************/
 		{
-			final String key = KEY_HW;
+			final HAMROption key = OPTION_HW;
 
 			// COL 1
-			addLabel("HW", container, key);
+			addLabel(key.displayText, container, key);
 
 			// COL 2
 			Combo cmb = new Combo(container, SWT.READ_ONLY);
@@ -290,13 +295,6 @@ public class HAMRPrompt extends TitleAreaDialog {
 			cmb.setLayoutData(gd);
 			cmb.setItems(getHWs());
 			registerOptionControl(key, cmb);
-
-			cmb.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-
-				}
-			});
 
 			// COL 3
 			registerViewControl(key, addColumnPad(container)); // col padding
@@ -307,10 +305,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 		 ****************************************************************/
 
 		{
-			final String key = KEY_SLANG_OUTPUT_DIRECTORY;
+			final HAMROption key = OPTION_SLANG_OUTPUT_DIRECTORY;
 
 			// COL 1
-			addLabel("Output Directory", container, key);
+			addLabel(key.displayText, container, key);
 
 			// COL 2
 			Text txt = new Text(container, SWT.BORDER);
@@ -340,10 +338,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 		 * ROW
 		 ****************************************************************/
 		{
-			final String key = KEY_BASE_PACKAGE_NAME;
+			final HAMROption key = OPTION_BASE_PACKAGE_NAME;
 
 			// COL 1
-			addLabel("Base Package Name", container, key);
+			addLabel(key.displayText, container, key);
 
 			// COL 2
 			Text txt = new Text(container, SWT.BORDER);
@@ -360,12 +358,12 @@ public class HAMRPrompt extends TitleAreaDialog {
 		 * ROW
 		 ****************************************************************/
 		{
-			final String key = KEY_TRANSPILER_GROUP;
+			final HAMRGroup key = GROUP_TRANSPILER;
 			final int numGroupCols = 3;
 
 			// COL 1
 			Group grpContainer = new Group(container, SWT.NONE);
-			grpContainer.setText("Transpiler Options");
+			grpContainer.setText(key.displayText);
 			grpContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, numCols, 1));
 			registerViewControl(key, grpContainer);
 
@@ -376,10 +374,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 			 * GROUP ROW - Exclude Slang Impl
 			 ****************************************************************/
 			{
-				String subKey = KEY_EXCLUDE_SLANG_IMPL;
+				HAMROption subKey = OPTION_EXCLUDE_SLANG_IMPL;
 
 				Button btn = new Button(grpContainer, SWT.CHECK);
-				btn.setText("Exclude Slang Component Implementations");
+				btn.setText(subKey.displayText);
 				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
 				registerOptionControl(subKey, btn, false);
 			}
@@ -388,10 +386,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 			 * GROUP ROW - Bit Width
 			 ****************************************************************/
 			{
-				String subKey = KEY_BIT_WIDTH;
+				HAMROption subKey = OPTION_BIT_WIDTH;
 
 				// COL 1
-				addLabel("Bit Width", grpContainer);
+				addLabel(subKey.displayText, grpContainer);
 
 				// COL 2
 				Combo cmb = new Combo(grpContainer, SWT.READ_ONLY);
@@ -409,10 +407,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 			 * GROUP ROW - Max Sequence Size
 			 ****************************************************************/
 			{
-				String subKey = KEY_MAX_SEQUENCE_SIZE;
+				HAMROption subKey = OPTION_MAX_SEQUENCE_SIZE;
 
 				// COL 1
-				addLabel("Max Sequence Size", grpContainer);
+				addLabel(subKey.displayText, grpContainer);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
@@ -427,10 +425,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 			 * GROUP ROW - Max String Size
 			 ****************************************************************/
 			{
-				String subKey = KEY_MAX_STRING_SIZE;
+				HAMROption subKey = OPTION_MAX_STRING_SIZE;
 
 				// COL 1
-				addLabel("Max String Size", grpContainer);
+				addLabel(subKey.displayText, grpContainer);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
@@ -445,10 +443,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 			 * GROUP ROW - C Source Code Directory
 			 ****************************************************************/
 			{
-				String subKey = KEY_C_SRC_DIRECTORY;
+				HAMROption subKey = OPTION_C_SRC_DIRECTORY;
 
 				// COL 1
-				addLabel("Aux Code Directory", grpContainer);
+				addLabel(subKey.displayText, grpContainer);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
@@ -480,12 +478,12 @@ public class HAMRPrompt extends TitleAreaDialog {
 		 * ROW
 		 ****************************************************************/
 		{
-			final String key = KEY_CAMKES_GROUP;
+			final HAMRGroup key = GROUP_CAMKES;
 			final int numGroupCols = 3;
 
 			// COL 1
 			Group grpContainer = new Group(container, SWT.NONE);
-			grpContainer.setText("CAmkES Options");
+			grpContainer.setText(key.displayText);
 			grpContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, numCols, 1));
 			registerViewControl(key, grpContainer);
 
@@ -497,7 +495,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			 ****************************************************************/
 
 			{
-				final String subKey = KEY_TRUSTED_BUILD_PROFILE;
+				final HAMROption subKey = OPTION_TRUSTED_BUILD_PROFILE;
 
 				// COL 1
 				Button btn = new Button(grpContainer, SWT.CHECK);
@@ -507,7 +505,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 						computeVisibilityAndPack(container);
 					}
 				});
-				btn.setText("Trusted Build Profile");
+				btn.setText(subKey.displayText);
 				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
 				registerOptionControl(subKey, btn, false);
 			}
@@ -517,10 +515,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 			 ****************************************************************/
 
 			{
-				final String subKey = KEY_CAMKES_OUTPUT_DIRECTORY;
+				final HAMROption subKey = OPTION_CAMKES_OUTPUT_DIRECTORY;
 
 				// COL 1
-				addLabel("seL4/CAmkES Output Directory", grpContainer);
+				addLabel(subKey.displayText, grpContainer);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
@@ -552,10 +550,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 			 ****************************************************************/
 
 			{
-				final String subKey = KEY_CAMKES_AUX_SRC_DIR;
+				final HAMROption subKey = OPTION_CAMKES_AUX_SRC_DIR;
 
 				// COL 1
-				addLabel("Aux Code Directory for CAmkES", grpContainer);
+				addLabel(subKey.displayText, grpContainer);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
@@ -587,8 +585,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return area;
 	}
 
-	protected List<String> addAll(List<String> controls, List<String> other) {
-		List<String> ret = new ArrayList<>(controls);
+	protected <T> List<T> addAll(List<T> controls, List<T> other) {
+		List<T> ret = new ArrayList<>(controls);
 		ret.addAll(other);
 		return ret;
 	}
@@ -600,7 +598,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return l;
 	}
 
-	private Label addLabel(String label, Composite container, String key) {
+	private Label addLabel(String label, Composite container, HAMREntry key) {
 		Label l = addLabel(label, container);
 		registerViewControl(key, l);
 		return l;
@@ -613,10 +611,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return l;
 	}
 
-	private final Map<String, Collection<Control>> viewControlMap = new HashMap<>();
-	private final Map<String, Control> optionControls = new HashMap<>();
+	private final Map<HAMREntry, Collection<Control>> viewControlMap = new HashMap<>();
+	private final Map<HAMROption, Control> optionControls = new HashMap<>();
 
-	private Combo getComboControl(String key) {
+	private Combo getComboControl(HAMROption key) {
 		if (optionControls.containsKey(key) && optionControls.get(key) instanceof Combo) {
 			return (Combo) optionControls.get(key);
 		} else {
@@ -624,7 +622,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 	}
 
-	private Text getTextControl(String key) {
+	private Text getTextControl(HAMROption key) {
 		if (optionControls.containsKey(key) && optionControls.get(key) instanceof Text) {
 			return (Text) optionControls.get(key);
 		} else {
@@ -632,11 +630,11 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 	}
 
-	private Control registerOptionControl(String KEY, Control control) {
+	private Control registerOptionControl(HAMROption KEY, Control control) {
 		return registerOptionControl(KEY, control, true);
 	}
 
-	private Control registerOptionControl(String KEY, Control control, boolean addToViewControl) {
+	private Control registerOptionControl(HAMROption KEY, Control control, boolean addToViewControl) {
 		assert (!optionControls.containsKey(KEY));
 		optionControls.put(KEY, control);
 		if (addToViewControl) {
@@ -645,7 +643,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return control;
 	}
 
-	private Control registerViewControl(String KEY, Control control) {
+	private Control registerViewControl(HAMREntry KEY, Control control) {
 		assert (control.getLayoutData() instanceof GridData);
 		if (!viewControlMap.containsKey(KEY)) {
 			viewControlMap.put(KEY, new ArrayList<>());
@@ -654,8 +652,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return control;
 	}
 
-	protected void showOnly(Composite container, List<String> keys) {
-		for (Entry<String, Collection<Control>> e : viewControlMap.entrySet()) {
+	protected void showOnly(Composite container, List<HAMREntry> keys) {
+		for (Entry<HAMREntry, Collection<Control>> e : viewControlMap.entrySet()) {
 			boolean makeVisible = keys.contains(e.getKey());
 			for (Control c : e.getValue()) {
 				GridData gd = (GridData) c.getLayoutData();
@@ -665,8 +663,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 	}
 
-	private void show(boolean show, Composite container, String... KEYS) {
-		for (String KEY : KEYS) {
+	private void show(boolean show, Composite container, HAMREntry... KEYS) {
+		for (HAMREntry KEY : KEYS) {
 			if (viewControlMap.containsKey(KEY)) {
 				for (Control c : viewControlMap.get(KEY)) {
 					GridData gd = (GridData) c.getLayoutData();
@@ -697,13 +695,13 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	/* save value of the control fields to eclipse project */
 	private void saveOptions() {
-		for (Entry<String, Control> option : optionControls.entrySet()) {
+		for (Entry<HAMROption, Control> option : optionControls.entrySet()) {
 			if (option.getValue() instanceof Text) {
-				projectNode.put(option.getKey(), ((Text) option.getValue()).getText());
+				projectNode.put(option.getKey().id, ((Text) option.getValue()).getText());
 			} else if (option.getValue() instanceof Combo) {
-				projectNode.put(option.getKey(), ((Combo) option.getValue()).getText());
+				projectNode.put(option.getKey().id, ((Combo) option.getValue()).getText());
 			} else if (option.getValue() instanceof Button) {
-				projectNode.putBoolean(option.getKey(), ((Button) option.getValue()).getSelection());
+				projectNode.putBoolean(option.getKey().id, ((Button) option.getValue()).getSelection());
 			} else {
 				throw new RuntimeException();
 			}
@@ -716,12 +714,12 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 	}
 
-	private boolean getSavedBooleanOption(String key) {
-		return projectNode.getBoolean(key, false);
+	private boolean getSavedBooleanOption(HAMROption key) {
+		return projectNode.getBoolean(key.id, false);
 	}
 
-	private String getSavedStringOption(String key) {
-		return projectNode.get(key, "");
+	private String getSavedStringOption(HAMROption key) {
+		return projectNode.get(key.id, "");
 	}
 
 	private String promptForDirectory(String title, String init) {
@@ -765,7 +763,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 				.stream().map(f -> f.toString()).toArray(String[]::new);
 	}
 
-	private Option<String> getStringFromControl(String key) {
+	private Option<String> getStringFromControl(HAMROption key) {
 		if (optionControls.containsKey(key)) {
 			Control c = optionControls.get(key);
 			if (c instanceof Text) {
@@ -779,7 +777,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return org.sireum.None.apply();
 	}
 
-	private Option<Integer> getIntFromControl(String key) {
+	private Option<Integer> getIntFromControl(HAMROption key) {
 		try {
 			return org.sireum.Some$.MODULE$.apply(new Integer(getStringFromControl(key).get()));
 		} catch (Exception nfe) {
@@ -787,7 +785,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return org.sireum.None.apply();
 	}
 
-	private Option<Boolean> getBooleanFromControl(String key) {
+	private Option<Boolean> getBooleanFromControl(HAMROption key) {
 		try {
 			return org.sireum.Some$.MODULE$.apply(new Boolean(getStringFromControl(key).get()));
 		} catch (Exception nfe) {
@@ -803,27 +801,27 @@ public class HAMRPrompt extends TitleAreaDialog {
 	}
 
 	private void computeVisibility(Composite container) {
-		Combo cmb = getComboControl(KEY_PLATFORM);
+		Combo cmb = getComboControl(OPTION_PLATFORM);
 
 		if (cmb.getSelectionIndex() < 0) {
-			showOnly(container, Arrays.asList(KEY_PLATFORM));
+			showOnly(container, Arrays.asList(OPTION_PLATFORM));
 			return;
 		}
 
 		String selection = cmb.getItem(cmb.getSelectionIndex());
 		Platform p = HAMRPropertyProvider.Platform.valueOf(selection);
 
-		List<String> JVM_controls = Arrays.asList( //
-				KEY_PLATFORM, KEY_SLANG_OUTPUT_DIRECTORY, KEY_BASE_PACKAGE_NAME);
+		List<HAMREntry> JVM_controls = Arrays.asList( //
+				OPTION_PLATFORM, OPTION_SLANG_OUTPUT_DIRECTORY, OPTION_BASE_PACKAGE_NAME);
 
-		List<String> NIX_controls = addAll(JVM_controls, Arrays.asList( //
-				KEY_HW, KEY_C_SRC_DIRECTORY, KEY_EXCLUDE_SLANG_IMPL, //
-				KEY_TRANSPILER_GROUP));
+		List<HAMREntry> NIX_controls = addAll(JVM_controls, Arrays.asList( //
+				OPTION_HW, OPTION_C_SRC_DIRECTORY, OPTION_EXCLUDE_SLANG_IMPL, //
+				GROUP_TRANSPILER));
 
-		List<String> SEL4_controls = addAll(NIX_controls, Arrays.asList( //
-				KEY_CAMKES_GROUP));
+		List<HAMREntry> SEL4_controls = addAll(NIX_controls, Arrays.asList( //
+				GROUP_CAMKES));
 
-		List<String> toShow = JVM_controls;
+		List<HAMREntry> toShow = JVM_controls;
 
 		String[] hwItems = null;
 		switch (p) {
@@ -847,15 +845,38 @@ public class HAMRPrompt extends TitleAreaDialog {
 			toShow = SEL4_controls;
 			break;
 		}
-		getComboControl(KEY_HW).setItems(hwItems);
+		getComboControl(OPTION_HW).setItems(hwItems);
 
-		Option<Boolean> tb = getBooleanFromControl(KEY_TRUSTED_BUILD_PROFILE);
+		Option<Boolean> tb = getBooleanFromControl(OPTION_TRUSTED_BUILD_PROFILE);
 		if (p == Platform.seL4 && tb.nonEmpty() && tb.get()) {
-			toShow = Arrays.asList(KEY_PLATFORM, KEY_HW, KEY_CAMKES_GROUP);
+			toShow = Arrays.asList(OPTION_PLATFORM, OPTION_HW, GROUP_CAMKES);
 		}
 
 		// show(showControls, container, JVM_controls);
 		showOnly(container, toShow);
 
 	}
+
+	public abstract class HAMREntry {
+		final String id;
+		final String displayText;
+
+		HAMREntry(String id, String displayText) {
+			this.id = id;
+			this.displayText = displayText;
+		}
+	}
+
+	public class HAMRGroup extends HAMREntry {
+		HAMRGroup(String id, String displayText) {
+			super(id, displayText);
+		}
+	}
+
+	public class HAMROption extends HAMREntry {
+		HAMROption(String id, String displayText) {
+			super(id, displayText);
+		}
+	}
 }
+
