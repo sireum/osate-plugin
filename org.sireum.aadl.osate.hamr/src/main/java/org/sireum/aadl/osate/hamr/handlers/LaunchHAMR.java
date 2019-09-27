@@ -1,8 +1,6 @@
 package org.sireum.aadl.osate.hamr.handlers;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +11,6 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.mylyn.commons.ui.dialogs.AbstractNotificationPopup;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.console.MessageConsoleStream;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
@@ -25,6 +22,8 @@ import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
+import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.ErrorReport;
+import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.Report;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
 
@@ -92,8 +91,18 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 			if (prompt.getReturnCode() == Window.OK) {
 				try {
+					int toolRet = 0;
 
 					final boolean targetingSel4 = prompt.getOptionPlatform() == ArsitBridge.Platform.SeL4;
+
+					List<Report> report = HAMRUtil.checkModel(si, prompt);
+
+					for (Report r : report) {
+						writeToConsole(r.toString());
+						if (r instanceof ErrorReport) {
+							toolRet = 1;
+						}
+					}
 
 					final File workspaceRoot = getProjectPath(si).toFile();
 
@@ -101,19 +110,18 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							? workspaceRoot.getAbsolutePath()
 							: prompt.getSlangOptionOutputDirectory();
 
-					writeToConsole("Generating " + getToolName() + " artifacts...");
-
-					int toolRet = 0;
-
 					final String _base = prompt.getOptionBasePackageName().equals("")
-							? cleanupPackageName(new File(slangOutputDir).getName())
-							: cleanupPackageName(prompt.getOptionBasePackageName());
+							? HAMRUtil.cleanupPackageName(new File(slangOutputDir).getName())
+							: HAMRUtil.cleanupPackageName(prompt.getOptionBasePackageName());
 
 					final String outputCDirectory = targetingSel4
 							? new File(prompt.getOptionCamkesOptionOutputDirectory(), "hamr").getAbsolutePath()
 							: new File(slangOutputDir, "src/c/nix").getAbsolutePath();
 
-					if (!prompt.getOptionTrustedBuildProfile()) {
+					if (toolRet == 0 && !prompt.getOptionTrustedBuildProfile()) {
+
+						writeToConsole("Generating " + getToolName() + " artifacts...");
+
 						Util.callWrapper(getToolName(), console, () -> {
 
 							String _behaviorDir = prompt.getOptionCSourceDirectory().equals("") ? null
@@ -141,12 +149,13 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						});
 					}
 
-					if (toolRet == 0 && shouldTranspile(prompt)) {
+					if (toolRet == 0 && HAMRUtil.shouldTranspile(prompt)) {
 
 						String sireumHome = PreferenceValues.getHAMR_SIREUM_HOME();
 						if (sireumHome.equals("") || !new File(sireumHome).exists()) {
 							writeToConsole("SIREUM_HOME not set.");
-							writeToConsole("Install Sireum (https://github.com/sireum/kekinian#installing) and then add its install directory to \"Sireum HAMR >> Code Generation >> SIREUM_HOME\"");
+							writeToConsole(
+									"Install Sireum (https://github.com/sireum/kekinian#installing) and then add its install directory to \"Sireum HAMR >> Code Generation >> SIREUM_HOME\"");
 
 							toolRet = 1;
 						}
@@ -158,12 +167,12 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						String[] commands = new String[] { "chmod", "700", transpilerScript };
 
 						if (toolRet == 0) {
-							toolRet = invoke(console, commands);
+							toolRet = HAMRUtil.invoke(console, commands);
 						}
 
 						if (toolRet == 0) {
 							commands = new String[] { transpilerScript };
-							toolRet = invoke(console, commands);
+							toolRet = HAMRUtil.invoke(console, commands);
 						}
 					}
 
@@ -179,14 +188,14 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							writeToConsole("\nGenerating CAmkES artifacts ...");
 
-							IS<Z, String> auxDirs = prompt.getOptionCamkesAuxSrcDir().equals("") ? this.toISZ()
-									: this.toISZ(prompt.getOptionCamkesAuxSrcDir());
+							IS<Z, String> auxDirs = prompt.getOptionCamkesAuxSrcDir().equals("") ? HAMRUtil.toISZ()
+									: HAMRUtil.toISZ(prompt.getOptionCamkesAuxSrcDir());
 
 							Option<String> aadlRootDir = ArsitBridge.sireumOption(workspaceRoot.getAbsolutePath());
 
 							boolean hamrIntegration = !prompt.getOptionTrustedBuildProfile();
 
-							IS<Z, String> hamrIncludeDirs = toISZ(outputCDirectory);
+							IS<Z, String> hamrIncludeDirs = HAMRUtil.toISZ(outputCDirectory);
 
 							String hsl = new File(outputCDirectory, "sel4-build/libmain.a").getAbsolutePath();
 
@@ -208,62 +217,13 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 				} catch (Throwable ex) {
 					ex.printStackTrace();
-					displayPopup("Error encountered while running HAMR.\n\n"
-							+ ex.getLocalizedMessage());
+					displayPopup("Error encountered while running HAMR.\n\n" + ex.getLocalizedMessage());
 					return Status.CANCEL_STATUS;
 				}
 			}
 		}
 
 		return Status.OK_STATUS;
-	}
-
-	private int invoke(MessageConsole console, String[] commands) {
-		MessageConsoleStream mcs = console.newMessageStream();
-		try {
-			Runtime rt = Runtime.getRuntime();
-			String[] envp = new String[] { "SIREUM_HOME=" + PreferenceValues.getHAMR_SIREUM_HOME() };
-			Process p = rt.exec(commands, envp);
-
-			BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-			String line;
-			while ((line = input.readLine()) != null) {
-				mcs.write(line + "\n");
-			}
-
-			BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-			while ((line = error.readLine()) != null) {
-				mcs.write(line + "\n");
-			}
-
-			p.waitFor();
-
-			return p.exitValue();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 1;
-		}
-	}
-
-	private String cleanupPackageName(String p) {
-		return p.replaceAll("-", "_");
-	}
-
-	private boolean shouldTranspile(HAMRPrompt p) {
-		switch (p.getOptionPlatform()) {
-		case JVM:
-			return false;
-		case SeL4:
-			return !p.getOptionTrustedBuildProfile();
-		case Linux:
-		case MacOS:
-		case Cygwin:
-			return true;
-		default:
-			throw new RuntimeException("Unexpected platform: " + p.getOptionPlatform());
-		}
 	}
 
 	private void displayPopup(String msg) {
@@ -273,11 +233,5 @@ public class LaunchHAMR extends AbstractSireumHandler {
 					getToolName() + " Message", msg);
 			notification.open();
 		});
-	}
-
-	private <T> IS<Z, T> toISZ(T... args) {
-		scala.collection.Seq<T> seq = scala.collection.JavaConverters.asScalaBuffer(java.util.Arrays.asList(args));
-		IS<Z, T> ret = org.sireum.IS$.MODULE$.apply(seq, org.sireum.Z$.MODULE$);
-		return ret;
 	}
 }
