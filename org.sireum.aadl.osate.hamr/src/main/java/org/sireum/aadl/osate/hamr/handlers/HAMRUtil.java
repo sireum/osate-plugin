@@ -3,6 +3,7 @@ package org.sireum.aadl.osate.hamr.handlers;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -104,6 +105,10 @@ public class HAMRUtil {
 			Process p = rt.exec(commands, envp);
 
 			BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+			if (PreferenceValues.getHAMR_VERBOSE_OPT()) {
+				mcs.write("Invoking: '" + String.join(" ", Arrays.asList(commands)) + "'\n");
+			}
 
 			String line;
 			while ((line = input.readLine()) != null) {
