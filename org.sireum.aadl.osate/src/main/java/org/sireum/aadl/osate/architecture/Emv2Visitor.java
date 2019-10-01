@@ -53,6 +53,8 @@ import org.sireum.aadl.ir.Name;
 
 public class Emv2Visitor {
 
+	final String ALL_STATE = "all";
+
 	final org.sireum.aadl.ir.AadlASTFactory factory = new org.sireum.aadl.ir.AadlASTFactory();
 	final LinkedHashMap<String, ErrorModelLibrary> errorLibs = new LinkedHashMap<>();
 	final Aadl2QualifiedNameProvider eqp = new Aadl2QualifiedNameProvider();
@@ -92,19 +94,23 @@ public class Emv2Visitor {
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorPropagation) {
 			ErrorPropagation es = (ErrorPropagation) ne;
+			String pathName = EMV2Util.getPrintName(emv2path);
 			// es.getFeatureorPPRef()
 			List<Name> errorTypes = new ArrayList<Name>();
-			ErrorTypes ets = EMV2Util.getErrorType(emv2path);
-			if (ets instanceof TypeSet) {
-				TypeSet ts = (TypeSet) ets;
-				ts.getTypeTokens().forEach(tt -> {
-					tt.getType().forEach(t -> {
-						errorTypes.add(getErrorType(t));
+			ErrorTypes ets = EMV2Util.getErrorType(emv2path) != null ? EMV2Util.getErrorType(emv2path)
+					: emv2path.getEmv2Target().getErrorType();
+			if (ets != null) {
+				if (ets instanceof TypeSet) {
+					TypeSet ts = (TypeSet) ets;
+					ts.getTypeTokens().forEach(tt -> {
+						tt.getType().forEach(t -> {
+							errorTypes.add(getErrorType(t));
+						});
 					});
-				});
-			} else {
-				ErrorType et = (ErrorType) ets;
-				errorTypes.add(getErrorType(et));
+				} else {
+					ErrorType et = (ErrorType) ets;
+					errorTypes.add(getErrorType(et));
+				}
 			}
 			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Propagation,
 					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
@@ -567,7 +573,17 @@ public class Emv2Visitor {
 			factory.name(cp, VisitorUtil.buildPosInfo(ebt));
 		}
 
-		Name source = getStateName(ebt.getSource());
+		Name source = null;
+		if (ebt.isAllStates()) {
+			if (ebt.getOwner() instanceof ComponentInstance
+					&& EMV2Util.getAllErrorBehaviorStates((ComponentInstance) ebt.getOwner()).isEmpty()) {
+				source = getStateName(EMV2Util.getAllErrorBehaviorStates((ComponentInstance) ebt.getOwner()).stream()
+						.findFirst().get());
+			}
+			source = factory.name(VisitorUtil.add(VisitorUtil.iList(), ALL_STATE), VisitorUtil.buildPosInfo(ebt));
+		} else {
+			source = getStateName(ebt.getSource());
+		}
 		org.sireum.aadl.ir.ErrorCondition condition = errorCondition(ebt.getCondition(), path);
 		Name target = null;
 		if (ebt.getTarget() != null) {
