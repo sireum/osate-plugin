@@ -41,21 +41,20 @@ import org.osate.xtext.aadl2.errormodel.errorModel.impl.ErrorPropagationImpl;
 import org.osate.xtext.aadl2.errormodel.util.EMV2Properties;
 import org.osate.xtext.aadl2.errormodel.util.EMV2Util;
 import org.osate.xtext.aadl2.naming.Aadl2QualifiedNameProvider;
-import org.sireum.aadl.ir.Annex;
-import org.sireum.aadl.ir.BehaveStateMachine;
-import org.sireum.aadl.ir.Emv2BehaviorSection;
-import org.sireum.aadl.ir.Emv2Library;
-import org.sireum.aadl.ir.ErrorAliasDef;
-import org.sireum.aadl.ir.ErrorTransition;
-import org.sireum.aadl.ir.ErrorTypeDef;
-import org.sireum.aadl.ir.ErrorTypeSetDef;
-import org.sireum.aadl.ir.Name;
-
+import org.sireum.hamr.ir.Annex;
+import org.sireum.hamr.ir.BehaveStateMachine;
+import org.sireum.hamr.ir.Emv2BehaviorSection;
+import org.sireum.hamr.ir.Emv2Library;
+import org.sireum.hamr.ir.ErrorAliasDef;
+import org.sireum.hamr.ir.ErrorTransition;
+import org.sireum.hamr.ir.ErrorTypeDef;
+import org.sireum.hamr.ir.ErrorTypeSetDef;
+import org.sireum.hamr.ir.Name;
 public class Emv2Visitor {
 
 	final String ALL_STATE = "all";
 
-	final org.sireum.aadl.ir.AadlASTFactory factory = new org.sireum.aadl.ir.AadlASTFactory();
+	final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 	final LinkedHashMap<String, ErrorModelLibrary> errorLibs = new LinkedHashMap<>();
 	final Aadl2QualifiedNameProvider eqp = new Aadl2QualifiedNameProvider();
 
@@ -73,23 +72,23 @@ public class Emv2Visitor {
 						componentBehavior(root, path), buildEmv2Property(root, path)));
 	}
 
-	private org.sireum.aadl.ir.ElementRef buildEmv2ElemRef(EMV2Path emv2path, ComponentInstance root) {
+	private org.sireum.hamr.ir.ElementRef buildEmv2ElemRef(EMV2Path emv2path, ComponentInstance root) {
 		NamedElement ne = EMV2Util.getErrorModelElement(emv2path);
 		List<String> path = Arrays
 				.asList(EMV2Util.getLastComponentInstance(emv2path, root).getInstanceObjectPath().split("//."));
 		if (ne instanceof ErrorSource) {
 			ErrorSource es = (ErrorSource) ne;
-			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Source,
+			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Source,
 					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorSink) {
 			ErrorSink es = (ErrorSink) ne;
-			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Sink,
+			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Sink,
 					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorPath) {
 			ErrorPath es = (ErrorPath) ne;
-			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Path,
+			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Path,
 					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorPropagation) {
@@ -112,22 +111,22 @@ public class Emv2Visitor {
 					errorTypes.add(getErrorType(et));
 				}
 			}
-			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Propagation,
+			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Propagation,
 					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
 					errorTypes);
 		} else if (ne instanceof ErrorBehaviorState) {
 			ErrorBehaviorState es = (ErrorBehaviorState) ne;
-			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.State,
+			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.State,
 					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorBehaviorEvent) {
 			ErrorBehaviorEvent es = (ErrorBehaviorEvent) ne;
-			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Event,
+			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Event,
 					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorBehaviorTransition) {
 			ErrorBehaviorTransition es = (ErrorBehaviorTransition) ne;
-			return factory.emv2ElementRef(org.sireum.aadl.ir.AadlASTJavaFactory.Emv2ElementKind.Event,
+			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Event,
 					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
 					VisitorUtil.iList());
 		} else {
@@ -136,22 +135,22 @@ public class Emv2Visitor {
 		}
 	}
 
-	private List<org.sireum.aadl.ir.Property> buildEmv2Property(ComponentInstance root, List<String> path) {
+	private List<org.sireum.hamr.ir.Property> buildEmv2Property(ComponentInstance root, List<String> path) {
 		EList<ErrorModelSubclause> emscs = EMV2Util.getAllContainingClassifierEMV2Subclauses(root);
 		List<EMV2PropertyAssociation> pas = new ArrayList<EMV2PropertyAssociation>();
 
 		emscs.forEach(emsc -> {
 			pas.addAll(EMV2Properties.getPropertyAssociationListInContext(emsc));
 		});
-		List<org.sireum.aadl.ir.Property> res = pas.stream().map(pa -> {
+		List<org.sireum.hamr.ir.Property> res = pas.stream().map(pa -> {
 			final Property prop = pa.getProperty();
-			List<org.sireum.aadl.ir.ElementRef> elems = pa.getEmv2Path().stream().map(ep -> {
-				org.sireum.aadl.ir.ElementRef eRes = buildEmv2ElemRef(ep, root);
+			List<org.sireum.hamr.ir.ElementRef> elems = pa.getEmv2Path().stream().map(ep -> {
+				org.sireum.hamr.ir.ElementRef eRes = buildEmv2ElemRef(ep, root);
 				return eRes;
 			}).collect(Collectors.toList());
 			final List<String> currentPath = VisitorUtil.add(path, prop.getQualifiedName());
 			final NamedElement cont = (NamedElement) pa.eContainer();
-			List<org.sireum.aadl.ir.PropertyValue> propertyValues = VisitorUtil.iList();
+			List<org.sireum.hamr.ir.PropertyValue> propertyValues = VisitorUtil.iList();
 			try {
 				PropertyExpression pe = EMV2Properties.getPropertyValue(pa);
 				propertyValues = coreVisitor.getPropertyExpressionValue(pe, path);
@@ -179,7 +178,7 @@ public class Emv2Visitor {
 //			});
 //			final List<String> currentPath = VisitorUtil.add(path, prop.getQualifiedName());
 //			final NamedElement cont = (NamedElement) pa.eContainer();
-//			List<org.sireum.aadl.ir.PropertyValue> propertyValues = VisitorUtil.iList();
+//			List<org.sireum.hamr.ir.PropertyValue> propertyValues = VisitorUtil.iList();
 //			try {
 //				PropertyExpression pe = EMV2Properties.getPropertyValue(pa);
 //				propertyValues = coreVisitor.getPropertyExpressionValue(pe, path);
@@ -193,9 +192,9 @@ public class Emv2Visitor {
 		return res;
 	}
 
-	private List<org.sireum.aadl.ir.Emv2Propagation> errorProp2Map(List<ErrorPropagation> errorProp, boolean isIn,
+	private List<org.sireum.hamr.ir.Emv2Propagation> errorProp2Map(List<ErrorPropagation> errorProp, boolean isIn,
 			List<String> path) {
-		List<org.sireum.aadl.ir.Emv2Propagation> prop = new ArrayList<>();
+		List<org.sireum.hamr.ir.Emv2Propagation> prop = new ArrayList<>();
 		errorProp.stream().forEach(ep -> {
 			List<Name> inErrorTokens = new ArrayList<>();
 			ep.getTypeSet().getTypeTokens().forEach(tt -> {
@@ -212,9 +211,9 @@ public class Emv2Visitor {
 					dirAdd = "_OUT";
 				}
 			}
-			org.sireum.aadl.ir.AadlASTJavaFactory.PropagationDirection dir = isIn
-					? org.sireum.aadl.ir.AadlASTJavaFactory.PropagationDirection.In
-					: org.sireum.aadl.ir.AadlASTJavaFactory.PropagationDirection.Out;
+			org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection dir = isIn
+					? org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.In
+					: org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.Out;
 			Name curPath = null;
 			if (ep.getFeatureorPPRef() == null) {
 				curPath = factory.name(VisitorUtil.add(path, ep.getKind()), VisitorUtil.buildPosInfo(ep));
@@ -247,22 +246,22 @@ public class Emv2Visitor {
 		return res;
 	}
 
-	private List<org.sireum.aadl.ir.Emv2Propagation> inProp(ComponentInstance root, List<String> path) {
+	private List<org.sireum.hamr.ir.Emv2Propagation> inProp(ComponentInstance root, List<String> path) {
 		List<ErrorPropagation> errorProp = EMV2Util.getAllIncomingErrorPropagations(root).stream()
 				.filter(it -> (it instanceof ErrorPropagationImpl)).map(it -> (ErrorPropagationImpl) it)
 				.collect(Collectors.toList());
 		return errorProp2Map(errorProp, true, path);
 	}
 
-	private List<org.sireum.aadl.ir.Emv2Propagation> outProp(ComponentInstance root, List<String> path) {
+	private List<org.sireum.hamr.ir.Emv2Propagation> outProp(ComponentInstance root, List<String> path) {
 		List<ErrorPropagation> errorProp = EMV2Util.getAllOutgoingErrorPropagations(root.getComponentClassifier())
 				.stream().filter(it -> (it instanceof ErrorPropagationImpl)).map(it -> (ErrorPropagationImpl) it)
 				.collect(Collectors.toList());
 		return errorProp2Map(errorProp, false, path);
 	}
 
-	private List<org.sireum.aadl.ir.Emv2Flow> flowSource(ComponentInstance root, List<String> path) {
-		List<org.sireum.aadl.ir.Emv2Flow> sources = new ArrayList<>();
+	private List<org.sireum.hamr.ir.Emv2Flow> flowSource(ComponentInstance root, List<String> path) {
+		List<org.sireum.hamr.ir.Emv2Flow> sources = new ArrayList<>();
 		EMV2Util.getAllErrorSources(root.getComponentClassifier()).forEach(src -> {
 			String name = src.getName();
 			if (src.getSourceModelElement() instanceof ErrorPropagation) {
@@ -271,53 +270,53 @@ public class Emv2Visitor {
 				String dirAdd = (epDir.incoming() && epDir.outgoing()) ? "_OUT" : "";
 				String featureName = (s.getFeatureorPPRef() == null) ? s.getKind()
 						: getFeatureString(s.getFeatureorPPRef()) + dirAdd;
-				org.sireum.aadl.ir.Emv2Propagation prop = null;
+				org.sireum.hamr.ir.Emv2Propagation prop = null;
 				if (src.getTypeTokenConstraint() != null) {
 					List<Name> errorP = src.getTypeTokenConstraint().getTypeTokens().stream()
 							.flatMap(it -> it.getType().stream().map(et -> getErrorType(et)))
 							.collect(Collectors.toList());
-					prop = factory.emv2Propagation(org.sireum.aadl.ir.AadlASTJavaFactory.PropagationDirection.Out,
+					prop = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.Out,
 							factory.name(VisitorUtil.add(path, featureName), VisitorUtil.buildPosInfo(s)), errorP);
 				} else {
 					prop = errorProp2Map(VisitorUtil.toIList(s), false, path).get(0);
 				}
 				sources.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(src)),
-						org.sireum.aadl.ir.AadlASTJavaFactory.FlowKind.Source, null, prop));
+						org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Source, null, prop));
 			}
 		});
 		return sources;
 	}
 
-	private List<org.sireum.aadl.ir.Emv2Flow> flowSink(ComponentInstance root, List<String> path) {
-		List<org.sireum.aadl.ir.Emv2Flow> sinks = new ArrayList<>();
+	private List<org.sireum.hamr.ir.Emv2Flow> flowSink(ComponentInstance root, List<String> path) {
+		List<org.sireum.hamr.ir.Emv2Flow> sinks = new ArrayList<>();
 		EMV2Util.getAllErrorSinks(root.getComponentClassifier()).forEach(snk -> {
 			String name = snk.getName();
 			DirectionType epDir = EMV2Util.getErrorPropagationFeatureDirection(snk.getIncoming());
 			String dirAdd = (epDir.incoming() && epDir.outgoing()) ? "_IN" : "";
 			String featureName = (snk.getIncoming().getFeatureorPPRef() == null) ? snk.getIncoming().getKind()
 					: getFeatureString(snk.getIncoming().getFeatureorPPRef()) + dirAdd;
-			org.sireum.aadl.ir.Emv2Propagation prop = null;
+			org.sireum.hamr.ir.Emv2Propagation prop = null;
 			if (snk.getTypeTokenConstraint() != null) {
 				List<Name> errorP = snk.getTypeTokenConstraint().getTypeTokens().stream()
 						.flatMap(it -> it.getType().stream().map(et -> getErrorType(et))).collect(Collectors.toList());
-				prop = factory.emv2Propagation(org.sireum.aadl.ir.AadlASTJavaFactory.PropagationDirection.In,
+				prop = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.In,
 						factory.name(VisitorUtil.add(path, featureName), VisitorUtil.buildPosInfo(snk)), errorP);
 			} else {
 				prop = errorProp2Map(VisitorUtil.toIList(snk.getIncoming()), false, path).get(0);
 			}
 			sinks.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(snk)),
-					org.sireum.aadl.ir.AadlASTJavaFactory.FlowKind.Sink, prop, null));
+					org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Sink, prop, null));
 
 		});
 		return sinks;
 	}
 
-	private List<org.sireum.aadl.ir.Emv2Flow> flowPath(ComponentInstance root, List<String> path) {
-		List<org.sireum.aadl.ir.Emv2Flow> paths = new ArrayList<>();
+	private List<org.sireum.hamr.ir.Emv2Flow> flowPath(ComponentInstance root, List<String> path) {
+		List<org.sireum.hamr.ir.Emv2Flow> paths = new ArrayList<>();
 		EMV2Util.getAllErrorPaths(root.getComponentClassifier()).forEach(pth -> {
 			String name = pth.getName();
-			org.sireum.aadl.ir.Emv2Propagation inError = null;
-			org.sireum.aadl.ir.Emv2Propagation outError = null;
+			org.sireum.hamr.ir.Emv2Propagation inError = null;
+			org.sireum.hamr.ir.Emv2Propagation outError = null;
 			if (pth.getTypeTokenConstraint() != null) {
 				DirectionType inDir = EMV2Util.getErrorPropagationFeatureDirection(pth.getIncoming());
 				String inDirAdd = (inDir.incoming() && inDir.outgoing()) ? "_IN" : "";
@@ -325,7 +324,7 @@ public class Emv2Visitor {
 						: getFeatureString(pth.getIncoming().getFeatureorPPRef()) + inDirAdd;
 				List<Name> errorTokens = pth.getTypeTokenConstraint().getTypeTokens().stream()
 						.flatMap(it -> it.getType().stream().map(et -> getErrorType(et))).collect(Collectors.toList());
-				inError = factory.emv2Propagation(org.sireum.aadl.ir.AadlASTJavaFactory.PropagationDirection.In,
+				inError = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.In,
 						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosInfo(pth)), errorTokens);
 			} else {
 				inError = errorProp2Map(VisitorUtil.toIList(pth.getIncoming()), true, path).get(0);
@@ -337,7 +336,7 @@ public class Emv2Visitor {
 						: getFeatureString(pth.getOutgoing().getFeatureorPPRef()) + outDirAdd;
 				List<Name> errorTokens = pth.getTargetToken().getTypeTokens().stream()
 						.flatMap(it -> it.getType().stream().map(et -> getErrorType(et))).collect(Collectors.toList());
-				outError = factory.emv2Propagation(org.sireum.aadl.ir.AadlASTJavaFactory.PropagationDirection.Out,
+				outError = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.Out,
 						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosInfo(pth.getOutgoing())),
 						errorTokens);
 			} else {
@@ -345,14 +344,14 @@ public class Emv2Visitor {
 			}
 
 			paths.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(pth)),
-					org.sireum.aadl.ir.AadlASTJavaFactory.FlowKind.Path, inError, outError));
+					org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Path, inError, outError));
 		});
 		return paths;
 	}
 
 	private Emv2BehaviorSection componentBehavior(ComponentInstance root, List<String> path) {
 
-		List<org.sireum.aadl.ir.ErrorEvent> events = EMV2Util.getAllErrorBehaviorEvents(root).stream().map(be -> {
+		List<org.sireum.hamr.ir.ErrorEvent> events = EMV2Util.getAllErrorBehaviorEvents(root).stream().map(be -> {
 
 			return factory.errorEvent(factory.name(VisitorUtil.add(path, be.getName()), VisitorUtil.buildPosInfo(be)));
 		}).collect(Collectors.toList());
@@ -360,13 +359,13 @@ public class Emv2Visitor {
 		List<ErrorTransition> transitions = EMV2Util.getAllErrorBehaviorTransitions(root).stream()
 				.map(bt -> errorTransition(bt, path)).collect(Collectors.toList());
 
-		List<org.sireum.aadl.ir.ErrorPropagation> propagations = EMV2Util.getAllOutgoingPropagationConditions(root)
+		List<org.sireum.hamr.ir.ErrorPropagation> propagations = EMV2Util.getAllOutgoingPropagationConditions(root)
 				.stream().map(opc -> errorPropagation(opc, path)).collect(Collectors.toList());
 
 		return factory.emv2BehaviorSection(events, transitions, propagations);
 	}
 
-	private org.sireum.aadl.ir.ErrorPropagation errorPropagation(OutgoingPropagationCondition opc, List<String> path) {
+	private org.sireum.hamr.ir.ErrorPropagation errorPropagation(OutgoingPropagationCondition opc, List<String> path) {
 		Name id = null;
 		if (opc.getName() != null) {
 			List<String> cPath = VisitorUtil.add(path, opc.getName());
@@ -381,11 +380,11 @@ public class Emv2Visitor {
 			source = EMV2Util.getAllErrorBehaviorStates(opc.getContainingComponentImpl()).stream()
 					.map(ebs -> getStateName(ebs)).collect(Collectors.toList());
 		}
-		org.sireum.aadl.ir.ErrorCondition ec = null;
+		org.sireum.hamr.ir.ErrorCondition ec = null;
 		if (opc.getCondition() != null) {
 			ec = errorCondition(opc.getCondition(), path);
 		}
-		List<org.sireum.aadl.ir.Emv2Propagation> prop = VisitorUtil.iList();
+		List<org.sireum.hamr.ir.Emv2Propagation> prop = VisitorUtil.iList();
 
 		if (!opc.isAllPropagations()) {
 			prop = errorProp2Map(VisitorUtil.toIList(opc.getOutgoing()), false, path);
@@ -480,7 +479,7 @@ public class Emv2Visitor {
 
 	}
 
-	private org.sireum.aadl.ir.ErrorTypeDef errorType(ErrorType et) {
+	private org.sireum.hamr.ir.ErrorTypeDef errorType(ErrorType et) {
 		Name etn = getErrorType(et);
 		Name st = null;
 		if (et.getSuperType() != null) {
@@ -499,7 +498,7 @@ public class Emv2Visitor {
 		}
 	}
 
-	private org.sireum.aadl.ir.ErrorTypeSetDef errorTypeSet(TypeSet ts) {
+	private org.sireum.hamr.ir.ErrorTypeSetDef errorTypeSet(TypeSet ts) {
 		Name tsn = factory.name(
 				VisitorUtil.add(VisitorUtil.toIList(EMV2Util.getPrintName(EMV2Util.getContainingErrorModelLibrary(ts))),
 						ts.getName()),
@@ -521,19 +520,19 @@ public class Emv2Visitor {
 		}
 	}
 
-	private org.sireum.aadl.ir.BehaveStateMachine errorBehaviorStateMachine(ErrorBehaviorStateMachine ebsm) {
+	private org.sireum.hamr.ir.BehaveStateMachine errorBehaviorStateMachine(ErrorBehaviorStateMachine ebsm) {
 
 		Name id = getErrorType(ebsm);
 		List<String> path = VisitorUtil.add(
 				VisitorUtil.toIList(EMV2Util.getPrintName(EMV2Util.getContainingErrorModelLibrary(ebsm))),
 				ebsm.getName());
 
-		List<org.sireum.aadl.ir.ErrorEvent> events = ebsm.getEvents().stream()
+		List<org.sireum.hamr.ir.ErrorEvent> events = ebsm.getEvents().stream()
 				.map(evnt -> factory.errorEvent(
 						factory.name(VisitorUtil.add(path, evnt.getName()), VisitorUtil.buildPosInfo(evnt))))
 				.collect(Collectors.toList());
 
-		List<org.sireum.aadl.ir.ErrorState> states = ebsm.getStates().stream()
+		List<org.sireum.hamr.ir.ErrorState> states = ebsm.getStates().stream()
 				.map(st -> factory.errorState(
 						factory.name(VisitorUtil.add(path, st.getName()), VisitorUtil.buildPosInfo(st)), st.isIntial()))
 				.collect(Collectors.toList());
@@ -541,14 +540,14 @@ public class Emv2Visitor {
 		List<ErrorTransition> transitions = ebsm.getTransitions().stream().map(trans -> errorTransition(trans, path))
 				.collect(Collectors.toList());
 
-		List<org.sireum.aadl.ir.Property> properties = VisitorUtil.iList();// ebsm.getProperties().stream().map(pa -> emv2Property(pa,
+		List<org.sireum.hamr.ir.Property> properties = VisitorUtil.iList();// ebsm.getProperties().stream().map(pa -> emv2Property(pa,
 																			// path)).collect(Collectors.toList());
 
 		return factory.behaveStateMachine(id, events, states, transitions, properties);
 
 	}
 
-//	private org.sireum.aadl.ir.Property emv2Property(EMV2PropertyAssociation epa, List<String> path) {
+//	private org.sireum.hamr.ir.Property emv2Property(EMV2PropertyAssociation epa, List<String> path) {
 //		Property prop = epa.getProperty();
 //		final NamedElement cont = (NamedElement) epa.eContainer();
 //
@@ -566,7 +565,7 @@ public class Emv2Visitor {
 //				values);
 //	}
 
-	private org.sireum.aadl.ir.ErrorTransition errorTransition(ErrorBehaviorTransition ebt, List<String> path) {
+	private org.sireum.hamr.ir.ErrorTransition errorTransition(ErrorBehaviorTransition ebt, List<String> path) {
 		List<String> cp = (ebt.getName() != null) ? VisitorUtil.add(path, ebt.getName()) : path;
 		Name name = null;
 		if (ebt.getName() != null) {
@@ -584,7 +583,7 @@ public class Emv2Visitor {
 		} else {
 			source = getStateName(ebt.getSource());
 		}
-		org.sireum.aadl.ir.ErrorCondition condition = errorCondition(ebt.getCondition(), path);
+		org.sireum.hamr.ir.ErrorCondition condition = errorCondition(ebt.getCondition(), path);
 		Name target = null;
 		if (ebt.getTarget() != null) {
 			target = getStateName(ebt.getTarget());
@@ -603,7 +602,7 @@ public class Emv2Visitor {
 				VisitorUtil.buildPosInfo(state));
 	}
 
-	private org.sireum.aadl.ir.ErrorCondition errorCondition(ConditionExpression cond, List<String> path) {
+	private org.sireum.hamr.ir.ErrorCondition errorCondition(ConditionExpression cond, List<String> path) {
 		if (cond instanceof ConditionElement) {
 			ConditionElement element = (ConditionElement) cond;
 			EventOrPropagation eop = EMV2Util.getErrorEventOrPropagation(element);

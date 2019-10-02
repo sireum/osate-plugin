@@ -15,7 +15,8 @@ Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.xtext.aadl2.errormodel,
  org.osate.annexsupport
 Bundle-ActivationPolicy: lazy
-Export-Package: org.sireum.aadl.osate.architecture;uses:="org.osate.aadl2,org.osate.aadl2.instance,org.sireum",
+Export-Package: org.sireum,
+ org.sireum.aadl.osate.architecture;uses:="org.osate.aadl2,org.osate.aadl2.instance,org.sireum",
  org.sireum.aadl.osate.handlers;
   uses:="org.eclipse.core.runtime,
    org.eclipse.ui.console,
@@ -34,12 +35,12 @@ Export-Package: org.sireum.aadl.osate.architecture;uses:="org.osate.aadl2,org.os
    org.eclipse.jface.dialogs,
    org.eclipse.jface.viewers,
    org.eclipse.xtext.ui.editor",
- org.sireum,
- org.sireum.$internal,
- org.sireum.aadl.ir,
  org.sireum.cli,
  org.sireum.conversions,
  org.sireum.crypto,
+ org.sireum.hamr.act,
+ org.sireum.hamr.arsit,
+ org.sireum.hamr.ir,
  org.sireum.logika,
  org.sireum.message,
  org.sireum.ops,
@@ -89,9 +90,9 @@ Export-Package: org.sireum.aadl.osate.architecture;uses:="org.osate.aadl2,org.os
  scala.util,
  scala.util.control,
  scala.util.hashing,
- scala.util.matching   
+ scala.util.matching
 Automatic-Module-Name: org.sireum.aadl.osate
 Bundle-ClassPath: .,
  bin/,
- lib/air.jar
+ lib/sireum.jar
 Import-Package: org.sireum.message

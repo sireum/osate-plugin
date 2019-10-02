@@ -12,11 +12,12 @@ import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
+import org.sireum.Option;
 import org.sireum.Z;
-import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.act.PreferenceValues;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
+import org.sireum.hamr.ir.Aadl;
 
 public class LaunchAct extends AbstractSireumHandler {
 
@@ -75,11 +76,12 @@ public class LaunchAct extends AbstractSireumHandler {
 					File workspaceRoot = getProjectPath(si).toFile();
 
 					int toolRet = Util.callWrapper(getToolName(), console, () -> {
-						File outDir = new File(prompt.getOptionOutputDirectory());
+						File outDirFile = new File(prompt.getOptionOutputDirectory());
+						Option<String> outDir = new org.sireum.Some<String>(outDirFile.getAbsolutePath());
 						IS<Z, String> auxDirs = toISZ(prompt.getOptionCSourceDirectory());
-						org.sireum.Option<File> aadlRootDir = new org.sireum.Some<File>(workspaceRoot);
+						Option<String> aadlRootDir = new org.sireum.Some<String>(workspaceRoot.getAbsolutePath());
 
-						return org.sireum.aadl.act.Act.run(outDir, model, auxDirs, aadlRootDir);
+						return org.sireum.hamr.act.Act.run(outDir, model, auxDirs, aadlRootDir);
 					});
 
 					refreshWorkspace();

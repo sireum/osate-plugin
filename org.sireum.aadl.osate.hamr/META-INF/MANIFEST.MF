@@ -13,6 +13,5 @@ Require-Bundle: org.osate.aadl2,
 Automatic-Module-Name: HAMR
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
- bin/,
- lib/sireum.jar
+ bin/
 Import-Package: org.osate.pluginsupport

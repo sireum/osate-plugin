@@ -11,12 +11,12 @@ import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
-import org.sireum.aadl.arsit.ArsitBridge;
-import org.sireum.aadl.arsit.ArsitBridge.IPCMechanismJava;
-import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.arsit.PreferenceValues;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
+import org.sireum.hamr.arsit.ArsitBridge;
+import org.sireum.hamr.arsit.ArsitBridge.IPCMechanism;
+import org.sireum.hamr.ir.Aadl;
 
 public class LaunchArsit extends AbstractSireumHandler {
 
@@ -65,17 +65,17 @@ public class LaunchArsit extends AbstractSireumHandler {
 
 					int ret = Util.callWrapper(getToolName(), console, () -> {
 
-						ArsitBridge.IPCMechanismJava ipc = IPCMechanismJava.MessageQueue;
+						ArsitBridge.IPCMechanism ipc = IPCMechanism.MessageQueue;
 
 						if (p.getOptionIPCMechanism().equals("Shared Memory")) {
-							ipc = IPCMechanismJava.SharedMemory;
+							ipc = IPCMechanism.SharedMemory;
 						}
 
 						String outputDir = p.getOptionOutputDirectory().equals("") ? null
 								: p.getOptionOutputDirectory();
 						String base = p.getOptionBasePackageName().equals("") ? null : p.getOptionBasePackageName();
 
-						return org.sireum.aadl.arsit.Arsit.run(
+						return org.sireum.hamr.arsit.Arsit.run(
 								model,
 								ArsitBridge.sireumOption(outputDir),
 								ArsitBridge.sireumOption(base),

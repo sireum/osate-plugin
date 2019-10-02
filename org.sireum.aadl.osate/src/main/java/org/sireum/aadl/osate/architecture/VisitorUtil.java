@@ -79,7 +79,7 @@ public class VisitorUtil {
 
 	public static Position buildPosInfo(NamedElement elem) {
 
-		final org.sireum.aadl.ir.AadlASTFactory factory = new org.sireum.aadl.ir.AadlASTFactory();
+		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 		EObject obj = elem;
 		if (obj == null) {
 			return null;
