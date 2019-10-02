@@ -16,6 +16,7 @@ Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.annexsupport
 Bundle-ActivationPolicy: lazy
 Export-Package: org.sireum,
+ org.sireum.$internal,
  org.sireum.aadl.osate.architecture;uses:="org.osate.aadl2,org.osate.aadl2.instance,org.sireum",
  org.sireum.aadl.osate.handlers;
   uses:="org.eclipse.core.runtime,
