@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.DirectionType;
@@ -103,12 +105,18 @@ public class Emv2Visitor {
 					TypeSet ts = (TypeSet) ets;
 					ts.getTypeTokens().forEach(tt -> {
 						tt.getType().forEach(t -> {
-							errorTypes.add(getErrorType(t));
+							Optional<Name> errorTypeOpt = getErrorType(t);
+							if(errorTypeOpt.isPresent()) {
+								errorTypes.add(errorTypeOpt.get());
+							}
 						});
 					});
 				} else {
 					ErrorType et = (ErrorType) ets;
-					errorTypes.add(getErrorType(et));
+					Optional<Name> errorTypeOpt = getErrorType(et);
+					if(errorTypeOpt.isPresent()) {
+						errorTypes.add(errorTypeOpt.get());
+					}
 				}
 			}
 			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Propagation,
@@ -199,7 +207,10 @@ public class Emv2Visitor {
 			List<Name> inErrorTokens = new ArrayList<>();
 			ep.getTypeSet().getTypeTokens().forEach(tt -> {
 				tt.getType().forEach(t -> {
-					inErrorTokens.add(getErrorType(t));
+					Optional<Name> errorTypeOpt = getErrorType(t);
+					if(errorTypeOpt.isPresent()) {
+						inErrorTokens.add(errorTypeOpt.get());
+					}
 				});
 			});
 			DirectionType epDir = EMV2Util.getErrorPropagationFeatureDirection(ep);
@@ -229,11 +240,11 @@ public class Emv2Visitor {
 		return prop;
 	}
 
-	private Name getErrorType(NamedElement error) {
+	private Optional<Name> getErrorType(NamedElement error) {
 
-		return factory.name(VisitorUtil.add(
+		return Optional.of(factory.name(VisitorUtil.add(
 				VisitorUtil.toIList(EMV2Util.getPrintName(EMV2Util.getContainingErrorModelLibrary(error))),
-				error.getName()), VisitorUtil.buildPosInfo(error));
+				error.getName()), VisitorUtil.buildPosInfo(error)));
 	}
 
 	private String getFeatureString(FeatureorPPReference fpp) {
@@ -273,7 +284,9 @@ public class Emv2Visitor {
 				org.sireum.hamr.ir.Emv2Propagation prop = null;
 				if (src.getTypeTokenConstraint() != null) {
 					List<Name> errorP = src.getTypeTokenConstraint().getTypeTokens().stream()
-							.flatMap(it -> it.getType().stream().map(et -> getErrorType(et)))
+							.flatMap(it -> it.getType().stream()
+									.flatMap(et -> getErrorType(et).isPresent() ? Stream.of(getErrorType(et).get())
+											: Stream.empty()))
 							.collect(Collectors.toList());
 					prop = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.Out,
 							factory.name(VisitorUtil.add(path, featureName), VisitorUtil.buildPosInfo(s)), errorP);
@@ -298,7 +311,10 @@ public class Emv2Visitor {
 			org.sireum.hamr.ir.Emv2Propagation prop = null;
 			if (snk.getTypeTokenConstraint() != null) {
 				List<Name> errorP = snk.getTypeTokenConstraint().getTypeTokens().stream()
-						.flatMap(it -> it.getType().stream().map(et -> getErrorType(et))).collect(Collectors.toList());
+						.flatMap(it -> it.getType().stream()
+								.flatMap(et -> getErrorType(et).isPresent() ? Stream.of(getErrorType(et).get())
+										: Stream.empty()))
+						.collect(Collectors.toList());
 				prop = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.In,
 						factory.name(VisitorUtil.add(path, featureName), VisitorUtil.buildPosInfo(snk)), errorP);
 			} else {
@@ -323,7 +339,10 @@ public class Emv2Visitor {
 				String pp = (pth.getIncoming().getFeatureorPPRef() == null) ? pth.getIncoming().getKind()
 						: getFeatureString(pth.getIncoming().getFeatureorPPRef()) + inDirAdd;
 				List<Name> errorTokens = pth.getTypeTokenConstraint().getTypeTokens().stream()
-						.flatMap(it -> it.getType().stream().map(et -> getErrorType(et))).collect(Collectors.toList());
+						.flatMap(it -> it.getType().stream()
+								.flatMap(et -> getErrorType(et).isPresent() ? Stream.of(getErrorType(et).get())
+										: Stream.empty()))
+						.collect(Collectors.toList());
 				inError = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.In,
 						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosInfo(pth)), errorTokens);
 			} else {
@@ -335,7 +354,10 @@ public class Emv2Visitor {
 				String pp = (pth.getOutgoing().getFeatureorPPRef() == null) ? pth.getOutgoing().getKind()
 						: getFeatureString(pth.getOutgoing().getFeatureorPPRef()) + outDirAdd;
 				List<Name> errorTokens = pth.getTargetToken().getTypeTokens().stream()
-						.flatMap(it -> it.getType().stream().map(et -> getErrorType(et))).collect(Collectors.toList());
+						.flatMap(it -> it.getType().stream()
+								.flatMap(et -> getErrorType(et).isPresent() ? Stream.of(getErrorType(et).get())
+										: Stream.empty()))
+						.collect(Collectors.toList());
 				outError = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.Out,
 						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosInfo(pth.getOutgoing())),
 						errorTokens);
@@ -480,19 +502,19 @@ public class Emv2Visitor {
 	}
 
 	private org.sireum.hamr.ir.ErrorTypeDef errorType(ErrorType et) {
-		Name etn = getErrorType(et);
+		Name etn = getErrorType(et).get();
 		Name st = null;
 		if (et.getSuperType() != null) {
-			st = getErrorType(et.getSuperType());
+			st = getErrorType(et.getSuperType()).get();
 		}
 
 		return factory.errorTypeDef(etn, st);
 	}
 
 	private ErrorAliasDef errorAliasType(ErrorType et) {
-		Name etn = getErrorType(et);
+		Name etn = getErrorType(et).get();
 		if (et.getAliasedType() != null) {
-			return factory.errorAliseDef(etn, getErrorType(et.getAliasedType()));
+			return factory.errorAliseDef(etn, getErrorType(et.getAliasedType()).get());
 		} else {
 			return null;
 		}
@@ -505,15 +527,17 @@ public class Emv2Visitor {
 				VisitorUtil.buildPosInfo(ts));
 
 		List<Name> errorTkn = ts.getTypeTokens().stream()
-				.flatMap(tt -> tt.getType().stream().map(et -> getErrorType(et))).collect(Collectors.toList());
+				.flatMap(tt -> tt.getType().stream().flatMap(
+						et -> getErrorType(et).isPresent() ? Stream.of(getErrorType(et).get()) : Stream.empty()))
+				.collect(Collectors.toList());
 
 		return factory.errorTypeSetDef(tsn, errorTkn);
 	}
 
 	private ErrorAliasDef errorAliasTypeDef(TypeSet ts) {
 		if (ts.getAliasedType() != null) {
-			Name tsn = getErrorType(ts);
-			Name atsn = getErrorType(ts.getAliasedType());
+			Name tsn = getErrorType(ts).get();
+			Name atsn = getErrorType(ts.getAliasedType()).get();
 			return factory.errorAliseDef(tsn, atsn);
 		} else {
 			return null;
@@ -522,7 +546,7 @@ public class Emv2Visitor {
 
 	private org.sireum.hamr.ir.BehaveStateMachine errorBehaviorStateMachine(ErrorBehaviorStateMachine ebsm) {
 
-		Name id = getErrorType(ebsm);
+		Name id = getErrorType(ebsm).get();
 		List<String> path = VisitorUtil.add(
 				VisitorUtil.toIList(EMV2Util.getPrintName(EMV2Util.getContainingErrorModelLibrary(ebsm))),
 				ebsm.getName());

@@ -19,9 +19,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.ComponentInstance;
-import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
+import org.sireum.hamr.ir.Aadl;
 
 public class LaunchAwas extends AbstractSireumHandler {
 
