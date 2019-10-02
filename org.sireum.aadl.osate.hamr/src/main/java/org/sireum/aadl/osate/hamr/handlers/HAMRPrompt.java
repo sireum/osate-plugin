@@ -34,9 +34,9 @@ import org.eclipse.swt.widgets.Text;
 import org.osate.ui.dialogs.Dialog;
 import org.osgi.service.prefs.BackingStoreException;
 import org.sireum.Option;
-import org.sireum.aadl.arsit.ArsitBridge;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
+import org.sireum.hamr.arsit.ArsitBridge;
 
 public class HAMRPrompt extends TitleAreaDialog {
 

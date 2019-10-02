@@ -9,10 +9,10 @@ import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.IS;
 import org.sireum.U8;
 import org.sireum.Z;
-import org.sireum.aadl.ir.Aadl;
-import org.sireum.aadl.ir.JSON;
-import org.sireum.aadl.ir.MsgPack;
 import org.sireum.aadl.osate.architecture.Visitor;
+import org.sireum.hamr.ir.Aadl;
+import org.sireum.hamr.ir.JSON;
+import org.sireum.hamr.ir.MsgPack;
 
 import scala.Console;
 import scala.Function0;

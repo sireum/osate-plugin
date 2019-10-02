@@ -13,6 +13,5 @@ Require-Bundle: org.osate.aadl2,
 Automatic-Module-Name: Act
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
- bin/,
- lib/act.jar
+ bin/
 Import-Package: org.osate.pluginsupport

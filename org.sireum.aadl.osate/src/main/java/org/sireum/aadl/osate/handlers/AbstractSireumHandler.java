@@ -49,11 +49,11 @@ import org.osate.aadl2.instantiation.InstantiateModel;
 import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.ui.dialogs.Dialog;
-import org.sireum.aadl.ir.Aadl;
-import org.sireum.aadl.ir.JSON;
 import org.sireum.aadl.osate.util.SelectionHelper;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
+import org.sireum.hamr.ir.Aadl;
+import org.sireum.hamr.ir.JSON;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
 
@@ -67,7 +67,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		return getToolName() + " job";
 	}
 
-	protected final String MARKER_TYPE = "org.sireum.aadl.marker";
+	protected final String MARKER_TYPE = "org.sireum.hamr.marker";
 
 	protected static IResource getIResource(Resource r) {
 		final URI uri = r.getURI();
@@ -317,6 +317,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		if (m != null) {
 			MessageConsoleStream out = m.newMessageStream();
 			out.println(text);
+			isWritten = true;
 			try {
 				out.flush();
 				out.close();

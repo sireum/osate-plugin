@@ -66,20 +66,20 @@ import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 import org.sireum.Option;
 import org.sireum.Some;
-import org.sireum.aadl.ir.AadlASTJavaFactory;
+import org.sireum.hamr.ir.AadlASTJavaFactory;
 
 public class Visitor {
 
-	protected final org.sireum.aadl.ir.AadlASTFactory factory = new org.sireum.aadl.ir.AadlASTFactory();
+	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 
-	final Map<String, org.sireum.aadl.ir.Component> datamap = new LinkedHashMap<>();
+	final Map<String, org.sireum.hamr.ir.Component> datamap = new LinkedHashMap<>();
 	final Map<List<String>, Set<Connection>> compConnMap = new HashMap<>();
 	final Emv2Visitor ev = new Emv2Visitor(this);
 
-	public Option<org.sireum.aadl.ir.Aadl> convert(Element root, boolean includeDataComponents) {
-		final Option<org.sireum.aadl.ir.Component> t = visit(root);
+	public Option<org.sireum.hamr.ir.Aadl> convert(Element root, boolean includeDataComponents) {
+		final Option<org.sireum.hamr.ir.Component> t = visit(root);
 		if (t.nonEmpty()) {
-			final List<org.sireum.aadl.ir.Component> dataComponents = includeDataComponents
+			final List<org.sireum.hamr.ir.Component> dataComponents = includeDataComponents
 					? new ArrayList<>(datamap.values())
 					: VisitorUtil.iList();
 			return new Some<>(factory.aadl(VisitorUtil.toIList(t.get()), ev.buildLibs(), // errorLib
@@ -89,11 +89,11 @@ public class Visitor {
 		}
 	}
 
-	private Option<org.sireum.aadl.ir.Component> visit(Element root) {
+	private Option<org.sireum.hamr.ir.Component> visit(Element root) {
 		switch (root.eClass().getClassifierID()) {
 		case InstancePackage.SYSTEM_INSTANCE:
 		case InstancePackage.COMPONENT_INSTANCE: {
-			org.sireum.aadl.ir.Component c = buildComponent((ComponentInstance) root, VisitorUtil.iList());
+			org.sireum.hamr.ir.Component c = buildComponent((ComponentInstance) root, VisitorUtil.iList());
 			return new Some<>(c);
 		}
 		default:
@@ -101,15 +101,15 @@ public class Visitor {
 		}
 	}
 
-	private List<org.sireum.aadl.ir.Connection> buildConnection(Connection conn, List<String> path,
+	private List<org.sireum.hamr.ir.Connection> buildConnection(Connection conn, List<String> path,
 			ComponentInstance compInst) {
 		final List<String> name = VisitorUtil.add(path, conn.getName());
-		final List<org.sireum.aadl.ir.EndPoint> src = buildEndPoint(conn.getSource(), path);
-		final List<org.sireum.aadl.ir.EndPoint> dst = buildEndPoint(conn.getDestination(), path);
+		final List<org.sireum.hamr.ir.EndPoint> src = buildEndPoint(conn.getSource(), path);
+		final List<org.sireum.hamr.ir.EndPoint> dst = buildEndPoint(conn.getDestination(), path);
 		final boolean isBiDirectional = conn.isBidirectional();
 		final List<ConnectionInstance> connInst = compInst.findConnectionInstance(conn);
 
-		List<org.sireum.aadl.ir.Name> connectionInstances = VisitorUtil.iList();
+		List<org.sireum.hamr.ir.Name> connectionInstances = VisitorUtil.iList();
 		if (!connInst.isEmpty()) {
 			connectionInstances = connInst.stream().map(ci -> factory
 					.name(Arrays.asList(ci.getInstanceObjectPath().split("\\.")), VisitorUtil.buildPosInfo(ci)))
@@ -131,7 +131,7 @@ public class Visitor {
 			throw new RuntimeException("Unexpected connection kind: " + conn);
 		}
 
-		final List<org.sireum.aadl.ir.Property> properties = conn.getOwnedPropertyAssociations().stream()
+		final List<org.sireum.hamr.ir.Property> properties = conn.getOwnedPropertyAssociations().stream()
 				.map(pa -> buildProperty(pa, name)).collect(Collectors.toList());
 
 		if (src.size() != dst.size()) {
@@ -142,8 +142,8 @@ public class Visitor {
 				kind, isBiDirectional, connectionInstances, properties));
 	}
 
-	private List<org.sireum.aadl.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
-		List<org.sireum.aadl.ir.EndPoint> result = VisitorUtil.iList();
+	private List<org.sireum.hamr.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
+		List<org.sireum.hamr.ir.EndPoint> result = VisitorUtil.iList();
 		final List<String> component = connElem.getContext() != null
 				? VisitorUtil.add(path, connElem.getContext().getName())
 				: path;
@@ -186,9 +186,9 @@ public class Visitor {
 		return result;
 	}
 
-	private List<org.sireum.aadl.ir.EndPoint> flattenFeatureGroup(List<String> component, String parentName,
+	private List<org.sireum.hamr.ir.EndPoint> flattenFeatureGroup(List<String> component, String parentName,
 			FeatureGroupImpl fgi, ConnectedElement connElem) {
-		List<org.sireum.aadl.ir.EndPoint> res = VisitorUtil.iList();
+		List<org.sireum.hamr.ir.EndPoint> res = VisitorUtil.iList();
 		FeatureGroupType fgt = fgi.getFeatureGroupType();
 		if (fgt == null) {
 			final FeatureGroupPrototype fgpt = fgi.basicGetFeatureGroupPrototype();
@@ -223,25 +223,25 @@ public class Visitor {
 		return res;
 	}
 
-	private org.sireum.aadl.ir.Component buildComponent(ComponentInstance compInst, List<String> path) {
+	private org.sireum.hamr.ir.Component buildComponent(ComponentInstance compInst, List<String> path) {
 		final List<String> currentPath = VisitorUtil.add(path, compInst.getName());
 
-		final List<org.sireum.aadl.ir.Feature> features = compInst.getFeatureInstances().stream()
+		final List<org.sireum.hamr.ir.Feature> features = compInst.getFeatureInstances().stream()
 				.map(fi -> buildFeature(fi, currentPath)).collect(Collectors.toList());
 
-		final List<org.sireum.aadl.ir.ConnectionInstance> connectionInstances = compInst.getConnectionInstances()
+		final List<org.sireum.hamr.ir.ConnectionInstance> connectionInstances = compInst.getConnectionInstances()
 				.stream().map(ci -> buildConnectionInst(ci, currentPath)).collect(Collectors.toList());
 
-		final List<org.sireum.aadl.ir.Property> properties = compInst.getOwnedPropertyAssociations().stream()
+		final List<org.sireum.hamr.ir.Property> properties = compInst.getOwnedPropertyAssociations().stream()
 				.map(pa -> buildProperty(pa, currentPath)).collect(Collectors.toList());
 
-		final List<org.sireum.aadl.ir.Flow> flows = compInst.getFlowSpecifications().stream()
+		final List<org.sireum.hamr.ir.Flow> flows = compInst.getFlowSpecifications().stream()
 				.map(fs -> buildFlow(fs, currentPath)).collect(Collectors.toList());
 
-		final List<org.sireum.aadl.ir.Component> subComponents = compInst.getComponentInstances().stream()
+		final List<org.sireum.hamr.ir.Component> subComponents = compInst.getComponentInstances().stream()
 				.map(ci -> buildComponent(ci, currentPath)).collect(Collectors.toList());
 
-		List<org.sireum.aadl.ir.Connection> connections = VisitorUtil.iList();
+		List<org.sireum.hamr.ir.Connection> connections = VisitorUtil.iList();
 		if (compConnMap.containsKey(currentPath)) {
 			connections = compConnMap.get(currentPath).stream()
 					.flatMap(c -> buildConnection(c, currentPath, compInst).stream()).collect(Collectors.toList());
@@ -295,27 +295,27 @@ public class Visitor {
 			throw new RuntimeException("Unexpected");
 		}
 
-		final org.sireum.aadl.ir.Name identifier = factory.name(currentPath,
+		final org.sireum.hamr.ir.Name identifier = factory.name(currentPath,
 				VisitorUtil.buildPosInfo(compInst.getInstantiatedObjects().get(0)));
 
-		final org.sireum.aadl.ir.Classifier classifier = compInst.getClassifier() != null
+		final org.sireum.hamr.ir.Classifier classifier = compInst.getClassifier() != null
 				? factory.classifier(compInst.getClassifier().getQualifiedName())
 				: null;
 
-		final List<org.sireum.aadl.ir.Mode> modes = VisitorUtil.iList(); // TODO
+		final List<org.sireum.hamr.ir.Mode> modes = VisitorUtil.iList(); // TODO
 
-		final List<org.sireum.aadl.ir.Annex> annexes = VisitorUtil.toIList(ev.visitEmv2Comp(compInst, currentPath)); // TODO
+		final List<org.sireum.hamr.ir.Annex> annexes = VisitorUtil.toIList(ev.visitEmv2Comp(compInst, currentPath)); // TODO
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
 				connectionInstances, properties, flows, modes, annexes);
 	}
 
-	private org.sireum.aadl.ir.Feature buildFeature(FeatureInstance featureInst, List<String> path) {
+	private org.sireum.hamr.ir.Feature buildFeature(FeatureInstance featureInst, List<String> path) {
 
 		final Feature f = featureInst.getFeature();
 
 		final List<String> currentPath = VisitorUtil.add(path, featureInst.getName());
 
-		org.sireum.aadl.ir.Classifier classifier = null;
+		org.sireum.hamr.ir.Classifier classifier = null;
 		if (f.getFeatureClassifier() != null) {
 			if (f.getFeatureClassifier() instanceof NamedElement) {
 				classifier = factory.classifier(((NamedElement) f.getFeatureClassifier()).getQualifiedName());
@@ -325,7 +325,7 @@ public class Visitor {
 			}
 		}
 
-		final List<org.sireum.aadl.ir.Property> properties = featureInst.getOwnedPropertyAssociations().stream()
+		final List<org.sireum.hamr.ir.Property> properties = featureInst.getOwnedPropertyAssociations().stream()
 				.map(pa -> buildProperty(pa, currentPath)).collect(Collectors.toList());
 
 		AadlASTJavaFactory.FeatureCategory category = null;
@@ -375,7 +375,7 @@ public class Visitor {
 		default: // do nothing
 		}
 
-		final org.sireum.aadl.ir.Name identifier = factory.name(currentPath,
+		final org.sireum.hamr.ir.Name identifier = factory.name(currentPath,
 				VisitorUtil.buildPosInfo(featureInst.getInstantiatedObjects().get(0)));
 
 		final List<FeatureInstance> featureInstances = featureInst.getFeatureInstances();
@@ -412,13 +412,13 @@ public class Visitor {
 			}
 		} else {
 			final boolean isInverse = ((FeatureGroupImpl) f).isInverse();
-			final List<org.sireum.aadl.ir.Feature> features = featureInstances.stream()
+			final List<org.sireum.hamr.ir.Feature> features = featureInstances.stream()
 					.map(fi -> buildFeature(fi, currentPath)).collect(Collectors.toList());
 			return factory.featureGroup(identifier, features, isInverse, category, properties);
 		}
 	}
 
-	private org.sireum.aadl.ir.ConnectionReference buildConnectionRef(ConnectionReference connRef, List<String> path) {
+	private org.sireum.hamr.ir.ConnectionReference buildConnectionRef(ConnectionReference connRef, List<String> path) {
 		final List<String> context = Arrays.asList(connRef.getContext().getInstanceObjectPath().split("\\."));
 		final List<String> name = VisitorUtil.add(context, connRef.getConnection().getName());
 		if (compConnMap.containsKey(context)) {
@@ -431,7 +431,7 @@ public class Visitor {
 				path.equals(context));
 	}
 
-	private org.sireum.aadl.ir.ConnectionInstance buildConnectionInst(ConnectionInstance connInst, List<String> path) {
+	private org.sireum.hamr.ir.ConnectionInstance buildConnectionInst(ConnectionInstance connInst, List<String> path) {
 		final List<String> currentPath = VisitorUtil.add(path, connInst.getName());
 
 		final List<String> srcComponent = Arrays
@@ -448,10 +448,10 @@ public class Visitor {
 				? handleDirection(((FeatureInstanceImpl) connInst.getDestination()).getDirection())
 				: null;
 
-		final org.sireum.aadl.ir.Name name = factory.name(currentPath,
+		final org.sireum.hamr.ir.Name name = factory.name(currentPath,
 				VisitorUtil.buildPosInfo(connInst.getInstantiatedObjects().get(0)));
 
-		final List<org.sireum.aadl.ir.Property> properties = connInst.getOwnedPropertyAssociations().stream()
+		final List<org.sireum.hamr.ir.Property> properties = connInst.getOwnedPropertyAssociations().stream()
 				.map(pa -> buildProperty(pa, currentPath)).collect(Collectors.toList());
 
 		AadlASTJavaFactory.ConnectionKind kind = null;
@@ -476,10 +476,10 @@ public class Visitor {
 			break;
 		}
 
-		final List<org.sireum.aadl.ir.ConnectionReference> connectionRefs = connInst.getConnectionReferences().stream()
+		final List<org.sireum.hamr.ir.ConnectionReference> connectionRefs = connInst.getConnectionReferences().stream()
 				.map(ci -> buildConnectionRef(ci, path)).collect(Collectors.toList());
 
-		final org.sireum.aadl.ir.EndPoint src = factory.endPoint(
+		final org.sireum.hamr.ir.EndPoint src = factory.endPoint(
 				factory.name(srcComponent,
 						VisitorUtil.buildPosInfo(
 								connInst.getSource().getComponentInstance().getInstantiatedObjects().get(0))),
@@ -487,7 +487,7 @@ public class Visitor {
 						VisitorUtil.buildPosInfo(connInst.getSource().getInstantiatedObjects().get(0))),
 				srcDirection);
 
-		final org.sireum.aadl.ir.EndPoint dst = factory
+		final org.sireum.hamr.ir.EndPoint dst = factory
 				.endPoint(
 						factory.name(dstComponent,
 								VisitorUtil.buildPosInfo(connInst.getDestination().getComponentInstance()
@@ -499,10 +499,10 @@ public class Visitor {
 		return factory.connectionInstance(name, src, dst, kind, connectionRefs, properties);
 	}
 
-	private org.sireum.aadl.ir.Flow buildFlow(FlowSpecificationInstance flowInst, List<String> path) {
+	private org.sireum.hamr.ir.Flow buildFlow(FlowSpecificationInstance flowInst, List<String> path) {
 
 		final List<String> currentPath = VisitorUtil.add(path, flowInst.getQualifiedName());
-		final org.sireum.aadl.ir.Name name = factory.name(currentPath,
+		final org.sireum.hamr.ir.Name name = factory.name(currentPath,
 				VisitorUtil.buildPosInfo(flowInst.getInstantiatedObjects().get(0)));
 
 		AadlASTJavaFactory.FlowKind kind = null;
@@ -518,13 +518,13 @@ public class Visitor {
 			break;
 		}
 
-		org.sireum.aadl.ir.Feature source = null;
+		org.sireum.hamr.ir.Feature source = null;
 		if (flowInst.getSource() != null) {
 			// List<String> us = Arrays.asList(flowInst.getSource().getInstanceObjectPath().split("\\."));
 			source = buildFeature(flowInst.getSource(), currentPath);
 		}
 
-		org.sireum.aadl.ir.Feature sink = null;
+		org.sireum.hamr.ir.Feature sink = null;
 		if (flowInst.getDestination() != null) {
 			// List<String> ud = Arrays.asList(flowInst.getDestination().getInstanceObjectPath().split("\\."));
 			sink = buildFeature(flowInst.getDestination(), currentPath);
@@ -533,12 +533,12 @@ public class Visitor {
 		return factory.flow(name, kind, source, sink);
 	}
 
-	protected org.sireum.aadl.ir.Property buildProperty(PropertyAssociation pa, List<String> path) {
+	protected org.sireum.hamr.ir.Property buildProperty(PropertyAssociation pa, List<String> path) {
 		final Property prop = pa.getProperty();
 		final List<String> currentPath = VisitorUtil.add(path, prop.getQualifiedName());
 		final NamedElement cont = (NamedElement) pa.eContainer();
 		PropertyType propName = prop.getPropertyType();
-		List<org.sireum.aadl.ir.PropertyValue> propertyValues = VisitorUtil.iList();
+		List<org.sireum.hamr.ir.PropertyValue> propertyValues = VisitorUtil.iList();
 		try {
 			PropertyExpression pe = PropertyUtils.getSimplePropertyValue(cont, prop);
 			propertyValues = getPropertyExpressionValue(pe, path);
@@ -551,7 +551,7 @@ public class Visitor {
 				VisitorUtil.iList());
 	}
 
-	private org.sireum.aadl.ir.UnitProp getUnitProp(NumberValue nv) {
+	private org.sireum.hamr.ir.UnitProp getUnitProp(NumberValue nv) {
 		if (nv == null) {
 			return factory.unitProp("??", null);
 		} else {
@@ -561,7 +561,7 @@ public class Visitor {
 		}
 	}
 
-	protected List<org.sireum.aadl.ir.PropertyValue> getPropertyExpressionValue(PropertyExpression pe,
+	protected List<org.sireum.hamr.ir.PropertyValue> getPropertyExpressionValue(PropertyExpression pe,
 			List<String> path) {
 
 		switch (pe.eClass().getClassifierID()) {
@@ -586,7 +586,7 @@ public class Visitor {
 			return VisitorUtil.toIList(factory.classifierProp(cv.getQualifiedName()));
 		case Aadl2Package.LIST_VALUE:
 			final ListValue lv = (ListValue) pe;
-			List<org.sireum.aadl.ir.PropertyValue> elems = VisitorUtil.iList();
+			List<org.sireum.hamr.ir.PropertyValue> elems = VisitorUtil.iList();
 			for (PropertyExpression e : lv.getOwnedListElements()) {
 				elems = VisitorUtil.addAll(elems, getPropertyExpressionValue(e, path));
 			}
@@ -615,7 +615,7 @@ public class Visitor {
 			}
 		case Aadl2Package.RECORD_VALUE:
 			final RecordValue rvy = (RecordValue) pe;
-			final List<org.sireum.aadl.ir.Property> properties = rvy.getOwnedFieldValues().stream()
+			final List<org.sireum.hamr.ir.Property> properties = rvy.getOwnedFieldValues().stream()
 					.map(fv -> factory.property(
 							factory.name(VisitorUtil.add(path, fv.getProperty().getQualifiedName()),
 									VisitorUtil.buildPosInfo(fv.getProperty())),
@@ -624,7 +624,7 @@ public class Visitor {
 			return VisitorUtil.toIList(factory.recordProp(properties));
 		case Aadl2Package.REFERENCE_VALUE:
 			final ReferenceValue rvx = (ReferenceValue) pe;
-			final org.sireum.aadl.ir.Name refName = factory.name(VisitorUtil.toIList(rvx.toString()),
+			final org.sireum.hamr.ir.Name refName = factory.name(VisitorUtil.toIList(rvx.toString()),
 					VisitorUtil.buildPosInfo(rvx.getPath().getNamedElement()));
 			return VisitorUtil.toIList(factory.referenceProp(refName));
 		case InstancePackage.INSTANCE_REFERENCE_VALUE:
@@ -642,21 +642,21 @@ public class Visitor {
 		}
 	}
 
-	private org.sireum.aadl.ir.Component processDataType(DataClassifier f) {
+	private org.sireum.hamr.ir.Component processDataType(DataClassifier f) {
 		final String name = f.getQualifiedName();
 		if (datamap.containsKey(name)) {
 			return datamap.get(name);
 		}
 
-		List<org.sireum.aadl.ir.Property> properties = f.getOwnedPropertyAssociations().stream()
+		List<org.sireum.hamr.ir.Property> properties = f.getOwnedPropertyAssociations().stream()
 				.map(op -> buildProperty(op, VisitorUtil.iList())).collect(Collectors.toList());
 
-		List<org.sireum.aadl.ir.Component> subComponents = VisitorUtil.iList();
+		List<org.sireum.hamr.ir.Component> subComponents = VisitorUtil.iList();
 		if (f instanceof DataTypeImpl) {
 			// do nothing as component types can't have subcomponents
 		} else if (f instanceof DataImplementation) {
 			final DataImplementation di = (DataImplementation) f;
-			final List<org.sireum.aadl.ir.Property> subProps = di.getType().getOwnedPropertyAssociations().stream()
+			final List<org.sireum.hamr.ir.Property> subProps = di.getType().getOwnedPropertyAssociations().stream()
 					.map(op -> buildProperty(op, VisitorUtil.iList())).collect(Collectors.toList());
 			properties = VisitorUtil.addAll(properties, subProps);
 
@@ -668,25 +668,25 @@ public class Visitor {
 
 				DataSubcomponent dsc = (DataSubcomponent) subcom;
 
-				final org.sireum.aadl.ir.Name subName = factory.name(VisitorUtil.toIList(dsc.getName()),
+				final org.sireum.hamr.ir.Name subName = factory.name(VisitorUtil.toIList(dsc.getName()),
 						VisitorUtil.buildPosInfo(dsc));
-				final List<org.sireum.aadl.ir.Property> fProperties = dsc.getOwnedPropertyAssociations().stream()
+				final List<org.sireum.hamr.ir.Property> fProperties = dsc.getOwnedPropertyAssociations().stream()
 						.map(op -> buildProperty(op, VisitorUtil.iList())).collect(Collectors.toList());
 
 				final DataClassifier sct = (DataClassifier) dsc.getDataSubcomponentType();
 				if (sct != null) {
-					final org.sireum.aadl.ir.Component c = processDataType(sct);
+					final org.sireum.hamr.ir.Component c = processDataType(sct);
 
-					final List<org.sireum.aadl.ir.Property> cProps = VisitorUtil
+					final List<org.sireum.hamr.ir.Property> cProps = VisitorUtil
 							.addAll(VisitorUtil.isz2IList(c.properties()), fProperties);
 
 					final AadlASTJavaFactory.ComponentCategory category = AadlASTJavaFactory.ComponentCategory
 							.valueOf(c.category().name());
 
-					final org.sireum.aadl.ir.Classifier classifier = c.classifier().nonEmpty() ? c.classifier().get()
+					final org.sireum.hamr.ir.Classifier classifier = c.classifier().nonEmpty() ? c.classifier().get()
 							: null;
 
-					final org.sireum.aadl.ir.Component sub = factory.component(subName, category, classifier,
+					final org.sireum.hamr.ir.Component sub = factory.component(subName, category, classifier,
 							VisitorUtil.isz2IList(c.features()), VisitorUtil.isz2IList(c.subComponents()),
 							VisitorUtil.isz2IList(c.connections()), VisitorUtil.isz2IList(c.connectionInstances()),
 							cProps, VisitorUtil.isz2IList(c.flows()), VisitorUtil.isz2IList(c.modes()),
@@ -695,7 +695,7 @@ public class Visitor {
 					subComponents = VisitorUtil.add(subComponents, sub);
 				} else {
 					// type not specified for subcomponent/field
-					final org.sireum.aadl.ir.Component sub = factory.component(subName, // name
+					final org.sireum.hamr.ir.Component sub = factory.component(subName, // name
 							AadlASTJavaFactory.ComponentCategory.Data, // category
 							null, // classifier
 							VisitorUtil.iList(), // features
@@ -715,7 +715,7 @@ public class Visitor {
 			throw new RuntimeException("Unexpected data type: " + f);
 		}
 
-		final org.sireum.aadl.ir.Component c = factory.component(factory.name(VisitorUtil.iList(), null), // identifier
+		final org.sireum.hamr.ir.Component c = factory.component(factory.name(VisitorUtil.iList(), null), // identifier
 				AadlASTJavaFactory.ComponentCategory.Data, // category
 				factory.classifier(name), VisitorUtil.iList(), // features
 				subComponents, VisitorUtil.iList(), // connections

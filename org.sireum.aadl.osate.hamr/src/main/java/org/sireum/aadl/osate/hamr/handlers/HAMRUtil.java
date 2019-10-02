@@ -17,8 +17,8 @@ import org.osate.aadl2.instance.ConnectionKind;
 import org.osate.aadl2.instance.SystemInstance;
 import org.sireum.IS;
 import org.sireum.Z;
-import org.sireum.aadl.arsit.ArsitBridge.Platform;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
+import org.sireum.hamr.arsit.ArsitBridge.Platform;
 
 public class HAMRUtil {
 

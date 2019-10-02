@@ -12,10 +12,10 @@ import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
-import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
+import org.sireum.hamr.ir.Aadl;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 

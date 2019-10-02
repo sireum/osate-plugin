@@ -17,8 +17,6 @@ import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
 import org.sireum.Option;
 import org.sireum.Z;
-import org.sireum.aadl.arsit.ArsitBridge;
-import org.sireum.aadl.ir.Aadl;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
@@ -26,6 +24,8 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.ErrorReport;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.Report;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
+import org.sireum.hamr.arsit.ArsitBridge;
+import org.sireum.hamr.ir.Aadl;
 
 public class LaunchHAMR extends AbstractSireumHandler {
 	private HAMRPrompt prompt = null;
@@ -142,7 +142,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							int maxStringSize = max_string_size;
 							int maxArraySize = max_seq_size;
 
-							return org.sireum.aadl.arsit.Arsit.run( //
+							return org.sireum.hamr.arsit.Arsit.run( //
 									model, optOutputDir, optBasePackageName, embedArt, genBlessEntryPoints, verbose,
 									devicesAsThreads, ipcMechanism, excludeImpl, behaviorDir, outputCDir, platform,
 									bitWidth, maxStringSize, maxArraySize);
@@ -203,7 +203,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							Option<String> hamrBasePackageName = ArsitBridge.sireumOption(_base);
 
-							return org.sireum.aadl.act.Act.run(camkesOutDir, model, auxDirs, aadlRootDir,
+							return org.sireum.hamr.act.Act.run(camkesOutDir, model, auxDirs, aadlRootDir,
 									hamrIntegration, hamrIncludeDirs, hamrStaticLib, hamrBasePackageName);
 						});
 
