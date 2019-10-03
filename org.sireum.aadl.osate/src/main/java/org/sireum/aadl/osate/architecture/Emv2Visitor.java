@@ -242,9 +242,13 @@ public class Emv2Visitor {
 
 	private Optional<Name> getErrorType(NamedElement error) {
 
+		if (EMV2Util.getContainingErrorModelLibrary(error) != null) {
 		return Optional.of(factory.name(VisitorUtil.add(
 				VisitorUtil.toIList(EMV2Util.getPrintName(EMV2Util.getContainingErrorModelLibrary(error))),
 				error.getName()), VisitorUtil.buildPosInfo(error)));
+		} else {
+			return Optional.empty();
+		}
 	}
 
 	private String getFeatureString(FeatureorPPReference fpp) {
