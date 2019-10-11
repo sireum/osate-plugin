@@ -36,7 +36,6 @@ import org.osgi.service.prefs.BackingStoreException;
 import org.sireum.Option;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
-import org.sireum.hamr.arsit.ArsitBridge;
 
 public class HAMRPrompt extends TitleAreaDialog {
 
@@ -57,15 +56,12 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	public final HAMROption OPTION_CAMKES_OUTPUT_DIRECTORY = new HAMROption("camkes.output.directory",
 			"seL4/CAmkES Output Directory");
-	public final HAMROption OPTION_TRUSTED_BUILD_PROFILE = new HAMROption("trusted.build.profile",
-			"Trusted Build Profile");
+
 	public final HAMROption OPTION_CAMKES_AUX_SRC_DIR = new HAMROption("camkes.aux.src.dir",
 			"Aux Code Directory for CAmkES");
 
-	public ArsitBridge.Platform getOptionPlatform() {
-		Platform p = Platform.valueOf(getSavedStringOption(OPTION_PLATFORM));
-		// slang cligen causes first letter of enum value to always be upper case
-		return ArsitBridge.Platform.valueOf(p.name().substring(0, 1).toUpperCase() + p.name().substring(1));
+	public Platform getOptionPlatform() {
+		return Platform.valueOf(getSavedStringOption(OPTION_PLATFORM));
 	}
 
 	public HW getOptionHW() {
@@ -102,10 +98,6 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	public String getOptionCamkesOptionOutputDirectory() {
 		return getSavedStringOption(OPTION_CAMKES_OUTPUT_DIRECTORY);
-	}
-
-	public boolean getOptionTrustedBuildProfile() {
-		return getSavedBooleanOption(OPTION_TRUSTED_BUILD_PROFILE);
 	}
 
 	public String getOptionCamkesAuxSrcDir() {
@@ -490,25 +482,6 @@ public class HAMRPrompt extends TitleAreaDialog {
 			final GridLayout grpLayout = new GridLayout(numGroupCols, false);
 			grpContainer.setLayout(grpLayout);
 
-			/****************************************************************
-			 * ROW - trusted build profile
-			 ****************************************************************/
-
-			{
-				final HAMROption subKey = OPTION_TRUSTED_BUILD_PROFILE;
-
-				// COL 1
-				Button btn = new Button(grpContainer, SWT.CHECK);
-				btn.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						computeVisibilityAndPack(container);
-					}
-				});
-				btn.setText(subKey.displayText);
-				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
-				registerOptionControl(subKey, btn, false);
-			}
 
 			/****************************************************************
 			 * ROW - Camkes Output Directory
@@ -844,13 +817,15 @@ public class HAMRPrompt extends TitleAreaDialog {
 			hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
 			toShow = SEL4_controls;
 			break;
+		case seL4_Only:
+		case seL4_TB:
+			hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
+			toShow = Arrays.asList(OPTION_PLATFORM, OPTION_HW, GROUP_CAMKES);
+			break;
+		default:
+			throw new RuntimeException("Not expecting platform " + p.name());
 		}
 		getComboControl(OPTION_HW).setItems(hwItems);
-
-		Option<Boolean> tb = getBooleanFromControl(OPTION_TRUSTED_BUILD_PROFILE);
-		if (p == Platform.seL4 && tb.nonEmpty() && tb.get()) {
-			toShow = Arrays.asList(OPTION_PLATFORM, OPTION_HW, GROUP_CAMKES);
-		}
 
 		// show(showControls, container, JVM_controls);
 		showOnly(container, toShow);
