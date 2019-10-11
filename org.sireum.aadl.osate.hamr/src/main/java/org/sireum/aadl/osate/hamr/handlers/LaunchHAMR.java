@@ -93,7 +93,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 				try {
 					int toolRet = 0;
 
-					final boolean targetingSel4 = prompt.getOptionPlatform() == ArsitBridge.Platform.SeL4;
+					final boolean targetingSel4 = prompt.getOptionPlatform() == Platform.seL4;
 
 					List<Report> report = HAMRUtil.checkModel(si, prompt);
 
@@ -104,109 +104,69 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						}
 					}
 
-					final File workspaceRoot = getProjectPath(si).toFile();
-
-					final String slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("")
-							? workspaceRoot.getAbsolutePath()
-							: prompt.getSlangOptionOutputDirectory();
-
-					final String _base = prompt.getOptionBasePackageName().equals("")
-							? HAMRUtil.cleanupPackageName(new File(slangOutputDir).getName())
-							: HAMRUtil.cleanupPackageName(prompt.getOptionBasePackageName());
-
-					final String outputCDirectory = targetingSel4
-							? new File(prompt.getOptionCamkesOptionOutputDirectory(), "hamr").getAbsolutePath()
-							: new File(slangOutputDir, "src/c/nix").getAbsolutePath();
-
-					if (toolRet == 0 && !prompt.getOptionTrustedBuildProfile()) {
+					if (toolRet == 0) {
 
 						writeToConsole("Generating " + getToolName() + " artifacts...");
 
-						Util.callWrapper(getToolName(), console, () -> {
+						toolRet = Util.callWrapper(getToolName(), console, () -> {
+							final File workspaceRoot = getProjectPath(si).toFile();
 
-							String _behaviorDir = prompt.getOptionCSourceDirectory().equals("") ? null
-									: prompt.getOptionCSourceDirectory();
+							final String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("")
+									? workspaceRoot.getAbsolutePath()
+									: prompt.getSlangOptionOutputDirectory();
 
-							Option<String> optOutputDir = ArsitBridge.sireumOption(slangOutputDir);
-							Option<String> optBasePackageName = ArsitBridge.sireumOption(_base);
-							boolean embedArt = PreferenceValues.getHAMR_EMBED_ART_OPT();
-							boolean genBlessEntryPoints = false;
+							final String _base = prompt.getOptionBasePackageName().equals("")
+									? HAMRUtil.cleanupPackageName(new File(_slangOutputDir).getName())
+									: HAMRUtil.cleanupPackageName(prompt.getOptionBasePackageName());
+
+							final String outputCDirectory = targetingSel4
+									? new File(prompt.getOptionCamkesOptionOutputDirectory(), "hamr").getAbsolutePath()
+									: new File(_slangOutputDir, "src/c/nix").getAbsolutePath();
+
 							boolean verbose = PreferenceValues.getHAMR_VERBOSE_OPT();
+							String platform = prompt.getOptionPlatform().hamrName();
+							Option<String> slangOutputDir = ArsitBridge.sireumOption(_slangOutputDir);
+							Option<String> slangPackageName = ArsitBridge.sireumOption(_base);
+							boolean embedArt = PreferenceValues.getHAMR_EMBED_ART_OPT();
 							boolean devicesAsThreads = PreferenceValues.getHAMR_DEVICES_AS_THREADS_OPT();
-							ArsitBridge.IPCMechanism ipcMechanism = ArsitBridge.IPCMechanism.SharedMemory;
-							boolean excludeImpl = prompt.getOptionExcludesSlangImplementations();
-							Option<String> behaviorDir = ArsitBridge.sireumOption(_behaviorDir);
-							Option<String> outputCDir = ArsitBridge.sireumOption(outputCDirectory);
-							ArsitBridge.Platform platform = prompt.getOptionPlatform();
+							IS<Z, String> slangAuxCodeDirs = prompt.getOptionCSourceDirectory().equals("")
+									? HAMRUtil.toISZ()
+									: HAMRUtil.toISZ(prompt.getOptionCSourceDirectory());
+							Option<String> slangOutputCDirectory = ArsitBridge.sireumOption(outputCDirectory);
+							boolean excludeComponentImpl = prompt.getOptionExcludesSlangImplementations();
 							int bitWidth = bit_width;
 							int maxStringSize = max_string_size;
 							int maxArraySize = max_seq_size;
-
-							return org.sireum.hamr.arsit.Arsit.run( //
-									model, optOutputDir, optBasePackageName, embedArt, genBlessEntryPoints, verbose,
-									devicesAsThreads, ipcMechanism, excludeImpl, behaviorDir, outputCDir, platform,
-									bitWidth, maxStringSize, maxArraySize);
-						});
-					}
-
-					if (toolRet == 0 && HAMRUtil.shouldTranspile(prompt)) {
-
-						String sireumHome = PreferenceValues.getHAMR_SIREUM_HOME();
-						if (sireumHome.equals("") || !new File(sireumHome).exists()) {
-							writeToConsole("SIREUM_HOME not set.");
-							writeToConsole(
-									"Install Sireum (https://github.com/sireum/kekinian#installing) and then add its install directory to \"Sireum HAMR >> Code Generation >> SIREUM_HOME\"");
-
-							toolRet = 1;
-						}
-
-						String transpilerScript = slangOutputDir
-								+ (prompt.getOptionPlatform() == ArsitBridge.Platform.SeL4 ? "/bin/transpile-sel4.sh"
-										: "/bin/transpile.sh");
-
-						String[] commands = new String[] { "chmod", "700", transpilerScript };
-
-						if (toolRet == 0) {
-							toolRet = HAMRUtil.invoke(console, commands);
-						}
-
-						if (toolRet == 0) {
-							commands = new String[] { transpilerScript };
-							toolRet = HAMRUtil.invoke(console, commands);
-						}
-					}
-
-					if (toolRet == 0 && prompt.getOptionPlatform() == ArsitBridge.Platform.SeL4) {
-
-						// run ACT
-						toolRet = Util.callWrapper(getToolName(), console, () -> {
-
 							File _camkesOutDir = new File(prompt.getOptionCamkesOptionOutputDirectory());
 							_camkesOutDir.mkdirs();
-
-							Option<String> camkesOutDir = ArsitBridge.sireumOption(_camkesOutDir.getAbsolutePath());
-
-							writeToConsole("\nGenerating CAmkES artifacts ...");
-
-							IS<Z, String> auxDirs = prompt.getOptionCamkesAuxSrcDir().equals("") ? HAMRUtil.toISZ()
+							Option<String> camkesOutputDirectory = ArsitBridge
+									.sireumOption(_camkesOutDir.getAbsolutePath());
+							IS<Z, String> camkesAuxCodeDirs = prompt.getOptionCamkesAuxSrcDir().equals("")
+									? HAMRUtil.toISZ()
 									: HAMRUtil.toISZ(prompt.getOptionCamkesAuxSrcDir());
-
 							Option<String> aadlRootDir = ArsitBridge.sireumOption(workspaceRoot.getAbsolutePath());
 
-							boolean hamrIntegration = !prompt.getOptionTrustedBuildProfile();
-
-							IS<Z, String> hamrIncludeDirs = HAMRUtil.toISZ(outputCDirectory);
-
-							String hsl = new File(outputCDirectory, "sel4-build/libmain.a").getAbsolutePath();
-
-							org.sireum.Option<String> hamrStaticLib = new org.sireum.Some<>(hsl);
-
-							Option<String> hamrBasePackageName = ArsitBridge.sireumOption(_base);
-
-							return org.sireum.hamr.act.Act.run(camkesOutDir, model, auxDirs, aadlRootDir,
-									hamrIntegration, hamrIncludeDirs, hamrStaticLib, hamrBasePackageName);
+							return org.sireum.cli.HAMR.codeGen( //
+									model, //
+									verbose, //
+									org.sireum.Cli.HamrPlatform$.MODULE$.byName(platform).get(), //
+									slangOutputDir, //
+									slangPackageName, //
+									embedArt, //
+									devicesAsThreads, //
+									//
+									org.sireum.Cli.HamrIpcMechanism$.MODULE$.byName("SharedMemory"), //
+									slangAuxCodeDirs, //
+									slangOutputCDirectory, //
+									excludeComponentImpl, //
+									bitWidth, //
+									maxStringSize, //
+									maxArraySize, //
+									//
+									camkesOutputDirectory, //
+									camkesAuxCodeDirs, //
+									aadlRootDir);
 						});
-
 					}
 
 					String msg = "HAMR code "

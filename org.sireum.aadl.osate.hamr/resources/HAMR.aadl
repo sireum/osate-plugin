@@ -1,5 +1,5 @@
 property set HAMR is
-  Platform : list of enumeration (JVM, Linux, macOS, Cygwin, seL4) applies to (processor, virtual processor, system implementation);
+  Platform : list of enumeration (JVM, Linux, macOS, Cygwin, seL4, seL4_Only, seL4_TB) applies to (processor, virtual processor, system implementation);
   HW : list of enumeration (ODROID_XU4, QEMU, x86, amd64) applies to (processor, virtual processor, system implementation);
  
   Compute_Entrypoint_Sources : list of aadlstring applies to (processor, virtual processor, system implementation);

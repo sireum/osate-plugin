@@ -27,7 +27,18 @@ public class HAMRPropertyProvider {
 
 	// should match Platform in HAMR.aadl
 	enum Platform {
-		JVM, Linux, macOS, Cygwin, seL4
+		JVM, Linux, macOS, Cygwin, seL4, seL4_Only, seL4_TB;
+
+		Platform() {
+			if(org.sireum.Cli.HamrPlatform$.MODULE$.byName(hamrName()).isEmpty()) {
+				throw new RuntimeException(this.hamrName() + " is not a valid HamrPlatform value");
+			}
+		}
+
+		public String hamrName() {
+			// first char in cli-gen'ed slang enum values are upper cased
+			return this.name().substring(0, 1).toUpperCase() + this.name().substring(1);
+		}
 	}
 
 	// should match HW in HAMR.aadl

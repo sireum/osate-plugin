@@ -1,7 +1,0 @@
-property set SB_SYS is
-
-    Compute_Entrypoint_Source_Text : list of aadlstring applies to (processor, virtual processor, system, system implementation, port, thread);
-
-    CAmkES_Owner_Thread : aadlstring applies to ( data );
-    
-end SB_SYS;
