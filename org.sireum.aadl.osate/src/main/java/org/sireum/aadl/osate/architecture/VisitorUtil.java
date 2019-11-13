@@ -15,12 +15,12 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.LineAndColumn;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.NamedElement;
-import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.annexsupport.AnnexRegistry;
 import org.osate.annexsupport.AnnexTextPositionResolverRegistry;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelLibrary;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelSubclause;
+import org.sireum.aadl.osate.util.Util;
 import org.sireum.message.Position;
 
 public class VisitorUtil {
@@ -73,7 +73,7 @@ public class VisitorUtil {
 	private static String getResourcePath(NamedElement component) {
 		Resource res = component.eResource();
 		URI uri = res.getURI();
-		IPath path = OsateResourceUtil.getOsatePath(uri);
+		IPath path = Util.toIFile(uri).getFullPath();
 		return path.toPortableString();
 	}
 
