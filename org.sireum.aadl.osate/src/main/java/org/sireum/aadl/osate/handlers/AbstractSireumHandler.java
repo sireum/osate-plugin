@@ -46,7 +46,6 @@ import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instantiation.InstantiateModel;
-import org.osate.aadl2.modelsupport.resources.OsateResourceUtil;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.aadl.osate.util.SelectionHelper;
@@ -190,11 +189,11 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 	}
 
 	protected String getInstanceFilename(ComponentInstance root) {
-		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getName();
+		return Util.toIFile(root.eResource().getURI()).getName();
 	}
 
 	protected IProject getProject(ComponentInstance root) {
-		return OsateResourceUtil.getOsateIFile(root.eResource().getURI()).getProject();
+		return Util.toIFile(root.eResource().getURI()).getProject();
 	}
 
 	protected IPath getProjectPath(ComponentInstance e) {
@@ -205,7 +204,7 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		Element root = getComponentInstance(e);
 		Resource res = root.eResource();
 		URI uri = res.getURI();
-		IPath path = OsateResourceUtil.getOsatePath(uri);
+		IPath path = Util.toIFile(uri).getFullPath();
 		return path;
 	}
 
