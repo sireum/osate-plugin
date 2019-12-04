@@ -18,7 +18,5 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceValues.HAMR_SERIALIZE_OPT, true);
 
 		store.setDefault(PreferenceValues.HAMR_VERBOSE_OPT, true);
-
-		store.setDefault(PreferenceValues.HAMR_SIREUM_HOME, "");
 	}
 }

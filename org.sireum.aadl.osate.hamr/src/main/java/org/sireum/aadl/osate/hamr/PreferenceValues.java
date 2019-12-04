@@ -11,7 +11,6 @@ public class PreferenceValues {
 	public static final String HAMR_OUTPUT_FOLDER_OPT = "org.sireum.HAMR_OUTPUT_FOLDER_OPT";
 	public static final String HAMR_SERIALIZE_OPT = "org.sireum.HAMR_SERIALIZE_OPT";
 	public static final String HAMR_VERBOSE_OPT = "org.sireum.HAMR_VERBOSE_OPT";
-	public static final String HAMR_SIREUM_HOME = "org.sireum.HAMR_SIREUM_HOME";
 
 	public enum Generators {
 		GEN_CAMKES
@@ -40,11 +39,6 @@ public class PreferenceValues {
 	public static boolean getHAMR_VERBOSE_OPT() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		return store.getBoolean(HAMR_VERBOSE_OPT);
-	}
-
-	public static String getHAMR_SIREUM_HOME() {
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		return store.getString(HAMR_SIREUM_HOME);
 	}
 }
 

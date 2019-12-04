@@ -1,14 +1,9 @@
 package org.sireum.aadl.osate.hamr.handlers;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.console.MessageConsoleStream;
 import org.osate.aadl2.ComponentCategory;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
@@ -82,39 +77,6 @@ public class HAMRUtil {
 		scala.collection.Seq<T> seq = scala.collection.JavaConverters.asScalaBuffer(java.util.Arrays.asList(args));
 		IS<Z, T> ret = org.sireum.IS$.MODULE$.apply(seq, org.sireum.Z$.MODULE$);
 		return ret;
-	}
-
-	public static int invoke(MessageConsole console, String[] commands) {
-		MessageConsoleStream mcs = console.newMessageStream();
-		try {
-			Runtime rt = Runtime.getRuntime();
-			String[] envp = new String[] { "SIREUM_HOME=" + PreferenceValues.getHAMR_SIREUM_HOME() };
-			Process p = rt.exec(commands, envp);
-
-			BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-			if (PreferenceValues.getHAMR_VERBOSE_OPT()) {
-				mcs.write("Invoking: '" + String.join(" ", Arrays.asList(commands)) + "'\n");
-			}
-
-			String line;
-			while ((line = input.readLine()) != null) {
-				mcs.write(line + "\n");
-			}
-
-			BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-			while ((line = error.readLine()) != null) {
-				mcs.write(line + "\n");
-			}
-
-			p.waitFor();
-
-			return p.exitValue();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 1;
-		}
 	}
 
 	private final static HAMRUtil inst = new HAMRUtil();
