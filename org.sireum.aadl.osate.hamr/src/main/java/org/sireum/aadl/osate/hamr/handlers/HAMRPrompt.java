@@ -274,23 +274,25 @@ public class HAMRPrompt extends TitleAreaDialog {
 		/****************************************************************
 		 * ROW - HW
 		 ****************************************************************/
-		{
-			final HAMROption key = OPTION_HW;
-
-			// COL 1
-			addLabel(key.displayText, container, key);
-
-			// COL 2
-			Combo cmb = new Combo(container, SWT.READ_ONLY);
-			GridData gd = new GridData(SWT.LEFT, SWT.CENTER, true, false);
-			gd.widthHint = 100;
-			cmb.setLayoutData(gd);
-			cmb.setItems(getHWs());
-			registerOptionControl(key, cmb);
-
-			// COL 3
-			registerViewControl(key, addColumnPad(container)); // col padding
-		}
+		/*
+		 * {
+		 * final HAMROption key = OPTION_HW;
+		 *
+		 * // COL 1
+		 * addLabel(key.displayText, container, key);
+		 *
+		 * // COL 2
+		 * Combo cmb = new Combo(container, SWT.READ_ONLY);
+		 * GridData gd = new GridData(SWT.LEFT, SWT.CENTER, true, false);
+		 * gd.widthHint = 100;
+		 * cmb.setLayoutData(gd);
+		 * cmb.setItems(getHWs());
+		 * registerOptionControl(key, cmb);
+		 *
+		 * // COL 3
+		 * registerViewControl(key, addColumnPad(container)); // col padding
+		 * }
+		 */
 
 		/****************************************************************
 		 * ROW - Slang Output Directory
@@ -788,7 +790,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 				OPTION_PLATFORM, OPTION_SLANG_OUTPUT_DIRECTORY, OPTION_BASE_PACKAGE_NAME);
 
 		List<HAMREntry> NIX_controls = addAll(JVM_controls, Arrays.asList( //
-				OPTION_HW, OPTION_C_SRC_DIRECTORY, OPTION_EXCLUDE_SLANG_IMPL, //
+				// OPTION_HW,
+				OPTION_C_SRC_DIRECTORY, OPTION_EXCLUDE_SLANG_IMPL, //
 				GROUP_TRANSPILER));
 
 		List<HAMREntry> SEL4_controls = addAll(NIX_controls, Arrays.asList( //
@@ -820,12 +823,13 @@ public class HAMRPrompt extends TitleAreaDialog {
 		case seL4_Only:
 		case seL4_TB:
 			hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
-			toShow = Arrays.asList(OPTION_PLATFORM, OPTION_HW, GROUP_CAMKES);
+			// toShow = Arrays.asList(OPTION_PLATFORM, OPTION_HW, GROUP_CAMKES);
+			toShow = Arrays.asList(OPTION_PLATFORM, GROUP_CAMKES);
 			break;
 		default:
 			throw new RuntimeException("Not expecting platform " + p.name());
 		}
-		getComboControl(OPTION_HW).setItems(hwItems);
+		// getComboControl(OPTION_HW).setItems(hwItems);
 
 		// show(showControls, container, JVM_controls);
 		showOnly(container, toShow);
