@@ -12,7 +12,7 @@ development environment (following the installation directions
 being used in either case so the rest of these instructions will refer to the
 IDE as 'Eclipse'.
 
-1. Clone this repository ``git clone git@github.com:sireum/osate-plugin.git osate-plugin``
+1. Clone this repository ``git clone git@github.com:sireum/osate-plugin.git``
 
 1. Launch Eclipse and go to __File__ -> __Import...__  
 
@@ -27,33 +27,12 @@ IDE as 'Eclipse'.
 
 1. __Optional:__ Rebuild tool jars
 
-   * AIR
+   * Sireum
      
      ```bash
-     git clone https://github.com/sireum/air.git
-     cd air
-     ./prelude.sh
-     ./mill-standalone air.jvm.assembly
-     cp out/air/jvm/assembly/dest/out.jar <osate-plugin-dir>/org.sireum.aadl.osate/lib/air.jar
-     ```
-
-   * ACT
-   
-     ```bash
-     git clone --recursive https://github.com/sireum/act.git
-     cd act
-     ./bin/build.cmd min-jar
-     cp ./out/act/jvm/jar/dest/out.jar <osate-plugin-dir>/org.sireum.aadl.osate.act/lib/act.jar
-     ```
-     
-   * Arsit
-   
-     ```bash
-     git clone --recursive git@github.com:santoslab/arsit.git
-     cd arsit
-     ./bin/prelude.sh
-     ./bin/mill arsit.jvm.jar
-     cp out/arsit/jvm/jar/dest/out.jar <ostate-plugin-dir>/org.sireum.aadl.osate.arsit/lib/arsit.jar
+     git clone --recursive https://github.com/sireum/kekinian
+     kekinian/bin/build.cmd
+     cp kekinian/bin/sireum.jar <osate-plugin-dir>/org.sireum.aadl.osate/lib/sireum.jar
      ```
      
    * Awas
