@@ -13,33 +13,18 @@
      <!-- CASE menu bar-->
      <menuContribution
        locationURI="menu:com.collins.fmw.cyres.menus.menubar.build">
-       <dynamic class="org.sireum.aadl.osate.act.MenuContributions" 
-         id="org.sireum.ui.views.menu.MenuItems"/>
-     </menuContribution>
-     <menuContribution
-       locationURI="menu:com.collins.fmw.cyres.menus.menubar.build">
        <dynamic class="org.sireum.aadl.osate.hamr.MenuContributions" 
          id="org.sireum.ui.views.menu.HAMRMenuItems"/>
      </menuContribution>
      
-     <!-- CASE menu outline view -->
-     <menuContribution
-       locationURI="popup:com.collins.fmw.cyres.menus.outline.build">
-       <dynamic class="org.sireum.aadl.osate.act.MenuContributions" 
-         id="org.sireum.ui.views.menu.MenuItems"/>
-     </menuContribution>     
+     <!-- CASE menu outline view -->  
      <menuContribution
        locationURI="popup:com.collins.fmw.cyres.menus.outline.build">
        <dynamic class="org.sireum.aadl.osate.hamr.MenuContributions" 
          id="org.sireum.ui.views.menu.HAMRMenuItems"/>
      </menuContribution>
      
-     <!-- CASE menu editor -->
-     <menuContribution
-       locationURI="popup:com.collins.fmw.cyres.menus.editor.build">
-       <dynamic class="org.sireum.aadl.osate.act.MenuContributions" 
-         id="org.sireum.ui.views.menu.MenuItems"/>
-     </menuContribution>     
+     <!-- CASE menu editor -->   
      <menuContribution
        locationURI="popup:com.collins.fmw.cyres.menus.editor.build">
        <dynamic class="org.sireum.aadl.osate.hamr.MenuContributions" 
