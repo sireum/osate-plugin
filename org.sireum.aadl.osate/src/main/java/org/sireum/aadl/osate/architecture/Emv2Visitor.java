@@ -44,6 +44,7 @@ import org.osate.xtext.aadl2.errormodel.util.EMV2Properties;
 import org.osate.xtext.aadl2.errormodel.util.EMV2Util;
 import org.osate.xtext.aadl2.naming.Aadl2QualifiedNameProvider;
 import org.sireum.hamr.ir.Annex;
+import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.hamr.ir.BehaveStateMachine;
 import org.sireum.hamr.ir.Emv2BehaviorSection;
 import org.sireum.hamr.ir.Emv2Library;
@@ -476,8 +477,8 @@ public class Emv2Visitor {
 
 	}
 
-	public List<Emv2Library> buildLibs() {
-		List<Emv2Library> emv2Libs = new ArrayList<>();
+	public List<AnnexLib> buildLibs() {
+		List<AnnexLib> emv2Libs = new ArrayList<>();
 		addAdditionalLibs();
 		errorLibs.keySet().forEach(eln -> {
 			emv2Libs.add(emv2Lib(errorLibs.get(eln)));
