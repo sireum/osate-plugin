@@ -56,12 +56,13 @@ import org.osate.aadl2.impl.DirectedFeatureImpl;
 import org.osate.aadl2.impl.FeatureGroupImpl;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.ConnectionInstance;
+import org.osate.aadl2.instance.ConnectionInstanceEnd;
 import org.osate.aadl2.instance.ConnectionReference;
 import org.osate.aadl2.instance.FeatureInstance;
 import org.osate.aadl2.instance.FlowSpecificationInstance;
 import org.osate.aadl2.instance.InstancePackage;
 import org.osate.aadl2.instance.InstanceReferenceValue;
-import org.osate.aadl2.instance.impl.FeatureInstanceImpl;
+import org.osate.aadl2.instance.ModeTransitionInstance;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
@@ -70,6 +71,8 @@ import org.sireum.Option;
 import org.sireum.Some;
 import org.sireum.hamr.ir.AadlASTJavaFactory;
 import org.sireum.hamr.ir.AnnexLib;
+import org.sireum.message.Position;
+
 
 public class Visitor {
 
@@ -157,6 +160,29 @@ public class Visitor {
 
 		return VisitorUtil.toIList(factory.connection(factory.name(name, VisitorUtil.buildPosInfo(conn)), src, dst,
 				kind, isBiDirectional, connectionInstances, properties));
+	}
+
+	private org.sireum.hamr.ir.EndPoint buildEndPoint(ConnectionInstanceEnd cie) {
+		final List<String> component = Arrays.asList(cie.getComponentInstance().getInstanceObjectPath().split("\\."));
+		final Position componentPos = VisitorUtil
+				.buildPosInfo(cie.getComponentInstance().getInstantiatedObjects().get(0));
+
+		if (cie instanceof FeatureInstance) {
+			final List<String> feature = Arrays.asList(cie.getInstanceObjectPath().split("\\."));
+			final Position featurePos = VisitorUtil.buildPosInfo(cie.getInstantiatedObjects().get(0));
+
+			final AadlASTJavaFactory.Direction direction = handleDirection(((FeatureInstance) cie).getDirection());
+
+			return factory.endPoint(factory.name(component, componentPos), factory.name(feature, featurePos),
+					direction);
+
+		} else if (cie instanceof ComponentInstance) {
+			return factory.endPoint(factory.name(component, componentPos), null, null);
+		} else if (cie instanceof ModeTransitionInstance) {
+			throw new RuntimeException("Need to handle ModeTransitionInstanceImpl: " + cie);
+		} else {
+			throw new RuntimeException("Unexpected: " + cie);
+		}
 	}
 
 	private List<org.sireum.hamr.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
@@ -455,20 +481,6 @@ public class Visitor {
 	private org.sireum.hamr.ir.ConnectionInstance buildConnectionInst(ConnectionInstance connInst, List<String> path) {
 		final List<String> currentPath = VisitorUtil.add(path, connInst.getName());
 
-		final List<String> srcComponent = Arrays
-				.asList(connInst.getSource().getComponentInstance().getInstanceObjectPath().split("\\."));
-		final List<String> srcFeature = Arrays.asList(connInst.getSource().getInstanceObjectPath().split("\\."));
-		final AadlASTJavaFactory.Direction srcDirection = connInst.getSource() instanceof FeatureInstanceImpl
-				? handleDirection(((FeatureInstanceImpl) connInst.getSource()).getDirection())
-				: null;
-
-		final List<String> dstComponent = Arrays
-				.asList(connInst.getDestination().getComponentInstance().getInstanceObjectPath().split("\\."));
-		final List<String> dstFeature = Arrays.asList(connInst.getDestination().getInstanceObjectPath().split("\\."));
-		final AadlASTJavaFactory.Direction dstDirection = connInst.getDestination() instanceof FeatureInstanceImpl
-				? handleDirection(((FeatureInstanceImpl) connInst.getDestination()).getDirection())
-				: null;
-
 		final org.sireum.hamr.ir.Name name = factory.name(currentPath,
 				VisitorUtil.buildPosInfo(connInst.getInstantiatedObjects().get(0)));
 
@@ -500,22 +512,9 @@ public class Visitor {
 		final List<org.sireum.hamr.ir.ConnectionReference> connectionRefs = connInst.getConnectionReferences().stream()
 				.map(ci -> buildConnectionRef(ci, path)).collect(Collectors.toList());
 
-		final org.sireum.hamr.ir.EndPoint src = factory.endPoint(
-				factory.name(srcComponent,
-						VisitorUtil.buildPosInfo(
-								connInst.getSource().getComponentInstance().getInstantiatedObjects().get(0))),
-				factory.name(srcFeature,
-						VisitorUtil.buildPosInfo(connInst.getSource().getInstantiatedObjects().get(0))),
-				srcDirection);
+		final org.sireum.hamr.ir.EndPoint src = buildEndPoint(connInst.getSource());
 
-		final org.sireum.hamr.ir.EndPoint dst = factory
-				.endPoint(
-						factory.name(dstComponent,
-								VisitorUtil.buildPosInfo(connInst.getDestination().getComponentInstance()
-										.getInstantiatedObjects().get(0))),
-						factory.name(dstFeature,
-								VisitorUtil.buildPosInfo(connInst.getDestination().getInstantiatedObjects().get(0))),
-						dstDirection);
+		final org.sireum.hamr.ir.EndPoint dst = buildEndPoint(connInst.getDestination());
 
 		return factory.connectionInstance(name, src, dst, kind, connectionRefs, properties);
 	}
