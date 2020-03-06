@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.eclipse.core.runtime.Platform;
 import org.osate.aadl2.Aadl2Package;
 import org.osate.aadl2.AbstractNamedValue;
 import org.osate.aadl2.AccessConnection;
@@ -64,17 +65,28 @@ import org.osate.aadl2.instance.impl.FeatureInstanceImpl;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
+import org.osgi.framework.Bundle;
 import org.sireum.Option;
 import org.sireum.Some;
 import org.sireum.hamr.ir.AadlASTJavaFactory;
+import org.sireum.hamr.ir.AnnexLib;
 
 public class Visitor {
+
+	public Visitor() {
+		Bundle b = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
+		if (b != null) {
+			sv = new SmfVisitor(this);
+		}
+	}
 
 	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 
 	final Map<String, org.sireum.hamr.ir.Component> datamap = new LinkedHashMap<>();
 	final Map<List<String>, Set<Connection>> compConnMap = new HashMap<>();
 	final Emv2Visitor ev = new Emv2Visitor(this);
+	SmfVisitor sv = null;
+
 
 	public Option<org.sireum.hamr.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		final Option<org.sireum.hamr.ir.Component> t = visit(root);
@@ -82,8 +94,13 @@ public class Visitor {
 			final List<org.sireum.hamr.ir.Component> dataComponents = includeDataComponents
 					? new ArrayList<>(datamap.values())
 					: VisitorUtil.iList();
-			return new Some<>(factory.aadl(VisitorUtil.toIList(t.get()), ev.buildLibs(), // errorLib
-					dataComponents));
+			List<AnnexLib> libs = ev.buildLibs();
+			if (sv != null) {
+				libs = VisitorUtil.addAll(libs, sv.visitSmfLib(root));
+			}
+			return new Some<>(
+					factory.aadl(VisitorUtil.toIList(t.get()), libs,
+							dataComponents));
 		} else {
 			return org.sireum.None.apply();
 		}
@@ -304,7 +321,11 @@ public class Visitor {
 
 		final List<org.sireum.hamr.ir.Mode> modes = VisitorUtil.iList(); // TODO
 
-		final List<org.sireum.hamr.ir.Annex> annexes = VisitorUtil.toIList(ev.visitEmv2Comp(compInst, currentPath)); // TODO
+		List<org.sireum.hamr.ir.Annex> annexes =
+				VisitorUtil.toIList(ev.visitEmv2Comp(compInst, currentPath)); // TODO
+		if(sv != null) {
+			annexes = VisitorUtil.add(annexes, sv.visitSmfComp(compInst, currentPath));
+		}
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
 				connectionInstances, properties, flows, modes, annexes);
 	}
