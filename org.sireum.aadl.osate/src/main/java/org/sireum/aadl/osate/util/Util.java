@@ -120,6 +120,10 @@ public class Util {
 
 		// return OsateResourceUtil.toIFile(resourceURI);
 
-		return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(resourceURI.toPlatformString(true)));
+		if (resourceURI.isPlatform()) {
+			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(resourceURI.toPlatformString(true)));
+		} else {
+			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(resourceURI.toFileString()));
+		}
 	}
 }
