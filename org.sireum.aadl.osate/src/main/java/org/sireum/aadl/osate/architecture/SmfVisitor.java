@@ -58,7 +58,7 @@ public class SmfVisitor {
 	}
 
 	public List<AnnexLib> visitSmfLib(Element root) {
-		HashSet<SecModelLibrary> libs = getallPackages(root);
+		HashSet<SecModelLibrary> libs = getAllPackages(root);
 		if (libs.size() > 1) {
 			java.lang.System.err.println("More than one security library defined");
 			return VisitorUtil.iList();
@@ -85,7 +85,7 @@ public class SmfVisitor {
 		return factory.smfType(typeName, parentName);
 	}
 
-	private HashSet<SecModelLibrary> getallPackages(Element root) {
+	private HashSet<SecModelLibrary> getAllPackages(Element root) {
 		HashSet<SecModelLibrary> secLibs = new HashSet<SecModelLibrary>();
 		// HashSet<> packages = new HashSet(); no need of seen set as the circular imports are not allowed
 
@@ -96,19 +96,17 @@ public class SmfVisitor {
 			while (!worklist.isEmpty()) {
 				ModelUnit head = worklist.remove(0);
 				if (head != null && head instanceof AadlPackage) {
-					secLibs.addAll(
-							AnnexUtil
-									.getAllActualAnnexLibraries((AadlPackage) head,
-											SecMFPackage.eINSTANCE.getSecModelLibrary())
-									.stream().map(al -> (SecModelLibrary)al).collect(Collectors.toList()));
-				}
-				AadlPackage ap = (AadlPackage) head;
-				if (ap.getPublicSection() != null) {
-					worklist.addAll(ap.getPublicSection().getImportedUnits());
-				} else if (ap.getPrivateSection() != null) {
-					worklist.addAll(ap.getPrivateSection().getImportedUnits());
-				}
+					secLibs.addAll(AnnexUtil
+							.getAllActualAnnexLibraries((AadlPackage) head, SecMFPackage.eINSTANCE.getSecModelLibrary())
+							.stream().map(al -> (SecModelLibrary) al).collect(Collectors.toList()));
 
+					AadlPackage ap = (AadlPackage) head;
+					if (ap.getPublicSection() != null) {
+						worklist.addAll(ap.getPublicSection().getImportedUnits());
+					} else if (ap.getPrivateSection() != null) {
+						worklist.addAll(ap.getPrivateSection().getImportedUnits());
+					}
+				}
 			}
 		}
 		return secLibs;
@@ -118,8 +116,7 @@ public class SmfVisitor {
 
 	private List<SecModelSubclause> getSecModelSubclause(ComponentInstance element) {
 		ComponentClassifier cl = element.getComponentClassifier();
-		EList<AnnexSubclause> asc = AnnexUtil
-				.getAllAnnexSubclauses(cl, SecMFPackage.eINSTANCE.getSecModelSubclause());
+		EList<AnnexSubclause> asc = AnnexUtil.getAllAnnexSubclauses(cl, SecMFPackage.eINSTANCE.getSecModelSubclause());
 		return asc.stream().map(it -> (SecModelSubclause) it).collect(Collectors.toList());
 	}
 
@@ -147,6 +144,5 @@ public class SmfVisitor {
 
 		return factory.smfDeclass(flowName, srcType, snkType);
 	}
-
 
 }
