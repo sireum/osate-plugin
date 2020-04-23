@@ -2,6 +2,7 @@ package org.sireum.aadl.osate.architecture;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
@@ -278,6 +279,7 @@ public class Emv2Visitor {
 
 	private List<org.sireum.hamr.ir.Emv2Flow> flowSource(ComponentInstance root, List<String> path) {
 		List<org.sireum.hamr.ir.Emv2Flow> sources = new ArrayList<>();
+
 		EMV2Util.getAllErrorSources(root.getComponentClassifier()).forEach(src -> {
 			String name = src.getName();
 			if (src.getSourceModelElement() instanceof ErrorPropagation) {
@@ -338,7 +340,7 @@ public class Emv2Visitor {
 			String name = pth.getName();
 			org.sireum.hamr.ir.Emv2Propagation inError = null;
 			org.sireum.hamr.ir.Emv2Propagation outError = null;
-			if (pth.getTypeTokenConstraint() != null) {
+			if (pth.getTypeTokenConstraint() != null && !pth.isAllIncoming()) {
 				DirectionType inDir = EMV2Util.getErrorPropagationFeatureDirection(pth.getIncoming());
 				String inDirAdd = (inDir.incoming() && inDir.outgoing()) ? "_IN" : "";
 				String pp = (pth.getIncoming().getFeatureorPPRef() == null) ? pth.getIncoming().getKind()
@@ -350,10 +352,13 @@ public class Emv2Visitor {
 						.collect(Collectors.toList());
 				inError = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.In,
 						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosInfo(pth)), errorTokens);
+			} else if (pth.isAllIncoming()) {
+				ErrorPropagation ep = EMV2Util.getErrorPropagation((EMV2Path) pth);
+				System.out.println(ep);
 			} else {
 				inError = errorProp2Map(VisitorUtil.toIList(pth.getIncoming()), true, path).get(0);
 			}
-			if (pth.getTargetToken() != null) {
+			if (pth.getTargetToken() != null && !pth.isAllOutgoing()) {
 				DirectionType outDir = EMV2Util.getErrorPropagationFeatureDirection(pth.getOutgoing());
 				String outDirAdd = (outDir.incoming() && outDir.outgoing()) ? "_OUT" : "";
 				String pp = (pth.getOutgoing().getFeatureorPPRef() == null) ? pth.getOutgoing().getKind()
@@ -366,6 +371,9 @@ public class Emv2Visitor {
 				outError = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.Out,
 						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosInfo(pth.getOutgoing())),
 						errorTokens);
+			} else if (pth.isAllOutgoing()) {
+				Collection<ErrorPropagation> ep = EMV2Util.getOutgoingPropagationOrAll(pth);
+				System.out.println(ep);
 			} else {
 				outError = errorProp2Map(VisitorUtil.toIList(pth.getOutgoing()), false, path).get(0);
 			}
