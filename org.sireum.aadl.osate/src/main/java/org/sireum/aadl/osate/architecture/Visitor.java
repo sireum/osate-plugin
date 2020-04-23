@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.EObject;
 import org.osate.aadl2.Aadl2Package;
 import org.osate.aadl2.AbstractNamedValue;
 import org.osate.aadl2.AccessConnection;
@@ -28,6 +29,7 @@ import org.osate.aadl2.Element;
 import org.osate.aadl2.EnumerationLiteral;
 import org.osate.aadl2.Feature;
 import org.osate.aadl2.FeatureConnection;
+import org.osate.aadl2.FeatureGroup;
 import org.osate.aadl2.FeatureGroupConnection;
 import org.osate.aadl2.FeatureGroupPrototype;
 import org.osate.aadl2.FeatureGroupType;
@@ -58,6 +60,7 @@ import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.ConnectionInstance;
 import org.osate.aadl2.instance.ConnectionInstanceEnd;
 import org.osate.aadl2.instance.ConnectionReference;
+import org.osate.aadl2.instance.FeatureCategory;
 import org.osate.aadl2.instance.FeatureInstance;
 import org.osate.aadl2.instance.FlowSpecificationInstance;
 import org.osate.aadl2.instance.InstancePackage;
@@ -79,7 +82,7 @@ public class Visitor {
 	public Visitor() {
 		Bundle b = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
 		if (b != null) {
-			sv = new SmfVisitor(this);
+			// sv = new SmfVisitor(this);
 		}
 	}
 
@@ -187,10 +190,14 @@ public class Visitor {
 
 	private List<org.sireum.hamr.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
 		List<org.sireum.hamr.ir.EndPoint> result = VisitorUtil.iList();
-		final List<String> component = connElem.getContext() != null
+		final List<String> component = (connElem.getContext() != null) && (connElem
+				.getContext() instanceof Subcomponent)
 				? VisitorUtil.add(path, connElem.getContext().getName())
 				: path;
-		final List<String> feature = VisitorUtil.add(component, connElem.getConnectionEnd().getName());
+		final List<String> feature = (connElem.getContext() instanceof FeatureGroup)
+				? VisitorUtil.add(component,
+						connElem.getContext().getName() + "_" + connElem.getConnectionEnd().getName())
+				: VisitorUtil.add(component, connElem.getConnectionEnd().getName());
 		AadlASTJavaFactory.Direction dir = null;
 		if (connElem.getConnectionEnd() instanceof DirectedFeatureImpl) {
 			final DirectedFeatureImpl inFeature = (DirectedFeatureImpl) connElem.getConnectionEnd();
@@ -235,9 +242,13 @@ public class Visitor {
 		FeatureGroupType fgt = fgi.getFeatureGroupType();
 		if (fgt == null) {
 			final FeatureGroupPrototype fgpt = fgi.basicGetFeatureGroupPrototype();
-			fgt = ResolvePrototypeUtil.resolveFeatureGroupPrototype(fgpt,
+			if (fgpt != null) {
+				fgt = ResolvePrototypeUtil.resolveFeatureGroupPrototype(
+						fgpt,
 					connElem.getContext() == null ? connElem.getContainingComponentImpl() : connElem.getContext());
+			}
 		}
+		if (fgt != null) {
 		for (Feature f : fgt.getAllFeatures()) {
 			Feature rf = f.getRefined();
 			if (rf == null) {
@@ -263,6 +274,7 @@ public class Visitor {
 								dir));
 			}
 		}
+	}
 		return res;
 	}
 
@@ -422,7 +434,8 @@ public class Visitor {
 		default: // do nothing
 		}
 
-		final org.sireum.hamr.ir.Name identifier = factory.name(currentPath,
+		org.sireum.hamr.ir.Name identifier = factory.name(
+				currentPath,
 				VisitorUtil.buildPosInfo(featureInst.getInstantiatedObjects().get(0)));
 
 		final List<FeatureInstance> featureInstances = featureInst.getFeatureInstances();
@@ -453,6 +466,7 @@ public class Visitor {
 				return factory.featureAccess(identifier, category, classifier, accessType, accessCategory, properties);
 			} else if (f instanceof DirectedFeatureImpl) {
 				final AadlASTJavaFactory.Direction direction = handleDirection(featureInst.getDirection());
+
 				return factory.featureEnd(identifier, direction, category, classifier, properties);
 			} else {
 				throw new RuntimeException("Not expecting feature: " + featureInst);
@@ -522,7 +536,9 @@ public class Visitor {
 	private org.sireum.hamr.ir.Flow buildFlow(FlowSpecificationInstance flowInst, List<String> path) {
 
 		final List<String> currentPath = VisitorUtil.add(path, flowInst.getQualifiedName());
-		final org.sireum.hamr.ir.Name name = factory.name(currentPath,
+
+		final org.sireum.hamr.ir.Name name = factory
+				.name(currentPath,
 				VisitorUtil.buildPosInfo(flowInst.getInstantiatedObjects().get(0)));
 
 		AadlASTJavaFactory.FlowKind kind = null;
@@ -538,19 +554,32 @@ public class Visitor {
 			break;
 		}
 
-		org.sireum.hamr.ir.Feature source = null;
+		org.sireum.hamr.ir.Name source = null;
 		if (flowInst.getSource() != null) {
 			// List<String> us = Arrays.asList(flowInst.getSource().getInstanceObjectPath().split("\\."));
-			source = buildFeature(flowInst.getSource(), currentPath);
+			source = buildFeatureRef(flowInst.getSource(), path);
 		}
 
-		org.sireum.hamr.ir.Feature sink = null;
+		org.sireum.hamr.ir.Name sink = null;
 		if (flowInst.getDestination() != null) {
 			// List<String> ud = Arrays.asList(flowInst.getDestination().getInstanceObjectPath().split("\\."));
-			sink = buildFeature(flowInst.getDestination(), currentPath);
+			sink = buildFeatureRef(flowInst.getDestination(), path);
 		}
 
 		return factory.flow(name, kind, source, sink);
+	}
+
+	private org.sireum.hamr.ir.Name buildFeatureRef(FeatureInstance featureRef, List<String> path) {
+		String name = featureRef.getName();
+		EObject temp = featureRef.eContainer();
+		while (temp instanceof FeatureInstance
+				&& ((FeatureInstance) temp).getCategory() == FeatureCategory.FEATURE_GROUP) {
+			name = ((FeatureInstance) temp).getName() + "_" + name;
+			temp = ((FeatureInstance) temp).eContainer();
+		}
+
+		return factory.name(VisitorUtil.add(path, name),
+				VisitorUtil.buildPosInfo(featureRef.getInstantiatedObjects().get(0)));
 	}
 
 	protected org.sireum.hamr.ir.Property buildProperty(PropertyAssociation pa, List<String> path) {

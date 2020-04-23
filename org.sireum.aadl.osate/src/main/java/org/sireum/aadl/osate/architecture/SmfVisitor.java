@@ -9,10 +9,10 @@ import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.AnnexSubclause;
 import org.osate.aadl2.ComponentClassifier;
+import org.osate.aadl2.ComponentImplementation;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.ModelUnit;
 import org.osate.aadl2.NamedElement;
-import org.osate.aadl2.Namespace;
 import org.osate.aadl2.PackageSection;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
@@ -47,6 +47,8 @@ public class SmfVisitor {
 		List<SecModelSubclause> temp = getSecModelSubclause(root);
 		List<SmfClassification> classes = VisitorUtil.iList();
 		List<SmfDeclass> declasses = VisitorUtil.iList();
+
+
 		if (!temp.isEmpty()) {
 			classes = temp.get(0).getClassification().stream().map(it -> visitClassification(it, path))
 					.collect(Collectors.toList());
@@ -87,27 +89,28 @@ public class SmfVisitor {
 
 	private HashSet<SecModelLibrary> getAllPackages(Element root) {
 		HashSet<SecModelLibrary> secLibs = new HashSet<SecModelLibrary>();
-		// HashSet<> packages = new HashSet(); no need of seen set as the circular imports are not allowed
+		HashSet<ModelUnit> seens = new HashSet(); // no need of seen set as the circular imports are not allowed
+		PackageSection ps = AadlUtil.getContainingPackageSection(((SystemInstance) root).getComponentClassifier());
+		EList<ComponentImplementation> ais = AadlUtil.getAllComponentImpl();
+		Set<ModelUnit> aps = ais.stream()
+				.flatMap(it -> AadlUtil.getContainingPackage(it).getPublicSection().getImportedUnits().stream())
+				.collect(Collectors.toSet());
+		Set<ModelUnit> worklist = aps;
 
-		Namespace tns = AadlUtil.getContainingTopLevelNamespace(((SystemInstance) root).getComponentClassifier());
-		if (tns instanceof PackageSection) {
-			PackageSection ps = (PackageSection) tns;
-			EList<ModelUnit> worklist = ps.getImportedUnits();
-			while (!worklist.isEmpty()) {
-				ModelUnit head = worklist.remove(0);
+		try {
+			for (ModelUnit head : worklist) {
+
+				seens.add(head);
 				if (head != null && head instanceof AadlPackage) {
 					secLibs.addAll(AnnexUtil
 							.getAllActualAnnexLibraries((AadlPackage) head, SecMFPackage.eINSTANCE.getSecModelLibrary())
 							.stream().map(al -> (SecModelLibrary) al).collect(Collectors.toList()));
 
-					AadlPackage ap = (AadlPackage) head;
-					if (ap.getPublicSection() != null) {
-						worklist.addAll(ap.getPublicSection().getImportedUnits());
-					} else if (ap.getPrivateSection() != null) {
-						worklist.addAll(ap.getPrivateSection().getImportedUnits());
-					}
 				}
 			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return secLibs;
 	}
