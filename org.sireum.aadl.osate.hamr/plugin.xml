@@ -78,5 +78,9 @@
             file="resources/HAMR.aadl"
             id="org.sireum.aadl.osate.hamr.aadlcontribution.hamr">
       </aadlcontribution>
+     <aadlcontribution
+            file="resources/CASE_Scheduling.aadl"
+            id="org.sireum.aadl.osate.hamr.aadlcontribution.case_scheduling">
+      </aadlcontribution>      
    </extension>     
 </plugin>
