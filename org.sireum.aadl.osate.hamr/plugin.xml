@@ -67,8 +67,8 @@
    <extension
          point="org.osate.pluginsupport.aadlcontribution">
       <aadlcontribution
-            file="resources/TB_SYS.aadl"
-            id="org.sireum.aadl.osate.hamr.aadlcontribution.tbsys">
+            file="resources/CASE_Scheduling.aadl"
+            id="org.sireum.aadl.osate.hamr.aadlcontribution.casescheduling">
       </aadlcontribution>
       <aadlcontribution
             file="resources/SB_SYS.aadl"
@@ -79,8 +79,8 @@
             id="org.sireum.aadl.osate.hamr.aadlcontribution.hamr">
       </aadlcontribution>
       <aadlcontribution
-            file="resources/CASE_Scheduling.aadl"
-            id="org.sireum.aadl.osate.hamr.aadlcontribution.casescheduling">
-      </aadlcontribution>      
+            file="resources/TB_SYS.aadl"
+            id="org.sireum.aadl.osate.hamr.aadlcontribution.tbsys">
+      </aadlcontribution>
    </extension>     
 </plugin>
