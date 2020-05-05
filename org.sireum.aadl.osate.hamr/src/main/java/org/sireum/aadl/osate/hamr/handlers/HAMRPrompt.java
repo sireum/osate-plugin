@@ -132,9 +132,17 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 		getTextControl(OPTION_CAMKES_OUTPUT_DIRECTORY).setText(camkesOutputDirectory);
 
-		getComboControl(OPTION_BIT_WIDTH).select(HAMRPropertyProvider.bitWidths.indexOf(theBitWidth));
-		getTextControl(OPTION_MAX_SEQUENCE_SIZE).setText(Integer.toString(theMaxSequenceSize));
-		getTextControl(OPTION_MAX_STRING_SIZE).setText(Integer.toString(theMaxStringSize));
+		if (getIntFromControl(OPTION_BIT_WIDTH).isEmpty()) {
+			getComboControl(OPTION_BIT_WIDTH).select(HAMRPropertyProvider.bitWidths.indexOf(theDefaultBitWidth));
+		}
+
+		if (getIntFromControl(OPTION_MAX_SEQUENCE_SIZE).isEmpty()) {
+			getTextControl(OPTION_MAX_SEQUENCE_SIZE).setText(Integer.toString(theDefaultMaxSequenceSize));
+		}
+
+		if (getIntFromControl(OPTION_MAX_STRING_SIZE).isEmpty()) {
+			getTextControl(OPTION_MAX_STRING_SIZE).setText(Integer.toString(theDefaultMaxStringSize));
+		}
 	}
 
 	private boolean validate() {
@@ -173,25 +181,25 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	private List<Platform> thePlatforms = null;
 	private List<HW> theHardwares = null;
-	private int theBitWidth = -1;
-	private int theMaxSequenceSize = -1;
-	private int theMaxStringSize = -1;
+	private int theDefaultBitWidth = -1;
+	private int theDefaultMaxSequenceSize = -1;
+	private int theDefaultMaxStringSize = -1;
 
 	public HAMRPrompt(Shell parentShell) {
 		super(parentShell);
 	}
 
 	public HAMRPrompt(IProject p, Shell parentShell, String title, List<Platform> platforms, List<HW> hardwares,
-			int bitWidth, int maxSequenceSize, int maxStringSize) {
+			int defaultBitWidth, int defaultMaxSequenceSize, int defaultMaxStringSize) {
 		super(parentShell);
 		subTitle = title;
 		project = p;
 
 		thePlatforms = platforms;
 		theHardwares = hardwares;
-		theBitWidth = bitWidth;
-		theMaxSequenceSize = maxSequenceSize;
-		theMaxStringSize = maxStringSize;
+		theDefaultBitWidth = defaultBitWidth;
+		theDefaultMaxSequenceSize = defaultMaxSequenceSize;
+		theDefaultMaxStringSize = defaultMaxStringSize;
 
 		IScopeContext projectScope = new ProjectScope(project);
 		projectNode = projectScope.getNode(PREF_KEY);

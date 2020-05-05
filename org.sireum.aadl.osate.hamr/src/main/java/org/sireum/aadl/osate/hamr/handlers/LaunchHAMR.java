@@ -134,9 +134,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									: HAMRUtil.toISZ(prompt.getOptionCSourceDirectory());
 							Option<String> slangOutputCDirectory = ArsitBridge.sireumOption(outputCDirectory);
 							boolean excludeComponentImpl = prompt.getOptionExcludesSlangImplementations();
-							int bitWidth = bit_width;
-							int maxStringSize = max_string_size;
-							int maxArraySize = max_seq_size;
+							int bitWidth = prompt.getOptionBitWidth();
+							int maxStringSize = prompt.getOptionMaxStringSize();
+							int maxArraySize = prompt.getOptionMaxSequenceSize();
 							File _camkesOutDir = new File(prompt.getOptionCamkesOptionOutputDirectory());
 							_camkesOutDir.mkdirs();
 							Option<String> camkesOutputDirectory = ArsitBridge
