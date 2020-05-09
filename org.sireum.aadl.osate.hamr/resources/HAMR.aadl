@@ -52,8 +52,8 @@ property set HAMR is
 
   HW : list of enumeration (ODROID_XU4, QEMU, x86, amd64) applies to (processor, virtual processor, system implementation);
     
-  Bit_Codec_Spec : aadlstring applies to ( connection );
+  Bit_Codec_Spec : aadlstring applies to ( connection, data );
   Bit_Codec_Encoded : aadlboolean applies to ( connection );
-  Bit_Codec_Max_Size : aadlinteger applies to ( connection );
-
+  Bit_Codec_Max_Size : aadlinteger applies to ( connection, data );
+  Bit_Codec_Raw_Connections : aadlboolean applies to ( system );
 end HAMR;
