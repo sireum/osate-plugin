@@ -51,9 +51,29 @@ property set HAMR is
 --- The <b>HW</b> property specifies hardware being targeted during code generation. 
 
   HW : list of enumeration (ODROID_XU4, QEMU, x86, amd64) applies to (processor, virtual processor, system implementation);
-    
-  Bit_Codec_Spec : aadlstring applies to ( connection, data );
-  Bit_Codec_Encoded : aadlboolean applies to ( connection );
-  Bit_Codec_Max_Size : aadlinteger applies to ( connection, data );
+
+
+--- The <b>Bit_Codec_Raw_Connections</b> property specifies whether the wire protocol should
+--- be used used for all connections between threads
+
   Bit_Codec_Raw_Connections : aadlboolean applies to ( system );
+
+--- The <b>Bit_Codec_Max_Size</b> property specifies the size requirements for a data type
+--- when using the wire protocol
+
+  Bit_Codec_Max_Size : Size applies to ( connection, data );
+
+
+
+--- The <b>Bit_Codec_Spec</b> property specifies the pathname to a data type's bitcodec spec.  
+--- <b>NOTE</b> support for this property has not been added to HAMR Codegen
+  
+  Bit_Codec_Spec : aadlstring applies to ( connection, data );
+  
+--- The <b>Bit_Codec_Encoded</b> property specifies whether a connection will use the
+--- the wire protocol.  
+--- <b>NOTE</b> support for this property has not been added to HAMR Codegen
+
+  Bit_Codec_Encoded : aadlboolean applies to ( connection );
+  
 end HAMR;
