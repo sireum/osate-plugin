@@ -452,6 +452,13 @@ public class Emv2Visitor {
 						VisitorUtil.toIList(clause.getUseBehavior().getElementRoot().getName() + "."
 								+ clause.getUseBehavior().getQualifiedName()),
 						VisitorUtil.buildPosInfo(clause.getUseBehavior()));
+				ErrorModelLibrary el2 = EMV2Util.getContainingErrorModelLibrary(clause.getUseBehavior());
+				if (el2 != null) {
+					errorLibs.put(EMV2Util.getLibraryName(el2), el2);
+					libNames.add(factory.name(VisitorUtil.toIList(EMV2Util.getLibraryName(el2)),
+							VisitorUtil.buildPosInfo(el2)));
+
+				}
 			}
 
 			if (tempName != null && !libNames.contains(tempName)) {

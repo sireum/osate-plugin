@@ -89,7 +89,7 @@ public class Visitor {
 	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 
 	final Map<String, org.sireum.hamr.ir.Component> datamap = new LinkedHashMap<>();
-	final Map<List<String>, Set<Connection>> compConnMap = new HashMap<>();
+	final Map<List<String>, Set<ConnectionReference>> compConnMap = new HashMap<>();
 	final Emv2Visitor ev = new Emv2Visitor(this);
 	SmfVisitor sv = null;
 
@@ -124,11 +124,36 @@ public class Visitor {
 		}
 	}
 
-	private List<org.sireum.hamr.ir.Connection> buildConnection(Connection conn, List<String> path,
+	private List<org.sireum.hamr.ir.Connection> buildConnection(
+			ConnectionReference connRef,
+			List<String> path,
 			ComponentInstance compInst) {
-		final List<String> name = VisitorUtil.add(path, conn.getName());
-		final List<org.sireum.hamr.ir.EndPoint> src = buildEndPoint(conn.getSource(), path);
-		final List<org.sireum.hamr.ir.EndPoint> dst = buildEndPoint(conn.getDestination(), path);
+		final Connection conn = connRef.getConnection();
+		List<String> name = VisitorUtil.add(path, conn.getName());
+		final ConnectionInstanceEnd scie = connRef.getSource();
+		final ConnectionInstanceEnd dcie = connRef.getDestination();
+
+
+//		List<org.sireum.hamr.ir.EndPoint> sep = buildEndPoint(sfii, path);
+//		List<org.sireum.hamr.ir.EndPoint> dep = buildEndPoint(dcie, path);
+
+		List<org.sireum.hamr.ir.EndPoint> src = VisitorUtil.iList();
+		List<org.sireum.hamr.ir.EndPoint> dst = VisitorUtil.iList();
+		List<org.sireum.hamr.ir.EndPoint> src1 = VisitorUtil.iList();
+		List<org.sireum.hamr.ir.EndPoint> dst1 = VisitorUtil.iList();
+
+		if ((scie instanceof FeatureInstance) && (dcie instanceof FeatureInstance)
+				&& (((FeatureInstance) scie).getCategory() == ((FeatureInstance) dcie).getCategory())) {
+			src1 = buildEndPoint(conn.getSource(), path);
+			dst1 = buildEndPoint(conn.getDestination(), path);
+
+			src = buildEndPoint(scie, path);
+			dst = buildEndPoint(dcie, path);
+		} else {
+			src = buildEndPoint(conn.getSource(), path);
+			dst = buildEndPoint(conn.getDestination(), path);
+		}
+
 		final boolean isBiDirectional = conn.isBidirectional();
 		final List<ConnectionInstance> connInst = compInst.findConnectionInstance(conn);
 
@@ -153,16 +178,38 @@ public class Visitor {
 		} else {
 			throw new RuntimeException("Unexpected connection kind: " + conn);
 		}
+		if (src.size() == 1 && dst.size() == 1 && src.get(0).getFeature().nonEmpty()
+				&& dst.get(0).getFeature().nonEmpty()) {
+			String srcName = src.get(0).getFeature().get().name().elements().toList().last().string();
+			String dstName = dst.get(0).getFeature().get().name().elements().toList().last().string();
+			name = VisitorUtil.add(path, conn.getName() + "_" + srcName + "_" + dstName);
+//			System.out.println(conn.getName());
+		}
+
+		final List<String> na = name;
 
 		final List<org.sireum.hamr.ir.Property> properties = conn.getOwnedPropertyAssociations().stream()
-				.map(pa -> buildProperty(pa, name)).collect(Collectors.toList());
+				.map(pa -> buildProperty(pa, na)).collect(Collectors.toList());
 
 		if (src.size() != dst.size()) {
 			throw new RuntimeException("Incorrect translation!");
 		}
 
-		return VisitorUtil.toIList(factory.connection(factory.name(name, VisitorUtil.buildPosInfo(conn)), src, dst,
+		if (src.equals(dst)) {
+			System.out.println(scie.getComponentInstancePath() + " -> " + dcie.getComponentInstancePath());
+		}
+
+		if (!src.equals(dst)) {
+			return VisitorUtil.toIList(factory.connection(factory.name(na, VisitorUtil.buildPosInfo(conn)),
+					src,
+				dst,
 				kind, isBiDirectional, connectionInstances, properties));
+		} else if (dst.isEmpty() && src.isEmpty()) {
+			System.out.println(conn.getName());
+			return VisitorUtil.iList();
+		} else {
+			return VisitorUtil.iList();
+		}
 	}
 
 	private org.sireum.hamr.ir.EndPoint buildEndPoint(ConnectionInstanceEnd cie) {
@@ -188,6 +235,99 @@ public class Visitor {
 		}
 	}
 
+	private List<org.sireum.hamr.ir.EndPoint> flattenFeatureGroupInstance(
+			FeatureInstance fii,
+			String featurePre,
+			List<String> component,
+			Position componentPos, Boolean isInverse) {
+		List<org.sireum.hamr.ir.EndPoint> result = VisitorUtil.iList();
+		if (fii.getCategory() == FeatureCategory.FEATURE_GROUP && !fii.getFeatureInstances().isEmpty()) {
+			result = fii
+					.getFeatureInstances().stream().flatMap(fisl -> flattenFeatureGroupInstance(fisl,
+							featurePre + "_" + fii.getName(), component, componentPos, isInverse).stream())
+					.collect(Collectors.toList());
+
+		} else {
+			String fname = featurePre + "_" + fii.getName();
+			List<String> feature = VisitorUtil.add(component, fname);
+			final Position featurePos = VisitorUtil.buildPosInfo(fii.getInstantiatedObjects().get(0));
+			AadlASTJavaFactory.Direction dir = null;
+			if(isInverse) {
+				dir = (handleDirection(fii.getDirection()) == AadlASTJavaFactory.Direction.In) ? AadlASTJavaFactory.Direction.Out : AadlASTJavaFactory.Direction.In;
+			} else {
+				dir = handleDirection(fii.getDirection());
+			}
+
+			result = VisitorUtil.add(result, factory.endPoint(factory.name(component, componentPos),
+					factory.name(feature, featurePos), dir));
+		}
+		if (result.size() > 1) {
+//			System.out.println("");
+		}
+		return result;
+	}
+
+	private List<org.sireum.hamr.ir.EndPoint> buildEndPoint(ConnectionInstanceEnd connInstEnd, List<String> path) {
+		List<org.sireum.hamr.ir.EndPoint> result = VisitorUtil.iList();
+
+		final List<String> component = Arrays
+				.asList(connInstEnd.getComponentInstance().getInstanceObjectPath().split("\\."));
+		final Position componentPos = VisitorUtil
+				.buildPosInfo(connInstEnd.getComponentInstance().getInstantiatedObjects().get(0));
+		if (connInstEnd instanceof FeatureInstance) {
+			FeatureInstance connElem = (FeatureInstance) connInstEnd;
+			String featurePre = connElem.getFeature().getName();
+			FeatureInstance temp = connElem;
+			while (temp.eContainer() instanceof FeatureInstance) {
+				featurePre = ((FeatureInstance) temp.eContainer()).getName() + "_" + featurePre;
+				temp = (FeatureInstance) temp.eContainer();
+			}
+
+			if (connElem.getCategory() == FeatureCategory.FEATURE_GROUP && !connElem.getFeatureInstances().isEmpty()) {
+
+				Feature ff = connElem.getFeature().getRefined();
+				final String fp = featurePre;
+
+				result = VisitorUtil.addAll(
+						result,
+						connElem.getFeatureInstances().stream().flatMap(fii -> flattenFeatureGroupInstance(fii, fp,
+								component, componentPos, false).stream())
+								.collect(Collectors.toList()));
+
+			} else {
+				final List<String> feature = VisitorUtil.add(component, featurePre);
+				final Position featurePos = VisitorUtil.buildPosInfo(connElem.getInstantiatedObjects().get(0));
+				final AadlASTJavaFactory.Direction direction = handleDirection(connElem.getDirection());
+				result = VisitorUtil.add(result, factory.endPoint(factory.name(component, componentPos),
+						factory.name(feature, featurePos), direction));
+			}
+
+			org.sireum.hamr.ir.Feature f = buildFeature(connElem, component);
+
+//			if(connElem.getCategory() == FeatureCategory.FEATURE_GROUP) {
+//				connElem.getFeatureInstances().forEach(fi -> {
+//
+//				});
+//			}
+
+
+//			final List<String> component = (connElem.getgetContext() != null) && (connElem
+//			.getContext() instanceof Subcomponent)
+//			? VisitorUtil.add(path, connElem.getContext().getName())
+//			: path;
+		} else if (connInstEnd instanceof ComponentInstance) {
+			result = VisitorUtil.toIList(factory.endPoint(factory.name(component, componentPos), null, null));
+		} else if (connInstEnd instanceof ModeTransitionInstance) {
+			throw new RuntimeException("Need to handle ModeTransitionInstanceImpl: " + connInstEnd);
+		} else {
+			throw new RuntimeException("Unexpected: " + connInstEnd);
+		}
+		if (result.size() > 1) {
+//			System.out.println("");
+		}
+		return result;
+	}
+
 	private List<org.sireum.hamr.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
 		List<org.sireum.hamr.ir.EndPoint> result = VisitorUtil.iList();
 		final List<String> component = (connElem.getContext() != null) && (connElem
@@ -210,6 +350,7 @@ public class Visitor {
 			}
 		}
 		final ConnectionEnd ce = connElem.getConnectionEnd();
+		String cname = AadlUtil.getConnectionEndName(connElem);
 		if (ce instanceof FeatureGroupImpl) {
 			final FeatureGroupImpl fgce = (FeatureGroupImpl) ce;
 			result = VisitorUtil.addAll(result, flattenFeatureGroup(component, fgce.getFullName(), fgce, connElem));
@@ -233,11 +374,15 @@ public class Visitor {
 											: null),
 							factory.name(feature, VisitorUtil.buildPosInfo(connElem.getConnectionEnd())), dir));
 		}
+		if (result.size() > 1) {
+//			System.out.println("");
+		}
 		return result;
 	}
 
 	private List<org.sireum.hamr.ir.EndPoint> flattenFeatureGroup(List<String> component, String parentName,
 			FeatureGroupImpl fgi, ConnectedElement connElem) {
+
 		List<org.sireum.hamr.ir.EndPoint> res = VisitorUtil.iList();
 		FeatureGroupType fgt = fgi.getFeatureGroupType();
 		if (fgt == null) {
@@ -250,10 +395,10 @@ public class Visitor {
 		}
 		if (fgt != null) {
 		for (Feature f : fgt.getAllFeatures()) {
-			Feature rf = f.getRefined();
-			if (rf == null) {
-				rf = f;
-			}
+			Feature rf = f;// .getRefined();
+//			if (rf == null) {
+//				rf = f;
+//			}
 			if (rf instanceof FeatureGroupImpl) {
 				res = VisitorUtil.addAll(res, flattenFeatureGroup(component, parentName + "_" + rf.getFullName(),
 						(FeatureGroupImpl) rf, connElem));
@@ -377,7 +522,10 @@ public class Visitor {
 		org.sireum.hamr.ir.Classifier classifier = null;
 		if (f.getFeatureClassifier() != null) {
 			if (f.getFeatureClassifier() instanceof NamedElement) {
-				classifier = factory.classifier(((NamedElement) f.getFeatureClassifier()).getQualifiedName());
+				if (((NamedElement) f.getFeatureClassifier()).getQualifiedName() != null) {
+					classifier = factory
+						.classifier(((NamedElement) f.getFeatureClassifier()).getQualifiedName().toString());
+				}
 			} else {
 				throw new RuntimeException("Unexepcted classifier " + f.getFeatureClassifier() + " for feature "
 						+ featureInst.getQualifiedName());
@@ -482,10 +630,11 @@ public class Visitor {
 	private org.sireum.hamr.ir.ConnectionReference buildConnectionRef(ConnectionReference connRef, List<String> path) {
 		final List<String> context = Arrays.asList(connRef.getContext().getInstanceObjectPath().split("\\."));
 		final List<String> name = VisitorUtil.add(context, connRef.getConnection().getName());
+
 		if (compConnMap.containsKey(context)) {
-			compConnMap.put(context, VisitorUtil.add(compConnMap.get(context), connRef.getConnection()));
+			compConnMap.put(context, VisitorUtil.add(compConnMap.get(context), connRef));
 		} else {
-			compConnMap.put(context, VisitorUtil.toISet(connRef.getConnection()));
+			compConnMap.put(context, VisitorUtil.toISet(connRef));
 		}
 		return factory.connectionReference(factory.name(name, VisitorUtil.buildPosInfo(connRef.getConnection())),
 				factory.name(context, VisitorUtil.buildPosInfo(connRef.getContext().getInstantiatedObjects().get(0))),
@@ -632,7 +781,12 @@ public class Visitor {
 			if (cv instanceof DataClassifier) {
 				processDataType((DataClassifier) cv);
 			}
-			return VisitorUtil.toIList(factory.classifierProp(cv.getQualifiedName()));
+			if (cv.getQualifiedName() != null) {
+				return VisitorUtil.toIList(factory.classifierProp(cv.getQualifiedName()));
+			} else {
+				return VisitorUtil.iList();
+			}
+			// return VisitorUtil.toIList(factory.classifierProp(cv.getQualifiedName()));
 		case Aadl2Package.LIST_VALUE:
 			final ListValue lv = (ListValue) pe;
 			List<org.sireum.hamr.ir.PropertyValue> elems = VisitorUtil.iList();
@@ -687,7 +841,12 @@ public class Visitor {
 					VisitorUtil.buildPosInfo(irv.getReferencedInstanceObject()))));
 		default:
 			java.lang.System.err.println("Need to handle " + pe + " " + pe.eClass().getClassifierID());
-			return VisitorUtil.toIList(factory.classifierProp(pe.getClass().getName()));
+			if (pe.getClass().getName() != null) {
+				return VisitorUtil.toIList(factory.classifierProp(pe.getClass().getName()));
+			} else {
+				return VisitorUtil.iList();
+			}
+
 		}
 	}
 
