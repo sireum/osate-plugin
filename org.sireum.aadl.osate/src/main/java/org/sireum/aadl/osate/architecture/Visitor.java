@@ -762,21 +762,23 @@ public class Visitor {
 	protected List<org.sireum.hamr.ir.PropertyValue> getPropertyExpressionValue(PropertyExpression pe,
 			List<String> path) {
 
-		switch (pe.eClass().getClassifierID()) {
-		case Aadl2Package.BOOLEAN_LITERAL:
+		if(pe instanceof BooleanLiteral) {
 			final String b = Boolean.toString(((BooleanLiteral) pe).getValue());
 			return VisitorUtil.toIList(factory.valueProp(b));
-		case Aadl2Package.INTEGER_LITERAL:
-		case Aadl2Package.REAL_LITERAL:
+		}
+		else if(pe instanceof NumberValue) {
 			return VisitorUtil.toIList(getUnitProp((NumberValue) pe));
-		case Aadl2Package.STRING_LITERAL:
+		}
+		else if(pe instanceof StringLiteral) {
 			final String v = ((StringLiteral) pe).getValue();
 			return VisitorUtil.toIList(factory.valueProp(v));
-		case Aadl2Package.RANGE_VALUE:
+		}
+		else if(pe instanceof RangeValue) {
 			final RangeValue rv = (RangeValue) pe;
 			return VisitorUtil
 					.toIList(factory.rangeProp(getUnitProp(rv.getMinimumValue()), getUnitProp(rv.getMaximumValue())));
-		case Aadl2Package.CLASSIFIER_VALUE:
+		}
+		else if(pe instanceof ClassifierValue) {
 			final Classifier cv = ((ClassifierValue) pe).getClassifier();
 			if (cv instanceof DataClassifier) {
 				processDataType((DataClassifier) cv);
@@ -787,36 +789,41 @@ public class Visitor {
 				return VisitorUtil.iList();
 			}
 			// return VisitorUtil.toIList(factory.classifierProp(cv.getQualifiedName()));
-		case Aadl2Package.LIST_VALUE:
+		}
+		else if(pe instanceof ListValue) {
 			final ListValue lv = (ListValue) pe;
 			List<org.sireum.hamr.ir.PropertyValue> elems = VisitorUtil.iList();
 			for (PropertyExpression e : lv.getOwnedListElements()) {
 				elems = VisitorUtil.addAll(elems, getPropertyExpressionValue(e, path));
 			}
 			return elems;
-		case Aadl2Package.NAMED_VALUE:
+		}
+		else if(pe instanceof NamedValue) {
 			final NamedValue nv = (NamedValue) pe;
 			final AbstractNamedValue nv2 = nv.getNamedValue();
 
-			switch (nv2.eClass().getClassifierID()) {
-			case Aadl2Package.ENUMERATION_LITERAL:
+			if (nv2 instanceof EnumerationLiteral) {
 				final EnumerationLiteral el = (EnumerationLiteral) nv2;
 				return VisitorUtil.toIList(factory.valueProp(el.getFullName()));
-			case Aadl2Package.PROPERTY:
+			}
+			else if (nv2 instanceof Property) {
 				final Property _p = (Property) nv2;
 				if (_p.getDefaultValue() != null) {
 					return getPropertyExpressionValue(_p.getDefaultValue(), path);
 				} else {
 					return VisitorUtil.toIList(factory.valueProp(_p.getQualifiedName()));
 				}
-			case Aadl2Package.PROPERTY_CONSTANT:
+			}
+			else if (nv2 instanceof PropertyConstant) {
 				final PropertyConstant pc = (PropertyConstant) nv2;
 				return getPropertyExpressionValue(pc.getConstantValue(), path);
-			default:
+			}
+			else {
 				java.lang.System.err.println("Not handling " + pe.eClass().getClassifierID() + " " + nv2);
 				return VisitorUtil.iList();
 			}
-		case Aadl2Package.RECORD_VALUE:
+		}
+		else if (pe instanceof RecordValue) {
 			final RecordValue rvy = (RecordValue) pe;
 			final List<org.sireum.hamr.ir.Property> properties = rvy.getOwnedFieldValues().stream()
 					.map(fv -> factory.property(
@@ -825,21 +832,22 @@ public class Visitor {
 							getPropertyExpressionValue(fv.getOwnedValue(), path), VisitorUtil.iList()))
 					.collect(Collectors.toList());
 			return VisitorUtil.toIList(factory.recordProp(properties));
-		case Aadl2Package.REFERENCE_VALUE:
+		}
+		else if (pe instanceof ReferenceValue) {
 			final ReferenceValue rvx = (ReferenceValue) pe;
 			final org.sireum.hamr.ir.Name refName = factory.name(VisitorUtil.toIList(rvx.toString()),
 					VisitorUtil.buildPosInfo(rvx.getPath().getNamedElement()));
 			return VisitorUtil.toIList(factory.referenceProp(refName));
-		case InstancePackage.INSTANCE_REFERENCE_VALUE:
-			// FIXME: id is coming from InstancePackage rather than Aadl2Package. Might cause the
-			// following cast to fail if there is an id clash
+		}
+		else if (pe instanceof InstanceReferenceValue) {
 
 			final InstanceReferenceValue irv = (InstanceReferenceValue) pe;
 			final String t = irv.getReferencedInstanceObject().getInstanceObjectPath();
 
 			return VisitorUtil.toIList(factory.referenceProp(factory.name(Arrays.asList(t.split("\\.")),
 					VisitorUtil.buildPosInfo(irv.getReferencedInstanceObject()))));
-		default:
+		}
+		else {
 			java.lang.System.err.println("Need to handle " + pe + " " + pe.eClass().getClassifierID());
 			if (pe.getClass().getName() != null) {
 				return VisitorUtil.toIList(factory.classifierProp(pe.getClass().getName()));
