@@ -385,14 +385,14 @@ public class Visitor {
 
 		List<org.sireum.hamr.ir.EndPoint> res = VisitorUtil.iList();
 		FeatureGroupType fgt = fgi.getFeatureGroupType();
-		if (fgt == null) {
+		// if (fgt == null) {
 			final FeatureGroupPrototype fgpt = fgi.basicGetFeatureGroupPrototype();
 			if (fgpt != null) {
 				fgt = ResolvePrototypeUtil.resolveFeatureGroupPrototype(
 						fgpt,
 					connElem.getContext() == null ? connElem.getContainingComponentImpl() : connElem.getContext());
 			}
-		}
+			// }
 		if (fgt != null) {
 		for (Feature f : fgt.getAllFeatures()) {
 			Feature rf = f;// .getRefined();
