@@ -50,7 +50,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 	public final HAMROption OPTION_EXCLUDE_SLANG_IMPL = new HAMROption("exclude.slang.impl",
 			"Exclude Slang Component Implementations");
 	public final HAMROption OPTION_BIT_WIDTH = new HAMROption("bit.width", "Bit Width");
-	public final HAMROption OPTION_MAX_SEQUENCE_SIZE = new HAMROption("max.sequence.size", "Bit Sequence Size");
+	public final HAMROption OPTION_MAX_SEQUENCE_SIZE = new HAMROption("max.sequence.size", "Max Sequence Size");
 	public final HAMROption OPTION_MAX_STRING_SIZE = new HAMROption("max.string.size", "Max String Size");
 	public final HAMROption OPTION_C_SRC_DIRECTORY = new HAMROption("c.src.directory", "Aux Code Directory");
 
