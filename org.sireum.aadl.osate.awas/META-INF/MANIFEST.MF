@@ -13,3 +13,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  lib/awas.jar,
  bin/
+Export-Package: org.sireum.awas.flow
