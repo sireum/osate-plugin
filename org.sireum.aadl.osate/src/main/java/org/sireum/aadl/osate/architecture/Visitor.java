@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
-import org.osate.aadl2.Aadl2Package;
 import org.osate.aadl2.AbstractNamedValue;
 import org.osate.aadl2.AccessConnection;
 import org.osate.aadl2.AccessType;
@@ -144,8 +143,8 @@ public class Visitor {
 
 		if ((scie instanceof FeatureInstance) && (dcie instanceof FeatureInstance)
 				&& (((FeatureInstance) scie).getCategory() == ((FeatureInstance) dcie).getCategory())) {
-			src1 = buildEndPoint(conn.getSource(), path);
-			dst1 = buildEndPoint(conn.getDestination(), path);
+//			src1 = buildEndPoint(conn.getSource(), path);
+//			dst1 = buildEndPoint(conn.getDestination(), path);
 
 			src = buildEndPoint(scie, path);
 			dst = buildEndPoint(dcie, path);
@@ -179,10 +178,10 @@ public class Visitor {
 			throw new RuntimeException("Unexpected connection kind: " + conn);
 		}
 		if (src.size() == 1 && dst.size() == 1 && src.get(0).getFeature().nonEmpty()
-				&& dst.get(0).getFeature().nonEmpty()) {
+				&& dst.get(0).getFeature().nonEmpty() && (conn instanceof FeatureGroupConnection)) {
 			String srcName = src.get(0).getFeature().get().name().elements().toList().last().string();
 			String dstName = dst.get(0).getFeature().get().name().elements().toList().last().string();
-			name = VisitorUtil.add(path, conn.getName() + "_" + srcName + "_" + dstName);
+			name = VisitorUtil.add(path, conn.getName() + "-" + srcName + "_" + dstName);
 //			System.out.println(conn.getName());
 		}
 
@@ -294,6 +293,12 @@ public class Visitor {
 								component, componentPos, false).stream())
 								.collect(Collectors.toList()));
 
+			} else if (connElem.getCategory() == FeatureCategory.BUS_ACCESS) {
+				final List<String> feature = VisitorUtil.add(component, featurePre);
+				final Position featurePos = VisitorUtil.buildPosInfo(connElem.getInstantiatedObjects().get(0));
+				final AadlASTJavaFactory.Direction direction = AadlASTJavaFactory.Direction.InOut;
+				result = VisitorUtil.add(result, factory.endPoint(factory.name(component, componentPos),
+						factory.name(feature, featurePos), direction));
 			} else {
 				final List<String> feature = VisitorUtil.add(component, featurePre);
 				final Position featurePos = VisitorUtil.buildPosInfo(connElem.getInstantiatedObjects().get(0));
@@ -525,6 +530,8 @@ public class Visitor {
 				if (((NamedElement) f.getFeatureClassifier()).getQualifiedName() != null) {
 					classifier = factory
 						.classifier(((NamedElement) f.getFeatureClassifier()).getQualifiedName().toString());
+				} else {
+					System.out.println("failing here");
 				}
 			} else {
 				throw new RuntimeException("Unexepcted classifier " + f.getFeatureClassifier() + " for feature "
