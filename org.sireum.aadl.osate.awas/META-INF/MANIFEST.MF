@@ -32,4 +32,5 @@ Export-Package: org.sireum.awas.AADLBridge,
  org.sireum.awas.slang,
  org.sireum.awas.symbol,
  org.sireum.awas.util,
- org.sireum.awas.witness
+ org.sireum.awas.witness,
+ org.sireum.util
