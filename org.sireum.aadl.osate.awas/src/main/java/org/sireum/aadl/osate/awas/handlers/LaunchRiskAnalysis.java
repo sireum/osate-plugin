@@ -25,7 +25,7 @@ import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.ir.Aadl;
 
-public class LaunchAwas extends AbstractSireumHandler {
+public class LaunchRiskAnalysis extends AbstractSireumHandler {
 
 	@Override
 	protected IStatus runJob(Element arg0, IProgressMonitor arg1) {
@@ -68,7 +68,7 @@ public class LaunchAwas extends AbstractSireumHandler {
 				e1.printStackTrace();
 			} catch (Exception e3) {
 				e3.printStackTrace();
-				String m2 = "Could not invoke visualizer.  Please make sure Awas is configured correctly.\n\n"
+				String m2 = "Could not invoke Awas risk analysis.  Please make sure Awas is configured correctly.\n\n"
 						+ e3.getLocalizedMessage();
 				MessageDialog.openError(window.getShell(), "Sireum", m2);
 			}
@@ -87,8 +87,8 @@ public class LaunchAwas extends AbstractSireumHandler {
 		String outputPath = dialog2.open();
 		org.sireum.awas.ast.Model awasModel = org.sireum.awas.AADLBridge.AadlHandler.buildAwasModel(model);
 		org.sireum.awas.AADLBridge.AadlHandler.generateWitness(awasModel, outputPath, null);
-		String m2 = "Visulaizer generated at: " + outputPath + "/index.html";
-		Files.deleteIfExists(Paths.get(outputPath, "risk-analysis-report.html"));
+		String m2 = "Report generated at: " + outputPath + "/risk-analysis-report.html";
+		Files.deleteIfExists(Paths.get(outputPath, "index.html"));
 		writeToConsole(console, m2);
 	}
 }

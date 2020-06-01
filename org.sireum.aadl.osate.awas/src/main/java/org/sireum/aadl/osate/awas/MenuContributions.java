@@ -21,6 +21,10 @@ public class MenuContributions extends CompoundContributionItem {
 		l.add(getItem("Generate AWAS Visualizer", "org.sireum.commands.launchawas",
 				map("org.sireum.commands.launchawas.generator", Generators.GEN_AWAS.toString())));
 
+		l.add(getItem("Generate Risk Analysis Report",
+				"org.sireum.commands.launchriskanalysis",
+				map("org.sireum.commands.launchriskanalysis.generator1", Generators.GEN_AWAS.toString())));
+
 		return l.toArray(new IContributionItem[0]);
 	}
 
