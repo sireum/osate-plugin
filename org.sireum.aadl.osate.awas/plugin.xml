@@ -6,7 +6,17 @@
                name="Launch AWAS"
                defaultHandler="org.sireum.aadl.osate.awas.handlers.LaunchAwas">
         <commandParameter id="org.sireum.commands.launchawas.generator"
-                          name="Generator"/>
+                          name="Generator">
+        </commandParameter>
+      </command>
+      <command
+            defaultHandler="org.sireum.aadl.osate.awas.handlers.LaunchRiskAnalysis"
+            id="org.sireum.commands.launchriskanalysis"
+            name="Launch Risk Analysis">
+         <commandParameter
+               id="org.sireum.commands.launchriskanalysis.generator1"
+               name="Generator1">
+         </commandParameter>
       </command>
    </extension>
    <extension point="org.eclipse.ui.menus">
@@ -26,5 +36,12 @@
             id="org.sireum.aadl.osate.awas.preferences.PreferencePage"
             name="AWAS">
       </page>
+   </extension>
+   <extension
+         point="org.osate.pluginsupport.aadlcontribution">
+      <aadlcontribution
+            file="resources/ISO14971_80001.aadl"
+            id="org.sireum.aadl.osate.awas.ISO14971">
+      </aadlcontribution>
    </extension>   
 </plugin>

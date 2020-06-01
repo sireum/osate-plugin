@@ -3,6 +3,8 @@ package org.sireum.aadl.osate.awas.handlers;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -86,7 +88,7 @@ public class LaunchAwas extends AbstractSireumHandler {
 		org.sireum.awas.ast.Model awasModel = org.sireum.awas.AADLBridge.AadlHandler.buildAwasModel(model);
 		org.sireum.awas.AADLBridge.AadlHandler.generateWitness(awasModel, outputPath, null);
 		String m2 = "Visulaizer generated at: " + outputPath + "/index.html";
-
+		Files.deleteIfExists(Paths.get(outputPath, "risk-analysis-report.html"));
 		writeToConsole(console, m2);
 	}
 }
