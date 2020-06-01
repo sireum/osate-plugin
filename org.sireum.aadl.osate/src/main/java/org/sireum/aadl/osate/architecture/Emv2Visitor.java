@@ -98,6 +98,7 @@ public class Emv2Visitor {
 		} else if (ne instanceof ErrorPropagation) {
 			ErrorPropagation es = (ErrorPropagation) ne;
 			String pathName = EMV2Util.getPrintName(emv2path);
+			String pathName2 = getFeatureString(((ErrorPropagation) ne).getFeatureorPPRef());
 			// es.getFeatureorPPRef()
 			List<Name> errorTypes = new ArrayList<Name>();
 			ErrorTypes ets = EMV2Util.getErrorType(emv2path) != null ? EMV2Util.getErrorType(emv2path)
@@ -122,7 +123,7 @@ public class Emv2Visitor {
 				}
 			}
 			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Propagation,
-					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					factory.name(VisitorUtil.add(path, pathName2), VisitorUtil.buildPosInfo(ne)),
 					errorTypes);
 		} else if (ne instanceof ErrorBehaviorState) {
 			ErrorBehaviorState es = (ErrorBehaviorState) ne;
