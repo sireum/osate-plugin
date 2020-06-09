@@ -195,16 +195,15 @@ public class Visitor {
 		}
 
 		if (src.equals(dst)) {
-			System.out.println(scie.getComponentInstancePath() + " -> " + dcie.getComponentInstancePath());
+			// System.out.println(scie.getComponentInstancePath() + " -> " + dcie.getComponentInstancePath());
 		}
 
 		if (!src.equals(dst)) {
 			return VisitorUtil.toIList(factory.connection(factory.name(na, VisitorUtil.buildPosInfo(conn)),
-					src,
-				dst,
+					src, dst, 
 				kind, isBiDirectional, connectionInstances, properties));
 		} else if (dst.isEmpty() && src.isEmpty()) {
-			System.out.println(conn.getName());
+			// System.out.println(conn.getName());
 			return VisitorUtil.iList();
 		} else {
 			return VisitorUtil.iList();

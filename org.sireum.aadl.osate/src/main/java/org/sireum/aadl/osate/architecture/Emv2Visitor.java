@@ -98,7 +98,14 @@ public class Emv2Visitor {
 		} else if (ne instanceof ErrorPropagation) {
 			ErrorPropagation es = (ErrorPropagation) ne;
 			String pathName = EMV2Util.getPrintName(emv2path);
-			String pathName2 = getFeatureString(((ErrorPropagation) ne).getFeatureorPPRef());
+			String pathName2 = (es.getFeatureorPPRef() != null) ? getFeatureString(es.getFeatureorPPRef())
+					: es.getKind();
+			if ((es.getFeatureorPPRef() == null) && (es.getDirection().incoming())) {
+				pathName2 = pathName2 + "_IN";
+			} else if ((es.getFeatureorPPRef() == null) && (es.getDirection().outgoing())) {
+				pathName2 = pathName2 + "_OUT";
+			}
+			System.out.println(pathName2);
 			// es.getFeatureorPPRef()
 			List<Name> errorTypes = new ArrayList<Name>();
 			ErrorTypes ets = EMV2Util.getErrorType(emv2path) != null ? EMV2Util.getErrorType(emv2path)
@@ -355,7 +362,7 @@ public class Emv2Visitor {
 						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosInfo(pth)), errorTokens);
 			} else if (pth.isAllIncoming()) {
 				ErrorPropagation ep = EMV2Util.getErrorPropagation((EMV2Path) pth);
-				System.out.println(ep);
+				// System.out.println(ep);
 			} else {
 				inError = errorProp2Map(VisitorUtil.toIList(pth.getIncoming()), true, path).get(0);
 			}
@@ -374,7 +381,7 @@ public class Emv2Visitor {
 						errorTokens);
 			} else if (pth.isAllOutgoing()) {
 				Collection<ErrorPropagation> ep = EMV2Util.getOutgoingPropagationOrAll(pth);
-				System.out.println(ep);
+				// System.out.println(ep);
 			} else {
 				outError = errorProp2Map(VisitorUtil.toIList(pth.getOutgoing()), false, path).get(0);
 			}
