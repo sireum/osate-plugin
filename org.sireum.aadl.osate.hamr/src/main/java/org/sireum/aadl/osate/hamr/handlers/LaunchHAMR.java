@@ -155,7 +155,6 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									embedArt, //
 									devicesAsThreads, //
 									//
-									org.sireum.Cli.HamrIpcMechanism$.MODULE$.byName("SharedMemory"), //
 									slangAuxCodeDirs, //
 									slangOutputCDirectory, //
 									excludeComponentImpl, //
