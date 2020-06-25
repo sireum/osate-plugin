@@ -53,6 +53,16 @@ public class AirUpdater extends XtextTest {
 		}
 	}
 
+	@Test
+	public void updateAirHamr2() {
+		File hamrModelsDir = new File(
+				"/home/vagrant/devel/case/CASE-loonwerks/TA5/tool-evaluation-4/HAMR/examples");
+		if (hamrModelsDir.exists()) {
+			regen(hamrModelsDir, ".slang");
+		} else {
+			System.out.println("Directory does not exist: " + hamrModelsDir);
+		}
+	}
 
 	void regen(File rootDir, String outputDir) {
 
