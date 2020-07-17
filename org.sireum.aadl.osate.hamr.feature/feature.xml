@@ -2,7 +2,7 @@
 <feature
       id="org.sireum.aadl.osate.hamr.feature"
       label="Sireum HAMR plugin"
-      version="1.0.2007152217.qualifier"
+      version="1.0.2007171023.qualifier"
       provider-name="SAnToS">
 
    <description>
@@ -39,7 +39,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <import plugin="org.osate.ui"/>
       <import plugin="org.osate.xtext.aadl2.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.console" version="3.7.1" match="greaterOrEqual"/>
-      <import plugin="org.sireum.aadl.osate" version="1.0.2007152217" match="greaterOrEqual"/>
+      <import plugin="org.sireum.aadl.osate" version="1.0.2007171023" match="greaterOrEqual"/>
       <import plugin="org.osate.pluginsupport"/>
       <import plugin="org.eclipse.mylyn.commons.ui" version="3.24.2" match="greaterOrEqual"/>
    </requires>
