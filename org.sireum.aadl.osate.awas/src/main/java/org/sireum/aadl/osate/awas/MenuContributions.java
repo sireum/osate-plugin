@@ -25,6 +25,15 @@ public class MenuContributions extends CompoundContributionItem {
 				"org.sireum.commands.launchriskanalysis",
 				map("org.sireum.commands.launchriskanalysis.generator1", Generators.GEN_AWAS.toString())));
 
+		l.add(getItem("Forward Reachability", "org.sireum.commands.forward",
+				map("org.sireum.commands.forward.generator", Generators.GEN_AWAS.toString())));
+
+		l.add(getItem("Backward Reachability", "org.sireum.commands.backward",
+				map("org.sireum.commands.backward.generator", Generators.GEN_AWAS.toString())));
+
+		l.add(getItem("Erase Reachability", "org.sireum.commands.erase",
+				map("org.sireum.commands.erase.generator", Generators.GEN_AWAS.toString())));
+
 		return l.toArray(new IContributionItem[0]);
 	}
 
