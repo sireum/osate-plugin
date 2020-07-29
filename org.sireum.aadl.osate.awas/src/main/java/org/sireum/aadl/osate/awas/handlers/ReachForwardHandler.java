@@ -46,7 +46,7 @@ public class ReachForwardHandler extends AbstractSireumHandler {
 	@SuppressWarnings("restriction")
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		final Boolean isImplDiagram = true;
+		final Boolean isImplDiagram = false;
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 		List<DiagramElement> des = SelectionUtil.getSelectedDiagramElements(SelectionHelper.getDiagramSelection(),
