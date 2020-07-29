@@ -309,7 +309,8 @@ public class Emv2Visitor {
 					prop = errorProp2Map(VisitorUtil.toIList(s), false, path).get(0);
 				}
 				sources.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(src)),
-						org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Source, null, prop));
+						org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Source, null, prop,
+						VisitorUtil.getUriFragment(src)));
 			}
 		});
 		return sources;
@@ -336,7 +337,7 @@ public class Emv2Visitor {
 				prop = errorProp2Map(VisitorUtil.toIList(snk.getIncoming()), false, path).get(0);
 			}
 			sinks.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(snk)),
-					org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Sink, prop, null));
+					org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Sink, prop, null, VisitorUtil.getUriFragment(snk)));
 
 		});
 		return sinks;
@@ -387,7 +388,8 @@ public class Emv2Visitor {
 			}
 
 			paths.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(pth)),
-					org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Path, inError, outError));
+					org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Path, inError, outError,
+					VisitorUtil.getUriFragment(pth)));
 		});
 		return paths;
 	}

@@ -1,9 +1,14 @@
 package org.sireum.aadl.osate.util;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
@@ -98,6 +103,43 @@ public class SelectionHelper {
 		}
 
 		return null;
+	}
+
+	// Get the current project by selection on navigator, active window or current editor
+	public static IProject getProject() {
+		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IProject result = null;
+		if (window != null) {
+			IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
+			Object firstElement = selection.getFirstElement();
+			if (firstElement instanceof IAdaptable) {
+				result = ((IAdaptable) firstElement).getAdapter(IProject.class);
+			}
+			if (result == null) {
+				IWorkbenchPage activePage = window.getActivePage();
+				IEditorPart activeEditor = activePage.getActiveEditor();
+				if (activeEditor != null) {
+					IEditorInput input = activeEditor.getEditorInput();
+					result = input.getAdapter(IProject.class);
+					if (result == null) {
+						IResource resource = input.getAdapter(IResource.class);
+						if (resource != null) {
+							result = resource.getProject();
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	public static ISelection getDiagramSelection() {
+		IWorkbench wb = PlatformUI.getWorkbench();
+		IWorkbenchWindow win = wb.getActiveWorkbenchWindow();
+		if (win == null) {
+			return StructuredSelection.EMPTY;
+		}
+		return win.getSelectionService().getSelection();
 	}
 
 	public static XtextEditor getXtextEditor() {

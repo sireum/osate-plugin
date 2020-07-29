@@ -81,7 +81,7 @@ public class Visitor {
 	public Visitor() {
 		Bundle b = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
 		if (b != null) {
-			// sv = new SmfVisitor(this);
+			sv = new SmfVisitor(this);
 		}
 	}
 
@@ -200,8 +200,9 @@ public class Visitor {
 
 		if (!src.equals(dst)) {
 			return VisitorUtil.toIList(factory.connection(factory.name(na, VisitorUtil.buildPosInfo(conn)),
-					src, dst, 
-				kind, isBiDirectional, connectionInstances, properties));
+					src,
+					dst,
+					kind, isBiDirectional, connectionInstances, properties, VisitorUtil.getUriFragment(connRef)));
 		} else if (dst.isEmpty() && src.isEmpty()) {
 			// System.out.println(conn.getName());
 			return VisitorUtil.iList();
@@ -514,7 +515,7 @@ public class Visitor {
 			annexes = VisitorUtil.add(annexes, sv.visitSmfComp(compInst, currentPath));
 		}
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
-				connectionInstances, properties, flows, modes, annexes);
+				connectionInstances, properties, flows, modes, annexes, VisitorUtil.getUriFragment(compInst));
 	}
 
 	private org.sireum.hamr.ir.Feature buildFeature(FeatureInstance featureInst, List<String> path) {
@@ -617,11 +618,13 @@ public class Visitor {
 					accessCategory = AadlASTJavaFactory.AccessCategory.VirtualBus;
 					break;
 				}
-				return factory.featureAccess(identifier, category, classifier, accessType, accessCategory, properties);
+				return factory.featureAccess(identifier, category, classifier, accessType, accessCategory, properties,
+						VisitorUtil.getUriFragment(featureInst));
 			} else if (f instanceof DirectedFeatureImpl) {
 				final AadlASTJavaFactory.Direction direction = handleDirection(featureInst.getDirection());
 
-				return factory.featureEnd(identifier, direction, category, classifier, properties);
+				return factory.featureEnd(identifier, direction, category, classifier, properties,
+						VisitorUtil.getUriFragment(featureInst));
 			} else {
 				throw new RuntimeException("Not expecting feature: " + featureInst);
 			}
@@ -629,7 +632,8 @@ public class Visitor {
 			final boolean isInverse = ((FeatureGroupImpl) f).isInverse();
 			final List<org.sireum.hamr.ir.Feature> features = featureInstances.stream()
 					.map(fi -> buildFeature(fi, currentPath)).collect(Collectors.toList());
-			return factory.featureGroup(identifier, features, isInverse, category, properties);
+			return factory.featureGroup(identifier, features, isInverse, category, properties,
+					VisitorUtil.getUriFragment(featureInst));
 		}
 	}
 
@@ -721,7 +725,7 @@ public class Visitor {
 			sink = buildFeatureRef(flowInst.getDestination(), path);
 		}
 
-		return factory.flow(name, kind, source, sink);
+		return factory.flow(name, kind, source, sink, VisitorUtil.getUriFragment(flowInst));
 	}
 
 	private org.sireum.hamr.ir.Name buildFeatureRef(FeatureInstance featureRef, List<String> path) {
@@ -912,7 +916,7 @@ public class Visitor {
 							VisitorUtil.isz2IList(c.features()), VisitorUtil.isz2IList(c.subComponents()),
 							VisitorUtil.isz2IList(c.connections()), VisitorUtil.isz2IList(c.connectionInstances()),
 							cProps, VisitorUtil.isz2IList(c.flows()), VisitorUtil.isz2IList(c.modes()),
-							VisitorUtil.isz2IList(c.annexes()));
+							VisitorUtil.isz2IList(c.annexes()), VisitorUtil.getUriFragment(sct));
 
 					subComponents = VisitorUtil.add(subComponents, sub);
 				} else {
@@ -927,7 +931,8 @@ public class Visitor {
 							fProperties, // properties
 							VisitorUtil.iList(), // flows
 							VisitorUtil.iList(), // modes
-							VisitorUtil.iList() // annexes
+							VisitorUtil.iList(), // annexes
+							""
 					);
 
 					subComponents = VisitorUtil.add(subComponents, sub);
@@ -944,7 +949,8 @@ public class Visitor {
 				VisitorUtil.iList(), // connectionInstances
 				properties, VisitorUtil.iList(), // flows
 				VisitorUtil.iList(), // modes
-				VisitorUtil.iList() // annexes
+				VisitorUtil.iList(), // annexes
+				""
 		);
 		datamap.put(name, c);
 		return c;

@@ -18,6 +18,33 @@
                name="Generator1">
          </commandParameter>
       </command>
+      <command
+            defaultHandler="org.sireum.aadl.osate.awas.handlers.ReachForwardHandler"
+            id="org.sireum.commands.forward"
+            name="Compute Forward Reachability">
+         <commandParameter
+               id="org.sireum.commands.forward.generator"
+               name="generator">
+         </commandParameter>
+      </command>
+      <command
+            defaultHandler="org.sireum.aadl.osate.awas.handlers.ReachBackwardHandler"
+            id="org.sireum.commands.backward"
+            name="Compute Backward Reachability">
+         <commandParameter
+               id="org.sireum.commands.backward.generator"
+               name="generator">
+         </commandParameter>
+      </command>
+      <command
+            defaultHandler="org.sireum.aadl.osate.awas.handlers.ReachEraseHandler"
+            id="org.sireum.commands.erase"
+            name="Erase Reachability Results">
+         <commandParameter
+               id="org.sireum.commands.erase.generator"
+               name="generator">
+         </commandParameter>
+      </command>
    </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution
@@ -27,6 +54,52 @@
                label="Sireum Bridge">
             <dynamic class="org.sireum.aadl.osate.awas.MenuContributions" id="org.sireum.ui.views.menu.AwasMenuItems"/>
          </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="sireum.toolbar"
+               label="Sireum Toolbar">
+            <command
+                  commandId="org.sireum.commands.forward"
+                  disabledIcon="icons/f2.png"
+                  icon="icons/f1.png"
+                  label="Forward Reach"
+                  tooltip="compute forward reach">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="org.osate.ge.expressions.editorIsActive">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.sireum.commands.backward"
+                  disabledIcon="icons/b2.png"
+                  icon="icons/b1.png"
+                  label="Backward Reach"
+                  tooltip="compute backward reach">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="org.osate.ge.expressions.editorIsActive">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.sireum.commands.erase"
+                  disabledIcon="icons/e2.png"
+                  icon="icons/e1.png"
+                  label="Erase Reach"
+                  tooltip="erase reach">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="org.osate.ge.expressions.editorIsActive">
+                  </reference>
+               </visibleWhen>
+            </command>
+         </toolbar>
       </menuContribution>
    </extension>
    <extension point="org.eclipse.ui.preferencePages">
@@ -43,5 +116,5 @@
             file="resources/ISO14971_80001.aadl"
             id="org.sireum.aadl.osate.awas.ISO14971">
       </aadlcontribution>
-   </extension>   
+   </extension>
 </plugin>

@@ -77,6 +77,11 @@ public class VisitorUtil {
 		return path.toPortableString();
 	}
 
+	public static String getUriFragment(EObject eobj) {
+		Resource res = eobj.eResource();
+		return res.getURIFragment(eobj);
+	}
+
 	public static Position buildPosInfo(NamedElement elem) {
 
 		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
