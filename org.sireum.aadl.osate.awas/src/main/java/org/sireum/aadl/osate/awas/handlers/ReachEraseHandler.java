@@ -45,7 +45,8 @@ public class ReachEraseHandler extends AbstractSireumHandler {
 
 			diagramService.findDiagrams(projects).forEach(dr -> {
 				AgeDiagramEditor agede = getAgeDiagramEditor(dr);
-				AwasUtil.getAllDiagramElements(agede.getDiagram()).forEach(de -> de.setStyle(Style.DEFAULT));
+				AwasUtil.getAllDiagramElements(agede.getDiagramBehavior().getAgeDiagram())
+						.forEach(de -> de.setStyle(Style.DEFAULT));
 
 				agede.getDiagramBehavior().updateDiagramWhenVisible();
 				agede.doSave(new NullProgressMonitor());
