@@ -87,7 +87,7 @@ public class AwasUtil {
 		Set<DiagramElement> des = new HashSet<DiagramElement>();
 
 		ads.forEach(ad -> {
-			des.addAll(getAllDiagramElements(ad.getDiagram()));
+			des.addAll(getAllDiagramElements(ad.getDiagramBehavior().getAgeDiagram()));// getDiagram()));
 		});
 
 		des.forEach(de -> {
