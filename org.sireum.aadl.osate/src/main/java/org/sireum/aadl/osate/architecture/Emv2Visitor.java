@@ -538,7 +538,7 @@ public class Emv2Visitor {
 			st = getErrorType(et.getSuperType()).get();
 		}
 
-		return factory.errorTypeDef(etn, st);
+		return factory.errorTypeDef(etn, st, VisitorUtil.getUriFragment(et));
 	}
 
 	private ErrorAliasDef errorAliasType(ErrorType et) {

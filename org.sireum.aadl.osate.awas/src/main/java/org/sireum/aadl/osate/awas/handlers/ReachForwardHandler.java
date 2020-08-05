@@ -19,9 +19,11 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.osate.aadl2.ComponentImplementation;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.InstanceObject;
 import org.osate.aadl2.instance.SystemInstance;
+import org.osate.aadl2.instance.util.InstanceUtil;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
 import org.osate.ge.internal.services.DiagramService;
 import org.osate.ge.internal.ui.editor.AgeDiagramEditor;
@@ -81,6 +83,8 @@ public class ReachForwardHandler extends AbstractSireumHandler {
 							.getService(DiagramService.class);
 					SystemInstance si = ios.get(0).getSystemInstance();
 					Resource resource = si.eResource();
+					ComponentImplementation cii = InstanceUtil.getComponentImplementation(si, 0, null);
+					// cii.eResource().getResourceSet().get
 					List<Collector> lc = new ArrayList<Collector>(qres.values());
 					Set<AgeDiagramEditor> ads = AwasUtil.awasGraphUri2AgeDiagramEditor(lc.get(0).getGraph(),
 							isImplDiagram, st, resource, diagramService);

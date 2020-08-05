@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.LineAndColumn;
@@ -78,8 +79,10 @@ public class VisitorUtil {
 	}
 
 	public static String getUriFragment(EObject eobj) {
+		System.out.println();
 		Resource res = eobj.eResource();
-		return res.getURIFragment(eobj);
+		// return res.getURIFragment(eobj);
+		return EcoreUtil.getURI(eobj).toString();
 	}
 
 	public static Position buildPosInfo(NamedElement elem) {
