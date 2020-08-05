@@ -34,19 +34,23 @@ import scala.Option;
 
 public class AwasUtil {
 
-	public static Set<InstanceObject> awasUri2AadlInstObj(Set<String> uris, SymbolTable st, Resource resource) {
-		Set<InstanceObject> ios = uris.stream().flatMap(it -> {
+	public static Set<EObject> awasUri2EObject(Set<String> uris, SymbolTable st, Resource resource) {
+		Set<EObject> ios = uris.stream().flatMap(it -> {
 			Option<Node> t = SymbolTableHelper.uri2Node(it, st);
-			Set<InstanceObject> res = new HashSet<InstanceObject>();
+			Set<EObject> res = new HashSet<EObject>();
 			if (t.isDefined() && t.get().auriFrag().isDefined()) {
-				EObject eo = resource.getEObject(t.get().auriFrag().get());
-				if (eo instanceof InstanceObject) {
-					res.add(((InstanceObject) eo));
-				}
+				EObject eo = resource.getResourceSet().getEObject(URI.createURI(t.get().auriFrag().get()), true);
+				// EObject eo = resource.getEObject(t.get().auriFrag().get());
+				res.add(eo);
 			}
 			return res.stream();
 		}).collect(Collectors.toSet());
 		return ios;
+	}
+
+	public static Set<InstanceObject> awasUri2AadlInstObj(Set<String> uris, SymbolTable st, Resource resource) {
+		return awasUri2EObject(uris, st, resource).stream().filter(it -> (it instanceof InstanceObject))
+				.map(it -> (InstanceObject) it).collect(Collectors.toSet());
 	}
 
 	public static Set<Element> instObjs2Elements(Set<InstanceObject> instObjs) {
@@ -133,7 +137,8 @@ public class AwasUtil {
 			return res.stream();
 		}).collect(Collectors.toList());
 
-		final List<EObject> cis = graphFrags.stream().map(it -> resource.getEObject(it)).collect(Collectors.toList());
+		final List<EObject> cis = graphFrags.stream()
+				.map(it -> resource.getResourceSet().getEObject(URI.createURI(it), true)).collect(Collectors.toList());
 
 		Set<AgeDiagramEditor> ads = new HashSet<AgeDiagramEditor>();
 		for (EObject ci : cis) {
