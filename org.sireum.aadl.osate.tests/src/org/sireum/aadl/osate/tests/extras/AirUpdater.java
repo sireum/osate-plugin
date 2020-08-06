@@ -45,7 +45,7 @@ public class AirUpdater extends XtextTest {
 	@Test
 	public void updateAirHamr() {
 		File hamrModelsDir = new File(
-				System.getenv("SIREUM_HOME") + "/hamr/codegen/jvm/src/test/scala/org/sireum/hamr/codegen/test/models");
+				System.getenv("SIREUM_HOME") + "/hamr/codegen/jvm/src/test/scala/models");
 		if (hamrModelsDir.exists()) {
 			regen(hamrModelsDir, ".slang");
 		} else {
