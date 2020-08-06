@@ -105,7 +105,7 @@ public class Emv2Visitor {
 			} else if ((es.getFeatureorPPRef() == null) && (es.getDirection().outgoing())) {
 				pathName2 = pathName2 + "_OUT";
 			}
-			System.out.println(pathName2);
+			// System.out.println(pathName2);
 			// es.getFeatureorPPRef()
 			List<Name> errorTypes = new ArrayList<Name>();
 			ErrorTypes ets = EMV2Util.getErrorType(emv2path) != null ? EMV2Util.getErrorType(emv2path)

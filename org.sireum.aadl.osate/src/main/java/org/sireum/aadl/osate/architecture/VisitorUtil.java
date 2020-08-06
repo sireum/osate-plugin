@@ -79,7 +79,7 @@ public class VisitorUtil {
 	}
 
 	public static String getUriFragment(EObject eobj) {
-		System.out.println();
+		// System.out.println();
 		Resource res = eobj.eResource();
 		// return res.getURIFragment(eobj);
 		return EcoreUtil.getURI(eobj).toString();
