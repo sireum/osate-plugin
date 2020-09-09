@@ -42,7 +42,6 @@ import org.osate.aadl2.Property;
 import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.PropertyConstant;
 import org.osate.aadl2.PropertyExpression;
-import org.osate.aadl2.PropertyType;
 import org.osate.aadl2.RangeValue;
 import org.osate.aadl2.RecordValue;
 import org.osate.aadl2.ReferenceValue;
@@ -138,8 +137,8 @@ public class Visitor {
 
 		List<org.sireum.hamr.ir.EndPoint> src = VisitorUtil.iList();
 		List<org.sireum.hamr.ir.EndPoint> dst = VisitorUtil.iList();
-		List<org.sireum.hamr.ir.EndPoint> src1 = VisitorUtil.iList();
-		List<org.sireum.hamr.ir.EndPoint> dst1 = VisitorUtil.iList();
+		// List<org.sireum.hamr.ir.EndPoint> src1 = VisitorUtil.iList();
+		// List<org.sireum.hamr.ir.EndPoint> dst1 = VisitorUtil.iList();
 
 		if ((scie instanceof FeatureInstance) && (dcie instanceof FeatureInstance)
 				&& (((FeatureInstance) scie).getCategory() == ((FeatureInstance) dcie).getCategory())) {
@@ -179,10 +178,22 @@ public class Visitor {
 		}
 		if (src.size() == 1 && dst.size() == 1 && src.get(0).getFeature().nonEmpty()
 				&& dst.get(0).getFeature().nonEmpty() && (conn instanceof FeatureGroupConnection)) {
-			String srcName = src.get(0).getFeature().get().name().elements().toList().last().string();
-			String dstName = dst.get(0).getFeature().get().name().elements().toList().last().string();
+
+			scala.collection.immutable.Seq<org.sireum.String> srcNameSeq = src.get(0).getFeature().get().name()
+					.elements();
+			scala.collection.immutable.Seq<org.sireum.String> dstNameSeq = dst.get(0).getFeature().get().name()
+					.elements();
+
+			// eclipse jdt hack
+
+			// String srcName = src.get(0).getFeature().get().name().elements().toList().last().string();
+			// String dstName = dst.get(0).getFeature().get().name().elements().toList().last().string();
+
+			String srcName = ((scala.collection.IterableOnceOps<?, ?, ?>) srcNameSeq).toList().last().toString();
+			String dstName = ((scala.collection.IterableOnceOps<?, ?, ?>) dstNameSeq).toList().last().toString();
+
 			name = VisitorUtil.add(path, conn.getName() + "-" + srcName + "_" + dstName);
-//			System.out.println(conn.getName());
+			// System.out.println(conn.getName());
 		}
 
 		final List<String> na = name;
@@ -284,7 +295,7 @@ public class Visitor {
 
 			if (connElem.getCategory() == FeatureCategory.FEATURE_GROUP && !connElem.getFeatureInstances().isEmpty()) {
 
-				Feature ff = connElem.getFeature().getRefined();
+				// Feature ff = connElem.getFeature().getRefined();
 				final String fp = featurePre;
 
 				result = VisitorUtil.addAll(
@@ -307,7 +318,7 @@ public class Visitor {
 						factory.name(feature, featurePos), direction));
 			}
 
-			org.sireum.hamr.ir.Feature f = buildFeature(connElem, component);
+			// org.sireum.hamr.ir.Feature f = buildFeature(connElem, component);
 
 //			if(connElem.getCategory() == FeatureCategory.FEATURE_GROUP) {
 //				connElem.getFeatureInstances().forEach(fi -> {
@@ -355,7 +366,7 @@ public class Visitor {
 			}
 		}
 		final ConnectionEnd ce = connElem.getConnectionEnd();
-		String cname = AadlUtil.getConnectionEndName(connElem);
+		// String cname = AadlUtil.getConnectionEndName(connElem);
 		if (ce instanceof FeatureGroupImpl) {
 			final FeatureGroupImpl fgce = (FeatureGroupImpl) ce;
 			result = VisitorUtil.addAll(result, flattenFeatureGroup(component, fgce.getFullName(), fgce, connElem));
@@ -745,7 +756,7 @@ public class Visitor {
 		final Property prop = pa.getProperty();
 		final List<String> currentPath = VisitorUtil.add(path, prop.getQualifiedName());
 		final NamedElement cont = (NamedElement) pa.eContainer();
-		PropertyType propName = prop.getPropertyType();
+		// PropertyType propName = prop.getPropertyType();
 		List<org.sireum.hamr.ir.PropertyValue> propertyValues = VisitorUtil.iList();
 		try {
 			PropertyExpression pe = PropertyUtils.getSimplePropertyValue(cont, prop);
