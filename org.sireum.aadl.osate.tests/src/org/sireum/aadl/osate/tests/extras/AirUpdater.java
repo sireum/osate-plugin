@@ -17,9 +17,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.SystemImplementation;
+import org.osate.aadl2.errormodel.tests.ErrorModelInjectorProvider;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instantiation.InstantiateModel;
-import org.osate.testsupport.Aadl2InjectorProvider;
 import org.osate.testsupport.TestResourceSetHelper;
 import org.sireum.aadl.osate.tests.extras.UpdaterUtil.TestAadlProject;
 import org.sireum.aadl.osate.tests.extras.UpdaterUtil.TestAadlSystem;
@@ -30,7 +30,7 @@ import com.google.inject.Inject;
 import com.itemis.xtext.testing.XtextTest;
 
 @RunWith(XtextRunner.class)
-@InjectWith(Aadl2InjectorProvider.class)
+@InjectWith(ErrorModelInjectorProvider.class)
 public class AirUpdater extends XtextTest {
 	@Inject
 	TestResourceSetHelper rsHelper;
