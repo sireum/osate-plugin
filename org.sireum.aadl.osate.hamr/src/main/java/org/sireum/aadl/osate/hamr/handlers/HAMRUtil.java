@@ -48,7 +48,8 @@ public class HAMRUtil {
 						msg += ". Use the '" + Platform.seL4_Only + "' or " + Platform.seL4_TB
 								+ "' option if only targeting CAmkES.";
 					}
-					ret.add(inst.new ErrorReport(conn, msg));
+
+					// ret.add(inst.new ErrorReport(conn, msg));
 				}
 			}
 		}
