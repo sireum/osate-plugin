@@ -117,18 +117,21 @@ public class UpdaterUtil {
 		File slangOutputDir;
 		List<TestAadlProject> projects;
 
-		TestAadlSystem(String _systemImpl, File _systemFile, List<TestAadlProject> _projects) {
-			assert (_systemImpl != null);
-			assert (_systemFile != null && _systemFile.exists() && _systemFile.isFile());
-			assert (_projects.size() > 0);
-
-			// assumes first project has the .slang directory
-			slangOutputDir = new File(_projects.get(0).rootDirectory, ".slang");
-			assert (slangOutputDir.exists() && slangOutputDir.isDirectory());
+		TestAadlSystem(String _systemImpl, File _systemFile, List<TestAadlProject> _projects, File _slangOutputDir) {
+			assert _systemImpl != null;
+			assert _systemFile != null && _systemFile.exists() && _systemFile.isFile();
+			assert _projects.size() > 0;
+			assert _slangOutputDir.exists() && _slangOutputDir.isDirectory();
 
 			this.systemImplementationName = _systemImpl;
 			this.systemImplementationFile = _systemFile;
 			this.projects = _projects;
+			this.slangOutputDir = _slangOutputDir;
+		}
+
+		TestAadlSystem(String _systemImpl, File _systemFile, List<TestAadlProject> _projects) {
+			// assume first project contains a .slang subdirectory
+			this(_systemImpl, _systemFile, _projects, new File(_projects.get(0).rootDirectory, ".slang"));
 		}
 
 		/*
