@@ -22,7 +22,8 @@ Bundle-ClassPath: .,
  bin/
 Import-Package: org.osate.ge.diagram,
  org.osate.pluginsupport
-Export-Package: org.sireum.awas.AADLBridge,
+Export-Package: org.sireum.aadl.osate.awas.util,
+ org.sireum.awas.AADLBridge,
  org.sireum.awas.AliranAman,
  org.sireum.awas.Stpa,
  org.sireum.awas.analysis,
