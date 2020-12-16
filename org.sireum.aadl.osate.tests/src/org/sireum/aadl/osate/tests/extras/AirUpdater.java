@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 
@@ -121,7 +122,7 @@ public class AirUpdater extends XtextTest {
 		ResourceSet rs = rsHelper.getResourceSet();
 		for (TestAadlProject project : projects) {
 			for (File f : project.aadlFiles) {
-				loadFile(project.projectName, f, rs);
+				loadFile(project, f, rs);
 			}
 		}
 		return rs;
@@ -137,11 +138,28 @@ public class AirUpdater extends XtextTest {
 	 * @param rs ResourceSet
 	 * @return
 	 */
-	public Resource loadFile(String projectName, File file, ResourceSet rs) {
+	public Resource loadFile(TestAadlProject project, File file, ResourceSet rs) {
 		try {
 			URL url = new URL("file:" + file.getAbsolutePath());
 			InputStream stream = url.openConnection().getInputStream();
-			Resource res = rs.createResource(URI.createURI(projectName + "/" + file.getName()));
+
+			String prefix = "platform:/resource/";
+
+			Path rootPath = Path.of(project.rootDirectory.toURI());
+			Path resourcePath = Path.of(file.toURI());
+			Path relativePath = rootPath.relativize(resourcePath);
+
+			// came up with this uri by comparing what OSATE IDE serialized AIR produces
+			URI resourceUri = URI.createURI(prefix + project.projectName + "/" + relativePath);
+
+			/*
+			 * System.out.println("root = " + rootPath);
+			 * System.out.println("resourcePath = " + resourcePath);
+			 * System.out.println("relative = " + relativePath);
+			 * System.out.println("resourceUri = " + resourceUri);
+			 * System.out.println();
+			 */
+			Resource res = rs.createResource(resourceUri);
 			if (res != null) {
 				res.load(stream, Collections.EMPTY_MAP);
 			}
