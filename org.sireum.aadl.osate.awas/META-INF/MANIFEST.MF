@@ -14,7 +14,9 @@ Require-Bundle: org.osate.aadl2,
  org.eclipse.graphiti.ui,
  org.osate.ge.diagram;bundle-version="2.0.1",
  org.eclipse.graphiti;bundle-version="0.16.1",
- org.eclipse.core.expressions
+ org.eclipse.core.expressions,
+ org.eclipse.core.commands,
+ org.osate.ui;bundle-version="4.0.2"
 Automatic-Module-Name: Awas
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
@@ -22,7 +24,8 @@ Bundle-ClassPath: .,
  bin/
 Import-Package: org.osate.ge.diagram,
  org.osate.pluginsupport
-Export-Package: org.sireum.awas.AADLBridge,
+Export-Package: org.sireum.aadl.osate.awas.util,
+ org.sireum.awas.AADLBridge,
  org.sireum.awas.AliranAman,
  org.sireum.awas.Stpa,
  org.sireum.awas.analysis,

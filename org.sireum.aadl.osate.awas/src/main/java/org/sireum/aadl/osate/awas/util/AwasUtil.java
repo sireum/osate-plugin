@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -15,6 +14,7 @@ import org.osate.aadl2.ComponentImplementation;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.InstanceObject;
+import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instance.util.InstanceUtil;
 import org.osate.aadl2.modelsupport.EObjectURIWrapper;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
@@ -62,7 +62,7 @@ public class AwasUtil {
 			SymbolTable st,
 			Resource resource) {
 
-		AtomicBoolean isNode = new AtomicBoolean(true);
+		// AtomicBoolean isNode = new AtomicBoolean(true);
 		Set<String> uris = new HashSet<String>();
 		if (qres.getResultType().isPresent()) {
 			if (qres.getResultType().get() == ResultType.Node()) {
@@ -72,7 +72,7 @@ public class AwasUtil {
 				uris.addAll(qres.getFlows());
 				uris.addAll(qres.getNodes().stream().filter(it -> it.getResourceType() == NodeType.CONNECTION())
 						.map(it -> it.getUri()).collect(Collectors.toSet()));
-				isNode.getAndSet(false);
+				// isNode.getAndSet(false);
 			}
 		} else if (!qres.getNodes().isEmpty()) {
 			uris.addAll(qres.getNodes().stream().map(it -> it.getUri()).collect(Collectors.toSet()));
@@ -156,6 +156,18 @@ public class AwasUtil {
 				ads.add(ade);
 			}
 		}
+		return ads;
+	}
+
+	@SuppressWarnings("restriction")
+	public static Set<AgeDiagramEditor> awasGraphUri2AgeDiagramEditor(SystemInstance si, SymbolTable st,
+			Resource resource, DiagramService diagramService) {
+
+
+		Set<AgeDiagramEditor> ads = new HashSet<AgeDiagramEditor>();
+
+		ads.add(diagramService.openOrCreateDiagramForBusinessObject(si, true, true));
+
 		return ads;
 	}
 

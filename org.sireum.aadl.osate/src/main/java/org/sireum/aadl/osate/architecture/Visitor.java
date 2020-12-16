@@ -80,7 +80,7 @@ public class Visitor {
 	public Visitor() {
 		Bundle b = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
 		if (b != null) {
-			sv = new SmfVisitor(this);
+			// sv = new SmfVisitor(this);
 		}
 	}
 
