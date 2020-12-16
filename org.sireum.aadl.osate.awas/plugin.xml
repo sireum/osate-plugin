@@ -45,6 +45,19 @@
                name="generator">
          </commandParameter>
       </command>
+      <command
+            defaultHandler="org.sireum.aadl.osate.awas.handlers.AwasServerHandler"
+            id="org.sireum.commands.toggleserver"
+            name="Toggle Server">
+         <commandParameter
+               id="org.sireum.commands.server.generator"
+               name="generator">
+         </commandParameter>
+         <state
+               class="org.eclipse.jface.commands.ToggleState"
+               id="org.eclipse.ui.commands.toggleState">
+         </state>
+      </command>
    </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution
@@ -97,6 +110,16 @@
                   <reference
                         definitionId="org.osate.ge.expressions.editorIsActive">
                   </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.sireum.commands.toggleserver"
+                  icon="icons/play.png"
+                  label="Toggle Server"
+                  style="toggle"
+                  tooltip="Toggle Server">
+               <visibleWhen
+                     checkEnabled="false">
                </visibleWhen>
             </command>
          </toolbar>
