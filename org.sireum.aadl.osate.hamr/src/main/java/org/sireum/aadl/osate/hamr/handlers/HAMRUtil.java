@@ -48,7 +48,8 @@ public class HAMRUtil {
 						msg += ". Use the '" + Platform.seL4_Only + "' or " + Platform.seL4_TB
 								+ "' option if only targeting CAmkES.";
 					}
-					ret.add(inst.new ErrorReport(conn, msg));
+
+					// ret.add(inst.new ErrorReport(conn, msg));
 				}
 			}
 		}
@@ -74,8 +75,15 @@ public class HAMRUtil {
 
 	@SafeVarargs
 	public static <T> IS<Z, T> toISZ(T... args) {
-		scala.collection.Seq<T> seq = scala.collection.JavaConverters.asScalaBuffer(java.util.Arrays.asList(args));
-		IS<Z, T> ret = org.sireum.IS$.MODULE$.apply(seq, org.sireum.Z$.MODULE$);
+		// scala 2.13 update
+		// scala.collection.Seq<T> seq = scala.collection.JavaConverters.asScalaBuffer(java.util.Arrays.asList(args));
+		scala.collection.Seq<T> seq = scala.jdk.javaapi.CollectionConverters
+				.asScala(java.util.Arrays.asList(args));
+
+		scala.collection.immutable.Seq<T> eclipseJDTSeqHack = ((scala.collection.IterableOnceOps<T, ?, ?>) seq).toSeq();
+
+		// IS<Z, T> ret = org.sireum.IS$.MODULE$.apply(seq, org.sireum.Z$.MODULE$);
+		IS<Z, T> ret = org.sireum.IS$.MODULE$.apply(eclipseJDTSeqHack, org.sireum.Z$.MODULE$);
 		return ret;
 	}
 

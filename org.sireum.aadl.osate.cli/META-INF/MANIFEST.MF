@@ -5,15 +5,14 @@ Bundle-SymbolicName: org.sireum.aadl.osate.cli;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.sireum.aadl.osate.cli.Activator
 Require-Bundle: org.osate.aadl2,
+ org.osate.xtext.aadl2,
  org.osate.aadl2.instantiation,
  org.sireum.aadl.osate,
  org.osate.xtext.aadl2.errormodel,
- org.osate.alisa.workbench,
  org.osate.categories,
- org.osate.testsupport;visibility:=reexport,
- org.osate.xtext.aadl2.ui,
  org.osate.pluginsupport,
- org.osate.assure.tests
+ org.osate.annexsupport,
+ org.osate.aadl2.modelsupport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.sireum.aadl.osate.cli
 Bundle-ActivationPolicy: lazy
