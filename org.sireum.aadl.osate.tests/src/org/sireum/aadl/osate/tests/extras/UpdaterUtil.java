@@ -2,6 +2,7 @@ package org.sireum.aadl.osate.tests.extras;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -63,7 +64,7 @@ public class UpdaterUtil {
 						}
 					}
 				}
-				ret.add(new TestAadlSystem(systemImpl, systemFile, List.of(project)));
+				ret.add(new TestAadlSystem(systemImpl, systemFile, Arrays.asList(project)));
 			}
 		}
 		return ret;
