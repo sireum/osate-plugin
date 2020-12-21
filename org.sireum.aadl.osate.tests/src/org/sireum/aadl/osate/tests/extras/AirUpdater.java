@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
@@ -145,8 +146,8 @@ public class AirUpdater extends XtextTest {
 
 			String prefix = "platform:/resource/";
 
-			Path rootPath = Path.of(project.rootDirectory.toURI());
-			Path resourcePath = Path.of(file.toURI());
+			Path rootPath = Paths.get(project.rootDirectory.toURI());
+			Path resourcePath = Paths.get(file.toURI());
 			Path relativePath = rootPath.relativize(resourcePath);
 
 			// came up with this uri by comparing what OSATE IDE serialized AIR produces
