@@ -171,4 +171,11 @@ public class AwasUtil {
 		return ads;
 	}
 
+
+
+	public static org.osate.ge.graphics.Color hex2Rgb(String colorStr) {
+		return new org.osate.ge.graphics.Color(Integer.valueOf(colorStr.substring(1, 3), 16),
+				Integer.valueOf(colorStr.substring(3, 5), 16), Integer.valueOf(colorStr.substring(5, 7), 16));
+	}
+
 }

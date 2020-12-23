@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -18,12 +17,11 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.osate.aadl2.instance.InstanceObject;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.modelsupport.EObjectURIWrapper;
-import org.osate.ge.graphics.Style;
-import org.osate.ge.graphics.StyleBuilder;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
 import org.osate.ge.internal.services.DiagramService.DiagramReference;
 import org.osate.ge.internal.ui.editor.AgeDiagramEditor;
 import org.osate.ge.internal.ui.util.EditorUtil;
+import org.sireum.aadl.osate.awas.handlers.AwasServerHandler;
 import org.sireum.awas.ast.AwasSerializer;
 import org.sireum.awas.ast.Model;
 import org.sireum.awas.peti.PetiImpl;
@@ -42,15 +40,14 @@ public class AwasServer extends PetiImpl {
 //	IProject project = null;
 //	DiagramService diagramService = null;
 	IWorkbenchPage page = null;
-	Set<AgeDiagramEditor> ade = null;
 
-	public AwasServer(Model awasModel, SystemInstance si, Set<AgeDiagramEditor> ade, IWorkbenchPage page) {
+	public AwasServer(Model awasModel, SystemInstance si, IWorkbenchPage page) {
 		this.awasModel = awasModel;
 		this.si = si;
 //		this.diagramService = diagramService;
 //		this.project = project;
 		this.page = page;
-		this.ade = ade;
+
 		startServer();
 		this.main(new String[0]);
 		// this.handlePing();
@@ -69,7 +66,7 @@ public class AwasServer extends PetiImpl {
 
 		try {
 			String res = toHexString(getSHA(awasJson));
-			System.out.println(res);
+
 			this.sendHash(res);
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
@@ -133,28 +130,8 @@ public class AwasServer extends PetiImpl {
 
 //		Set<IProject> projects = new HashSet();
 //		projects.add(project);
-		ade.forEach(dia -> {
 
-			AwasUtil.getAllDiagramElements(dia.getDiagramBehavior().getAgeDiagram())
-					.forEach(de -> des.add(de));
-		});
-
-
-		des.forEach(de -> {
-			URI hUri = new EObjectURIWrapper((EObject) de.getBusinessObject()).getUri();
-			if (de.getBusinessObject() instanceof EObject && iUri.containsKey(hUri)) {
-				de.setStyle(StyleBuilder.create(de.getStyle()).backgroundColor(hex2Rgb(iUri.get(hUri)))
-						// .fontColor(org.osate.ge.graphics.Color.ORANGE)
-						.outlineColor(hex2Rgb(iUri.get(hUri))).build());
-			}
-
-		});
-
-		ade.forEach(dia -> {
-			dia.getDiagramBehavior().updateDiagramWhenVisible();
-			dia.doSave(new NullProgressMonitor());
-		});
-
+		AwasServerHandler.highlightInstanceDiagram(iUri, si);
 
 
 
@@ -185,37 +162,21 @@ public class AwasServer extends PetiImpl {
 			return res.stream();
 		}).collect(Collectors.toSet());
 
-		Set<DiagramElement> des = new HashSet<DiagramElement>();
+
 		// des.addAll(AwasUtil.getAllDiagramElements(ade.getDiagramBehavior().getAgeDiagram()));
 
 //		Set<IProject> projects = new HashSet();
 //		projects.add(project);
-		ade.forEach(dia -> {
 
-			AwasUtil.getAllDiagramElements(dia.getDiagramBehavior().getAgeDiagram()).forEach(de -> des.add(de));
-		});
 
-		des.forEach(de -> {
-			URI hUri = new EObjectURIWrapper((EObject) de.getBusinessObject()).getUri();
-			if (de.getBusinessObject() instanceof EObject && iUri.contains(hUri)) {
-				de.setStyle(Style.DEFAULT);
-			}
-		});
+		AwasServerHandler.clearInstanceDiagram(iUri, si);
 
-		ade.forEach(dia -> {
-			dia.getDiagramBehavior().updateDiagramWhenVisible();
-			dia.doSave(new NullProgressMonitor());
-		});
+
 
 		return Option.empty();
 	}
 
-	public static org.osate.ge.graphics.Color hex2Rgb(String colorStr) {
-		return new org.osate.ge.graphics.Color(
-	            Integer.valueOf( colorStr.substring( 1, 3 ), 16 ),
-	            Integer.valueOf( colorStr.substring( 3, 5 ), 16 ),
-	            Integer.valueOf( colorStr.substring( 5, 7 ), 16 ) );
-	}
+
 
 	public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
 		// Static getInstance method is called with hashing SHA
