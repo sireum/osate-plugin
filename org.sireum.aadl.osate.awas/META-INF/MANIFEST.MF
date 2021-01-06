@@ -16,7 +16,7 @@ Require-Bundle: org.osate.aadl2,
  org.eclipse.graphiti;bundle-version="0.16.1",
  org.eclipse.core.expressions,
  org.eclipse.core.commands,
- org.osate.ui;bundle-version="4.0.2"
+ org.osate.ui
 Automatic-Module-Name: Awas
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
