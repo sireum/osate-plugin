@@ -48,7 +48,6 @@ import org.sireum.aadl.osate.awas.Activator;
 import org.sireum.aadl.osate.awas.util.AwasServer;
 import org.sireum.aadl.osate.awas.util.AwasUtil;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
-import org.sireum.aadl.osate.util.SelectionHelper;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.ir.Aadl;
 
@@ -139,7 +138,7 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 				return null;
 			}
 
-			IProject currProject = SelectionHelper.getProject();
+			IProject currProject = getProject(root);// SelectionHelper.getProject();
 			Set<IProject> projects = new HashSet();
 			projects.add(currProject);
 			diagramService.findDiagrams(projects).forEach(dr -> {
