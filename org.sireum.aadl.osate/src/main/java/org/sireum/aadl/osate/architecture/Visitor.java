@@ -30,7 +30,6 @@ import org.osate.aadl2.Feature;
 import org.osate.aadl2.FeatureConnection;
 import org.osate.aadl2.FeatureGroup;
 import org.osate.aadl2.FeatureGroupConnection;
-import org.osate.aadl2.FeatureGroupPrototype;
 import org.osate.aadl2.FeatureGroupType;
 import org.osate.aadl2.ListValue;
 import org.osate.aadl2.NamedElement;
@@ -65,7 +64,6 @@ import org.osate.aadl2.instance.InstancePackage;
 import org.osate.aadl2.instance.InstanceReferenceValue;
 import org.osate.aadl2.instance.ModeTransitionInstance;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.osate.aadl2.modelsupport.util.ResolvePrototypeUtil;
 import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 import org.osgi.framework.Bundle;
 import org.sireum.Option;
@@ -401,6 +399,8 @@ public class Visitor {
 
 		List<org.sireum.hamr.ir.EndPoint> res = VisitorUtil.iList();
 		FeatureGroupType fgt = fgi.getFeatureGroupType();
+
+		/**
 		// if (fgt == null) {
 			final FeatureGroupPrototype fgpt = fgi.basicGetFeatureGroupPrototype();
 			if (fgpt != null) {
@@ -409,6 +409,7 @@ public class Visitor {
 					connElem.getContext() == null ? connElem.getContainingComponentImpl() : connElem.getContext());
 			}
 			// }
+		*/
 		if (fgt != null) {
 		for (Feature f : fgt.getAllFeatures()) {
 			Feature rf = f;// .getRefined();
