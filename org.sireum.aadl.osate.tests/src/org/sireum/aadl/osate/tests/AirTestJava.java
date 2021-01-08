@@ -1,39 +1,21 @@
 package org.sireum.aadl.osate.tests;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.testing.InjectWith;
-import org.eclipse.xtext.testing.XtextRunner;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.osate.aadl2.AadlPackage;
-import org.osate.aadl2.Classifier;
-import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.instance.SystemInstance;
-import org.osate.aadl2.instantiation.InstantiateModel;
-import org.osate.testsupport.Aadl2InjectorProvider;
-import org.osate.testsupport.TestHelper;
+import org.sireum.aadl.osate.tests.util.IOUtils;
+import org.sireum.aadl.osate.tests.util.UpdaterUtil.TestAadlProject;
+import org.sireum.aadl.osate.tests.util.UpdaterUtil.TestAadlSystem;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
+import org.sireum.hamr.ir.Aadl;
 
-import com.google.inject.Inject;
-import com.itemis.xtext.testing.XtextTest;
-
-@RunWith(XtextRunner.class)
-@InjectWith(Aadl2InjectorProvider.class)
-public class AirTestJava extends XtextTest {
-
-	@Inject
-	TestHelper<AadlPackage> testHelper;
+public class AirTestJava extends SireumTest {
 
 	boolean generateExpected = false;
 	boolean writeResults = true;
@@ -67,74 +49,49 @@ public class AirTestJava extends XtextTest {
 
 	@Test
 	public void pca_pulseox_spiral15_insecure() {
-		execute("PCA_PulseOX_spiral15", "PCA_Example.aadl", "PCA_PulseOx.insecure");
+		// FIXME
+		assert false : "FIXME - doesn't work via OSATE either";
+		// execute("PCA_PulseOX_spiral15", "PCA_Example.aadl", "PCA_PulseOx.insecure");
 	}
 
-//	@Test
-//	public void feature_Grpup_Tests_Concrete_Sys() {
-//		execute("feature-group-tests", "Feature_Group_TestCase.aadl", "Concrete_Sys.impl");
-//	}
+	@Test
+	public void feature_Grpup_Tests_Concrete_Sys() {
+		execute("feature-group-tests", "Feature_Group_TestCase.aadl", "Concrete_Sys.impl");
+	}
 
 	void execute(String dirName, String sysFilename, String sysImplName) {
 		try {
-			File r = new File(ROOT_DIR, dirName);
-			String sys = null;
-			ArrayList<String> l = new ArrayList<>();
+			File root = new File(ROOT_DIR, dirName);
 
-			for (File f : r.listFiles()) {
-				if(f.getName().endsWith(".aadl")) {
-					if(f.getName().equals(sysFilename)){
-						sys = readFile(f);
-					} else {
-						l.add(readFile(f));
-					}
-				}
-			}
+			List<File> aadlFiles = IOUtils.collectFiles(root, ".aadl", true);
+			File sysImplFile = new File(root, sysFilename);
+			assert sysImplFile.exists() : sysImplFile.getAbsolutePath() + "doesn't exist";
 
-			AadlPackage pkg = testHelper.parseString(sys, l.toArray(new String[l.size()]));
+			TestAadlProject project = new TestAadlProject(root.getName(), root, aadlFiles);
+			TestAadlSystem system = new TestAadlSystem(sysImplName, sysImplFile, Arrays.asList(project), root);
 
-//			assertAllCrossReferencesResolvable(pkg);
+			SystemInstance instance = getSystemInstance(system);
 
-			// instantiate
-			SystemImplementation sysImpl = (SystemImplementation) getResourceByName(sysImplName,
-					pkg.getOwnedPublicSection().getOwnedClassifiers());
-			SystemInstance instance = InstantiateModel.instantiate(sysImpl);
+			Aadl model = Util.getAir(instance, true, System.out);
+			String ir = Util.serialize(model, SerializerType.JSON);
 
-			String ir = Util.serialize(Util.getAir(instance, true), SerializerType.JSON);
-
-			Optional<File> expectedFile = Arrays.stream(r.listFiles())
+			Optional<File> expectedFile = Arrays.stream(root.listFiles())
 					.filter(x -> x.getName().endsWith(sysImplName + ".json")).findFirst();
 			if (writeResults) {
-				File results = new File(r, sysImplName + "_results.json");
-				Files.write(Paths.get(results.toURI()), ir.getBytes(StandardCharsets.UTF_8));
-				System.out.println("Wrote: " + results.getAbsolutePath());
+				File results = new File(root, sysImplName + "_results.json");
+				IOUtils.writeFile(results, ir);
 			}
 			Assert.assertTrue("Expected results not found", expectedFile.isPresent());
-			String expected = readFile(expectedFile.get());
+			String expected = IOUtils.readFile(expectedFile.get());
 			if (generateExpected) {
-				Files.write(Paths.get(expectedFile.get().toURI()), ir.getBytes(StandardCharsets.UTF_8));
-				System.out.println("Wrote: " + expectedFile.get().getAbsolutePath());
+				IOUtils.writeFile(expectedFile.get(), ir);
 				expected = ir;
 			}
-
 
 			Assert.assertEquals(ir, expected);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.assertFalse(true);
 		}
-	}
-
-	String readFile(File f) throws IOException {
-		return new String(Files.readAllBytes(Paths.get(f.toURI())));
-	}
-
-	Classifier getResourceByName(String name, EList<Classifier> l) {
-		for (Classifier oc : l) {
-			if (oc.getName().equals(name)) {
-				return oc;
-			}
-		}
-		return null;
 	}
 }

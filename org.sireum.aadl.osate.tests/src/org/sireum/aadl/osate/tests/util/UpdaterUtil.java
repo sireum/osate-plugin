@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate.tests.extras;
+package org.sireum.aadl.osate.tests.util;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import org.osate.aadl2.Classifier;
 
 public class UpdaterUtil {
 
-	static Classifier getResourceByName(String name, EList<Classifier> l) {
+	public static Classifier getResourceByName(String name, EList<Classifier> l) {
 		for (Classifier oc : l) {
 			if (oc.getName().equals(name)) {
 				return oc;
@@ -27,7 +27,7 @@ public class UpdaterUtil {
 		return line.substring(line.indexOf(marker) + marker.length(), line.indexOf("</name>"));
 	}
 
-	static List<TestAadlSystem> findSystems(File f) {
+	public static List<TestAadlSystem> findSystems(File f) {
 		List<TestAadlSystem> ret = new ArrayList<TestAadlSystem>();
 		if (f.isDirectory()) {
 			List<File> systems = IOUtils.collectFiles(f, ".system", false);
@@ -95,12 +95,12 @@ public class UpdaterUtil {
 		return null;
 	}
 
-	static class TestAadlProject {
-		String projectName;
-		File rootDirectory;
-		List<File> aadlFiles;
+	public static class TestAadlProject {
+		public String projectName;
+		public File rootDirectory;
+		public List<File> aadlFiles;
 
-		TestAadlProject(String _projectName, File _rootDirectory, List<File> _aadlFiles) {
+		public TestAadlProject(String _projectName, File _rootDirectory, List<File> _aadlFiles) {
 			assert (_projectName != null);
 			assert _rootDirectory != null && _rootDirectory.exists() && _rootDirectory.isDirectory();
 			assert !_aadlFiles.isEmpty() : "no aadl files for " + projectName + " in root dir " + rootDirectory;
@@ -111,14 +111,15 @@ public class UpdaterUtil {
 		}
 	}
 
-	static class TestAadlSystem {
+	public static class TestAadlSystem {
 
-		String systemImplementationName;
-		File systemImplementationFile;
-		File slangOutputDir;
-		List<TestAadlProject> projects;
+		public String systemImplementationName;
+		public File systemImplementationFile;
+		public File slangOutputDir;
+		public List<TestAadlProject> projects;
 
-		TestAadlSystem(String _systemImpl, File _systemFile, List<TestAadlProject> _projects, File _slangOutputDir) {
+		public TestAadlSystem(String _systemImpl, File _systemFile, List<TestAadlProject> _projects,
+				File _slangOutputDir) {
 			assert _systemImpl != null;
 			assert _systemFile != null && _systemFile.exists() && _systemFile.isFile();
 			assert _projects.size() > 0;

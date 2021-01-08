@@ -12,7 +12,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "__synthetic0.aadl"
+              "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
             },
             "beginLine" : 8,
             "beginColumn" : 3,
@@ -44,7 +44,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "__synthetic0.aadl"
+                  "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                 },
                 "beginLine" : 10,
                 "beginColumn" : 7,
@@ -80,7 +80,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                     },
                     "beginLine" : 18,
                     "beginColumn" : 7,
@@ -114,7 +114,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 28,
                         "beginColumn" : 7,
@@ -152,7 +152,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
                             "beginLine" : 26,
                             "beginColumn" : 4,
@@ -168,6 +168,8 @@
                           "type" : "ValueProp",
                           "value" : "Struct"
                         }
+                      ],
+                      "appliesTo" : [
                       ]
                     },
                     {
@@ -181,7 +183,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
                             "beginLine" : 43,
                             "beginColumn" : 4,
@@ -209,6 +211,8 @@
                           "type" : "ValueProp",
                           "value" : "pbolusRequest"
                         }
+                      ],
+                      "appliesTo" : [
                       ]
                     },
                     {
@@ -222,7 +226,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
                             "beginLine" : 5,
                             "beginColumn" : 4,
@@ -250,9 +254,12 @@
                           "type" : "ClassifierProp",
                           "name" : "Base_Types::Boolean"
                         }
+                      ],
+                      "appliesTo" : [
                       ]
                     }
-                  ]
+                  ],
+                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 },
                 {
                   "type" : "FeatureEnd",
@@ -265,7 +272,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 29,
                         "beginColumn" : 7,
@@ -288,7 +295,8 @@
                     "type" : "None"
                   },
                   "properties" : [
-                  ]
+                  ],
+                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.1"
                 }
               ],
               "subComponents" : [
@@ -309,13 +317,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "plugin\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
                         },
-                        "beginLine" : 12,
+                        "beginLine" : 13,
                         "beginColumn" : 2,
-                        "endLine" : 13,
+                        "endLine" : 14,
                         "endColumn" : 50,
-                        "offset" : 476,
+                        "offset" : 527,
                         "length" : 97
                       }
                     }
@@ -325,6 +333,8 @@
                       "type" : "ValueProp",
                       "value" : "Periodic"
                     }
+                  ],
+                  "appliesTo" : [
                   ]
                 },
                 {
@@ -338,13 +348,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "plugin\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
                         },
-                        "beginLine" : 191,
+                        "beginLine" : 192,
                         "beginColumn" : 2,
-                        "endLine" : 192,
+                        "endLine" : 193,
                         "endColumn" : 99,
-                        "offset" : 11575,
+                        "offset" : 11626,
                         "length" : 119
                       }
                     }
@@ -358,6 +368,8 @@
                         "value" : "ps"
                       }
                     }
+                  ],
+                  "appliesTo" : [
                   ]
                 }
               ],
@@ -388,10 +400,13 @@
                         "propagations" : [
                         ]
                       }
-                    }
+                    },
+                    "properties" : [
+                    ]
                   }
                 }
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
             },
             {
               "type" : "Component",
@@ -404,7 +419,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                     },
                     "beginLine" : 19,
                     "beginColumn" : 7,
@@ -438,7 +453,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 41,
                         "beginColumn" : 7,
@@ -476,7 +491,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
                             "beginLine" : 26,
                             "beginColumn" : 4,
@@ -492,6 +507,8 @@
                           "type" : "ValueProp",
                           "value" : "Struct"
                         }
+                      ],
+                      "appliesTo" : [
                       ]
                     },
                     {
@@ -505,7 +522,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
                             "beginLine" : 43,
                             "beginColumn" : 4,
@@ -533,6 +550,8 @@
                           "type" : "ValueProp",
                           "value" : "pbolusRequest"
                         }
+                      ],
+                      "appliesTo" : [
                       ]
                     },
                     {
@@ -546,7 +565,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
                             "beginLine" : 5,
                             "beginColumn" : 4,
@@ -574,9 +593,12 @@
                           "type" : "ClassifierProp",
                           "name" : "Base_Types::Boolean"
                         }
+                      ],
+                      "appliesTo" : [
                       ]
                     }
-                  ]
+                  ],
+                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1\/@featureInstance.0"
                 },
                 {
                   "type" : "FeatureEnd",
@@ -589,7 +611,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 42,
                         "beginColumn" : 7,
@@ -612,7 +634,8 @@
                     "type" : "None"
                   },
                   "properties" : [
-                  ]
+                  ],
+                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1\/@featureInstance.1"
                 }
               ],
               "subComponents" : [
@@ -633,13 +656,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "plugin\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
                         },
-                        "beginLine" : 12,
+                        "beginLine" : 13,
                         "beginColumn" : 2,
-                        "endLine" : 13,
+                        "endLine" : 14,
                         "endColumn" : 50,
-                        "offset" : 476,
+                        "offset" : 527,
                         "length" : 97
                       }
                     }
@@ -649,6 +672,8 @@
                       "type" : "ValueProp",
                       "value" : "Sporadic"
                     }
+                  ],
+                  "appliesTo" : [
                   ]
                 },
                 {
@@ -662,13 +687,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "plugin\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
                         },
-                        "beginLine" : 191,
+                        "beginLine" : 192,
                         "beginColumn" : 2,
-                        "endLine" : 192,
+                        "endLine" : 193,
                         "endColumn" : 99,
-                        "offset" : 11575,
+                        "offset" : 11626,
                         "length" : 119
                       }
                     }
@@ -682,6 +707,8 @@
                         "value" : "ps"
                       }
                     }
+                  ],
+                  "appliesTo" : [
                   ]
                 }
               ],
@@ -712,10 +739,13 @@
                         "propagations" : [
                         ]
                       }
-                    }
+                    },
+                    "properties" : [
+                    ]
                   }
                 }
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1"
             }
           ],
           "connections" : [
@@ -730,7 +760,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                     },
                     "beginLine" : 21,
                     "beginColumn" : 7,
@@ -753,7 +783,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 18,
                         "beginColumn" : 7,
@@ -775,7 +805,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "__synthetic0.aadl"
+                            "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                           },
                           "beginLine" : 28,
                           "beginColumn" : 7,
@@ -808,7 +838,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 19,
                         "beginColumn" : 7,
@@ -830,7 +860,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "__synthetic0.aadl"
+                            "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                           },
                           "beginLine" : 41,
                           "beginColumn" : 7,
@@ -866,7 +896,8 @@
                 }
               ],
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@connectionInstance.0\/@connectionReference.0"
             },
             {
               "type" : "Connection",
@@ -879,7 +910,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                     },
                     "beginLine" : 22,
                     "beginColumn" : 7,
@@ -902,7 +933,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 18,
                         "beginColumn" : 7,
@@ -924,7 +955,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "__synthetic0.aadl"
+                            "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                           },
                           "beginLine" : 29,
                           "beginColumn" : 7,
@@ -957,7 +988,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 19,
                         "beginColumn" : 7,
@@ -979,7 +1010,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "__synthetic0.aadl"
+                            "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                           },
                           "beginLine" : 42,
                           "beginColumn" : 7,
@@ -1015,7 +1046,8 @@
                 }
               ],
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@connectionInstance.1\/@connectionReference.0"
             }
           ],
           "connectionInstances" : [
@@ -1030,7 +1062,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                     },
                     "beginLine" : 21,
                     "beginColumn" : 7,
@@ -1052,7 +1084,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "__synthetic0.aadl"
+                        "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                       },
                       "beginLine" : 18,
                       "beginColumn" : 7,
@@ -1074,7 +1106,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 28,
                         "beginColumn" : 7,
@@ -1105,7 +1137,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "__synthetic0.aadl"
+                        "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                       },
                       "beginLine" : 19,
                       "beginColumn" : 7,
@@ -1127,7 +1159,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 41,
                         "beginColumn" : 7,
@@ -1163,7 +1195,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 21,
                         "beginColumn" : 7,
@@ -1183,7 +1215,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 10,
                         "beginColumn" : 7,
@@ -1211,7 +1243,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                     },
                     "beginLine" : 22,
                     "beginColumn" : 7,
@@ -1233,7 +1265,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "__synthetic0.aadl"
+                        "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                       },
                       "beginLine" : 18,
                       "beginColumn" : 7,
@@ -1255,7 +1287,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 29,
                         "beginColumn" : 7,
@@ -1286,7 +1318,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "__synthetic0.aadl"
+                        "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                       },
                       "beginLine" : 19,
                       "beginColumn" : 7,
@@ -1308,7 +1340,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 42,
                         "beginColumn" : 7,
@@ -1344,7 +1376,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 22,
                         "beginColumn" : 7,
@@ -1364,7 +1396,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/pca-pump-chasis-gen\/Chassis.aadl"
                         },
                         "beginLine" : 10,
                         "beginColumn" : 7,
@@ -1411,10 +1443,13 @@
                     "propagations" : [
                     ]
                   }
-                }
+                },
+                "properties" : [
+                ]
               }
             }
-          ]
+          ],
+          "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0"
         }
       ],
       "connections" : [
@@ -1450,15 +1485,87 @@
                 "propagations" : [
                 ]
               }
-            }
+            },
+            "properties" : [
+            ]
           }
         }
-      ]
+      ],
+      "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/"
     }
   ],
-  "errorLib" : [
+  "annexLib" : [
   ],
   "dataComponents" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Boolean"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 26,
+                "beginColumn" : 4,
+                "endLine" : 29,
+                "endColumn" : 36,
+                "offset" : 1108,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Boolean"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
     {
       "type" : "Component",
       "identifier" : {
@@ -1499,7 +1606,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                 },
                 "beginLine" : 26,
                 "beginColumn" : 4,
@@ -1515,6 +1622,8 @@
               "type" : "ValueProp",
               "value" : "Struct"
             }
+          ],
+          "appliesTo" : [
           ]
         },
         {
@@ -1528,7 +1637,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                 },
                 "beginLine" : 43,
                 "beginColumn" : 4,
@@ -1556,6 +1665,8 @@
               "type" : "ValueProp",
               "value" : "pbolusRequest"
             }
+          ],
+          "appliesTo" : [
           ]
         },
         {
@@ -1569,7 +1680,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "plugin\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                 },
                 "beginLine" : 5,
                 "beginColumn" : 4,
@@ -1597,6 +1708,8 @@
               "type" : "ClassifierProp",
               "name" : "Base_Types::Boolean"
             }
+          ],
+          "appliesTo" : [
           ]
         }
       ],
@@ -1605,7 +1718,8 @@
       "modes" : [
       ],
       "annexes" : [
-      ]
+      ],
+      "uriFrag" : ""
     }
   ]
 }

@@ -1,1 +1,1931 @@
-{ "type" : "Aadl", "components" : [ { "type" : "Component", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "category" : { "type" : "ComponentCategory", "value" : "System" }, "classifier" : { "type" : "None" }, "features" : [ { "type" : "FeatureGroup", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat"] }, "features" : [ { "type" : "FeatureEnd", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "f_in"] }, "direction" : { "type" : "Direction", "value" : "In" }, "category" : { "type" : "FeatureCategory", "value" : "EventPort" }, "classifier" : { "type" : "None" }, "properties" : [ ] }, { "type" : "FeatureEnd", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "f_out"] }, "direction" : { "type" : "Direction", "value" : "Out" }, "category" : { "type" : "FeatureCategory", "value" : "EventPort" }, "classifier" : { "type" : "None" }, "properties" : [ ] }, { "type" : "FeatureEnd", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_in"] }, "direction" : { "type" : "Direction", "value" : "In" }, "category" : { "type" : "FeatureCategory", "value" : "EventPort" }, "classifier" : { "type" : "None" }, "properties" : [ ] }, { "type" : "FeatureEnd", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_out"] }, "direction" : { "type" : "Direction", "value" : "Out" }, "category" : { "type" : "FeatureCategory", "value" : "EventPort" }, "classifier" : { "type" : "None" }, "properties" : [ ] } ], "isInverse" : false, "category" : { "type" : "FeatureCategory", "value" : "FeatureGroup" }, "properties" : [ ] } ], "subComponents" : [ { "type" : "Component", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp"] }, "category" : { "type" : "ComponentCategory", "value" : "System" }, "classifier" : { "type" : "Some", "value" : { "type" : "Classifier", "name" : "Feature_Group_TestCase::dst_sys.impl" } }, "features" : [ { "type" : "FeatureGroup", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst"] }, "features" : [ { "type" : "FeatureEnd", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_in"] }, "direction" : { "type" : "Direction", "value" : "In" }, "category" : { "type" : "FeatureCategory", "value" : "EventPort" }, "classifier" : { "type" : "None" }, "properties" : [ ] }, { "type" : "FeatureEnd", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_out"] }, "direction" : { "type" : "Direction", "value" : "Out" }, "category" : { "type" : "FeatureCategory", "value" : "EventPort" }, "classifier" : { "type" : "None" }, "properties" : [ ] }, { "type" : "FeatureEnd", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_in"] }, "direction" : { "type" : "Direction", "value" : "In" }, "category" : { "type" : "FeatureCategory", "value" : "EventPort" }, "classifier" : { "type" : "None" }, "properties" : [ ] }, { "type" : "FeatureEnd", "identifier" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_out"] }, "direction" : { "type" : "Direction", "value" : "Out" }, "category" : { "type" : "FeatureCategory", "value" : "EventPort" }, "classifier" : { "type" : "None" }, "properties" : [ ] } ], "isInverse" : false, "category" : { "type" : "FeatureCategory", "value" : "FeatureGroup" }, "properties" : [ ] } ], "subComponents" : [ ], "connections" : [ ], "connectionInstances" : [ ], "properties" : [ ], "flows" : [ ], "modes" : [ ], "annexes" : [ { "type" : "Annex", "name" : "Emv2", "clause" : { "type" : "Emv2Clause", "libraries" : [], "propagations" : [ ], "flows" : [ ] } } ] } ], "connections" : [ { "type" : "Connection", "name" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "con"] }, "src" : [ { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat_f_in"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "In" } } }, { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat_f_out"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "Out" } } }, { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat_cf_in"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "In" } } }, { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat_cf_out"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "Out" } } } ], "dst" : [ { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst_f_in"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "In" } } }, { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst_f_out"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "Out" } } }, { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst_cf_in"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "In" } } }, { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst_cf_out"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "Out" } } } ], "kind" : { "type" : "ConnectionKind", "value" : "FeatureGroup" }, "isBiDirectional" : true, "connectionInstances" : [ { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "f_in -> sub_comp", "dst", "f_in"] }, { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_in -> sub_comp", "dst", "cf_in"] }, { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_out -> feat", "f_out"] }, { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_out -> feat", "cf_out"] } ], "properties" : [ ] } ], "connectionInstances" : [ { "type" : "ConnectionInstance", "name" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat.f_in -> sub_comp.dst.f_in"] }, "src" : { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "f_in"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "In" } } }, "dst" : { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_in"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "In" } } }, "kind" : { "type" : "ConnectionKind", "value" : "Port" }, "connectionRefs" : [ { "type" : "ConnectionReference", "name" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "con"] }, "context" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "isParent" : true } ], "properties" : [ ] }, { "type" : "ConnectionInstance", "name" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat.cf_in -> sub_comp.dst.cf_in"] }, "src" : { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_in"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "In" } } }, "dst" : { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_in"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "In" } } }, "kind" : { "type" : "ConnectionKind", "value" : "Port" }, "connectionRefs" : [ { "type" : "ConnectionReference", "name" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "con"] }, "context" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "isParent" : true } ], "properties" : [ ] }, { "type" : "ConnectionInstance", "name" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp.dst.f_out -> feat.f_out"] }, "src" : { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_out"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "Out" } } }, "dst" : { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "f_out"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "Out" } } }, "kind" : { "type" : "ConnectionKind", "value" : "Port" }, "connectionRefs" : [ { "type" : "ConnectionReference", "name" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "con"] }, "context" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "isParent" : true } ], "properties" : [ ] }, { "type" : "ConnectionInstance", "name" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp.dst.cf_out -> feat.cf_out"] }, "src" : { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_out"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "Out" } } }, "dst" : { "type" : "EndPoint", "component" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "feature" : { "type" : "Some", "value" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_out"] } }, "direction" : { "type" : "Some", "value" : { "type" : "Direction", "value" : "Out" } } }, "kind" : { "type" : "ConnectionKind", "value" : "Port" }, "connectionRefs" : [ { "type" : "ConnectionReference", "name" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance", "con"] }, "context" : { "type" : "Name", "name" : ["Concrete_Sys_impl_Instance"] }, "isParent" : true } ], "properties" : [ ] } ], "properties" : [ ], "flows" : [ ], "modes" : [ ], "annexes" : [ { "type" : "Annex", "name" : "Emv2", "clause" : { "type" : "Emv2Clause", "libraries" : [], "propagations" : [ ], "flows" : [ ] } } ] } ], "errorLib" : [ ] }
+{
+  "type" : "Aadl",
+  "components" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["Concrete_Sys_impl_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+            },
+            "beginLine" : 27,
+            "beginColumn" : 2,
+            "endLine" : 32,
+            "endColumn" : 24,
+            "offset" : 490,
+            "length" : 174
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "System"
+      },
+      "classifier" : {
+        "type" : "None"
+      },
+      "features" : [
+        {
+          "type" : "FeatureGroup",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "feat"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 20,
+                "beginColumn" : 4,
+                "endLine" : 20,
+                "endColumn" : 35,
+                "offset" : 334,
+                "length" : 31
+              }
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "feat", "f_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 6,
+                    "beginColumn" : 4,
+                    "endLine" : 6,
+                    "endColumn" : 25,
+                    "offset" : 73,
+                    "length" : 21
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventPort"
+              },
+              "classifier" : {
+                "type" : "None"
+              },
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@featureInstance.0\/@featureInstance.0"
+            },
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "feat", "f_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 7,
+                    "beginColumn" : 4,
+                    "endLine" : 7,
+                    "endColumn" : 27,
+                    "offset" : 98,
+                    "length" : 23
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "Out"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventPort"
+              },
+              "classifier" : {
+                "type" : "None"
+              },
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@featureInstance.0\/@featureInstance.1"
+            },
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 12,
+                    "beginColumn" : 4,
+                    "endLine" : 12,
+                    "endColumn" : 26,
+                    "offset" : 184,
+                    "length" : 22
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "In"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventPort"
+              },
+              "classifier" : {
+                "type" : "None"
+              },
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@featureInstance.0\/@featureInstance.2"
+            },
+            {
+              "type" : "FeatureEnd",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 13,
+                    "beginColumn" : 4,
+                    "endLine" : 13,
+                    "endColumn" : 28,
+                    "offset" : 210,
+                    "length" : 24
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Direction",
+                "value" : "Out"
+              },
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "EventPort"
+              },
+              "classifier" : {
+                "type" : "None"
+              },
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@featureInstance.0\/@featureInstance.3"
+            }
+          ],
+          "isInverse" : false,
+          "category" : {
+            "type" : "FeatureCategory",
+            "value" : "FeatureGroup"
+          },
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@featureInstance.0"
+        }
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "sub_comp"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 29,
+                "beginColumn" : 4,
+                "endLine" : 29,
+                "endColumn" : 35,
+                "offset" : 549,
+                "length" : 31
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "System"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "Feature_Group_TestCase::dst_sys.impl"
+            }
+          },
+          "features" : [
+            {
+              "type" : "FeatureGroup",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 36,
+                    "beginColumn" : 4,
+                    "endLine" : 36,
+                    "endColumn" : 33,
+                    "offset" : 697,
+                    "length" : 29
+                  }
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_in"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                        },
+                        "beginLine" : 6,
+                        "beginColumn" : 4,
+                        "endLine" : 6,
+                        "endColumn" : 25,
+                        "offset" : 73,
+                        "length" : 21
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventPort"
+                  },
+                  "classifier" : {
+                    "type" : "None"
+                  },
+                  "properties" : [
+                  ],
+                  "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.0\/@featureInstance.0"
+                },
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_out"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                        },
+                        "beginLine" : 7,
+                        "beginColumn" : 4,
+                        "endLine" : 7,
+                        "endColumn" : 27,
+                        "offset" : 98,
+                        "length" : 23
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventPort"
+                  },
+                  "classifier" : {
+                    "type" : "None"
+                  },
+                  "properties" : [
+                  ],
+                  "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.0\/@featureInstance.1"
+                },
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_in"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                        },
+                        "beginLine" : 12,
+                        "beginColumn" : 4,
+                        "endLine" : 12,
+                        "endColumn" : 26,
+                        "offset" : 184,
+                        "length" : 22
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventPort"
+                  },
+                  "classifier" : {
+                    "type" : "None"
+                  },
+                  "properties" : [
+                  ],
+                  "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.0\/@featureInstance.2"
+                },
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_out"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                        },
+                        "beginLine" : 13,
+                        "beginColumn" : 4,
+                        "endLine" : 13,
+                        "endColumn" : 28,
+                        "offset" : 210,
+                        "length" : 24
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventPort"
+                  },
+                  "classifier" : {
+                    "type" : "None"
+                  },
+                  "properties" : [
+                  ],
+                  "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.0\/@featureInstance.3"
+                }
+              ],
+              "isInverse" : false,
+              "category" : {
+                "type" : "FeatureCategory",
+                "value" : "FeatureGroup"
+              },
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.0"
+            }
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@componentInstance.0"
+        }
+      ],
+      "connections" : [
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "con-feat_f_in_dst_f_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 31,
+                "beginColumn" : 4,
+                "endLine" : 31,
+                "endColumn" : 46,
+                "offset" : 598,
+                "length" : 42
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 2,
+                    "endLine" : 32,
+                    "endColumn" : 24,
+                    "offset" : 490,
+                    "length" : 174
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["Concrete_Sys_impl_Instance", "feat_f_in"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                      },
+                      "beginLine" : 6,
+                      "beginColumn" : 4,
+                      "endLine" : 6,
+                      "endColumn" : 25,
+                      "offset" : 73,
+                      "length" : 21
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "sub_comp"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 29,
+                    "beginColumn" : 4,
+                    "endLine" : 29,
+                    "endColumn" : 35,
+                    "offset" : 549,
+                    "length" : 31
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst_f_in"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                      },
+                      "beginLine" : 6,
+                      "beginColumn" : 4,
+                      "endLine" : 6,
+                      "endColumn" : 25,
+                      "offset" : 73,
+                      "length" : 21
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "FeatureGroup"
+          },
+          "isBiDirectional" : true,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "feat", "f_in -> sub_comp", "dst", "f_in"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_in -> sub_comp", "dst", "cf_in"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_out -> feat", "f_out"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_out -> feat", "cf_out"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.0"
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "con-feat_cf_in_dst_cf_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 31,
+                "beginColumn" : 4,
+                "endLine" : 31,
+                "endColumn" : 46,
+                "offset" : 598,
+                "length" : 42
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 2,
+                    "endLine" : 32,
+                    "endColumn" : 24,
+                    "offset" : 490,
+                    "length" : 174
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["Concrete_Sys_impl_Instance", "feat_cf_in"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                      },
+                      "beginLine" : 12,
+                      "beginColumn" : 4,
+                      "endLine" : 12,
+                      "endColumn" : 26,
+                      "offset" : 184,
+                      "length" : 22
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "sub_comp"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 29,
+                    "beginColumn" : 4,
+                    "endLine" : 29,
+                    "endColumn" : 35,
+                    "offset" : 549,
+                    "length" : 31
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst_cf_in"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                      },
+                      "beginLine" : 12,
+                      "beginColumn" : 4,
+                      "endLine" : 12,
+                      "endColumn" : 26,
+                      "offset" : 184,
+                      "length" : 22
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "In"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "FeatureGroup"
+          },
+          "isBiDirectional" : true,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "feat", "f_in -> sub_comp", "dst", "f_in"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_in -> sub_comp", "dst", "cf_in"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_out -> feat", "f_out"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_out -> feat", "cf_out"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@connectionInstance.1\/@connectionReference.0"
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "con-dst_f_out_feat_f_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 31,
+                "beginColumn" : 4,
+                "endLine" : 31,
+                "endColumn" : 46,
+                "offset" : 598,
+                "length" : 42
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "sub_comp"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 29,
+                    "beginColumn" : 4,
+                    "endLine" : 29,
+                    "endColumn" : 35,
+                    "offset" : 549,
+                    "length" : 31
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst_f_out"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                      },
+                      "beginLine" : 7,
+                      "beginColumn" : 4,
+                      "endLine" : 7,
+                      "endColumn" : 27,
+                      "offset" : 98,
+                      "length" : 23
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 2,
+                    "endLine" : 32,
+                    "endColumn" : 24,
+                    "offset" : 490,
+                    "length" : 174
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["Concrete_Sys_impl_Instance", "feat_f_out"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                      },
+                      "beginLine" : 7,
+                      "beginColumn" : 4,
+                      "endLine" : 7,
+                      "endColumn" : 27,
+                      "offset" : 98,
+                      "length" : 23
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "FeatureGroup"
+          },
+          "isBiDirectional" : true,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "feat", "f_in -> sub_comp", "dst", "f_in"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_in -> sub_comp", "dst", "cf_in"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_out -> feat", "f_out"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_out -> feat", "cf_out"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@connectionInstance.2\/@connectionReference.0"
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "con-dst_cf_out_feat_cf_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 31,
+                "beginColumn" : 4,
+                "endLine" : 31,
+                "endColumn" : 46,
+                "offset" : 598,
+                "length" : 42
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "sub_comp"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 29,
+                    "beginColumn" : 4,
+                    "endLine" : 29,
+                    "endColumn" : 35,
+                    "offset" : 549,
+                    "length" : 31
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst_cf_out"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                      },
+                      "beginLine" : 13,
+                      "beginColumn" : 4,
+                      "endLine" : 13,
+                      "endColumn" : 28,
+                      "offset" : 210,
+                      "length" : 24
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 2,
+                    "endLine" : 32,
+                    "endColumn" : 24,
+                    "offset" : 490,
+                    "length" : 174
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["Concrete_Sys_impl_Instance", "feat_cf_out"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                      },
+                      "beginLine" : 13,
+                      "beginColumn" : 4,
+                      "endLine" : 13,
+                      "endColumn" : 28,
+                      "offset" : 210,
+                      "length" : 24
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "Out"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "FeatureGroup"
+          },
+          "isBiDirectional" : true,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "feat", "f_in -> sub_comp", "dst", "f_in"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_in -> sub_comp", "dst", "cf_in"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_out -> feat", "f_out"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_out -> feat", "cf_out"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ],
+          "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/\/@connectionInstance.3\/@connectionReference.0"
+        }
+      ],
+      "connectionInstances" : [
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "feat.f_in -> sub_comp.dst.f_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 31,
+                "beginColumn" : 4,
+                "endLine" : 31,
+                "endColumn" : 46,
+                "offset" : 598,
+                "length" : 42
+              }
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                  },
+                  "beginLine" : 27,
+                  "beginColumn" : 2,
+                  "endLine" : 32,
+                  "endColumn" : 24,
+                  "offset" : 490,
+                  "length" : 174
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "feat", "f_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 6,
+                    "beginColumn" : 4,
+                    "endLine" : 6,
+                    "endColumn" : 25,
+                    "offset" : 73,
+                    "length" : 21
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                  },
+                  "beginLine" : 29,
+                  "beginColumn" : 4,
+                  "endLine" : 29,
+                  "endColumn" : 35,
+                  "offset" : 549,
+                  "length" : 31
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 6,
+                    "beginColumn" : 4,
+                    "endLine" : 6,
+                    "endColumn" : 25,
+                    "offset" : 73,
+                    "length" : 21
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "con"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 31,
+                    "beginColumn" : 4,
+                    "endLine" : 31,
+                    "endColumn" : 46,
+                    "offset" : 598,
+                    "length" : 42
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 2,
+                    "endLine" : 32,
+                    "endColumn" : 24,
+                    "offset" : 490,
+                    "length" : 174
+                  }
+                }
+              },
+              "isParent" : true
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "feat.cf_in -> sub_comp.dst.cf_in"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 31,
+                "beginColumn" : 4,
+                "endLine" : 31,
+                "endColumn" : 46,
+                "offset" : 598,
+                "length" : 42
+              }
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                  },
+                  "beginLine" : 27,
+                  "beginColumn" : 2,
+                  "endLine" : 32,
+                  "endColumn" : 24,
+                  "offset" : 490,
+                  "length" : 174
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 12,
+                    "beginColumn" : 4,
+                    "endLine" : 12,
+                    "endColumn" : 26,
+                    "offset" : 184,
+                    "length" : 22
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                  },
+                  "beginLine" : 29,
+                  "beginColumn" : 4,
+                  "endLine" : 29,
+                  "endColumn" : 35,
+                  "offset" : 549,
+                  "length" : 31
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_in"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 12,
+                    "beginColumn" : 4,
+                    "endLine" : 12,
+                    "endColumn" : 26,
+                    "offset" : 184,
+                    "length" : 22
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "In"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "con"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 31,
+                    "beginColumn" : 4,
+                    "endLine" : 31,
+                    "endColumn" : 46,
+                    "offset" : 598,
+                    "length" : 42
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 2,
+                    "endLine" : 32,
+                    "endColumn" : 24,
+                    "offset" : 490,
+                    "length" : 174
+                  }
+                }
+              },
+              "isParent" : true
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "sub_comp.dst.f_out -> feat.f_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 31,
+                "beginColumn" : 4,
+                "endLine" : 31,
+                "endColumn" : 46,
+                "offset" : 598,
+                "length" : 42
+              }
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                  },
+                  "beginLine" : 29,
+                  "beginColumn" : 4,
+                  "endLine" : 29,
+                  "endColumn" : 35,
+                  "offset" : 549,
+                  "length" : 31
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "f_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 7,
+                    "beginColumn" : 4,
+                    "endLine" : 7,
+                    "endColumn" : 27,
+                    "offset" : 98,
+                    "length" : 23
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                  },
+                  "beginLine" : 27,
+                  "beginColumn" : 2,
+                  "endLine" : 32,
+                  "endColumn" : 24,
+                  "offset" : 490,
+                  "length" : 174
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "feat", "f_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 7,
+                    "beginColumn" : 4,
+                    "endLine" : 7,
+                    "endColumn" : 27,
+                    "offset" : 98,
+                    "length" : 23
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "con"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 31,
+                    "beginColumn" : 4,
+                    "endLine" : 31,
+                    "endColumn" : 46,
+                    "offset" : 598,
+                    "length" : 42
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 2,
+                    "endLine" : 32,
+                    "endColumn" : 24,
+                    "offset" : 490,
+                    "length" : 174
+                  }
+                }
+              },
+              "isParent" : true
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "ConnectionInstance",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Concrete_Sys_impl_Instance", "sub_comp.dst.cf_out -> feat.cf_out"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                },
+                "beginLine" : 31,
+                "beginColumn" : 4,
+                "endLine" : 31,
+                "endColumn" : 46,
+                "offset" : 598,
+                "length" : 42
+              }
+            }
+          },
+          "src" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance", "sub_comp"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                  },
+                  "beginLine" : 29,
+                  "beginColumn" : 4,
+                  "endLine" : 29,
+                  "endColumn" : 35,
+                  "offset" : 549,
+                  "length" : 31
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "sub_comp", "dst", "cf_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 13,
+                    "beginColumn" : 4,
+                    "endLine" : 13,
+                    "endColumn" : 28,
+                    "offset" : 210,
+                    "length" : 24
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "dst" : {
+            "type" : "EndPoint",
+            "component" : {
+              "type" : "Name",
+              "name" : ["Concrete_Sys_impl_Instance"],
+              "pos" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Position",
+                  "uriOpt" : {
+                    "type" : "Some",
+                    "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                  },
+                  "beginLine" : 27,
+                  "beginColumn" : 2,
+                  "endLine" : 32,
+                  "endColumn" : 24,
+                  "offset" : 490,
+                  "length" : 174
+                }
+              }
+            },
+            "feature" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "feat", "cf_out"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 13,
+                    "beginColumn" : 4,
+                    "endLine" : 13,
+                    "endColumn" : 28,
+                    "offset" : 210,
+                    "length" : 24
+                  }
+                }
+              }
+            },
+            "direction" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Direction",
+                "value" : "Out"
+              }
+            }
+          },
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Port"
+          },
+          "connectionRefs" : [
+            {
+              "type" : "ConnectionReference",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance", "con"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 31,
+                    "beginColumn" : 4,
+                    "endLine" : 31,
+                    "endColumn" : 46,
+                    "offset" : 598,
+                    "length" : 42
+                  }
+                }
+              },
+              "context" : {
+                "type" : "Name",
+                "name" : ["Concrete_Sys_impl_Instance"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/feature-group-tests\/Feature_Group_TestCase.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 2,
+                    "endLine" : 32,
+                    "endColumn" : 24,
+                    "offset" : 490,
+                    "length" : 174
+                  }
+                }
+              },
+              "isParent" : true
+            }
+          ],
+          "properties" : [
+          ]
+        }
+      ],
+      "properties" : [
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+        {
+          "type" : "Annex",
+          "name" : "Emv2",
+          "clause" : {
+            "type" : "Emv2Clause",
+            "libraries" : [
+            ],
+            "propagations" : [
+            ],
+            "flows" : [
+            ],
+            "componentBehavior" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Emv2BehaviorSection",
+                "events" : [
+                ],
+                "transitions" : [
+                ],
+                "propagations" : [
+                ]
+              }
+            },
+            "properties" : [
+            ]
+          }
+        }
+      ],
+      "uriFrag" : "platform:\/resource\/feature-group-tests\/instances\/Feature_Group_TestCase_Concrete_Sys_impl_Instance.aaxl2#\/"
+    }
+  ],
+  "annexLib" : [
+  ],
+  "dataComponents" : [
+  ]
+}

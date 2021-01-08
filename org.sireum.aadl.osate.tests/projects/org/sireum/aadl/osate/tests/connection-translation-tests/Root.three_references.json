@@ -12,7 +12,7 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "__synthetic0.aadl"
+              "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
             },
             "beginLine" : 105,
             "beginColumn" : 2,
@@ -42,7 +42,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "__synthetic0.aadl"
+                  "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                 },
                 "beginLine" : 8,
                 "beginColumn" : 4,
@@ -65,7 +65,8 @@
             "type" : "None"
           },
           "properties" : [
-          ]
+          ],
+          "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@featureInstance.0"
         },
         {
           "type" : "FeatureEnd",
@@ -78,7 +79,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "__synthetic0.aadl"
+                  "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                 },
                 "beginLine" : 9,
                 "beginColumn" : 4,
@@ -101,7 +102,8 @@
             "type" : "None"
           },
           "properties" : [
-          ]
+          ],
+          "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@featureInstance.1"
         }
       ],
       "subComponents" : [
@@ -116,7 +118,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "__synthetic0.aadl"
+                  "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                 },
                 "beginLine" : 108,
                 "beginColumn" : 4,
@@ -150,7 +152,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 14,
                     "beginColumn" : 4,
@@ -173,7 +175,8 @@
                 "type" : "None"
               },
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.0"
             },
             {
               "type" : "FeatureEnd",
@@ -186,7 +189,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 15,
                     "beginColumn" : 4,
@@ -209,7 +212,8 @@
                 "type" : "None"
               },
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.1"
             },
             {
               "type" : "FeatureEnd",
@@ -222,7 +226,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 16,
                     "beginColumn" : 4,
@@ -245,7 +249,8 @@
                 "type" : "None"
               },
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.2"
             }
           ],
           "subComponents" : [
@@ -260,7 +265,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 99,
                     "beginColumn" : 4,
@@ -294,7 +299,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                         },
                         "beginLine" : 21,
                         "beginColumn" : 4,
@@ -317,7 +322,8 @@
                     "type" : "None"
                   },
                   "properties" : [
-                  ]
+                  ],
+                  "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 },
                 {
                   "type" : "FeatureEnd",
@@ -330,7 +336,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                         },
                         "beginLine" : 22,
                         "beginColumn" : 4,
@@ -353,7 +359,8 @@
                     "type" : "None"
                   },
                   "properties" : [
-                  ]
+                  ],
+                  "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.1"
                 },
                 {
                   "type" : "FeatureEnd",
@@ -366,7 +373,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                         },
                         "beginLine" : 23,
                         "beginColumn" : 4,
@@ -389,7 +396,8 @@
                     "type" : "None"
                   },
                   "properties" : [
-                  ]
+                  ],
+                  "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.2"
                 }
               ],
               "subComponents" : [
@@ -404,7 +412,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                         },
                         "beginLine" : 92,
                         "beginColumn" : 4,
@@ -438,7 +446,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "__synthetic0.aadl"
+                              "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                             },
                             "beginLine" : 28,
                             "beginColumn" : 4,
@@ -461,7 +469,8 @@
                         "type" : "None"
                       },
                       "properties" : [
-                      ]
+                      ],
+                      "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                     }
                   ],
                   "subComponents" : [
@@ -499,10 +508,13 @@
                             "propagations" : [
                             ]
                           }
-                        }
+                        },
+                        "properties" : [
+                        ]
                       }
                     }
-                  ]
+                  ],
+                  "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@componentInstance.0"
                 }
               ],
               "connections" : [
@@ -517,7 +529,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                         },
                         "beginLine" : 94,
                         "beginColumn" : 4,
@@ -535,7 +547,20 @@
                         "type" : "Name",
                         "name" : ["Root_three_references_Instance", "Sub", "sub_proc"],
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
+                            },
+                            "beginLine" : 99,
+                            "beginColumn" : 4,
+                            "endLine" : 99,
+                            "endColumn" : 50,
+                            "offset" : 2890,
+                            "length" : 46
+                          }
                         }
                       },
                       "feature" : {
@@ -549,7 +574,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "__synthetic0.aadl"
+                                "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                               },
                               "beginLine" : 23,
                               "beginColumn" : 4,
@@ -582,7 +607,7 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "__synthetic0.aadl"
+                              "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                             },
                             "beginLine" : 92,
                             "beginColumn" : 4,
@@ -604,7 +629,7 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "__synthetic0.aadl"
+                                "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                               },
                               "beginLine" : 28,
                               "beginColumn" : 4,
@@ -647,7 +672,165 @@
                     }
                   ],
                   "properties" : [
-                  ]
+                  ],
+                  "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.2"
+                },
+                {
+                  "type" : "Connection",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_to_thread"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
+                        },
+                        "beginLine" : 94,
+                        "beginColumn" : 4,
+                        "endLine" : 94,
+                        "endColumn" : 63,
+                        "offset" : 2723,
+                        "length" : 59
+                      }
+                    }
+                  },
+                  "src" : [
+                    {
+                      "type" : "EndPoint",
+                      "component" : {
+                        "type" : "Name",
+                        "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
+                            },
+                            "beginLine" : 92,
+                            "beginColumn" : 4,
+                            "endLine" : 92,
+                            "endColumn" : 39,
+                            "offset" : 2670,
+                            "length" : 35
+                          }
+                        }
+                      },
+                      "feature" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Name",
+                          "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1", "access_point"],
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
+                              },
+                              "beginLine" : 28,
+                              "beginColumn" : 4,
+                              "endLine" : 28,
+                              "endColumn" : 36,
+                              "offset" : 560,
+                              "length" : 32
+                            }
+                          }
+                        }
+                      },
+                      "direction" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Direction",
+                          "value" : "InOut"
+                        }
+                      }
+                    }
+                  ],
+                  "dst" : [
+                    {
+                      "type" : "EndPoint",
+                      "component" : {
+                        "type" : "Name",
+                        "name" : ["Root_three_references_Instance", "Sub", "sub_proc"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
+                            },
+                            "beginLine" : 99,
+                            "beginColumn" : 4,
+                            "endLine" : 99,
+                            "endColumn" : 50,
+                            "offset" : 2890,
+                            "length" : 46
+                          }
+                        }
+                      },
+                      "feature" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Name",
+                          "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "proc_in_out"],
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
+                              },
+                              "beginLine" : 23,
+                              "beginColumn" : 4,
+                              "endLine" : 23,
+                              "endColumn" : 35,
+                              "offset" : 469,
+                              "length" : 31
+                            }
+                          }
+                        }
+                      },
+                      "direction" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Direction",
+                          "value" : "InOut"
+                        }
+                      }
+                    }
+                  ],
+                  "kind" : {
+                    "type" : "ConnectionKind",
+                    "value" : "Port"
+                  },
+                  "isBiDirectional" : true,
+                  "connectionInstances" : [
+                    {
+                      "type" : "Name",
+                      "name" : ["Root_three_references_Instance", "root_in -> Sub", "sub_proc", "thread1", "access_point"],
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    },
+                    {
+                      "type" : "Name",
+                      "name" : ["Root_three_references_Instance", "Sub", "sub_proc", "thread1", "access_point -> root_out"],
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    }
+                  ],
+                  "properties" : [
+                  ],
+                  "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@connectionInstance.1\/@connectionReference.0"
                 }
               ],
               "connectionInstances" : [
@@ -681,10 +864,13 @@
                         "propagations" : [
                         ]
                       }
-                    }
+                    },
+                    "properties" : [
+                    ]
                   }
                 }
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
             }
           ],
           "connections" : [
@@ -699,7 +885,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 101,
                     "beginColumn" : 4,
@@ -731,7 +917,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "__synthetic0.aadl"
+                            "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                           },
                           "beginLine" : 16,
                           "beginColumn" : 4,
@@ -764,7 +950,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                         },
                         "beginLine" : 99,
                         "beginColumn" : 4,
@@ -786,7 +972,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "__synthetic0.aadl"
+                            "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                           },
                           "beginLine" : 23,
                           "beginColumn" : 4,
@@ -822,7 +1008,8 @@
                 }
               ],
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.1"
             },
             {
               "type" : "Connection",
@@ -835,7 +1022,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 102,
                     "beginColumn" : 4,
@@ -858,7 +1045,7 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "__synthetic0.aadl"
+                          "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                         },
                         "beginLine" : 99,
                         "beginColumn" : 4,
@@ -880,7 +1067,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "__synthetic0.aadl"
+                            "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                           },
                           "beginLine" : 23,
                           "beginColumn" : 4,
@@ -922,7 +1109,7 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "__synthetic0.aadl"
+                            "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                           },
                           "beginLine" : 16,
                           "beginColumn" : 4,
@@ -958,7 +1145,8 @@
                 }
               ],
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@connectionInstance.1\/@connectionReference.1"
             }
           ],
           "connectionInstances" : [
@@ -992,10 +1180,13 @@
                     "propagations" : [
                     ]
                   }
-                }
+                },
+                "properties" : [
+                ]
               }
             }
-          ]
+          ],
+          "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@componentInstance.0"
         }
       ],
       "connections" : [
@@ -1010,7 +1201,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "__synthetic0.aadl"
+                  "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                 },
                 "beginLine" : 110,
                 "beginColumn" : 4,
@@ -1042,7 +1233,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "__synthetic0.aadl"
+                        "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                       },
                       "beginLine" : 8,
                       "beginColumn" : 4,
@@ -1075,7 +1266,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 4,
@@ -1097,7 +1288,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "__synthetic0.aadl"
+                        "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                       },
                       "beginLine" : 16,
                       "beginColumn" : 4,
@@ -1133,7 +1324,8 @@
             }
           ],
           "properties" : [
-          ]
+          ],
+          "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.0"
         },
         {
           "type" : "Connection",
@@ -1146,7 +1338,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "__synthetic0.aadl"
+                  "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                 },
                 "beginLine" : 111,
                 "beginColumn" : 4,
@@ -1169,7 +1361,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 4,
@@ -1191,7 +1383,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "__synthetic0.aadl"
+                        "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                       },
                       "beginLine" : 16,
                       "beginColumn" : 4,
@@ -1233,7 +1425,7 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "__synthetic0.aadl"
+                        "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                       },
                       "beginLine" : 9,
                       "beginColumn" : 4,
@@ -1269,7 +1461,8 @@
             }
           ],
           "properties" : [
-          ]
+          ],
+          "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/\/@connectionInstance.1\/@connectionReference.2"
         }
       ],
       "connectionInstances" : [
@@ -1284,7 +1477,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "__synthetic0.aadl"
+                  "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                 },
                 "beginLine" : 110,
                 "beginColumn" : 4,
@@ -1306,7 +1499,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "__synthetic0.aadl"
+                    "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                   },
                   "beginLine" : 105,
                   "beginColumn" : 2,
@@ -1328,7 +1521,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 8,
                     "beginColumn" : 4,
@@ -1359,7 +1552,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "__synthetic0.aadl"
+                    "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                   },
                   "beginLine" : 92,
                   "beginColumn" : 4,
@@ -1381,7 +1574,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 28,
                     "beginColumn" : 4,
@@ -1417,7 +1610,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 110,
                     "beginColumn" : 4,
@@ -1437,7 +1630,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 105,
                     "beginColumn" : 2,
@@ -1461,7 +1654,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 101,
                     "beginColumn" : 4,
@@ -1481,7 +1674,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 4,
@@ -1505,7 +1698,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 94,
                     "beginColumn" : 4,
@@ -1525,7 +1718,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 99,
                     "beginColumn" : 4,
@@ -1553,7 +1746,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "__synthetic0.aadl"
+                  "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                 },
                 "beginLine" : 94,
                 "beginColumn" : 4,
@@ -1575,7 +1768,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "__synthetic0.aadl"
+                    "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                   },
                   "beginLine" : 92,
                   "beginColumn" : 4,
@@ -1597,7 +1790,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 28,
                     "beginColumn" : 4,
@@ -1628,7 +1821,7 @@
                   "type" : "Position",
                   "uriOpt" : {
                     "type" : "Some",
-                    "value" : "__synthetic0.aadl"
+                    "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                   },
                   "beginLine" : 105,
                   "beginColumn" : 2,
@@ -1650,7 +1843,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 9,
                     "beginColumn" : 4,
@@ -1686,7 +1879,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 94,
                     "beginColumn" : 4,
@@ -1706,7 +1899,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 99,
                     "beginColumn" : 4,
@@ -1730,7 +1923,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 102,
                     "beginColumn" : 4,
@@ -1750,7 +1943,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 108,
                     "beginColumn" : 4,
@@ -1774,7 +1967,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 111,
                     "beginColumn" : 4,
@@ -1794,7 +1987,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "__synthetic0.aadl"
+                      "value" : "\/connection-translation-tests\/Connection_Translation.aadl"
                     },
                     "beginLine" : 105,
                     "beginColumn" : 2,
@@ -1841,13 +2034,16 @@
                 "propagations" : [
                 ]
               }
-            }
+            },
+            "properties" : [
+            ]
           }
         }
-      ]
+      ],
+      "uriFrag" : "platform:\/resource\/connection-translation-tests\/instances\/Connection_Translation_Root_three_references_Instance.aaxl2#\/"
     }
   ],
-  "errorLib" : [
+  "annexLib" : [
   ],
   "dataComponents" : [
   ]
