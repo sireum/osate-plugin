@@ -17,6 +17,7 @@ import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
 import org.sireum.Option;
 import org.sireum.Z;
+import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
@@ -130,8 +131,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							boolean embedArt = PreferenceValues.getHAMR_EMBED_ART_OPT();
 							boolean devicesAsThreads = PreferenceValues.getHAMR_DEVICES_AS_THREADS_OPT();
 							IS<Z, String> slangAuxCodeDirs = prompt.getOptionCSourceDirectory().equals("")
-									? HAMRUtil.toISZ()
-									: HAMRUtil.toISZ(prompt.getOptionCSourceDirectory());
+									? VisitorUtil.toISZ()
+									: VisitorUtil.toISZ(prompt.getOptionCSourceDirectory());
 							Option<String> slangOutputCDirectory = ArsitBridge.sireumOption(outputCDirectory);
 							boolean excludeComponentImpl = prompt.getOptionExcludesSlangImplementations();
 							int bitWidth = prompt.getOptionBitWidth();
@@ -142,8 +143,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Option<String> camkesOutputDirectory = ArsitBridge
 									.sireumOption(_camkesOutDir.getAbsolutePath());
 							IS<Z, String> camkesAuxCodeDirs = prompt.getOptionCamkesAuxSrcDir().equals("")
-									? HAMRUtil.toISZ()
-									: HAMRUtil.toISZ(prompt.getOptionCamkesAuxSrcDir());
+									? VisitorUtil.toISZ()
+									: VisitorUtil.toISZ(prompt.getOptionCamkesAuxSrcDir());
 							Option<String> aadlRootDir = ArsitBridge.sireumOption(workspaceRoot.getAbsolutePath());
 
 							return org.sireum.cli.HAMR.codeGen( //

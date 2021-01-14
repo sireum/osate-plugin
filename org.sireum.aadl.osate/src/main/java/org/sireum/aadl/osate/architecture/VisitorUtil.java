@@ -21,6 +21,8 @@ import org.osate.annexsupport.AnnexRegistry;
 import org.osate.annexsupport.AnnexTextPositionResolverRegistry;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelLibrary;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelSubclause;
+import org.sireum.IS;
+import org.sireum.IS$;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.message.Position;
 
@@ -30,7 +32,23 @@ public class VisitorUtil {
 			.getRegistry(AnnexRegistry.ANNEX_TEXTPOSITIONRESOLVER_EXT_ID);
 
 	public static <T> List<T> isz2IList(org.sireum.IS<org.sireum.Z, T> isz) {
-		return Collections.unmodifiableList(scala.collection.JavaConverters.seqAsJavaList(isz.elements()));
+		return Collections.unmodifiableList(scala.jdk.javaapi.CollectionConverters.asJava(isz.elements()));
+	}
+
+	@SafeVarargs
+	public static <T> IS<org.sireum.Z, T> toISZ(T... l) {
+		return toISZ(java.util.Arrays.asList(l));
+	}
+
+	public static <T> IS<org.sireum.Z, T> toISZ(List<T> l) {
+		scala.collection.Seq<T> seq = scala.jdk.javaapi.CollectionConverters.asScala(l);
+
+		// Eclipse JDT hack. Eclipse reports seq.toSeq() is ambiguous so help compiler
+		// out by casting to the interface type we want
+		// -- see https://bugs.eclipse.org/bugs/show_bug.cgi?id=468276#c32
+		scala.collection.immutable.Seq<T> iseq = ((scala.collection.IterableOnceOps<T, ?, ?>) seq).toSeq();
+
+		return IS$.MODULE$.apply(iseq, org.sireum.Z$.MODULE$);
 	}
 
 	public static <T> List<T> toIList(T e) {
@@ -79,9 +97,6 @@ public class VisitorUtil {
 	}
 
 	public static String getUriFragment(EObject eobj) {
-		// System.out.println();
-		Resource res = eobj.eResource();
-		// return res.getURIFragment(eobj);
 		return EcoreUtil.getURI(eobj).toString();
 	}
 
