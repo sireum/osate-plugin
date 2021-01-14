@@ -10,8 +10,6 @@ import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.ConnectionInstance;
 import org.osate.aadl2.instance.ConnectionKind;
 import org.osate.aadl2.instance.SystemInstance;
-import org.sireum.IS;
-import org.sireum.Z;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 
@@ -71,20 +69,6 @@ public class HAMRUtil {
 
 	public static String cleanupPackageName(String p) {
 		return p.replaceAll("-", "_");
-	}
-
-	@SafeVarargs
-	public static <T> IS<Z, T> toISZ(T... args) {
-		// scala 2.13 update
-		// scala.collection.Seq<T> seq = scala.collection.JavaConverters.asScalaBuffer(java.util.Arrays.asList(args));
-		scala.collection.Seq<T> seq = scala.jdk.javaapi.CollectionConverters
-				.asScala(java.util.Arrays.asList(args));
-
-		scala.collection.immutable.Seq<T> eclipseJDTSeqHack = ((scala.collection.IterableOnceOps<T, ?, ?>) seq).toSeq();
-
-		// IS<Z, T> ret = org.sireum.IS$.MODULE$.apply(seq, org.sireum.Z$.MODULE$);
-		IS<Z, T> ret = org.sireum.IS$.MODULE$.apply(eclipseJDTSeqHack, org.sireum.Z$.MODULE$);
-		return ret;
 	}
 
 	private final static HAMRUtil inst = new HAMRUtil();
