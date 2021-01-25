@@ -12,7 +12,7 @@ development environment (following the installation directions
 being used in either case so the rest of these instructions will refer to the
 IDE as 'Eclipse'.
 
-1. Clone this repository ``git clone --recurse-submodules git@github.com:sireum/osate-plugin.git``
+1. Clone this repository ``git clone --depth=1 --recurse-submodules git@github.com:sireum/osate-plugin.git``
 
 1. Launch Eclipse and go to __File__ -> __Import...__  
 
