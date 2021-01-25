@@ -147,6 +147,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									: VisitorUtil.toISZ(prompt.getOptionCamkesAuxSrcDir());
 							Option<String> aadlRootDir = ArsitBridge.sireumOption(workspaceRoot.getAbsolutePath());
 
+							IS<Z, String> experimentalOptions = org.sireum.aadl.osate.PreferenceValues.getPROCESS_BA_OPT()
+									? VisitorUtil.toISZ("PROCESS_BTS_NODES")
+									: VisitorUtil.toISZ();
+
 							return org.sireum.cli.HAMR.codeGen( //
 									model, //
 									verbose, //
@@ -165,7 +169,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									//
 									camkesOutputDirectory, //
 									camkesAuxCodeDirs, //
-									aadlRootDir);
+									aadlRootDir, //
+									//
+									experimentalOptions);
 						});
 					}
 
