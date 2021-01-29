@@ -24,6 +24,12 @@ IDE as 'Eclipse'.
 
 1. Switch to the plug-in development perspective: __Window__ -> __Perspective__ -> 
    __Open Perspective__ -> __Other...__ -> __Plug-in Development__.
+   
+1. To resolve access restrictions errors related to ``UiUtil``
+
+   - Navigate to: __Preferences -> Java -> Errors/Warnings -> Deprecated and restricted API__, and 
+
+   - Change __Forbidden reference (access rules)__ from ``Error`` to ``Warning``.
 
 1. __Optional:__ Rebuild tool jars
 
