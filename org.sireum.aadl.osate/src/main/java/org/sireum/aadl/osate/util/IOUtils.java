@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate.cli;
+package org.sireum.aadl.osate.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.zip.ZipOutputStream;
 
 public class IOUtils {
 
-	static Properties getPropertiesFile(File f) {
+	public static Properties getPropertiesFile(File f) {
 		try {
 			FileInputStream fis = new FileInputStream(f);
 			Properties prop = new Properties();
@@ -29,7 +29,7 @@ public class IOUtils {
 		return null;
 	}
 
-	static String readFile(File f) {
+	public static String readFile(File f) {
 		try {
 			return new String(Files.readAllBytes(Paths.get(f.toURI())));
 		} catch (IOException e) {
@@ -39,7 +39,7 @@ public class IOUtils {
 		}
 	}
 
-	static void writeFile(File f, String str) {
+	public static void writeFile(File f, String str) {
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(f.toURI()))) {
 			writer.write(str);
 			System.out.println("Wrote: " + f);
@@ -49,7 +49,7 @@ public class IOUtils {
 		}
 	}
 
-	static void zipFile(File f) {
+	public static void zipFile(File f) {
 		try {
 			String zipFileName = f.getPath().concat(".zip");
 
@@ -77,7 +77,7 @@ public class IOUtils {
 		}
 	}
 
-	static List<File> collectFiles(File root, String endsWith, boolean recursive) {
+	public static List<File> collectFiles(File root, String endsWith, boolean recursive) {
 		assert (root.isDirectory());
 
 		List<File> ret = new ArrayList<>();

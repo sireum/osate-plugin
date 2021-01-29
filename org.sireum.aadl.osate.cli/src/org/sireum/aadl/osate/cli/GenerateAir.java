@@ -6,9 +6,11 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -31,8 +33,16 @@ import org.osate.aadl2.util.Aadl2ResourceFactoryImpl;
 import org.osate.pluginsupport.PluginSupportUtil;
 import org.osate.xtext.aadl2.Aadl2StandaloneSetup;
 import org.osate.xtext.aadl2.errormodel.ErrorModelStandaloneSetup;
-import org.sireum.aadl.osate.cli.UpdaterUtil.TestAadlProject;
-import org.sireum.aadl.osate.cli.UpdaterUtil.TestAadlSystem;
+import org.sireum.Cli.HelpOption;
+//import org.sireum.Cli.PhantomMode.Type;
+import org.sireum.Cli.PhantomOption;
+import org.sireum.Cli.SireumTopOption;
+import org.sireum.Option;
+import org.sireum.aadl.osate.architecture.VisitorUtil;
+import org.sireum.aadl.osate.util.AadlProjectUtil;
+import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
+import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
+import org.sireum.aadl.osate.util.IOUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 
@@ -41,6 +51,9 @@ import com.google.inject.Injector;
 @SuppressWarnings("restriction")
 public class GenerateAir implements IApplication {
 
+	org.sireum.Z z(int i) {
+		return org.sireum.Z.apply(i);
+	}
 	/**
 	 * based on instructions from
 	 *
@@ -88,72 +101,116 @@ public class GenerateAir implements IApplication {
 			final Map<?, ?> args = context.getArguments();
 			final String[] appArgs = (String[]) args.get("application.args");
 
-			if (appArgs.length < 1 || appArgs.length > 2) {
+			Option<PhantomOption> _phantomOptions = getOptions(appArgs);
+
+			if (_phantomOptions.isEmpty() || _phantomOptions.get().getArgs().size().toInt() > 1) {
 				printUsage();
 				return IApplication.EXIT_OK;
 			}
 
-			File root = new File(appArgs[0]);
+			PhantomOption po = _phantomOptions.get();
 
-			if (!root.exists() || !root.isDirectory()) {
-				System.err.println(root + " is not a directory\n");
+			if(po.args().nonEmpty() == (po.getProjects().nonEmpty() && po.getMain().nonEmpty() && po.getImpl().nonEmpty())) {
+				addError("Either point to a directory or supply the required options\n");
 				printUsage();
 				return IApplication.EXIT_OK;
 			}
 
-			File outputDir = appArgs.length == 2 ? new File(appArgs[1]) : null;
+			boolean userProvided = po.getArgs().isEmpty();
 
-			// use air hamr test utils to load the system
-			List<TestAadlSystem> systems = UpdaterUtil.findSystems(root);
+			AadlSystem system = null;
 
-			if (systems.size() != 1) {
-				System.err.println("Found " + systems.size() + " AADL projects. "
-						+ "Point to a directory that contains a single .project file "
-						+ "or a .system file\n");
-				printUsage();
-				return IApplication.EXIT_OK;
+			if (userProvided) {
+				File mainPackageFile = new File(po.getMain().get().string());
+
+				List<File> projRoots = VisitorUtil.isz2IList(po.getProjects()).stream().map(m -> new File(m.string()))
+						.collect(Collectors.toList());
+				for (File projectRoot : projRoots) {
+					if(!projectRoot.exists() || !projectRoot.isDirectory()) {
+						addError(projectRoot + " does not exist or is not a directory");
+						return IApplication.EXIT_OK;
+					}
+				}
+
+				List<AadlProject> projects = projRoots.stream().map(m -> AadlProjectUtil.createTestAadlProject(m))
+						.collect(Collectors.toList());
+
+				String sysImplName = po.getImpl().get().string();
+
+				system = new AadlSystem(sysImplName, mainPackageFile, projects);
+
+			} else {
+
+				File root = new File(po.getArgs().apply(z(0)).string());
+
+				if (!root.exists() || !root.isDirectory()) {
+					addError(root + " is not a directory\n");
+					printUsage();
+					return IApplication.EXIT_OK;
+				}
+
+				// use air hamr test utils to load the system
+				List<AadlSystem> systems = AadlProjectUtil.findSystems(root);
+
+				if (systems.size() != 1) {
+					addError("Found " + systems.size() + " AADL projects. "
+							+ "Point to a directory that contains a single .project file " + "or a .system file\n");
+					printUsage();
+					return IApplication.EXIT_OK;
+				}
+				system = systems.get(0);
 			}
 
-			TestAadlSystem system = systems.get(0);
+			// Slang enum's type def nested inside a Slang object don't seem to be
+			// accessible via Eclipse jdt
+			boolean toJson = po.getMode().name().equals("Json");
 
-			if (outputDir != null) {
-				system.slangOutputDir = outputDir;
+			File outputFile = po.getOutput().nonEmpty() ? new File(po.getOutput().get().string()) : null;
+			if (outputFile != null) {
+				system.slangOutputFile = outputFile;
 			}
 
 			populateResourceSet(system.projects, resourceSet);
 
-			genAIR(system, resourceSet);
+			org.sireum.aadl.osate.PreferenceValues.setPROCESS_BA_OPT(true);
+
+			genAIR(system, resourceSet, toJson);
 
 		} else {
-			System.out.println("Failed! Unable to create resource set");
+			addError("Failed! Unable to create resource set");
 		}
 		return IApplication.EXIT_OK;
 	}
 
-	void printUsage() {
-		System.out.println(//
-				"AIR HAMR CLI\n\n" + //
-						"Usage: <path> <output-directory>?");
-	}
+	void genAIR(AadlSystem system, ResourceSet resourceSet, boolean toJson) {
 
-	void genAIR(org.sireum.aadl.osate.cli.UpdaterUtil.TestAadlSystem system, ResourceSet resourceSet) {
-
-		System.out.println("Processing: " + system.systemImplementationName);
+		addInfo("Processing: " + system.systemImplementationName);
 
 		SystemInstance instance = getSystemInstance(system, resourceSet);
-		assert instance != null : "System is null " + system.systemImplementationName;
+		if (instance == null) {
+			return;
+		}
 
-		String air = Util.serialize(Util.getAir(instance, true), SerializerType.JSON);
+		SerializerType st = toJson ? SerializerType.JSON : SerializerType.MSG_PACK;
+		String ext = toJson ? ".json" : ".msgpack";
 
-		String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
-		String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ".json";
+		String air = Util.serialize(Util.getAir(instance, true), st);
 
-		File outFile = new File(system.slangOutputDir, fname);
-		IOUtils.writeFile(outFile, air);
-		IOUtils.zipFile(outFile);
+		File outputFile = system.slangOutputFile;
+		if (outputFile == null) {
+			String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
+			String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ext;
+
+			File slangDir = new File(system.projects.get(0).rootDirectory, ".slang");
+			outputFile = new File(slangDir, fname);
+		}
+
+		IOUtils.writeFile(outputFile, air);
+
+		// IOUtils.zipFile(outFile);
 	}
 
-	SystemInstance getSystemInstance(TestAadlSystem system, ResourceSet rset) {
+	SystemInstance getSystemInstance(AadlSystem system, ResourceSet rset) {
 		try {
 			Resource sysImplResource = null;
 			// TODO: determine correct way of getting the OSATE URI for the system impl file
@@ -168,24 +225,27 @@ public class GenerateAir implements IApplication {
 				final AadlPackage pkg = (AadlPackage) (sysImplResource.getContents().isEmpty() ? null
 						: sysImplResource.getContents().get(0));
 
-				SystemImplementation sysImpl = (SystemImplementation) UpdaterUtil.getResourceByName(
+				SystemImplementation sysImpl = (SystemImplementation) AadlProjectUtil.getResourceByName(
 						system.systemImplementationName, pkg.getOwnedPublicSection().getOwnedClassifiers());
 
-				return InstantiateModel.instantiate(sysImpl);
+				if (sysImpl != null) {
+					return InstantiateModel.instantiate(sysImpl);
+				} else {
+					addError("Unable to find system implementation " + system.systemImplementationName);
+				}
 			} else {
-				throw new RuntimeException("Couldn't find resource " + system.systemImplementationFile);
+				addError("Unable to find resource " + system.systemImplementationFile);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		System.exit(1);
 		return null;
 	}
 
-	ResourceSet populateResourceSet(List<TestAadlProject> projects, ResourceSet rs) {
+	ResourceSet populateResourceSet(List<AadlProject> projects, ResourceSet rs) {
 
-		for (TestAadlProject project : projects) {
+		for (AadlProject project : projects) {
 			// pretend the files are organized in a project called <projectName> so that URIs in
 			// AIR Positions are relative to the project, not the file system
 			// https://github.com/osate/osate2/wiki/Using-contributed-resources-in-stand-alone-applications/d5e28542e20b531b8688ab962aa08606d5e619a8
@@ -194,7 +254,7 @@ public class GenerateAir implements IApplication {
 		}
 
 		// ResourceSet rs = rsHelper.getResourceSet();
-		for (TestAadlProject project : projects) {
+		for (AadlProject project : projects) {
 			for (File f : project.aadlFiles) {
 				loadFile(project, f, rs);
 			}
@@ -206,7 +266,7 @@ public class GenerateAir implements IApplication {
 			List<Issue> issues = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 
 			if (!issues.isEmpty()) {
-				System.out.println("Issues detected for: " + resource);
+				addError("Issues detected for: " + resource);
 				for (Issue issue : issues) {
 					System.err.println(issue.getMessage());
 				}
@@ -226,7 +286,7 @@ public class GenerateAir implements IApplication {
 	 * @param rs ResourceSet
 	 * @return
 	 */
-	public Resource loadFile(TestAadlProject project, File file, ResourceSet rs) {
+	public Resource loadFile(AadlProject project, File file, ResourceSet rs) {
 		try {
 			URL url = new URL("file:" + file.getAbsolutePath());
 			InputStream stream = url.openConnection().getInputStream();
@@ -261,4 +321,45 @@ public class GenerateAir implements IApplication {
 	public void stop() {
 		// TODO Auto-generated method stub
 	}
+
+	private Option<PhantomOption> getOptions(String... appArgs) {
+		// convert java strings to sireum strings
+		List<org.sireum.String> sStrings = Arrays.asList(appArgs).stream().map(s -> new org.sireum.String(s))
+				.collect(Collectors.toList());
+
+		Option<SireumTopOption> opts = org.sireum.Cli$.MODULE$.apply(File.pathSeparatorChar)
+				.parsePhantom(VisitorUtil.toISZ(sStrings), z(0));
+
+		if (opts.isEmpty() || opts.get() instanceof HelpOption) {
+			return org.sireum.None$.MODULE$.apply();
+		} else if (opts.get() instanceof PhantomOption) {
+			PhantomOption po = (PhantomOption) opts.get();
+
+			if (po.getOsate().nonEmpty()) {
+				throw new RuntimeException("Not expecting Phantom 'osate' option (ie. you're already in OSATE)");
+			}
+
+			return org.sireum.Some$.MODULE$.apply(po);
+		} else {
+			throw new RuntimeException("Unexpected: received" + opts.get());
+		}
+	}
+
+	void printUsage() {
+		// This will cause sireum to print the help text for phantom
+		getOptions("-h");
+	}
+
+	void addInfo(String msg) {
+		System.out.println(msg);
+	}
+
+	void addError(String msg) {
+		System.err.println("Error: " + msg);
+	}
+
+	void addWarning(String msg) {
+		System.out.println("Warning: " + msg);
+	}
+
 }
