@@ -22,9 +22,9 @@ import org.osate.aadl2.errormodel.tests.ErrorModelInjectorProvider;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instantiation.InstantiateModel;
 import org.osate.testsupport.TestResourceSetHelper;
-import org.sireum.aadl.osate.tests.util.UpdaterUtil;
-import org.sireum.aadl.osate.tests.util.UpdaterUtil.TestAadlProject;
-import org.sireum.aadl.osate.tests.util.UpdaterUtil.TestAadlSystem;
+import org.sireum.aadl.osate.util.AadlProjectUtil;
+import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
+import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
 
 import com.google.inject.Inject;
 import com.itemis.xtext.testing.XtextTest;
@@ -36,7 +36,7 @@ public abstract class SireumTest extends XtextTest {
 	@Inject
 	TestResourceSetHelper rsHelper;
 
-	protected SystemInstance getSystemInstance(TestAadlSystem system) {
+	protected SystemInstance getSystemInstance(AadlSystem system) {
 		try {
 			ResourceSet rset = createResourceSet(system.projects);
 
@@ -53,7 +53,7 @@ public abstract class SireumTest extends XtextTest {
 				final AadlPackage pkg = (AadlPackage) (sysImplResource.getContents().isEmpty() ? null
 						: sysImplResource.getContents().get(0));
 
-				SystemImplementation sysImpl = (SystemImplementation) UpdaterUtil.getResourceByName(
+				SystemImplementation sysImpl = (SystemImplementation) AadlProjectUtil.getResourceByName(
 						system.systemImplementationName, pkg.getOwnedPublicSection().getOwnedClassifiers());
 
 				return InstantiateModel.instantiate(sysImpl);
@@ -68,9 +68,9 @@ public abstract class SireumTest extends XtextTest {
 		return null;
 	}
 
-	ResourceSet createResourceSet(List<TestAadlProject> projects) {
+	ResourceSet createResourceSet(List<AadlProject> projects) {
 
-		for (TestAadlProject project : projects) {
+		for (AadlProject project : projects) {
 			// pretend the files are organized in a project called <projectName> so that URIs in
 			// AIR Positions are relative to the project, not the file system
 			// https://github.com/osate/osate2/wiki/Using-contributed-resources-in-stand-alone-applications/d5e28542e20b531b8688ab962aa08606d5e619a8
@@ -79,7 +79,7 @@ public abstract class SireumTest extends XtextTest {
 		}
 
 		ResourceSet rs = rsHelper.getResourceSet();
-		for (TestAadlProject project : projects) {
+		for (AadlProject project : projects) {
 			for (File f : project.aadlFiles) {
 				loadFile(project, f, rs);
 			}
@@ -96,7 +96,7 @@ public abstract class SireumTest extends XtextTest {
 	 * @param rs ResourceSet
 	 * @return
 	 */
-	Resource loadFile(TestAadlProject project, File file, ResourceSet rs) {
+	Resource loadFile(AadlProject project, File file, ResourceSet rs) {
 		try {
 			URL url = new URL("file:" + file.getAbsolutePath());
 			InputStream stream = url.openConnection().getInputStream();

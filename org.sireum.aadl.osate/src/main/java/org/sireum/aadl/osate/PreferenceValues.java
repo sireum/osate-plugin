@@ -18,5 +18,10 @@ public class PreferenceValues {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		return store.getBoolean(PreferenceConstants.PROCESS_BA_OPT);
 	}
+
+	public static void setPROCESS_BA_OPT(boolean value) {
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		store.setValue(PreferenceConstants.PROCESS_BA_OPT, value);
+	}
 }
 

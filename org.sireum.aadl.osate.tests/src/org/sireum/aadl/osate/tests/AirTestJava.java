@@ -8,9 +8,9 @@ import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Test;
 import org.osate.aadl2.instance.SystemInstance;
-import org.sireum.aadl.osate.tests.util.IOUtils;
-import org.sireum.aadl.osate.tests.util.UpdaterUtil.TestAadlProject;
-import org.sireum.aadl.osate.tests.util.UpdaterUtil.TestAadlSystem;
+import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
+import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
+import org.sireum.aadl.osate.util.IOUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.hamr.ir.Aadl;
@@ -67,8 +67,8 @@ public class AirTestJava extends SireumTest {
 			File sysImplFile = new File(root, sysFilename);
 			assert sysImplFile.exists() : sysImplFile.getAbsolutePath() + "doesn't exist";
 
-			TestAadlProject project = new TestAadlProject(root.getName(), root, aadlFiles);
-			TestAadlSystem system = new TestAadlSystem(sysImplName, sysImplFile, Arrays.asList(project), root);
+			AadlProject project = new AadlProject(root.getName(), root, aadlFiles);
+			AadlSystem system = new AadlSystem(sysImplName, sysImplFile, Arrays.asList(project));
 
 			SystemInstance instance = getSystemInstance(system);
 
