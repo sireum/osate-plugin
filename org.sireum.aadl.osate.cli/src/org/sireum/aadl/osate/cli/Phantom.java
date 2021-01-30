@@ -49,11 +49,8 @@ import org.sireum.aadl.osate.util.Util.SerializerType;
 import com.google.inject.Injector;
 
 @SuppressWarnings("restriction")
-public class GenerateAir implements IApplication {
+public class Phantom implements IApplication {
 
-	org.sireum.Z z(int i) {
-		return org.sireum.Z.apply(i);
-	}
 	/**
 	 * based on instructions from
 	 *
@@ -336,13 +333,21 @@ public class GenerateAir implements IApplication {
 			PhantomOption po = (PhantomOption) opts.get();
 
 			if (po.getOsate().nonEmpty()) {
-				throw new RuntimeException("Not expecting Phantom 'osate' option (ie. you're already in OSATE)");
+				addWarning("Ignoring 'osate' option.  Only applicable when run via Sireum Kekinain's CLI");
+			}
+
+			if (po.getUpdate()) {
+				addWarning("Ignoring 'update' option.  Only applicable when run via Sireum Kekinian' CLI");
 			}
 
 			return org.sireum.Some$.MODULE$.apply(po);
 		} else {
 			throw new RuntimeException("Unexpected: received" + opts.get());
 		}
+	}
+
+	org.sireum.Z z(int i) {
+		return org.sireum.Z.apply(i);
 	}
 
 	void printUsage() {
