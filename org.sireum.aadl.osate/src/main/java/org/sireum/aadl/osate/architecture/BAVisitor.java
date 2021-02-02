@@ -22,6 +22,7 @@ import org.osate.ba.aadlba.BehaviorActionBlock;
 import org.osate.ba.aadlba.BehaviorActionCollection;
 import org.osate.ba.aadlba.BehaviorAnnex;
 import org.osate.ba.aadlba.BehaviorCondition;
+import org.osate.ba.aadlba.BehaviorIntegerLiteral;
 import org.osate.ba.aadlba.BehaviorState;
 import org.osate.ba.aadlba.BehaviorTime;
 import org.osate.ba.aadlba.BehaviorTransition;
@@ -84,6 +85,8 @@ import org.sireum.hamr.ir.BTSExecutionOrder;
 import org.sireum.hamr.ir.BTSExp;
 import org.sireum.hamr.ir.BTSFormalExpPair;
 import org.sireum.hamr.ir.BTSFormalExpPair$;
+import org.sireum.hamr.ir.BTSLiteralExp$;
+import org.sireum.hamr.ir.BTSLiteralType;
 import org.sireum.hamr.ir.BTSNameExp;
 import org.sireum.hamr.ir.BTSNameExp$;
 import org.sireum.hamr.ir.BTSPortOutAction$;
@@ -118,6 +121,8 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 	private boolean TODO_HALT = false;
 
 	BTSExecutionOrder.Type Sequential = BTSExecutionOrder.byName("Sequential").get();
+
+	BTSLiteralType.Type Integer = BTSLiteralType.byName("INTEGER").get();
 
 	public BAVisitor(Visitor v) {
 		this.v = v;
@@ -244,21 +249,26 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 	@Override
 	public Boolean caseBehaviorTransition(BehaviorTransition object) {
 
-		Name id = toSimpleName(object.getName());
-
 		Z value = Z$.MODULE$.apply(object.getPriority());
 
 		Option<Z> priority = toSome(value);
 
-		BTSTransitionLabel label = BTSTransitionLabel$.MODULE$.apply(id, priority);
-
 		List<Name> _sourceStates = new ArrayList<>();
 		BehaviorState src = object.getSourceState();
-		_sourceStates.add(toSimpleName(src.getName()));
+		String srcName = src.getName();
+		_sourceStates.add(toSimpleName(srcName));
 
 		BehaviorState dest = object.getDestinationState();
 		String destName = dest.getName(); // just need name
 		Name destState = toSimpleName(destName);
+
+		Name id = null;
+		if (object.getName() != null) {
+			id = toSimpleName(object.getName());
+		} else {
+			id = toSimpleName("");
+		}
+		BTSTransitionLabel label = BTSTransitionLabel$.MODULE$.apply(id, priority);
 
 		Option<BTSTransitionCondition> _transitionCondition = toNone();
 		BehaviorCondition bc = object.getCondition();
@@ -387,14 +397,14 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 			throw new RuntimeException("Unexpected " + object.getSubprogram().getElement());
 		}
 
-		assert features.size() == object.getParameterLabels().size() : "Apparantly BA allows this";
+		assert features.size() == object.getParameterLabels().size() : "Apparently BA allows this";
 
 		List<BTSFormalExpPair> params = new ArrayList<>();
 		for (int index = 0; index < object.getParameterLabels().size(); index++) {
 			Feature f = features.get(index);
 
 			visit(object.getParameterLabels().get(index));
-			BTSNameExp ne = pop();
+			BTSExp ne = pop();
 
 			// TODO:
 			Option<Name> paramName = toSome(toSimpleName(f.getName()));
@@ -699,6 +709,12 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 			push(expressions.get(0));
 		}
 
+		return false;
+	}
+
+	@Override
+	public Boolean caseBehaviorIntegerLiteral(BehaviorIntegerLiteral object) {
+		push(BTSLiteralExp$.MODULE$.apply(Integer, String.valueOf(object.getValue())));
 		return false;
 	}
 
