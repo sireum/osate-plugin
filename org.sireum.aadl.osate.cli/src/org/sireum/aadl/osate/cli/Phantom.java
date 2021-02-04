@@ -35,12 +35,9 @@ import org.osate.xtext.aadl2.Aadl2StandaloneSetup;
 import org.osate.xtext.aadl2.errormodel.ErrorModelStandaloneSetup;
 import org.sireum.Cli.HamrCodeGenOption;
 import org.sireum.Cli.HelpOption;
-//import org.sireum.Cli.PhantomMode.Type;
 import org.sireum.Cli.PhantomOption;
 import org.sireum.Cli.SireumTopOption;
-import org.sireum.IS;
 import org.sireum.Option;
-import org.sireum.Z;
 import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
@@ -187,19 +184,18 @@ public class Phantom implements IApplication {
 		SerializerType st = toJson ? SerializerType.JSON : SerializerType.MSG_PACK;
 		String ext = toJson ? ".json" : ".msgpack";
 
-		Aadl model = genAir(system, rs);
+		SystemInstance instance = getSystemInstance(system, rs);
+		Aadl model = Util.getAir(instance, true);
+
 		if (model != null) {
 			String air = Util.serialize(model, st);
 
 			if (outputFile == null) {
-				IS<Z, org.sireum.String> name = model.components().apply(z(0)).identifier().getName();
-				String n = name.apply(name.lastIndex()).string();
-
-				// String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
-				// String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ext;
+				String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
+				String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ext;
 
 				File slangDir = new File(system.projects.get(0).rootDirectory, ".slang");
-				outputFile = new File(slangDir, n + "." + ext);
+				outputFile = new File(slangDir, fname);
 			}
 
 			IOUtils.writeFile(outputFile, air);
@@ -238,31 +234,20 @@ public class Phantom implements IApplication {
 		}
 
 		AadlSystem system = systems.get(0);
-
-		org.sireum.cli.HAMR.codeGen(genAir(system, rs), ho);
+		Aadl model = Util.getAir(getSystemInstance(system, rs), true);
+		org.sireum.cli.HAMR.codeGen(model, ho);
 
 		return IApplication.EXIT_OK;
 	}
 
-	Aadl genAir(AadlSystem system, ResourceSet resourceSet) {
-
-		populateResourceSet(system.projects, resourceSet);
-
-		org.sireum.aadl.osate.PreferenceValues.setPROCESS_BA_OPT(true);
-
-		addInfo("Processing: " + system.systemImplementationName);
-
-		SystemInstance instance = getSystemInstance(system, resourceSet);
-		if (instance == null) {
-			addError("Could not generate system instance for " + system.systemImplementationName);
-			return null;
-		}
-
-		return Util.getAir(instance, true);
-	}
-
 	SystemInstance getSystemInstance(AadlSystem system, ResourceSet rset) {
 		try {
+			populateResourceSet(system.projects, rset);
+
+			org.sireum.aadl.osate.PreferenceValues.setPROCESS_BA_OPT(true);
+
+			addInfo("Processing: " + system.systemImplementationName);
+
 			Resource sysImplResource = null;
 			// TODO: determine correct way of getting the OSATE URI for the system impl file
 			for (Resource rs : rset.getResources()) {
