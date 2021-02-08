@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -48,6 +49,8 @@ import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.hamr.ir.Aadl;
 
 import com.google.inject.Injector;
+import com.rockwellcollins.atc.agree.AgreeStandaloneSetup;
+import com.rockwellcollins.atc.resolute.ResoluteStandaloneSetup;
 
 @SuppressWarnings("restriction")
 public class Phantom implements IApplication {
@@ -81,6 +84,16 @@ public class Phantom implements IApplication {
 		// important that this comes next, otherwise emv2 libraries won't resolve
 		// see https://github.com/osate/osate2/issues/1387#issuecomment-483739761
 		ErrorModelStandaloneSetup.doSetup();
+
+		if (Platform.getBundle("com.rockwellcollins.atc.resolute") != null) {
+			// addInfo("Setting up Resolute");
+			ResoluteStandaloneSetup.doSetup();
+		}
+
+		if (Platform.getBundle("com.rockwellcollins.atc.agree") != null) {
+			// addInfo("Seeting up AGREE");
+			AgreeStandaloneSetup.doSetup();
+		}
 
 		// Init Instance model -- need both these lines
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("aaxl2", new Aadl2ResourceFactoryImpl());
@@ -220,7 +233,7 @@ public class Phantom implements IApplication {
 
 		File f = new File(s);
 		if (!f.exists() || !f.isFile() || !(f.getName().equals(".project") || f.getName().equals(".system"))) {
-			addError("Must point to a .project or .system file when calling Phantom from OSATE");
+			addError("Must point to a .project or .system file when calling HAMR Codegen from OSATE");
 			return IApplication.EXIT_OK;
 		}
 
@@ -304,7 +317,8 @@ public class Phantom implements IApplication {
 			if (!issues.isEmpty()) {
 				addError("Issues detected for: " + resource);
 				for (Issue issue : issues) {
-					System.err.println(issue.getMessage());
+					String pos = "  [" + issue.getLineNumber() + "," + issue.getColumn() + "] ";
+					System.err.println(pos + issue.getMessage());
 				}
 				System.err.println();
 			}
@@ -344,8 +358,12 @@ public class Phantom implements IApplication {
 			 * System.out.println();
 			 */
 			Resource res = rs.createResource(resourceUri);
+
 			if (res != null) {
+				// addInfo("Created resource: " + resourceUri);
 				res.load(stream, Collections.EMPTY_MAP);
+			} else {
+				addError("Resource creation resulted in null for: " + resourceUri);
 			}
 			return res;
 		} catch (IOException e) {
