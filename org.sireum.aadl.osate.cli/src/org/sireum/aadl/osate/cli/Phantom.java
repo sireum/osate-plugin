@@ -232,23 +232,32 @@ public class Phantom implements IApplication {
 		String s = ho.args().apply(z(0)).string();
 
 		File f = new File(s);
-		if (!f.exists() || !f.isFile() || !(f.getName().equals(".project") || f.getName().equals(".system"))) {
-			addError("Must point to a .project or .system file when calling HAMR Codegen from OSATE");
+		if (!f.exists() || !f.isFile()) {
+			addError("Either point to a serialized AIR file, or to a .project or .system file");
 			return IApplication.EXIT_OK;
 		}
 
-		List<AadlSystem> systems = AadlProjectUtil.findSystems(f.getParentFile());
+		int ret = 0;
+		if(f.getName().equals(".project") || f.getName().equals(".system")) {
+			List<AadlSystem> systems = AadlProjectUtil.findSystems(f.getParentFile());
 
-		if (systems.size() != 1) {
-			addError("Found " + systems.size() + " AADL projects. "
-					+ "Point to a single .project file " + "or a .system file\n");
-			// printUsage();
-			return IApplication.EXIT_OK;
+			if (systems.size() != 1) {
+				addError("Found " + systems.size() + " AADL projects. " + "Point to a single .project file "
+						+ "or a .system file\n");
+				// printUsage();
+				return IApplication.EXIT_OK;
+			}
+
+			AadlSystem system = systems.get(0);
+			Aadl model = Util.getAir(getSystemInstance(system, rs), true);
+
+			ret = org.sireum.cli.HAMR.codeGen(model, ho);
+		} else {
+			// assume it's a serialized AIR file
+			ret = org.sireum.cli.HAMR.codeGen(ho);
 		}
 
-		AadlSystem system = systems.get(0);
-		Aadl model = Util.getAir(getSystemInstance(system, rs), true);
-		org.sireum.cli.HAMR.codeGen(model, ho);
+		addInfo("HAMR Codegen was " + ((ret != 0) ? "un" : "") + "succesful");
 
 		return IApplication.EXIT_OK;
 	}
