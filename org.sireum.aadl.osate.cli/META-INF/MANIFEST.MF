@@ -9,10 +9,11 @@ Require-Bundle: org.osate.aadl2,
  org.osate.aadl2.instantiation,
  org.sireum.aadl.osate,
  org.osate.xtext.aadl2.errormodel,
- org.osate.categories,
  org.osate.pluginsupport,
  org.osate.annexsupport,
- org.osate.aadl2.modelsupport
+ org.osate.aadl2.modelsupport,
+ com.rockwellcollins.atc.agree;resolution:=optional,
+ com.rockwellcollins.atc.resolute;resolution:=optional
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: org.sireum.aadl.osate.cli
 Bundle-ActivationPolicy: lazy
