@@ -49,8 +49,6 @@ import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.hamr.ir.Aadl;
 
 import com.google.inject.Injector;
-import com.rockwellcollins.atc.agree.AgreeStandaloneSetup;
-import com.rockwellcollins.atc.resolute.ResoluteStandaloneSetup;
 
 @SuppressWarnings("restriction")
 public class Phantom implements IApplication {
@@ -86,13 +84,15 @@ public class Phantom implements IApplication {
 		ErrorModelStandaloneSetup.doSetup();
 
 		if (Platform.getBundle("com.rockwellcollins.atc.resolute") != null) {
-			// addInfo("Setting up Resolute");
-			ResoluteStandaloneSetup.doSetup();
+			//addInfo("Setting up Resolute");
+			// ResoluteStandaloneSetup.doSetup();
+			reflectDoSetup("com.rockwellcollins.atc.resolute.ResoluteStandaloneSetup");
 		}
 
 		if (Platform.getBundle("com.rockwellcollins.atc.agree") != null) {
-			// addInfo("Seeting up AGREE");
-			AgreeStandaloneSetup.doSetup();
+			//addInfo("Setting up AGREE");
+			// AgreeStandaloneSetup.doSetup();
+			reflectDoSetup("com.rockwellcollins.atc.agree.AgreeStandaloneSetup");
 		}
 
 		// Init Instance model -- need both these lines
@@ -133,6 +133,14 @@ public class Phantom implements IApplication {
 			addError("Failed! Unable to create resource set");
 		}
 		return IApplication.EXIT_OK;
+	}
+
+	private void reflectDoSetup(String className) {
+		try {
+			Class.forName(className).getMethod("doSetup").invoke(null);
+		} catch (Exception e) {
+			addError("Issue invoking " + className + ".doSetup()");
+		}
 	}
 
 	int phantom(PhantomOption po, ResourceSet rs) {
