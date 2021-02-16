@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -37,6 +38,7 @@ import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.modelsupport.EObjectURIWrapper;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
+import org.osate.ge.CanonicalBusinessObjectReference;
 import org.osate.ge.graphics.Style;
 import org.osate.ge.graphics.StyleBuilder;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
@@ -143,7 +145,14 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 			projects.add(currProject);
 			diagramService.findDiagrams(projects).forEach(dr -> {
 				if (dr.isValid()) {
-					ade = getAgeDiagramEditor(dr);
+					Resource res = root.eResource();
+					URI uri = res.getURI();
+					IPath instancePath = Util.toIFile(uri).getFullPath();
+
+					CanonicalBusinessObjectReference bor = dr.getContextReference();
+					if (bor.getSegments().stream().anyMatch(it -> it.equals(instancePath.toString().toLowerCase()))) {
+						ade = getAgeDiagramEditor(dr);
+					}
 				}
 			});
 			// des.addAll(AwasUtil.getAllDiagramElements(ade.getDiagramBehavior().getAgeDiagram()));
