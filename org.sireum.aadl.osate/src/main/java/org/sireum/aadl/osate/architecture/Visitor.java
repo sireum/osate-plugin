@@ -85,6 +85,10 @@ public class Visitor {
 		if (ba != null && PreferenceValues.getPROCESS_BA_OPT()) {
 			bv = new BAVisitor(this);
 		}
+		Bundle gumbo = Platform.getBundle("org.sireum.aadl.gumbo");
+		if (gumbo != null) {
+			gv = new GumboVisitor(this);
+		}
 	}
 
 	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
@@ -94,6 +98,7 @@ public class Visitor {
 	final Emv2Visitor ev = new Emv2Visitor(this);
 	SmfVisitor sv = null;
 	BAVisitor bv = null;
+	GumboVisitor gv = null;
 
 	public Option<org.sireum.hamr.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		final Option<org.sireum.hamr.ir.Component> t = visit(root);
@@ -534,6 +539,10 @@ public class Visitor {
 
 		if (bv != null) {
 			annexes = VisitorUtil.addAll(annexes, bv.visit(compInst, currentPath));
+		}
+
+		if (gv != null) {
+			annexes = VisitorUtil.addAll(annexes, gv.visit(compInst, currentPath));
 		}
 
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
