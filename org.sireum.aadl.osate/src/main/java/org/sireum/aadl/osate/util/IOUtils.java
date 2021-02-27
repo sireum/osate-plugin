@@ -78,18 +78,32 @@ public class IOUtils {
 	}
 
 	public static List<File> collectFiles(File root, String endsWith, boolean recursive) {
+		return collectFiles(root, endsWith, true, SearchType.ENDS_WITH);
+	}
+
+	public static List<File> collectFiles(File root, String str, boolean recursive, SearchType st) {
 		assert (root.isDirectory());
 
 		List<File> ret = new ArrayList<>();
 		for (File f : root.listFiles()) {
-			if (f.isFile() && f.getName().endsWith(endsWith)) {
+			if (f.isFile()
+					&& (st == SearchType.STARTS_WITH ? f.getName().startsWith(str) : //
+							(st == SearchType.ENDS_WITH ? f.getName().endsWith(str) : //
+									(st == SearchType.CONTAINS ? f.getName().contains(str) : //
+											(st == SearchType.EQUALS ? f.getName().equals(str) : false))))) {
 				ret.add(f);
 			} else if (f.isDirectory() && recursive) {
-				ret.addAll(collectFiles(f, endsWith, recursive));
+				ret.addAll(collectFiles(f, str, recursive, st));
 			}
 		}
 
 		return ret;
 	}
 
+	public static enum SearchType {
+		STARTS_WITH, // appears at the head of the string
+		ENDS_WITH, // appears at the tail of the string
+		CONTAINS, // appears anywhere in the string
+		EQUALS // exactly equal
+	}
 }

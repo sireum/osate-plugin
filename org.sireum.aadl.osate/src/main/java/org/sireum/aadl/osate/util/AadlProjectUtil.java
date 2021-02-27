@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.Classifier;
+import org.sireum.aadl.osate.util.IOUtils.SearchType;
 
 public class AadlProjectUtil {
 
@@ -30,7 +31,7 @@ public class AadlProjectUtil {
 	public static List<AadlSystem> findSystems(File f) {
 		List<AadlSystem> ret = new ArrayList<AadlSystem>();
 		if (f.isDirectory()) {
-			List<File> systems = IOUtils.collectFiles(f, ".system", false);
+			List<File> systems = IOUtils.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
 			if (!systems.isEmpty()) {
 				// found user provided .system file so use that
 
