@@ -8,6 +8,7 @@ public class PreferenceValues {
 
 	public static final String HAMR_DEVICES_AS_THREADS_OPT = "HAMR_DEVICES_AS_THREADS_OPT";
 	public static final String HAMR_EMBED_ART_OPT = "HAMR_EMBED_ART_OPT";
+	public static final String HAMR_RUN_TRANSPILER = "HAMR_RUN_TRANSPILER";
 	public static final String HAMR_OUTPUT_FOLDER_OPT = "org.sireum.HAMR_OUTPUT_FOLDER_OPT";
 	public static final String HAMR_SERIALIZE_OPT = "org.sireum.HAMR_SERIALIZE_OPT";
 	public static final String HAMR_VERBOSE_OPT = "org.sireum.HAMR_VERBOSE_OPT";
@@ -24,6 +25,11 @@ public class PreferenceValues {
 	public static boolean getHAMR_EMBED_ART_OPT() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		return store.getBoolean(HAMR_EMBED_ART_OPT);
+	}
+
+	public static boolean getHAMR_RUN_TRANSPILER() {
+		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
+		return store.getBoolean(HAMR_RUN_TRANSPILER);
 	}
 
 	public static String getHAMR_OUTPUT_FOLDER_OPT() {

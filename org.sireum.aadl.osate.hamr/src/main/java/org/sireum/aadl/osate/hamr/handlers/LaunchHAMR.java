@@ -128,7 +128,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							String platform = prompt.getOptionPlatform().hamrName();
 							Option<String> slangOutputDir = ArsitBridge.sireumOption(_slangOutputDir);
 							Option<String> slangPackageName = ArsitBridge.sireumOption(_base);
-							boolean embedArt = PreferenceValues.getHAMR_EMBED_ART_OPT();
+							boolean noEmbedArt = !PreferenceValues.getHAMR_EMBED_ART_OPT();
 							boolean devicesAsThreads = PreferenceValues.getHAMR_DEVICES_AS_THREADS_OPT();
 							IS<Z, String> slangAuxCodeDirs = prompt.getOptionCSourceDirectory().equals("")
 									? VisitorUtil.toISZ()
@@ -138,6 +138,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							int bitWidth = prompt.getOptionBitWidth();
 							int maxStringSize = prompt.getOptionMaxStringSize();
 							int maxArraySize = prompt.getOptionMaxSequenceSize();
+							boolean runTranspiler = PreferenceValues.getHAMR_RUN_TRANSPILER();
 							File _camkesOutDir = new File(prompt.getOptionCamkesOptionOutputDirectory());
 							_camkesOutDir.mkdirs();
 							Option<String> camkesOutputDirectory = ArsitBridge
@@ -153,11 +154,12 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							return org.sireum.cli.HAMR.codeGen( //
 									model, //
+									//
 									verbose, //
 									org.sireum.Cli.HamrPlatform$.MODULE$.byName(platform).get(), //
 									slangOutputDir, //
 									slangPackageName, //
-									embedArt, //
+									noEmbedArt, //
 									devicesAsThreads, //
 									//
 									slangAuxCodeDirs, //
@@ -166,6 +168,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									bitWidth, //
 									maxStringSize, //
 									maxArraySize, //
+									runTranspiler, //
 									//
 									camkesOutputDirectory, //
 									camkesAuxCodeDirs, //
