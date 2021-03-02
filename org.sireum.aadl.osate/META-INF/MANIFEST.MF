@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Sireum plug-in for OSATEv2
 Bundle-SymbolicName: org.sireum.aadl.osate;singleton:=true
-Bundle-Version: 1.0.2101051925.qualifier
+Bundle-Version: 1.0.2103012140.qualifier
 Bundle-Activator: org.sireum.aadl.osate.Activator
 Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.aadl2.errormodel.faulttree.edit;bundle-version="1.0.0",
@@ -14,11 +14,14 @@ Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.aadl2,
  org.osate.xtext.aadl2.errormodel,
  org.osate.annexsupport,
- org.sireum.aadl.osate.securitymodel;resolution:=optional
+ org.sireum.aadl.osate.securitymodel;resolution:=optional,
+ org.osate.ba;resolution:=optional,
+ org.sireum.aadl.gumbo;bundle-version="1.0.0";resolution:=optional
 Bundle-ActivationPolicy: lazy
 Export-Package: 
  org.sireum,
  org.sireum.$internal,
+ org.sireum.aadl.osate,
  org.sireum.aadl.osate.architecture;uses:="org.osate.aadl2,org.osate.aadl2.instance,org.sireum",
  org.sireum.aadl.osate.handlers;
   uses:="org.eclipse.core.runtime,

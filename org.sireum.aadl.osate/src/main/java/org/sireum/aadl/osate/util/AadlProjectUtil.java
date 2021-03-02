@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate.tests.util;
+package org.sireum.aadl.osate.util;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,8 +7,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.Classifier;
+import org.sireum.aadl.osate.util.IOUtils.SearchType;
 
-public class UpdaterUtil {
+public class AadlProjectUtil {
 
 	public static Classifier getResourceByName(String name, EList<Classifier> l) {
 		for (Classifier oc : l) {
@@ -19,7 +20,7 @@ public class UpdaterUtil {
 		return null;
 	}
 
-	static String getProjectName(File projectFile) {
+	public static String getProjectName(File projectFile) {
 		assert (projectFile.getName().equals(".project"));
 
 		String marker = "<name>";
@@ -27,15 +28,15 @@ public class UpdaterUtil {
 		return line.substring(line.indexOf(marker) + marker.length(), line.indexOf("</name>"));
 	}
 
-	public static List<TestAadlSystem> findSystems(File f) {
-		List<TestAadlSystem> ret = new ArrayList<TestAadlSystem>();
+	public static List<AadlSystem> findSystems(File f) {
+		List<AadlSystem> ret = new ArrayList<AadlSystem>();
 		if (f.isDirectory()) {
-			List<File> systems = IOUtils.collectFiles(f, ".system", false);
+			List<File> systems = IOUtils.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
 			if (!systems.isEmpty()) {
 				// found user provided .system file so use that
 
 				assert (systems.size() == 1);
-				ret.add(UpdaterUtil.createTestAadlSystem(systems.get(0)));
+				ret.add(AadlProjectUtil.createTestAadlSystem(systems.get(0)));
 				return ret;
 			}
 			for (File file : f.listFiles()) {
@@ -46,48 +47,65 @@ public class UpdaterUtil {
 				// assumes there is only one system implementation in the
 				// directory rooted at f
 
-				String projectName = UpdaterUtil.getProjectName(f);
-				File rootDirectory = f.getParentFile();
-				List<File> aadlFiles = IOUtils.collectFiles(rootDirectory, ".aadl", true);
-				TestAadlProject project = new TestAadlProject(projectName, rootDirectory, aadlFiles);
-
+				AadlProject project = createTestAadlProject(f.getParentFile());
+				if (project == null) {
+					return ret;
+				}
 				String systemImpl = null;
 				File systemFile = null;
-				for (File a : aadlFiles) {
+				for (File a : project.aadlFiles) {
 					for (String line : IOUtils.readFile(a).split("\n")) {
 						String SYS_IMPL = "system implementation";
 						if (line.contains(SYS_IMPL)) {
-							assert systemFile == null : "Found multiple system implementations in " + f.getParent();
+							if (systemFile != null) {
+								addError("Found multiple system implementations in " + f.getParent());
+								return ret;
+							}
 							systemFile = a;
 							systemImpl = line.substring(line.indexOf(SYS_IMPL) + SYS_IMPL.length()).trim();
 							break;
 						}
 					}
 				}
-				ret.add(new TestAadlSystem(systemImpl, systemFile, Arrays.asList(project)));
+				ret.add(new AadlSystem(systemImpl, systemFile, Arrays.asList(project)));
 			}
 		}
 		return ret;
 	}
 
-	static TestAadlSystem createTestAadlSystem(File systemFile) {
+	public static AadlProject createTestAadlProject(File projectRoot) {
+		File projectFile = new File(projectRoot, ".project");
+
+		if (!projectFile.exists() || !projectFile.isFile()) {
+			addError(projectFile + " does not exist or isn't a file");
+			return null;
+		}
+
+		String projectName = AadlProjectUtil.getProjectName(projectFile);
+		List<File> aadlFiles = IOUtils.collectFiles(projectRoot, ".aadl", true);
+		AadlProject project = new AadlProject(projectName, projectRoot, aadlFiles);
+
+		return project;
+	}
+
+	public static AadlSystem createTestAadlSystem(File systemFile) {
 		try {
 
-			String[] _projects = TestAadlSystem.getProjectsProperty(systemFile);
-			File systemImplFile = TestAadlSystem.getSystemImplementationFile(systemFile);
-			String systemImpl = TestAadlSystem.getSystemImplementationClassifierName(systemFile);
+			String[] _projects = AadlSystem.getProjectsProperty(systemFile);
+			File systemImplFile = AadlSystem.getSystemImplementationFile(systemFile);
+			String systemImpl = AadlSystem.getSystemImplementationClassifierName(systemFile);
 
-			List<TestAadlProject> projects = new ArrayList<TestAadlProject>();
+			List<AadlProject> projects = new ArrayList<AadlProject>();
 			for (String p : _projects) {
-				File projectFile = new File(systemFile.getParentFile(), p);
-				assert (projectFile.exists() && projectFile.isFile() && projectFile.getName().equals(".project"));
+				File projectRoot = new File(systemFile.getParentFile(), p);
 
-				String projectName = getProjectName(projectFile);
-				List<File> aadlFiles = IOUtils.collectFiles(projectFile.getParentFile(), ".aadl", true);
-
-				projects.add(new TestAadlProject(projectName, projectFile.getParentFile(), aadlFiles));
+				if (!projectRoot.exists() || !projectRoot.isDirectory()) {
+					addError(projectRoot + " doesn't exist or isn't a directory");
+				} else {
+					projects.add(createTestAadlProject(projectRoot));
+				}
 			}
-			return new TestAadlSystem(systemImpl, systemImplFile, projects);
+			return new AadlSystem(systemImpl, systemImplFile, projects);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -95,12 +113,12 @@ public class UpdaterUtil {
 		return null;
 	}
 
-	public static class TestAadlProject {
+	public static class AadlProject {
 		public String projectName;
 		public File rootDirectory;
 		public List<File> aadlFiles;
 
-		public TestAadlProject(String _projectName, File _rootDirectory, List<File> _aadlFiles) {
+		public AadlProject(String _projectName, File _rootDirectory, List<File> _aadlFiles) {
 			assert (_projectName != null);
 			assert _rootDirectory != null && _rootDirectory.exists() && _rootDirectory.isDirectory();
 			assert !_aadlFiles.isEmpty() : "no aadl files for " + projectName + " in root dir " + rootDirectory;
@@ -111,35 +129,33 @@ public class UpdaterUtil {
 		}
 	}
 
-	public static class TestAadlSystem {
+	public static class AadlSystem {
 
 		public String systemImplementationName;
 		public File systemImplementationFile;
-		public File slangOutputDir;
-		public List<TestAadlProject> projects;
+		public File slangOutputFile;
+		public List<AadlProject> projects;
 
-		public TestAadlSystem(String _systemImpl, File _systemFile, List<TestAadlProject> _projects,
-				File _slangOutputDir) {
+		public AadlSystem(String _systemImpl, File _systemFile, List<AadlProject> _projects, File _slangOutputFile) {
 			assert _systemImpl != null;
 			assert _systemFile != null && _systemFile.exists() && _systemFile.isFile();
 			assert _projects.size() > 0;
-			assert _slangOutputDir.exists() && _slangOutputDir.isDirectory();
 
 			this.systemImplementationName = _systemImpl;
 			this.systemImplementationFile = _systemFile;
 			this.projects = _projects;
-			this.slangOutputDir = _slangOutputDir;
+			this.slangOutputFile = _slangOutputFile;
 		}
 
-		TestAadlSystem(String _systemImpl, File _systemFile, List<TestAadlProject> _projects) {
+		public AadlSystem(String _systemImpl, File _systemFile, List<AadlProject> _projects) {
 			// assume first project contains a .slang subdirectory
-			this(_systemImpl, _systemFile, _projects, new File(_projects.get(0).rootDirectory, ".slang"));
+			this(_systemImpl, _systemFile, _projects, null);
 		}
 
 		/*
 		 * Example .system properties file
 		 *
-		 * projects=pca/.project;BLESS_Resources/.project;ice-device/.project;physical/.project
+		 * projects=pca;BLESS_Resources;ice-device;physical
 		 * system_impl_file=pca/aadl/packages/PCA_System.aadl
 		 * system_impl=wrap_pca.imp
 		 *
@@ -161,5 +177,9 @@ public class UpdaterUtil {
 			return new File(systemFile.getParentFile(), systemImplFilename);
 		}
 
+	}
+
+	static void addError(String msg) {
+		System.err.println("Error: " + msg);
 	}
 }

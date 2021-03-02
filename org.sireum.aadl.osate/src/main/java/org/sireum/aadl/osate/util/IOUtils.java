@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate.cli;
+package org.sireum.aadl.osate.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,7 +16,7 @@ import java.util.zip.ZipOutputStream;
 
 public class IOUtils {
 
-	static Properties getPropertiesFile(File f) {
+	public static Properties getPropertiesFile(File f) {
 		try {
 			FileInputStream fis = new FileInputStream(f);
 			Properties prop = new Properties();
@@ -29,7 +29,7 @@ public class IOUtils {
 		return null;
 	}
 
-	static String readFile(File f) {
+	public static String readFile(File f) {
 		try {
 			return new String(Files.readAllBytes(Paths.get(f.toURI())));
 		} catch (IOException e) {
@@ -39,7 +39,7 @@ public class IOUtils {
 		}
 	}
 
-	static void writeFile(File f, String str) {
+	public static void writeFile(File f, String str) {
 		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(f.toURI()))) {
 			writer.write(str);
 			System.out.println("Wrote: " + f);
@@ -49,7 +49,7 @@ public class IOUtils {
 		}
 	}
 
-	static void zipFile(File f) {
+	public static void zipFile(File f) {
 		try {
 			String zipFileName = f.getPath().concat(".zip");
 
@@ -77,19 +77,33 @@ public class IOUtils {
 		}
 	}
 
-	static List<File> collectFiles(File root, String endsWith, boolean recursive) {
+	public static List<File> collectFiles(File root, String endsWith, boolean recursive) {
+		return collectFiles(root, endsWith, true, SearchType.ENDS_WITH);
+	}
+
+	public static List<File> collectFiles(File root, String str, boolean recursive, SearchType st) {
 		assert (root.isDirectory());
 
 		List<File> ret = new ArrayList<>();
 		for (File f : root.listFiles()) {
-			if (f.isFile() && f.getName().endsWith(endsWith)) {
+			if (f.isFile()
+					&& (st == SearchType.STARTS_WITH ? f.getName().startsWith(str) : //
+							(st == SearchType.ENDS_WITH ? f.getName().endsWith(str) : //
+									(st == SearchType.CONTAINS ? f.getName().contains(str) : //
+											(st == SearchType.EQUALS ? f.getName().equals(str) : false))))) {
 				ret.add(f);
 			} else if (f.isDirectory() && recursive) {
-				ret.addAll(collectFiles(f, endsWith, recursive));
+				ret.addAll(collectFiles(f, str, recursive, st));
 			}
 		}
 
 		return ret;
 	}
 
+	public static enum SearchType {
+		STARTS_WITH, // appears at the head of the string
+		ENDS_WITH, // appears at the tail of the string
+		CONTAINS, // appears anywhere in the string
+		EQUALS // exactly equal
+	}
 }

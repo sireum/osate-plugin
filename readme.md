@@ -12,7 +12,7 @@ development environment (following the installation directions
 being used in either case so the rest of these instructions will refer to the
 IDE as 'Eclipse'.
 
-1. Clone this repository ``git clone git@github.com:sireum/osate-plugin.git``
+1. Clone this repository ``git clone --depth=1 --recurse-submodules git@github.com:sireum/osate-plugin.git``
 
 1. Launch Eclipse and go to __File__ -> __Import...__  
 
@@ -24,6 +24,12 @@ IDE as 'Eclipse'.
 
 1. Switch to the plug-in development perspective: __Window__ -> __Perspective__ -> 
    __Open Perspective__ -> __Other...__ -> __Plug-in Development__.
+   
+1. To resolve access restrictions errors related to ``UiUtil``
+
+   - Navigate to: __Preferences -> Java -> Errors/Warnings -> Deprecated and restricted API__, and 
+
+   - Change __Forbidden reference (access rules)__ from ``Error`` to ``Warning``.
 
 1. __Optional:__ Rebuild tool jars
 
