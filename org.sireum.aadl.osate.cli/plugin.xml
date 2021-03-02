@@ -10,7 +10,7 @@
             thread="main"
             visible="true">
          <run
-               class="org.sireum.aadl.osate.cli.GenerateAir">
+               class="org.sireum.aadl.osate.cli.Phantom">
          </run>
       </application>
    </extension>

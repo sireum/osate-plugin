@@ -68,6 +68,7 @@ import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 import org.osgi.framework.Bundle;
 import org.sireum.Option;
 import org.sireum.Some;
+import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.hamr.ir.AadlASTJavaFactory;
 import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.message.Position;
@@ -80,6 +81,14 @@ public class Visitor {
 		if (b != null) {
 			// sv = new SmfVisitor(this);
 		}
+		Bundle ba = Platform.getBundle("org.osate.ba");
+		if (ba != null && PreferenceValues.getPROCESS_BA_OPT()) {
+			bv = new BAVisitor(this);
+		}
+		Bundle gumbo = Platform.getBundle("org.sireum.aadl.gumbo");
+		if (gumbo != null) {
+			gv = new GumboVisitor(this);
+		}
 	}
 
 	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
@@ -88,7 +97,8 @@ public class Visitor {
 	final Map<List<String>, Set<ConnectionReference>> compConnMap = new HashMap<>();
 	final Emv2Visitor ev = new Emv2Visitor(this);
 	SmfVisitor sv = null;
-
+	BAVisitor bv = null;
+	GumboVisitor gv = null;
 
 	public Option<org.sireum.hamr.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		final Option<org.sireum.hamr.ir.Component> t = visit(root);
@@ -526,6 +536,15 @@ public class Visitor {
 		if(sv != null) {
 			annexes = VisitorUtil.add(annexes, sv.visitSmfComp(compInst, currentPath));
 		}
+
+		if (bv != null) {
+			annexes = VisitorUtil.addAll(annexes, bv.visit(compInst, currentPath));
+		}
+
+		if (gv != null) {
+			annexes = VisitorUtil.addAll(annexes, gv.visit(compInst, currentPath));
+		}
+
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
 				connectionInstances, properties, flows, modes, annexes, VisitorUtil.getUriFragment(compInst));
 	}
@@ -880,7 +899,7 @@ public class Visitor {
 		}
 	}
 
-	private org.sireum.hamr.ir.Component processDataType(DataClassifier f) {
+	protected org.sireum.hamr.ir.Component processDataType(DataClassifier f) {
 		final String name = f.getQualifiedName();
 		if (datamap.containsKey(name)) {
 			return datamap.get(name);

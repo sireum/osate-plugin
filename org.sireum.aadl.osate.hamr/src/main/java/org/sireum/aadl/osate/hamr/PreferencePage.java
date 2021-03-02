@@ -53,6 +53,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 				seGroup));
 
 		addField(new BooleanFieldEditor(PreferenceValues.HAMR_EMBED_ART_OPT, "Embed ART", seGroup));
+
+		addField(new BooleanFieldEditor(PreferenceValues.HAMR_RUN_TRANSPILER, "Run Transpiler", seGroup));
 	}
 
 	private Composite addTab(TabFolder tabFolder, String tabName) {
