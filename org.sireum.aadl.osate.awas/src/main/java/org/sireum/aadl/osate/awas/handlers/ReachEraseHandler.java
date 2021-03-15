@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -34,6 +35,7 @@ public class ReachEraseHandler extends AbstractSireumHandler {
 				.getService(DiagramService.class);
 
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+		IWorkbenchPage page = window.getActivePage();
 
 		Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 
@@ -45,13 +47,16 @@ public class ReachEraseHandler extends AbstractSireumHandler {
 
 			diagramService.findDiagrams(projects).forEach(dr -> {
 				if (dr.isValid()) {
-				AgeDiagramEditor agede = getAgeDiagramEditor(dr);
-				AwasUtil.getAllDiagramElements(agede.getDiagramBehavior().getAgeDiagram())
-						.forEach(de -> de.setStyle(Style.DEFAULT));
+					if (dr.getEditor() == page.getActiveEditor()) {
+						AgeDiagramEditor agede = getAgeDiagramEditor(dr);
+						AwasUtil.getAllDiagramElements(agede.getDiagramBehavior().getAgeDiagram())
+								.forEach(de -> de.setStyle(Style.DEFAULT));
 
-				agede.getDiagramBehavior().updateDiagramWhenVisible();
-				agede.doSave(new NullProgressMonitor());
-				}
+						agede.getDiagramBehavior().updateDiagramWhenVisible();
+						agede.doSave(new NullProgressMonitor());
+					}
+					}
+
 			});
 
 
