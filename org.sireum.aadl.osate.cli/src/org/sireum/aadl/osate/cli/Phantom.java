@@ -177,7 +177,7 @@ public class Phantom implements IApplication {
 
 		} else {
 
-			File root = new File(po.getArgs().apply(z(0)).string());
+			File root = new File(po.getArgs().apply(z(0)).string()).getAbsoluteFile();
 
 			if (!root.exists() || !root.isDirectory()) {
 				addError(root + " is not a directory\n");
@@ -239,7 +239,7 @@ public class Phantom implements IApplication {
 
 		String s = ho.args().apply(z(0)).string();
 
-		File f = new File(s);
+		File f = new File(s).getAbsoluteFile();
 		if (!f.exists() || !f.isFile()) {
 			addError("Either point to a serialized AIR file, or to a .project or .system file");
 			return IApplication.EXIT_OK;
