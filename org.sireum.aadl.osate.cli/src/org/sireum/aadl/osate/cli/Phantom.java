@@ -247,7 +247,7 @@ public class Phantom implements IApplication {
 
 		int ret = 0;
 		if (f.getName().equals(".project") || f.getName().startsWith(".system")) {
-			List<AadlSystem> systems = AadlProjectUtil.findSystems(f.getParentFile());
+			List<AadlSystem> systems = AadlProjectUtil.findSystems(f);
 
 			if (systems.size() != 1) {
 				addError("Found " + systems.size() + " AADL projects. " + "Point to a single .project file "

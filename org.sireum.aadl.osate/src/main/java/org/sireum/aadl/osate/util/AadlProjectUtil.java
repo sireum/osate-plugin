@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.Classifier;
-import org.sireum.aadl.osate.util.IOUtils.SearchType;
 
 public class AadlProjectUtil {
 
@@ -31,14 +30,16 @@ public class AadlProjectUtil {
 	public static List<AadlSystem> findSystems(File f) {
 		List<AadlSystem> ret = new ArrayList<AadlSystem>();
 		if (f.isDirectory()) {
-			List<File> systems = IOUtils.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
-			if (!systems.isEmpty()) {
-				// found user provided .system file so use that
-
-				assert (systems.size() == 1);
-				ret.add(AadlProjectUtil.createTestAadlSystem(systems.get(0)));
-				return ret;
-			}
+			/*
+			 * List<File> systems = IOUtils.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
+			 * if (!systems.isEmpty()) {
+			 * // found user provided .system file so use that
+			 *
+			 * assert (systems.size() == 1);
+			 * ret.add(AadlProjectUtil.createTestAadlSystem(systems.get(0)));
+			 * return ret;
+			 * }
+			 */
 			for (File file : f.listFiles()) {
 				ret.addAll(findSystems(file));
 			}
@@ -68,6 +69,8 @@ public class AadlProjectUtil {
 					}
 				}
 				ret.add(new AadlSystem(systemImpl, systemFile, Arrays.asList(project)));
+			} else if (f.getName().startsWith(".system")) {
+				ret.add(AadlProjectUtil.createTestAadlSystem(f));
 			}
 		}
 		return ret;
