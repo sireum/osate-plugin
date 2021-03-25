@@ -177,7 +177,7 @@ public class Phantom implements IApplication {
 
 		} else {
 
-			File root = new File(po.getArgs().apply(z(0)).string());
+			File root = new File(po.getArgs().apply(z(0)).string()).getAbsoluteFile();
 
 			if (!root.exists() || !root.isDirectory()) {
 				addError(root + " is not a directory\n");
@@ -239,7 +239,7 @@ public class Phantom implements IApplication {
 
 		String s = ho.args().apply(z(0)).string();
 
-		File f = new File(s);
+		File f = new File(s).getAbsoluteFile();
 		if (!f.exists() || !f.isFile()) {
 			addError("Either point to a serialized AIR file, or to a .project or .system file");
 			return IApplication.EXIT_OK;
@@ -247,7 +247,7 @@ public class Phantom implements IApplication {
 
 		int ret = 0;
 		if (f.getName().equals(".project") || f.getName().startsWith(".system")) {
-			List<AadlSystem> systems = AadlProjectUtil.findSystems(f.getParentFile());
+			List<AadlSystem> systems = AadlProjectUtil.findSystems(f);
 
 			if (systems.size() != 1) {
 				addError("Found " + systems.size() + " AADL projects. " + "Point to a single .project file "
