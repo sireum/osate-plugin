@@ -40,7 +40,7 @@ public class AirUpdater extends SireumTest {
 	@Test
 	public void updateAirHamr2() {
 
-		File hamrModelsDir = new File("/home/vagrant/devel/case/CASE-loonwerks/TA5/tool-evaluation-4/HAMR/examples");
+		File hamrModelsDir = new File("/home/vagrant/devel/case/case-loonwerks/TA5/tool-evaluation-4/HAMR/examples");
 		if (hamrModelsDir.exists()) {
 			for (AadlSystem system : AadlProjectUtil.findSystems(hamrModelsDir)) {
 				regen(system);
