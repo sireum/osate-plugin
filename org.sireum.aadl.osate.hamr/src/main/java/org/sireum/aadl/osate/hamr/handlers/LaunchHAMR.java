@@ -16,6 +16,7 @@ import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
 import org.sireum.Option;
+import org.sireum.SireumApi;
 import org.sireum.Z;
 import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
@@ -49,6 +50,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 			Dialog.showError(getToolName(), "Please select a system implementation or a system instance");
 			return Status.CANCEL_STATUS;
 		}
+
+		writeToConsole("Sireum Version: " + SireumApi.version());
 
 		writeToConsole("Generating AIR ...");
 

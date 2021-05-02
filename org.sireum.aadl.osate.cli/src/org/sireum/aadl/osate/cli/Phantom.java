@@ -39,6 +39,7 @@ import org.sireum.Cli.HelpOption;
 import org.sireum.Cli.PhantomOption;
 import org.sireum.Cli.SireumTopOption;
 import org.sireum.Option;
+import org.sireum.SireumApi;
 import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
@@ -244,6 +245,8 @@ public class Phantom implements IApplication {
 			addError("Either point to a serialized AIR file, or to a .project or .system file");
 			return IApplication.EXIT_OK;
 		}
+
+		addInfo("Sireum Version: " + SireumApi.version());
 
 		int ret = 0;
 		if (f.getName().equals(".project") || f.getName().startsWith(".system")) {
