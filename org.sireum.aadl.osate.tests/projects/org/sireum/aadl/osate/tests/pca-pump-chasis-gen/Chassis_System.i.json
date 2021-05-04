@@ -1599,7 +1599,7 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["Data_Model::Data_Representation"],
+            "name" : ["Data_Model::Base_Type"],
             "pos" : {
               "type" : "Some",
               "value" : {
@@ -1608,19 +1608,31 @@
                   "type" : "Some",
                   "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                 },
-                "beginLine" : 27,
+                "beginLine" : 6,
                 "beginColumn" : 4,
-                "endLine" : 30,
-                "endColumn" : 36,
-                "offset" : 1165,
-                "length" : 162
+                "endLine" : 6,
+                "endColumn" : 73,
+                "offset" : 163,
+                "length" : 69
               }
             }
           },
           "propertyValues" : [
             {
-              "type" : "ValueProp",
-              "value" : "Struct"
+              "type" : "ClassifierProp",
+              "name" : "Base_Types::Boolean"
+            },
+            {
+              "type" : "ClassifierProp",
+              "name" : "Base_Types::Boolean"
+            },
+            {
+              "type" : "ClassifierProp",
+              "name" : "Base_Types::Boolean"
+            },
+            {
+              "type" : "ClassifierProp",
+              "name" : "Base_Types::Boolean"
             }
           ],
           "appliesTo" : [
@@ -1673,7 +1685,7 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["Data_Model::Base_Type"],
+            "name" : ["Data_Model::Data_Representation"],
             "pos" : {
               "type" : "Some",
               "value" : {
@@ -1682,31 +1694,19 @@
                   "type" : "Some",
                   "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                 },
-                "beginLine" : 6,
+                "beginLine" : 27,
                 "beginColumn" : 4,
-                "endLine" : 6,
-                "endColumn" : 73,
-                "offset" : 163,
-                "length" : 69
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
               }
             }
           },
           "propertyValues" : [
             {
-              "type" : "ClassifierProp",
-              "name" : "Base_Types::Boolean"
-            },
-            {
-              "type" : "ClassifierProp",
-              "name" : "Base_Types::Boolean"
-            },
-            {
-              "type" : "ClassifierProp",
-              "name" : "Base_Types::Boolean"
-            },
-            {
-              "type" : "ClassifierProp",
-              "name" : "Base_Types::Boolean"
+              "type" : "ValueProp",
+              "value" : "Struct"
             }
           ],
           "appliesTo" : [
