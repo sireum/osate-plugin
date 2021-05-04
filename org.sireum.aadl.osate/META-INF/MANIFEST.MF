@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Sireum plug-in for OSATEv2
 Bundle-SymbolicName: org.sireum.aadl.osate;singleton:=true
-Bundle-Version: 1.0.2105031401.qualifier
+Bundle-Version: 1.0.2105041755.qualifier
 Bundle-Activator: org.sireum.aadl.osate.Activator
 Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.aadl2.errormodel.faulttree.edit;bundle-version="1.0.0",
