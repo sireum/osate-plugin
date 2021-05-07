@@ -23,6 +23,7 @@ import org.osate.aadl2.ConnectionEnd;
 import org.osate.aadl2.DataClassifier;
 import org.osate.aadl2.DataImplementation;
 import org.osate.aadl2.DataSubcomponent;
+import org.osate.aadl2.DataType;
 import org.osate.aadl2.DirectionType;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.EnumerationLiteral;
@@ -46,11 +47,13 @@ import org.osate.aadl2.RecordValue;
 import org.osate.aadl2.ReferenceValue;
 import org.osate.aadl2.StringLiteral;
 import org.osate.aadl2.Subcomponent;
+import org.osate.aadl2.SubprogramClassifier;
+import org.osate.aadl2.SubprogramImplementation;
+import org.osate.aadl2.SubprogramType;
 import org.osate.aadl2.UnitLiteral;
 import org.osate.aadl2.impl.AccessImpl;
 import org.osate.aadl2.impl.BusAccessImpl;
 import org.osate.aadl2.impl.BusSubcomponentImpl;
-import org.osate.aadl2.impl.DataTypeImpl;
 import org.osate.aadl2.impl.DirectedFeatureImpl;
 import org.osate.aadl2.impl.FeatureGroupImpl;
 import org.osate.aadl2.instance.ComponentInstance;
@@ -87,7 +90,11 @@ public class Visitor {
 		}
 		Bundle gumbo = Platform.getBundle("org.sireum.aadl.gumbo");
 		if (gumbo != null) {
-			gv = new GumboVisitor(this);
+			// gv = new GumboVisitor(this);
+		}
+		Bundle bless = Platform.getBundle("com.multitude.aadl.bless");
+		if (bless != null) {
+			blessVisitor = new BlessVisitor(this);
 		}
 	}
 
@@ -99,6 +106,7 @@ public class Visitor {
 	SmfVisitor sv = null;
 	BAVisitor bv = null;
 	GumboVisitor gv = null;
+	BlessVisitor blessVisitor = null;
 
 	public Option<org.sireum.hamr.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		final Option<org.sireum.hamr.ir.Component> t = visit(root);
@@ -545,6 +553,10 @@ public class Visitor {
 			annexes = VisitorUtil.addAll(annexes, gv.visit(compInst, currentPath));
 		}
 
+		if (blessVisitor != null) {
+			annexes = VisitorUtil.addAll(annexes, blessVisitor.visit(compInst, currentPath));
+		}
+
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
 				connectionInstances, properties, flows, modes, annexes, VisitorUtil.getUriFragment(compInst));
 	}
@@ -899,6 +911,34 @@ public class Visitor {
 		}
 	}
 
+	protected org.sireum.hamr.ir.Component processSubprogramClassifier(SubprogramClassifier o) {
+		String name = o.getQualifiedName();
+		if (datamap.containsKey(name)) {
+			return datamap.get(name);
+		}
+
+		List<PropertyAssociation> allProperties = VisitorUtil.toIList(o.getAllPropertyAssociations());
+
+		if (o instanceof SubprogramType) {
+			// nothing to do... I guess
+		} else {
+			SubprogramImplementation si = (SubprogramImplementation) o;
+			if(!si.getAllSubcomponents().isEmpty()) {
+				throw new RuntimeException("Subprogram subcomponents are not currently supported: " + name);
+			}
+			allProperties = VisitorUtil.addAll(si.getType().getAllPropertyAssociations(), allProperties);
+		}
+
+		List<PropertyAssociation> uniqueProperties = VisitorUtil.removeShadowedProperties(allProperties);
+
+		List<org.sireum.hamr.ir.Property> properties = uniqueProperties.stream()
+				.map(op -> buildProperty(op, VisitorUtil.iList()))
+				.collect(Collectors.toList());
+
+
+		throw new RuntimeException();
+	}
+
 	protected org.sireum.hamr.ir.Component processDataType(DataClassifier f) {
 		final String name = f.getQualifiedName();
 		if (datamap.containsKey(name)) {
@@ -924,7 +964,7 @@ public class Visitor {
 		List<PropertyAssociation> allProperties = VisitorUtil.toIList(f.getAllPropertyAssociations());
 
 		List<org.sireum.hamr.ir.Component> subComponents = VisitorUtil.iList();
-		if (f instanceof DataTypeImpl) {
+		if (f instanceof DataType) {
 			// do nothing as component types can't have subcomponents
 		} else if (f instanceof DataImplementation) {
 			final DataImplementation di = (DataImplementation) f;
@@ -935,6 +975,7 @@ public class Visitor {
 			// implemention's properties
 			allProperties = VisitorUtil.addAll(di.getType().getAllPropertyAssociations(), allProperties);
 
+			// use getAllSubcomponents in order to pickup inherited ones
 			for (Subcomponent subcom : di.getAllSubcomponents()) {
 				if (!(subcom instanceof DataSubcomponent)) {
 					throw new RuntimeException("Unxepcted data subcomponent: " + subcom.getFullName() + " of type "
