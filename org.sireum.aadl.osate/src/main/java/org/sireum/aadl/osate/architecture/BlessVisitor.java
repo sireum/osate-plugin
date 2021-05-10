@@ -627,8 +627,8 @@ public class BlessVisitor extends BLESSSwitch<Boolean> {
 		String qname = object.getProcedure().getFullName();
 
 		if(!subcomponentNames.contains(qname)) {
-			if (object.getProcedure().getClassifier() instanceof SubprogramClassifier) {
-				SubprogramClassifier st = (SubprogramClassifier) object.getProcedure().getClassifier();
+			if (object.getProcedure() instanceof SubprogramClassifier) {
+				SubprogramClassifier st = (SubprogramClassifier) object.getProcedure();
 
 				v.processSubprogramClassifier(st);
 			}
