@@ -35,6 +35,7 @@ import org.osate.aadl2.ListValue;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.NamedValue;
 import org.osate.aadl2.NumberValue;
+import org.osate.aadl2.Parameter;
 import org.osate.aadl2.ParameterConnection;
 import org.osate.aadl2.PortConnection;
 import org.osate.aadl2.Property;
@@ -46,6 +47,9 @@ import org.osate.aadl2.RecordValue;
 import org.osate.aadl2.ReferenceValue;
 import org.osate.aadl2.StringLiteral;
 import org.osate.aadl2.Subcomponent;
+import org.osate.aadl2.SubprogramClassifier;
+import org.osate.aadl2.SubprogramImplementation;
+import org.osate.aadl2.SubprogramType;
 import org.osate.aadl2.UnitLiteral;
 import org.osate.aadl2.impl.AccessImpl;
 import org.osate.aadl2.impl.BusAccessImpl;
@@ -89,6 +93,10 @@ public class Visitor {
 		if (gumbo != null) {
 			gv = new GumboVisitor(this);
 		}
+		Bundle bless = Platform.getBundle("com.multitude.aadl.bless");
+		if (bless != null && PreferenceValues.getPROCESS_BA_OPT()) {
+			blessVisitor = new BlessVisitor(this);
+		}
 	}
 
 	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
@@ -99,6 +107,7 @@ public class Visitor {
 	SmfVisitor sv = null;
 	BAVisitor bv = null;
 	GumboVisitor gv = null;
+	BlessVisitor blessVisitor = null;
 
 	public Option<org.sireum.hamr.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		final Option<org.sireum.hamr.ir.Component> t = visit(root);
@@ -544,6 +553,9 @@ public class Visitor {
 		if (gv != null) {
 			annexes = VisitorUtil.addAll(annexes, gv.visit(compInst, currentPath));
 		}
+		if (blessVisitor != null) {
+			annexes = VisitorUtil.addAll(annexes, blessVisitor.visit(compInst, currentPath));
+		}
 
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
 				connectionInstances, properties, flows, modes, annexes, VisitorUtil.getUriFragment(compInst));
@@ -899,6 +911,84 @@ public class Visitor {
 		}
 	}
 
+	protected org.sireum.hamr.ir.Component processSubprogramClassifier(SubprogramClassifier o) {
+
+		String name = o.getQualifiedName();
+		if (datamap.containsKey(name)) {
+			return datamap.get(name);
+		}
+
+		List<PropertyAssociation> allProperties = VisitorUtil.toIList(o.getAllPropertyAssociations());
+
+		if (o instanceof SubprogramType) {
+			// nothing to do... I guess
+		} else {
+			SubprogramImplementation si = (SubprogramImplementation) o;
+			if (!si.getAllSubcomponents().isEmpty()) {
+				throw new RuntimeException("Subprogram subcomponents are not currently supported: " + name);
+			}
+			allProperties = VisitorUtil.addAll(si.getType().getAllPropertyAssociations(), allProperties);
+		}
+
+		List<PropertyAssociation> uniqueProperties = VisitorUtil.removeShadowedProperties(allProperties);
+
+		List<org.sireum.hamr.ir.Property> properties = uniqueProperties.stream()
+				.map(op -> buildProperty(op, VisitorUtil.iList()))
+				.collect(Collectors.toList());
+
+		List<org.sireum.hamr.ir.Feature> features = VisitorUtil.iList();
+
+		for (Feature f : o.getAllFeatures()) {
+			assert (f instanceof Parameter);
+
+			Parameter p = (Parameter) f;
+
+			String paramName = p.getName();
+			org.sireum.hamr.ir.Name paramIdentifier = factory.name(VisitorUtil.toIList(paramName),
+					VisitorUtil.buildPosInfo(p));
+
+			Classifier c = p.getClassifier();
+			assert (c instanceof DataClassifier);
+
+			processDataType((DataClassifier) c);
+
+			org.sireum.hamr.ir.Classifier paramClassifier = factory
+					.classifier(((NamedElement) c).getQualifiedName().toString());
+
+			AadlASTJavaFactory.FeatureCategory paramCategory = AadlASTJavaFactory.FeatureCategory.Parameter;
+
+			final AadlASTJavaFactory.Direction paramDirection = handleDirection(p.getDirection());
+
+			List<org.sireum.hamr.ir.Property> paramProperties = p.getOwnedPropertyAssociations()
+					.stream()
+					.map(op -> buildProperty(op, VisitorUtil.iList()))
+					.collect(Collectors.toList());
+
+			features = VisitorUtil.add(features, factory.featureEnd(paramIdentifier, paramDirection, paramCategory,
+					paramClassifier,
+					paramProperties, VisitorUtil.getUriFragment(p)));
+		}
+
+		final org.sireum.hamr.ir.Component c = factory.component( //
+				factory.name(VisitorUtil.iList(), null), // identifier
+				AadlASTJavaFactory.ComponentCategory.Subprogram, // category
+				factory.classifier(name), // classifier
+				features, //
+				VisitorUtil.iList(), // subComponents
+				VisitorUtil.iList(), // connections
+				VisitorUtil.iList(), // connectionInstances
+				properties, //
+				VisitorUtil.iList(), // flows
+				VisitorUtil.iList(), // modes
+				VisitorUtil.iList(), // annexes
+				VisitorUtil.getUriFragment(o) // uriFrag
+		);
+
+		datamap.put(name, c);
+
+		return c;
+	}
+
 	protected org.sireum.hamr.ir.Component processDataType(DataClassifier f) {
 		final String name = f.getQualifiedName();
 		if (datamap.containsKey(name)) {
@@ -1008,8 +1098,10 @@ public class Visitor {
 		final org.sireum.hamr.ir.Component c = factory.component( //
 				factory.name(VisitorUtil.iList(), null), // identifier
 				AadlASTJavaFactory.ComponentCategory.Data, // category
-				factory.classifier(name), VisitorUtil.iList(), // features
-				subComponents, VisitorUtil.iList(), // connections
+				factory.classifier(name), //
+				VisitorUtil.iList(), // features
+				subComponents, //
+				VisitorUtil.iList(), // connections
 				VisitorUtil.iList(), // connectionInstances
 				properties, // properties
 				VisitorUtil.iList(), // flows

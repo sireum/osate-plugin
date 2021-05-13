@@ -24,6 +24,8 @@ import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelLibrary;
 import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelSubclause;
 import org.sireum.IS;
 import org.sireum.IS$;
+import org.sireum.Z;
+import org.sireum.Z$;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.message.Position;
 
@@ -97,6 +99,10 @@ public class VisitorUtil {
 
 	public static <T> Set<T> iSet() {
 		return Collections.emptySet();
+	}
+
+	public static Z toZ(int i) {
+		return Z$.MODULE$.apply(i);
 	}
 
 	private static String getResourcePath(NamedElement component) {
