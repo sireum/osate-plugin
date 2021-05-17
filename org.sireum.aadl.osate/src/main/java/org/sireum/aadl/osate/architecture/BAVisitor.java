@@ -12,8 +12,8 @@ import org.osate.aadl2.Element;
 import org.osate.aadl2.Feature;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.Port;
+import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.StringLiteral;
-import org.osate.aadl2.SubprogramSubcomponent;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.ba.aadlba.ActualPortHolder;
 import org.osate.ba.aadlba.AssignmentAction;
@@ -24,12 +24,14 @@ import org.osate.ba.aadlba.BehaviorAnnex;
 import org.osate.ba.aadlba.BehaviorCondition;
 import org.osate.ba.aadlba.BehaviorIntegerLiteral;
 import org.osate.ba.aadlba.BehaviorState;
+import org.osate.ba.aadlba.BehaviorStringLiteral;
 import org.osate.ba.aadlba.BehaviorTime;
 import org.osate.ba.aadlba.BehaviorTransition;
 import org.osate.ba.aadlba.BehaviorVariable;
 import org.osate.ba.aadlba.BehaviorVariableHolder;
 import org.osate.ba.aadlba.BinaryAddingOperator;
 import org.osate.ba.aadlba.BinaryNumericOperator;
+import org.osate.ba.aadlba.CalledSubprogramHolder;
 import org.osate.ba.aadlba.ClassifierPropertyReference;
 import org.osate.ba.aadlba.DataComponentReference;
 import org.osate.ba.aadlba.DataSubcomponentHolder;
@@ -37,7 +39,9 @@ import org.osate.ba.aadlba.DispatchCondition;
 import org.osate.ba.aadlba.DispatchConjunction;
 import org.osate.ba.aadlba.DispatchTrigger;
 import org.osate.ba.aadlba.DispatchTriggerLogicalExpression;
+import org.osate.ba.aadlba.ElseStatement;
 import org.osate.ba.aadlba.Factor;
+import org.osate.ba.aadlba.IfStatement;
 import org.osate.ba.aadlba.IntegerValue;
 import org.osate.ba.aadlba.MultiplyingOperator;
 import org.osate.ba.aadlba.PortSendAction;
@@ -74,6 +78,8 @@ import org.sireum.hamr.ir.BTSBinaryExp;
 import org.sireum.hamr.ir.BTSBinaryExp$;
 import org.sireum.hamr.ir.BTSBinaryOp;
 import org.sireum.hamr.ir.BTSClassifier$;
+import org.sireum.hamr.ir.BTSConditionalActions;
+import org.sireum.hamr.ir.BTSConditionalActions$;
 import org.sireum.hamr.ir.BTSDispatchCondition;
 import org.sireum.hamr.ir.BTSDispatchCondition$;
 import org.sireum.hamr.ir.BTSDispatchConjunction;
@@ -85,6 +91,8 @@ import org.sireum.hamr.ir.BTSExecutionOrder;
 import org.sireum.hamr.ir.BTSExp;
 import org.sireum.hamr.ir.BTSFormalExpPair;
 import org.sireum.hamr.ir.BTSFormalExpPair$;
+import org.sireum.hamr.ir.BTSIfBAAction;
+import org.sireum.hamr.ir.BTSIfBAAction$;
 import org.sireum.hamr.ir.BTSLiteralExp$;
 import org.sireum.hamr.ir.BTSLiteralType;
 import org.sireum.hamr.ir.BTSNameExp;
@@ -122,7 +130,8 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 	BTSExecutionOrder.Type Sequential = BTSExecutionOrder.byName("Sequential").get();
 
-	BTSLiteralType.Type Integer = BTSLiteralType.byName("INTEGER").get();
+	BTSLiteralType.Type IntegerLiteral = BTSLiteralType.byName("INTEGER").get();
+	BTSLiteralType.Type StringLiteral = BTSLiteralType.byName("STRING").get();
 
 	public BAVisitor(Visitor v) {
 		this.v = v;
@@ -130,8 +139,12 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 	protected final static AadlASTFactory factory = new AadlASTFactory();
 
+	Name toName(List<String> _path) {
+		return factory.name(_path, null);
+	}
+
 	Name toName(String n, List<String> _path) {
-		return factory.name(VisitorUtil.add(_path, n), null);
+		return toName(VisitorUtil.add(_path, n));
 	}
 
 	Name toName(String n) {
@@ -140,6 +153,10 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 	Name toName(Port p) {
 		return toName(p.getName());
+	}
+
+	Name emptyName() {
+		return toName(VisitorUtil.iList());
 	}
 
 	Name toSimpleName(String s) {
@@ -266,7 +283,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 		if (object.getName() != null) {
 			id = toSimpleName(object.getName());
 		} else {
-			id = toSimpleName("");
+			id = emptyName();
 		}
 		BTSTransitionLabel label = BTSTransitionLabel$.MODULE$.apply(id, priority);
 
@@ -368,36 +385,76 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 	}
 
 	@Override
-	public Boolean caseSubprogramSubcomponentHolder(SubprogramSubcomponentHolder object) {
+	public Boolean caseIfStatement(IfStatement object) {
+		assert !object.isElif() : "Only expecting to reach this case for the if part of and if/elsif/else statement";
 
-		List<IntegerValue> arrayIndexes = object.getArrayIndexes();
-		assert (arrayIndexes.isEmpty());
+		visit(object.getLogicalValueExpression());
+		BTSExp ifCond = pop();
 
-		// TODO: what is the difference b/w subcomponent and subprogramsubcomponent?
-		assert (object.getElement() == object.getSubcomponent());
-		assert (object.getSubcomponent() == object.getSubprogramSubcomponent());
+		visit(object.getBehaviorActions());
+		BTSBehaviorActions ifActions = pop();
 
-		SubprogramSubcomponent ssc = object.getSubprogramSubcomponent();
+		BTSConditionalActions ifBranch = BTSConditionalActions$.MODULE$.apply(ifCond, ifActions);
 
-		push(toName(ssc.getName()));
+		List<BTSConditionalActions> elseIfBranches = new ArrayList<>();
+		Option<BTSBehaviorActions> elseBranch = toNone();
+		if (object.getElseStatement() != null) {
+			Object current = object.getElseStatement();
+
+			while (current != null) {
+				if (current instanceof IfStatement) {
+					IfStatement elsif = (IfStatement) current;
+					assert elsif.isElif() : "This had better be an elsif";
+
+					visit(elsif.getLogicalValueExpression());
+					BTSExp elsifCond = pop();
+
+					visit(elsif.getBehaviorActions());
+					BTSBehaviorActions elsifActions = pop();
+
+					BTSConditionalActions bca = BTSConditionalActions$.MODULE$.apply(elsifCond, elsifActions);
+					elseIfBranches = VisitorUtil.add(elseIfBranches, bca);
+
+					current = elsif.getElseStatement();
+				} else if (current instanceof ElseStatement) {
+					ElseStatement els = (ElseStatement) current;
+
+					visit(els.getBehaviorActions());
+					elseBranch = toSome(pop());
+
+					current = null;
+				} else {
+					throw new RuntimeException("Unexpected if/else kind " + current);
+				}
+			}
+		}
+
+		BTSIfBAAction ret = BTSIfBAAction$.MODULE$.apply(ifBranch, VisitorUtil.toISZ(elseIfBranches), elseBranch);
+		push(ret);
 
 		return false;
 	}
 
 	@Override
 	public Boolean caseSubprogramCallAction(SubprogramCallAction object) {
-		visit(object.getSubprogram());
-		Name name = pop();
-
+		Name name = null;
 		List<Feature> features = null;
-		if (object.getSubprogram().getElement() instanceof SubprogramSubcomponent) {
-			SubprogramSubcomponent q = (SubprogramSubcomponent) object.getSubprogram().getElement();
-			features = q.getAllFeatures();
+
+		CalledSubprogramHolder csh = object.getSubprogram();
+		assert csh.getArrayIndexes().isEmpty() : "has array indexes: " + csh.getArrayIndexes().size();
+
+		if (csh instanceof SubprogramSubcomponentHolder) {
+			SubprogramSubcomponentHolder ssh = (SubprogramSubcomponentHolder) csh;
+			assert (ssh.getArrayIndexes().isEmpty());
+
+			name = toName(ssh.getSubcomponent().getName());
+			features = ssh.getSubcomponent().getAllFeatures();
 		} else {
-			throw new RuntimeException("Unexpected " + object.getSubprogram().getElement());
+			throw new RuntimeException("Currently only supporting subcomponent subprograms");
 		}
 
-		assert features.size() == object.getParameterLabels().size() : "Apparently BA allows this";
+		assert features.size() == object.getParameterLabels().size() : "feature size not equal to param labels size: "
+				+ features.size() + " vs " + object.getParameterLabels().size();
 
 		List<BTSFormalExpPair> params = new ArrayList<>();
 		for (int index = 0; index < object.getParameterLabels().size(); index++) {
@@ -576,21 +633,32 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 	@Override
 	public Boolean caseClassifierPropertyReference(ClassifierPropertyReference object) {
 
-		// TODO: this handles enums only
+		// TODO: currently only handling enums
+		// e.g. BuildingControl::FanCmdEnum#Enumerators.Off
+
 		// inspired by https://github.com/osate/osate2/blob/master/ba/org.osate.ba/src/org/osate/ba/utils/AadlBaUtils.java#L1873
 
-		assert (object.getProperties().size() == 2);
-
-		// The first property name is supposed to be a property association
-		// Enumerators. Don't need to check it.
-
-		Element el = object.getProperties().get(1).getProperty().getElement();
-		if (el instanceof StringLiteral) {
-			StringLiteral sl = ((StringLiteral) el);
-			BTSNameExp ne = BTSNameExp$.MODULE$.apply(toSimpleName(object.getClassifier().getQualifiedName()));
-			push(BTSAccessExp$.MODULE$.apply(ne, sl.getValue()));
+		if (object.getProperties().size() == 2) {
+			Element firstElem = object.getProperties().get(0).getProperty().getElement();
+			if (firstElem instanceof PropertyAssociation) {
+				PropertyAssociation pa = (PropertyAssociation) firstElem;
+				if (pa.getProperty().getName().equals("Enumerators")) {
+					Element secondElem = object.getProperties().get(1).getProperty().getElement();
+					if (secondElem instanceof StringLiteral) {
+						// TODO can we trust BA that this a valid enum value
+						StringLiteral sl = ((StringLiteral) secondElem);
+						BTSNameExp ne = BTSNameExp$.MODULE$
+								.apply(toSimpleName(object.getClassifier().getQualifiedName()));
+						push(BTSAccessExp$.MODULE$.apply(ne, sl.getValue()));
+					} else {
+						throw new RuntimeException("Looks like an enum ref but second element isn't a string lit");
+					}
+				}
+			} else {
+				throw new RuntimeException("What is this " + object);
+			}
 		} else {
-			throw new RuntimeException();
+			throw new RuntimeException("Need to handle this case " + object);
 		}
 
 		return false;
@@ -714,7 +782,13 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 	@Override
 	public Boolean caseBehaviorIntegerLiteral(BehaviorIntegerLiteral object) {
-		push(BTSLiteralExp$.MODULE$.apply(Integer, String.valueOf(object.getValue())));
+		push(BTSLiteralExp$.MODULE$.apply(IntegerLiteral, String.valueOf(object.getValue())));
+		return false;
+	}
+
+	@Override
+	public Boolean caseBehaviorStringLiteral(BehaviorStringLiteral object) {
+		push(BTSLiteralExp$.MODULE$.apply(StringLiteral, String.valueOf(object.getValue())));
 		return false;
 	}
 
@@ -726,13 +800,13 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 	Object result = null;
 
 	void push(Object o) {
-		assert result == null : "Stack not empty: " + result;
+		assert result == null : "Trying to push " + o + " but the stack isn't empty: " + result;
 		result = o;
 	}
 
 	@SuppressWarnings("unchecked")
 	<T> T pop() {
-		assert (result != null);
+		assert result != null : "The stack is empty";
 		T ret = (T) result;
 		result = null;
 		return ret;
