@@ -1,6 +1,7 @@
 package org.sireum.aadl.osate.util;
 
 import org.eclipse.emf.common.util.Enumerator;
+import org.osate.ba.aadlba.BehaviorElement;
 import org.osate.ba.aadlba.BinaryAddingOperator;
 import org.osate.ba.aadlba.BinaryNumericOperator;
 import org.osate.ba.aadlba.LogicalOperator;
@@ -9,16 +10,35 @@ import org.osate.ba.aadlba.RelationalOperator;
 import org.osate.ba.aadlba.UnaryAddingOperator;
 import org.osate.ba.aadlba.UnaryBooleanOperator;
 import org.osate.ba.aadlba.UnaryNumericOperator;
+import org.osate.ba.utils.AadlBaLocationReference;
 import org.sireum.hamr.ir.BTSBinaryOp;
 import org.sireum.hamr.ir.BTSExp;
 import org.sireum.hamr.ir.BTSUnaryExp;
 import org.sireum.hamr.ir.BTSUnaryExp$;
 import org.sireum.hamr.ir.BTSUnaryOp;
+import org.sireum.message.Position;
 
 public class BAUtils {
 
+	public static org.sireum.Option<Position> buildPosInfo(BehaviorElement elem) {
+		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
+
+		AadlBaLocationReference abr = elem.getAadlBaLocationReference();
+
+		return SlangUtils.toSome(factory.flatPos(abr.getFilename(), //
+				abr.getLine(), //
+				abr.getColumn(),//
+
+				abr.getLine(), // FIXME
+				abr.getColumn(), // FIXME
+
+				abr.getOffset(), //
+				abr.getLength() //
+		));
+	}
+
 	public static BTSUnaryExp convertToUnaryExp(BTSExp btsExp, Enumerator unaryOp) {
-		return BTSUnaryExp$.MODULE$.apply(toUnaryOp(unaryOp), btsExp);
+		return BTSUnaryExp$.MODULE$.apply(toUnaryOp(unaryOp), btsExp, btsExp.pos());
 	}
 
 	public static boolean isNoneEnumerator(Enumerator op) {
