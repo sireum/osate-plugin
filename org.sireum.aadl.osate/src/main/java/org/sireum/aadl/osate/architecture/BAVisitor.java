@@ -5,8 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
+import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.DataClassifier;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.Feature;
@@ -191,12 +195,25 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 				subcomponentNames = ci.getComponentInstances().stream().map(c -> c.getName())
 						.collect(Collectors.toList());
 
+				addAllBaseTypes(ci.eResource().getResourceSet());
+
 				visit(bas.get(0));
 
 				ret.add(Annex$.MODULE$.apply(ANNEX_TYPE, pop()));
 			}
 		}
 		return ret;
+	}
+
+	private void addAllBaseTypes(ResourceSet rs) {
+		URI u = URI.createURI("platform:/plugin/org.osate.contribution.sei/resources/packages/Base_Types.aadl");
+		Resource r = rs.getResource(u, true);
+		AadlPackage baseTypes = (AadlPackage) r.getContents().get(0);
+		for (org.osate.aadl2.Classifier c : baseTypes.getOwnedPublicSection().getOwnedClassifiers()) {
+			if (!c.getName().equals("Natural")) {
+				v.processDataType((DataClassifier) c);
+			}
+		}
 	}
 
 	@Override
@@ -465,7 +482,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 			// TODO:
 			Option<Name> paramName = toSome(toSimpleName(f.getName()));
-			params.add(BTSFormalExpPair$.MODULE$.apply(paramName, toSome(ne)));
+			params.add(BTSFormalExpPair$.MODULE$.apply(paramName, toSome(ne), toNone()));
 		}
 
 		push(BTSSubprogramCallAction$.MODULE$.apply(name, VisitorUtil.toISZ(params)));
@@ -566,7 +583,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 		assert (arrayIndexes.isEmpty());
 
 		BehaviorVariable bv = object.getBehaviorVariable();
-		push(BTSNameExp$.MODULE$.apply(toSimpleName(bv.getName())));
+		push(BTSNameExp$.MODULE$.apply(toSimpleName(bv.getName()), toNone()));
 
 		return false;
 	}
@@ -581,12 +598,12 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 		visit(object.getData().get(1));
 		String attributeName = pop();
-		BTSAccessExp bts = BTSAccessExp$.MODULE$.apply(exp, attributeName);
+		BTSAccessExp bts = BTSAccessExp$.MODULE$.apply(exp, attributeName, toNone());
 
 		for (int i = 2; i < object.getData().size(); i++) {
 			visit(object.getData().get(i));
 			attributeName = pop();
-			bts = BTSAccessExp$.MODULE$.apply(bts, attributeName);
+			bts = BTSAccessExp$.MODULE$.apply(bts, attributeName, toNone());
 		}
 
 		push(bts);
@@ -596,7 +613,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 	@Override
 	public Boolean caseActualPortHolder(ActualPortHolder object) {
-		push(BTSNameExp$.MODULE$.apply(toName(object.getPort().getName())));
+		push(BTSNameExp$.MODULE$.apply(toName(object.getPort().getName()), toNone()));
 
 		return false;
 	}
@@ -618,7 +635,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 			BTSBinaryOp.Type op = BAUtils.toBinaryOp(bno);
 
-			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs));
+			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, toNone()));
 		} else {
 			if (BAUtils.isNoneEnumerator(ubo)) {
 				push(lhs);
@@ -648,8 +665,8 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 						// TODO can we trust BA that this a valid enum value
 						StringLiteral sl = ((StringLiteral) secondElem);
 						BTSNameExp ne = BTSNameExp$.MODULE$
-								.apply(toSimpleName(object.getClassifier().getQualifiedName()));
-						push(BTSAccessExp$.MODULE$.apply(ne, sl.getValue()));
+								.apply(toSimpleName(object.getClassifier().getQualifiedName()), toNone());
+						push(BTSAccessExp$.MODULE$.apply(ne, sl.getValue(), toNone()));
 					} else {
 						throw new RuntimeException("Looks like an enum ref but second element isn't a string lit");
 					}
@@ -731,7 +748,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 			BTSBinaryOp.Type op = BAUtils.toBinaryOp(binOps.get(i).getLiteral());
 
 			// treat list as a stack
-			BTSBinaryExp be = BTSBinaryExp$.MODULE$.apply(op, expressions.get(i), expressions.get(i + 1));
+			BTSBinaryExp be = BTSBinaryExp$.MODULE$.apply(op, expressions.get(i), expressions.get(i + 1), toNone());
 			expressions.set(i + 1, be);
 		}
 
@@ -750,7 +767,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 			visit(object.getSecondExpression());
 			BTSExp rhs = pop();
 
-			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs));
+			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, toNone()));
 		} else {
 			assert (BAUtils.isNoneEnumerator(object.getRelationalOperator()));
 
@@ -782,13 +799,15 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 	@Override
 	public Boolean caseBehaviorIntegerLiteral(BehaviorIntegerLiteral object) {
-		push(BTSLiteralExp$.MODULE$.apply(IntegerLiteral, String.valueOf(object.getValue())));
+		push(BTSLiteralExp$.MODULE$.apply(IntegerLiteral, String.valueOf(object.getValue()),
+				BAUtils.buildPosInfo(object)));
 		return false;
 	}
 
 	@Override
 	public Boolean caseBehaviorStringLiteral(BehaviorStringLiteral object) {
-		push(BTSLiteralExp$.MODULE$.apply(StringLiteral, String.valueOf(object.getValue())));
+		push(BTSLiteralExp$.MODULE$.apply(StringLiteral, String.valueOf(object.getValue()),
+				BAUtils.buildPosInfo(object)));
 		return false;
 	}
 
