@@ -115,17 +115,21 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						toolRet = Util.callWrapper(getToolName(), console, () -> {
 							final File workspaceRoot = getProjectPath(si).toFile();
 
-							final String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("")
+							final String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("") //
 									? workspaceRoot.getAbsolutePath()
 									: prompt.getSlangOptionOutputDirectory();
 
-							final String _base = prompt.getOptionBasePackageName().equals("")
+							final String _base = prompt.getOptionBasePackageName().equals("") //
 									? HAMRUtil.cleanupPackageName(new File(_slangOutputDir).getName())
 									: HAMRUtil.cleanupPackageName(prompt.getOptionBasePackageName());
 
-							final String outputCDirectory = targetingSel4
-									? new File(prompt.getOptionCamkesOptionOutputDirectory(), "hamr").getAbsolutePath()
-									: new File(_slangOutputDir, "src/c/nix").getAbsolutePath();
+							final String _cOutputDirectory = prompt.getOptionCOutputDirectory().equals("") //
+									? null
+									: prompt.getOptionCOutputDirectory();
+
+							String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory().equals("") //
+									? null
+									: prompt.getOptionCamkesOptionOutputDirectory();
 
 							boolean verbose = PreferenceValues.getHAMR_VERBOSE_OPT();
 							String platform = prompt.getOptionPlatform().hamrName();
@@ -133,19 +137,16 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Option<String> slangPackageName = ArsitBridge.sireumOption(_base);
 							boolean noEmbedArt = !PreferenceValues.getHAMR_EMBED_ART_OPT();
 							boolean devicesAsThreads = PreferenceValues.getHAMR_DEVICES_AS_THREADS_OPT();
-							IS<Z, String> slangAuxCodeDirs = prompt.getOptionCSourceDirectory().equals("")
+							IS<Z, String> slangAuxCodeDirs = prompt.getOptionCAuxSourceDirectory().equals("")
 									? VisitorUtil.toISZ()
-									: VisitorUtil.toISZ(prompt.getOptionCSourceDirectory());
-							Option<String> slangOutputCDirectory = ArsitBridge.sireumOption(outputCDirectory);
+									: VisitorUtil.toISZ(prompt.getOptionCAuxSourceDirectory());
+							Option<String> slangOutputCDirectory = ArsitBridge.sireumOption(_cOutputDirectory);
 							boolean excludeComponentImpl = prompt.getOptionExcludesSlangImplementations();
 							int bitWidth = prompt.getOptionBitWidth();
 							int maxStringSize = prompt.getOptionMaxStringSize();
 							int maxArraySize = prompt.getOptionMaxSequenceSize();
 							boolean runTranspiler = PreferenceValues.getHAMR_RUN_TRANSPILER();
-							File _camkesOutDir = new File(prompt.getOptionCamkesOptionOutputDirectory());
-							_camkesOutDir.mkdirs();
-							Option<String> camkesOutputDirectory = ArsitBridge
-									.sireumOption(_camkesOutDir.getAbsolutePath());
+							Option<String> camkesOutputDirectory = ArsitBridge.sireumOption(_camkesOutputDir);
 							IS<Z, String> camkesAuxCodeDirs = prompt.getOptionCamkesAuxSrcDir().equals("")
 									? VisitorUtil.toISZ()
 									: VisitorUtil.toISZ(prompt.getOptionCamkesAuxSrcDir());

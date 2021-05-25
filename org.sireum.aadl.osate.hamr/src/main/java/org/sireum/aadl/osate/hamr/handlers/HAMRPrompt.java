@@ -39,26 +39,34 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 
 public class HAMRPrompt extends TitleAreaDialog {
 
-	public final HAMROption OPTION_PLATFORM = new HAMROption("platform", "Platform");
+	public final HAMROption OPTION_PLATFORM = new HAMROption("platform", "Platform", "Target platform");
 
 	public final HAMROption OPTION_SLANG_OUTPUT_DIRECTORY = new HAMROption("slang.output.directory",
-			"Output Directory");
-	public final HAMROption OPTION_BASE_PACKAGE_NAME = new HAMROption("base.package.name", "Base Package Name");
+			"Output Directory", "Directory where Slang resources will be written to");
+	public final HAMROption OPTION_BASE_PACKAGE_NAME = new HAMROption("base.package.name", "Base Package Name",
+			"The root package name for the generated Slang project");
 
-	public final HAMROption OPTION_HW = new HAMROption("hw", "HW");
+	public final HAMROption OPTION_HW = new HAMROption("hw", "HW", "");
 
 	public final HAMROption OPTION_EXCLUDE_SLANG_IMPL = new HAMROption("exclude.slang.impl",
-			"Exclude Slang Component Implementations");
-	public final HAMROption OPTION_BIT_WIDTH = new HAMROption("bit.width", "Bit Width");
-	public final HAMROption OPTION_MAX_SEQUENCE_SIZE = new HAMROption("max.sequence.size", "Max Sequence Size");
-	public final HAMROption OPTION_MAX_STRING_SIZE = new HAMROption("max.string.size", "Max String Size");
-	public final HAMROption OPTION_C_SRC_DIRECTORY = new HAMROption("c.src.directory", "Aux Code Directory");
+			"Exclude Slang Component Implementations",
+			"Allows component behavior code to be provided in C rather than Slang");
+	public final HAMROption OPTION_BIT_WIDTH = new HAMROption("bit.width", "Bit Width",
+			"Bit size to use for unbounded numeric values (e.g. Base_Types::Integer)");
+	public final HAMROption OPTION_MAX_SEQUENCE_SIZE = new HAMROption("max.sequence.size", "Max Sequence Size",
+			"Maximum size of Slang sequences");
+	public final HAMROption OPTION_MAX_STRING_SIZE = new HAMROption("max.string.size", "Max String Size",
+			"Max size of Slang strings");
+	public final HAMROption OPTION_C_OUTPUT_DIRECTORY = new HAMROption("c.output.directory", "C Output Directory",
+			"Directory where C resources will be written to");
+	public final HAMROption OPTION_C_AUX_SRC_DIRECTORY = new HAMROption("c.aux.src.directory", "Aux Code Directory",
+			"Directory containing C code to be included in HAMR project");
 
 	public final HAMROption OPTION_CAMKES_OUTPUT_DIRECTORY = new HAMROption("camkes.output.directory",
-			"seL4/CAmkES Output Directory");
+			"seL4/CAmkES Output Directory", "Directory where CAmkES resources will be written to");
 
 	public final HAMROption OPTION_CAMKES_AUX_SRC_DIR = new HAMROption("camkes.aux.src.dir",
-			"Aux Code Directory for CAmkES");
+			"Aux Code Directory for CAmkES", "Directory containing C code to be included in CAmkES project");
 
 	public Platform getOptionPlatform() {
 		return Platform.valueOf(getSavedStringOption(OPTION_PLATFORM));
@@ -68,8 +76,12 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return HW.valueOf(getSavedStringOption(OPTION_HW));
 	}
 
-	public String getOptionCSourceDirectory() {
-		return getSavedStringOption(OPTION_C_SRC_DIRECTORY);
+	public String getOptionCOutputDirectory() {
+		return getSavedStringOption(OPTION_C_OUTPUT_DIRECTORY);
+	}
+
+	public String getOptionCAuxSourceDirectory() {
+		return getSavedStringOption(OPTION_C_AUX_SRC_DIRECTORY);
 	}
 
 	public String getSlangOptionOutputDirectory() {
@@ -120,17 +132,13 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 
 		// SPECIAL INIT CASES
-		String slangOutputDirectory = getSlangOptionOutputDirectory();
-		if (slangOutputDirectory.equals("")) {
-			slangOutputDirectory = project.getLocation().toString();
+		{
+			String slangOutputDirectory = getSlangOptionOutputDirectory();
+			if (slangOutputDirectory.equals("")) {
+				slangOutputDirectory = project.getLocation().toString();
+			}
+			getTextControl(OPTION_SLANG_OUTPUT_DIRECTORY).setText(slangOutputDirectory);
 		}
-		getTextControl(OPTION_SLANG_OUTPUT_DIRECTORY).setText(slangOutputDirectory);
-
-		String camkesOutputDirectory = getOptionCamkesOptionOutputDirectory();
-		if (camkesOutputDirectory.equals("")) {
-			camkesOutputDirectory = project.getLocation().toString();
-		}
-		getTextControl(OPTION_CAMKES_OUTPUT_DIRECTORY).setText(camkesOutputDirectory);
 
 		if (getIntFromControl(OPTION_BIT_WIDTH).isEmpty()) {
 			getComboControl(OPTION_BIT_WIDTH).select(HAMRPropertyProvider.bitWidths.indexOf(theDefaultBitWidth));
@@ -173,8 +181,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	private final String PREF_KEY = "org.sireum.aadl.hamr";
 
-	private final HAMRGroup GROUP_TRANSPILER = new HAMRGroup("KEY_GROUP_TRANSPILER", "Transpiler Options");
-	private final HAMRGroup GROUP_CAMKES = new HAMRGroup("KEY_GROUP_CAMKES", "CAmkES Options");
+	private final HAMRGroup GROUP_TRANSPILER = new HAMRGroup("KEY_GROUP_TRANSPILER", "Transpiler Options", "");
+	private final HAMRGroup GROUP_CAMKES = new HAMRGroup("KEY_GROUP_CAMKES", "CAmkES Options", "");
 
 	// The image to display
 	private Image image;
@@ -258,7 +266,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			final HAMROption key = OPTION_PLATFORM;
 
 			// COL 1
-			addLabel(key.displayText, container, key);
+			addLabel(key.displayText, container, key).setToolTipText(key.toolTipText);
 
 			// COL 2
 			Combo cmb = new Combo(container, SWT.READ_ONLY);
@@ -310,7 +318,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			final HAMROption key = OPTION_SLANG_OUTPUT_DIRECTORY;
 
 			// COL 1
-			addLabel(key.displayText, container, key);
+			addLabel(key.displayText, container, key).setToolTipText(key.toolTipText);
 
 			// COL 2
 			Text txt = new Text(container, SWT.BORDER);
@@ -343,7 +351,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			final HAMROption key = OPTION_BASE_PACKAGE_NAME;
 
 			// COL 1
-			addLabel(key.displayText, container, key);
+			addLabel(key.displayText, container, key).setToolTipText(key.toolTipText);
 
 			// COL 2
 			Text txt = new Text(container, SWT.BORDER);
@@ -380,6 +388,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 				Button btn = new Button(grpContainer, SWT.CHECK);
 				btn.setText(subKey.displayText);
+				btn.setToolTipText(subKey.toolTipText);
 				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
 				registerOptionControl(subKey, btn, false);
 			}
@@ -391,7 +400,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 				HAMROption subKey = OPTION_BIT_WIDTH;
 
 				// COL 1
-				addLabel(subKey.displayText, grpContainer);
+				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
 
 				// COL 2
 				Combo cmb = new Combo(grpContainer, SWT.READ_ONLY);
@@ -412,7 +421,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 				HAMROption subKey = OPTION_MAX_SEQUENCE_SIZE;
 
 				// COL 1
-				addLabel(subKey.displayText, grpContainer);
+				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
@@ -430,7 +439,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 				HAMROption subKey = OPTION_MAX_STRING_SIZE;
 
 				// COL 1
-				addLabel(subKey.displayText, grpContainer);
+				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
@@ -441,19 +450,15 @@ public class HAMRPrompt extends TitleAreaDialog {
 				addColumnPad(grpContainer);
 			}
 
-			/****************************************************************
-			 * GROUP ROW - C Source Code Directory
-			 ****************************************************************/
 			{
-				HAMROption subKey = OPTION_C_SRC_DIRECTORY;
+				HAMROption subKey = OPTION_C_OUTPUT_DIRECTORY;
 
 				// COL 1
-				addLabel(subKey.displayText, grpContainer);
+				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
 				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-				txt.setToolTipText("Directory containing C code to be included in HAMR project");
 				registerOptionControl(subKey, txt, false);
 
 				// COL 3
@@ -461,8 +466,39 @@ public class HAMRPrompt extends TitleAreaDialog {
 				btn.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						String path = promptForDirectory("Select C Source Directory Directory",
-								getOptionCSourceDirectory());
+						String path = promptForDirectory("Select C Output Directory",
+								getOptionCOutputDirectory());
+						if (path != null) {
+							txt.setText(path);
+						}
+					}
+				});
+				btn.setText("...");
+				btn.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
+				// registerViewControl(subKey, btn);
+			}
+
+			/****************************************************************
+			 * GROUP ROW - C AUX Source Code Directory
+			 ****************************************************************/
+			{
+				HAMROption subKey = OPTION_C_AUX_SRC_DIRECTORY;
+
+				// COL 1
+				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+				registerOptionControl(subKey, txt, false);
+
+				// COL 3
+				Button btn = new Button(grpContainer, SWT.NONE);
+				btn.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						String path = promptForDirectory("Select C Source Directory",
+								getOptionCAuxSourceDirectory());
 						if (path != null) {
 							txt.setText(path);
 						}
@@ -501,7 +537,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 				final HAMROption subKey = OPTION_CAMKES_OUTPUT_DIRECTORY;
 
 				// COL 1
-				addLabel(subKey.displayText, grpContainer);
+				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
@@ -536,12 +572,11 @@ public class HAMRPrompt extends TitleAreaDialog {
 				final HAMROption subKey = OPTION_CAMKES_AUX_SRC_DIR;
 
 				// COL 1
-				addLabel(subKey.displayText, grpContainer);
+				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
 
 				// COL 2
 				Text txt = new Text(grpContainer, SWT.BORDER);
 				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-				txt.setToolTipText("Directory containing C code to be included in CAmkES project");
 				registerOptionControl(subKey, txt, false);
 
 				// COL 3
@@ -550,7 +585,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						String path = promptForDirectory("Select Aux Source Directory Directory",
-								getOptionCSourceDirectory());
+								getOptionCamkesAuxSrcDir());
 						if (path != null) {
 							txt.setText(path);
 						}
@@ -799,8 +834,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 		List<HAMREntry> NIX_controls = addAll(JVM_controls, Arrays.asList( //
 				// OPTION_HW,
-				OPTION_C_SRC_DIRECTORY, OPTION_EXCLUDE_SLANG_IMPL, //
-				GROUP_TRANSPILER));
+				OPTION_C_OUTPUT_DIRECTORY, OPTION_C_AUX_SRC_DIRECTORY, //
+				OPTION_EXCLUDE_SLANG_IMPL, GROUP_TRANSPILER));
 
 		List<HAMREntry> SEL4_controls = addAll(NIX_controls, Arrays.asList( //
 				GROUP_CAMKES));
@@ -847,22 +882,24 @@ public class HAMRPrompt extends TitleAreaDialog {
 	public abstract class HAMREntry {
 		final String id;
 		final String displayText;
+		final String toolTipText;
 
-		HAMREntry(String id, String displayText) {
+		HAMREntry(String id, String displayText, String toolTipText) {
 			this.id = id;
 			this.displayText = displayText;
+			this.toolTipText = toolTipText;
 		}
 	}
 
 	public class HAMRGroup extends HAMREntry {
-		HAMRGroup(String id, String displayText) {
-			super(id, displayText);
+		HAMRGroup(String id, String displayText, String toolTipText) {
+			super(id, displayText, toolTipText);
 		}
 	}
 
 	public class HAMROption extends HAMREntry {
-		HAMROption(String id, String displayText) {
-			super(id, displayText);
+		HAMROption(String id, String displayText, String toolTipText) {
+			super(id, displayText, toolTipText);
 		}
 	}
 }
