@@ -30,7 +30,7 @@ import org.sireum.hamr.ir.SmfClassification;
 import org.sireum.hamr.ir.SmfDeclass;
 import org.sireum.hamr.ir.SmfType;
 
-public class SmfVisitor {
+public class SmfVisitor implements AnnexVisitor {
 
 	final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 	final Set<SecModelLibrary> smfLib = new HashSet();
@@ -40,6 +40,11 @@ public class SmfVisitor {
 
 	public SmfVisitor(Visitor visitor) {
 		this.coreVisitor = visitor;
+	}
+
+	@Override
+	public List<Annex> visit(ComponentInstance root, List<String> path) {
+		return VisitorUtil.toIList(visitSmfComp(root, path));
 	}
 
 	public Annex visitSmfComp(ComponentInstance root, List<String> path) {
@@ -56,6 +61,11 @@ public class SmfVisitor {
 		}
 		return new Annex(SMF_ID, factory.smfClause(classes, declasses));
 
+	}
+
+	@Override
+	public List<AnnexLib> buildAnnexLibraries(Element root) {
+		return visitSmfLib(root);
 	}
 
 	public List<AnnexLib> visitSmfLib(Element root) {

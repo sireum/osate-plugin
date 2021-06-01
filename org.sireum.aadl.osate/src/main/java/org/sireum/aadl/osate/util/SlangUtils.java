@@ -2,6 +2,10 @@ package org.sireum.aadl.osate.util;
 
 public class SlangUtils {
 
+	public static org.sireum.Z toZ(int i) {
+		return org.sireum.Z$.MODULE$.apply(i);
+	}
+
 	public static <T> org.sireum.None<T> toNone() {
 		return org.sireum.None$.MODULE$.apply();
 	}

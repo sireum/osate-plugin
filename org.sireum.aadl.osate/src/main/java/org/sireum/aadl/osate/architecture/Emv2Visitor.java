@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.DirectionType;
+import org.osate.aadl2.Element;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.Property;
 import org.osate.aadl2.PropertyExpression;
@@ -54,7 +55,8 @@ import org.sireum.hamr.ir.ErrorTransition;
 import org.sireum.hamr.ir.ErrorTypeDef;
 import org.sireum.hamr.ir.ErrorTypeSetDef;
 import org.sireum.hamr.ir.Name;
-public class Emv2Visitor {
+
+public class Emv2Visitor implements AnnexVisitor {
 
 	final String ALL_STATE = "all";
 
@@ -66,6 +68,11 @@ public class Emv2Visitor {
 
 	public Emv2Visitor(Visitor visitor) {
 		this.coreVisitor = visitor;
+	}
+
+	@Override
+	public List<Annex> visit(ComponentInstance root, List<String> path) {
+		return VisitorUtil.toIList(visitEmv2Comp(root, path));
 	}
 
 	public Annex visitEmv2Comp(ComponentInstance root, List<String> path) {
@@ -500,6 +507,11 @@ public class Emv2Visitor {
 			errorLibs.put(EMV2Util.getLibraryName(useLib), useLib);
 		});
 
+	}
+
+	@Override
+	public List<AnnexLib> buildAnnexLibraries(Element root) {
+		return buildLibs();
 	}
 
 	public List<AnnexLib> buildLibs() {
