@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.osate.aadl2.Element;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.aadl.gumbo.gumbo.FeatureElement;
@@ -12,8 +13,9 @@ import org.sireum.aadl.gumbo.gumbo.Flow;
 import org.sireum.aadl.gumbo.gumbo.GumboSubclause;
 import org.sireum.aadl.gumbo.gumbo.util.GumboSwitch;
 import org.sireum.hamr.ir.Annex;
+import org.sireum.hamr.ir.AnnexLib;
 
-public class GumboVisitor extends GumboSwitch<Boolean> {
+public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 	Visitor v;
 
@@ -25,6 +27,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> {
 		this.v = v;
 	}
 
+	@Override
 	public List<Annex> visit(ComponentInstance ci, List<String> currentPath) {
 		List<Annex> ret = new ArrayList<>();
 		if (ci.getClassifier() != null) {
@@ -85,5 +88,10 @@ public class GumboVisitor extends GumboSwitch<Boolean> {
 		T ret = (T) result;
 		result = null;
 		return ret;
+	}
+
+	@Override
+	public List<AnnexLib> buildAnnexLibraries(Element arg0) {
+		return VisitorUtil.iList();
 	}
 }

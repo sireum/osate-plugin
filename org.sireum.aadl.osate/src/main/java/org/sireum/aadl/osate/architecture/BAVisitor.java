@@ -66,6 +66,7 @@ import org.sireum.aadl.osate.util.BAUtils;
 import org.sireum.hamr.ir.AadlASTFactory;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.Annex$;
+import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.hamr.ir.BLESSIntConst;
 import org.sireum.hamr.ir.BTSAccessExp;
 import org.sireum.hamr.ir.BTSAccessExp$;
@@ -119,7 +120,7 @@ import org.sireum.hamr.ir.Classifier;
 import org.sireum.hamr.ir.Classifier$;
 import org.sireum.hamr.ir.Name;
 
-public class BAVisitor extends AadlBaSwitch<Boolean> {
+public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 	Visitor v;
 
@@ -179,6 +180,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 		return org.sireum.Some$.MODULE$.apply(t);
 	}
 
+	@Override
 	public List<Annex> visit(ComponentInstance ci, List<String> path) {
 		List<Annex> ret = new ArrayList<>();
 		if (ci.getClassifier() != null) {
@@ -841,6 +843,11 @@ public class BAVisitor extends AadlBaSwitch<Boolean> {
 
 			System.err.println(e.getMessage() + ": " + ste);
 		}
+	}
+
+	@Override
+	public List<AnnexLib> buildAnnexLibraries(Element arg0) {
+		return VisitorUtil.iList();
 	}
 
 }

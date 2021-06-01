@@ -1,5 +1,6 @@
 package org.sireum.aadl.osate.architecture;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -75,30 +76,57 @@ import org.sireum.message.Position;
 
 
 public class Visitor {
+	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 
-	public Visitor() {
-		Bundle b = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
-		if (b != null) {
-			// sv = new SmfVisitor(this);
+	protected final Map<String, org.sireum.hamr.ir.Component> datamap = new LinkedHashMap<>();
+	final Map<List<String>, Set<ConnectionReference>> compConnMap = new HashMap<>();
+	List<AnnexVisitor> annexVisitors = new ArrayList<>();
+
+	/** allowing this to throw exceptions as they will be caught by {@link org.sireum.aadl.osate.util.Util#getAir }
+	 * and printed to the passed in output stream
+	 *
+	 * @throws Exception
+	 */
+	public Visitor() throws Exception {
+		annexVisitors.add(new Emv2Visitor(this));
+
+		Bundle sm = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
+		if (sm != null) {
+			// annexVisitors.add(new SmfVisitor(this));
 		}
+
 		Bundle ba = Platform.getBundle("org.osate.ba");
 		if (ba != null && PreferenceValues.getPROCESS_BA_OPT()) {
-			bv = new BAVisitor(this);
+			annexVisitors.add(new BAVisitor(this));
 		}
+
 		Bundle gumbo = Platform.getBundle("org.sireum.aadl.gumbo");
 		if (gumbo != null) {
-			gv = new GumboVisitor(this);
+			annexVisitors.add(new GumboVisitor(this));
+		}
+
+		Bundle blessAir = Platform.getBundle("org.sireum.aadl.osate.blessAir");
+		if (blessAir != null && PreferenceValues.getPROCESS_BA_OPT()) {
+
+			// Bless is closed source so a Sireum OSATE plugin developer may not have
+			// access to its source code. Therefore the BlessVisitor was placed in a separate
+			// plugin which has the Bless plugin dependencies. Below we'll reflexively construct
+			// BlessVisitor so that there are no hard-coded dependencies to anything Bless related
+
+			Class<?> cls = blessAir.loadClass("org.sireum.aadl.osate.architecture.BlessVisitor");
+			if (AnnexVisitor.class.isAssignableFrom(cls)) {
+				Constructor<?> cons = cls.getConstructor(new Class[] { Visitor.class });
+				annexVisitors.add((AnnexVisitor) cons.newInstance(this));
+			} else {
+				throw new RuntimeException(cls.getCanonicalName() + " doesn't implement AnnexVisitor");
+			}
 		}
 	}
 
-	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
-
-	final Map<String, org.sireum.hamr.ir.Component> datamap = new LinkedHashMap<>();
-	final Map<List<String>, Set<ConnectionReference>> compConnMap = new HashMap<>();
-	final Emv2Visitor ev = new Emv2Visitor(this);
-	SmfVisitor sv = null;
-	BAVisitor bv = null;
-	GumboVisitor gv = null;
+	public Map<String, org.sireum.hamr.ir.Component> getDataComponents() {
+		// TODO should be an immutable copy
+		return this.datamap;
+	}
 
 	public Option<org.sireum.hamr.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		final Option<org.sireum.hamr.ir.Component> t = visit(root);
@@ -106,13 +134,13 @@ public class Visitor {
 			final List<org.sireum.hamr.ir.Component> dataComponents = includeDataComponents
 					? new ArrayList<>(datamap.values())
 					: VisitorUtil.iList();
-			List<AnnexLib> libs = ev.buildLibs();
-			if (sv != null) {
-				libs = VisitorUtil.addAll(libs, sv.visitSmfLib(root));
+
+			List<AnnexLib> libs = VisitorUtil.iList();
+			for (AnnexVisitor av : annexVisitors) {
+				libs = VisitorUtil.addAll(libs, av.buildAnnexLibraries(root));
 			}
-			return new Some<>(
-					factory.aadl(VisitorUtil.toIList(t.get()), libs,
-							dataComponents));
+
+			return new Some<>(factory.aadl(VisitorUtil.toIList(t.get()), libs, dataComponents));
 		} else {
 			return org.sireum.None.apply();
 		}
@@ -531,18 +559,10 @@ public class Visitor {
 
 		final List<org.sireum.hamr.ir.Mode> modes = VisitorUtil.iList(); // TODO
 
-		List<org.sireum.hamr.ir.Annex> annexes =
-				VisitorUtil.toIList(ev.visitEmv2Comp(compInst, currentPath)); // TODO
-		if(sv != null) {
-			annexes = VisitorUtil.add(annexes, sv.visitSmfComp(compInst, currentPath));
-		}
+		List<org.sireum.hamr.ir.Annex> annexes = VisitorUtil.iList();
 
-		if (bv != null) {
-			annexes = VisitorUtil.addAll(annexes, bv.visit(compInst, currentPath));
-		}
-
-		if (gv != null) {
-			annexes = VisitorUtil.addAll(annexes, gv.visit(compInst, currentPath));
+		for (AnnexVisitor av : annexVisitors) {
+			annexes = VisitorUtil.addAll(annexes, av.visit(compInst, currentPath));
 		}
 
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
