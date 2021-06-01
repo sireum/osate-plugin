@@ -105,7 +105,7 @@ public class Visitor {
 			annexVisitors.add(new GumboVisitor(this));
 		}
 
-		Bundle blessAir = Platform.getBundle("org.sireum.aadl.osate.blessAir");
+		Bundle blessAir = Platform.getBundle("org.sireum.aadl.osate.bless2Air");
 		if (blessAir != null && PreferenceValues.getPROCESS_BA_OPT()) {
 
 			// Bless is closed source so a Sireum OSATE plugin developer may not have
