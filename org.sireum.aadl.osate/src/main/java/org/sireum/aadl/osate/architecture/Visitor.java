@@ -105,20 +105,22 @@ public class Visitor {
 			annexVisitors.add(new GumboVisitor(this));
 		}
 
-		Bundle blessAir = Platform.getBundle("org.sireum.aadl.osate.bless2Air");
-		if (blessAir != null && PreferenceValues.getPROCESS_BA_OPT()) {
+		Bundle bless = Platform.getBundle("com.multitude.aadl.bless");
+		Bundle bless2Air = Platform.getBundle("org.sireum.aadl.osate.bless2Air");
+		if (bless != null && bless2Air != null && PreferenceValues.getPROCESS_BA_OPT()) {
 
 			// Bless is closed source so a Sireum OSATE plugin developer may not have
 			// access to its source code. Therefore the BlessVisitor was placed in a separate
 			// plugin which has the Bless plugin dependencies. Below we'll reflexively construct
 			// BlessVisitor so that there are no hard-coded dependencies to anything Bless related
 
-			Class<?> cls = blessAir.loadClass("org.sireum.aadl.osate.architecture.BlessVisitor");
+			Class<?> cls = bless2Air.loadClass("org.sireum.aadl.osate.architecture.BlessVisitor");
 			if (AnnexVisitor.class.isAssignableFrom(cls)) {
 				Constructor<?> cons = cls.getConstructor(new Class[] { Visitor.class });
 				annexVisitors.add((AnnexVisitor) cons.newInstance(this));
 			} else {
-				throw new RuntimeException(cls.getCanonicalName() + " doesn't implement AnnexVisitor");
+				throw new RuntimeException("Could not load Bless to AIR plugin: " + cls.getCanonicalName()
+						+ " doesn't implement AnnexVisitor");
 			}
 		}
 	}
