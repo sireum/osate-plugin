@@ -262,10 +262,10 @@ public class Phantom implements IApplication {
 			AadlSystem system = systems.get(0);
 			Aadl model = Util.getAir(getSystemInstance(system, rs), true);
 
-			ret = org.sireum.cli.HAMR.codeGen(model, ho);
+			ret = org.sireum.cli.HAMR.codeGenH2(model, ho).toInt();
 		} else {
 			// assume it's a serialized AIR file
-			ret = org.sireum.cli.HAMR.codeGen(ho);
+			ret = org.sireum.cli.HAMR.codeGen(ho).toInt();
 		}
 
 		addInfo("HAMR Codegen was " + ((ret != 0) ? "un" : "") + "succesful");
