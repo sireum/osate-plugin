@@ -959,7 +959,7 @@ public class Visitor {
 
 			for (Subcomponent subcom : di.getAllSubcomponents()) {
 				if (!(subcom instanceof DataSubcomponent)) {
-					throw new RuntimeException("Unxepcted data subcomponent: " + subcom.getFullName() + " of type "
+					throw new RuntimeException("Unexpected data subcomponent: " + subcom.getFullName() + " of type "
 							+ subcom.getClass().getSimpleName() + " from " + f.getFullName());
 				}
 
@@ -970,7 +970,19 @@ public class Visitor {
 				final List<org.sireum.hamr.ir.Property> fProperties = dsc.getOwnedPropertyAssociations().stream()
 						.map(op -> buildProperty(op, VisitorUtil.iList())).collect(Collectors.toList());
 
-				final DataClassifier sct = (DataClassifier) dsc.getDataSubcomponentType();
+				DataClassifier sct = null;
+				if (dsc.getDataSubcomponentType() instanceof DataClassifier) {
+					sct = (DataClassifier) dsc.getDataSubcomponentType();
+				} else {
+					String mesg = "Expecting a DataClassifier for " + dsc.qualifiedName()
+							+ " but found something of type "
+							+ dsc.getDataSubcomponentType().getClass().getSimpleName() +
+							(dsc.getDataSubcomponentType().hasName() ? " whose name is " + dsc.getDataSubcomponentType().getQualifiedName()
+									: "")
+							+ ". This can happen when your model has multiple copies of the same resource.";
+					throw new RuntimeException(mesg);
+				}
+
 				if (sct != null) {
 					final org.sireum.hamr.ir.Component c = processDataType(sct);
 
