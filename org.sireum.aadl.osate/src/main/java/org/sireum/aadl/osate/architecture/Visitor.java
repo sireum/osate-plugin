@@ -974,13 +974,14 @@ public class Visitor {
 				if (dsc.getDataSubcomponentType() instanceof DataClassifier) {
 					sct = (DataClassifier) dsc.getDataSubcomponentType();
 				} else {
-					String mesg = "Expecting a DataClassifier for " + dsc.qualifiedName()
-							+ " but found something of type "
-							+ dsc.getDataSubcomponentType().getClass().getSimpleName() +
-							(dsc.getDataSubcomponentType().hasName() ? " whose name is " + dsc.getDataSubcomponentType().getQualifiedName()
-									: "")
+					if(dsc.getDataSubcomponentType() != null) {
+						String mesg = "Expecting a DataClassifier for " + dsc.qualifiedName()
+							+ " but found something of type " + dsc.getDataSubcomponentType().getClass().getSimpleName()
+							+ (dsc.getDataSubcomponentType().hasName() ? " whose name is " + dsc.getDataSubcomponentType().getQualifiedName() : "")
 							+ ". This can happen when your model has multiple copies of the same resource.";
-					throw new RuntimeException(mesg);
+
+						throw new RuntimeException(mesg);
+					}
 				}
 
 				if (sct != null) {
