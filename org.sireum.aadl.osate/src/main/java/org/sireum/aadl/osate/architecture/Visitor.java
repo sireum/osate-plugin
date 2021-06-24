@@ -921,7 +921,7 @@ public class Visitor {
 		}
 	}
 
-	protected org.sireum.hamr.ir.Component processDataType(DataClassifier f) {
+	public org.sireum.hamr.ir.Component processDataType(DataClassifier f) {
 		final String name = f.getQualifiedName();
 		if (datamap.containsKey(name)) {
 			return datamap.get(name);
