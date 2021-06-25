@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.SystemImplementation;
@@ -25,6 +27,10 @@ import org.osate.testsupport.TestResourceSetHelper;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
+import org.sireum.aadl.osate.util.IOUtils;
+import org.sireum.aadl.osate.util.Util;
+import org.sireum.aadl.osate.util.Util.SerializerType;
+import org.sireum.hamr.ir.Aadl;
 
 import com.google.inject.Inject;
 import com.itemis.xtext.testing.XtextTest;
@@ -35,6 +41,48 @@ import com.itemis.xtext.testing.XtextTest;
 public abstract class SireumTest extends XtextTest {
 	@Inject
 	TestResourceSetHelper rsHelper;
+
+	public boolean writeResults = true;
+	public boolean generateExpected = false;
+
+	public void execute(File modelDir, String sysFilename, String sysImplName) {
+		try {
+			File root = modelDir;
+
+			List<File> aadlFiles = IOUtils.collectFiles(root, ".aadl", true);
+			File sysImplFile = new File(root, sysFilename);
+			assert sysImplFile.exists() : sysImplFile.getAbsolutePath() + "doesn't exist";
+
+			AadlProject project = new AadlProject(root.getName(), root, aadlFiles);
+			AadlSystem system = new AadlSystem(sysImplName, sysImplFile, Arrays.asList(project));
+
+			SystemInstance instance = getSystemInstance(system);
+
+			Aadl model = Util.getAir(instance, true, System.out);
+			String ir = Util.serialize(model, SerializerType.JSON);
+
+			if (writeResults) {
+				File results = new File(root, sysImplName + "_results.json");
+				IOUtils.writeFile(results, ir);
+			}
+
+			File expectedFile = new File(root, sysImplName + ".json");
+			String expected = null;
+			if (generateExpected) {
+				IOUtils.writeFile(expectedFile, ir);
+				expected = ir;
+			} else {
+				Assert.assertTrue("Expected results not found: " + expectedFile.getCanonicalPath(),
+						expectedFile.exists());
+				expected = IOUtils.readFile(expectedFile);
+			}
+
+			Assert.assertEquals(ir, expected);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertFalse(true);
+		}
+	}
 
 	protected SystemInstance getSystemInstance(AadlSystem system) {
 		try {
