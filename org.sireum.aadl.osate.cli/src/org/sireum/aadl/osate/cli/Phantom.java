@@ -34,9 +34,9 @@ import org.osate.aadl2.util.Aadl2ResourceFactoryImpl;
 import org.osate.pluginsupport.PluginSupportUtil;
 import org.osate.xtext.aadl2.Aadl2StandaloneSetup;
 import org.osate.xtext.aadl2.errormodel.ErrorModelStandaloneSetup;
-import org.sireum.Cli.HamrCodeGenOption;
 import org.sireum.Cli.HelpOption;
-import org.sireum.Cli.PhantomOption;
+import org.sireum.Cli.SireumHamrCodegenOption;
+import org.sireum.Cli.SireumHamrPhantomOption;
 import org.sireum.Cli.SireumTopOption;
 import org.sireum.Option;
 import org.sireum.SireumApi;
@@ -120,10 +120,10 @@ public class Phantom implements IApplication {
 				return IApplication.EXIT_OK;
 			}
 
-			if (opts.get() instanceof PhantomOption) {
-				return phantom((PhantomOption) opts.get(), resourceSet);
-			} else if (opts.get() instanceof HamrCodeGenOption) {
-				return hamrCodegen((HamrCodeGenOption) opts.get(), resourceSet);
+			if (opts.get() instanceof SireumHamrPhantomOption) {
+				return phantom((SireumHamrPhantomOption) opts.get(), resourceSet);
+			} else if (opts.get() instanceof SireumHamrCodegenOption) {
+				return hamrCodegen((SireumHamrCodegenOption) opts.get(), resourceSet);
 			} else {
 				org.sireum.Sireum$.MODULE$.main(appArgs);
 
@@ -144,7 +144,7 @@ public class Phantom implements IApplication {
 		}
 	}
 
-	int phantom(PhantomOption po, ResourceSet rs) {
+	int phantom(SireumHamrPhantomOption po, ResourceSet rs) {
 
 		if (po.args()
 				.nonEmpty() == (po.getProjects().nonEmpty() && po.getMain().nonEmpty() && po.getImpl().nonEmpty())) {
@@ -231,7 +231,7 @@ public class Phantom implements IApplication {
 		}
 	}
 
-	int hamrCodegen(HamrCodeGenOption ho, ResourceSet rs) {
+	int hamrCodegen(SireumHamrCodegenOption ho, ResourceSet rs) {
 
 		if (ho.args().size().toInt() != 1) {
 			addError("Expecting exactly one argument");

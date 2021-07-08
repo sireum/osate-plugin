@@ -55,8 +55,15 @@ public class LaunchAwas extends AbstractSireumHandler {
 			// String s = Util.serialize(model, SerializerType.JSON);
 			// writeGeneratedFile(e, "json", s);
 
+			Thread current = Thread.currentThread();
+			ClassLoader oldLoader = current.getContextClassLoader();
+			try {
+				current.setContextClassLoader(getClass().getClassLoader());
 //				String str = buildAwasText(model);
-			String str = org.sireum.awas.AADLBridge.AadlHandler.buildAwasText(model);
+				String str = org.sireum.awas.AADLBridge.AadlHandler.buildAwasText(model);
+			} finally {
+				current.setContextClassLoader(oldLoader);
+			}
 			try {
 				generateVisualizer(root, model, console);
 				getProject(root).refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());

@@ -21,7 +21,8 @@ Automatic-Module-Name: Awas
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  lib/awas.jar,
- bin/
+ bin/,
+ external:$SIREUM_JAR$
 Import-Package: org.osate.ge.diagram,
  org.osate.pluginsupport
 Export-Package: org.sireum.aadl.osate.awas.util,

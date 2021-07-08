@@ -24,4 +24,4 @@ Export-Package: org.sireum.aadl.osate.cli;
    org.eclipse.equinox.app,
    org.eclipse.emf.ecore.resource"
 Bundle-ClassPath: .,
- lib/
+ external:$user.dir$/plugins/sireum.jar

@@ -1,6 +1,7 @@
 package org.sireum.aadl.osate.hamr.handlers;
 
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -99,8 +100,6 @@ public class LaunchHAMR extends AbstractSireumHandler {
 				try {
 					int toolRet = 0;
 
-					final boolean targetingSel4 = prompt.getOptionPlatform() == Platform.seL4;
-
 					List<Report> report = HAMRUtil.checkModel(si, prompt);
 
 					for (Report r : report) {
@@ -167,29 +166,33 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									.getPROCESS_BA_OPT() ? VisitorUtil.toISZ(new org.sireum.String("PROCESS_BTS_NODES"))
 									: VisitorUtil.toISZ();
 
-							return org.sireum.cli.HAMR.codeGenH( //
-									model, //
-									//
-									verbose, //
-									org.sireum.Cli.HamrPlatform$.MODULE$.byName(platform).get(), //
-									slangOutputDir, //
-									slangPackageName, //
-									noEmbedArt, //
-									devicesAsThreads, //
-									//
-									slangAuxCodeDirs, //
-									slangOutputCDirectory, //
-									excludeComponentImpl, //
-									bitWidth, //
-									maxStringSize, //
-									maxArraySize, //
-									runTranspiler, //
-									//
-									camkesOutputDirectory, //
-									camkesAuxCodeDirs, //
-									aadlRootDir, //
-									//
-									experimentalOptions).toInt();
+							if (!sireumApiCompatible()) {
+								return 1;
+							} else {
+								return org.sireum.cli.HAMR.codeGenH( //
+										model, //
+										//
+										verbose, //
+										org.sireum.Cli.SireumHamrCodegenHamrPlatform$.MODULE$.byName(platform).get(), //
+										slangOutputDir, //
+										slangPackageName, //
+										noEmbedArt, //
+										devicesAsThreads, //
+										//
+										slangAuxCodeDirs, //
+										slangOutputCDirectory, //
+										excludeComponentImpl, //
+										bitWidth, //
+										maxStringSize, //
+										maxArraySize, //
+										runTranspiler, //
+										//
+										camkesOutputDirectory, //
+										camkesAuxCodeDirs, //
+										aadlRootDir, //
+										//
+										experimentalOptions).toInt();
+							}
 						});
 					}
 
@@ -217,5 +220,51 @@ public class LaunchHAMR extends AbstractSireumHandler {
 					getToolName() + " Message", msg);
 			notification.open();
 		});
+	}
+
+	private boolean sireumApiCompatible() {
+
+		String msg = null;
+		try {
+			Class<?> clsHAMR = Class.forName("org.sireum.cli.HAMR");
+			Method[] mms = clsHAMR.getMethods();
+			Class<?> clsAadl = Class.forName("org.sireum.hamr.ir.Aadl");
+			Class<?> clsBool = boolean.class;
+			Class<?> clsPlatform = Class.forName("org.sireum.Cli$SireumHamrCodegenHamrPlatform$Type");
+			Class<?> clsOption = Class.forName("org.sireum.Option");
+			Class<?> clsIS = Class.forName("org.sireum.IS");
+			Class<?> clsZ = Class.forName("org.sireum.Z");
+			Method m = clsHAMR.getMethod("codeGenH", //
+					clsAadl, // model
+					clsBool, // verbose
+					clsPlatform, // platform
+					clsOption, // slangOutputDir
+					clsOption, // slangPackageName
+					clsBool, // noEmbedArt
+					clsBool, // devicesAsThreads
+					clsIS, // slangAuxCodeDir
+					clsOption, // slangOutputCDirectory
+					clsBool, // excludeComponentImpl
+					clsZ, // bitWidth
+					clsZ, // maxStringSize
+					clsZ, // maxArraySize
+					clsBool, // runTranspiler
+					clsOption, // camkesOutputDirectory
+					clsIS, // camkesAuxCodeDirs
+					clsOption, // aadlRootDir
+					clsIS // experimentalOptions
+					);
+			return true;
+		} catch (ClassNotFoundException e) {
+			msg = e.getMessage();
+		} catch (NoSuchMethodException e) {
+			msg = e.getMessage();
+		} catch (SecurityException e) {
+			msg = e.getMessage();
+		}
+		writeToConsole("\nCannot run HAMR Codegen. " + msg);
+		writeToConsole("Run Phantom to update HAMR's OSATE plugin (\"$SIREUM_HOME/bin/sireum hamr phantom -u\"). ");
+		writeToConsole("If that does not resolve the issue then please report it.\n");
+		return false;
 	}
 }

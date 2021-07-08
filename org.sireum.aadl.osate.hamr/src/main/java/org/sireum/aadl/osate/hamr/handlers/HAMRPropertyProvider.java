@@ -30,7 +30,7 @@ public class HAMRPropertyProvider {
 		JVM, Linux, macOS, Cygwin, seL4, seL4_Only, seL4_TB;
 
 		Platform() {
-			if(org.sireum.Cli.HamrPlatform$.MODULE$.byName(hamrName()).isEmpty()) {
+			if (org.sireum.Cli.SireumHamrCodegenHamrPlatform$.MODULE$.byName(hamrName()).isEmpty()) {
 				throw new RuntimeException(this.hamrName() + " is not a valid HamrPlatform value");
 			}
 		}
