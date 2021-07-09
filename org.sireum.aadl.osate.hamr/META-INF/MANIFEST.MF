@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Sireum HAMR Plugin for OSATE
 Bundle-SymbolicName: org.sireum.aadl.osate.hamr;singleton:=true
-Bundle-Version: 1.0.2106151941.qualifier
+Bundle-Version: 1.0.2107091650.qualifier
 Bundle-Activator: org.sireum.aadl.osate.hamr.Activator
 Require-Bundle: org.osate.aadl2,
  org.osate.ui,
@@ -14,5 +14,5 @@ Automatic-Module-Name: HAMR
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  bin/,
- external:$SIREUM_JAR$
+ external:$org.sireum.home$/bin/sireum.jar
 Import-Package: org.osate.pluginsupport
