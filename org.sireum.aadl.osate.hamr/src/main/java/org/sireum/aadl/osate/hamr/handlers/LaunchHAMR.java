@@ -9,7 +9,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.window.Window;
-import org.eclipse.mylyn.commons.ui.dialogs.AbstractNotificationPopup;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
@@ -17,7 +16,6 @@ import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
 import org.sireum.Option;
-import org.sireum.SireumApi;
 import org.sireum.Z;
 import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
@@ -33,7 +31,6 @@ import org.sireum.hamr.ir.Aadl;
 
 public class LaunchHAMR extends AbstractSireumHandler {
 	private HAMRPrompt prompt = null;
-	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 
 	@Override
 	public String getToolName() {
@@ -48,13 +45,16 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		MessageConsole console = displayConsole();
 		console.clearConsole();
 
+		if (!emitSireumVersion()) {
+			displayPopup("HAMR code generation was unsuccessful");
+			return Status.CANCEL_STATUS;
+		}
+
 		SystemInstance si = getSystemInstance(elem);
 		if (si == null) {
 			Dialog.showError(getToolName(), "Please select a system implementation or a system instance");
 			return Status.CANCEL_STATUS;
 		}
-
-		writeToConsole("Sireum Version: " + SireumApi.version());
 
 		writeToConsole("Generating AIR ...");
 
@@ -64,7 +64,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 			final int bit_width = HAMRPropertyProvider.getDefaultBitWidthFromElement(si);
 			if (!HAMRPropertyProvider.bitWidths.contains(bit_width)) {
-				String options = HAMRPropertyProvider.bitWidths.stream().map(Object::toString)
+				String options = HAMRPropertyProvider.bitWidths.stream()
+						.map(Object::toString)
 						.collect(Collectors.joining(", "));
 				displayPopup("Invalid bit width: " + bit_width + ".  Valid options are " + options);
 				return Status.CANCEL_STATUS;
@@ -85,8 +86,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 			List<Platform> platforms = HAMRPropertyProvider.getPlatformsFromElement(si);
 			List<HW> hardwares = HAMRPropertyProvider.getHWsFromElement(si);
 
-			if (PreferenceValues.getHAMR_SERIALIZE_OPT()) {
-				File f = serializeToFile(model, PreferenceValues.getHAMR_OUTPUT_FOLDER_OPT(), si);
+			if (PreferenceValues.HAMR_SERIALIZE_AIR_OPT.getValue()) {
+				File f = serializeToFile(model, PreferenceValues.HAMR_AIR_OUTPUT_FOLDER_OPT.getValue(), si);
 				writeToConsole("Wrote: " + f.getAbsolutePath());
 			}
 
@@ -132,18 +133,16 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory()
 									.equals("") //
-									? null
+											? null
 											: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
 
-
-							boolean verbose = PreferenceValues.getHAMR_VERBOSE_OPT();
+							boolean verbose = PreferenceValues.HAMR_VERBOSE_OPT.getValue();
 							String platform = prompt.getOptionPlatform().hamrName();
-							Option<org.sireum.String> slangOutputDir = ArsitBridge
-									.sireumOption(_slangOutputDir);
-							Option<org.sireum.String> slangPackageName = ArsitBridge
-									.sireumOption(_base);
-							boolean noEmbedArt = !PreferenceValues.getHAMR_EMBED_ART_OPT();
-							boolean devicesAsThreads = PreferenceValues.getHAMR_DEVICES_AS_THREADS_OPT();
+							Option<org.sireum.String> slangOutputDir = ArsitBridge.sireumOption(_slangOutputDir);
+							Option<org.sireum.String> slangPackageName = ArsitBridge.sireumOption(_base);
+							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue();
+							boolean noEmbedArt = !PreferenceValues.HAMR_EMBED_ART_OPT.getValue();
+							boolean devicesAsThreads = PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getValue();
 							IS<Z, org.sireum.String> slangAuxCodeDirs = prompt.getOptionCAuxSourceDirectory().equals("")
 									? VisitorUtil.toISZ()
 									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionCAuxSourceDirectory()));
@@ -153,7 +152,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Z bitWidth = SlangUtils.toZ(prompt.getOptionBitWidth());
 							Z maxStringSize = SlangUtils.toZ(prompt.getOptionMaxStringSize());
 							Z maxArraySize = SlangUtils.toZ(prompt.getOptionMaxSequenceSize());
-							boolean runTranspiler = PreferenceValues.getHAMR_RUN_TRANSPILER();
+							boolean runTranspiler = PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getValue();
 							Option<org.sireum.String> camkesOutputDirectory = ArsitBridge
 									.sireumOption(_camkesOutputDir);
 							IS<Z, org.sireum.String> camkesAuxCodeDirs = prompt.getOptionCamkesAuxSrcDir().equals("")
@@ -164,35 +163,33 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							IS<Z, org.sireum.String> experimentalOptions = org.sireum.aadl.osate.PreferenceValues
 									.getPROCESS_BA_OPT() ? VisitorUtil.toISZ(new org.sireum.String("PROCESS_BTS_NODES"))
-									: VisitorUtil.toISZ();
+											: VisitorUtil.toISZ();
 
-							if (!sireumApiCompatible()) {
-								return 1;
-							} else {
-								return org.sireum.cli.HAMR.codeGenH( //
-										model, //
-										//
-										verbose, //
-										org.sireum.Cli.SireumHamrCodegenHamrPlatform$.MODULE$.byName(platform).get(), //
-										slangOutputDir, //
-										slangPackageName, //
-										noEmbedArt, //
-										devicesAsThreads, //
-										//
-										slangAuxCodeDirs, //
-										slangOutputCDirectory, //
-										excludeComponentImpl, //
-										bitWidth, //
-										maxStringSize, //
-										maxArraySize, //
-										runTranspiler, //
-										//
-										camkesOutputDirectory, //
-										camkesAuxCodeDirs, //
-										aadlRootDir, //
-										//
-										experimentalOptions).toInt();
-							}
+							return org.sireum.cli.HAMR.codeGenH( //
+									model, //
+									//
+									verbose, //
+									org.sireum.Cli.SireumHamrCodegenHamrPlatform$.MODULE$.byName(platform).get(), //
+									slangOutputDir, //
+									slangPackageName, //
+									//
+									noProyekIve, //
+									noEmbedArt, //
+									devicesAsThreads, //
+									//
+									slangAuxCodeDirs, //
+									slangOutputCDirectory, //
+									excludeComponentImpl, //
+									bitWidth, //
+									maxStringSize, //
+									maxArraySize, //
+									runTranspiler, //
+									//
+									camkesOutputDirectory, //
+									camkesAuxCodeDirs, //
+									aadlRootDir, //
+									//
+									experimentalOptions).toInt();
 						});
 					}
 
@@ -211,15 +208,6 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		}
 
 		return Status.OK_STATUS;
-	}
-
-	private void displayPopup(String msg) {
-		Display.getDefault().syncExec(() -> {
-			writeToConsole(msg);
-			AbstractNotificationPopup notification = new EclipseNotification(Display.getCurrent(),
-					getToolName() + " Message", msg);
-			notification.open();
-		});
 	}
 
 	private boolean sireumApiCompatible() {
@@ -253,7 +241,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 					clsIS, // camkesAuxCodeDirs
 					clsOption, // aadlRootDir
 					clsIS // experimentalOptions
-					);
+			);
 			return true;
 		} catch (ClassNotFoundException e) {
 			msg = e.getMessage();

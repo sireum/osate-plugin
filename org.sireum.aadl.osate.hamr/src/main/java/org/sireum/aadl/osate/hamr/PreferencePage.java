@@ -1,8 +1,6 @@
 package org.sireum.aadl.osate.hamr;
 
-import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
-import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -30,15 +28,11 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		// Composite comp = addTab(tabFolder, "Code Generation");
 		Composite comp = getFieldEditorParent();
 
-		addField(new BooleanFieldEditor(PreferenceValues.HAMR_VERBOSE_OPT, "Verbose output", comp));
+		addField(PreferenceValues.HAMR_VERBOSE_OPT.getEditor(comp));
 
-		addField(new BooleanFieldEditor(PreferenceValues.HAMR_SERIALIZE_OPT,
-				"Serialize AIR to JSON (non-compact) when generating CAmkES", comp));
+		addField(PreferenceValues.HAMR_SERIALIZE_AIR_OPT.getEditor(comp));
 
-		StringFieldEditor outputFolder = new StringFieldEditor(PreferenceValues.HAMR_OUTPUT_FOLDER_OPT, "Output folder",
-				comp);
-		outputFolder.getTextControl(comp).setToolTipText("Directory where serialized AIR model will be stored");
-		addField(outputFolder);
+		addField(PreferenceValues.HAMR_AIR_OUTPUT_FOLDER_OPT.getEditor(comp));
 
 
 		// blank line
@@ -49,12 +43,14 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		seGroup.setText("Slang-Embedded Options");
 		seGroup.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 2, 1));
 
-		addField(new BooleanFieldEditor(PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT, "Treat AADL devices as threads",
-				seGroup));
+		addField(PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getEditor(seGroup));
 
-		addField(new BooleanFieldEditor(PreferenceValues.HAMR_EMBED_ART_OPT, "Embed ART", seGroup));
+		addField(PreferenceValues.HAMR_EMBED_ART_OPT.getEditor(seGroup));
 
-		addField(new BooleanFieldEditor(PreferenceValues.HAMR_RUN_TRANSPILER, "Run Transpiler", seGroup));
+		addField(PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getEditor(seGroup));
+
+		addField(PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getEditor(seGroup));
+
 	}
 
 	private Composite addTab(TabFolder tabFolder, String tabName) {

@@ -25,7 +25,8 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 
-		new PreferenceInitializer().initializeDefaultPreferences();
+		// each option now does this when it's constructed
+		// new PreferenceInitializer().initializeDefaultPreferences();
 	}
 
 	@Override

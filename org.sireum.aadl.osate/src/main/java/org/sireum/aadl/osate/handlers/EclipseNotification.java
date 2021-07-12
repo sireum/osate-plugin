@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate.hamr.handlers;
+package org.sireum.aadl.osate.handlers;
 
 import org.eclipse.mylyn.commons.ui.dialogs.AbstractNotificationPopup;
 import org.eclipse.swt.SWT;

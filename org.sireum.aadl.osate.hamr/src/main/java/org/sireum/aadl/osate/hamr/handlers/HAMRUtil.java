@@ -21,7 +21,7 @@ public class HAMRUtil {
 				|| prompt.getOptionPlatform() == Platform.seL4_Only || prompt.getOptionPlatform() == Platform.seL4_TB;
 		boolean trustedBuild = prompt.getOptionPlatform() == Platform.seL4_Only
 				|| prompt.getOptionPlatform() == Platform.seL4_TB;
-		boolean treatDevicesAsThreads = PreferenceValues.getHAMR_DEVICES_AS_THREADS_OPT();
+		boolean treatDevicesAsThreads = PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getValue();
 
 		List<Report> ret = new ArrayList<>();
 		// List<ComponentInstance> allThreads = root.getAllComponentInstances().stream()

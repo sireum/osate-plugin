@@ -18,8 +18,10 @@ public class MenuContributions extends CompoundContributionItem {
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<IContributionItem>();
 
-		l.add(getItem("Code Generation", "org.sireum.commands.launchhamr",
-				map("org.sireum.commands.launchhamr.generator", Generators.GEN_CAMKES.toString())));
+		l.add(getItem(//
+				"Code Generation", //
+				"org.sireum.commands.launchhamr", //
+				map("org.sireum.commands.launchhamr.generator", Generators.HAMR_GENERATOR.toString())));
 
 		return l.toArray(new IContributionItem[0]);
 	}
