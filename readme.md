@@ -12,24 +12,32 @@ development environment (following the installation directions
 being used in either case so the rest of these instructions will refer to the
 IDE as 'Eclipse'.
 
-1. Clone this repository ``git clone --depth=1 --recurse-submodules git@github.com:sireum/osate-plugin.git``
+1. Clone this repository ``git clone -b manifest --recurse-submodules git@github.com:sireum/osate-plugin.git``
 
-1. Launch Eclipse and go to __File__ -> __Import...__  
+1. From the command line
 
-1. Expand the __General__ folder and select __Existing Project into Workspace__, then click 
-   __Next__.
+   ```
+   cd osate-plugin/org.sireum.aadl.osate/lib
+   ln -s $SIREUM_HOME/bin/sireum.jar .
+   ```
+
+1. Launch Eclipse and go to *__File__ -> __Import...__*  
+
+1. Expand the *__General__* folder and select *__Existing Project into Workspace__*, then click 
+   *__Next__*.
 
 1. Enter the path to the directory where you cloned the repository and then select all the 
-   available projects from the project listings and click __Finish__.
+   available projects from the project listings and click *__Finish__*.
 
-1. Switch to the plug-in development perspective: __Window__ -> __Perspective__ -> 
-   __Open Perspective__ -> __Other...__ -> __Plug-in Development__.
+1. Navigate to *__Window -> Preferences -> Java -> Installed JREs__*.  Select the JRE that is checked (probably '*jre (default)*') 
+   and then click *__Edit...__*.  Add the following to *__Default VM arguments__*: ``-ea -Dorg.sireum.home=${env_var:SIREUM_HOME}`` 
+   and click *__Finish__* then *__Apply and Close__*
    
 1. To resolve access restrictions errors related to ``UiUtil``
 
-   - Navigate to: __Preferences -> Java -> Compiler -> Errors/Warnings -> Deprecated and restricted API__, and 
+   - Navigate to: *__Preferences -> Java -> Compiler -> Errors/Warnings -> Deprecated and restricted API__*, and 
 
-   - Change __Forbidden reference (access rules)__ from ``Error`` to ``Warning``.
+   - Change *__Forbidden reference (access rules)__* from ``Error`` to ``Warning``.
 
 1. __Optional:__ Rebuild tool jars
 
