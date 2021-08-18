@@ -38,10 +38,6 @@ models to [AIR](https://github.com/sireum/air) and then to downstream Sireum too
 
    - Change *__Forbidden reference (access rules)__* from ``Error`` to ``Warning``.
 
-1. Changes were made to OSATE that broke the AWAS plugin. Until those are resolved you can just close the project
-   in order to remove errors related to it.  Right click on ``org.sireum.aadl.osate.awas`` in the __Package Explorer__
-   and choose *__Close Project__*.
-
 1. __Optional:__ Rebuild tool jars
      
    * Awas
