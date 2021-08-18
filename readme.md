@@ -5,20 +5,18 @@ models to [AIR](https://github.com/sireum/air) and then to downstream Sireum too
 
 ## Installation for Developers 
 
-The plugin can be developed using an OSATE release (following the installation
-directions [here](http://osate.org/download-and-install.html)) or an OSATE
-development environment (following the installation directions
-[here](http://osate.org/setup-development.html)).  Eclipse is the underlying IDE
-being used in either case so the rest of these instructions will refer to the
-IDE as 'Eclipse'.
+1. Install an [OSATE development environment](http://osate.org/setup-development.html) -- the rest of these instructions
+   will refer to this as Eclipse
 
-1. Clone this repository ``git clone -b manifest --recurse-submodules git@github.com:sireum/osate-plugin.git``
+1. Install [Sireum Kekinian](https://github.com/sireum/kekinian#installing)
+
+1. Clone the 'sireum_env' branch of this repository ``git clone -b sireum_env --recurse-submodules git@github.com:sireum/osate-plugin.git``
 
 1. From the command line
 
    ```
-   cd osate-plugin/org.sireum.aadl.osate/lib
-   ln -s $SIREUM_HOME/bin/sireum.jar .
+   mkdir osate-plugin/org.sireum.aadl.osate/lib
+   ln -s $SIREUM_HOME/bin/sireum.jar osate-plugin/org.sireum.aadl.osate/lib/sireum.jar
    ```
 
 1. Launch Eclipse and go to *__File__ -> __Import...__*  
@@ -30,8 +28,9 @@ IDE as 'Eclipse'.
    available projects from the project listings and click *__Finish__*.
 
 1. Navigate to *__Window -> Preferences -> Java -> Installed JREs__*.  Select the JRE that is checked (probably '*jre (default)*') 
-   and then click *__Edit...__*.  Add the following to *__Default VM arguments__*: ``-ea -Dorg.sireum.home=${env_var:SIREUM_HOME}`` 
-   and click *__Finish__* then *__Apply and Close__*
+   and then click *__Edit...__*.  If you launch Eclipse from the command line (ie. it will inherit your environment variables) then 
+   add ``-ea -Dorg.sireum.home=${env_var:SIREUM_HOME}`` to *__Default VM arguments__*, otherwise add ``-ea -Dorg.sireum.home=<path-to-sireum-home>``.
+   Click *__Finish__* then *__Apply and Close__*.
    
 1. To resolve access restrictions errors related to ``UiUtil``
 
@@ -39,15 +38,11 @@ IDE as 'Eclipse'.
 
    - Change *__Forbidden reference (access rules)__* from ``Error`` to ``Warning``.
 
-1. __Optional:__ Rebuild tool jars
+1. Changes were made to OSATE that broke the AWAS plugin. Until those are resolved you can just close the project
+   in order to remove errors related to it.  Right click on ``org.sireum.aadl.osate.awas`` in the __Package Explorer__
+   and choose *__Close Project__*.
 
-   * Sireum
-     
-     ```bash
-     git clone --recursive https://github.com/sireum/kekinian
-     kekinian/bin/build.cmd
-     cp kekinian/bin/sireum.jar <osate-plugin-dir>/org.sireum.aadl.osate/lib/sireum.jar
-     ```
+1. __Optional:__ Rebuild tool jars
      
    * Awas
    
