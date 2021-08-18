@@ -18,9 +18,6 @@ import org.osate.aadl2.instance.InstanceObject;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.modelsupport.EObjectURIWrapper;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
-import org.osate.ge.internal.services.DiagramService.DiagramReference;
-import org.osate.ge.internal.ui.editor.AgeDiagramEditor;
-import org.osate.ge.internal.ui.util.EditorUtil;
 import org.sireum.aadl.osate.awas.handlers.AwasServerHandler;
 import org.sireum.awas.ast.AwasSerializer;
 import org.sireum.awas.ast.Model;
@@ -96,7 +93,7 @@ public class AwasServer extends PetiImpl {
 		}
 		return Option.empty();
 	}
-
+/*
 	@SuppressWarnings("restriction")
 	@Override
 	public Option<Protocol> handleHighlight(scala.collection.immutable.Map<String, String> urisColor) {
@@ -175,7 +172,7 @@ public class AwasServer extends PetiImpl {
 
 		return Option.empty();
 	}
-
+*/
 
 
 	public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
@@ -202,7 +199,7 @@ public class AwasServer extends PetiImpl {
 
 		return hexString.toString();
 	}
-
+/*
 	private AgeDiagramEditor getAgeDiagramEditor(DiagramReference diagramRef) {
 		if (diagramRef.isOpen()) {
 			return diagramRef.getEditor();
@@ -211,4 +208,5 @@ public class AwasServer extends PetiImpl {
 		}
 
 	}
+*/
 }

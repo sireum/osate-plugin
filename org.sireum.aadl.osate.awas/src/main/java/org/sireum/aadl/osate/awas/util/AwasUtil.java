@@ -6,27 +6,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.osate.aadl2.ComponentImplementation;
 import org.osate.aadl2.Element;
-import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.InstanceObject;
-import org.osate.aadl2.instance.SystemInstance;
-import org.osate.aadl2.instance.util.InstanceUtil;
-import org.osate.aadl2.modelsupport.EObjectURIWrapper;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.osate.ge.graphics.StyleBuilder;
 import org.osate.ge.internal.diagram.runtime.AgeDiagram;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
-import org.osate.ge.internal.services.DiagramService;
-import org.osate.ge.internal.ui.editor.AgeDiagramEditor;
 import org.sireum.awas.ast.Node;
-import org.sireum.awas.awasfacade.Collector;
-import org.sireum.awas.collector.ResultType;
-import org.sireum.awas.flow.NodeType;
 import org.sireum.awas.symbol.SymbolTable;
 import org.sireum.awas.symbol.SymbolTableHelper;
 
@@ -56,7 +44,7 @@ public class AwasUtil {
 	public static Set<Element> instObjs2Elements(Set<InstanceObject> instObjs) {
 		return instObjs.stream().map(it -> AadlUtil.getInstanceOrigin(it)).collect(Collectors.toSet());
 	}
-
+/*
 	@SuppressWarnings("restriction")
 	public static void highlightDiagrams(Set<AgeDiagramEditor> ads, Collector qres, Boolean isImpleDiagram,
 			SymbolTable st,
@@ -108,7 +96,7 @@ public class AwasUtil {
 			ad.doSave(new NullProgressMonitor());
 		});
 	}
-
+*/
 	public static Set<DiagramElement> getAllDiagramElements(AgeDiagram diagram) {
 		Set<DiagramElement> result = new HashSet();
 
@@ -123,7 +111,7 @@ public class AwasUtil {
 		}
 		return result;
 	}
-
+/*
 	@SuppressWarnings("restriction")
 	public static Set<AgeDiagramEditor> awasGraphUri2AgeDiagramEditor(Set<String> graphs, Boolean isImpleDiagram,
 			SymbolTable st, Resource resource, DiagramService diagramService) {
@@ -170,7 +158,7 @@ public class AwasUtil {
 
 		return ads;
 	}
-
+*/
 
 
 	public static org.osate.ge.graphics.Color hex2Rgb(String colorStr) {

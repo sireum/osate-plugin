@@ -5,53 +5,27 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.commands.Command;
-import org.eclipse.core.commands.ExecutionEvent;
-import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.internal.resources.File;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IResourceChangeEvent;
-import org.eclipse.core.resources.IResourceChangeListener;
-import org.eclipse.core.resources.IResourceDelta;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.IElementUpdater;
-import org.eclipse.ui.console.MessageConsole;
-import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.menus.UIElement;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osate.aadl2.Element;
-import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.modelsupport.EObjectURIWrapper;
-import org.osate.aadl2.modelsupport.util.AadlUtil;
-import org.osate.ge.CanonicalBusinessObjectReference;
 import org.osate.ge.graphics.Style;
 import org.osate.ge.graphics.StyleBuilder;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
 import org.osate.ge.internal.services.DiagramService;
-import org.osate.ge.internal.services.DiagramService.DiagramReference;
-import org.osate.ge.internal.ui.editor.AgeDiagramEditor;
-import org.osate.ge.internal.ui.util.EditorUtil;
 import org.sireum.aadl.osate.awas.Activator;
 import org.sireum.aadl.osate.awas.util.AwasServer;
 import org.sireum.aadl.osate.awas.util.AwasUtil;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
-import org.sireum.aadl.osate.util.Util;
-import org.sireum.hamr.ir.Aadl;
 
 public class AwasServerHandler extends AbstractSireumHandler implements IElementUpdater {
 
@@ -63,7 +37,7 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 	static Display display = null;
 
 	static DiagramService diagramService = null;
-	static AgeDiagramEditor ade = null;
+/*	static AgeDiagramEditor ade = null;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -200,7 +174,7 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 		}
 
 	}
-
+*/
 	@Override
 	protected IStatus runJob(Element arg0, IProgressMonitor arg1) {
 		// TODO Auto-generated method stub
@@ -218,7 +192,7 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 				.imageDescriptorFromPlugin(Activator.getDefault().getBundle().getSymbolicName(), "icons/play.png");
 		element.setIcon(icon);
 	}
-
+/*
 	@SuppressWarnings("restriction")
 	public static void highlightInstanceDiagram(Map<URI, String> uris, SystemInstance root) {
 
@@ -263,6 +237,6 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 		ade.doSave(new NullProgressMonitor());
 		});
 	}
-
+*/
 
 }
