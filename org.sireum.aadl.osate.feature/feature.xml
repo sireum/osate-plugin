@@ -2,7 +2,7 @@
 <feature
       id="org.sireum.aadl.osate.feature"
       label="Sireum OSATE Plugin"
-      version="1.0.2103112135.qualifier"
+      version="1.0.2106151941.qualifier"
       provider-name="SAnToS">
 
    <description url="https://raw.githubusercontent.com/sireum/osate-plugin-update-site/master/org.sireum.aadl.osate.update.site/">
@@ -10,7 +10,7 @@
    </description>
 
    <license url="">
-      Copyright (c) 2021, Kansas State University
+      Copyright (c) 2017-2021, Kansas State University
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

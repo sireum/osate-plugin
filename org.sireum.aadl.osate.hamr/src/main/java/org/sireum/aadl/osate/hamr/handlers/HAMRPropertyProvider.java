@@ -21,7 +21,7 @@ public class HAMRPropertyProvider {
 	final static String PROP_HAMR__DEFAULT_MAX_SEQUENCE_SIZE = "HAMR::Default_Max_Sequence_Size";
 	final static String PROP_HAMR__MAX_STRING_SIZE = "HAMR::Max_String_Size";
 
-	final static int DEFAULT_BIT_WIDTH = 64;
+	final static int DEFAULT_BIT_WIDTH = 32;
 	final static int DEFAULT_MAX_SEQUENCE_SIZE = 16;
 	final static int DEFAULT_MAX_STRING_SIZE = 256;
 

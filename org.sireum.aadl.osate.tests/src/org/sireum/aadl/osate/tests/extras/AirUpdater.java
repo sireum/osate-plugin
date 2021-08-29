@@ -1,6 +1,7 @@
 package org.sireum.aadl.osate.tests.extras;
 
 import java.io.File;
+import java.util.List;
 
 import org.eclipse.xtext.testing.InjectWith;
 import org.eclipse.xtext.testing.XtextRunner;
@@ -9,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.osate.aadl2.errormodel.tests.ErrorModelInjectorProvider;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.testsupport.TestResourceSetHelper;
+import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.tests.SireumTest;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
@@ -26,21 +28,25 @@ public class AirUpdater extends SireumTest {
 
 	@Test
 	public void updateAirHamr() {
-		File hamrModelsDir = new File(System.getenv("SIREUM_HOME") + "/hamr/codegen/jvm/src/test/scala/models");
+		List<File> hamrModelsDirs = VisitorUtil.toIList(
+				new File(System.getenv("SIREUM_HOME") + "/hamr/codegen/jvm/src/test/scala/models"),
+				new File(System.getenv("SIREUM_HOME") + "/hamr/codegen/arsit/jvm/src/test/scala/models"));
 
-		if (hamrModelsDir.exists()) {
-			for (AadlSystem system : AadlProjectUtil.findSystems(hamrModelsDir)) {
-				regen(system);
+		for (File hamrModelsDir : hamrModelsDirs) {
+			if (hamrModelsDir.exists()) {
+				for (AadlSystem system : AadlProjectUtil.findSystems(hamrModelsDir)) {
+					regen(system);
+				}
+			} else {
+				System.out.println("Directory does not exist: " + hamrModelsDir);
 			}
-		} else {
-			System.out.println("Directory does not exist: " + hamrModelsDir);
 		}
 	}
 
 	@Test
 	public void updateAirHamr2() {
 
-		File hamrModelsDir = new File("/home/vagrant/devel/case/CASE-loonwerks/TA5/tool-evaluation-4/HAMR/examples");
+		File hamrModelsDir = new File("/home/vagrant/devel/case/case-loonwerks/TA5/tool-evaluation-4/HAMR/examples");
 		if (hamrModelsDir.exists()) {
 			for (AadlSystem system : AadlProjectUtil.findSystems(hamrModelsDir)) {
 				regen(system);

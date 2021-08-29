@@ -27,7 +27,7 @@ IDE as 'Eclipse'.
    
 1. To resolve access restrictions errors related to ``UiUtil``
 
-   - Navigate to: __Preferences -> Java -> Errors/Warnings -> Deprecated and restricted API__, and 
+   - Navigate to: __Preferences -> Java -> Compiler -> Errors/Warnings -> Deprecated and restricted API__, and 
 
    - Change __Forbidden reference (access rules)__ from ``Error`` to ``Warning``.
 

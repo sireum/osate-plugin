@@ -1,50 +1,41 @@
 package org.sireum.aadl.osate.tests;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
 
-import org.junit.Assert;
 import org.junit.Test;
-import org.osate.aadl2.instance.SystemInstance;
-import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
-import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
-import org.sireum.aadl.osate.util.IOUtils;
-import org.sireum.aadl.osate.util.Util;
-import org.sireum.aadl.osate.util.Util.SerializerType;
-import org.sireum.hamr.ir.Aadl;
 
 public class AirTestJava extends SireumTest {
 
-	boolean generateExpected = false;
-	boolean writeResults = true;
+	{
+		generateExpected = false;
+		writeResults = true;
+	}
 
 	static File ROOT_DIR = new File("./projects/org/sireum/aadl/osate/tests/");
 
 	@Test
 	public void pca_pump_chassis() {
-		execute("pca-pump-chasis-gen", "Chassis.aadl", "Chassis_System.i");
+		lexecute("pca-pump-chasis-gen", "Chassis.aadl", "Chassis_System.i");
 	}
 
 	@Test
 	public void connection_Test_one_reference() {
-		execute("connection-translation-tests", "Connection_Translation.aadl", "Root.one_reference");
+		lexecute("connection-translation-tests", "Connection_Translation.aadl", "Root.one_reference");
 	}
 
 	@Test
 	public void connection_Test_two_references() {
-		execute("connection-translation-tests", "Connection_Translation.aadl", "Root.two_references");
+		lexecute("connection-translation-tests", "Connection_Translation.aadl", "Root.two_references");
 	}
 
 	@Test
 	public void connection_Test_three_references() {
-		execute("connection-translation-tests", "Connection_Translation.aadl", "Root.three_references");
+		lexecute("connection-translation-tests", "Connection_Translation.aadl", "Root.three_references");
 	}
 
 	@Test
 	public void bus_Access_Test_Dual_Processor_PowerPC() {
-		execute("bus-access-tests", "Bus_Access.aadl", "Dual_Processor.PowerPC");
+		lexecute("bus-access-tests", "Bus_Access.aadl", "Dual_Processor.PowerPC");
 	}
 
 	@Test
@@ -56,42 +47,10 @@ public class AirTestJava extends SireumTest {
 
 	@Test
 	public void feature_Grpup_Tests_Concrete_Sys() {
-		execute("feature-group-tests", "Feature_Group_TestCase.aadl", "Concrete_Sys.impl");
+		lexecute("feature-group-tests", "Feature_Group_TestCase.aadl", "Concrete_Sys.impl");
 	}
 
-	void execute(String dirName, String sysFilename, String sysImplName) {
-		try {
-			File root = new File(ROOT_DIR, dirName);
-
-			List<File> aadlFiles = IOUtils.collectFiles(root, ".aadl", true);
-			File sysImplFile = new File(root, sysFilename);
-			assert sysImplFile.exists() : sysImplFile.getAbsolutePath() + "doesn't exist";
-
-			AadlProject project = new AadlProject(root.getName(), root, aadlFiles);
-			AadlSystem system = new AadlSystem(sysImplName, sysImplFile, Arrays.asList(project));
-
-			SystemInstance instance = getSystemInstance(system);
-
-			Aadl model = Util.getAir(instance, true, System.out);
-			String ir = Util.serialize(model, SerializerType.JSON);
-
-			Optional<File> expectedFile = Arrays.stream(root.listFiles())
-					.filter(x -> x.getName().endsWith(sysImplName + ".json")).findFirst();
-			if (writeResults) {
-				File results = new File(root, sysImplName + "_results.json");
-				IOUtils.writeFile(results, ir);
-			}
-			Assert.assertTrue("Expected results not found", expectedFile.isPresent());
-			String expected = IOUtils.readFile(expectedFile.get());
-			if (generateExpected) {
-				IOUtils.writeFile(expectedFile.get(), ir);
-				expected = ir;
-			}
-
-			Assert.assertEquals(ir, expected);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.assertFalse(true);
-		}
+	void lexecute(String dirName, String sysFilename, String sysImplName) {
+		execute(new File(ROOT_DIR, dirName), sysFilename, sysImplName);
 	}
 }

@@ -12,19 +12,19 @@ property set CASE_Scheduling is
 	-- We will get fancier if we do a general ARINC653 solution. This
 	-- works for a basic schedule.
 	
-	-- CASE_Scheduling::Domain is the numeric ID of the domain to which
-	-- the Systems Engineer assigns the thread. Once the examples get
-	-- fixed to have processes, this should be at the process level,
-	-- rather than thread level.
+	--- CASE_Scheduling::Domain is the numeric ID of the domain to which
+	--- the Systems Engineer assigns the thread. Once the examples get
+	--- fixed to have processes, this should be at the process level,
+	--- rather than thread level.
 	Domain: aadlinteger applies to (thread, process);
 	
 	
-	-- The maximum allowed domain identifier
+	--- The maximum allowed domain identifier
 	Max_Domain: aadlinteger applies to (processor, virtual processor);
 	
 	
-	-- Schedule_Source_Text specifies the location of the source text for a
-	-- periodic domain schedule. For seL4, this will be a kernel modification.
+	--- Schedule_Source_Text specifies the location of the source text for a
+	--- periodic domain schedule. For seL4, this will be a kernel modification.
 	Schedule_Source_Text: aadlstring applies to (processor, virtual processor);
 	
 	-- use Timing_Properties::Compute_Execution_Time to specify the duration
@@ -38,4 +38,15 @@ property set CASE_Scheduling is
 	-- the timer tick is configurable, defaulting to 2ms. None of the
 	-- verified configurations change this. See:
 	-- https://github.com/seL4/seL4/blob/master/config.cmake#L213
+	
+	
+	--- Specifies the style of pacing to be used.  The default is <i>Self_Pacing</i> 
+	--- unless the model has virtual machines in which case <i>Pacer</i> must be used.
+	--- <ul>
+	---   <li><b>Pacer</b>: A Pacer component will be generated that sends pacing events to
+	---     each component.  The Pacer should be scheduled in domain 1.
+	---   <li><b>Self_Pacing</b>: Components pace themselves.
+	--- </ul> 
+	Pacing_Method: enumeration (Pacer, Self_Pacing) applies to (processor, virtual processor);
+	
 end CASE_Scheduling;

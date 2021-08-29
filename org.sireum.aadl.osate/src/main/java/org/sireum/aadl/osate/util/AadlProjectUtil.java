@@ -31,6 +31,7 @@ public class AadlProjectUtil {
 	public static List<AadlSystem> findSystems(File f) {
 		List<AadlSystem> ret = new ArrayList<AadlSystem>();
 		if (f.isDirectory()) {
+
 			List<File> systems = IOUtils.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
 			if (!systems.isEmpty()) {
 				// found user provided .system file so use that
@@ -39,6 +40,7 @@ public class AadlProjectUtil {
 				ret.add(AadlProjectUtil.createTestAadlSystem(systems.get(0)));
 				return ret;
 			}
+
 			for (File file : f.listFiles()) {
 				ret.addAll(findSystems(file));
 			}
@@ -68,6 +70,8 @@ public class AadlProjectUtil {
 					}
 				}
 				ret.add(new AadlSystem(systemImpl, systemFile, Arrays.asList(project)));
+			} else if (f.getName().startsWith(".system")) {
+				ret.add(AadlProjectUtil.createTestAadlSystem(f));
 			}
 		}
 		return ret;

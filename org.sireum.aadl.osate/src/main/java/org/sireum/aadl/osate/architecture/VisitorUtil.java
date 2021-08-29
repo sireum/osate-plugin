@@ -16,6 +16,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.LineAndColumn;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.NamedElement;
+import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.annexsupport.AnnexRegistry;
 import org.osate.annexsupport.AnnexTextPositionResolverRegistry;
@@ -51,10 +52,19 @@ public class VisitorUtil {
 		return IS$.MODULE$.apply(iseq, org.sireum.Z$.MODULE$);
 	}
 
+	public static <T> List<T> toIList(List<T> l) {
+		return Collections.unmodifiableList(l);
+	}
+
 	public static <T> List<T> toIList(T e) {
 		final List<T> ret = new ArrayList<>();
 		ret.add(e);
-		return Collections.unmodifiableList(ret);
+		return toIList(ret);
+	}
+
+	@SafeVarargs
+	public static <T> List<T> toIList(T... l) {
+		return toIList(java.util.Arrays.asList(l));
 	}
 
 	public static <T> List<T> addAll(List<T> l, List<T> e) {
@@ -142,4 +152,31 @@ public class VisitorUtil {
 		return null;
 	}
 
+	/**
+	 * @return removes property associations in {@code properties} that have the same name, keeping
+	 * only the final occurrence
+	 */
+	public static List<PropertyAssociation> removeShadowedProperties(List<PropertyAssociation> properties) {
+		List<PropertyAssociation> ret = new ArrayList<>();
+		List<String> names = new ArrayList<>();
+		for (int i = properties.size() - 1; i >= 0; i--) {
+			PropertyAssociation p = properties.get(i);
+			String name = p.getProperty().getName();
+			if (!names.contains(name)) {
+				ret.add(p);
+				names.add(name);
+			}
+		}
+		return ret;
+	}
+
+	public static class Pair<T1, T2> {
+		public final T1 t1;
+		public final T2 t2;
+
+		public Pair(T1 t1, T2 t2) {
+			this.t1 = t1;
+			this.t2 = t2;
+		}
+	}
 }

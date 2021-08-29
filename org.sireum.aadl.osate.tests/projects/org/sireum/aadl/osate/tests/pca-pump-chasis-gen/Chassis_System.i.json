@@ -154,11 +154,11 @@
                               "type" : "Some",
                               "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
-                            "beginLine" : 26,
+                            "beginLine" : 27,
                             "beginColumn" : 4,
-                            "endLine" : 29,
+                            "endLine" : 30,
                             "endColumn" : 36,
-                            "offset" : 1108,
+                            "offset" : 1165,
                             "length" : 162
                           }
                         }
@@ -185,11 +185,11 @@
                               "type" : "Some",
                               "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
-                            "beginLine" : 43,
+                            "beginLine" : 44,
                             "beginColumn" : 4,
-                            "endLine" : 43,
+                            "endLine" : 44,
                             "endColumn" : 68,
-                            "offset" : 1909,
+                            "offset" : 1966,
                             "length" : 64
                           }
                         }
@@ -228,11 +228,11 @@
                               "type" : "Some",
                               "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
-                            "beginLine" : 5,
+                            "beginLine" : 6,
                             "beginColumn" : 4,
-                            "endLine" : 5,
+                            "endLine" : 6,
                             "endColumn" : 73,
-                            "offset" : 106,
+                            "offset" : 163,
                             "length" : 69
                           }
                         }
@@ -493,11 +493,11 @@
                               "type" : "Some",
                               "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
-                            "beginLine" : 26,
+                            "beginLine" : 27,
                             "beginColumn" : 4,
-                            "endLine" : 29,
+                            "endLine" : 30,
                             "endColumn" : 36,
-                            "offset" : 1108,
+                            "offset" : 1165,
                             "length" : 162
                           }
                         }
@@ -524,11 +524,11 @@
                               "type" : "Some",
                               "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
-                            "beginLine" : 43,
+                            "beginLine" : 44,
                             "beginColumn" : 4,
-                            "endLine" : 43,
+                            "endLine" : 44,
                             "endColumn" : 68,
-                            "offset" : 1909,
+                            "offset" : 1966,
                             "length" : 64
                           }
                         }
@@ -567,11 +567,11 @@
                               "type" : "Some",
                               "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                             },
-                            "beginLine" : 5,
+                            "beginLine" : 6,
                             "beginColumn" : 4,
-                            "endLine" : 5,
+                            "endLine" : 6,
                             "endColumn" : 73,
-                            "offset" : 106,
+                            "offset" : 163,
                             "length" : 69
                           }
                         }
@@ -1539,11 +1539,11 @@
                   "type" : "Some",
                   "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                 },
-                "beginLine" : 26,
+                "beginLine" : 27,
                 "beginColumn" : 4,
-                "endLine" : 29,
+                "endLine" : 30,
                 "endColumn" : 36,
-                "offset" : 1108,
+                "offset" : 1165,
                 "length" : 162
               }
             }
@@ -1599,7 +1599,7 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["Data_Model::Data_Representation"],
+            "name" : ["Data_Model::Base_Type"],
             "pos" : {
               "type" : "Some",
               "value" : {
@@ -1608,19 +1608,31 @@
                   "type" : "Some",
                   "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                 },
-                "beginLine" : 26,
+                "beginLine" : 6,
                 "beginColumn" : 4,
-                "endLine" : 29,
-                "endColumn" : 36,
-                "offset" : 1108,
-                "length" : 162
+                "endLine" : 6,
+                "endColumn" : 73,
+                "offset" : 163,
+                "length" : 69
               }
             }
           },
           "propertyValues" : [
             {
-              "type" : "ValueProp",
-              "value" : "Struct"
+              "type" : "ClassifierProp",
+              "name" : "Base_Types::Boolean"
+            },
+            {
+              "type" : "ClassifierProp",
+              "name" : "Base_Types::Boolean"
+            },
+            {
+              "type" : "ClassifierProp",
+              "name" : "Base_Types::Boolean"
+            },
+            {
+              "type" : "ClassifierProp",
+              "name" : "Base_Types::Boolean"
             }
           ],
           "appliesTo" : [
@@ -1639,11 +1651,11 @@
                   "type" : "Some",
                   "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                 },
-                "beginLine" : 43,
+                "beginLine" : 44,
                 "beginColumn" : 4,
-                "endLine" : 43,
+                "endLine" : 44,
                 "endColumn" : 68,
-                "offset" : 1909,
+                "offset" : 1966,
                 "length" : 64
               }
             }
@@ -1673,7 +1685,7 @@
           "type" : "Property",
           "name" : {
             "type" : "Name",
-            "name" : ["Data_Model::Base_Type"],
+            "name" : ["Data_Model::Data_Representation"],
             "pos" : {
               "type" : "Some",
               "value" : {
@@ -1682,31 +1694,19 @@
                   "type" : "Some",
                   "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
                 },
-                "beginLine" : 5,
+                "beginLine" : 27,
                 "beginColumn" : 4,
-                "endLine" : 5,
-                "endColumn" : 73,
-                "offset" : 106,
-                "length" : 69
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
               }
             }
           },
           "propertyValues" : [
             {
-              "type" : "ClassifierProp",
-              "name" : "Base_Types::Boolean"
-            },
-            {
-              "type" : "ClassifierProp",
-              "name" : "Base_Types::Boolean"
-            },
-            {
-              "type" : "ClassifierProp",
-              "name" : "Base_Types::Boolean"
-            },
-            {
-              "type" : "ClassifierProp",
-              "name" : "Base_Types::Boolean"
+              "type" : "ValueProp",
+              "value" : "Struct"
             }
           ],
           "appliesTo" : [

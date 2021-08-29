@@ -1,5 +1,6 @@
 package org.sireum.aadl.osate.architecture;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -75,30 +76,59 @@ import org.sireum.message.Position;
 
 
 public class Visitor {
+	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 
-	public Visitor() {
-		Bundle b = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
-		if (b != null) {
-			// sv = new SmfVisitor(this);
+	protected final Map<String, org.sireum.hamr.ir.Component> datamap = new LinkedHashMap<>();
+	final Map<List<String>, Set<ConnectionReference>> compConnMap = new HashMap<>();
+	List<AnnexVisitor> annexVisitors = new ArrayList<>();
+
+	/** allowing this to throw exceptions as they will be caught by {@link org.sireum.aadl.osate.util.Util#getAir }
+	 * and printed to the passed in output stream
+	 *
+	 * @throws Exception
+	 */
+	public Visitor() throws Exception {
+		annexVisitors.add(new Emv2Visitor(this));
+
+		Bundle sm = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
+		if (sm != null) {
+			// annexVisitors.add(new SmfVisitor(this));
 		}
+
 		Bundle ba = Platform.getBundle("org.osate.ba");
 		if (ba != null && PreferenceValues.getPROCESS_BA_OPT()) {
-			bv = new BAVisitor(this);
+			annexVisitors.add(new BAVisitor(this));
 		}
+
 		Bundle gumbo = Platform.getBundle("org.sireum.aadl.gumbo");
 		if (gumbo != null) {
-			gv = new GumboVisitor(this);
+			annexVisitors.add(new GumboVisitor(this));
+		}
+
+		Bundle bless = Platform.getBundle("com.multitude.aadl.bless");
+		Bundle bless2Air = Platform.getBundle("org.sireum.aadl.osate.bless2Air");
+		if (bless != null && bless2Air != null && PreferenceValues.getPROCESS_BA_OPT()) {
+
+			// Bless is closed source so a Sireum OSATE plugin developer may not have
+			// access to its source code. Therefore the BlessVisitor was placed in a separate
+			// plugin which has the Bless plugin dependencies. Below we'll reflexively construct
+			// BlessVisitor so that there are no hard-coded dependencies to anything Bless related
+
+			Class<?> cls = bless2Air.loadClass("org.sireum.aadl.osate.architecture.BlessVisitor");
+			if (AnnexVisitor.class.isAssignableFrom(cls)) {
+				Constructor<?> cons = cls.getConstructor(new Class[] { Visitor.class });
+				annexVisitors.add((AnnexVisitor) cons.newInstance(this));
+			} else {
+				throw new RuntimeException("Could not load Bless to AIR plugin: " + cls.getCanonicalName()
+						+ " doesn't implement AnnexVisitor");
+			}
 		}
 	}
 
-	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
-
-	final Map<String, org.sireum.hamr.ir.Component> datamap = new LinkedHashMap<>();
-	final Map<List<String>, Set<ConnectionReference>> compConnMap = new HashMap<>();
-	final Emv2Visitor ev = new Emv2Visitor(this);
-	SmfVisitor sv = null;
-	BAVisitor bv = null;
-	GumboVisitor gv = null;
+	public Map<String, org.sireum.hamr.ir.Component> getDataComponents() {
+		// TODO should be an immutable copy
+		return this.datamap;
+	}
 
 	public Option<org.sireum.hamr.ir.Aadl> convert(Element root, boolean includeDataComponents) {
 		final Option<org.sireum.hamr.ir.Component> t = visit(root);
@@ -106,13 +136,13 @@ public class Visitor {
 			final List<org.sireum.hamr.ir.Component> dataComponents = includeDataComponents
 					? new ArrayList<>(datamap.values())
 					: VisitorUtil.iList();
-			List<AnnexLib> libs = ev.buildLibs();
-			if (sv != null) {
-				libs = VisitorUtil.addAll(libs, sv.visitSmfLib(root));
+
+			List<AnnexLib> libs = VisitorUtil.iList();
+			for (AnnexVisitor av : annexVisitors) {
+				libs = VisitorUtil.addAll(libs, av.buildAnnexLibraries(root));
 			}
-			return new Some<>(
-					factory.aadl(VisitorUtil.toIList(t.get()), libs,
-							dataComponents));
+
+			return new Some<>(factory.aadl(VisitorUtil.toIList(t.get()), libs, dataComponents));
 		} else {
 			return org.sireum.None.apply();
 		}
@@ -531,18 +561,10 @@ public class Visitor {
 
 		final List<org.sireum.hamr.ir.Mode> modes = VisitorUtil.iList(); // TODO
 
-		List<org.sireum.hamr.ir.Annex> annexes =
-				VisitorUtil.toIList(ev.visitEmv2Comp(compInst, currentPath)); // TODO
-		if(sv != null) {
-			annexes = VisitorUtil.add(annexes, sv.visitSmfComp(compInst, currentPath));
-		}
+		List<org.sireum.hamr.ir.Annex> annexes = VisitorUtil.iList();
 
-		if (bv != null) {
-			annexes = VisitorUtil.addAll(annexes, bv.visit(compInst, currentPath));
-		}
-
-		if (gv != null) {
-			annexes = VisitorUtil.addAll(annexes, gv.visit(compInst, currentPath));
+		for (AnnexVisitor av : annexVisitors) {
+			annexes = VisitorUtil.addAll(annexes, av.visit(compInst, currentPath));
 		}
 
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
@@ -899,27 +921,45 @@ public class Visitor {
 		}
 	}
 
-	protected org.sireum.hamr.ir.Component processDataType(DataClassifier f) {
+	public org.sireum.hamr.ir.Component processDataType(DataClassifier f) {
 		final String name = f.getQualifiedName();
 		if (datamap.containsKey(name)) {
 			return datamap.get(name);
 		}
 
-		List<org.sireum.hamr.ir.Property> properties = f.getOwnedPropertyAssociations().stream()
-				.map(op -> buildProperty(op, VisitorUtil.iList())).collect(Collectors.toList());
+		if (f.getExtended() != null) {
+			Classifier c = f.getExtended();
+			String parentName = c.getQualifiedName();
+
+			// TODO: add extended classifier name to AIR nodes
+			// System.out.println(parentName + " >> " + name);
+		}
+
+		/*
+		 * need to use 'getAll...' in order to pickup properties inherited from parent
+		 * since DataClassifier is coming from the declarative model (i.e. isn't flattened)
+		 * javadoc for method:
+		 * A list of the property associations. Property associations from
+		 * an ancestor component classifier will appear before those of any
+		 * descendents.
+		 */
+		List<PropertyAssociation> allProperties = VisitorUtil.toIList(f.getAllPropertyAssociations());
 
 		List<org.sireum.hamr.ir.Component> subComponents = VisitorUtil.iList();
 		if (f instanceof DataTypeImpl) {
 			// do nothing as component types can't have subcomponents
 		} else if (f instanceof DataImplementation) {
 			final DataImplementation di = (DataImplementation) f;
-			final List<org.sireum.hamr.ir.Property> subProps = di.getType().getOwnedPropertyAssociations().stream()
-					.map(op -> buildProperty(op, VisitorUtil.iList())).collect(Collectors.toList());
-			properties = VisitorUtil.addAll(properties, subProps);
+
+			// the properties from the data component's type are not inherited by
+			// the data component's implementation in the declarative model.
+			// Add the data component type's properties before the data component
+			// implemention's properties
+			allProperties = VisitorUtil.addAll(di.getType().getAllPropertyAssociations(), allProperties);
 
 			for (Subcomponent subcom : di.getAllSubcomponents()) {
 				if (!(subcom instanceof DataSubcomponent)) {
-					throw new RuntimeException("Unxepcted data subcomponent: " + subcom.getFullName() + " of type "
+					throw new RuntimeException("Unexpected data subcomponent: " + subcom.getFullName() + " of type "
 							+ subcom.getClass().getSimpleName() + " from " + f.getFullName());
 				}
 
@@ -930,7 +970,20 @@ public class Visitor {
 				final List<org.sireum.hamr.ir.Property> fProperties = dsc.getOwnedPropertyAssociations().stream()
 						.map(op -> buildProperty(op, VisitorUtil.iList())).collect(Collectors.toList());
 
-				final DataClassifier sct = (DataClassifier) dsc.getDataSubcomponentType();
+				DataClassifier sct = null;
+				if (dsc.getDataSubcomponentType() instanceof DataClassifier) {
+					sct = (DataClassifier) dsc.getDataSubcomponentType();
+				} else {
+					if(dsc.getDataSubcomponentType() != null) {
+						String mesg = "Expecting a DataClassifier for " + dsc.qualifiedName()
+							+ " but found something of type " + dsc.getDataSubcomponentType().getClass().getSimpleName()
+							+ (dsc.getDataSubcomponentType().hasName() ? " whose name is " + dsc.getDataSubcomponentType().getQualifiedName() : "")
+							+ ". This can happen when your model has multiple copies of the same resource.";
+
+						throw new RuntimeException(mesg);
+					}
+				}
+
 				if (sct != null) {
 					final org.sireum.hamr.ir.Component c = processDataType(sct);
 
@@ -973,12 +1026,28 @@ public class Visitor {
 			throw new RuntimeException("Unexpected data type: " + f);
 		}
 
-		final org.sireum.hamr.ir.Component c = factory.component(factory.name(VisitorUtil.iList(), null), // identifier
+		// NOTE there may be multiple properties associations with the same name if, e.g, a
+		// data component extends Base_Type::Integer_32 but also adds the property
+		// Data_Size => 16 bits. So would need to 'findLast' when processing these
+		// ... so instead remove duplicates? Unless there is a reason why we'd want to
+		// know the parent values of properties the child shadows
+		List<PropertyAssociation> uniqueProperties = VisitorUtil.removeShadowedProperties(allProperties);
+
+		List<org.sireum.hamr.ir.Property> properties = uniqueProperties.stream()
+				.map(op -> buildProperty(op, VisitorUtil.iList()))
+				.collect(Collectors.toList());
+
+		// this is a hack as we're sticking something from the declarative
+		// model into a node meant for things from the instance model. Todo
+		// would be to add a declarative model AIR AST and ...
+		final org.sireum.hamr.ir.Component c = factory.component( //
+				factory.name(VisitorUtil.iList(), null), // identifier
 				AadlASTJavaFactory.ComponentCategory.Data, // category
 				factory.classifier(name), VisitorUtil.iList(), // features
 				subComponents, VisitorUtil.iList(), // connections
 				VisitorUtil.iList(), // connectionInstances
-				properties, VisitorUtil.iList(), // flows
+				properties, // properties
+				VisitorUtil.iList(), // flows
 				VisitorUtil.iList(), // modes
 				VisitorUtil.iList(), // annexes
 				""
@@ -986,6 +1055,7 @@ public class Visitor {
 		datamap.put(name, c);
 		return c;
 	}
+
 
 	private AadlASTJavaFactory.Direction handleDirection(DirectionType d) {
 		AadlASTJavaFactory.Direction direction = null;

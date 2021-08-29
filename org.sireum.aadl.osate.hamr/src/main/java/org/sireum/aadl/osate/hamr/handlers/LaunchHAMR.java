@@ -16,6 +16,7 @@ import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
 import org.sireum.Option;
+import org.sireum.SireumApi;
 import org.sireum.Z;
 import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
@@ -24,12 +25,14 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.ErrorReport;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.Report;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
+import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.arsit.ArsitBridge;
 import org.sireum.hamr.ir.Aadl;
 
 public class LaunchHAMR extends AbstractSireumHandler {
 	private HAMRPrompt prompt = null;
+	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 
 	@Override
 	public String getToolName() {
@@ -49,6 +52,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 			Dialog.showError(getToolName(), "Please select a system implementation or a system instance");
 			return Status.CANCEL_STATUS;
 		}
+
+		writeToConsole("Sireum Version: " + SireumApi.version());
 
 		writeToConsole("Generating AIR ...");
 
@@ -112,47 +117,57 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						toolRet = Util.callWrapper(getToolName(), console, () -> {
 							final File workspaceRoot = getProjectPath(si).toFile();
 
-							final String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("")
-									? workspaceRoot.getAbsolutePath()
-									: prompt.getSlangOptionOutputDirectory();
+							final org.sireum.String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("") //
+									? new org.sireum.String(workspaceRoot.getAbsolutePath())
+									: new org.sireum.String(prompt.getSlangOptionOutputDirectory());
 
-							final String _base = prompt.getOptionBasePackageName().equals("")
-									? HAMRUtil.cleanupPackageName(new File(_slangOutputDir).getName())
-									: HAMRUtil.cleanupPackageName(prompt.getOptionBasePackageName());
+							final org.sireum.String _base = prompt.getOptionBasePackageName().equals("") //
+									? new org.sireum.String(
+											HAMRUtil.cleanupPackageName(new File(_slangOutputDir.string()).getName()))
+									: new org.sireum.String(
+											HAMRUtil.cleanupPackageName(prompt.getOptionBasePackageName()));
 
-							final String outputCDirectory = targetingSel4
-									? new File(prompt.getOptionCamkesOptionOutputDirectory(), "hamr").getAbsolutePath()
-									: new File(_slangOutputDir, "src/c/nix").getAbsolutePath();
+							final org.sireum.String _cOutputDirectory = prompt.getOptionCOutputDirectory().equals("") //
+									? null
+									: new org.sireum.String(prompt.getOptionCOutputDirectory());
+
+							org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory()
+									.equals("") //
+									? null
+											: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
+
 
 							boolean verbose = PreferenceValues.getHAMR_VERBOSE_OPT();
 							String platform = prompt.getOptionPlatform().hamrName();
-							Option<String> slangOutputDir = ArsitBridge.sireumOption(_slangOutputDir);
-							Option<String> slangPackageName = ArsitBridge.sireumOption(_base);
+							Option<org.sireum.String> slangOutputDir = ArsitBridge
+									.sireumOption(_slangOutputDir);
+							Option<org.sireum.String> slangPackageName = ArsitBridge
+									.sireumOption(_base);
 							boolean noEmbedArt = !PreferenceValues.getHAMR_EMBED_ART_OPT();
 							boolean devicesAsThreads = PreferenceValues.getHAMR_DEVICES_AS_THREADS_OPT();
-							IS<Z, String> slangAuxCodeDirs = prompt.getOptionCSourceDirectory().equals("")
+							IS<Z, org.sireum.String> slangAuxCodeDirs = prompt.getOptionCAuxSourceDirectory().equals("")
 									? VisitorUtil.toISZ()
-									: VisitorUtil.toISZ(prompt.getOptionCSourceDirectory());
-							Option<String> slangOutputCDirectory = ArsitBridge.sireumOption(outputCDirectory);
+									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionCAuxSourceDirectory()));
+							Option<org.sireum.String> slangOutputCDirectory = ArsitBridge
+									.sireumOption(_cOutputDirectory);
 							boolean excludeComponentImpl = prompt.getOptionExcludesSlangImplementations();
-							int bitWidth = prompt.getOptionBitWidth();
-							int maxStringSize = prompt.getOptionMaxStringSize();
-							int maxArraySize = prompt.getOptionMaxSequenceSize();
+							Z bitWidth = SlangUtils.toZ(prompt.getOptionBitWidth());
+							Z maxStringSize = SlangUtils.toZ(prompt.getOptionMaxStringSize());
+							Z maxArraySize = SlangUtils.toZ(prompt.getOptionMaxSequenceSize());
 							boolean runTranspiler = PreferenceValues.getHAMR_RUN_TRANSPILER();
-							File _camkesOutDir = new File(prompt.getOptionCamkesOptionOutputDirectory());
-							_camkesOutDir.mkdirs();
-							Option<String> camkesOutputDirectory = ArsitBridge
-									.sireumOption(_camkesOutDir.getAbsolutePath());
-							IS<Z, String> camkesAuxCodeDirs = prompt.getOptionCamkesAuxSrcDir().equals("")
+							Option<org.sireum.String> camkesOutputDirectory = ArsitBridge
+									.sireumOption(_camkesOutputDir);
+							IS<Z, org.sireum.String> camkesAuxCodeDirs = prompt.getOptionCamkesAuxSrcDir().equals("")
 									? VisitorUtil.toISZ()
-									: VisitorUtil.toISZ(prompt.getOptionCamkesAuxSrcDir());
-							Option<String> aadlRootDir = ArsitBridge.sireumOption(workspaceRoot.getAbsolutePath());
+									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionCamkesAuxSrcDir()));
+							Option<org.sireum.String> aadlRootDir = ArsitBridge
+									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 
-							IS<Z, String> experimentalOptions = org.sireum.aadl.osate.PreferenceValues.getPROCESS_BA_OPT()
-									? VisitorUtil.toISZ("PROCESS_BTS_NODES")
+							IS<Z, org.sireum.String> experimentalOptions = org.sireum.aadl.osate.PreferenceValues
+									.getPROCESS_BA_OPT() ? VisitorUtil.toISZ(new org.sireum.String("PROCESS_BTS_NODES"))
 									: VisitorUtil.toISZ();
 
-							return org.sireum.cli.HAMR.codeGen( //
+							return org.sireum.cli.HAMR.codeGenH( //
 									model, //
 									//
 									verbose, //
@@ -174,7 +189,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									camkesAuxCodeDirs, //
 									aadlRootDir, //
 									//
-									experimentalOptions);
+									experimentalOptions).toInt();
 						});
 					}
 
