@@ -23,6 +23,7 @@ import org.sireum.aadl.osate.securitymodel.secMF.SMFDeclassification;
 import org.sireum.aadl.osate.securitymodel.secMF.SecMFPackage;
 import org.sireum.aadl.osate.securitymodel.secMF.SecModelLibrary;
 import org.sireum.aadl.osate.securitymodel.secMF.SecModelSubclause;
+import org.sireum.aadl.osate.securitymodel.secMF.SmfTypeDef;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.hamr.ir.Name;
@@ -69,23 +70,25 @@ public class SmfVisitor {
 	}
 
 	private AnnexLib visitSmfLib(SecModelLibrary secModelLibrary) {
-//		List<SmfType> types = secModelLibrary.getTypes().stream().map(it -> visitSMFTypeDef(it))
-//				.collect(Collectors.toList());
-		List<SmfType> types = VisitorUtil.iList();
+		List<SmfType> types = secModelLibrary.getTypes()
+				.stream()
+				.map(it -> visitSMFTypeDef(it))
+				.collect(Collectors.toList());
+		// List<SmfType> types = VisitorUtil.iList();
 		return factory.smfLibrary(types);
 
 	}
 
-//	private SmfType visitSMFTypeDef(SmfTypeDef typeDef) {
-//		Name typeName = factory.name(VisitorUtil.toIList(typeDef.getFullName()), VisitorUtil.buildPosInfo(typeDef));
-//		List<Name> parentName = VisitorUtil.iList();
-//		if (typeDef.getType() != null) {
-//			parentName = typeDef.getType().stream().map(it -> {
-//				return factory.name(VisitorUtil.toIList(it.getFullName()), VisitorUtil.buildPosInfo(it));
-//			}).collect(Collectors.toList());
-//		}
-//		return factory.smfType(typeName, parentName);
-//	}
+	private SmfType visitSMFTypeDef(SmfTypeDef typeDef) {
+		Name typeName = factory.name(VisitorUtil.toIList(typeDef.getFullName()), VisitorUtil.buildPosInfo(typeDef));
+		List<Name> parentName = VisitorUtil.iList();
+		if (typeDef.getType() != null) {
+			parentName = typeDef.getType().stream().map(it -> {
+				return factory.name(VisitorUtil.toIList(it.getFullName()), VisitorUtil.buildPosInfo(it));
+			}).collect(Collectors.toList());
+		}
+		return factory.smfType(typeName, parentName);
+	}
 
 	private HashSet<SecModelLibrary> getAllPackages(Element root) {
 		HashSet<SecModelLibrary> secLibs = new HashSet<SecModelLibrary>();
