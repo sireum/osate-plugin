@@ -24,9 +24,9 @@ import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.InstanceObject;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instance.util.InstanceUtil;
+import org.osate.ge.gef.ui.editor.AgeEditor;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
 import org.osate.ge.internal.services.DiagramService;
-import org.osate.ge.internal.ui.editor.AgeDiagramEditor;
 import org.osate.ge.internal.ui.util.SelectionUtil;
 import org.sireum.aadl.osate.awas.util.AwasUtil;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
@@ -86,7 +86,7 @@ public class ReachForwardHandler extends AbstractSireumHandler {
 					ComponentImplementation cii = InstanceUtil.getComponentImplementation(si, 0, null);
 					// cii.eResource().getResourceSet().get
 					List<Collector> lc = new ArrayList<Collector>(qres.values());
-					Set<AgeDiagramEditor> ads = AwasUtil.awasGraphUri2AgeDiagramEditor(lc.get(0).getGraph(),
+					Set<AgeEditor> ads = AwasUtil.awasGraphUri2AgeDiagramEditor(lc.get(0).getGraph(),
 							isImplDiagram, st, resource, diagramService);
 					AwasUtil.highlightDiagrams(ads, lc.get(0), isImplDiagram, st, resource);
 				}

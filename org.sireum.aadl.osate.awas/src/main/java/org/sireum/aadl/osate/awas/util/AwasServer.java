@@ -18,9 +18,6 @@ import org.osate.aadl2.instance.InstanceObject;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.modelsupport.EObjectURIWrapper;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
-import org.osate.ge.internal.services.DiagramService.DiagramReference;
-import org.osate.ge.internal.ui.editor.AgeDiagramEditor;
-import org.osate.ge.internal.ui.util.EditorUtil;
 import org.sireum.aadl.osate.awas.handlers.AwasServerHandler;
 import org.sireum.awas.ast.AwasSerializer;
 import org.sireum.awas.ast.Model;
@@ -203,12 +200,12 @@ public class AwasServer extends PetiImpl {
 		return hexString.toString();
 	}
 
-	private AgeDiagramEditor getAgeDiagramEditor(DiagramReference diagramRef) {
-		if (diagramRef.isOpen()) {
-			return diagramRef.getEditor();
-		} else {
-			return EditorUtil.openEditor(diagramRef.getFile(), false);
-		}
-
-	}
+//	private InternalDiagramEditor getAgeDiagramEditor(DiagramReference diagramRef) {
+//		if (diagramRef.isOpen()) {
+//			return diagramRef.getEditor();
+//		} else {
+//			return EditorUtil.openEditor(diagramRef.getFile(), false);
+//		}
+//
+//	}
 }

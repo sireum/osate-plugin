@@ -18,11 +18,17 @@ import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instance.util.InstanceUtil;
 import org.osate.aadl2.modelsupport.EObjectURIWrapper;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
+import org.osate.ge.GraphicalEditor;
+import org.osate.ge.gef.AgeGefRuntimeException;
+import org.osate.ge.gef.ui.editor.AgeEditor;
 import org.osate.ge.graphics.StyleBuilder;
 import org.osate.ge.internal.diagram.runtime.AgeDiagram;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
+import org.osate.ge.internal.services.ActionExecutor.ExecutionMode;
 import org.osate.ge.internal.services.DiagramService;
-import org.osate.ge.internal.ui.editor.AgeDiagramEditor;
+import org.osate.ge.internal.services.DiagramService.DiagramReference;
+import org.osate.ge.internal.ui.editor.InternalDiagramEditor;
+import org.osate.ge.internal.ui.util.EditorUtil;
 import org.sireum.awas.ast.Node;
 import org.sireum.awas.awasfacade.Collector;
 import org.sireum.awas.collector.ResultType;
@@ -47,7 +53,6 @@ public class AwasUtil {
 		}).collect(Collectors.toSet());
 		return ios;
 	}
-
 	public static Set<InstanceObject> awasUri2AadlInstObj(Set<String> uris, SymbolTable st, Resource resource) {
 		return awasUri2EObject(uris, st, resource).stream().filter(it -> (it instanceof InstanceObject))
 				.map(it -> (InstanceObject) it).collect(Collectors.toSet());
@@ -58,7 +63,7 @@ public class AwasUtil {
 	}
 
 	@SuppressWarnings("restriction")
-	public static void highlightDiagrams(Set<AgeDiagramEditor> ads, Collector qres, Boolean isImpleDiagram,
+	public static void highlightDiagrams(Set<AgeEditor> ads, Collector qres, Boolean isImpleDiagram,
 			SymbolTable st,
 			Resource resource) {
 
@@ -91,7 +96,7 @@ public class AwasUtil {
 		Set<DiagramElement> des = new HashSet<DiagramElement>();
 
 		ads.forEach(ad -> {
-			des.addAll(getAllDiagramElements(ad.getDiagramBehavior().getAgeDiagram()));// getDiagram()));
+			des.addAll(getAllDiagramElements(ad.getDiagram()));// getDiagram()));
 		});
 
 		des.forEach(de -> {
@@ -104,8 +109,13 @@ public class AwasUtil {
 			}
 		});
 		ads.forEach(ad -> {
-			ad.getDiagramBehavior().updateDiagramWhenVisible();
-			ad.doSave(new NullProgressMonitor());
+			ad.getActionExecutor().execute("highlight diagram", ExecutionMode.NORMAL, () -> {
+				ad.updateNowIfModelHasChanged();
+				ad.updateDiagram();
+				ad.getGefDiagram().refreshDiagramStyles();
+				ad.doSave(new NullProgressMonitor());
+				return null;
+			});
 		});
 	}
 
@@ -114,18 +124,18 @@ public class AwasUtil {
 
 		List<DiagramElement> worklist = new ArrayList();
 
-		worklist.addAll(diagram.getDiagramElements());
+		worklist.addAll(diagram.getChildren());
 
 		while (!worklist.isEmpty()) {
 			DiagramElement curr = worklist.remove(0);
 			result.add(curr);
-			worklist.addAll(curr.getDiagramElements());
+			worklist.addAll(curr.getChildren());
 		}
 		return result;
 	}
 
 	@SuppressWarnings("restriction")
-	public static Set<AgeDiagramEditor> awasGraphUri2AgeDiagramEditor(Set<String> graphs, Boolean isImpleDiagram,
+	public static Set<AgeEditor> awasGraphUri2AgeDiagramEditor(Set<String> graphs, Boolean isImpleDiagram,
 			SymbolTable st, Resource resource, DiagramService diagramService) {
 
 		List<String> graphFrags = graphs.stream().flatMap(it -> {
@@ -140,10 +150,10 @@ public class AwasUtil {
 		final List<EObject> cis = graphFrags.stream()
 				.map(it -> resource.getResourceSet().getEObject(URI.createURI(it), true)).collect(Collectors.toList());
 
-		Set<AgeDiagramEditor> ads = new HashSet<AgeDiagramEditor>();
+		Set<AgeEditor> ads = new HashSet<AgeEditor>();
 		for (EObject ci : cis) {
 			if (ci instanceof ComponentInstance) {
-				AgeDiagramEditor ade = null;
+				GraphicalEditor ade = null;
 				if (isImpleDiagram) {
 					ComponentImplementation cii = InstanceUtil.getComponentImplementation((ComponentInstance) ci, 0,
 							null);
@@ -153,22 +163,39 @@ public class AwasUtil {
 					ade = diagramService.openOrCreateDiagramForBusinessObject(
 							((ComponentInstance) ci).getSystemInstance(), true, true);
 				}
-				ads.add(ade);
+
+				if (!(ade instanceof AgeEditor)) {
+					throw new AgeGefRuntimeException("Unexpected editor type. Editor must be of type " + AgeEditor.class);
+				}
+				ads.add((AgeEditor) ade);
 			}
 		}
 		return ads;
 	}
 
 	@SuppressWarnings("restriction")
-	public static Set<AgeDiagramEditor> awasGraphUri2AgeDiagramEditor(SystemInstance si, SymbolTable st,
+	public static Set<GraphicalEditor> awasGraphUri2AgeDiagramEditor(SystemInstance si, SymbolTable st,
 			Resource resource, DiagramService diagramService) {
 
 
-		Set<AgeDiagramEditor> ads = new HashSet<AgeDiagramEditor>();
+		Set<GraphicalEditor> ads = new HashSet<GraphicalEditor>();
 
 		ads.add(diagramService.openOrCreateDiagramForBusinessObject(si, true, true));
 
 		return ads;
+	}
+
+	@SuppressWarnings("restriction")
+	public static InternalDiagramEditor getAgeDiagramEditor(DiagramReference diagramRef) {
+
+		return EditorUtil.openEditor(diagramRef.getFile(), false);
+
+//		if (diagramRef.isOpen()) {
+//			return diagramRef.getEditor();
+//		} else {
+//			return EditorUtil.openEditor(diagramRef.getFile(), false);
+//		}
+
 	}
 
 

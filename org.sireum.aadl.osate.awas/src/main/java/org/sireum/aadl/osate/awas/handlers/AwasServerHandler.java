@@ -39,12 +39,15 @@ import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.modelsupport.EObjectURIWrapper;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.ge.CanonicalBusinessObjectReference;
+import org.osate.ge.GraphicalEditor;
+import org.osate.ge.gef.AgeGefRuntimeException;
+import org.osate.ge.gef.ui.editor.AgeEditor;
 import org.osate.ge.graphics.Style;
 import org.osate.ge.graphics.StyleBuilder;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
+import org.osate.ge.internal.services.ActionExecutor.ExecutionMode;
 import org.osate.ge.internal.services.DiagramService;
 import org.osate.ge.internal.services.DiagramService.DiagramReference;
-import org.osate.ge.internal.ui.editor.AgeDiagramEditor;
 import org.osate.ge.internal.ui.util.EditorUtil;
 import org.sireum.aadl.osate.awas.Activator;
 import org.sireum.aadl.osate.awas.util.AwasServer;
@@ -63,7 +66,7 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 	static Display display = null;
 
 	static DiagramService diagramService = null;
-	static AgeDiagramEditor ade = null;
+	static AgeEditor ade = null;
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -151,6 +154,7 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 
 					CanonicalBusinessObjectReference bor = dr.getContextReference();
 					if (bor.getSegments().stream().anyMatch(it -> it.equals(instancePath.toString().toLowerCase()))) {
+						// ade = diagramService.openOrCreateDiagramForBusinessObject(dr);
 						ade = getAgeDiagramEditor(dr);
 					}
 				}
@@ -192,12 +196,23 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 		return null;
 	}
 
-	private static AgeDiagramEditor getAgeDiagramEditor(DiagramReference diagramRef) {
-		if (diagramRef.isOpen()) {
-			return diagramRef.getEditor();
-		} else {
-			return EditorUtil.openEditor(diagramRef.getFile(), false);
+	@SuppressWarnings("restriction")
+	private static AgeEditor getAgeDiagramEditor(DiagramReference diagramRef) {
+
+		GraphicalEditor ge = EditorUtil.openEditor(diagramRef.getFile(), false);// diagramService.openOrCreateDiagramForBusinessObject(diagramRef.getContextReference());
+
+		if (!(ge instanceof AgeEditor)) {
+			throw new AgeGefRuntimeException("Unexpected editor type. Editor must be of type " + AgeEditor.class);
 		}
+
+		return (AgeEditor) ge;
+//		return null;
+
+//		if (diagramRef.isOpen()) {
+//			return diagramRef.getEditor();
+//		} else {
+//			return EditorUtil.openEditor(diagramRef.getFile(), false);
+//		}
 
 	}
 
@@ -226,7 +241,7 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 			Set<DiagramElement> des = new HashSet<DiagramElement>();
 
 
-			AwasUtil.getAllDiagramElements(ade.getDiagramBehavior().getAgeDiagram()).forEach(de -> des.add(de));
+			AwasUtil.getAllDiagramElements(ade.getDiagram()).forEach(de -> des.add(de));
 
 			des.forEach(de -> {
 				URI hUri = new EObjectURIWrapper((EObject) de.getBusinessObject()).getUri();
@@ -238,8 +253,22 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 
 			});
 
-			ade.getDiagramBehavior().updateDiagramWhenVisible();
-			ade.doSave(new NullProgressMonitor());
+
+			ade.getActionExecutor().execute("highlight diagram", ExecutionMode.NORMAL, () -> {
+				ade.updateNowIfModelHasChanged();
+				ade.updateDiagram();
+				ade.getGefDiagram().refreshDiagramStyles();
+				ade.doSave(new NullProgressMonitor());
+				return null;
+			});
+//
+//			ade.forceDiagramUpdateOnNextModelChange();
+//			ade.updateDiagram();
+//			ade.setFocus();
+//			ade.clearSelection();
+
+			// ade.updateNowIfModelHasChanged();
+			// ade.doSave(new NullProgressMonitor());
 		});
 
 
@@ -248,19 +277,24 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 	@SuppressWarnings("restriction")
 	public static void clearInstanceDiagram(Set<URI> iUri, SystemInstance root) {
 		display.syncExec(() -> {
-		Set<DiagramElement> des = new HashSet<DiagramElement>();
+			Set<DiagramElement> des = new HashSet<DiagramElement>();
 
-		AwasUtil.getAllDiagramElements(ade.getDiagramBehavior().getAgeDiagram()).forEach(de -> des.add(de));
+			AwasUtil.getAllDiagramElements(ade.getDiagram()).forEach(de -> des.add(de));
 
-		des.forEach(de -> {
-			URI hUri = new EObjectURIWrapper((EObject) de.getBusinessObject()).getUri();
-			if (de.getBusinessObject() instanceof EObject && iUri.contains(hUri)) {
-				de.setStyle(Style.DEFAULT);
-			}
-		});
+			des.forEach(de -> {
+				URI hUri = new EObjectURIWrapper((EObject) de.getBusinessObject()).getUri();
+				if (de.getBusinessObject() instanceof EObject && iUri.contains(hUri)) {
+					de.setStyle(Style.DEFAULT);
+				}
+			});
 
-		ade.getDiagramBehavior().updateDiagramWhenVisible();
-		ade.doSave(new NullProgressMonitor());
+			ade.getActionExecutor().execute("highlight diagram", ExecutionMode.NORMAL, () -> {
+				ade.updateNowIfModelHasChanged();
+				ade.updateDiagram();
+				ade.getGefDiagram().refreshDiagramStyles();
+				ade.doSave(new NullProgressMonitor());
+				return null;
+			});
 		});
 	}
 
