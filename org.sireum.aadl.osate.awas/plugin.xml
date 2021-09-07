@@ -18,7 +18,6 @@
                name="Generator1">
          </commandParameter>
       </command>
-      <!--
       <command
             defaultHandler="org.sireum.aadl.osate.awas.handlers.ReachForwardHandler"
             id="org.sireum.commands.forward"
@@ -59,7 +58,6 @@
                id="org.eclipse.ui.commands.toggleState">
          </state>
       </command>
-      -->
    </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution
@@ -70,7 +68,6 @@
             <dynamic class="org.sireum.aadl.osate.awas.MenuContributions" id="org.sireum.ui.views.menu.AwasMenuItems"/>
          </menu>
       </menuContribution>
-      <!--
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar">
          <toolbar
@@ -127,7 +124,6 @@
             </command>
          </toolbar>
       </menuContribution>
-      -->
    </extension>
    <extension point="org.eclipse.ui.preferencePages">
       <page

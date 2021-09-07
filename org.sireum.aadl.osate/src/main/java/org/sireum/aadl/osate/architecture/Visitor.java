@@ -92,7 +92,7 @@ public class Visitor {
 
 		Bundle sm = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
 		if (sm != null) {
-			// annexVisitors.add(new SmfVisitor(this));
+			annexVisitors.add(new SmfVisitor(this));
 		}
 
 		Bundle ba = Platform.getBundle("org.osate.ba");

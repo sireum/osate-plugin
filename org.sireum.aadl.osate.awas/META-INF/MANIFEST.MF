@@ -14,7 +14,11 @@ Require-Bundle: org.osate.aadl2,
  org.osate.ge.diagram;bundle-version="2.0.1",
  org.eclipse.core.expressions,
  org.eclipse.core.commands,
- org.osate.ui
+ org.osate.ui,
+ org.osate.ge.gef;bundle-version="1.0.0",
+ org.osate.ge.gef.ui;bundle-version="1.0.0",
+ org.eclipse.gef.common;bundle-version="5.0.1",
+ org.eclipse.ui.views.properties.tabbed;bundle-version="3.9.100"
 Automatic-Module-Name: Awas
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
@@ -22,6 +26,8 @@ Bundle-ClassPath: .,
  bin/,
  external:$SIREUM_JAR$
 Import-Package: org.osate.ge.diagram,
+ org.osate.ge.gef,
+ org.osate.ge.gef.ui.editor,
  org.osate.pluginsupport
 Export-Package: org.sireum.aadl.osate.awas.util,
  org.sireum.awas.AADLBridge,

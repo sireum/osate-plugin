@@ -1,12 +1,48 @@
 package org.sireum.aadl.osate.awas.handlers;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.console.MessageConsole;
+import org.eclipse.ui.handlers.HandlerUtil;
 import org.osate.aadl2.Element;
+import org.osate.aadl2.instance.InstanceObject;
+import org.osate.aadl2.instance.SystemInstance;
+import org.osate.ge.gef.ui.editor.AgeEditor;
+import org.osate.ge.internal.diagram.runtime.DiagramElement;
+import org.osate.ge.internal.services.DiagramService;
+import org.osate.ge.internal.ui.util.SelectionUtil;
+import org.sireum.aadl.osate.awas.util.AwasUtil;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
+import org.sireum.aadl.osate.util.SelectionHelper;
+import org.sireum.aadl.osate.util.Util;
+import org.sireum.awas.ast.Model;
+import org.sireum.awas.awasfacade.AwasGraph;
+import org.sireum.awas.awasfacade.AwasGraphImpl;
+import org.sireum.awas.awasfacade.Collector;
+import org.sireum.awas.flow.FlowEdge;
+import org.sireum.awas.flow.FlowGraph;
+import org.sireum.awas.flow.FlowNode;
+import org.sireum.awas.symbol.SymbolTable;
+import org.sireum.hamr.ir.Aadl;
+import org.sireum.util.ConsoleTagReporter;
 
 public class ReachBackwardHandler extends AbstractSireumHandler {
-/*
+
 	@SuppressWarnings("restriction")
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -46,7 +82,7 @@ public class ReachBackwardHandler extends AbstractSireumHandler {
 					SystemInstance si = ios.get(0).getSystemInstance();
 					Resource resource = si.eResource();
 					List<Collector> lc = new ArrayList<Collector>(qres.values());
-					Set<AgeDiagramEditor> ads = AwasUtil.awasGraphUri2AgeDiagramEditor(lc.get(0).getGraph(),
+					Set<AgeEditor> ads = AwasUtil.awasGraphUri2AgeDiagramEditor(lc.get(0).getGraph(),
 							isImplDiagram, st, resource, diagramService);
 					AwasUtil.highlightDiagrams(ads, lc.get(0), isImplDiagram, st, resource);
 
@@ -71,7 +107,7 @@ public class ReachBackwardHandler extends AbstractSireumHandler {
 
 		return null;
 	}
-*/
+
 	@Override
 	protected IStatus runJob(Element arg0, IProgressMonitor arg1) {
 		// TODO Auto-generated method stub

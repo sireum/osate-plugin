@@ -93,7 +93,7 @@ public class AwasServer extends PetiImpl {
 		}
 		return Option.empty();
 	}
-/*
+
 	@SuppressWarnings("restriction")
 	@Override
 	public Option<Protocol> handleHighlight(scala.collection.immutable.Map<String, String> urisColor) {
@@ -172,7 +172,7 @@ public class AwasServer extends PetiImpl {
 
 		return Option.empty();
 	}
-*/
+
 
 
 	public static byte[] getSHA(String input) throws NoSuchAlgorithmException {
@@ -199,14 +199,13 @@ public class AwasServer extends PetiImpl {
 
 		return hexString.toString();
 	}
-/*
-	private AgeDiagramEditor getAgeDiagramEditor(DiagramReference diagramRef) {
-		if (diagramRef.isOpen()) {
-			return diagramRef.getEditor();
-		} else {
-			return EditorUtil.openEditor(diagramRef.getFile(), false);
-		}
 
-	}
-*/
+//	private InternalDiagramEditor getAgeDiagramEditor(DiagramReference diagramRef) {
+//		if (diagramRef.isOpen()) {
+//			return diagramRef.getEditor();
+//		} else {
+//			return EditorUtil.openEditor(diagramRef.getFile(), false);
+//		}
+//
+//	}
 }
