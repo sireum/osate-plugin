@@ -154,6 +154,12 @@ public class HAMRPrompt extends TitleAreaDialog {
 	}
 
 	private boolean validate() {
+
+		if (getComboControl(OPTION_PLATFORM).getSelectionIndex() < 0) {
+			Dialog.showError("Input Error", "Please select a platform");
+			return false;
+		}
+
 		Option<Integer> mss = getIntFromControl(OPTION_MAX_SEQUENCE_SIZE);
 		if (mss.isEmpty() || mss.get().intValue() < 0) {
 			Dialog.showError("Input Error", "Max Sequence Size must be a number greater than or equal to 0");

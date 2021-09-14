@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
@@ -21,11 +23,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.mylyn.commons.ui.dialogs.AbstractNotificationPopup;
 import org.eclipse.swt.widgets.Display;
@@ -42,8 +47,14 @@ import org.eclipse.ui.console.IConsoleView;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.ui.editor.outline.impl.EObjectNode;
+import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.SystemImplementation;
+import org.osate.aadl2.SystemType;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.instantiation.InstantiateModel;
@@ -146,6 +157,54 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 
 		if (root == null) {
 			root = SelectionHelper.getSelectedSystemImplementation();
+		}
+
+		if (root == null) {
+			ISelection selection = SelectionHelper.getSelection();
+			if (selection instanceof TreeSelection) {
+				TreeSelection ts = (TreeSelection) selection;
+
+				List<SystemImplementation> candidates = new ArrayList<>();
+				for (Object o : ts.toList()) {
+					if (o instanceof EObjectNode) {
+						EObjectNode eon = (EObjectNode) o;
+						EObject eo = SelectionHelper.getXtextEditor().getDocument().readOnly(resource -> {
+							return eon.getEObject(resource);
+						});
+						if (eo instanceof SystemImplementation) {
+							candidates.add((SystemImplementation) eo);
+						}
+					}
+				}
+
+				if (candidates.size() == 1) {
+					// selected items in outline view only include a single system implementation
+					// so use that
+					root = candidates.get(0);
+				}
+
+			} else if (selection instanceof TextSelection) {
+				TextSelection ts = (TextSelection) selection;
+				EObject selectedObject = SelectionHelper.getEObjectFromSelection(selection);
+				if (selectedObject instanceof SystemType) {
+					// cursor is probably in the xx part of 'system implementation xx.yy ...'
+					SystemType st = (SystemType) selectedObject;
+
+					// find all system implementations of st and see if the cursor
+					// is in one of them
+					AadlPackage ap = AadlUtil.getContainingPackage(st);
+					for (SystemImplementation si : EcoreUtil2.getAllContentsOfType(ap, SystemImplementation.class)) {
+						if (si.getType().equals(st)) {
+							INode node = NodeModelUtils.findActualNodeFor(si);
+							if (node != null && //
+									(node.getStartLine() <= ts.getStartLine() + 1 //
+											&& ts.getEndLine() + 1 <= node.getEndLine())) {
+								root = si;
+							}
+						}
+					}
+				}
+			}
 		}
 
 		return root;

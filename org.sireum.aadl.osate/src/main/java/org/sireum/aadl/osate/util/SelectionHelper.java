@@ -57,9 +57,11 @@ public class SelectionHelper {
 			EObject targetElement = null;
 			if (selection instanceof IStructuredSelection) {
 				IStructuredSelection ss = (IStructuredSelection) selection;
-				Object eon = ss.getFirstElement();
-				if (eon instanceof EObjectNode) {
-					targetElement = ((EObjectNode) eon).getEObject(resource);
+				if (ss.size() == 1) {
+					Object eon = ss.getFirstElement();
+					if (eon instanceof EObjectNode) {
+						targetElement = ((EObjectNode) eon).getEObject(resource);
+					}
 				}
 			} else {
 				targetElement = eObjectAtOffsetHelper.resolveElementAt(resource,
