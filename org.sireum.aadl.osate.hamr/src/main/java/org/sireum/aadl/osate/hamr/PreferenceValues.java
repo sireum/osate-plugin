@@ -40,7 +40,7 @@ public class PreferenceValues {
 			"HAMR_AIR_OUTPUT_FOLDER_OPT", //
 			"AIR output folder", //
 			Optional.of("Directory where serialized AIR model will be stored"), //
-			".slash");
+			".slang");
 
 	public static final BoolOption HAMR_VERBOSE_OPT = new BoolOption(//
 			"HAMR_VERBOSE_OPT", //
@@ -51,7 +51,7 @@ public class PreferenceValues {
 	public static final BoolOption HAMR_RUN_PROYEK_IVE_OPT = new BoolOption(//
 			"HAMR_RUN_PROYEK_IVE_OPT", //
 			"Generate IVE project", //
-			Optional.of("Generate IVE project from Slang based projects"), //
+			Optional.of("Generate IVE project for Slang based projects"), //
 			true);
 
 	public enum Generators {
