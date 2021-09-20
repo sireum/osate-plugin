@@ -2,7 +2,7 @@
 <feature
       id="org.sireum.aadl.osate.cli.feature"
       label="Sireum OSATE CLI Plugin"
-      version="1.0.2109141821.qualifier"
+      version="1.0.2109171920.qualifier"
       provider-name="SAnToS">
 
    <description>
@@ -38,7 +38,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <import plugin="org.osate.aadl2"/>
       <import plugin="org.osate.xtext.aadl2"/>
       <import plugin="org.osate.aadl2.instantiation"/>
-      <import plugin="org.sireum.aadl.osate" version="1.0.2109141821" match="greaterOrEqual"/>
+      <import plugin="org.sireum.aadl.osate" version="1.0.2109171920" match="greaterOrEqual"/>
       <import plugin="org.osate.xtext.aadl2.errormodel"/>
       <import plugin="org.osate.pluginsupport"/>
       <import plugin="org.osate.annexsupport"/>
