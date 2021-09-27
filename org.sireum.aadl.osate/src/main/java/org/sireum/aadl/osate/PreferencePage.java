@@ -34,7 +34,9 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 						{ "MsgPack", SerializerType.MSG_PACK.toString() } },
 				airTab, true));
 
-		addField(new BooleanFieldEditor(PreferenceConstants.PROCESS_BA_OPT, "Process BA", airTab));
+		BooleanFieldEditor ba = new BooleanFieldEditor(PreferenceConstants.PROCESS_BA_OPT, "Process BA", airTab);
+		ba.getDescriptionControl(airTab).setToolTipText("Process BA/Bless annexes");
+		addField(ba);
 
 	}
 
