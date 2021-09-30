@@ -78,7 +78,7 @@ public class IOUtils {
 	}
 
 	public static List<File> collectFiles(File root, String endsWith, boolean recursive) {
-		return collectFiles(root, endsWith, true, SearchType.ENDS_WITH);
+		return collectFiles(root, endsWith, recursive, SearchType.ENDS_WITH);
 	}
 
 	public static List<File> collectFiles(File root, String str, boolean recursive, SearchType st) {

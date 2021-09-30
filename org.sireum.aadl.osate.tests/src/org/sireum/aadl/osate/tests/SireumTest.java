@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -54,7 +55,9 @@ public abstract class SireumTest extends XtextTest {
 			assert sysImplFile.exists() : sysImplFile.getAbsolutePath() + "doesn't exist";
 
 			AadlProject project = new AadlProject(root.getName(), root, aadlFiles);
-			AadlSystem system = new AadlSystem(sysImplName, sysImplFile, Arrays.asList(project));
+
+			AadlSystem system = AadlSystem.makeAadlSystem(sysImplName, Optional.of(sysImplFile), Arrays.asList(project),
+					null);
 
 			SystemInstance instance = getSystemInstance(system);
 
@@ -89,11 +92,12 @@ public abstract class SireumTest extends XtextTest {
 			ResourceSet rset = createResourceSet(system.projects);
 
 			Resource sysImplResource = null;
-			// TODO: determine correct way of getting the OSATE URI for the system impl file
+			String candURI = "platform:/resource/" + system.systemFileContainer.get().proj.projectName + "/"
+					+ system.systemFileContainer.get().projectRelativePath;
 			for (Resource rs : rset.getResources()) {
-				String filename = rs.getURI().lastSegment();
-				if (filename.equals(system.systemImplementationFile.getName())) {
+				if (rs.getURI().toString().equals(candURI)) {
 					sysImplResource = rs;
+					break;
 				}
 			}
 
@@ -106,7 +110,8 @@ public abstract class SireumTest extends XtextTest {
 
 				return InstantiateModel.instantiate(sysImpl);
 			} else {
-				throw new RuntimeException("Couldn't find resource " + system.systemImplementationFile);
+				throw new RuntimeException(
+						"Couldn't find resource " + system.systemFileContainer.get().systemImplementationFile);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

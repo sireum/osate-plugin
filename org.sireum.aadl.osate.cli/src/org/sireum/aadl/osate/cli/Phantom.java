@@ -4,12 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.eclipse.core.runtime.Platform;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.osate.aadl2.AadlPackage;
+import org.osate.aadl2.Classifier;
 import org.osate.aadl2.SystemImplementation;
 import org.osate.aadl2.instance.InstancePackage;
 import org.osate.aadl2.instance.SystemInstance;
@@ -53,6 +53,8 @@ import com.google.inject.Injector;
 
 @SuppressWarnings("restriction")
 public class Phantom implements IApplication {
+
+	final boolean debugging = System.getenv().containsKey("DEBUGGING_CLI");
 
 	/**
 	 * based on instructions from
@@ -85,13 +87,13 @@ public class Phantom implements IApplication {
 		ErrorModelStandaloneSetup.doSetup();
 
 		if (Platform.getBundle("com.rockwellcollins.atc.resolute") != null) {
-			//addInfo("Setting up Resolute");
+			// addInfo("Setting up Resolute");
 			// ResoluteStandaloneSetup.doSetup();
 			reflectDoSetup("com.rockwellcollins.atc.resolute.ResoluteStandaloneSetup");
 		}
 
 		if (Platform.getBundle("com.rockwellcollins.atc.agree") != null) {
-			//addInfo("Setting up AGREE");
+			// addInfo("Setting up AGREE");
 			// AgreeStandaloneSetup.doSetup();
 			reflectDoSetup("com.rockwellcollins.atc.agree.AgreeStandaloneSetup");
 		}
@@ -120,20 +122,23 @@ public class Phantom implements IApplication {
 				return IApplication.EXIT_OK;
 			}
 
+			// NOTE: returning anything but 0 will cause a dialog box to open
+			// which will freeze the terminal until 'OK' is clicked.  Alternatively, could
+			// ignore via --launcher.suppressErrors
+
 			if (opts.get() instanceof SireumHamrPhantomOption) {
 				return phantom((SireumHamrPhantomOption) opts.get(), resourceSet);
 			} else if (opts.get() instanceof SireumHamrCodegenOption) {
 				return hamrCodegen((SireumHamrCodegenOption) opts.get(), resourceSet);
 			} else {
 				org.sireum.Sireum$.MODULE$.main(appArgs);
-
 				return IApplication.EXIT_OK;
 			}
 
 		} else {
 			addError("Failed! Unable to create resource set");
+			return 1;
 		}
-		return IApplication.EXIT_OK;
 	}
 
 	private void reflectDoSetup(String className) {
@@ -150,7 +155,7 @@ public class Phantom implements IApplication {
 				.nonEmpty() == (po.getProjects().nonEmpty() && po.getMain().nonEmpty() && po.getImpl().nonEmpty())) {
 			addError("Either point to a directory or supply the required options\n");
 			// printUsage();
-			return IApplication.EXIT_OK;
+			return 1;
 		}
 
 		boolean userProvided = po.getArgs().isEmpty();
@@ -160,21 +165,24 @@ public class Phantom implements IApplication {
 		if (userProvided) {
 			File mainPackageFile = new File(po.getMain().get().string());
 
-			List<File> projRoots = VisitorUtil.isz2IList(po.getProjects()).stream().map(m -> new File(m.string()))
+			List<File> projRoots = VisitorUtil.isz2IList(po.getProjects())
+					.stream()
+					.map(m -> new File(m.string()))
 					.collect(Collectors.toList());
 			for (File projectRoot : projRoots) {
 				if (!projectRoot.exists() || !projectRoot.isDirectory()) {
 					addError(projectRoot + " does not exist or is not a directory");
-					return IApplication.EXIT_OK;
+					return 1;
 				}
 			}
 
-			List<AadlProject> projects = projRoots.stream().map(m -> AadlProjectUtil.createTestAadlProject(m))
+			List<AadlProject> projects = projRoots.stream()
+					.map(m -> AadlProjectUtil.createAadlProject(m))
 					.collect(Collectors.toList());
 
 			String sysImplName = po.getImpl().get().string();
 
-			system = new AadlSystem(sysImplName, mainPackageFile, projects);
+			system = AadlSystem.makeAadlSystem(sysImplName, Optional.of(mainPackageFile), projects, null);
 
 		} else {
 
@@ -183,7 +191,7 @@ public class Phantom implements IApplication {
 			if (!root.exists() || !root.isDirectory()) {
 				addError(root + " is not a directory\n");
 				// printUsage();
-				return IApplication.EXIT_OK;
+				return 1;
 			}
 
 			List<AadlSystem> systems = AadlProjectUtil.findSystems(root);
@@ -192,7 +200,7 @@ public class Phantom implements IApplication {
 				addError("Found " + systems.size() + " AADL projects. "
 						+ "Point to a directory that contains a single .project file " + "or a .system file\n");
 				// printUsage();
-				return IApplication.EXIT_OK;
+				return 1;
 			}
 			system = systems.get(0);
 		}
@@ -207,35 +215,38 @@ public class Phantom implements IApplication {
 		String ext = toJson ? ".json" : ".msgpack";
 
 		SystemInstance instance = getSystemInstance(system, rs);
-		Aadl model = Util.getAir(instance, true);
 
-		if (model != null) {
-			String air = Util.serialize(model, st);
+		if (instance != null) {
+			Aadl model = Util.getAir(instance, true);
 
-			if (outputFile == null) {
-				String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
-				String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ext;
+			if (model != null) {
+				String air = Util.serialize(model, st);
 
-				File slangDir = new File(system.projects.get(0).rootDirectory, ".slang");
-				outputFile = new File(slangDir, fname);
+				if (outputFile == null) {
+					String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
+					String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ext;
+
+					File slangDir = new File(system.projects.get(0).rootDirectory, ".slang");
+					outputFile = new File(slangDir, fname);
+				}
+
+				IOUtils.writeFile(outputFile, air);
+
+				// IOUtils.zipFile(outFile);
+
+				return IApplication.EXIT_OK;
 			}
-
-			IOUtils.writeFile(outputFile, air);
-
-			// IOUtils.zipFile(outFile);
-
-			return IApplication.EXIT_OK;
-		} else {
-			addError("Could not generate AIR");
-			return IApplication.EXIT_OK;
 		}
+
+		addError("Could not generate AIR");
+		return 1;
 	}
 
 	int hamrCodegen(SireumHamrCodegenOption ho, ResourceSet rs) {
 
 		if (ho.args().size().toInt() != 1) {
 			addError("Expecting exactly one argument");
-			return IApplication.EXIT_OK;
+			return 1;
 		}
 
 		String s = ho.args().apply(z(0)).string();
@@ -243,7 +254,7 @@ public class Phantom implements IApplication {
 		File f = new File(s).getAbsoluteFile();
 		if (!f.exists() || !f.isFile()) {
 			addError("Either point to a serialized AIR file, or to a .project or .system file");
-			return IApplication.EXIT_OK;
+			return 1;
 		}
 
 		addInfo("Sireum Version: " + SireumApi.version());
@@ -256,13 +267,17 @@ public class Phantom implements IApplication {
 				addError("Found " + systems.size() + " AADL projects. " + "Point to a single .project file "
 						+ "or a .system file\n");
 				// printUsage();
-				return IApplication.EXIT_OK;
+				return 1;
 			}
 
 			AadlSystem system = systems.get(0);
-			Aadl model = Util.getAir(getSystemInstance(system, rs), true);
-
-			ret = org.sireum.cli.HAMR.codeGenH2(model, ho).toInt();
+			SystemInstance si = getSystemInstance(system, rs);
+			if (si == null) {
+				ret = 1;
+			} else {
+				Aadl model = Util.getAir(si, true);
+				ret = org.sireum.cli.HAMR.codeGenH2(model, ho).toInt();
+			}
 		} else {
 			// assume it's a serialized AIR file
 			ret = org.sireum.cli.HAMR.codeGen(ho).toInt();
@@ -270,7 +285,7 @@ public class Phantom implements IApplication {
 
 		addInfo("HAMR Codegen was " + ((ret != 0) ? "un" : "") + "succesful");
 
-		return IApplication.EXIT_OK;
+		return ret;
 	}
 
 	SystemInstance getSystemInstance(AadlSystem system, ResourceSet rset) {
@@ -279,31 +294,85 @@ public class Phantom implements IApplication {
 
 			org.sireum.aadl.osate.PreferenceValues.setPROCESS_BA_OPT(true);
 
-			addInfo("Processing: " + system.systemImplementationName);
+			SystemImplementation sysImpl = null;
 
-			Resource sysImplResource = null;
-			// TODO: determine correct way of getting the OSATE URI for the system impl file
-			for (Resource rs : rset.getResources()) {
-				String filename = rs.getURI().lastSegment();
-				if (filename.equals(system.systemImplementationFile.getName())) {
-					sysImplResource = rs;
+			if (system.systemFileContainer.isEmpty()) {
+				if (!system.isSystemNameQualified()) {
+					addError("The " + AadlSystem.KEY_SYSTEM_IMPL + " property '" + system.systemImplementationName
+							+ "' must be fully qualified or the " + AadlSystem.KEY_SYSTEM_IMPL_FILE
+							+ " property must also be provided");
+					return null;
 				}
-			}
 
-			if (sysImplResource != null) {
-				final AadlPackage pkg = (AadlPackage) (sysImplResource.getContents().isEmpty() ? null
-						: sysImplResource.getContents().get(0));
+				for (Resource rs : rset.getResources()) {
+					if (!rs.getContents().isEmpty() && rs.getContents().get(0) instanceof AadlPackage) {
+						AadlPackage candidate = (AadlPackage) rs.getContents().get(0);
+						if (candidate.getOwnedPublicSection() != null
+								&& candidate.getOwnedPublicSection().getOwnedClassifiers() != null) {
+							Classifier classCand = AadlProjectUtil.getResourceByName(system.systemImplementationName,
+									candidate.getOwnedPublicSection().getOwnedClassifiers());
 
-				SystemImplementation sysImpl = (SystemImplementation) AadlProjectUtil.getResourceByName(
-						system.systemImplementationName, pkg.getOwnedPublicSection().getOwnedClassifiers());
-
-				if (sysImpl != null) {
-					return InstantiateModel.instantiate(sysImpl);
-				} else {
-					addError("Unable to find system implementation " + system.systemImplementationName);
+							if (classCand != null) {
+								if (classCand instanceof SystemImplementation) {
+									sysImpl = (SystemImplementation) classCand;
+									break;
+								} else {
+									addError(system.systemImplementationName + " is a "
+											+ classCand.getClass().getSimpleName()
+											+ " rather than a system implementation");
+									return null;
+								}
+							}
+						}
+					}
 				}
 			} else {
-				addError("Unable to find resource " + system.systemImplementationFile);
+
+				Resource sysImplResource = null;
+				String candURI = "platform:/resource/" + system.systemFileContainer.get().proj.projectName + "/"
+						+ system.systemFileContainer.get().projectRelativePath;
+				for (Resource rs : rset.getResources()) {
+					if (rs.getURI().toString().equals(candURI)) {
+						sysImplResource = rs;
+						break;
+					}
+				}
+
+				if (sysImplResource == null || sysImplResource.getContents().isEmpty()
+						|| !(sysImplResource.getContents().get(0) instanceof AadlPackage)) {
+					addError("Couldn't find an AadlPackage in " + system.systemFileContainer.get().systemImplementationFile);
+					return null;
+				}
+
+				AadlPackage pkg = (AadlPackage) (sysImplResource.getContents().get(0));
+
+				if (pkg.getOwnedPublicSection() == null || pkg.getOwnedPublicSection().getOwnedClassifiers() == null) {
+					addError("Couldn't find public classifiers in " + pkg.getQualifiedName());
+					return null;
+				}
+
+				Classifier cand = AadlProjectUtil.getResourceByName(system.systemImplementationName,
+						pkg.getOwnedPublicSection().getOwnedClassifiers());
+
+				if (cand == null || !(cand instanceof SystemImplementation)) {
+					addError(system.systemImplementationName + " not found in package " + pkg.getQualifiedName()
+							+ " or it isn't a system implementation");
+					return null;
+				}
+
+				sysImpl = (SystemImplementation) cand;
+			}
+
+			if (sysImpl != null) {
+				addInfo("Processing: " + system.systemImplementationName);
+
+				return InstantiateModel.instantiate(sysImpl);
+			} else {
+				String msg = "Unable to find a system implementation named " + system.systemImplementationName
+						+ (system.systemFileContainer.isPresent()
+								? " in file " + system.systemFileContainer.get().systemImplementationFile
+								: "");
+				addError(msg);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -335,12 +404,12 @@ public class Phantom implements IApplication {
 			List<Issue> issues = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 
 			if (!issues.isEmpty()) {
-				addError("Issues detected for: " + resource);
+				addInfo("Issues detected for: " + resource);
 				for (Issue issue : issues) {
 					String pos = "  [" + issue.getLineNumber() + "," + issue.getColumn() + "] ";
-					System.err.println(pos + issue.getMessage());
+					addInfo(pos + issue.getMessage());
 				}
-				System.err.println();
+				addInfo("");
 			}
 		}
 
@@ -363,24 +432,17 @@ public class Phantom implements IApplication {
 
 			String prefix = "platform:/resource/";
 
-			Path rootPath = Paths.get(project.rootDirectory.toURI());
-			Path resourcePath = Paths.get(file.toURI());
-			Path relativePath = rootPath.relativize(resourcePath);
+			String normalizedRelPath = AadlProjectUtil.relativize(project.rootDirectory, file).replace("\\", "/");
 
 			// came up with this uri by comparing what OSATE IDE serialized AIR produces
-			URI resourceUri = URI.createURI(prefix + project.projectName + "/" + relativePath);
+			URI resourceUri = URI.createURI(prefix + project.projectName + "/" + normalizedRelPath);
 
-			/*
-			 * System.out.println("root = " + rootPath);
-			 * System.out.println("resourcePath = " + resourcePath);
-			 * System.out.println("relative = " + relativePath);
-			 * System.out.println("resourceUri = " + resourceUri);
-			 * System.out.println();
-			 */
 			Resource res = rs.createResource(resourceUri);
 
 			if (res != null) {
-				// addInfo("Created resource: " + resourceUri);
+				if (debugging) {
+					addInfo("Created resource: " + resourceUri);
+				}
 				res.load(stream, Collections.EMPTY_MAP);
 			} else {
 				addError("Resource creation resulted in null for: " + resourceUri);
@@ -398,11 +460,12 @@ public class Phantom implements IApplication {
 
 	private Option<SireumTopOption> getOptions(String... appArgs) {
 		// convert java strings to sireum strings
-		List<org.sireum.String> sStrings = Arrays.asList(appArgs).stream().map(s -> new org.sireum.String(s))
+		List<org.sireum.String> sStrings = Arrays.asList(appArgs)
+				.stream()
+				.map(s -> new org.sireum.String(s))
 				.collect(Collectors.toList());
 
-		return org.sireum.Cli$.MODULE$.apply(File.pathSeparatorChar)
-				.parseSireum(VisitorUtil.toISZ(sStrings), z(0));
+		return org.sireum.Cli$.MODULE$.apply(File.pathSeparatorChar).parseSireum(VisitorUtil.toISZ(sStrings), z(0));
 	}
 
 	org.sireum.Z z(int i) {

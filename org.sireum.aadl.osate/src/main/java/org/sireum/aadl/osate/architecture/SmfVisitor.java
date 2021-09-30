@@ -45,7 +45,12 @@ public class SmfVisitor implements AnnexVisitor {
 
 	@Override
 	public List<Annex> visit(ComponentInstance root, List<String> path) {
-		return VisitorUtil.toIList(visitSmfComp(root, path));
+		Annex a = visitSmfComp(root, path);
+		if (a != null) {
+			return VisitorUtil.toIList(a);
+		} else {
+			return VisitorUtil.iList();
+		}
 	}
 
 	public Annex visitSmfComp(ComponentInstance root, List<String> path) {
@@ -60,8 +65,12 @@ public class SmfVisitor implements AnnexVisitor {
 			declasses = temp.get(0).getDeclassification().stream().map(it -> visitDeclass(it, path))
 					.collect(Collectors.toList());
 		}
-		return new Annex(SMF_ID, factory.smfClause(classes, declasses));
 
+		if (!classes.isEmpty() || !declasses.isEmpty()) {
+			return new Annex(SMF_ID, factory.smfClause(classes, declasses));
+		} else {
+			return null;
+		}
 	}
 
 	@Override
