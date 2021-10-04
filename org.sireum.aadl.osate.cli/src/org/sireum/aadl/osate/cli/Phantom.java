@@ -330,8 +330,13 @@ public class Phantom implements IApplication {
 
 				Resource sysImplResource = null;
 				String candURI = "platform:/resource/" + system.systemFileContainer.get().proj.projectName + "/"
-						+ system.systemFileContainer.get().projectRelativePath;
+						+ system.systemFileContainer.get().getProjectRelativeURI();
 				for (Resource rs : rset.getResources()) {
+					if (debugging) {
+						System.out.println("rs.getURI: " + rs.getURI().toString());
+						System.out.println("  candURI: " + candURI);
+						System.out.println();
+					}
 					if (rs.getURI().toString().equals(candURI)) {
 						sysImplResource = rs;
 						break;

@@ -155,6 +155,10 @@ public class AadlProjectUtil {
 			this.projectRelativePath = _projectRelativePath;
 			this.systemImplementationFile = _systemImplementationFile;
 		}
+
+		public String getProjectRelativeURI() {
+			return projectRelativePath.replace("\\", "/");
+		}
 	}
 
 	public static class AadlSystem {
