@@ -51,7 +51,7 @@ public class PreferenceValues {
 	public static final BoolOption HAMR_RUN_PROYEK_IVE_OPT = new BoolOption(//
 			"HAMR_RUN_PROYEK_IVE_OPT", //
 			"Generate IVE project", //
-			Optional.of("Generate IVE project for Slang based projects"), //
+			Optional.of("Generate IVE project using Proyek IVE"), //
 			true);
 
 	public enum Generators {
