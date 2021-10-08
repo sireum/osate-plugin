@@ -102,6 +102,10 @@ public class Phantom implements IApplication {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("aaxl2", new Aadl2ResourceFactoryImpl());
 		InstancePackage.eINSTANCE.eClass();
 
+		if (!Util.emitSireumVersion(System.out)) {
+			return 1;
+		}
+
 		XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
 
 		if (resourceSet != null) {
@@ -121,10 +125,6 @@ public class Phantom implements IApplication {
 				// printUsage();
 				return IApplication.EXIT_OK;
 			}
-
-			// NOTE: returning anything but 0 will cause a dialog box to open
-			// which will freeze the terminal until 'OK' is clicked.  Alternatively, could
-			// ignore via --launcher.suppressErrors
 
 			if (opts.get() instanceof SireumHamrPhantomOption) {
 				return phantom((SireumHamrPhantomOption) opts.get(), resourceSet);

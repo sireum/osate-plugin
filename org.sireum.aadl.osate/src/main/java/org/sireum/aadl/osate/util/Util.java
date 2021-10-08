@@ -1,5 +1,6 @@
 package org.sireum.aadl.osate.util;
 
+import java.io.File;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.function.IntSupplier;
@@ -11,6 +12,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.IS;
+import org.sireum.SireumApi;
 import org.sireum.U8;
 import org.sireum.Z;
 import org.sireum.aadl.osate.architecture.Visitor;
@@ -126,4 +128,57 @@ public class Util {
 			return ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(resourceURI.toFileString()));
 		}
 	}
+
+	public static boolean emitSireumVersion(MessageConsole ms) {
+		PrintStream out = new PrintStream(ms.newMessageStream());
+		boolean ret = emitSireumVersion(out);
+		out.close();
+		return ret;
+	}
+
+	public static boolean emitSireumVersion(PrintStream out) {
+		String propName = "org.sireum.home";
+		String propValue = System.getProperty(propName);
+		if (propValue != null) {
+			File sireum_jar = new File(propValue, "bin/sireum.jar");
+			if (!sireum_jar.exists()) {
+				out.print("sireum.jar not found. Expecting it to be at: " + sireum_jar.getAbsolutePath() //
+						+ "\n" //
+						+ "\n" //
+						+ "Ensure that the '" + propName + "' Java system property (current value is '" + propValue
+						+ "') is set \n"
+						+ "to the absolute path to your Sireum installation (sireum.jar should be in its 'bin' directory). \n"
+						+ "You must restart OSATE in order for changes to osate.ini to take effect.\n");
+				return false;
+			} else {
+				out.print(
+						"Sireum Version: " + SireumApi.version() + " located at " + sireum_jar.getAbsolutePath()
+								+ "\n");
+				return true;
+			}
+		} else {
+			out.print("Java system property '" + propName + "' not set. \n" //
+					+ "\n" //
+					+ "The prefered way of setting this is by installing the HAMR plugin via Phantom.  Run \n" //
+					+ "the following from the command line for more information\n" //
+					+ "\n" //
+					+ "    $SIREUM_HOME/bin/sireum hamr phantom -h \n" //
+					+ "\n" //
+					+ "If you don't have Sireum installed then refer to https://github.com/sireum/kekinian#installing \n"
+					+ "\n" //
+					+ "\n" //
+					+ "To set this property manually, in your osate.ini file locate the line containing '-vmargs' and \n"
+					+ "add the following on a new line directly after that \n" + "\n" //
+					+ "    -D" + propName + "=<path-to-sireum>\n" //
+					+ "\n" //
+					+ "replacing <path-to-sireum> with the absolute path to your Sireum installation \n"
+					+ "(sireum.jar should be under its 'bin' directory).  Then restart OSATE. \n" //
+					+ "\n" //
+					+ "Alternatively, start OSATE using the vmargs option.  For example: \n" //
+					+ "\n" //
+					+ "    <path-to-osate>/osate -vmargs " + propName + "=<path-to-sireum>\n");
+			return false;
+		}
+	}
+
 }

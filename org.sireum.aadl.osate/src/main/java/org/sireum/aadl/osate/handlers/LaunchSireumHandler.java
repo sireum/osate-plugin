@@ -25,7 +25,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 		MessageConsole console = displayConsole();
 		console.clearConsole();
 
-		if (!emitSireumVersion()) {
+		if (!Util.emitSireumVersion(console)) {
 			displayPopup("AIR generation was unsuccessful");
 			return Status.CANCEL_STATUS;
 		}

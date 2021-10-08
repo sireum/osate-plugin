@@ -45,7 +45,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		MessageConsole console = displayConsole();
 		console.clearConsole();
 
-		if (!emitSireumVersion()) {
+		if (!Util.emitSireumVersion(console)) {
 			displayPopup("HAMR code generation was unsuccessful");
 			return Status.CANCEL_STATUS;
 		}
