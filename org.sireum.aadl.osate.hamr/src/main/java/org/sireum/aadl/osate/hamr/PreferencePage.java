@@ -28,6 +28,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		// Composite comp = addTab(tabFolder, "Code Generation");
 		Composite comp = getFieldEditorParent();
 
+		comp.setLayout(new GridLayout());
+
 		addField(PreferenceValues.HAMR_VERBOSE_OPT.getEditor(comp));
 
 		addField(PreferenceValues.HAMR_SERIALIZE_AIR_OPT.getEditor(comp));
@@ -36,12 +38,12 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 
 		// blank line
-		new Label(comp, SWT.NONE).setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		new Label(comp, SWT.NONE).setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
 
 
 		Group seGroup = new Group(comp, SWT.BORDER);
 		seGroup.setText("Slang-Embedded Options");
-		seGroup.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 2, 1));
+		seGroup.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 3, 1));
 
 		addField(PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getEditor(seGroup));
 
@@ -51,6 +53,13 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 		addField(PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getEditor(seGroup));
 
+		addField(PreferenceValues.HAMR_PROOF_GENERATE.getEditor(seGroup));
+
+		addField(PreferenceValues.HAMR_PROOF_CHECK.getEditor(seGroup));
+
+		addField(PreferenceValues.HAMR_SMT2_OPTIONS.getEditor(seGroup));
+
+		addField(PreferenceValues.HAMR_SMT2_PATH.getEditor(seGroup));
 	}
 
 	private Composite addTab(TabFolder tabFolder, String tabName) {

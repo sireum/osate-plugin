@@ -1,7 +1,10 @@
 package org.sireum.aadl.osate.hamr.handlers;
 
 import java.io.File;
+import java.io.PrintStream;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +27,7 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.ErrorReport;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.Report;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
+import org.sireum.aadl.osate.util.ProofUtil;
 import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.arsit.ArsitBridge;
@@ -114,27 +118,26 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 						writeToConsole("Generating " + getToolName() + " artifacts...");
 
+						final File workspaceRoot = getProjectPath(si).toFile();
+
+						final org.sireum.String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("") //
+								? new org.sireum.String(workspaceRoot.getAbsolutePath())
+								: new org.sireum.String(prompt.getSlangOptionOutputDirectory());
+
+						final org.sireum.String _base = prompt.getOptionBasePackageName().equals("") //
+								? new org.sireum.String(
+										HAMRUtil.cleanupPackageName(new File(_slangOutputDir.string()).getName()))
+								: new org.sireum.String(HAMRUtil.cleanupPackageName(prompt.getOptionBasePackageName()));
+
+						final org.sireum.String _cOutputDirectory = prompt.getOptionCOutputDirectory().equals("") //
+								? null
+								: new org.sireum.String(prompt.getOptionCOutputDirectory());
+
+						org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory().equals("") //
+								? null
+								: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
+
 						toolRet = Util.callWrapper(getToolName(), console, () -> {
-							final File workspaceRoot = getProjectPath(si).toFile();
-
-							final org.sireum.String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("") //
-									? new org.sireum.String(workspaceRoot.getAbsolutePath())
-									: new org.sireum.String(prompt.getSlangOptionOutputDirectory());
-
-							final org.sireum.String _base = prompt.getOptionBasePackageName().equals("") //
-									? new org.sireum.String(
-											HAMRUtil.cleanupPackageName(new File(_slangOutputDir.string()).getName()))
-									: new org.sireum.String(
-											HAMRUtil.cleanupPackageName(prompt.getOptionBasePackageName()));
-
-							final org.sireum.String _cOutputDirectory = prompt.getOptionCOutputDirectory().equals("") //
-									? null
-									: new org.sireum.String(prompt.getOptionCOutputDirectory());
-
-							org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory()
-									.equals("") //
-											? null
-											: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
 
 							boolean verbose = PreferenceValues.HAMR_VERBOSE_OPT.getValue();
 							String platform = prompt.getOptionPlatform().hamrName();
@@ -161,9 +164,16 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Option<org.sireum.String> aadlRootDir = ArsitBridge
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 
-							IS<Z, org.sireum.String> experimentalOptions = org.sireum.aadl.osate.PreferenceValues
-									.getPROCESS_BA_OPT() ? VisitorUtil.toISZ(new org.sireum.String("PROCESS_BTS_NODES"))
-											: VisitorUtil.toISZ();
+							List<org.sireum.String> exOptions = new ArrayList<>();
+							if(org.sireum.aadl.osate.PreferenceValues.getPROCESS_BA_OPT()) {
+								exOptions.add(new org.sireum.String("PROCESS_BTS_NODES"));
+							}
+							if(PreferenceValues.HAMR_PROOF_GENERATE.getValue()) {
+								exOptions.add(new org.sireum.String("GENERATE_REFINEMENT_PROOF"));
+							}
+
+							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
+
 
 							return org.sireum.cli.HAMR.codeGenH( //
 									model, //
@@ -191,6 +201,38 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									//
 									experimentalOptions).toInt();
 						});
+
+						if (toolRet == 0 &&
+								PreferenceValues.HAMR_PROOF_GENERATE.getValue() &&
+								PreferenceValues.HAMR_PROOF_CHECK.getValue() &&
+								(prompt.getOptionPlatform() == Platform.seL4
+										|| prompt.getOptionPlatform() == Platform.seL4_Only)) {
+							File smt2FileLocation = new File(new File(_slangOutputDir.string()),
+									"src/c/camkes/proof/smt2_case.smt2");
+							if (_camkesOutputDir != null) {
+								smt2FileLocation = new File(new File(_camkesOutputDir.string()),
+										"proof/smt2_case.smt2");
+							}
+
+							if (smt2FileLocation.exists()) {
+								File smt2solver = PreferenceValues.HAMR_SMT2_PATH.getValue();
+								if (smt2solver != null) {
+									PrintStream out = new PrintStream(console.newMessageStream());
+
+									String[] solverOptions = PreferenceValues.HAMR_SMT2_OPTIONS.getValue().split(" ");
+									toolRet = ProofUtil.checkProof(smt2solver, Arrays.asList(solverOptions),
+											smt2FileLocation, out);
+
+									out.close();
+								} else {
+									writeToConsole("Location of SMT2 solver not specified");
+									toolRet = 1;
+								}
+							} else {
+								writeToConsole("Expected smt2 file not found: " + smt2FileLocation.getAbsolutePath());
+								toolRet = 1;
+							}
+						}
 					}
 
 					String msg = "HAMR code "

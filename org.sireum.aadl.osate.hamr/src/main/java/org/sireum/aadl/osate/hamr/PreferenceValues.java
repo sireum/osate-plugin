@@ -1,8 +1,10 @@
 package org.sireum.aadl.osate.hamr;
 
+import java.io.File;
 import java.util.Optional;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
+import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
@@ -54,6 +56,58 @@ public class PreferenceValues {
 			Optional.of("Generate IVE project using Proyek IVE"), //
 			true);
 
+	public static final BoolOption HAMR_PROOF_GENERATE = new BoolOption(//
+			"HAMR_PROOF_GENERATE", //
+			"Generate Information Flow Preservation Proof", //
+			Optional.of("Generate Information Flow Preservation Proof"), //
+			false);
+
+	public static final BoolOption HAMR_PROOF_CHECK = new BoolOption(//
+			"HAMR_PROOF_CHECK", //
+			"Check Information Flow Preservation Proof", //
+			Optional.of("Check Information Flow Preservation Proof"), //
+			false);
+
+	public static String sireumCVC4() {
+		String shome = System.getProperty("org.sireum.home");
+		if (shome != null && (new File(shome).exists())) {
+
+			String os = "";
+			String ext = "";
+			if(org.sireum.Os.isLinux()) {
+				os = "linux";
+			} else if(org.sireum.Os.isWin()) {
+				os = "win";
+				ext = ".exe";
+			} else if (org.sireum.Os.isMac()) {
+				os = "mac";
+			} else {
+				// unsupported OS
+				return "";
+			}
+
+			File f = new File(shome, "bin/" + os + "/cvc4" + ext);
+
+			if (f.exists() && f.isFile() && f.canExecute()) {
+				return f.getAbsolutePath();
+			}
+		}
+		return "";
+	}
+
+	public static final PathOption HAMR_SMT2_PATH = new PathOption(//
+			"HAMR_SMT2_PATH",
+			"SMT2 Solver",
+			Optional.of("Location of SMT2 solver executable"),
+			sireumCVC4()
+	);
+
+	public static final StringOption HAMR_SMT2_OPTIONS = new StringOption(//
+			"HAMR_SMT2_OPTIONS", //
+			"Solver Options", //
+			Optional.of("Options to pass to the SMT2 solver"), //
+			"--incremental --finite-model-find");
+
 	public enum Generators {
 		HAMR_GENERATOR
 	}
@@ -64,6 +118,37 @@ public class PreferenceValues {
 		String key;
 		String name;
 		Optional<String> tooltip;
+	}
+
+	public static class PathOption extends OsateOption {
+		final String defaultValue;
+
+		public PathOption(String key, String name, Optional<String> tooltip, String defaultValue) {
+			this.key = key;
+			this.name = name;
+			this.tooltip = tooltip;
+			this.defaultValue = defaultValue;
+
+			store.setDefault(key, defaultValue);
+		}
+
+		public File getValue() {
+			File f = new File(store.getString(key));
+			if (f.exists() && f.isFile() && f.canExecute()) {
+				return f;
+			} else {
+				return null;
+			}
+		}
+
+		public FileFieldEditor getEditor(Composite parent) {
+			FileFieldEditor ret = new FileFieldEditor(key, name, parent);
+			if (this.tooltip.isPresent()) {
+				ret.getTextControl(parent).setToolTipText(this.tooltip.get());
+				ret.getLabelControl(parent).setToolTipText(this.tooltip.get());
+			}
+			return ret;
+		}
 	}
 
 	public static class BoolOption extends OsateOption {
