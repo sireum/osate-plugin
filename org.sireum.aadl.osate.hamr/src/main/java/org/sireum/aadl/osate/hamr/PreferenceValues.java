@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.IntegerFieldEditor;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.swt.widgets.Composite;
 
@@ -108,6 +109,13 @@ public class PreferenceValues {
 			Optional.of("Options to pass to the SMT2 solver"), //
 			"--incremental --finite-model-find");
 
+	public static final IntegerOption HAMR_SMT2_TIMEOUT = new IntegerOption(//
+			"HAMR_SMT2_TIMEOUT", //
+			"Solver Timeout (ms)", //
+			Optional.of("Timeout for SMT2 solver"), //
+			20000, //
+			200, Integer.MAX_VALUE);
+
 	public enum Generators {
 		HAMR_GENERATOR
 	}
@@ -171,6 +179,42 @@ public class PreferenceValues {
 			BooleanFieldEditor ret = new BooleanFieldEditor(key, name, parent);
 			if (this.tooltip.isPresent()) {
 				ret.getDescriptionControl(parent).setToolTipText(this.tooltip.get());
+			}
+			return ret;
+		}
+	}
+
+	public static class IntegerOption extends OsateOption {
+		final int defaultValue;
+		final int minRange;
+		final int maxRange;
+
+		public IntegerOption(String key, String name, Optional<String> tooltip, int defaultValue) {
+			this(key, name, tooltip, defaultValue, Integer.MIN_VALUE, Integer.MAX_VALUE);
+		}
+
+		public IntegerOption(String key, String name, Optional<String> tooltip, int defaultValue, int lowRange,
+				int highRange) {
+			this.key = key;
+			this.name = name;
+			this.tooltip = tooltip;
+			this.defaultValue = defaultValue;
+			this.minRange = lowRange;
+			this.maxRange = highRange;
+
+			store.setDefault(key, this.defaultValue);
+		}
+
+		public int getValue() {
+			return store.getInt(key);
+		}
+
+		public IntegerFieldEditor getEditor(Composite parent) {
+			IntegerFieldEditor ret = new IntegerFieldEditor(key, name, parent);
+			ret.setValidRange(this.minRange, this.maxRange);
+			if (this.tooltip.isPresent()) {
+				ret.getTextControl(parent).setToolTipText(this.tooltip.get());
+				ret.getLabelControl(parent).setToolTipText(this.tooltip.get());
 			}
 			return ret;
 		}

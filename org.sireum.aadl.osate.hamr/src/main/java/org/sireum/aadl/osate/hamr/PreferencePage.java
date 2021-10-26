@@ -53,13 +53,19 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 		addField(PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getEditor(seGroup));
 
-		addField(PreferenceValues.HAMR_PROOF_GENERATE.getEditor(seGroup));
+		Group proofGroup = new Group(comp, SWT.BORDER);
+		proofGroup.setText("Proof Options");
+		proofGroup.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 3, 1));
 
-		addField(PreferenceValues.HAMR_PROOF_CHECK.getEditor(seGroup));
+		addField(PreferenceValues.HAMR_PROOF_GENERATE.getEditor(proofGroup));
 
-		addField(PreferenceValues.HAMR_SMT2_OPTIONS.getEditor(seGroup));
+		addField(PreferenceValues.HAMR_PROOF_CHECK.getEditor(proofGroup));
 
-		addField(PreferenceValues.HAMR_SMT2_PATH.getEditor(seGroup));
+		addField(PreferenceValues.HAMR_SMT2_TIMEOUT.getEditor(proofGroup));
+
+		addField(PreferenceValues.HAMR_SMT2_OPTIONS.getEditor(proofGroup));
+
+		addField(PreferenceValues.HAMR_SMT2_PATH.getEditor(proofGroup));
 	}
 
 	private Composite addTab(TabFolder tabFolder, String tabName) {

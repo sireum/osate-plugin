@@ -27,7 +27,6 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.ErrorReport;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.Report;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
-import org.sireum.aadl.osate.util.ProofUtil;
 import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.arsit.ArsitBridge;
@@ -220,8 +219,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									PrintStream out = new PrintStream(console.newMessageStream());
 
 									String[] solverOptions = PreferenceValues.HAMR_SMT2_OPTIONS.getValue().split(" ");
+									int timeout = PreferenceValues.HAMR_SMT2_TIMEOUT.getValue();
 									toolRet = ProofUtil.checkProof(smt2solver, Arrays.asList(solverOptions),
-											smt2FileLocation, out);
+											smt2FileLocation, timeout, out);
 
 									out.close();
 								} else {
