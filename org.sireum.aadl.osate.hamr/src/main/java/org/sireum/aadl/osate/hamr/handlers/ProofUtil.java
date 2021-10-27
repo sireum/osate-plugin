@@ -2,11 +2,14 @@ package org.sireum.aadl.osate.hamr.handlers;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
@@ -20,19 +23,68 @@ public class ProofUtil {
 		return checkProof(getLastGeneratedSMT2Proof());
 	}
 
-	public static int checkProof(File smt2Proof) {
-		return checkProof(smt2Proof, null);
+	public static int checkProof(File f) {
+		return checkProof(f, null);
 	}
 
 	public static int checkProof(PrintStream out) {
 		return checkProof(getLastGeneratedSMT2Proof(), out);
 	}
 
-	public static int checkProof(File smt2Proof, PrintStream out) {
+	/**
+	 * @param f either an smt2 file or,
+	 *          HAMR's org.sireum.aadl.hamr.prefs setting file or,
+	 *          the project's .settings directory or,
+	 *          the root AADL project directory
+	 */
+	public static int checkProof(File f, PrintStream out) {
 
-		if (smt2Proof == null || !smt2Proof.exists() || !smt2Proof.canRead()) {
-			outPrintln("Cannot read from file: " + smt2Proof, out);
+		if (f == null || !f.exists() || !f.canRead()) {
+			outPrintln("Cannot read from file: " + f, out);
 			return 1;
+		}
+
+		File smt2Proof = null;
+		if (f.getName().endsWith(".smt2")) {
+			smt2Proof = f;
+		} else {
+			String sep = File.separator;
+			File propFile = null;
+			String propName = "org.sireum.aadl.hamr.prefs";
+			if (f.isDirectory()) {
+				if(f.getName().equals(".settings") && new File(f, propName).exists()) {
+					propFile = new File(f, propName);
+				} else if (new File(f, ".settings" + sep + propName).exists()) {
+					propFile = new File(f, ".settings" + sep + propName);
+				}
+			} else if (f.getName().equals(propName)) {
+				propFile = f;
+			}
+
+			if (propFile != null) {
+				try (InputStream i = new FileInputStream(propFile)) {
+					Properties p = new Properties();
+					p.load(i);
+
+					if (p.getProperty("camkes.output.directory") != null) {
+						smt2Proof = new File(new File(p.getProperty("camkes.output.directory")),
+								"proof" + sep + "smt2_case.smt2");
+					} else if (p.getProperty("slang.output.directory") != null) {
+						smt2Proof = new File(new File(p.getProperty("slang.output.directory")),
+								"src" + sep + "c" + sep + "camkes" + sep + "proof" + sep + "smt2_case.smt2");
+					} else {
+						outPrintln("Couldn't determine location of SMT2 proof file from: " + propFile.getAbsolutePath(),
+								out);
+						return 1;
+					}
+				} catch (Exception e) {
+					outPrintln(e.getMessage(), out);
+					return 1;
+				}
+			} else {
+				outPrintln("Pass in a smt2 file or HAMR's setting file", out);
+				return 1;
+			}
 		}
 
 		File smt2Solver = PreferenceValues.HAMR_SMT2_PATH.getValue();
@@ -49,6 +101,14 @@ public class ProofUtil {
 
 	public static int checkProof(File smt2Solver, List<String> solverOptions, File smt2Proof, int timeout,
 			PrintStream out) {
+		if (smt2Solver == null || !smt2Solver.exists() || !smt2Solver.canExecute()) {
+			outPrintln("Error with passed in solver: " + smt2Solver, out);
+			return 1;
+		}
+		if (smt2Proof == null || !smt2Proof.exists() || !smt2Proof.canRead()) {
+			outPrintln("Cannot read from file: " + smt2Proof, out);
+			return 1;
+		}
 		try {
 			List<String> args = new ArrayList<>();
 			args.add(smt2Solver.getAbsolutePath());

@@ -202,11 +202,12 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						if (toolRet == 0 && PreferenceValues.HAMR_PROOF_GENERATE.getValue()
 								&& (prompt.getOptionPlatform() == Platform.seL4
 										|| prompt.getOptionPlatform() == Platform.seL4_Only)) {
+							String sep = File.separator;
 							File smt2FileLocation = new File(new File(_slangOutputDir.string()),
-									"src/c/camkes/proof/smt2_case.smt2");
+									"src" + sep + "c" + sep + "camkes" + sep + "proof" + sep + "smt2_case.smt2");
 							if (_camkesOutputDir != null) {
 								smt2FileLocation = new File(new File(_camkesOutputDir.string()),
-										"proof/smt2_case.smt2");
+										"proof" + sep + "smt2_case.smt2");
 							}
 
 							// or perhaps store the path in the eclipse store
