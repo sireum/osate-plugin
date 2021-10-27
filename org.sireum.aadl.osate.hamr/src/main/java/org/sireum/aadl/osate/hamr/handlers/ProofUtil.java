@@ -5,27 +5,46 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
+import org.sireum.aadl.osate.hamr.PreferenceValues;
+
 public class ProofUtil {
 
-	public static boolean checkResult(String expectedCategory, String resultCategory, String proofResult,
-			String proofExpected, PrintStream out) {
-		String category = expectedCategory.substring(1);
-		boolean cresult = resultCategory.startsWith(expectedCategory);
-		if (!cresult) {
-			out.println();
-			out.println(category + " Expected line to start with '" + expectedCategory + "' but received '"
-					+ resultCategory + "'");
+	protected static File lastSMT2Proof = null;
+
+	public static int checkProof() {
+		return checkProof(getLastGeneratedSMT2Proof());
+	}
+
+	public static int checkProof(File smt2Proof) {
+		return checkProof(smt2Proof, null);
+	}
+
+	public static int checkProof(PrintStream out) {
+		return checkProof(getLastGeneratedSMT2Proof(), out);
+	}
+
+	public static int checkProof(File smt2Proof, PrintStream out) {
+
+		if (smt2Proof == null || !smt2Proof.exists() || !smt2Proof.canRead()) {
+			outPrintln("Cannot read from file: " + smt2Proof, out);
+			return 1;
 		}
-		boolean presult = proofResult.equals(proofExpected);
-		if (!presult) {
-			out.println();
-			out.println(category + " Expected '" + proofExpected + "' but received '" + proofResult + "'");
+
+		File smt2Solver = PreferenceValues.HAMR_SMT2_PATH.getValue();
+		if (smt2Solver != null) {
+			String[] solverOptions = PreferenceValues.HAMR_SMT2_OPTIONS.getValue().split(" ");
+			int timeout = PreferenceValues.HAMR_SMT2_TIMEOUT.getValue();
+
+			return checkProof(smt2Solver, Arrays.asList(solverOptions), smt2Proof, timeout, out);
+		} else {
+			outPrintln("Location of SMT2 solver not specified", out);
+			return 1;
 		}
-		return cresult && presult;
 	}
 
 	public static int checkProof(File smt2Solver, List<String> solverOptions, File smt2Proof, int timeout,
@@ -39,8 +58,9 @@ public class ProofUtil {
 			ProcessBuilder pb = new ProcessBuilder(args.toArray(new String[args.size()]));
 			pb.redirectErrorStream(true);
 
-			out.println();
-			out.println("Checking Information Flow Preservation Proof ...");
+			outPrintln(out);
+			outPrintln("Checking Information Flow Preservation Proof in file", out);
+			outPrintln(smt2Proof.getAbsolutePath(), out);
 
 			Process p = pb.start();
 
@@ -56,12 +76,12 @@ public class ProofUtil {
 
 			boolean isTimeout = p.exitValue() == 6 || p.exitValue() == -101 || p.exitValue() == -100;
 			if (result.length() == 0 || p.exitValue() != 0 || isTimeout) {
-				out.println();
-				out.println("Error when running " + smt2Solver.getName() + " query:");
-				out.println("File: " + smt2Proof.getAbsolutePath());
-				out.println("Exit Code: " + p.exitValue());
-				out.println("Timed Out: " + isTimeout);
-				out.println(result);
+				outPrintln(out);
+				outPrintln("Error when running " + smt2Solver.getName() + " query:", out);
+				outPrintln("File: " + smt2Proof.getAbsolutePath(), out);
+				outPrintln("Exit Code: " + p.exitValue(), out);
+				outPrintln("Timed Out: " + isTimeout, out);
+				outPrintln(result, out);
 				return p.exitValue();
 			}
 
@@ -75,12 +95,12 @@ public class ProofUtil {
 				passing &= checkResult("\"ConnectionPreservation:", lines[6], lines[7], "unsat", out);
 				passing &= checkResult("\"NoNewConnections:", lines[8], lines[9], "unsat", out);
 
-				out.println();
-				out.println("Information Flow Preservation Proof: " + (passing ? "Succeeded" : "Failed"));
+				outPrintln(out);
+				outPrintln("Information Flow Preservation Proof: " + (passing ? "Succeeded" : "Failed"), out);
 				return passing ? 0 : 1;
 			} else {
-				out.println();
-				out.println("Expected 10 lines to be returned by the smt2 solver, but received " + result);
+				outPrintln(out);
+				outPrintln("Expected 10 lines to be returned by the smt2 solver, but received " + result, out);
 				return 1;
 			}
 
@@ -89,4 +109,37 @@ public class ProofUtil {
 			return 1;
 		}
 	}
+
+	private static boolean checkResult(String expectedCategory, String resultCategory, String proofResult,
+			String proofExpected, PrintStream out) {
+		String category = expectedCategory.substring(1);
+		boolean cresult = resultCategory.startsWith(expectedCategory);
+		if (!cresult) {
+			outPrintln(out);
+			outPrintln(category + " Expected line to start with '" + expectedCategory + "' but received '"
+					+ resultCategory + "'", out);
+		}
+		boolean presult = proofResult.equals(proofExpected);
+		if (!presult) {
+			outPrintln(out);
+			outPrintln(category + " Expected '" + proofExpected + "' but received '" + proofResult + "'", out);
+		}
+		return cresult && presult;
+	}
+
+	public static File getLastGeneratedSMT2Proof() {
+		// or perhaps get the file path from the eclipse store
+		return lastSMT2Proof;
+	}
+
+	private static void outPrintln(PrintStream out) {
+		outPrintln("", out);
+	}
+
+	private static void outPrintln(String s, PrintStream out) {
+		if (out != null) {
+			out.println(s);
+		}
+	}
+
 }

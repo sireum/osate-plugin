@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -164,15 +163,14 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 
 							List<org.sireum.String> exOptions = new ArrayList<>();
-							if(org.sireum.aadl.osate.PreferenceValues.getPROCESS_BA_OPT()) {
+							if (org.sireum.aadl.osate.PreferenceValues.getPROCESS_BA_OPT()) {
 								exOptions.add(new org.sireum.String("PROCESS_BTS_NODES"));
 							}
-							if(PreferenceValues.HAMR_PROOF_GENERATE.getValue()) {
+							if (PreferenceValues.HAMR_PROOF_GENERATE.getValue()) {
 								exOptions.add(new org.sireum.String("GENERATE_REFINEMENT_PROOF"));
 							}
 
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
-
 
 							return org.sireum.cli.HAMR.codeGenH( //
 									model, //
@@ -201,10 +199,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									experimentalOptions).toInt();
 						});
 
-						if (toolRet == 0 &&
-								PreferenceValues.HAMR_PROOF_GENERATE.getValue() &&
-								PreferenceValues.HAMR_PROOF_CHECK.getValue() &&
-								(prompt.getOptionPlatform() == Platform.seL4
+						if (toolRet == 0 && PreferenceValues.HAMR_PROOF_GENERATE.getValue()
+								&& (prompt.getOptionPlatform() == Platform.seL4
 										|| prompt.getOptionPlatform() == Platform.seL4_Only)) {
 							File smt2FileLocation = new File(new File(_slangOutputDir.string()),
 									"src/c/camkes/proof/smt2_case.smt2");
@@ -213,24 +209,15 @@ public class LaunchHAMR extends AbstractSireumHandler {
 										"proof/smt2_case.smt2");
 							}
 
-							if (smt2FileLocation.exists()) {
-								File smt2solver = PreferenceValues.HAMR_SMT2_PATH.getValue();
-								if (smt2solver != null) {
-									PrintStream out = new PrintStream(console.newMessageStream());
+							// or perhaps store the path in the eclipse store
+							ProofUtil.lastSMT2Proof = smt2FileLocation;
 
-									String[] solverOptions = PreferenceValues.HAMR_SMT2_OPTIONS.getValue().split(" ");
-									int timeout = PreferenceValues.HAMR_SMT2_TIMEOUT.getValue();
-									toolRet = ProofUtil.checkProof(smt2solver, Arrays.asList(solverOptions),
-											smt2FileLocation, timeout, out);
+							if (PreferenceValues.HAMR_PROOF_CHECK.getValue()) {
+								PrintStream out = new PrintStream(console.newMessageStream());
 
-									out.close();
-								} else {
-									writeToConsole("Location of SMT2 solver not specified");
-									toolRet = 1;
-								}
-							} else {
-								writeToConsole("Expected smt2 file not found: " + smt2FileLocation.getAbsolutePath());
-								toolRet = 1;
+								toolRet = ProofUtil.checkProof(smt2FileLocation, out);
+
+								out.close();
 							}
 						}
 					}
