@@ -53,11 +53,6 @@ property set HAMR is
   HW : list of enumeration (ODROID_XU4, QEMU, x86, amd64) applies to (processor, virtual processor, system implementation);
 
 
-  --- Copy of CASE_Properties::Component_Type.  As of 2020.05.23, HAMR only expects the VIRTUAL_MACHINE
-  --- enum value to be attached to a process.  See
-  --- <a href="https://github.com/loonwerks/CASE/blob/845360b53afb017994d4bd5f5077f75580890e26/TA5/CASE_Properties.aadl#L4">origin</a>  
-  Component_Type: enumeration (FILTER, ATTESTATION, MONITOR, VIRTUAL_MACHINE, COMM_DRIVER, SEL4, SWITCH) applies to (system, process, thread, thread group, device, abstract, processor, virtual processor);
-
 --- The <b>Bit_Codec_Raw_Connections</b> property specifies whether the wire protocol should
 --- be used used for all connections between threads
 
