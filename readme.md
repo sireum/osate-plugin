@@ -10,7 +10,7 @@ models to [AIR](https://github.com/sireum/air) and then to downstream Sireum too
 
 1. Install [Sireum Kekinian](https://github.com/sireum/kekinian#installing)
 
-1. Clone the 'sireum_env' branch of this repository ``git clone -b sireum_env --recurse-submodules git@github.com:sireum/osate-plugin.git``
+1. Clone the repository ``git clone --recurse-submodules git@github.com:sireum/osate-plugin.git``
 
 1. From the command line
 
