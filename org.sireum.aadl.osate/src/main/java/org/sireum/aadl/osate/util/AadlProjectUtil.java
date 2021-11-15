@@ -173,7 +173,7 @@ public class AadlProjectUtil {
 
 			assert _systemImplementationName != null;
 			assert _projects.size() > 0;
-			assert _systemFileContainer.isEmpty() || (_systemFileContainer.get().systemImplementationFile.exists()
+			assert !_systemFileContainer.isPresent() || (_systemFileContainer.get().systemImplementationFile.exists()
 					&& _systemFileContainer.get().systemImplementationFile.isFile());
 			this.systemImplementationName = _systemImplementationName;
 			this.systemFileContainer = _systemFileContainer;

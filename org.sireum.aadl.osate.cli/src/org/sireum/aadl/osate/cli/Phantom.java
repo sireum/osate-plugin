@@ -296,7 +296,7 @@ public class Phantom implements IApplication {
 
 			SystemImplementation sysImpl = null;
 
-			if (system.systemFileContainer.isEmpty()) {
+			if (!system.systemFileContainer.isPresent()) {
 				if (!system.isSystemNameQualified()) {
 					addError("The " + AadlSystem.KEY_SYSTEM_IMPL + " property '" + system.systemImplementationName
 							+ "' must be fully qualified or the " + AadlSystem.KEY_SYSTEM_IMPL_FILE
