@@ -71,6 +71,7 @@ import org.sireum.Option;
 import org.sireum.Some;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.hamr.ir.AadlASTJavaFactory;
+import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.message.Position;
 
@@ -1037,6 +1038,11 @@ public class Visitor {
 				.map(op -> buildProperty(op, VisitorUtil.iList()))
 				.collect(Collectors.toList());
 
+		List<Annex> annexes = new ArrayList<>();
+		for (AnnexVisitor av : annexVisitors) {
+			annexes.addAll(av.visit(f, new ArrayList<>()));
+		}
+
 		// this is a hack as we're sticking something from the declarative
 		// model into a node meant for things from the instance model. Todo
 		// would be to add a declarative model AIR AST and ...
@@ -1049,7 +1055,7 @@ public class Visitor {
 				properties, // properties
 				VisitorUtil.iList(), // flows
 				VisitorUtil.iList(), // modes
-				VisitorUtil.iList(), // annexes
+				annexes, // annexes
 				""
 		);
 		datamap.put(name, c);

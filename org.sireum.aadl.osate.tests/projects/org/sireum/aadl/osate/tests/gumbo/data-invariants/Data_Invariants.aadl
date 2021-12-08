@@ -1,0 +1,75 @@
+package Data_Invariants
+public
+	with Data_Model;
+	with Base_Types;
+	
+  data Temperature
+    properties
+      -- Indicate that the temperature info will be a struct (record)
+      -- For structs, use of the type must refer to the data component implementation (Temperature.i),
+      --  which defines the fields and associated types of the struct.
+      Data_Model::Data_Representation => Struct;
+  end Temperature;
+
+  data implementation Temperature.i
+    subcomponents
+      -- temperature message contains degrees, which is represented using an AADL Base Type
+      -- defined in the AADL Data Modeling annex.
+      degrees: data Base_Types::Float_32;
+
+    annex GUMBO
+    {**
+      -- data invariant
+      --  data invariants are assumed whenever value of the datatype is consumed
+      --                  and must be proved whenever a value of the data type is constructed
+      invariants
+        inv "Temperature Data Invariant":
+          --degrees >= -459.67;
+          1 >= -459.67;
+    **};
+  end Temperature.i;
+
+
+ data SetPoint
+        -- Indicate that the set point info will be a struct (record)
+    -- For structs, use of the type must refer to the data component implementation (SetPoint.i),
+    --  which defines the fields and associated types of the struct.
+    properties
+      Data_Model::Data_Representation => Struct;
+  end SetPoint;
+
+  data implementation SetPoint.i
+    subcomponents
+      low: data Temperature.i;
+      high: data Temperature.i;
+      annex GUMBO {**       
+      invariants
+        inv "SetPoint Data Invariant":
+          1 <= 2;
+      **};
+  end SetPoint.i;
+  
+  system s
+  	
+  end s;
+  
+  system implementation s.impl
+  	subcomponents
+  		p: process p.impl;
+  end s.impl;
+  
+  process p  	
+  end p;
+  
+  process implementation p.impl
+  	subcomponents
+  		t: thread t;
+  end p.impl;
+  
+  thread t
+  	features
+  		setPoint: out data port SetPoint.i;
+  		temp: out data port Temperature.i;
+  end t;
+  
+end Data_Invariants;

@@ -182,28 +182,31 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 	@Override
 	public List<Annex> visit(ComponentInstance ci, List<String> path) {
+		featureNames = ci.getFeatureInstances().stream().map(f -> f.getName()).collect(Collectors.toList());
+
+		subcomponentNames = ci.getComponentInstances().stream().map(c -> c.getName()).collect(Collectors.toList());
+
+		return visit(ci.getComponentClassifier(), this.path);
+	}
+
+	@Override
+	public List<Annex> visit(org.osate.aadl2.Classifier c, List<String> path) {
+		this.path = path;
+
 		List<Annex> ret = new ArrayList<>();
-		if (ci.getClassifier() != null) {
-			List<BehaviorAnnexImpl> bas = EcoreUtil2.eAllOfType(ci.getClassifier(),
-					BehaviorAnnexImpl.class);
-			assert bas.size() <= 1 : "Expecting at most one BA clause for " + ci.getFullName() + " but found "
-					+ bas.size();
 
-			if (bas.size() == 1) {
-				this.path = path;
+		List<BehaviorAnnexImpl> bas = EcoreUtil2.eAllOfType(c, BehaviorAnnexImpl.class);
+		assert bas.size() <= 1 : "Expecting at most one BA clause for " + c.getFullName() + " but found " + bas.size();
 
-				featureNames = ci.getFeatureInstances().stream().map(f -> f.getName()).collect(Collectors.toList());
+		if (bas.size() == 1) {
 
-				subcomponentNames = ci.getComponentInstances().stream().map(c -> c.getName())
-						.collect(Collectors.toList());
+			addAllBaseTypes(c.eResource().getResourceSet());
 
-				addAllBaseTypes(ci.eResource().getResourceSet());
+			visit(bas.get(0));
 
-				visit(bas.get(0));
-
-				ret.add(Annex$.MODULE$.apply(ANNEX_TYPE, pop()));
-			}
+			ret.add(Annex$.MODULE$.apply(ANNEX_TYPE, pop()));
 		}
+
 		return ret;
 	}
 
@@ -248,8 +251,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		}
 
 		BTSBLESSAnnexClause b = BTSBLESSAnnexClause$.MODULE$.apply(doNotProve, VisitorUtil.toISZ(_assertions),
-				_invariant,
-				VisitorUtil.toISZ(_variables), VisitorUtil.toISZ(_states), VisitorUtil.toISZ(_transitions));
+				_invariant, VisitorUtil.toISZ(_variables), VisitorUtil.toISZ(_states), VisitorUtil.toISZ(_transitions));
 		push(b);
 
 		return false;
@@ -328,8 +330,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		Option<BTSAssertion> assertion = toNone(); // NA for BA
 
 		BTSTransition bt = BTSTransition$.MODULE$.apply(label, VisitorUtil.toISZ(_sourceStates), destState,
-				_transitionCondition,
-				actions, assertion);
+				_transitionCondition, actions, assertion);
 		push(bt);
 
 		return false;
@@ -498,7 +499,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 		for (DispatchConjunction dc : object.getDispatchConjunctions()) {
 			List<BTSDispatchTrigger> triggers = new ArrayList<>();
-			for(DispatchTrigger t : dc.getDispatchTriggers()) {
+			for (DispatchTrigger t : dc.getDispatchTriggers()) {
 				if (t instanceof ActualPortHolder) {
 					ActualPortHolder e = (ActualPortHolder) t;
 
@@ -695,7 +696,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 			expressions.add(pop());
 		}
 
-		if(expressions.size() > 1) {
+		if (expressions.size() > 1) {
 			convertToBinaryExp(expressions, mos);
 		} else {
 			assert (expressions.size() == 1);
@@ -741,8 +742,8 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 	 * @return
 	 */
 	private BTSBinaryExp convertToBinaryExp(List<BTSExp> expressions, List<? extends Enumerator> binOps) {
-		assert binOps.size() == expressions.size() - 1 : "There are " + binOps.size() + " but " + expressions.size()
-				+ " expressions";
+		assert binOps.size() == expressions.size() - 1
+				: "There are " + binOps.size() + " but " + expressions.size() + " expressions";
 
 		// TODO: operator precedence in BA (or is it just paren expr?)
 
