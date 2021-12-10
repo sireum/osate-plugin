@@ -11,7 +11,7 @@ public class GumboTest extends SireumTest {
 		writeResults = true;
 	}
 
-	static File ROOT_DIR = new File("./projects/org/sireum/aadl/osate/tests/gumbo/");
+	static File ROOT_DIR = new File("./projects/org/sireum/aadl/osate/tests/Gumbo/");
 
 	@Test
 	public void data_invariants() {

@@ -14,11 +14,11 @@
               "type" : "Some",
               "value" : "\/data-invariants\/Data_Invariants.aadl"
             },
-            "beginLine" : 56,
+            "beginLine" : 63,
             "beginColumn" : 3,
-            "endLine" : 59,
+            "endLine" : 66,
             "endColumn" : 14,
-            "offset" : 1636,
+            "offset" : 1846,
             "length" : 82
           }
         }
@@ -46,11 +46,11 @@
                   "type" : "Some",
                   "value" : "\/data-invariants\/Data_Invariants.aadl"
                 },
-                "beginLine" : 58,
+                "beginLine" : 65,
                 "beginColumn" : 5,
-                "endLine" : 58,
+                "endLine" : 65,
                 "endColumn" : 23,
-                "offset" : 1686,
+                "offset" : 1896,
                 "length" : 18
               }
             }
@@ -82,11 +82,11 @@
                       "type" : "Some",
                       "value" : "\/data-invariants\/Data_Invariants.aadl"
                     },
-                    "beginLine" : 66,
+                    "beginLine" : 73,
                     "beginColumn" : 5,
-                    "endLine" : 66,
+                    "endLine" : 73,
                     "endColumn" : 17,
-                    "offset" : 1802,
+                    "offset" : 2012,
                     "length" : 12
                   }
                 }
@@ -116,11 +116,11 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 71,
+                        "beginLine" : 78,
                         "beginColumn" : 5,
-                        "endLine" : 71,
+                        "endLine" : 78,
                         "endColumn" : 40,
-                        "offset" : 1859,
+                        "offset" : 2069,
                         "length" : 35
                       }
                     }
@@ -188,11 +188,11 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 72,
+                        "beginLine" : 79,
                         "beginColumn" : 5,
-                        "endLine" : 72,
+                        "endLine" : 79,
                         "endColumn" : 39,
-                        "offset" : 1899,
+                        "offset" : 2109,
                         "length" : 34
                       }
                     }
@@ -531,6 +531,1566 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
+          "name" : "Base_Types::Boolean"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Boolean"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_8"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "8.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_16"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "16.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_32"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "32.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_64"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "64.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Unsigned_8"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "8.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Unsigned_16"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "16.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Unsigned_32"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "32.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Unsigned_64"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "64.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Float"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Float"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Float_64"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "64.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::IEEE754_Precision"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 53,
+                "beginColumn" : 4,
+                "endLine" : 53,
+                "endColumn" : 84,
+                "offset" : 2369,
+                "length" : 80
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Double"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Float"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Character"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Character"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::String"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "String"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
           "name" : "Data_Invariants::Temperature.i"
         }
       },
@@ -746,12 +2306,14 @@
                     "value" : "Gte"
                   },
                   "lhs" : {
-                    "type" : "GclLiteralExp",
-                    "typ" : {
-                      "type" : "GclLiteralType",
-                      "value" : "Integer"
+                    "type" : "GclNameExp",
+                    "name" : {
+                      "type" : "Name",
+                      "name" : ["degrees"],
+                      "pos" : {
+                        "type" : "None"
+                      }
                     },
-                    "exp" : "1",
                     "pos" : {
                       "type" : "None"
                     }
@@ -773,6 +2335,124 @@
                         "type" : "None"
                       }
                     },
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  },
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              },
+              {
+                "type" : "GclInvariant",
+                "name" : "Real vs Real",
+                "exp" : {
+                  "type" : "GclBinaryExp",
+                  "op" : {
+                    "type" : "GclBinaryOp",
+                    "value" : "Gte"
+                  },
+                  "lhs" : {
+                    "type" : "GclLiteralExp",
+                    "typ" : {
+                      "type" : "GclLiteralType",
+                      "value" : "Real"
+                    },
+                    "exp" : "1.0",
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  },
+                  "rhs" : {
+                    "type" : "GclUnaryExp",
+                    "op" : {
+                      "type" : "GclUnaryOp",
+                      "value" : "Neg"
+                    },
+                    "exp" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Real"
+                      },
+                      "exp" : "459.67",
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    },
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  },
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              },
+              {
+                "type" : "GclInvariant",
+                "name" : "Real vs Int",
+                "exp" : {
+                  "type" : "GclBinaryExp",
+                  "op" : {
+                    "type" : "GclBinaryOp",
+                    "value" : "Gte"
+                  },
+                  "lhs" : {
+                    "type" : "GclLiteralExp",
+                    "typ" : {
+                      "type" : "GclLiteralType",
+                      "value" : "Real"
+                    },
+                    "exp" : "1.0",
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  },
+                  "rhs" : {
+                    "type" : "GclLiteralExp",
+                    "typ" : {
+                      "type" : "GclLiteralType",
+                      "value" : "Integer"
+                    },
+                    "exp" : "0",
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  },
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              },
+              {
+                "type" : "GclInvariant",
+                "name" : "Int vs Int",
+                "exp" : {
+                  "type" : "GclBinaryExp",
+                  "op" : {
+                    "type" : "GclBinaryOp",
+                    "value" : "Gte"
+                  },
+                  "lhs" : {
+                    "type" : "GclLiteralExp",
+                    "typ" : {
+                      "type" : "GclLiteralType",
+                      "value" : "Integer"
+                    },
+                    "exp" : "1",
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  },
+                  "rhs" : {
+                    "type" : "GclLiteralExp",
+                    "typ" : {
+                      "type" : "GclLiteralType",
+                      "value" : "Integer"
+                    },
+                    "exp" : "0",
                     "pos" : {
                       "type" : "None"
                     }
@@ -832,11 +2512,11 @@
                   "type" : "Some",
                   "value" : "\/data-invariants\/Data_Invariants.aadl"
                 },
-                "beginLine" : 43,
+                "beginLine" : 48,
                 "beginColumn" : 7,
-                "endLine" : 43,
+                "endLine" : 48,
                 "endColumn" : 31,
-                "offset" : 1415,
+                "offset" : 1534,
                 "length" : 24
               }
             }
@@ -1064,12 +2744,14 @@
                         "value" : "Gte"
                       },
                       "lhs" : {
-                        "type" : "GclLiteralExp",
-                        "typ" : {
-                          "type" : "GclLiteralType",
-                          "value" : "Integer"
+                        "type" : "GclNameExp",
+                        "name" : {
+                          "type" : "Name",
+                          "name" : ["degrees"],
+                          "pos" : {
+                            "type" : "None"
+                          }
                         },
-                        "exp" : "1",
                         "pos" : {
                           "type" : "None"
                         }
@@ -1091,6 +2773,124 @@
                             "type" : "None"
                           }
                         },
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "Real vs Real",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Real"
+                        },
+                        "exp" : "1.0",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclUnaryExp",
+                        "op" : {
+                          "type" : "GclUnaryOp",
+                          "value" : "Neg"
+                        },
+                        "exp" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Real"
+                          },
+                          "exp" : "459.67",
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "Real vs Int",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Real"
+                        },
+                        "exp" : "1.0",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "0",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "Int vs Int",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "1",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "0",
                         "pos" : {
                           "type" : "None"
                         }
@@ -1127,11 +2927,11 @@
                   "type" : "Some",
                   "value" : "\/data-invariants\/Data_Invariants.aadl"
                 },
-                "beginLine" : 44,
+                "beginLine" : 49,
                 "beginColumn" : 7,
-                "endLine" : 44,
+                "endLine" : 49,
                 "endColumn" : 32,
-                "offset" : 1446,
+                "offset" : 1565,
                 "length" : 25
               }
             }
@@ -1359,12 +3159,14 @@
                         "value" : "Gte"
                       },
                       "lhs" : {
-                        "type" : "GclLiteralExp",
-                        "typ" : {
-                          "type" : "GclLiteralType",
-                          "value" : "Integer"
+                        "type" : "GclNameExp",
+                        "name" : {
+                          "type" : "Name",
+                          "name" : ["degrees"],
+                          "pos" : {
+                            "type" : "None"
+                          }
                         },
-                        "exp" : "1",
                         "pos" : {
                           "type" : "None"
                         }
@@ -1386,6 +3188,124 @@
                             "type" : "None"
                           }
                         },
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "Real vs Real",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Real"
+                        },
+                        "exp" : "1.0",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclUnaryExp",
+                        "op" : {
+                          "type" : "GclUnaryOp",
+                          "value" : "Neg"
+                        },
+                        "exp" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Real"
+                          },
+                          "exp" : "459.67",
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "Real vs Int",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Real"
+                        },
+                        "exp" : "1.0",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "0",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "Int vs Int",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "1",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "0",
                         "pos" : {
                           "type" : "None"
                         }
@@ -1467,26 +3387,146 @@
                   "type" : "GclBinaryExp",
                   "op" : {
                     "type" : "GclBinaryOp",
-                    "value" : "Lte"
+                    "value" : "And"
                   },
                   "lhs" : {
-                    "type" : "GclLiteralExp",
-                    "typ" : {
-                      "type" : "GclLiteralType",
-                      "value" : "Integer"
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "And"
                     },
-                    "exp" : "1",
+                    "lhs" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclAccessExp",
+                        "exp" : {
+                          "type" : "GclNameExp",
+                          "name" : {
+                            "type" : "Name",
+                            "name" : ["low"],
+                            "pos" : {
+                              "type" : "None"
+                            }
+                          },
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "attributeName" : "degrees",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Real"
+                        },
+                        "exp" : "70.0",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Lte"
+                      },
+                      "lhs" : {
+                        "type" : "GclAccessExp",
+                        "exp" : {
+                          "type" : "GclNameExp",
+                          "name" : {
+                            "type" : "Name",
+                            "name" : ["high"],
+                            "pos" : {
+                              "type" : "None"
+                            }
+                          },
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "attributeName" : "degrees",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Real"
+                        },
+                        "exp" : "100.0",
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    },
                     "pos" : {
                       "type" : "None"
                     }
                   },
                   "rhs" : {
-                    "type" : "GclLiteralExp",
-                    "typ" : {
-                      "type" : "GclLiteralType",
-                      "value" : "Integer"
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "Lte"
                     },
-                    "exp" : "2",
+                    "lhs" : {
+                      "type" : "GclAccessExp",
+                      "exp" : {
+                        "type" : "GclNameExp",
+                        "name" : {
+                          "type" : "Name",
+                          "name" : ["low"],
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "attributeName" : "degrees",
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclAccessExp",
+                      "exp" : {
+                        "type" : "GclNameExp",
+                        "name" : {
+                          "type" : "Name",
+                          "name" : ["high"],
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      },
+                      "attributeName" : "degrees",
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    },
                     "pos" : {
                       "type" : "None"
                     }

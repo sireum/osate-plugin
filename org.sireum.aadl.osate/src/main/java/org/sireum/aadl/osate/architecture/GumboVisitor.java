@@ -10,14 +10,19 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.Classifier;
+import org.osate.aadl2.ComponentType;
 import org.osate.aadl2.DataClassifier;
+import org.osate.aadl2.DataSubcomponent;
 import org.osate.aadl2.Element;
+import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.Option;
 import org.sireum.aadl.gumbo.gumbo.BinaryExpr;
+import org.sireum.aadl.gumbo.gumbo.DataRefExpr;
 import org.sireum.aadl.gumbo.gumbo.GumboSubclause;
 import org.sireum.aadl.gumbo.gumbo.IntLit;
 import org.sireum.aadl.gumbo.gumbo.InvSpec;
+import org.sireum.aadl.gumbo.gumbo.OtherDataRef;
 import org.sireum.aadl.gumbo.gumbo.RealLitExpr;
 import org.sireum.aadl.gumbo.gumbo.UnaryExpr;
 import org.sireum.aadl.gumbo.gumbo.util.GumboSwitch;
@@ -26,6 +31,7 @@ import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.Annex$;
 import org.sireum.hamr.ir.AnnexLib;
+import org.sireum.hamr.ir.GclAccessExp$;
 import org.sireum.hamr.ir.GclBinaryExp$;
 import org.sireum.hamr.ir.GclBinaryOp;
 import org.sireum.hamr.ir.GclCompute;
@@ -34,8 +40,10 @@ import org.sireum.hamr.ir.GclGuarantee;
 import org.sireum.hamr.ir.GclIntegration;
 import org.sireum.hamr.ir.GclInvariant;
 import org.sireum.hamr.ir.GclInvariant$;
+import org.sireum.hamr.ir.GclLiteralExp;
 import org.sireum.hamr.ir.GclLiteralExp$;
 import org.sireum.hamr.ir.GclLiteralType;
+import org.sireum.hamr.ir.GclNameExp$;
 import org.sireum.hamr.ir.GclStateVar;
 import org.sireum.hamr.ir.GclSubclause$;
 import org.sireum.hamr.ir.GclUnaryExp$;
@@ -44,6 +52,12 @@ import org.sireum.hamr.ir.GclUnaryOp;
 public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 	Visitor v;
+	Classifier entryClassifier = null;
+
+	private boolean TODO_HALT = true;
+
+	GclLiteralExp dummy = GclLiteralExp$.MODULE$.apply(GclLiteralType.byName("String").get(), "dummy",
+			SlangUtils.toNone());
 
 	private final String ANNEX_TYPE = "gumbo";
 	private List<String> path = null;
@@ -68,11 +82,15 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 		if (bas.size() == 1) {
 			this.path = path;
 
+			this.entryClassifier = c;
+
 			addAllBaseTypes(c.eResource().getResourceSet());
 
 			visit(bas.get(0));
 
 			ret.add(Annex$.MODULE$.apply(ANNEX_TYPE, pop()));
+
+			this.entryClassifier = null;
 		}
 
 		return ret;
@@ -155,6 +173,48 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 	}
 
 	@Override
+	public Boolean caseDataRefExpr(DataRefExpr object) {
+		EObject o = object.getPortOrSubcomponentOrStateVar();
+
+		GclExp exp = null;
+
+		if (o instanceof DataSubcomponent) {
+			DataSubcomponent ds = (DataSubcomponent) o;
+
+			ComponentType ct = ds.getComponentType();
+			Element owner = ds.getOwner();
+
+			if (owner != this.entryClassifier) {
+				todo(object, "Probably not dealing with a data component");
+
+				exp = dummy;
+			} else {
+				exp = GclNameExp$.MODULE$.apply(GumboUtils.toName(ds.getName()), SlangUtils.toNone());
+			}
+		}
+
+		if (object.getRef() != null) {
+			OtherDataRef ref = object.getRef();
+			NamedElement n = ref.getNamedElement();
+
+			if (n instanceof DataSubcomponent) {
+				DataSubcomponent ds = (DataSubcomponent) n;
+				String attName = ds.getName();
+
+				push(GclAccessExp$.MODULE$.apply(exp, attName, SlangUtils.toNone()));
+			} else {
+				todo(n, "Not yet");
+
+				push(dummy);
+			}
+		} else {
+			push(exp);
+		}
+
+		return false;
+	}
+
+	@Override
 	public Boolean caseIntLit(IntLit object) {
 
 		GclLiteralType.Type typ = GclLiteralType.byName("Integer").get();
@@ -200,6 +260,18 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 		T ret = (T) result;
 		result = null;
 		return ret;
+	}
+
+	private void todo(Object o, String msg) {
+		RuntimeException e = new RuntimeException(msg + ": " + o);
+
+		if (TODO_HALT) {
+			throw e;
+		} else {
+			StackTraceElement ste = e.getStackTrace()[1];
+
+			System.err.println(e.getMessage() + ": " + ste);
+		}
 	}
 
 	@Override

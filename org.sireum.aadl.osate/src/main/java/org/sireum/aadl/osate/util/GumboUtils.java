@@ -1,9 +1,17 @@
 package org.sireum.aadl.osate.util;
 
+import java.util.List;
+
+import org.osate.aadl2.Port;
+import org.sireum.aadl.osate.architecture.VisitorUtil;
+import org.sireum.hamr.ir.AadlASTFactory;
 import org.sireum.hamr.ir.GclBinaryOp;
 import org.sireum.hamr.ir.GclUnaryOp;
+import org.sireum.hamr.ir.Name;
 
 public class GumboUtils {
+
+	protected final static AadlASTFactory factory = new AadlASTFactory();
 
 	public static GclBinaryOp.Type toBinaryOp(String op) {
 
@@ -74,5 +82,25 @@ public class GumboUtils {
 		}
 
 		throw new RuntimeException("Unary operator '" + op + "' not supported");
+	}
+
+	public static Name toName(List<String> _path) {
+		return factory.name(_path, null);
+	}
+
+	public static Name toName(String n, List<String> _path) {
+		return toName(VisitorUtil.add(_path, n));
+	}
+
+	public static Name toName(String n) {
+		return toName(n, VisitorUtil.iList());
+	}
+
+	public static Name toName(Port p) {
+		return toName(p.getName());
+	}
+
+	public static Name emptyName() {
+		return toName(VisitorUtil.iList());
 	}
 }

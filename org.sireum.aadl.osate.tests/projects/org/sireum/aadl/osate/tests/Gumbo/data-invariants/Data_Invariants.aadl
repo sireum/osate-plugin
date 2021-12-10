@@ -24,8 +24,13 @@ public
       --                  and must be proved whenever a value of the data type is constructed
       invariants
         inv "Temperature Data Invariant":
-          --degrees >= -459.67;
+          degrees >= -459.67;
+        inv "Real vs Real":
           1.0 >= -459.67;
+        inv "Real vs Int":
+          1.0 >= 0;
+        inv "Int vs Int":
+          1 >= 0;
     **};
   end Temperature.i;
 
@@ -45,7 +50,9 @@ public
       annex GUMBO {**       
       invariants
         inv "SetPoint Data Invariant":
-          1 <= 2;
+          low.degrees >= 70.0 and
+          high.degrees <= 100.0 and
+          low.degrees <= high.degrees;
       **};
   end SetPoint.i;
   
