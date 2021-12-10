@@ -1,6 +1,7 @@
 package org.sireum.aadl.osate.tests.extras;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.xtext.testing.InjectWith;
@@ -18,6 +19,7 @@ import org.sireum.aadl.osate.util.IOUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 
+import com.google.common.io.Files;
 import com.google.inject.Inject;
 
 @RunWith(XtextRunner.class)
@@ -53,6 +55,37 @@ public class AirUpdater extends SireumTest {
 			}
 		} else {
 			System.out.println("Directory does not exist: " + hamrModelsDir);
+		}
+	}
+
+	void copy(File src, File dest) {
+		assert dest.isDirectory() : dest.getPath();
+
+		if (src.isDirectory() && !(src.getName().equals("instances") || src.getName().equals(".aadlbin-gen"))) {
+			File x = new File(dest, src.getName());
+			x.mkdir();
+			for (File f : src.listFiles()) {
+				copy(f, x);
+			}
+		} else if (src.isFile() && !(src.getName().endsWith("impl.json") || src.getName().endsWith("results.json"))) {
+			try {
+				Files.copy(src, new File(dest, src.getName()));
+				System.out.println("Wrote: " + new File(dest, src.getName()));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Test
+	public void syncGumbo() {
+		File srcDir = new File("./projects/org/sireum/aadl/osate/tests/Gumbo");
+		File destDir = new File(System.getenv("SIREUM_HOME") + "/hamr/codegen/jvm/src/test/scala/models");
+
+		copy(srcDir, destDir);
+
+		for (AadlSystem system : AadlProjectUtil.findSystems(new File(destDir, "Gumbo"))) {
+			regen(system);
 		}
 	}
 

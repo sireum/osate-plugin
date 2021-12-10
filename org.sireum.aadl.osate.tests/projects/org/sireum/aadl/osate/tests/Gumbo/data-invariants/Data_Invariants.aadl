@@ -25,7 +25,7 @@ public
       invariants
         inv "Temperature Data Invariant":
           --degrees >= -459.67;
-          1 >= -459.67;
+          1.0 >= -459.67;
     **};
   end Temperature.i;
 

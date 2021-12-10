@@ -732,23 +732,23 @@
           "type" : "Annex",
           "name" : "gumbo",
           "clause" : {
-            "type" : "GumboSubclause",
+            "type" : "GclSubclause",
             "state" : [
             ],
             "invariants" : [
               {
-                "type" : "GumboInvariant",
+                "type" : "GclInvariant",
                 "name" : "Temperature Data Invariant",
                 "exp" : {
-                  "type" : "BinaryExp",
+                  "type" : "GclBinaryExp",
                   "op" : {
-                    "type" : "BinaryOp",
+                    "type" : "GclBinaryOp",
                     "value" : "Gte"
                   },
                   "lhs" : {
-                    "type" : "LiteralExp",
+                    "type" : "GclLiteralExp",
                     "typ" : {
-                      "type" : "LiteralType",
+                      "type" : "GclLiteralType",
                       "value" : "Integer"
                     },
                     "exp" : "1",
@@ -757,15 +757,15 @@
                     }
                   },
                   "rhs" : {
-                    "type" : "UnaryExp",
+                    "type" : "GclUnaryExp",
                     "op" : {
-                      "type" : "UnaryOp",
+                      "type" : "GclUnaryOp",
                       "value" : "Neg"
                     },
                     "exp" : {
-                      "type" : "LiteralExp",
+                      "type" : "GclLiteralExp",
                       "typ" : {
-                        "type" : "LiteralType",
+                        "type" : "GclLiteralType",
                         "value" : "Real"
                       },
                       "exp" : "459.67",
@@ -1050,23 +1050,23 @@
               "type" : "Annex",
               "name" : "gumbo",
               "clause" : {
-                "type" : "GumboSubclause",
+                "type" : "GclSubclause",
                 "state" : [
                 ],
                 "invariants" : [
                   {
-                    "type" : "GumboInvariant",
+                    "type" : "GclInvariant",
                     "name" : "Temperature Data Invariant",
                     "exp" : {
-                      "type" : "BinaryExp",
+                      "type" : "GclBinaryExp",
                       "op" : {
-                        "type" : "BinaryOp",
+                        "type" : "GclBinaryOp",
                         "value" : "Gte"
                       },
                       "lhs" : {
-                        "type" : "LiteralExp",
+                        "type" : "GclLiteralExp",
                         "typ" : {
-                          "type" : "LiteralType",
+                          "type" : "GclLiteralType",
                           "value" : "Integer"
                         },
                         "exp" : "1",
@@ -1075,15 +1075,15 @@
                         }
                       },
                       "rhs" : {
-                        "type" : "UnaryExp",
+                        "type" : "GclUnaryExp",
                         "op" : {
-                          "type" : "UnaryOp",
+                          "type" : "GclUnaryOp",
                           "value" : "Neg"
                         },
                         "exp" : {
-                          "type" : "LiteralExp",
+                          "type" : "GclLiteralExp",
                           "typ" : {
-                            "type" : "LiteralType",
+                            "type" : "GclLiteralType",
                             "value" : "Real"
                           },
                           "exp" : "459.67",
@@ -1345,23 +1345,23 @@
               "type" : "Annex",
               "name" : "gumbo",
               "clause" : {
-                "type" : "GumboSubclause",
+                "type" : "GclSubclause",
                 "state" : [
                 ],
                 "invariants" : [
                   {
-                    "type" : "GumboInvariant",
+                    "type" : "GclInvariant",
                     "name" : "Temperature Data Invariant",
                     "exp" : {
-                      "type" : "BinaryExp",
+                      "type" : "GclBinaryExp",
                       "op" : {
-                        "type" : "BinaryOp",
+                        "type" : "GclBinaryOp",
                         "value" : "Gte"
                       },
                       "lhs" : {
-                        "type" : "LiteralExp",
+                        "type" : "GclLiteralExp",
                         "typ" : {
-                          "type" : "LiteralType",
+                          "type" : "GclLiteralType",
                           "value" : "Integer"
                         },
                         "exp" : "1",
@@ -1370,15 +1370,15 @@
                         }
                       },
                       "rhs" : {
-                        "type" : "UnaryExp",
+                        "type" : "GclUnaryExp",
                         "op" : {
-                          "type" : "UnaryOp",
+                          "type" : "GclUnaryOp",
                           "value" : "Neg"
                         },
                         "exp" : {
-                          "type" : "LiteralExp",
+                          "type" : "GclLiteralExp",
                           "typ" : {
-                            "type" : "LiteralType",
+                            "type" : "GclLiteralType",
                             "value" : "Real"
                           },
                           "exp" : "459.67",
@@ -1456,23 +1456,23 @@
           "type" : "Annex",
           "name" : "gumbo",
           "clause" : {
-            "type" : "GumboSubclause",
+            "type" : "GclSubclause",
             "state" : [
             ],
             "invariants" : [
               {
-                "type" : "GumboInvariant",
+                "type" : "GclInvariant",
                 "name" : "SetPoint Data Invariant",
                 "exp" : {
-                  "type" : "BinaryExp",
+                  "type" : "GclBinaryExp",
                   "op" : {
-                    "type" : "BinaryOp",
+                    "type" : "GclBinaryOp",
                     "value" : "Lte"
                   },
                   "lhs" : {
-                    "type" : "LiteralExp",
+                    "type" : "GclLiteralExp",
                     "typ" : {
-                      "type" : "LiteralType",
+                      "type" : "GclLiteralType",
                       "value" : "Integer"
                     },
                     "exp" : "1",
@@ -1481,9 +1481,9 @@
                     }
                   },
                   "rhs" : {
-                    "type" : "LiteralExp",
+                    "type" : "GclLiteralExp",
                     "typ" : {
-                      "type" : "LiteralType",
+                      "type" : "GclLiteralType",
                       "value" : "Integer"
                     },
                     "exp" : "2",
