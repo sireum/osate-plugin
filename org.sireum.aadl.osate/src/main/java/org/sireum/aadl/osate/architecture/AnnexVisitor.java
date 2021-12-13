@@ -12,7 +12,7 @@ public interface AnnexVisitor {
 
 	public List<Annex> visit(Classifier c, List<String> path);
 
-	// Annexes are attache dot Classifiers so it's expected that this
+	// Annexes are attached to Classifiers so it's expected that this
 	// will end up calling/returning visit(ci.getComponentClassifier, path)
 	public List<Annex> visit(ComponentInstance ci, List<String> path);
 
