@@ -27,8 +27,8 @@ public
           degrees >= -459.67;
         inv "Real vs Real":
           1.0 >= -459.67;
-        inv "Real vs Int":
-          1.0 >= 0;
+        --inv "Real vs Int":
+        --  1.0 >= 0;
         inv "Int vs Int":
           1 >= 0;
     **};

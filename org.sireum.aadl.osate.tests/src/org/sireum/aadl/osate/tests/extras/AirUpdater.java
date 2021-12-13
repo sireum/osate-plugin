@@ -11,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.osate.aadl2.errormodel.tests.ErrorModelInjectorProvider;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.testsupport.TestResourceSetHelper;
+import org.sireum.Os;
+import org.sireum.Os.Path;
 import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.tests.SireumTest;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
@@ -19,7 +21,6 @@ import org.sireum.aadl.osate.util.IOUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 
-import com.google.common.io.Files;
 import com.google.inject.Inject;
 
 @RunWith(XtextRunner.class)
@@ -58,33 +59,14 @@ public class AirUpdater extends SireumTest {
 		}
 	}
 
-	void copy(File src, File dest) {
-		assert dest.isDirectory() : dest.getPath();
-
-		if (src.isDirectory() && !(src.getName().equals("instances") || src.getName().equals(".aadlbin-gen"))) {
-			File x = new File(dest, src.getName());
-			x.mkdir();
-			for (File f : src.listFiles()) {
-				copy(f, x);
-			}
-		} else if (src.isFile() && !(src.getName().endsWith("impl.json") || src.getName().endsWith("results.json"))) {
-			try {
-				Files.copy(src, new File(dest, src.getName()));
-				System.out.println("Wrote: " + new File(dest, src.getName()));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	@Test
-	public void syncGumbo() {
-		File srcDir = new File("./projects/org/sireum/aadl/osate/tests/Gumbo");
-		File destDir = new File(System.getenv("SIREUM_HOME") + "/hamr/codegen/jvm/src/test/scala/models");
+	public void syncGumbo() throws IOException {
+		Path srcPath = Os.path("./projects/org/sireum/aadl/osate/tests/gumbo");
+		Path destPath = Os.path(System.getenv("SIREUM_HOME") + "/hamr/codegen/jvm/src/test/scala/models/GumboTest");
 
-		copy(srcDir, destDir);
+		srcPath.copyOverTo(destPath);
 
-		for (AadlSystem system : AadlProjectUtil.findSystems(new File(destDir, "Gumbo"))) {
+		for (AadlSystem system : AadlProjectUtil.findSystems(new File(destPath.canon().value()))) {
 			regen(system);
 		}
 	}

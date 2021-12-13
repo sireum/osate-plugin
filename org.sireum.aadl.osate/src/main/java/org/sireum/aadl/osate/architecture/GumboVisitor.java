@@ -147,6 +147,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 	@Override
 	public Boolean caseBinaryExpr(BinaryExpr object) {
+
 		visit(object.getLeft());
 		GclExp lhs = pop();
 
@@ -155,7 +156,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 		GclBinaryOp.Type op = GumboUtils.toBinaryOp(object.getOp());
 
-		push(GclBinaryExp$.MODULE$.apply(op, lhs, rhs, SlangUtils.toNone()));
+		push(GclBinaryExp$.MODULE$.apply(op, lhs, rhs, GumboUtils.buildPosInfo(object)));
 
 		return false;
 	}
@@ -167,7 +168,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 		GclUnaryOp.Type op = GumboUtils.toUnaryOp(object.getOp());
 
-		push(GclUnaryExp$.MODULE$.apply(op, exp, SlangUtils.toNone()));
+		push(GclUnaryExp$.MODULE$.apply(op, exp, GumboUtils.buildPosInfo(object)));
 
 		return false;
 	}
@@ -189,7 +190,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 				exp = dummy;
 			} else {
-				exp = GclNameExp$.MODULE$.apply(GumboUtils.toName(ds.getName()), SlangUtils.toNone());
+				exp = GclNameExp$.MODULE$.apply(GumboUtils.toName(ds.getName()), GumboUtils.buildPosInfo(object));
 			}
 		}
 
@@ -201,7 +202,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 				DataSubcomponent ds = (DataSubcomponent) n;
 				String attName = ds.getName();
 
-				push(GclAccessExp$.MODULE$.apply(exp, attName, SlangUtils.toNone()));
+				push(GclAccessExp$.MODULE$.apply(exp, attName, GumboUtils.buildPosInfo(object)));
 			} else {
 				todo(n, "Not yet");
 
@@ -219,7 +220,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 		GclLiteralType.Type typ = GclLiteralType.byName("Integer").get();
 
-		push(GclLiteralExp$.MODULE$.apply(typ, object.getValue(), SlangUtils.toNone()));
+		push(GclLiteralExp$.MODULE$.apply(typ, object.getValue(), GumboUtils.buildPosInfo(object)));
 
 		return false;
 	}
@@ -229,7 +230,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 		GclLiteralType.Type typ = GclLiteralType.byName("Real").get();
 
-		push(GclLiteralExp$.MODULE$.apply(typ, object.getVal(), SlangUtils.toNone()));
+		push(GclLiteralExp$.MODULE$.apply(typ, object.getVal(), GumboUtils.buildPosInfo(object)));
 
 		return false;
 	}

@@ -2,12 +2,15 @@ package org.sireum.aadl.osate.util;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.osate.aadl2.Port;
+import org.sireum.Option;
 import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.hamr.ir.AadlASTFactory;
 import org.sireum.hamr.ir.GclBinaryOp;
 import org.sireum.hamr.ir.GclUnaryOp;
 import org.sireum.hamr.ir.Name;
+import org.sireum.message.Position;
 
 public class GumboUtils {
 
@@ -102,5 +105,10 @@ public class GumboUtils {
 
 	public static Name emptyName() {
 		return toName(VisitorUtil.iList());
+	}
+
+	public static Option<Position> buildPosInfo(EObject object) {
+		Position p = VisitorUtil.buildPosInfo(object);
+		return p == null ? SlangUtils.toNone() : SlangUtils.toSome(p);
 	}
 }

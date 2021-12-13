@@ -18,7 +18,7 @@
             "beginColumn" : 3,
             "endLine" : 66,
             "endColumn" : 14,
-            "offset" : 1842,
+            "offset" : 1850,
             "length" : 82
           }
         }
@@ -50,7 +50,7 @@
                 "beginColumn" : 5,
                 "endLine" : 65,
                 "endColumn" : 23,
-                "offset" : 1892,
+                "offset" : 1900,
                 "length" : 18
               }
             }
@@ -86,7 +86,7 @@
                     "beginColumn" : 5,
                     "endLine" : 73,
                     "endColumn" : 17,
-                    "offset" : 2008,
+                    "offset" : 2016,
                     "length" : 12
                   }
                 }
@@ -120,7 +120,7 @@
                         "beginColumn" : 5,
                         "endLine" : 78,
                         "endColumn" : 40,
-                        "offset" : 2065,
+                        "offset" : 2073,
                         "length" : 35
                       }
                     }
@@ -192,7 +192,7 @@
                         "beginColumn" : 5,
                         "endLine" : 79,
                         "endColumn" : 39,
-                        "offset" : 2105,
+                        "offset" : 2113,
                         "length" : 34
                       }
                     }
@@ -2315,7 +2315,20 @@
                       }
                     },
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 11,
+                        "endLine" : 27,
+                        "endColumn" : 18,
+                        "offset" : 947,
+                        "length" : 7
+                      }
                     }
                   },
                   "rhs" : {
@@ -2332,15 +2345,54 @@
                       },
                       "exp" : "459.67",
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 27,
+                          "beginColumn" : 23,
+                          "endLine" : 27,
+                          "endColumn" : 29,
+                          "offset" : 959,
+                          "length" : 6
+                        }
                       }
                     },
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 22,
+                        "endLine" : 27,
+                        "endColumn" : 29,
+                        "offset" : 958,
+                        "length" : 7
+                      }
                     }
                   },
                   "pos" : {
-                    "type" : "None"
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/data-invariants\/Data_Invariants.aadl"
+                      },
+                      "beginLine" : 27,
+                      "beginColumn" : 11,
+                      "endLine" : 27,
+                      "endColumn" : 29,
+                      "offset" : 947,
+                      "length" : 18
+                    }
                   }
                 }
               },
@@ -2361,7 +2413,20 @@
                     },
                     "exp" : "1.0",
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 29,
+                        "beginColumn" : 11,
+                        "endLine" : 29,
+                        "endColumn" : 14,
+                        "offset" : 1005,
+                        "length" : 3
+                      }
                     }
                   },
                   "rhs" : {
@@ -2378,51 +2443,54 @@
                       },
                       "exp" : "459.67",
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 29,
+                          "beginColumn" : 19,
+                          "endLine" : 29,
+                          "endColumn" : 25,
+                          "offset" : 1013,
+                          "length" : 6
+                        }
                       }
                     },
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 29,
+                        "beginColumn" : 18,
+                        "endLine" : 29,
+                        "endColumn" : 25,
+                        "offset" : 1012,
+                        "length" : 7
+                      }
                     }
                   },
                   "pos" : {
-                    "type" : "None"
-                  }
-                }
-              },
-              {
-                "type" : "GclInvariant",
-                "name" : "Real vs Int",
-                "exp" : {
-                  "type" : "GclBinaryExp",
-                  "op" : {
-                    "type" : "GclBinaryOp",
-                    "value" : "Gte"
-                  },
-                  "lhs" : {
-                    "type" : "GclLiteralExp",
-                    "typ" : {
-                      "type" : "GclLiteralType",
-                      "value" : "Real"
-                    },
-                    "exp" : "1.0",
-                    "pos" : {
-                      "type" : "None"
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/data-invariants\/Data_Invariants.aadl"
+                      },
+                      "beginLine" : 29,
+                      "beginColumn" : 11,
+                      "endLine" : 29,
+                      "endColumn" : 25,
+                      "offset" : 1005,
+                      "length" : 14
                     }
-                  },
-                  "rhs" : {
-                    "type" : "GclLiteralExp",
-                    "typ" : {
-                      "type" : "GclLiteralType",
-                      "value" : "Integer"
-                    },
-                    "exp" : "0",
-                    "pos" : {
-                      "type" : "None"
-                    }
-                  },
-                  "pos" : {
-                    "type" : "None"
                   }
                 }
               },
@@ -2443,7 +2511,20 @@
                     },
                     "exp" : "1",
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 33,
+                        "beginColumn" : 11,
+                        "endLine" : 33,
+                        "endColumn" : 12,
+                        "offset" : 1108,
+                        "length" : 1
+                      }
                     }
                   },
                   "rhs" : {
@@ -2454,11 +2535,37 @@
                     },
                     "exp" : "0",
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 33,
+                        "beginColumn" : 16,
+                        "endLine" : 33,
+                        "endColumn" : 17,
+                        "offset" : 1113,
+                        "length" : 1
+                      }
                     }
                   },
                   "pos" : {
-                    "type" : "None"
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/data-invariants\/Data_Invariants.aadl"
+                      },
+                      "beginLine" : 33,
+                      "beginColumn" : 11,
+                      "endLine" : 33,
+                      "endColumn" : 17,
+                      "offset" : 1108,
+                      "length" : 6
+                    }
                   }
                 }
               }
@@ -2516,7 +2623,7 @@
                 "beginColumn" : 7,
                 "endLine" : 48,
                 "endColumn" : 31,
-                "offset" : 1534,
+                "offset" : 1538,
                 "length" : 24
               }
             }
@@ -2753,7 +2860,20 @@
                           }
                         },
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 11,
+                            "endLine" : 27,
+                            "endColumn" : 18,
+                            "offset" : 947,
+                            "length" : 7
+                          }
                         }
                       },
                       "rhs" : {
@@ -2770,15 +2890,54 @@
                           },
                           "exp" : "459.67",
                           "pos" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 27,
+                              "beginColumn" : 23,
+                              "endLine" : 27,
+                              "endColumn" : 29,
+                              "offset" : 959,
+                              "length" : 6
+                            }
                           }
                         },
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 22,
+                            "endLine" : 27,
+                            "endColumn" : 29,
+                            "offset" : 958,
+                            "length" : 7
+                          }
                         }
                       },
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 27,
+                          "beginColumn" : 11,
+                          "endLine" : 27,
+                          "endColumn" : 29,
+                          "offset" : 947,
+                          "length" : 18
+                        }
                       }
                     }
                   },
@@ -2799,7 +2958,20 @@
                         },
                         "exp" : "1.0",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 29,
+                            "beginColumn" : 11,
+                            "endLine" : 29,
+                            "endColumn" : 14,
+                            "offset" : 1005,
+                            "length" : 3
+                          }
                         }
                       },
                       "rhs" : {
@@ -2816,51 +2988,54 @@
                           },
                           "exp" : "459.67",
                           "pos" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 29,
+                              "beginColumn" : 19,
+                              "endLine" : 29,
+                              "endColumn" : 25,
+                              "offset" : 1013,
+                              "length" : 6
+                            }
                           }
                         },
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 29,
+                            "beginColumn" : 18,
+                            "endLine" : 29,
+                            "endColumn" : 25,
+                            "offset" : 1012,
+                            "length" : 7
+                          }
                         }
                       },
                       "pos" : {
-                        "type" : "None"
-                      }
-                    }
-                  },
-                  {
-                    "type" : "GclInvariant",
-                    "name" : "Real vs Int",
-                    "exp" : {
-                      "type" : "GclBinaryExp",
-                      "op" : {
-                        "type" : "GclBinaryOp",
-                        "value" : "Gte"
-                      },
-                      "lhs" : {
-                        "type" : "GclLiteralExp",
-                        "typ" : {
-                          "type" : "GclLiteralType",
-                          "value" : "Real"
-                        },
-                        "exp" : "1.0",
-                        "pos" : {
-                          "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 29,
+                          "beginColumn" : 11,
+                          "endLine" : 29,
+                          "endColumn" : 25,
+                          "offset" : 1005,
+                          "length" : 14
                         }
-                      },
-                      "rhs" : {
-                        "type" : "GclLiteralExp",
-                        "typ" : {
-                          "type" : "GclLiteralType",
-                          "value" : "Integer"
-                        },
-                        "exp" : "0",
-                        "pos" : {
-                          "type" : "None"
-                        }
-                      },
-                      "pos" : {
-                        "type" : "None"
                       }
                     }
                   },
@@ -2881,7 +3056,20 @@
                         },
                         "exp" : "1",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 33,
+                            "beginColumn" : 11,
+                            "endLine" : 33,
+                            "endColumn" : 12,
+                            "offset" : 1108,
+                            "length" : 1
+                          }
                         }
                       },
                       "rhs" : {
@@ -2892,11 +3080,37 @@
                         },
                         "exp" : "0",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 33,
+                            "beginColumn" : 16,
+                            "endLine" : 33,
+                            "endColumn" : 17,
+                            "offset" : 1113,
+                            "length" : 1
+                          }
                         }
                       },
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 33,
+                          "beginColumn" : 11,
+                          "endLine" : 33,
+                          "endColumn" : 17,
+                          "offset" : 1108,
+                          "length" : 6
+                        }
                       }
                     }
                   }
@@ -2931,7 +3145,7 @@
                 "beginColumn" : 7,
                 "endLine" : 49,
                 "endColumn" : 32,
-                "offset" : 1565,
+                "offset" : 1569,
                 "length" : 25
               }
             }
@@ -3168,7 +3382,20 @@
                           }
                         },
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 11,
+                            "endLine" : 27,
+                            "endColumn" : 18,
+                            "offset" : 947,
+                            "length" : 7
+                          }
                         }
                       },
                       "rhs" : {
@@ -3185,15 +3412,54 @@
                           },
                           "exp" : "459.67",
                           "pos" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 27,
+                              "beginColumn" : 23,
+                              "endLine" : 27,
+                              "endColumn" : 29,
+                              "offset" : 959,
+                              "length" : 6
+                            }
                           }
                         },
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 22,
+                            "endLine" : 27,
+                            "endColumn" : 29,
+                            "offset" : 958,
+                            "length" : 7
+                          }
                         }
                       },
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 27,
+                          "beginColumn" : 11,
+                          "endLine" : 27,
+                          "endColumn" : 29,
+                          "offset" : 947,
+                          "length" : 18
+                        }
                       }
                     }
                   },
@@ -3214,7 +3480,20 @@
                         },
                         "exp" : "1.0",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 29,
+                            "beginColumn" : 11,
+                            "endLine" : 29,
+                            "endColumn" : 14,
+                            "offset" : 1005,
+                            "length" : 3
+                          }
                         }
                       },
                       "rhs" : {
@@ -3231,51 +3510,54 @@
                           },
                           "exp" : "459.67",
                           "pos" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 29,
+                              "beginColumn" : 19,
+                              "endLine" : 29,
+                              "endColumn" : 25,
+                              "offset" : 1013,
+                              "length" : 6
+                            }
                           }
                         },
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 29,
+                            "beginColumn" : 18,
+                            "endLine" : 29,
+                            "endColumn" : 25,
+                            "offset" : 1012,
+                            "length" : 7
+                          }
                         }
                       },
                       "pos" : {
-                        "type" : "None"
-                      }
-                    }
-                  },
-                  {
-                    "type" : "GclInvariant",
-                    "name" : "Real vs Int",
-                    "exp" : {
-                      "type" : "GclBinaryExp",
-                      "op" : {
-                        "type" : "GclBinaryOp",
-                        "value" : "Gte"
-                      },
-                      "lhs" : {
-                        "type" : "GclLiteralExp",
-                        "typ" : {
-                          "type" : "GclLiteralType",
-                          "value" : "Real"
-                        },
-                        "exp" : "1.0",
-                        "pos" : {
-                          "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 29,
+                          "beginColumn" : 11,
+                          "endLine" : 29,
+                          "endColumn" : 25,
+                          "offset" : 1005,
+                          "length" : 14
                         }
-                      },
-                      "rhs" : {
-                        "type" : "GclLiteralExp",
-                        "typ" : {
-                          "type" : "GclLiteralType",
-                          "value" : "Integer"
-                        },
-                        "exp" : "0",
-                        "pos" : {
-                          "type" : "None"
-                        }
-                      },
-                      "pos" : {
-                        "type" : "None"
                       }
                     }
                   },
@@ -3296,7 +3578,20 @@
                         },
                         "exp" : "1",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 33,
+                            "beginColumn" : 11,
+                            "endLine" : 33,
+                            "endColumn" : 12,
+                            "offset" : 1108,
+                            "length" : 1
+                          }
                         }
                       },
                       "rhs" : {
@@ -3307,11 +3602,37 @@
                         },
                         "exp" : "0",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 33,
+                            "beginColumn" : 16,
+                            "endLine" : 33,
+                            "endColumn" : 17,
+                            "offset" : 1113,
+                            "length" : 1
+                          }
                         }
                       },
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 33,
+                          "beginColumn" : 11,
+                          "endLine" : 33,
+                          "endColumn" : 17,
+                          "offset" : 1108,
+                          "length" : 6
+                        }
                       }
                     }
                   }
@@ -3413,27 +3734,79 @@
                             }
                           },
                           "pos" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 53,
+                              "beginColumn" : 11,
+                              "endLine" : 53,
+                              "endColumn" : 22,
+                              "offset" : 1690,
+                              "length" : 11
+                            }
                           }
                         },
                         "attributeName" : "degrees",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 53,
+                            "beginColumn" : 11,
+                            "endLine" : 53,
+                            "endColumn" : 22,
+                            "offset" : 1690,
+                            "length" : 11
+                          }
                         }
                       },
                       "rhs" : {
                         "type" : "GclLiteralExp",
                         "typ" : {
                           "type" : "GclLiteralType",
-                          "value" : "Integer"
+                          "value" : "Real"
                         },
-                        "exp" : "70",
+                        "exp" : "70.0",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 53,
+                            "beginColumn" : 26,
+                            "endLine" : 53,
+                            "endColumn" : 30,
+                            "offset" : 1705,
+                            "length" : 4
+                          }
                         }
                       },
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 53,
+                          "beginColumn" : 11,
+                          "endLine" : 53,
+                          "endColumn" : 30,
+                          "offset" : 1690,
+                          "length" : 19
+                        }
                       }
                     },
                     "rhs" : {
@@ -3454,31 +3827,96 @@
                             }
                           },
                           "pos" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 54,
+                              "beginColumn" : 11,
+                              "endLine" : 54,
+                              "endColumn" : 23,
+                              "offset" : 1724,
+                              "length" : 12
+                            }
                           }
                         },
                         "attributeName" : "degrees",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 54,
+                            "beginColumn" : 11,
+                            "endLine" : 54,
+                            "endColumn" : 23,
+                            "offset" : 1724,
+                            "length" : 12
+                          }
                         }
                       },
                       "rhs" : {
                         "type" : "GclLiteralExp",
                         "typ" : {
                           "type" : "GclLiteralType",
-                          "value" : "Integer"
+                          "value" : "Real"
                         },
-                        "exp" : "100",
+                        "exp" : "100.0",
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 54,
+                            "beginColumn" : 27,
+                            "endLine" : 54,
+                            "endColumn" : 32,
+                            "offset" : 1740,
+                            "length" : 5
+                          }
                         }
                       },
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 54,
+                          "beginColumn" : 11,
+                          "endLine" : 54,
+                          "endColumn" : 32,
+                          "offset" : 1724,
+                          "length" : 21
+                        }
                       }
                     },
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 11,
+                        "endLine" : 54,
+                        "endColumn" : 32,
+                        "offset" : 1690,
+                        "length" : 55
+                      }
                     }
                   },
                   "rhs" : {
@@ -3499,12 +3937,38 @@
                           }
                         },
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 55,
+                            "beginColumn" : 11,
+                            "endLine" : 55,
+                            "endColumn" : 22,
+                            "offset" : 1760,
+                            "length" : 11
+                          }
                         }
                       },
                       "attributeName" : "degrees",
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 55,
+                          "beginColumn" : 11,
+                          "endLine" : 55,
+                          "endColumn" : 22,
+                          "offset" : 1760,
+                          "length" : 11
+                        }
                       }
                     },
                     "rhs" : {
@@ -3519,20 +3983,72 @@
                           }
                         },
                         "pos" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 55,
+                            "beginColumn" : 26,
+                            "endLine" : 55,
+                            "endColumn" : 38,
+                            "offset" : 1775,
+                            "length" : 12
+                          }
                         }
                       },
                       "attributeName" : "degrees",
                       "pos" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 55,
+                          "beginColumn" : 26,
+                          "endLine" : 55,
+                          "endColumn" : 38,
+                          "offset" : 1775,
+                          "length" : 12
+                        }
                       }
                     },
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 55,
+                        "beginColumn" : 11,
+                        "endLine" : 55,
+                        "endColumn" : 38,
+                        "offset" : 1760,
+                        "length" : 27
+                      }
                     }
                   },
                   "pos" : {
-                    "type" : "None"
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/data-invariants\/Data_Invariants.aadl"
+                      },
+                      "beginLine" : 53,
+                      "beginColumn" : 11,
+                      "endLine" : 55,
+                      "endColumn" : 38,
+                      "offset" : 1690,
+                      "length" : 97
+                    }
                   }
                 }
               }
