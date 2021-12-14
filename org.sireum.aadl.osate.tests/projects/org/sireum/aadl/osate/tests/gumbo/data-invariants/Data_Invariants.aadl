@@ -24,13 +24,35 @@ public
       --                  and must be proved whenever a value of the data type is constructed
       invariants
         inv "Temperature Data Invariant":
-          degrees >= -459.67;
-        inv "Real vs Real":
+          degrees >= -459.67; -- this works since codegen is emitting real lits as F32's
+          
+        inv "V: real vs neg real":
           1.0 >= -459.67;
-        --inv "Real vs Int":
+        inv "V: comparing ints":
+          (1 + 1) <= (3 - 1);
+        inv "V: T":
+          true;
+        inv "V: !F":
+          not false;
+        inv "V: mixed":
+          false <> (1 + 1 <= 3 - 1);
+        inv "V: logical ops":
+          true or true orelse true and not true andthen true;
+        inv "V: arith ops":
+          2 - 1 - 5 / 5 + 1 * 5 = 5;
+
+        -- currently emitted an F32 <op> Z.  Need to convert one to the other first
+        --inv "I: Real vs Int":
         --  1.0 >= 0;
-        inv "Int vs Int":
-          1 >= 0;
+        
+        --inv "I: int expression":
+        --  ((1) + 2);
+        --inv "I: logical op on ints":
+        --  1 and 2;
+        --inv "I: arith op on bools":
+        --  (1 = 1) + true;
+        --inv "I: string lits?":
+        --  "invalid";
     **};
   end Temperature.i;
 

@@ -18,6 +18,7 @@ import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.Option;
 import org.sireum.aadl.gumbo.gumbo.BinaryExpr;
+import org.sireum.aadl.gumbo.gumbo.BoolLitExpr;
 import org.sireum.aadl.gumbo.gumbo.DataRefExpr;
 import org.sireum.aadl.gumbo.gumbo.GumboSubclause;
 import org.sireum.aadl.gumbo.gumbo.IntLit;
@@ -216,6 +217,18 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 	}
 
 	@Override
+	public Boolean caseBoolLitExpr(BoolLitExpr object) {
+
+		GclLiteralType.Type typ = GclLiteralType.byName("Boolean").get();
+
+		Boolean b = Boolean.valueOf(object.getVal().getValue());
+
+		push(GclLiteralExp$.MODULE$.apply(typ, b.toString(), GumboUtils.buildPosInfo(object)));
+
+		return false;
+	}
+
+	@Override
 	public Boolean caseIntLit(IntLit object) {
 
 		GclLiteralType.Type typ = GclLiteralType.byName("Integer").get();
@@ -236,7 +249,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 	}
 
 	public Boolean visit(EObject o) {
-		assert (isSwitchFor(o.eClass().getEPackage()));
+		assert isSwitchFor(o.eClass().getEPackage()) : "Not a switch for " + o;
 		return doSwitch(o);
 	}
 
