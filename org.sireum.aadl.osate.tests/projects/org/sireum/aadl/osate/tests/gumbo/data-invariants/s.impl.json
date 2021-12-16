@@ -14,11 +14,11 @@
               "type" : "Some",
               "value" : "\/data-invariants\/Data_Invariants.aadl"
             },
-            "beginLine" : 63,
+            "beginLine" : 85,
             "beginColumn" : 3,
-            "endLine" : 66,
+            "endLine" : 88,
             "endColumn" : 14,
-            "offset" : 1850,
+            "offset" : 2579,
             "length" : 82
           }
         }
@@ -46,11 +46,11 @@
                   "type" : "Some",
                   "value" : "\/data-invariants\/Data_Invariants.aadl"
                 },
-                "beginLine" : 65,
+                "beginLine" : 87,
                 "beginColumn" : 5,
-                "endLine" : 65,
+                "endLine" : 87,
                 "endColumn" : 23,
-                "offset" : 1900,
+                "offset" : 2629,
                 "length" : 18
               }
             }
@@ -82,11 +82,11 @@
                       "type" : "Some",
                       "value" : "\/data-invariants\/Data_Invariants.aadl"
                     },
-                    "beginLine" : 73,
+                    "beginLine" : 95,
                     "beginColumn" : 5,
-                    "endLine" : 73,
+                    "endLine" : 95,
                     "endColumn" : 17,
-                    "offset" : 2016,
+                    "offset" : 2745,
                     "length" : 12
                   }
                 }
@@ -116,11 +116,11 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 78,
+                        "beginLine" : 100,
                         "beginColumn" : 5,
-                        "endLine" : 78,
+                        "endLine" : 100,
                         "endColumn" : 40,
-                        "offset" : 2073,
+                        "offset" : 2802,
                         "length" : 35
                       }
                     }
@@ -188,11 +188,11 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 79,
+                        "beginLine" : 101,
                         "beginColumn" : 5,
-                        "endLine" : 79,
+                        "endLine" : 101,
                         "endColumn" : 39,
-                        "offset" : 2113,
+                        "offset" : 2842,
                         "length" : 34
                       }
                     }
@@ -2398,7 +2398,7 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "Real vs Real",
+                "name" : "V: real vs neg real",
                 "exp" : {
                   "type" : "GclBinaryExp",
                   "op" : {
@@ -2420,11 +2420,11 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 29,
+                        "beginLine" : 30,
                         "beginColumn" : 11,
-                        "endLine" : 29,
+                        "endLine" : 30,
                         "endColumn" : 14,
-                        "offset" : 1005,
+                        "offset" : 1082,
                         "length" : 3
                       }
                     }
@@ -2450,11 +2450,11 @@
                             "type" : "Some",
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
-                          "beginLine" : 29,
+                          "beginLine" : 30,
                           "beginColumn" : 19,
-                          "endLine" : 29,
+                          "endLine" : 30,
                           "endColumn" : 25,
-                          "offset" : 1013,
+                          "offset" : 1090,
                           "length" : 6
                         }
                       }
@@ -2467,11 +2467,11 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 29,
+                        "beginLine" : 30,
                         "beginColumn" : 18,
-                        "endLine" : 29,
+                        "endLine" : 30,
                         "endColumn" : 25,
-                        "offset" : 1012,
+                        "offset" : 1089,
                         "length" : 7
                       }
                     }
@@ -2484,11 +2484,11 @@
                         "type" : "Some",
                         "value" : "\/data-invariants\/Data_Invariants.aadl"
                       },
-                      "beginLine" : 29,
+                      "beginLine" : 30,
                       "beginColumn" : 11,
-                      "endLine" : 29,
+                      "endLine" : 30,
                       "endColumn" : 25,
-                      "offset" : 1005,
+                      "offset" : 1082,
                       "length" : 14
                     }
                   }
@@ -2496,20 +2496,67 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "Int vs Int",
+                "name" : "V: comparing ints",
                 "exp" : {
                   "type" : "GclBinaryExp",
                   "op" : {
                     "type" : "GclBinaryOp",
-                    "value" : "Gte"
+                    "value" : "Lte"
                   },
                   "lhs" : {
-                    "type" : "GclLiteralExp",
-                    "typ" : {
-                      "type" : "GclLiteralType",
-                      "value" : "Integer"
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "Plus"
                     },
-                    "exp" : "1",
+                    "lhs" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Integer"
+                      },
+                      "exp" : "1",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 32,
+                          "beginColumn" : 12,
+                          "endLine" : 32,
+                          "endColumn" : 13,
+                          "offset" : 1142,
+                          "length" : 1
+                        }
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Integer"
+                      },
+                      "exp" : "1",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 32,
+                          "beginColumn" : 16,
+                          "endLine" : 32,
+                          "endColumn" : 17,
+                          "offset" : 1146,
+                          "length" : 1
+                        }
+                      }
+                    },
                     "pos" : {
                       "type" : "Some",
                       "value" : {
@@ -2518,12 +2565,903 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 33,
+                        "beginLine" : 32,
                         "beginColumn" : 11,
-                        "endLine" : 33,
-                        "endColumn" : 12,
-                        "offset" : 1108,
-                        "length" : 1
+                        "endLine" : 32,
+                        "endColumn" : 18,
+                        "offset" : 1141,
+                        "length" : 7
+                      }
+                    }
+                  },
+                  "rhs" : {
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "Minus"
+                    },
+                    "lhs" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Integer"
+                      },
+                      "exp" : "3",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 32,
+                          "beginColumn" : 23,
+                          "endLine" : 32,
+                          "endColumn" : 24,
+                          "offset" : 1153,
+                          "length" : 1
+                        }
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Integer"
+                      },
+                      "exp" : "1",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 32,
+                          "beginColumn" : 27,
+                          "endLine" : 32,
+                          "endColumn" : 28,
+                          "offset" : 1157,
+                          "length" : 1
+                        }
+                      }
+                    },
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 32,
+                        "beginColumn" : 22,
+                        "endLine" : 32,
+                        "endColumn" : 29,
+                        "offset" : 1152,
+                        "length" : 7
+                      }
+                    }
+                  },
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/data-invariants\/Data_Invariants.aadl"
+                      },
+                      "beginLine" : 32,
+                      "beginColumn" : 11,
+                      "endLine" : 32,
+                      "endColumn" : 29,
+                      "offset" : 1141,
+                      "length" : 18
+                    }
+                  }
+                }
+              },
+              {
+                "type" : "GclInvariant",
+                "name" : "V: T",
+                "exp" : {
+                  "type" : "GclLiteralExp",
+                  "typ" : {
+                    "type" : "GclLiteralType",
+                    "value" : "Boolean"
+                  },
+                  "exp" : "true",
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/data-invariants\/Data_Invariants.aadl"
+                      },
+                      "beginLine" : 34,
+                      "beginColumn" : 11,
+                      "endLine" : 34,
+                      "endColumn" : 15,
+                      "offset" : 1191,
+                      "length" : 4
+                    }
+                  }
+                }
+              },
+              {
+                "type" : "GclInvariant",
+                "name" : "V: !F",
+                "exp" : {
+                  "type" : "GclUnaryExp",
+                  "op" : {
+                    "type" : "GclUnaryOp",
+                    "value" : "Not"
+                  },
+                  "exp" : {
+                    "type" : "GclLiteralExp",
+                    "typ" : {
+                      "type" : "GclLiteralType",
+                      "value" : "Boolean"
+                    },
+                    "exp" : "false",
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 36,
+                        "beginColumn" : 15,
+                        "endLine" : 36,
+                        "endColumn" : 20,
+                        "offset" : 1232,
+                        "length" : 5
+                      }
+                    }
+                  },
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/data-invariants\/Data_Invariants.aadl"
+                      },
+                      "beginLine" : 36,
+                      "beginColumn" : 11,
+                      "endLine" : 36,
+                      "endColumn" : 20,
+                      "offset" : 1228,
+                      "length" : 9
+                    }
+                  }
+                }
+              },
+              {
+                "type" : "GclInvariant",
+                "name" : "V: mixed",
+                "exp" : {
+                  "type" : "GclBinaryExp",
+                  "op" : {
+                    "type" : "GclBinaryOp",
+                    "value" : "Neq"
+                  },
+                  "lhs" : {
+                    "type" : "GclLiteralExp",
+                    "typ" : {
+                      "type" : "GclLiteralType",
+                      "value" : "Boolean"
+                    },
+                    "exp" : "false",
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 38,
+                        "beginColumn" : 11,
+                        "endLine" : 38,
+                        "endColumn" : 16,
+                        "offset" : 1273,
+                        "length" : 5
+                      }
+                    }
+                  },
+                  "rhs" : {
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "Lte"
+                    },
+                    "lhs" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Plus"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "1",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 38,
+                            "beginColumn" : 21,
+                            "endLine" : 38,
+                            "endColumn" : 22,
+                            "offset" : 1283,
+                            "length" : 1
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "1",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 38,
+                            "beginColumn" : 25,
+                            "endLine" : 38,
+                            "endColumn" : 26,
+                            "offset" : 1287,
+                            "length" : 1
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 38,
+                          "beginColumn" : 21,
+                          "endLine" : 38,
+                          "endColumn" : 26,
+                          "offset" : 1283,
+                          "length" : 5
+                        }
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Minus"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "3",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 38,
+                            "beginColumn" : 30,
+                            "endLine" : 38,
+                            "endColumn" : 31,
+                            "offset" : 1292,
+                            "length" : 1
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "1",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 38,
+                            "beginColumn" : 34,
+                            "endLine" : 38,
+                            "endColumn" : 35,
+                            "offset" : 1296,
+                            "length" : 1
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 38,
+                          "beginColumn" : 30,
+                          "endLine" : 38,
+                          "endColumn" : 35,
+                          "offset" : 1292,
+                          "length" : 5
+                        }
+                      }
+                    },
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 38,
+                        "beginColumn" : 20,
+                        "endLine" : 38,
+                        "endColumn" : 36,
+                        "offset" : 1282,
+                        "length" : 16
+                      }
+                    }
+                  },
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/data-invariants\/Data_Invariants.aadl"
+                      },
+                      "beginLine" : 38,
+                      "beginColumn" : 11,
+                      "endLine" : 38,
+                      "endColumn" : 36,
+                      "offset" : 1273,
+                      "length" : 25
+                    }
+                  }
+                }
+              },
+              {
+                "type" : "GclInvariant",
+                "name" : "V: logical ops",
+                "exp" : {
+                  "type" : "GclBinaryExp",
+                  "op" : {
+                    "type" : "GclBinaryOp",
+                    "value" : "OrElse"
+                  },
+                  "lhs" : {
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "Or"
+                    },
+                    "lhs" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Boolean"
+                      },
+                      "exp" : "true",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 40,
+                          "beginColumn" : 11,
+                          "endLine" : 40,
+                          "endColumn" : 15,
+                          "offset" : 1340,
+                          "length" : 4
+                        }
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Boolean"
+                      },
+                      "exp" : "true",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 40,
+                          "beginColumn" : 19,
+                          "endLine" : 40,
+                          "endColumn" : 23,
+                          "offset" : 1348,
+                          "length" : 4
+                        }
+                      }
+                    },
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 40,
+                        "beginColumn" : 11,
+                        "endLine" : 40,
+                        "endColumn" : 23,
+                        "offset" : 1340,
+                        "length" : 12
+                      }
+                    }
+                  },
+                  "rhs" : {
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "AndThen"
+                    },
+                    "lhs" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "And"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Boolean"
+                        },
+                        "exp" : "true",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 40,
+                            "beginColumn" : 31,
+                            "endLine" : 40,
+                            "endColumn" : 35,
+                            "offset" : 1360,
+                            "length" : 4
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclUnaryExp",
+                        "op" : {
+                          "type" : "GclUnaryOp",
+                          "value" : "Not"
+                        },
+                        "exp" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Boolean"
+                          },
+                          "exp" : "true",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 44,
+                              "endLine" : 40,
+                              "endColumn" : 48,
+                              "offset" : 1373,
+                              "length" : 4
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 40,
+                            "beginColumn" : 40,
+                            "endLine" : 40,
+                            "endColumn" : 48,
+                            "offset" : 1369,
+                            "length" : 8
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 40,
+                          "beginColumn" : 31,
+                          "endLine" : 40,
+                          "endColumn" : 48,
+                          "offset" : 1360,
+                          "length" : 17
+                        }
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Boolean"
+                      },
+                      "exp" : "true",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 40,
+                          "beginColumn" : 57,
+                          "endLine" : 40,
+                          "endColumn" : 61,
+                          "offset" : 1386,
+                          "length" : 4
+                        }
+                      }
+                    },
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 40,
+                        "beginColumn" : 31,
+                        "endLine" : 40,
+                        "endColumn" : 61,
+                        "offset" : 1360,
+                        "length" : 30
+                      }
+                    }
+                  },
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/data-invariants\/Data_Invariants.aadl"
+                      },
+                      "beginLine" : 40,
+                      "beginColumn" : 11,
+                      "endLine" : 40,
+                      "endColumn" : 61,
+                      "offset" : 1340,
+                      "length" : 50
+                    }
+                  }
+                }
+              },
+              {
+                "type" : "GclInvariant",
+                "name" : "V: arith ops",
+                "exp" : {
+                  "type" : "GclBinaryExp",
+                  "op" : {
+                    "type" : "GclBinaryOp",
+                    "value" : "Eq"
+                  },
+                  "lhs" : {
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "Plus"
+                    },
+                    "lhs" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Minus"
+                      },
+                      "lhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Minus"
+                        },
+                        "lhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "2",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 42,
+                              "beginColumn" : 11,
+                              "endLine" : 42,
+                              "endColumn" : 12,
+                              "offset" : 1430,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "1",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 42,
+                              "beginColumn" : 15,
+                              "endLine" : 42,
+                              "endColumn" : 16,
+                              "offset" : 1434,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 42,
+                            "beginColumn" : 11,
+                            "endLine" : 42,
+                            "endColumn" : 16,
+                            "offset" : 1430,
+                            "length" : 5
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Div"
+                        },
+                        "lhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "5",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 42,
+                              "beginColumn" : 19,
+                              "endLine" : 42,
+                              "endColumn" : 20,
+                              "offset" : 1438,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "5",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 42,
+                              "beginColumn" : 23,
+                              "endLine" : 42,
+                              "endColumn" : 24,
+                              "offset" : 1442,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 42,
+                            "beginColumn" : 19,
+                            "endLine" : 42,
+                            "endColumn" : 24,
+                            "offset" : 1438,
+                            "length" : 5
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 42,
+                          "beginColumn" : 11,
+                          "endLine" : 42,
+                          "endColumn" : 24,
+                          "offset" : 1430,
+                          "length" : 13
+                        }
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Mult"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "1",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 42,
+                            "beginColumn" : 27,
+                            "endLine" : 42,
+                            "endColumn" : 28,
+                            "offset" : 1446,
+                            "length" : 1
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Integer"
+                        },
+                        "exp" : "5",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 42,
+                            "beginColumn" : 31,
+                            "endLine" : 42,
+                            "endColumn" : 32,
+                            "offset" : 1450,
+                            "length" : 1
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 42,
+                          "beginColumn" : 27,
+                          "endLine" : 42,
+                          "endColumn" : 32,
+                          "offset" : 1446,
+                          "length" : 5
+                        }
+                      }
+                    },
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 42,
+                        "beginColumn" : 11,
+                        "endLine" : 42,
+                        "endColumn" : 32,
+                        "offset" : 1430,
+                        "length" : 21
                       }
                     }
                   },
@@ -2533,7 +3471,7 @@
                       "type" : "GclLiteralType",
                       "value" : "Integer"
                     },
-                    "exp" : "0",
+                    "exp" : "5",
                     "pos" : {
                       "type" : "Some",
                       "value" : {
@@ -2542,11 +3480,11 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 33,
-                        "beginColumn" : 16,
-                        "endLine" : 33,
-                        "endColumn" : 17,
-                        "offset" : 1113,
+                        "beginLine" : 42,
+                        "beginColumn" : 35,
+                        "endLine" : 42,
+                        "endColumn" : 36,
+                        "offset" : 1454,
                         "length" : 1
                       }
                     }
@@ -2559,12 +3497,12 @@
                         "type" : "Some",
                         "value" : "\/data-invariants\/Data_Invariants.aadl"
                       },
-                      "beginLine" : 33,
+                      "beginLine" : 42,
                       "beginColumn" : 11,
-                      "endLine" : 33,
-                      "endColumn" : 17,
-                      "offset" : 1108,
-                      "length" : 6
+                      "endLine" : 42,
+                      "endColumn" : 36,
+                      "offset" : 1430,
+                      "length" : 25
                     }
                   }
                 }
@@ -2619,11 +3557,11 @@
                   "type" : "Some",
                   "value" : "\/data-invariants\/Data_Invariants.aadl"
                 },
-                "beginLine" : 48,
+                "beginLine" : 70,
                 "beginColumn" : 7,
-                "endLine" : 48,
+                "endLine" : 70,
                 "endColumn" : 31,
-                "offset" : 1538,
+                "offset" : 2267,
                 "length" : 24
               }
             }
@@ -2943,7 +3881,7 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "Real vs Real",
+                    "name" : "V: real vs neg real",
                     "exp" : {
                       "type" : "GclBinaryExp",
                       "op" : {
@@ -2965,11 +3903,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 29,
+                            "beginLine" : 30,
                             "beginColumn" : 11,
-                            "endLine" : 29,
+                            "endLine" : 30,
                             "endColumn" : 14,
-                            "offset" : 1005,
+                            "offset" : 1082,
                             "length" : 3
                           }
                         }
@@ -2995,11 +3933,11 @@
                                 "type" : "Some",
                                 "value" : "\/data-invariants\/Data_Invariants.aadl"
                               },
-                              "beginLine" : 29,
+                              "beginLine" : 30,
                               "beginColumn" : 19,
-                              "endLine" : 29,
+                              "endLine" : 30,
                               "endColumn" : 25,
-                              "offset" : 1013,
+                              "offset" : 1090,
                               "length" : 6
                             }
                           }
@@ -3012,11 +3950,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 29,
+                            "beginLine" : 30,
                             "beginColumn" : 18,
-                            "endLine" : 29,
+                            "endLine" : 30,
                             "endColumn" : 25,
-                            "offset" : 1012,
+                            "offset" : 1089,
                             "length" : 7
                           }
                         }
@@ -3029,11 +3967,11 @@
                             "type" : "Some",
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
-                          "beginLine" : 29,
+                          "beginLine" : 30,
                           "beginColumn" : 11,
-                          "endLine" : 29,
+                          "endLine" : 30,
                           "endColumn" : 25,
-                          "offset" : 1005,
+                          "offset" : 1082,
                           "length" : 14
                         }
                       }
@@ -3041,20 +3979,67 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "Int vs Int",
+                    "name" : "V: comparing ints",
                     "exp" : {
                       "type" : "GclBinaryExp",
                       "op" : {
                         "type" : "GclBinaryOp",
-                        "value" : "Gte"
+                        "value" : "Lte"
                       },
                       "lhs" : {
-                        "type" : "GclLiteralExp",
-                        "typ" : {
-                          "type" : "GclLiteralType",
-                          "value" : "Integer"
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Plus"
                         },
-                        "exp" : "1",
+                        "lhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "1",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 32,
+                              "beginColumn" : 12,
+                              "endLine" : 32,
+                              "endColumn" : 13,
+                              "offset" : 1142,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "1",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 32,
+                              "beginColumn" : 16,
+                              "endLine" : 32,
+                              "endColumn" : 17,
+                              "offset" : 1146,
+                              "length" : 1
+                            }
+                          }
+                        },
                         "pos" : {
                           "type" : "Some",
                           "value" : {
@@ -3063,12 +4048,903 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 33,
+                            "beginLine" : 32,
                             "beginColumn" : 11,
-                            "endLine" : 33,
-                            "endColumn" : 12,
-                            "offset" : 1108,
-                            "length" : 1
+                            "endLine" : 32,
+                            "endColumn" : 18,
+                            "offset" : 1141,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Minus"
+                        },
+                        "lhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "3",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 32,
+                              "beginColumn" : 23,
+                              "endLine" : 32,
+                              "endColumn" : 24,
+                              "offset" : 1153,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "1",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 32,
+                              "beginColumn" : 27,
+                              "endLine" : 32,
+                              "endColumn" : 28,
+                              "offset" : 1157,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 32,
+                            "beginColumn" : 22,
+                            "endLine" : 32,
+                            "endColumn" : 29,
+                            "offset" : 1152,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 32,
+                          "beginColumn" : 11,
+                          "endLine" : 32,
+                          "endColumn" : 29,
+                          "offset" : 1141,
+                          "length" : 18
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: T",
+                    "exp" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Boolean"
+                      },
+                      "exp" : "true",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 34,
+                          "beginColumn" : 11,
+                          "endLine" : 34,
+                          "endColumn" : 15,
+                          "offset" : 1191,
+                          "length" : 4
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: !F",
+                    "exp" : {
+                      "type" : "GclUnaryExp",
+                      "op" : {
+                        "type" : "GclUnaryOp",
+                        "value" : "Not"
+                      },
+                      "exp" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Boolean"
+                        },
+                        "exp" : "false",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 36,
+                            "beginColumn" : 15,
+                            "endLine" : 36,
+                            "endColumn" : 20,
+                            "offset" : 1232,
+                            "length" : 5
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 36,
+                          "beginColumn" : 11,
+                          "endLine" : 36,
+                          "endColumn" : 20,
+                          "offset" : 1228,
+                          "length" : 9
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: mixed",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Neq"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Boolean"
+                        },
+                        "exp" : "false",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 38,
+                            "beginColumn" : 11,
+                            "endLine" : 38,
+                            "endColumn" : 16,
+                            "offset" : 1273,
+                            "length" : 5
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Lte"
+                        },
+                        "lhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "Plus"
+                          },
+                          "lhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "1",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 38,
+                                "beginColumn" : 21,
+                                "endLine" : 38,
+                                "endColumn" : 22,
+                                "offset" : 1283,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "1",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 38,
+                                "beginColumn" : 25,
+                                "endLine" : 38,
+                                "endColumn" : 26,
+                                "offset" : 1287,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 38,
+                              "beginColumn" : 21,
+                              "endLine" : 38,
+                              "endColumn" : 26,
+                              "offset" : 1283,
+                              "length" : 5
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "Minus"
+                          },
+                          "lhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "3",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 38,
+                                "beginColumn" : 30,
+                                "endLine" : 38,
+                                "endColumn" : 31,
+                                "offset" : 1292,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "1",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 38,
+                                "beginColumn" : 34,
+                                "endLine" : 38,
+                                "endColumn" : 35,
+                                "offset" : 1296,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 38,
+                              "beginColumn" : 30,
+                              "endLine" : 38,
+                              "endColumn" : 35,
+                              "offset" : 1292,
+                              "length" : 5
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 38,
+                            "beginColumn" : 20,
+                            "endLine" : 38,
+                            "endColumn" : 36,
+                            "offset" : 1282,
+                            "length" : 16
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 38,
+                          "beginColumn" : 11,
+                          "endLine" : 38,
+                          "endColumn" : 36,
+                          "offset" : 1273,
+                          "length" : 25
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: logical ops",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "OrElse"
+                      },
+                      "lhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Or"
+                        },
+                        "lhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Boolean"
+                          },
+                          "exp" : "true",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 11,
+                              "endLine" : 40,
+                              "endColumn" : 15,
+                              "offset" : 1340,
+                              "length" : 4
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Boolean"
+                          },
+                          "exp" : "true",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 19,
+                              "endLine" : 40,
+                              "endColumn" : 23,
+                              "offset" : 1348,
+                              "length" : 4
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 40,
+                            "beginColumn" : 11,
+                            "endLine" : 40,
+                            "endColumn" : 23,
+                            "offset" : 1340,
+                            "length" : 12
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "AndThen"
+                        },
+                        "lhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "And"
+                          },
+                          "lhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Boolean"
+                            },
+                            "exp" : "true",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 31,
+                                "endLine" : 40,
+                                "endColumn" : 35,
+                                "offset" : 1360,
+                                "length" : 4
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclUnaryExp",
+                            "op" : {
+                              "type" : "GclUnaryOp",
+                              "value" : "Not"
+                            },
+                            "exp" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Boolean"
+                              },
+                              "exp" : "true",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 40,
+                                  "beginColumn" : 44,
+                                  "endLine" : 40,
+                                  "endColumn" : 48,
+                                  "offset" : 1373,
+                                  "length" : 4
+                                }
+                              }
+                            },
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 40,
+                                "endLine" : 40,
+                                "endColumn" : 48,
+                                "offset" : 1369,
+                                "length" : 8
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 31,
+                              "endLine" : 40,
+                              "endColumn" : 48,
+                              "offset" : 1360,
+                              "length" : 17
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Boolean"
+                          },
+                          "exp" : "true",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 57,
+                              "endLine" : 40,
+                              "endColumn" : 61,
+                              "offset" : 1386,
+                              "length" : 4
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 40,
+                            "beginColumn" : 31,
+                            "endLine" : 40,
+                            "endColumn" : 61,
+                            "offset" : 1360,
+                            "length" : 30
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 40,
+                          "beginColumn" : 11,
+                          "endLine" : 40,
+                          "endColumn" : 61,
+                          "offset" : 1340,
+                          "length" : 50
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: arith ops",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Eq"
+                      },
+                      "lhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Plus"
+                        },
+                        "lhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "Minus"
+                          },
+                          "lhs" : {
+                            "type" : "GclBinaryExp",
+                            "op" : {
+                              "type" : "GclBinaryOp",
+                              "value" : "Minus"
+                            },
+                            "lhs" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Integer"
+                              },
+                              "exp" : "2",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 42,
+                                  "beginColumn" : 11,
+                                  "endLine" : 42,
+                                  "endColumn" : 12,
+                                  "offset" : 1430,
+                                  "length" : 1
+                                }
+                              }
+                            },
+                            "rhs" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Integer"
+                              },
+                              "exp" : "1",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 42,
+                                  "beginColumn" : 15,
+                                  "endLine" : 42,
+                                  "endColumn" : 16,
+                                  "offset" : 1434,
+                                  "length" : 1
+                                }
+                              }
+                            },
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 11,
+                                "endLine" : 42,
+                                "endColumn" : 16,
+                                "offset" : 1430,
+                                "length" : 5
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclBinaryExp",
+                            "op" : {
+                              "type" : "GclBinaryOp",
+                              "value" : "Div"
+                            },
+                            "lhs" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Integer"
+                              },
+                              "exp" : "5",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 42,
+                                  "beginColumn" : 19,
+                                  "endLine" : 42,
+                                  "endColumn" : 20,
+                                  "offset" : 1438,
+                                  "length" : 1
+                                }
+                              }
+                            },
+                            "rhs" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Integer"
+                              },
+                              "exp" : "5",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 42,
+                                  "beginColumn" : 23,
+                                  "endLine" : 42,
+                                  "endColumn" : 24,
+                                  "offset" : 1442,
+                                  "length" : 1
+                                }
+                              }
+                            },
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 19,
+                                "endLine" : 42,
+                                "endColumn" : 24,
+                                "offset" : 1438,
+                                "length" : 5
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 42,
+                              "beginColumn" : 11,
+                              "endLine" : 42,
+                              "endColumn" : 24,
+                              "offset" : 1430,
+                              "length" : 13
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "Mult"
+                          },
+                          "lhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "1",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 27,
+                                "endLine" : 42,
+                                "endColumn" : 28,
+                                "offset" : 1446,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "5",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 31,
+                                "endLine" : 42,
+                                "endColumn" : 32,
+                                "offset" : 1450,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 42,
+                              "beginColumn" : 27,
+                              "endLine" : 42,
+                              "endColumn" : 32,
+                              "offset" : 1446,
+                              "length" : 5
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 42,
+                            "beginColumn" : 11,
+                            "endLine" : 42,
+                            "endColumn" : 32,
+                            "offset" : 1430,
+                            "length" : 21
                           }
                         }
                       },
@@ -3078,7 +4954,7 @@
                           "type" : "GclLiteralType",
                           "value" : "Integer"
                         },
-                        "exp" : "0",
+                        "exp" : "5",
                         "pos" : {
                           "type" : "Some",
                           "value" : {
@@ -3087,11 +4963,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 33,
-                            "beginColumn" : 16,
-                            "endLine" : 33,
-                            "endColumn" : 17,
-                            "offset" : 1113,
+                            "beginLine" : 42,
+                            "beginColumn" : 35,
+                            "endLine" : 42,
+                            "endColumn" : 36,
+                            "offset" : 1454,
                             "length" : 1
                           }
                         }
@@ -3104,12 +4980,12 @@
                             "type" : "Some",
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
-                          "beginLine" : 33,
+                          "beginLine" : 42,
                           "beginColumn" : 11,
-                          "endLine" : 33,
-                          "endColumn" : 17,
-                          "offset" : 1108,
-                          "length" : 6
+                          "endLine" : 42,
+                          "endColumn" : 36,
+                          "offset" : 1430,
+                          "length" : 25
                         }
                       }
                     }
@@ -3141,11 +5017,11 @@
                   "type" : "Some",
                   "value" : "\/data-invariants\/Data_Invariants.aadl"
                 },
-                "beginLine" : 49,
+                "beginLine" : 71,
                 "beginColumn" : 7,
-                "endLine" : 49,
+                "endLine" : 71,
                 "endColumn" : 32,
-                "offset" : 1569,
+                "offset" : 2298,
                 "length" : 25
               }
             }
@@ -3465,7 +5341,7 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "Real vs Real",
+                    "name" : "V: real vs neg real",
                     "exp" : {
                       "type" : "GclBinaryExp",
                       "op" : {
@@ -3487,11 +5363,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 29,
+                            "beginLine" : 30,
                             "beginColumn" : 11,
-                            "endLine" : 29,
+                            "endLine" : 30,
                             "endColumn" : 14,
-                            "offset" : 1005,
+                            "offset" : 1082,
                             "length" : 3
                           }
                         }
@@ -3517,11 +5393,11 @@
                                 "type" : "Some",
                                 "value" : "\/data-invariants\/Data_Invariants.aadl"
                               },
-                              "beginLine" : 29,
+                              "beginLine" : 30,
                               "beginColumn" : 19,
-                              "endLine" : 29,
+                              "endLine" : 30,
                               "endColumn" : 25,
-                              "offset" : 1013,
+                              "offset" : 1090,
                               "length" : 6
                             }
                           }
@@ -3534,11 +5410,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 29,
+                            "beginLine" : 30,
                             "beginColumn" : 18,
-                            "endLine" : 29,
+                            "endLine" : 30,
                             "endColumn" : 25,
-                            "offset" : 1012,
+                            "offset" : 1089,
                             "length" : 7
                           }
                         }
@@ -3551,11 +5427,11 @@
                             "type" : "Some",
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
-                          "beginLine" : 29,
+                          "beginLine" : 30,
                           "beginColumn" : 11,
-                          "endLine" : 29,
+                          "endLine" : 30,
                           "endColumn" : 25,
-                          "offset" : 1005,
+                          "offset" : 1082,
                           "length" : 14
                         }
                       }
@@ -3563,20 +5439,67 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "Int vs Int",
+                    "name" : "V: comparing ints",
                     "exp" : {
                       "type" : "GclBinaryExp",
                       "op" : {
                         "type" : "GclBinaryOp",
-                        "value" : "Gte"
+                        "value" : "Lte"
                       },
                       "lhs" : {
-                        "type" : "GclLiteralExp",
-                        "typ" : {
-                          "type" : "GclLiteralType",
-                          "value" : "Integer"
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Plus"
                         },
-                        "exp" : "1",
+                        "lhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "1",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 32,
+                              "beginColumn" : 12,
+                              "endLine" : 32,
+                              "endColumn" : 13,
+                              "offset" : 1142,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "1",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 32,
+                              "beginColumn" : 16,
+                              "endLine" : 32,
+                              "endColumn" : 17,
+                              "offset" : 1146,
+                              "length" : 1
+                            }
+                          }
+                        },
                         "pos" : {
                           "type" : "Some",
                           "value" : {
@@ -3585,12 +5508,903 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 33,
+                            "beginLine" : 32,
                             "beginColumn" : 11,
-                            "endLine" : 33,
-                            "endColumn" : 12,
-                            "offset" : 1108,
-                            "length" : 1
+                            "endLine" : 32,
+                            "endColumn" : 18,
+                            "offset" : 1141,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Minus"
+                        },
+                        "lhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "3",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 32,
+                              "beginColumn" : 23,
+                              "endLine" : 32,
+                              "endColumn" : 24,
+                              "offset" : 1153,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Integer"
+                          },
+                          "exp" : "1",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 32,
+                              "beginColumn" : 27,
+                              "endLine" : 32,
+                              "endColumn" : 28,
+                              "offset" : 1157,
+                              "length" : 1
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 32,
+                            "beginColumn" : 22,
+                            "endLine" : 32,
+                            "endColumn" : 29,
+                            "offset" : 1152,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 32,
+                          "beginColumn" : 11,
+                          "endLine" : 32,
+                          "endColumn" : 29,
+                          "offset" : 1141,
+                          "length" : 18
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: T",
+                    "exp" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Boolean"
+                      },
+                      "exp" : "true",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 34,
+                          "beginColumn" : 11,
+                          "endLine" : 34,
+                          "endColumn" : 15,
+                          "offset" : 1191,
+                          "length" : 4
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: !F",
+                    "exp" : {
+                      "type" : "GclUnaryExp",
+                      "op" : {
+                        "type" : "GclUnaryOp",
+                        "value" : "Not"
+                      },
+                      "exp" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Boolean"
+                        },
+                        "exp" : "false",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 36,
+                            "beginColumn" : 15,
+                            "endLine" : 36,
+                            "endColumn" : 20,
+                            "offset" : 1232,
+                            "length" : 5
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 36,
+                          "beginColumn" : 11,
+                          "endLine" : 36,
+                          "endColumn" : 20,
+                          "offset" : 1228,
+                          "length" : 9
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: mixed",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Neq"
+                      },
+                      "lhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Boolean"
+                        },
+                        "exp" : "false",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 38,
+                            "beginColumn" : 11,
+                            "endLine" : 38,
+                            "endColumn" : 16,
+                            "offset" : 1273,
+                            "length" : 5
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Lte"
+                        },
+                        "lhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "Plus"
+                          },
+                          "lhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "1",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 38,
+                                "beginColumn" : 21,
+                                "endLine" : 38,
+                                "endColumn" : 22,
+                                "offset" : 1283,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "1",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 38,
+                                "beginColumn" : 25,
+                                "endLine" : 38,
+                                "endColumn" : 26,
+                                "offset" : 1287,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 38,
+                              "beginColumn" : 21,
+                              "endLine" : 38,
+                              "endColumn" : 26,
+                              "offset" : 1283,
+                              "length" : 5
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "Minus"
+                          },
+                          "lhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "3",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 38,
+                                "beginColumn" : 30,
+                                "endLine" : 38,
+                                "endColumn" : 31,
+                                "offset" : 1292,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "1",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 38,
+                                "beginColumn" : 34,
+                                "endLine" : 38,
+                                "endColumn" : 35,
+                                "offset" : 1296,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 38,
+                              "beginColumn" : 30,
+                              "endLine" : 38,
+                              "endColumn" : 35,
+                              "offset" : 1292,
+                              "length" : 5
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 38,
+                            "beginColumn" : 20,
+                            "endLine" : 38,
+                            "endColumn" : 36,
+                            "offset" : 1282,
+                            "length" : 16
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 38,
+                          "beginColumn" : 11,
+                          "endLine" : 38,
+                          "endColumn" : 36,
+                          "offset" : 1273,
+                          "length" : 25
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: logical ops",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "OrElse"
+                      },
+                      "lhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Or"
+                        },
+                        "lhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Boolean"
+                          },
+                          "exp" : "true",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 11,
+                              "endLine" : 40,
+                              "endColumn" : 15,
+                              "offset" : 1340,
+                              "length" : 4
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Boolean"
+                          },
+                          "exp" : "true",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 19,
+                              "endLine" : 40,
+                              "endColumn" : 23,
+                              "offset" : 1348,
+                              "length" : 4
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 40,
+                            "beginColumn" : 11,
+                            "endLine" : 40,
+                            "endColumn" : 23,
+                            "offset" : 1340,
+                            "length" : 12
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "AndThen"
+                        },
+                        "lhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "And"
+                          },
+                          "lhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Boolean"
+                            },
+                            "exp" : "true",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 31,
+                                "endLine" : 40,
+                                "endColumn" : 35,
+                                "offset" : 1360,
+                                "length" : 4
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclUnaryExp",
+                            "op" : {
+                              "type" : "GclUnaryOp",
+                              "value" : "Not"
+                            },
+                            "exp" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Boolean"
+                              },
+                              "exp" : "true",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 40,
+                                  "beginColumn" : 44,
+                                  "endLine" : 40,
+                                  "endColumn" : 48,
+                                  "offset" : 1373,
+                                  "length" : 4
+                                }
+                              }
+                            },
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 40,
+                                "beginColumn" : 40,
+                                "endLine" : 40,
+                                "endColumn" : 48,
+                                "offset" : 1369,
+                                "length" : 8
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 31,
+                              "endLine" : 40,
+                              "endColumn" : 48,
+                              "offset" : 1360,
+                              "length" : 17
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Boolean"
+                          },
+                          "exp" : "true",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 40,
+                              "beginColumn" : 57,
+                              "endLine" : 40,
+                              "endColumn" : 61,
+                              "offset" : 1386,
+                              "length" : 4
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 40,
+                            "beginColumn" : 31,
+                            "endLine" : 40,
+                            "endColumn" : 61,
+                            "offset" : 1360,
+                            "length" : 30
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/data-invariants\/Data_Invariants.aadl"
+                          },
+                          "beginLine" : 40,
+                          "beginColumn" : 11,
+                          "endLine" : 40,
+                          "endColumn" : 61,
+                          "offset" : 1340,
+                          "length" : 50
+                        }
+                      }
+                    }
+                  },
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "V: arith ops",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Eq"
+                      },
+                      "lhs" : {
+                        "type" : "GclBinaryExp",
+                        "op" : {
+                          "type" : "GclBinaryOp",
+                          "value" : "Plus"
+                        },
+                        "lhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "Minus"
+                          },
+                          "lhs" : {
+                            "type" : "GclBinaryExp",
+                            "op" : {
+                              "type" : "GclBinaryOp",
+                              "value" : "Minus"
+                            },
+                            "lhs" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Integer"
+                              },
+                              "exp" : "2",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 42,
+                                  "beginColumn" : 11,
+                                  "endLine" : 42,
+                                  "endColumn" : 12,
+                                  "offset" : 1430,
+                                  "length" : 1
+                                }
+                              }
+                            },
+                            "rhs" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Integer"
+                              },
+                              "exp" : "1",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 42,
+                                  "beginColumn" : 15,
+                                  "endLine" : 42,
+                                  "endColumn" : 16,
+                                  "offset" : 1434,
+                                  "length" : 1
+                                }
+                              }
+                            },
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 11,
+                                "endLine" : 42,
+                                "endColumn" : 16,
+                                "offset" : 1430,
+                                "length" : 5
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclBinaryExp",
+                            "op" : {
+                              "type" : "GclBinaryOp",
+                              "value" : "Div"
+                            },
+                            "lhs" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Integer"
+                              },
+                              "exp" : "5",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 42,
+                                  "beginColumn" : 19,
+                                  "endLine" : 42,
+                                  "endColumn" : 20,
+                                  "offset" : 1438,
+                                  "length" : 1
+                                }
+                              }
+                            },
+                            "rhs" : {
+                              "type" : "GclLiteralExp",
+                              "typ" : {
+                                "type" : "GclLiteralType",
+                                "value" : "Integer"
+                              },
+                              "exp" : "5",
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                  },
+                                  "beginLine" : 42,
+                                  "beginColumn" : 23,
+                                  "endLine" : 42,
+                                  "endColumn" : 24,
+                                  "offset" : 1442,
+                                  "length" : 1
+                                }
+                              }
+                            },
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 19,
+                                "endLine" : 42,
+                                "endColumn" : 24,
+                                "offset" : 1438,
+                                "length" : 5
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 42,
+                              "beginColumn" : 11,
+                              "endLine" : 42,
+                              "endColumn" : 24,
+                              "offset" : 1430,
+                              "length" : 13
+                            }
+                          }
+                        },
+                        "rhs" : {
+                          "type" : "GclBinaryExp",
+                          "op" : {
+                            "type" : "GclBinaryOp",
+                            "value" : "Mult"
+                          },
+                          "lhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "1",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 27,
+                                "endLine" : 42,
+                                "endColumn" : 28,
+                                "offset" : 1446,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "rhs" : {
+                            "type" : "GclLiteralExp",
+                            "typ" : {
+                              "type" : "GclLiteralType",
+                              "value" : "Integer"
+                            },
+                            "exp" : "5",
+                            "pos" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/data-invariants\/Data_Invariants.aadl"
+                                },
+                                "beginLine" : 42,
+                                "beginColumn" : 31,
+                                "endLine" : 42,
+                                "endColumn" : 32,
+                                "offset" : 1450,
+                                "length" : 1
+                              }
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/data-invariants\/Data_Invariants.aadl"
+                              },
+                              "beginLine" : 42,
+                              "beginColumn" : 27,
+                              "endLine" : 42,
+                              "endColumn" : 32,
+                              "offset" : 1446,
+                              "length" : 5
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/data-invariants\/Data_Invariants.aadl"
+                            },
+                            "beginLine" : 42,
+                            "beginColumn" : 11,
+                            "endLine" : 42,
+                            "endColumn" : 32,
+                            "offset" : 1430,
+                            "length" : 21
                           }
                         }
                       },
@@ -3600,7 +6414,7 @@
                           "type" : "GclLiteralType",
                           "value" : "Integer"
                         },
-                        "exp" : "0",
+                        "exp" : "5",
                         "pos" : {
                           "type" : "Some",
                           "value" : {
@@ -3609,11 +6423,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 33,
-                            "beginColumn" : 16,
-                            "endLine" : 33,
-                            "endColumn" : 17,
-                            "offset" : 1113,
+                            "beginLine" : 42,
+                            "beginColumn" : 35,
+                            "endLine" : 42,
+                            "endColumn" : 36,
+                            "offset" : 1454,
                             "length" : 1
                           }
                         }
@@ -3626,12 +6440,12 @@
                             "type" : "Some",
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
-                          "beginLine" : 33,
+                          "beginLine" : 42,
                           "beginColumn" : 11,
-                          "endLine" : 33,
-                          "endColumn" : 17,
-                          "offset" : 1108,
-                          "length" : 6
+                          "endLine" : 42,
+                          "endColumn" : 36,
+                          "offset" : 1430,
+                          "length" : 25
                         }
                       }
                     }
@@ -3741,11 +6555,11 @@
                                 "type" : "Some",
                                 "value" : "\/data-invariants\/Data_Invariants.aadl"
                               },
-                              "beginLine" : 53,
+                              "beginLine" : 75,
                               "beginColumn" : 11,
-                              "endLine" : 53,
+                              "endLine" : 75,
                               "endColumn" : 22,
-                              "offset" : 1690,
+                              "offset" : 2419,
                               "length" : 11
                             }
                           }
@@ -3759,11 +6573,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 53,
+                            "beginLine" : 75,
                             "beginColumn" : 11,
-                            "endLine" : 53,
+                            "endLine" : 75,
                             "endColumn" : 22,
-                            "offset" : 1690,
+                            "offset" : 2419,
                             "length" : 11
                           }
                         }
@@ -3783,11 +6597,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 53,
+                            "beginLine" : 75,
                             "beginColumn" : 26,
-                            "endLine" : 53,
+                            "endLine" : 75,
                             "endColumn" : 30,
-                            "offset" : 1705,
+                            "offset" : 2434,
                             "length" : 4
                           }
                         }
@@ -3800,11 +6614,11 @@
                             "type" : "Some",
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
-                          "beginLine" : 53,
+                          "beginLine" : 75,
                           "beginColumn" : 11,
-                          "endLine" : 53,
+                          "endLine" : 75,
                           "endColumn" : 30,
-                          "offset" : 1690,
+                          "offset" : 2419,
                           "length" : 19
                         }
                       }
@@ -3834,11 +6648,11 @@
                                 "type" : "Some",
                                 "value" : "\/data-invariants\/Data_Invariants.aadl"
                               },
-                              "beginLine" : 54,
+                              "beginLine" : 76,
                               "beginColumn" : 11,
-                              "endLine" : 54,
+                              "endLine" : 76,
                               "endColumn" : 23,
-                              "offset" : 1724,
+                              "offset" : 2453,
                               "length" : 12
                             }
                           }
@@ -3852,11 +6666,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 54,
+                            "beginLine" : 76,
                             "beginColumn" : 11,
-                            "endLine" : 54,
+                            "endLine" : 76,
                             "endColumn" : 23,
-                            "offset" : 1724,
+                            "offset" : 2453,
                             "length" : 12
                           }
                         }
@@ -3876,11 +6690,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 54,
+                            "beginLine" : 76,
                             "beginColumn" : 27,
-                            "endLine" : 54,
+                            "endLine" : 76,
                             "endColumn" : 32,
-                            "offset" : 1740,
+                            "offset" : 2469,
                             "length" : 5
                           }
                         }
@@ -3893,11 +6707,11 @@
                             "type" : "Some",
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
-                          "beginLine" : 54,
+                          "beginLine" : 76,
                           "beginColumn" : 11,
-                          "endLine" : 54,
+                          "endLine" : 76,
                           "endColumn" : 32,
-                          "offset" : 1724,
+                          "offset" : 2453,
                           "length" : 21
                         }
                       }
@@ -3910,11 +6724,11 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 53,
+                        "beginLine" : 75,
                         "beginColumn" : 11,
-                        "endLine" : 54,
+                        "endLine" : 76,
                         "endColumn" : 32,
-                        "offset" : 1690,
+                        "offset" : 2419,
                         "length" : 55
                       }
                     }
@@ -3944,11 +6758,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 55,
+                            "beginLine" : 77,
                             "beginColumn" : 11,
-                            "endLine" : 55,
+                            "endLine" : 77,
                             "endColumn" : 22,
-                            "offset" : 1760,
+                            "offset" : 2489,
                             "length" : 11
                           }
                         }
@@ -3962,11 +6776,11 @@
                             "type" : "Some",
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
-                          "beginLine" : 55,
+                          "beginLine" : 77,
                           "beginColumn" : 11,
-                          "endLine" : 55,
+                          "endLine" : 77,
                           "endColumn" : 22,
-                          "offset" : 1760,
+                          "offset" : 2489,
                           "length" : 11
                         }
                       }
@@ -3990,11 +6804,11 @@
                               "type" : "Some",
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
-                            "beginLine" : 55,
+                            "beginLine" : 77,
                             "beginColumn" : 26,
-                            "endLine" : 55,
+                            "endLine" : 77,
                             "endColumn" : 38,
-                            "offset" : 1775,
+                            "offset" : 2504,
                             "length" : 12
                           }
                         }
@@ -4008,11 +6822,11 @@
                             "type" : "Some",
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
-                          "beginLine" : 55,
+                          "beginLine" : 77,
                           "beginColumn" : 26,
-                          "endLine" : 55,
+                          "endLine" : 77,
                           "endColumn" : 38,
-                          "offset" : 1775,
+                          "offset" : 2504,
                           "length" : 12
                         }
                       }
@@ -4025,11 +6839,11 @@
                           "type" : "Some",
                           "value" : "\/data-invariants\/Data_Invariants.aadl"
                         },
-                        "beginLine" : 55,
+                        "beginLine" : 77,
                         "beginColumn" : 11,
-                        "endLine" : 55,
+                        "endLine" : 77,
                         "endColumn" : 38,
-                        "offset" : 1760,
+                        "offset" : 2489,
                         "length" : 27
                       }
                     }
@@ -4042,11 +6856,11 @@
                         "type" : "Some",
                         "value" : "\/data-invariants\/Data_Invariants.aadl"
                       },
-                      "beginLine" : 53,
+                      "beginLine" : 75,
                       "beginColumn" : 11,
-                      "endLine" : 55,
+                      "endLine" : 77,
                       "endColumn" : 38,
-                      "offset" : 1690,
+                      "offset" : 2419,
                       "length" : 97
                     }
                   }

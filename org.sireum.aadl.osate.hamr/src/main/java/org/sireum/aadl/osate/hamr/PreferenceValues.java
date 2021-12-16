@@ -12,6 +12,8 @@ import org.eclipse.swt.widgets.Composite;
 
 public class PreferenceValues {
 
+	public static final String HAMR_MARKER_ID = "hamr.marker";
+
 	public static final String PLUGIN_ID = "HAMR";
 
 	public static final BoolOption HAMR_DEVICES_AS_THREADS_OPT = new BoolOption(//
@@ -67,6 +69,13 @@ public class PreferenceValues {
 			"HAMR_PROOF_CHECK", //
 			"Check Information Flow Preservation Proof", //
 			Optional.of("Check Information Flow Preservation Proof"), //
+			false);
+
+	public static final BoolOption HAMR_PROPOGATE_MARKERS = new BoolOption(//
+			"HAMR_PROPOGATE_MARKERS", //
+			"Display HAMR issues in OSATE", //
+			Optional.of(
+					"Converts HAMR messages that contain position information into OSATE markers (e.g. populates the Problems View)"), //
 			false);
 
 	public static String sireumCVC4() {
