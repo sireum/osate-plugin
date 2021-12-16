@@ -48,6 +48,7 @@ import org.sireum.aadl.osate.util.IOUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.hamr.ir.Aadl;
+import org.sireum.message.Reporter;
 
 import com.google.inject.Injector;
 
@@ -276,7 +277,8 @@ public class Phantom implements IApplication {
 				ret = 1;
 			} else {
 				Aadl model = Util.getAir(si, true);
-				ret = org.sireum.cli.HAMR.codeGenH2(model, ho).toInt();
+				Reporter reporter = org.sireum.cli.HAMR.codeGenReporter(model, ho);
+				ret = reporter.hasError() ? 1 : 0;
 			}
 		} else {
 			// assume it's a serialized AIR file

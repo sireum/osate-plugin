@@ -30,6 +30,7 @@ import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.arsit.ArsitBridge;
 import org.sireum.hamr.ir.Aadl;
+import org.sireum.message.Reporter;
 
 public class LaunchHAMR extends AbstractSireumHandler {
 	private HAMRPrompt prompt = null;
@@ -172,7 +173,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
 
-							return org.sireum.cli.HAMR.codeGenH( //
+							Reporter reporter = org.sireum.cli.HAMR.codeGenR( //
 									model, //
 									//
 									verbose, //
@@ -196,7 +197,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									camkesAuxCodeDirs, //
 									aadlRootDir, //
 									//
-									experimentalOptions).toInt();
+									experimentalOptions);
+							return reporter.hasError() ? 1 : 0;
 						});
 
 						if (toolRet == 0 && PreferenceValues.HAMR_PROOF_GENERATE.getValue()
