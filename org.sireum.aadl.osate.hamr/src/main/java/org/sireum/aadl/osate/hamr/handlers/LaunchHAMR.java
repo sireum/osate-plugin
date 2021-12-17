@@ -56,7 +56,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		MessageConsole console = displayConsole();
 		console.clearConsole();
 
-		if (!Util.emitSireumVersion(console)) {
+		if (!Util.emitSireumVersion(console) || !hamrCliApiCompatible()) {
 			displayPopup("HAMR code generation was unsuccessful");
 			return Status.CANCEL_STATUS;
 		}
@@ -333,26 +333,36 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		}
 	}
 
-	private boolean sireumApiCompatible() {
+	/**
+	 * @return true if the sireum.jar being used has the expected HAMR CLI method.
+	 * Alternatively could catch the NoSuchMethodException that would be raised
+	 * when OSATE tries to call HAMR and the method is not in sireum.jar
+	 */
+	private boolean hamrCliApiCompatible() {
 
 		String msg = null;
 		try {
 			Class<?> clsHAMR = Class.forName("org.sireum.cli.HAMR");
-			Method[] mms = clsHAMR.getMethods();
+
 			Class<?> clsAadl = Class.forName("org.sireum.hamr.ir.Aadl");
 			Class<?> clsBool = boolean.class;
 			Class<?> clsPlatform = Class.forName("org.sireum.Cli$SireumHamrCodegenHamrPlatform$Type");
 			Class<?> clsOption = Class.forName("org.sireum.Option");
 			Class<?> clsIS = Class.forName("org.sireum.IS");
 			Class<?> clsZ = Class.forName("org.sireum.Z");
-			Method m = clsHAMR.getMethod("codeGenH", //
+
+			Method m = clsHAMR.getMethod("codeGenR", //
 					clsAadl, // model
+					//
 					clsBool, // verbose
 					clsPlatform, // platform
 					clsOption, // slangOutputDir
 					clsOption, // slangPackageName
+					//
+					clsBool, // noProyekIve
 					clsBool, // noEmbedArt
 					clsBool, // devicesAsThreads
+					//
 					clsIS, // slangAuxCodeDir
 					clsOption, // slangOutputCDirectory
 					clsBool, // excludeComponentImpl
@@ -360,20 +370,26 @@ public class LaunchHAMR extends AbstractSireumHandler {
 					clsZ, // maxStringSize
 					clsZ, // maxArraySize
 					clsBool, // runTranspiler
+					//
 					clsOption, // camkesOutputDirectory
 					clsIS, // camkesAuxCodeDirs
 					clsOption, // aadlRootDir
+					//
 					clsIS // experimentalOptions
 			);
+
+			Class<?> reporter = Class.forName("org.sireum.message.Reporter");
+			if (m.getReturnType() != reporter) {
+				throw new NoSuchMethodException("Expecting HAMR's cli to return a " + reporter.getName()
+						+ " but it's returning a " + m.getReturnType().getName());
+			}
 			return true;
-		} catch (ClassNotFoundException e) {
-			msg = e.getMessage();
-		} catch (NoSuchMethodException e) {
-			msg = e.getMessage();
-		} catch (SecurityException e) {
-			msg = e.getMessage();
+		} catch (Exception e) {
+			msg = e.getClass().getSimpleName() + ": " + e.getMessage();
 		}
-		writeToConsole("\nCannot run HAMR Codegen. " + msg);
+		writeToConsole("\nCannot run HAMR Codegen due to:");
+		writeToConsole("  " + msg);
+		writeToConsole("");
 		writeToConsole("Run Phantom to update HAMR's OSATE plugin (\"$SIREUM_HOME/bin/sireum hamr phantom -u\"). ");
 		writeToConsole("If that does not resolve the issue then please report it.\n");
 		return false;
