@@ -2,7 +2,6 @@ package org.sireum.aadl.osate.hamr.handlers;
 
 import java.io.File;
 import java.io.PrintStream;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +25,7 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.ErrorReport;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.Report;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
+import org.sireum.aadl.osate.util.ApiUtil;
 import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.arsit.ArsitBridge;
@@ -48,7 +48,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		MessageConsole console = displayConsole();
 		console.clearConsole();
 
-		if (!Util.emitSireumVersion(console)) {
+		if (!Util.emitSireumVersion(console) || //
+				!(ApiUtil.hamrCliApiCompatible(new PrintStream(console.newMessageStream())))) {
 			displayPopup("HAMR code generation was unsuccessful");
 			return Status.CANCEL_STATUS;
 		}
@@ -240,51 +241,5 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		}
 
 		return Status.OK_STATUS;
-	}
-
-	private boolean sireumApiCompatible() {
-
-		String msg = null;
-		try {
-			Class<?> clsHAMR = Class.forName("org.sireum.cli.HAMR");
-			Method[] mms = clsHAMR.getMethods();
-			Class<?> clsAadl = Class.forName("org.sireum.hamr.ir.Aadl");
-			Class<?> clsBool = boolean.class;
-			Class<?> clsPlatform = Class.forName("org.sireum.Cli$SireumHamrCodegenHamrPlatform$Type");
-			Class<?> clsOption = Class.forName("org.sireum.Option");
-			Class<?> clsIS = Class.forName("org.sireum.IS");
-			Class<?> clsZ = Class.forName("org.sireum.Z");
-			Method m = clsHAMR.getMethod("codeGenH", //
-					clsAadl, // model
-					clsBool, // verbose
-					clsPlatform, // platform
-					clsOption, // slangOutputDir
-					clsOption, // slangPackageName
-					clsBool, // noEmbedArt
-					clsBool, // devicesAsThreads
-					clsIS, // slangAuxCodeDir
-					clsOption, // slangOutputCDirectory
-					clsBool, // excludeComponentImpl
-					clsZ, // bitWidth
-					clsZ, // maxStringSize
-					clsZ, // maxArraySize
-					clsBool, // runTranspiler
-					clsOption, // camkesOutputDirectory
-					clsIS, // camkesAuxCodeDirs
-					clsOption, // aadlRootDir
-					clsIS // experimentalOptions
-			);
-			return true;
-		} catch (ClassNotFoundException e) {
-			msg = e.getMessage();
-		} catch (NoSuchMethodException e) {
-			msg = e.getMessage();
-		} catch (SecurityException e) {
-			msg = e.getMessage();
-		}
-		writeToConsole("\nCannot run HAMR Codegen. " + msg);
-		writeToConsole("Run Phantom to update HAMR's OSATE plugin (\"$SIREUM_HOME/bin/sireum hamr phantom -u\"). ");
-		writeToConsole("If that does not resolve the issue then please report it.\n");
-		return false;
 	}
 }

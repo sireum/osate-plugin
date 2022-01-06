@@ -44,6 +44,7 @@ import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
+import org.sireum.aadl.osate.util.ApiUtil;
 import org.sireum.aadl.osate.util.IOUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
@@ -130,7 +131,20 @@ public class Phantom implements IApplication {
 			if (opts.get() instanceof SireumHamrPhantomOption) {
 				return phantom((SireumHamrPhantomOption) opts.get(), resourceSet);
 			} else if (opts.get() instanceof SireumHamrCodegenOption) {
-				return hamrCodegen((SireumHamrCodegenOption) opts.get(), resourceSet);
+				int codegenRet = hamrCodegen((SireumHamrCodegenOption) opts.get(), resourceSet);
+
+				if (!ApiUtil.hamrCliApiCompatible(System.err)) {
+					String msg = "HAMR codegen was " + //
+							(codegenRet == 0 ? "succesful, but " : "unsuccesful. Also \n") + //
+							"the expected CLI for codegen was not found so will fail \n" + //
+							"if invoked from within OSATE IDE. Please report this issue.";
+
+					addError(msg);
+
+					return 1;
+				} else {
+					return codegenRet;
+				}
 			} else {
 				org.sireum.Sireum$.MODULE$.main(appArgs);
 				return IApplication.EXIT_OK;
