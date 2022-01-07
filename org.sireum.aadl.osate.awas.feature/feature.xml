@@ -2,7 +2,7 @@
 <feature
       id="org.sireum.aadl.osate.awas.feature"
       label="Sireum AWAS plugin"
-      version="1.0.2110251959.qualifier"
+      version="1.2022.01051723.qualifier"
       provider-name="SAnToS">
 
    <description>
@@ -38,7 +38,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <import plugin="org.osate.aadl2"/>
       <import plugin="org.osate.xtext.aadl2.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.console" version="3.7.1" match="greaterOrEqual"/>
-      <import plugin="org.sireum.aadl.osate" version="1.0.2110251959" match="greaterOrEqual"/>
+      <import plugin="org.sireum.aadl.osate" version="1.2022.01051723" match="greaterOrEqual"/>
       <import plugin="org.osate.pluginsupport"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.osate.ge"/>
