@@ -34,6 +34,8 @@ public class MenuContributions extends CompoundContributionItem {
 		l.add(getItem("Erase Reachability", "org.sireum.commands.erase",
 				map("org.sireum.commands.erase.generator", Generators.GEN_AWAS.toString())));
 
+		l.add(new org.eclipse.jface.action.Separator());
+
 		return l.toArray(new IContributionItem[0]);
 	}
 

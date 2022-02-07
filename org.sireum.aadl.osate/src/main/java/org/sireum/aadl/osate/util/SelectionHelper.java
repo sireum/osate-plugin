@@ -112,10 +112,12 @@ public class SelectionHelper {
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IProject result = null;
 		if (window != null) {
-			IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
-			Object firstElement = selection.getFirstElement();
-			if (firstElement instanceof IAdaptable) {
-				result = ((IAdaptable) firstElement).getAdapter(IProject.class);
+			if (window.getSelectionService().getSelection() instanceof IStructuredSelection) {
+				IStructuredSelection selection = (IStructuredSelection) window.getSelectionService().getSelection();
+				Object firstElement = selection.getFirstElement();
+				if (firstElement instanceof IAdaptable) {
+					result = ((IAdaptable) firstElement).getAdapter(IProject.class);
+				}
 			}
 			if (result == null) {
 				IWorkbenchPage activePage = window.getActivePage();

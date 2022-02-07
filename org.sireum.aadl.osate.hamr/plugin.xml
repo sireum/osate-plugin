@@ -8,6 +8,12 @@
         <commandParameter id="org.sireum.commands.launchhamr.generator"
                           name="Generator"/>
       </command>
+      <command id="org.sireum.commands.clearhamrmarkers"
+               name="Clear HAMR Markers"
+               defaultHandler="org.sireum.aadl.osate.hamr.handlers.EraseHamrMarkersHandler">
+        <commandParameter id="org.sireum.commands.clearhamrmarkers.generator"
+                          name="Generator"/>
+      </command>      
    </extension>   
    <extension point="org.eclipse.ui.menus">
      <!-- CASE menu bar-->
