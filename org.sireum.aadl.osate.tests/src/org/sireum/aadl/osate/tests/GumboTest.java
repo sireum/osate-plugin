@@ -18,6 +18,11 @@ public class GumboTest extends SireumTest {
 		lexecute("data-invariants", "Data_Invariants.aadl", "s.impl");
 	}
 
+	@Test
+	public void integration_contracts() {
+		lexecute("integration-contracts", "Integration_Contracts.aadl", "s.impl");
+	}
+
 	void lexecute(String dirName, String sysFilename, String sysImplName) {
 		execute(new File(ROOT_DIR, dirName), sysFilename, sysImplName);
 	}

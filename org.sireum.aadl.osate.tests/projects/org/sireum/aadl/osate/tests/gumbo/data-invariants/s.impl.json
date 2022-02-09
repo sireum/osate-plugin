@@ -6574,11 +6574,11 @@
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
                             "beginLine" : 75,
-                            "beginColumn" : 11,
+                            "beginColumn" : 15,
                             "endLine" : 75,
                             "endColumn" : 22,
-                            "offset" : 2419,
-                            "length" : 11
+                            "offset" : 2423,
+                            "length" : 7
                           }
                         }
                       },
@@ -6667,11 +6667,11 @@
                               "value" : "\/data-invariants\/Data_Invariants.aadl"
                             },
                             "beginLine" : 76,
-                            "beginColumn" : 11,
+                            "beginColumn" : 16,
                             "endLine" : 76,
                             "endColumn" : 23,
-                            "offset" : 2453,
-                            "length" : 12
+                            "offset" : 2458,
+                            "length" : 7
                           }
                         }
                       },
@@ -6777,11 +6777,11 @@
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
                           "beginLine" : 77,
-                          "beginColumn" : 11,
+                          "beginColumn" : 15,
                           "endLine" : 77,
                           "endColumn" : 22,
-                          "offset" : 2489,
-                          "length" : 11
+                          "offset" : 2493,
+                          "length" : 7
                         }
                       }
                     },
@@ -6823,11 +6823,11 @@
                             "value" : "\/data-invariants\/Data_Invariants.aadl"
                           },
                           "beginLine" : 77,
-                          "beginColumn" : 26,
+                          "beginColumn" : 31,
                           "endLine" : 77,
                           "endColumn" : 38,
-                          "offset" : 2504,
-                          "length" : 12
+                          "offset" : 2509,
+                          "length" : 7
                         }
                       }
                     },

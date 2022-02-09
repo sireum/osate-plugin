@@ -1,0 +1,4902 @@
+{
+  "type" : "Aadl",
+  "components" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["s_impl_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+            },
+            "beginLine" : 57,
+            "beginColumn" : 3,
+            "endLine" : 60,
+            "endColumn" : 14,
+            "offset" : 1774,
+            "length" : 82
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "System"
+      },
+      "classifier" : {
+        "type" : "None"
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["s_impl_Instance", "p"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                },
+                "beginLine" : 59,
+                "beginColumn" : 5,
+                "endLine" : 59,
+                "endColumn" : 23,
+                "offset" : 1824,
+                "length" : 18
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "Integration_Contracts::p.impl"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["s_impl_Instance", "p", "tempControl"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                    },
+                    "beginLine" : 67,
+                    "beginColumn" : 5,
+                    "endLine" : 67,
+                    "endColumn" : 37,
+                    "offset" : 1940,
+                    "length" : 32
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Integration_Contracts::TempControl"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempControl", "setPoint"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 75,
+                        "beginColumn" : 5,
+                        "endLine" : 75,
+                        "endColumn" : 45,
+                        "offset" : 2141,
+                        "length" : 40
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Integration_Contracts::SetPoint.i"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["s_impl_Instance", "p", "tempControl", "setPoint", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Struct"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
+                },
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempControl", "currentTemp"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 76,
+                        "beginColumn" : 5,
+                        "endLine" : 76,
+                        "endColumn" : 51,
+                        "offset" : 2186,
+                        "length" : 46
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Integration_Contracts::Temperature.i"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["s_impl_Instance", "p", "tempControl", "currentTemp", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Struct"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.1"
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempControl", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 13,
+                        "beginColumn" : 2,
+                        "endLine" : 14,
+                        "endColumn" : 50,
+                        "offset" : 527,
+                        "length" : 97
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "gumbo",
+                  "clause" : {
+                    "type" : "GclSubclause",
+                    "state" : [
+                    ],
+                    "invariants" : [
+                    ],
+                    "initializes" : [
+                    ],
+                    "integration" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "GclIntegration",
+                        "specs" : [
+                          {
+                            "type" : "GclAssume",
+                            "name" : "currentTemp Range",
+                            "exp" : {
+                              "type" : "GclBinaryExp",
+                              "op" : {
+                                "type" : "GclBinaryOp",
+                                "value" : "And"
+                              },
+                              "lhs" : {
+                                "type" : "GclBinaryExp",
+                                "op" : {
+                                  "type" : "GclBinaryOp",
+                                  "value" : "Gte"
+                                },
+                                "lhs" : {
+                                  "type" : "GclAccessExp",
+                                  "exp" : {
+                                    "type" : "GclNameExp",
+                                    "name" : {
+                                      "type" : "Name",
+                                      "name" : ["currentTemp"],
+                                      "pos" : {
+                                        "type" : "None"
+                                      }
+                                    },
+                                    "pos" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 83,
+                                        "beginColumn" : 8,
+                                        "endLine" : 83,
+                                        "endColumn" : 27,
+                                        "offset" : 2363,
+                                        "length" : 19
+                                      }
+                                    }
+                                  },
+                                  "attributeName" : "degrees",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 83,
+                                      "beginColumn" : 20,
+                                      "endLine" : 83,
+                                      "endColumn" : 27,
+                                      "offset" : 2375,
+                                      "length" : 7
+                                    }
+                                  }
+                                },
+                                "rhs" : {
+                                  "type" : "GclUnaryExp",
+                                  "op" : {
+                                    "type" : "GclUnaryOp",
+                                    "value" : "Neg"
+                                  },
+                                  "exp" : {
+                                    "type" : "GclLiteralExp",
+                                    "typ" : {
+                                      "type" : "GclLiteralType",
+                                      "value" : "Real"
+                                    },
+                                    "exp" : "70.0",
+                                    "pos" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 83,
+                                        "beginColumn" : 32,
+                                        "endLine" : 83,
+                                        "endColumn" : 36,
+                                        "offset" : 2387,
+                                        "length" : 4
+                                      }
+                                    }
+                                  },
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 83,
+                                      "beginColumn" : 31,
+                                      "endLine" : 83,
+                                      "endColumn" : 36,
+                                      "offset" : 2386,
+                                      "length" : 5
+                                    }
+                                  }
+                                },
+                                "pos" : {
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    },
+                                    "beginLine" : 83,
+                                    "beginColumn" : 8,
+                                    "endLine" : 83,
+                                    "endColumn" : 36,
+                                    "offset" : 2363,
+                                    "length" : 28
+                                  }
+                                }
+                              },
+                              "rhs" : {
+                                "type" : "GclBinaryExp",
+                                "op" : {
+                                  "type" : "GclBinaryOp",
+                                  "value" : "Lte"
+                                },
+                                "lhs" : {
+                                  "type" : "GclAccessExp",
+                                  "exp" : {
+                                    "type" : "GclNameExp",
+                                    "name" : {
+                                      "type" : "Name",
+                                      "name" : ["currentTemp"],
+                                      "pos" : {
+                                        "type" : "None"
+                                      }
+                                    },
+                                    "pos" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 83,
+                                        "beginColumn" : 41,
+                                        "endLine" : 83,
+                                        "endColumn" : 60,
+                                        "offset" : 2396,
+                                        "length" : 19
+                                      }
+                                    }
+                                  },
+                                  "attributeName" : "degrees",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 83,
+                                      "beginColumn" : 53,
+                                      "endLine" : 83,
+                                      "endColumn" : 60,
+                                      "offset" : 2408,
+                                      "length" : 7
+                                    }
+                                  }
+                                },
+                                "rhs" : {
+                                  "type" : "GclLiteralExp",
+                                  "typ" : {
+                                    "type" : "GclLiteralType",
+                                    "value" : "Real"
+                                  },
+                                  "exp" : "180.0",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 83,
+                                      "beginColumn" : 64,
+                                      "endLine" : 83,
+                                      "endColumn" : 69,
+                                      "offset" : 2419,
+                                      "length" : 5
+                                    }
+                                  }
+                                },
+                                "pos" : {
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    },
+                                    "beginLine" : 83,
+                                    "beginColumn" : 41,
+                                    "endLine" : 83,
+                                    "endColumn" : 69,
+                                    "offset" : 2396,
+                                    "length" : 28
+                                  }
+                                }
+                              },
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                  },
+                                  "beginLine" : 83,
+                                  "beginColumn" : 8,
+                                  "endLine" : 83,
+                                  "endColumn" : 69,
+                                  "offset" : 2363,
+                                  "length" : 61
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type" : "GclAssume",
+                            "name" : "setPoint Range",
+                            "exp" : {
+                              "type" : "GclBinaryExp",
+                              "op" : {
+                                "type" : "GclBinaryOp",
+                                "value" : "And"
+                              },
+                              "lhs" : {
+                                "type" : "GclBinaryExp",
+                                "op" : {
+                                  "type" : "GclBinaryOp",
+                                  "value" : "Gte"
+                                },
+                                "lhs" : {
+                                  "type" : "GclAccessExp",
+                                  "exp" : {
+                                    "type" : "GclAccessExp",
+                                    "exp" : {
+                                      "type" : "GclNameExp",
+                                      "name" : {
+                                        "type" : "Name",
+                                        "name" : ["setPoint"],
+                                        "pos" : {
+                                          "type" : "None"
+                                        }
+                                      },
+                                      "pos" : {
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          },
+                                          "beginLine" : 85,
+                                          "beginColumn" : 8,
+                                          "endLine" : 85,
+                                          "endColumn" : 28,
+                                          "offset" : 2464,
+                                          "length" : 20
+                                        }
+                                      }
+                                    },
+                                    "attributeName" : "low",
+                                    "pos" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 85,
+                                        "beginColumn" : 17,
+                                        "endLine" : 85,
+                                        "endColumn" : 28,
+                                        "offset" : 2473,
+                                        "length" : 11
+                                      }
+                                    }
+                                  },
+                                  "attributeName" : "degrees",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 85,
+                                      "beginColumn" : 21,
+                                      "endLine" : 85,
+                                      "endColumn" : 28,
+                                      "offset" : 2477,
+                                      "length" : 7
+                                    }
+                                  }
+                                },
+                                "rhs" : {
+                                  "type" : "GclLiteralExp",
+                                  "typ" : {
+                                    "type" : "GclLiteralType",
+                                    "value" : "Real"
+                                  },
+                                  "exp" : "40.0",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 85,
+                                      "beginColumn" : 32,
+                                      "endLine" : 85,
+                                      "endColumn" : 36,
+                                      "offset" : 2488,
+                                      "length" : 4
+                                    }
+                                  }
+                                },
+                                "pos" : {
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    },
+                                    "beginLine" : 85,
+                                    "beginColumn" : 8,
+                                    "endLine" : 85,
+                                    "endColumn" : 36,
+                                    "offset" : 2464,
+                                    "length" : 28
+                                  }
+                                }
+                              },
+                              "rhs" : {
+                                "type" : "GclBinaryExp",
+                                "op" : {
+                                  "type" : "GclBinaryOp",
+                                  "value" : "Lte"
+                                },
+                                "lhs" : {
+                                  "type" : "GclAccessExp",
+                                  "exp" : {
+                                    "type" : "GclAccessExp",
+                                    "exp" : {
+                                      "type" : "GclNameExp",
+                                      "name" : {
+                                        "type" : "Name",
+                                        "name" : ["setPoint"],
+                                        "pos" : {
+                                          "type" : "None"
+                                        }
+                                      },
+                                      "pos" : {
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          },
+                                          "beginLine" : 85,
+                                          "beginColumn" : 41,
+                                          "endLine" : 85,
+                                          "endColumn" : 62,
+                                          "offset" : 2497,
+                                          "length" : 21
+                                        }
+                                      }
+                                    },
+                                    "attributeName" : "high",
+                                    "pos" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 85,
+                                        "beginColumn" : 50,
+                                        "endLine" : 85,
+                                        "endColumn" : 62,
+                                        "offset" : 2506,
+                                        "length" : 12
+                                      }
+                                    }
+                                  },
+                                  "attributeName" : "degrees",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 85,
+                                      "beginColumn" : 55,
+                                      "endLine" : 85,
+                                      "endColumn" : 62,
+                                      "offset" : 2511,
+                                      "length" : 7
+                                    }
+                                  }
+                                },
+                                "rhs" : {
+                                  "type" : "GclLiteralExp",
+                                  "typ" : {
+                                    "type" : "GclLiteralType",
+                                    "value" : "Real"
+                                  },
+                                  "exp" : "110.0",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 85,
+                                      "beginColumn" : 66,
+                                      "endLine" : 85,
+                                      "endColumn" : 71,
+                                      "offset" : 2522,
+                                      "length" : 5
+                                    }
+                                  }
+                                },
+                                "pos" : {
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    },
+                                    "beginLine" : 85,
+                                    "beginColumn" : 41,
+                                    "endLine" : 85,
+                                    "endColumn" : 71,
+                                    "offset" : 2497,
+                                    "length" : 30
+                                  }
+                                }
+                              },
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                  },
+                                  "beginLine" : 85,
+                                  "beginColumn" : 8,
+                                  "endLine" : 85,
+                                  "endColumn" : 71,
+                                  "offset" : 2464,
+                                  "length" : 63
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "compute" : {
+                      "type" : "None"
+                    }
+                  }
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
+            },
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["s_impl_Instance", "p", "tempSensor"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                    },
+                    "beginLine" : 68,
+                    "beginColumn" : 5,
+                    "endLine" : 68,
+                    "endColumn" : 35,
+                    "offset" : 1977,
+                    "length" : 30
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Integration_Contracts::tempSensor"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempSensor", "currentTemp"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 100,
+                        "beginColumn" : 5,
+                        "endLine" : 100,
+                        "endColumn" : 52,
+                        "offset" : 2928,
+                        "length" : 47
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Integration_Contracts::Temperature.i"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["s_impl_Instance", "p", "tempSensor", "currentTemp", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 4,
+                            "endLine" : 30,
+                            "endColumn" : 36,
+                            "offset" : 1165,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Struct"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ],
+                  "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1\/@featureInstance.0"
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempSensor", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 13,
+                        "beginColumn" : 2,
+                        "endLine" : 14,
+                        "endColumn" : 50,
+                        "offset" : 527,
+                        "length" : 97
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempSensor", "Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 192,
+                        "beginColumn" : 2,
+                        "endLine" : 193,
+                        "endColumn" : 99,
+                        "offset" : 11626,
+                        "length" : 119
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "1.0E12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "gumbo",
+                  "clause" : {
+                    "type" : "GclSubclause",
+                    "state" : [
+                    ],
+                    "invariants" : [
+                    ],
+                    "initializes" : [
+                    ],
+                    "integration" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "GclIntegration",
+                        "specs" : [
+                          {
+                            "type" : "GclGuarantee",
+                            "name" : "currentTemp Range",
+                            "exp" : {
+                              "type" : "GclBinaryExp",
+                              "op" : {
+                                "type" : "GclBinaryOp",
+                                "value" : "And"
+                              },
+                              "lhs" : {
+                                "type" : "GclBinaryExp",
+                                "op" : {
+                                  "type" : "GclBinaryOp",
+                                  "value" : "Gte"
+                                },
+                                "lhs" : {
+                                  "type" : "GclAccessExp",
+                                  "exp" : {
+                                    "type" : "GclNameExp",
+                                    "name" : {
+                                      "type" : "Name",
+                                      "name" : ["currentTemp"],
+                                      "pos" : {
+                                        "type" : "None"
+                                      }
+                                    },
+                                    "pos" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 108,
+                                        "beginColumn" : 8,
+                                        "endLine" : 108,
+                                        "endColumn" : 27,
+                                        "offset" : 3148,
+                                        "length" : 19
+                                      }
+                                    }
+                                  },
+                                  "attributeName" : "degrees",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 108,
+                                      "beginColumn" : 20,
+                                      "endLine" : 108,
+                                      "endColumn" : 27,
+                                      "offset" : 3160,
+                                      "length" : 7
+                                    }
+                                  }
+                                },
+                                "rhs" : {
+                                  "type" : "GclUnaryExp",
+                                  "op" : {
+                                    "type" : "GclUnaryOp",
+                                    "value" : "Neg"
+                                  },
+                                  "exp" : {
+                                    "type" : "GclLiteralExp",
+                                    "typ" : {
+                                      "type" : "GclLiteralType",
+                                      "value" : "Real"
+                                    },
+                                    "exp" : "70.0",
+                                    "pos" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 108,
+                                        "beginColumn" : 32,
+                                        "endLine" : 108,
+                                        "endColumn" : 36,
+                                        "offset" : 3172,
+                                        "length" : 4
+                                      }
+                                    }
+                                  },
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 108,
+                                      "beginColumn" : 31,
+                                      "endLine" : 108,
+                                      "endColumn" : 36,
+                                      "offset" : 3171,
+                                      "length" : 5
+                                    }
+                                  }
+                                },
+                                "pos" : {
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    },
+                                    "beginLine" : 108,
+                                    "beginColumn" : 8,
+                                    "endLine" : 108,
+                                    "endColumn" : 36,
+                                    "offset" : 3148,
+                                    "length" : 28
+                                  }
+                                }
+                              },
+                              "rhs" : {
+                                "type" : "GclBinaryExp",
+                                "op" : {
+                                  "type" : "GclBinaryOp",
+                                  "value" : "Lte"
+                                },
+                                "lhs" : {
+                                  "type" : "GclAccessExp",
+                                  "exp" : {
+                                    "type" : "GclNameExp",
+                                    "name" : {
+                                      "type" : "Name",
+                                      "name" : ["currentTemp"],
+                                      "pos" : {
+                                        "type" : "None"
+                                      }
+                                    },
+                                    "pos" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 108,
+                                        "beginColumn" : 41,
+                                        "endLine" : 108,
+                                        "endColumn" : 60,
+                                        "offset" : 3181,
+                                        "length" : 19
+                                      }
+                                    }
+                                  },
+                                  "attributeName" : "degrees",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 108,
+                                      "beginColumn" : 53,
+                                      "endLine" : 108,
+                                      "endColumn" : 60,
+                                      "offset" : 3193,
+                                      "length" : 7
+                                    }
+                                  }
+                                },
+                                "rhs" : {
+                                  "type" : "GclLiteralExp",
+                                  "typ" : {
+                                    "type" : "GclLiteralType",
+                                    "value" : "Real"
+                                  },
+                                  "exp" : "180.0",
+                                  "pos" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      },
+                                      "beginLine" : 108,
+                                      "beginColumn" : 64,
+                                      "endLine" : 108,
+                                      "endColumn" : 69,
+                                      "offset" : 3204,
+                                      "length" : 5
+                                    }
+                                  }
+                                },
+                                "pos" : {
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    },
+                                    "beginLine" : 108,
+                                    "beginColumn" : 41,
+                                    "endLine" : 108,
+                                    "endColumn" : 69,
+                                    "offset" : 3181,
+                                    "length" : 28
+                                  }
+                                }
+                              },
+                              "pos" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                  },
+                                  "beginLine" : 108,
+                                  "beginColumn" : 8,
+                                  "endLine" : 108,
+                                  "endColumn" : 69,
+                                  "offset" : 3148,
+                                  "length" : 61
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "compute" : {
+                      "type" : "None"
+                    }
+                  }
+                }
+              ],
+              "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1"
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["s_impl_Instance", "p", "c1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                    },
+                    "beginLine" : 70,
+                    "beginColumn" : 5,
+                    "endLine" : 70,
+                    "endColumn" : 64,
+                    "offset" : 2027,
+                    "length" : 59
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempSensor"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 68,
+                        "beginColumn" : 5,
+                        "endLine" : 68,
+                        "endColumn" : 35,
+                        "offset" : 1977,
+                        "length" : 30
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["s_impl_Instance", "p", "tempSensor", "currentTemp"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 100,
+                          "beginColumn" : 5,
+                          "endLine" : 100,
+                          "endColumn" : 52,
+                          "offset" : 2928,
+                          "length" : 47
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempControl"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 67,
+                        "beginColumn" : 5,
+                        "endLine" : 67,
+                        "endColumn" : 37,
+                        "offset" : 1940,
+                        "length" : 32
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["s_impl_Instance", "p", "tempControl", "currentTemp"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 76,
+                          "beginColumn" : 5,
+                          "endLine" : 76,
+                          "endColumn" : 51,
+                          "offset" : 2186,
+                          "length" : 46
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["s_impl_Instance", "p", "tempSensor", "currentTemp -> tempControl", "currentTemp"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ],
+              "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@connectionInstance.0\/@connectionReference.0"
+            }
+          ],
+          "connectionInstances" : [
+            {
+              "type" : "ConnectionInstance",
+              "name" : {
+                "type" : "Name",
+                "name" : ["s_impl_Instance", "p", "tempSensor.currentTemp -> tempControl.currentTemp"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                    },
+                    "beginLine" : 70,
+                    "beginColumn" : 5,
+                    "endLine" : 70,
+                    "endColumn" : 64,
+                    "offset" : 2027,
+                    "length" : 59
+                  }
+                }
+              },
+              "src" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["s_impl_Instance", "p", "tempSensor"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      },
+                      "beginLine" : 68,
+                      "beginColumn" : 5,
+                      "endLine" : 68,
+                      "endColumn" : 35,
+                      "offset" : 1977,
+                      "length" : 30
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempSensor", "currentTemp"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 100,
+                        "beginColumn" : 5,
+                        "endLine" : 100,
+                        "endColumn" : 52,
+                        "offset" : 2928,
+                        "length" : 47
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  }
+                }
+              },
+              "dst" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["s_impl_Instance", "p", "tempControl"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      },
+                      "beginLine" : 67,
+                      "beginColumn" : 5,
+                      "endLine" : 67,
+                      "endColumn" : 37,
+                      "offset" : 1940,
+                      "length" : 32
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "tempControl", "currentTemp"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 76,
+                        "beginColumn" : 5,
+                        "endLine" : 76,
+                        "endColumn" : 51,
+                        "offset" : 2186,
+                        "length" : 46
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  }
+                }
+              },
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "connectionRefs" : [
+                {
+                  "type" : "ConnectionReference",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p", "c1"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 70,
+                        "beginColumn" : 5,
+                        "endLine" : 70,
+                        "endColumn" : 64,
+                        "offset" : 2027,
+                        "length" : 59
+                      }
+                    }
+                  },
+                  "context" : {
+                    "type" : "Name",
+                    "name" : ["s_impl_Instance", "p"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 59,
+                        "beginColumn" : 5,
+                        "endLine" : 59,
+                        "endColumn" : 23,
+                        "offset" : 1824,
+                        "length" : 18
+                      }
+                    }
+                  },
+                  "isParent" : true
+                }
+              ],
+              "properties" : [
+              ]
+            }
+          ],
+          "properties" : [
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0"
+        }
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+        {
+          "type" : "Annex",
+          "name" : "Emv2",
+          "clause" : {
+            "type" : "Emv2Clause",
+            "libraries" : [
+            ],
+            "propagations" : [
+            ],
+            "flows" : [
+            ],
+            "componentBehavior" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Emv2BehaviorSection",
+                "events" : [
+                ],
+                "transitions" : [
+                ],
+                "propagations" : [
+                ]
+              }
+            },
+            "properties" : [
+            ]
+          }
+        }
+      ],
+      "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/"
+    }
+  ],
+  "annexLib" : [
+  ],
+  "dataComponents" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Float_32"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "32.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::IEEE754_Precision"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 53,
+                "beginColumn" : 4,
+                "endLine" : 53,
+                "endColumn" : 84,
+                "offset" : 2369,
+                "length" : 80
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Simple"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Float"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Boolean"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Boolean"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_8"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "8.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_16"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "16.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_32"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "32.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_64"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "64.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Unsigned_8"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "8.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Unsigned_16"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "16.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Unsigned_32"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "32.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Unsigned_64"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "64.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 79,
+                "beginColumn" : 4,
+                "endLine" : 79,
+                "endColumn" : 88,
+                "offset" : 3710,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Unsigned"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Integer"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Float"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Float"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Float_64"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "64.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::IEEE754_Precision"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 53,
+                "beginColumn" : 4,
+                "endLine" : 53,
+                "endColumn" : 84,
+                "offset" : 2369,
+                "length" : 80
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Double"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Float"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Character"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Character"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::String"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "String"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Integration_Contracts::Temperature.i"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["degrees"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                },
+                "beginLine" : 18,
+                "beginColumn" : 7,
+                "endLine" : 18,
+                "endColumn" : 42,
+                "offset" : 624,
+                "length" : 35
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Data"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "Base_Types::Float_32"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Memory_Properties::Data_Size"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                    },
+                    "beginLine" : 92,
+                    "beginColumn" : 2,
+                    "endLine" : 93,
+                    "endColumn" : 137,
+                    "offset" : 4808,
+                    "length" : 152
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "32.0",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "bits"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::IEEE754_Precision"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                    },
+                    "beginLine" : 53,
+                    "beginColumn" : 4,
+                    "endLine" : 53,
+                    "endColumn" : 84,
+                    "offset" : 2369,
+                    "length" : 80
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Simple"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::Data_Representation"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 4,
+                    "endLine" : 30,
+                    "endColumn" : 36,
+                    "offset" : 1165,
+                    "length" : 162
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Float"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+          ],
+          "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_32"
+        }
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Struct"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+        {
+          "type" : "Annex",
+          "name" : "gumbo",
+          "clause" : {
+            "type" : "GclSubclause",
+            "state" : [
+            ],
+            "invariants" : [
+              {
+                "type" : "GclInvariant",
+                "name" : "Temperature Data Invariant",
+                "exp" : {
+                  "type" : "GclBinaryExp",
+                  "op" : {
+                    "type" : "GclBinaryOp",
+                    "value" : "Gte"
+                  },
+                  "lhs" : {
+                    "type" : "GclNameExp",
+                    "name" : {
+                      "type" : "Name",
+                      "name" : ["degrees"],
+                      "pos" : {
+                        "type" : "None"
+                      }
+                    },
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 11,
+                        "endLine" : 27,
+                        "endColumn" : 18,
+                        "offset" : 953,
+                        "length" : 7
+                      }
+                    }
+                  },
+                  "rhs" : {
+                    "type" : "GclUnaryExp",
+                    "op" : {
+                      "type" : "GclUnaryOp",
+                      "value" : "Neg"
+                    },
+                    "exp" : {
+                      "type" : "GclLiteralExp",
+                      "typ" : {
+                        "type" : "GclLiteralType",
+                        "value" : "Real"
+                      },
+                      "exp" : "459.67",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 27,
+                          "beginColumn" : 23,
+                          "endLine" : 27,
+                          "endColumn" : 29,
+                          "offset" : 965,
+                          "length" : 6
+                        }
+                      }
+                    },
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 22,
+                        "endLine" : 27,
+                        "endColumn" : 29,
+                        "offset" : 964,
+                        "length" : 7
+                      }
+                    }
+                  },
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      },
+                      "beginLine" : 27,
+                      "beginColumn" : 11,
+                      "endLine" : 27,
+                      "endColumn" : 29,
+                      "offset" : 953,
+                      "length" : 18
+                    }
+                  }
+                }
+              }
+            ],
+            "initializes" : [
+            ],
+            "integration" : {
+              "type" : "None"
+            },
+            "compute" : {
+              "type" : "None"
+            }
+          }
+        }
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Integration_Contracts::SetPoint.i"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["low"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                },
+                "beginLine" : 42,
+                "beginColumn" : 7,
+                "endLine" : 42,
+                "endColumn" : 31,
+                "offset" : 1462,
+                "length" : 24
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Data"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "Integration_Contracts::Temperature.i"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["degrees"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                    },
+                    "beginLine" : 18,
+                    "beginColumn" : 7,
+                    "endLine" : 18,
+                    "endColumn" : 42,
+                    "offset" : 624,
+                    "length" : 35
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Data"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Float_32"
+                }
+              },
+              "features" : [
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 2,
+                        "endLine" : 93,
+                        "endColumn" : 137,
+                        "offset" : 4808,
+                        "length" : 152
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "32.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::IEEE754_Precision"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 4,
+                        "endLine" : 53,
+                        "endColumn" : 84,
+                        "offset" : 2369,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Simple"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Float"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_32"
+            }
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::Data_Representation"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 4,
+                    "endLine" : 30,
+                    "endColumn" : 36,
+                    "offset" : 1165,
+                    "length" : 162
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Struct"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "gumbo",
+              "clause" : {
+                "type" : "GclSubclause",
+                "state" : [
+                ],
+                "invariants" : [
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "Temperature Data Invariant",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclNameExp",
+                        "name" : {
+                          "type" : "Name",
+                          "name" : ["degrees"],
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 11,
+                            "endLine" : 27,
+                            "endColumn" : 18,
+                            "offset" : 953,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclUnaryExp",
+                        "op" : {
+                          "type" : "GclUnaryOp",
+                          "value" : "Neg"
+                        },
+                        "exp" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Real"
+                          },
+                          "exp" : "459.67",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 27,
+                              "beginColumn" : 23,
+                              "endLine" : 27,
+                              "endColumn" : 29,
+                              "offset" : 965,
+                              "length" : 6
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 22,
+                            "endLine" : 27,
+                            "endColumn" : 29,
+                            "offset" : 964,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 27,
+                          "beginColumn" : 11,
+                          "endLine" : 27,
+                          "endColumn" : 29,
+                          "offset" : 953,
+                          "length" : 18
+                        }
+                      }
+                    }
+                  }
+                ],
+                "initializes" : [
+                ],
+                "integration" : {
+                  "type" : "None"
+                },
+                "compute" : {
+                  "type" : "None"
+                }
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/integration-contracts\/Integration_Contracts.aadl#Integration_Contracts.Temperature.i"
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["high"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                },
+                "beginLine" : 43,
+                "beginColumn" : 7,
+                "endLine" : 43,
+                "endColumn" : 32,
+                "offset" : 1493,
+                "length" : 25
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Data"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "Integration_Contracts::Temperature.i"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["degrees"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                    },
+                    "beginLine" : 18,
+                    "beginColumn" : 7,
+                    "endLine" : 18,
+                    "endColumn" : 42,
+                    "offset" : 624,
+                    "length" : 35
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Data"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "Base_Types::Float_32"
+                }
+              },
+              "features" : [
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 2,
+                        "endLine" : 93,
+                        "endColumn" : 137,
+                        "offset" : 4808,
+                        "length" : 152
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "32.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::IEEE754_Precision"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 4,
+                        "endLine" : 53,
+                        "endColumn" : 84,
+                        "offset" : 2369,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Simple"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::Data_Representation"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 27,
+                        "beginColumn" : 4,
+                        "endLine" : 30,
+                        "endColumn" : 36,
+                        "offset" : 1165,
+                        "length" : 162
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Float"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+              ],
+              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_32"
+            }
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::Data_Representation"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                    },
+                    "beginLine" : 27,
+                    "beginColumn" : 4,
+                    "endLine" : 30,
+                    "endColumn" : 36,
+                    "offset" : 1165,
+                    "length" : 162
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Struct"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "gumbo",
+              "clause" : {
+                "type" : "GclSubclause",
+                "state" : [
+                ],
+                "invariants" : [
+                  {
+                    "type" : "GclInvariant",
+                    "name" : "Temperature Data Invariant",
+                    "exp" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclNameExp",
+                        "name" : {
+                          "type" : "Name",
+                          "name" : ["degrees"],
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 11,
+                            "endLine" : 27,
+                            "endColumn" : 18,
+                            "offset" : 953,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclUnaryExp",
+                        "op" : {
+                          "type" : "GclUnaryOp",
+                          "value" : "Neg"
+                        },
+                        "exp" : {
+                          "type" : "GclLiteralExp",
+                          "typ" : {
+                            "type" : "GclLiteralType",
+                            "value" : "Real"
+                          },
+                          "exp" : "459.67",
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 27,
+                              "beginColumn" : 23,
+                              "endLine" : 27,
+                              "endColumn" : 29,
+                              "offset" : 965,
+                              "length" : 6
+                            }
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 27,
+                            "beginColumn" : 22,
+                            "endLine" : 27,
+                            "endColumn" : 29,
+                            "offset" : 964,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 27,
+                          "beginColumn" : 11,
+                          "endLine" : 27,
+                          "endColumn" : 29,
+                          "offset" : 953,
+                          "length" : 18
+                        }
+                      }
+                    }
+                  }
+                ],
+                "initializes" : [
+                ],
+                "integration" : {
+                  "type" : "None"
+                },
+                "compute" : {
+                  "type" : "None"
+                }
+              }
+            }
+          ],
+          "uriFrag" : "platform:\/resource\/integration-contracts\/Integration_Contracts.aadl#Integration_Contracts.Temperature.i"
+        }
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Struct"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+        {
+          "type" : "Annex",
+          "name" : "gumbo",
+          "clause" : {
+            "type" : "GclSubclause",
+            "state" : [
+            ],
+            "invariants" : [
+              {
+                "type" : "GclInvariant",
+                "name" : "SetPoint Data Invariant",
+                "exp" : {
+                  "type" : "GclBinaryExp",
+                  "op" : {
+                    "type" : "GclBinaryOp",
+                    "value" : "And"
+                  },
+                  "lhs" : {
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "And"
+                    },
+                    "lhs" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Gte"
+                      },
+                      "lhs" : {
+                        "type" : "GclAccessExp",
+                        "exp" : {
+                          "type" : "GclNameExp",
+                          "name" : {
+                            "type" : "Name",
+                            "name" : ["low"],
+                            "pos" : {
+                              "type" : "None"
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 47,
+                              "beginColumn" : 11,
+                              "endLine" : 47,
+                              "endColumn" : 22,
+                              "offset" : 1614,
+                              "length" : 11
+                            }
+                          }
+                        },
+                        "attributeName" : "degrees",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 47,
+                            "beginColumn" : 15,
+                            "endLine" : 47,
+                            "endColumn" : 22,
+                            "offset" : 1618,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Real"
+                        },
+                        "exp" : "70.0",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 47,
+                            "beginColumn" : 26,
+                            "endLine" : 47,
+                            "endColumn" : 30,
+                            "offset" : 1629,
+                            "length" : 4
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 47,
+                          "beginColumn" : 11,
+                          "endLine" : 47,
+                          "endColumn" : 30,
+                          "offset" : 1614,
+                          "length" : 19
+                        }
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclBinaryExp",
+                      "op" : {
+                        "type" : "GclBinaryOp",
+                        "value" : "Lte"
+                      },
+                      "lhs" : {
+                        "type" : "GclAccessExp",
+                        "exp" : {
+                          "type" : "GclNameExp",
+                          "name" : {
+                            "type" : "Name",
+                            "name" : ["high"],
+                            "pos" : {
+                              "type" : "None"
+                            }
+                          },
+                          "pos" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 48,
+                              "beginColumn" : 11,
+                              "endLine" : 48,
+                              "endColumn" : 23,
+                              "offset" : 1648,
+                              "length" : 12
+                            }
+                          }
+                        },
+                        "attributeName" : "degrees",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 48,
+                            "beginColumn" : 16,
+                            "endLine" : 48,
+                            "endColumn" : 23,
+                            "offset" : 1653,
+                            "length" : 7
+                          }
+                        }
+                      },
+                      "rhs" : {
+                        "type" : "GclLiteralExp",
+                        "typ" : {
+                          "type" : "GclLiteralType",
+                          "value" : "Real"
+                        },
+                        "exp" : "100.0",
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 48,
+                            "beginColumn" : 27,
+                            "endLine" : 48,
+                            "endColumn" : 32,
+                            "offset" : 1664,
+                            "length" : 5
+                          }
+                        }
+                      },
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 48,
+                          "beginColumn" : 11,
+                          "endLine" : 48,
+                          "endColumn" : 32,
+                          "offset" : 1648,
+                          "length" : 21
+                        }
+                      }
+                    },
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 47,
+                        "beginColumn" : 11,
+                        "endLine" : 48,
+                        "endColumn" : 32,
+                        "offset" : 1614,
+                        "length" : 55
+                      }
+                    }
+                  },
+                  "rhs" : {
+                    "type" : "GclBinaryExp",
+                    "op" : {
+                      "type" : "GclBinaryOp",
+                      "value" : "Lte"
+                    },
+                    "lhs" : {
+                      "type" : "GclAccessExp",
+                      "exp" : {
+                        "type" : "GclNameExp",
+                        "name" : {
+                          "type" : "Name",
+                          "name" : ["low"],
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 49,
+                            "beginColumn" : 11,
+                            "endLine" : 49,
+                            "endColumn" : 22,
+                            "offset" : 1684,
+                            "length" : 11
+                          }
+                        }
+                      },
+                      "attributeName" : "degrees",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 49,
+                          "beginColumn" : 15,
+                          "endLine" : 49,
+                          "endColumn" : 22,
+                          "offset" : 1688,
+                          "length" : 7
+                        }
+                      }
+                    },
+                    "rhs" : {
+                      "type" : "GclAccessExp",
+                      "exp" : {
+                        "type" : "GclNameExp",
+                        "name" : {
+                          "type" : "Name",
+                          "name" : ["high"],
+                          "pos" : {
+                            "type" : "None"
+                          }
+                        },
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 49,
+                            "beginColumn" : 26,
+                            "endLine" : 49,
+                            "endColumn" : 38,
+                            "offset" : 1699,
+                            "length" : 12
+                          }
+                        }
+                      },
+                      "attributeName" : "degrees",
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 49,
+                          "beginColumn" : 31,
+                          "endLine" : 49,
+                          "endColumn" : 38,
+                          "offset" : 1704,
+                          "length" : 7
+                        }
+                      }
+                    },
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 49,
+                        "beginColumn" : 11,
+                        "endLine" : 49,
+                        "endColumn" : 38,
+                        "offset" : 1684,
+                        "length" : 27
+                      }
+                    }
+                  },
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      },
+                      "beginLine" : 47,
+                      "beginColumn" : 11,
+                      "endLine" : 49,
+                      "endColumn" : 38,
+                      "offset" : 1614,
+                      "length" : 97
+                    }
+                  }
+                }
+              }
+            ],
+            "initializes" : [
+            ],
+            "integration" : {
+              "type" : "None"
+            },
+            "compute" : {
+              "type" : "None"
+            }
+          }
+        }
+      ],
+      "uriFrag" : ""
+    }
+  ]
+}
