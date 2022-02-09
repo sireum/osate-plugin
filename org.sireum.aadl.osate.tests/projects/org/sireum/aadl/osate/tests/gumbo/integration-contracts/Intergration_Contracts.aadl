@@ -1,0 +1,115 @@
+package Integration_Contracts
+public
+	with Data_Model;
+	with Base_Types;
+	
+  data Temperature
+    properties
+      -- Indicate that the temperature info will be a struct (record)
+      -- For structs, use of the type must refer to the data component implementation (Temperature.i),
+      --  which defines the fields and associated types of the struct.
+      Data_Model::Data_Representation => Struct;
+  end Temperature;
+
+  data implementation Temperature.i
+    subcomponents
+      -- temperature message contains degrees, which is represented using an AADL Base Type
+      -- defined in the AADL Data Modeling annex.
+      degrees: data Base_Types::Float_32;
+
+    annex GUMBO
+    {**
+      -- data invariant
+      --  data invariants are assumed whenever value of the datatype is consumed
+      --                  and must be proved whenever a value of the data type is constructed
+      invariants
+        inv "Temperature Data Invariant":
+          degrees >= -459.67; -- this works since codegen is emitting real lits as F32's        
+    **};
+  end Temperature.i;
+
+
+ data SetPoint
+        -- Indicate that the set point info will be a struct (record)
+    -- For structs, use of the type must refer to the data component implementation (SetPoint.i),
+    --  which defines the fields and associated types of the struct.
+    properties
+      Data_Model::Data_Representation => Struct;
+  end SetPoint;
+
+  data implementation SetPoint.i
+    subcomponents
+      low: data Temperature.i;
+      high: data Temperature.i;
+      annex GUMBO {**       
+      invariants
+        inv "SetPoint Data Invariant":
+          low.degrees >= 70.0 and
+          high.degrees <= 100.0 and
+          low.degrees <= high.degrees;
+      **};
+  end SetPoint.i;
+  
+  system s
+  	
+  end s;
+  
+  system implementation s.impl
+  	subcomponents
+  		p: process p.impl;
+  end s.impl;
+  
+  process p  	
+  end p;
+  
+  process implementation p.impl
+  	subcomponents
+  		tempControl: thread TempControl;
+  		tempSensor: thread TempSensor;
+  	connections
+  		c1: port tempSensor.currentTemp -> tempControl.currentTemp;
+  end p.impl;
+  
+  thread TempControl
+  	features
+  		setPoint: in event data port SetPoint.i;
+  		currentTemp: in event data port Temperature.i;
+  	properties
+  		Dispatch_Protocol => Sporadic;
+  	annex
+  		gumbo {**
+  			integration
+  				assume "currentTemp Range":
+  					currentTemp.degrees >= -70.0 and currentTemp.degrees <= 180.0;
+  				assume "setPoint Range":
+  					setPoint.low.degrees >= 40.0 and setPoint.high.degrees <= 110.0;
+  					
+				--assume "INVALID: refers to multiple ports":
+				--	setPoint.low.degrees >= 40.0 and currentTemp.degrees <= 180.0;
+					
+				--assume "INVALID: refers to no ports":
+				--	1 = 1;
+
+				--guarantee "INVALID: must use assume for incoming ports":
+				--	setPoint.low.degrees >= 40.0 and setPoint.high.degrees <= 110.0;
+  		**}; 			
+  end TempControl;
+  
+  thread tempSensor
+  	features
+  		currentTemp: out event data port Temperature.i;
+  	properties
+  		Dispatch_Protocol => Periodic;
+  		Timing_Properties::Period => 1000ms;
+	annex
+  		gumbo {**
+  			integration
+  				guarantee "currentTemp Range":
+  					currentTemp.degrees >= -70.0 and currentTemp.degrees <= 180.0;
+  					
+				--assume "INVALID: must use guarantee for outgoing ports":
+  				--	currentTemp.degrees >= -70.0 and currentTemp.degrees <= 180.0;  					
+  		**};  		
+  end tempSensor;
+  
+end Integration_Contracts;

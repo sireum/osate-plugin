@@ -149,9 +149,7 @@ Export-Package:
  scala.xml.include,
  scala.xml.include.sax,
  scala.xml.parsing,
- scala.xml.persistent,
- scala.xml.pull,
- scala.xml.transform
+  scala.xml.transform
 Automatic-Module-Name: org.sireum.aadl.osate
 Bundle-ClassPath: .,
  bin/,

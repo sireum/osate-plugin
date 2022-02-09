@@ -67,6 +67,7 @@ public class AirUpdater extends SireumTest {
 		srcPath.copyOverTo(destPath);
 
 		for (AadlSystem system : AadlProjectUtil.findSystems(new File(destPath.canon().value()))) {
+			System.out.println("Processing: " + system.projects.get(0).projectName);
 			regen(system);
 		}
 	}
@@ -82,6 +83,8 @@ public class AirUpdater extends SireumTest {
 		String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ".json";
 
 		File slangDir = new File(system.projects.get(0).rootDirectory, File.separator + ".slang");
+		slangDir.mkdir();
+
 		assert slangDir.exists() && slangDir.isDirectory() : slangDir + " does not exist";
 
 		File outFile = new File(slangDir, fname);

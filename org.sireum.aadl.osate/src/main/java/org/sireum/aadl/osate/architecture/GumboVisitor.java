@@ -14,17 +14,21 @@ import org.osate.aadl2.ComponentType;
 import org.osate.aadl2.DataClassifier;
 import org.osate.aadl2.DataSubcomponent;
 import org.osate.aadl2.Element;
-import org.osate.aadl2.NamedElement;
+import org.osate.aadl2.Port;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.Option;
+import org.sireum.aadl.gumbo.gumbo.AssumeStatement;
 import org.sireum.aadl.gumbo.gumbo.BinaryExpr;
 import org.sireum.aadl.gumbo.gumbo.BoolLitExpr;
 import org.sireum.aadl.gumbo.gumbo.DataRefExpr;
+import org.sireum.aadl.gumbo.gumbo.GuaranteeStatement;
 import org.sireum.aadl.gumbo.gumbo.GumboSubclause;
 import org.sireum.aadl.gumbo.gumbo.IntLit;
+import org.sireum.aadl.gumbo.gumbo.Integration;
 import org.sireum.aadl.gumbo.gumbo.InvSpec;
 import org.sireum.aadl.gumbo.gumbo.OtherDataRef;
 import org.sireum.aadl.gumbo.gumbo.RealLitExpr;
+import org.sireum.aadl.gumbo.gumbo.SpecStatement;
 import org.sireum.aadl.gumbo.gumbo.UnaryExpr;
 import org.sireum.aadl.gumbo.gumbo.util.GumboSwitch;
 import org.sireum.aadl.osate.util.GumboUtils;
@@ -32,19 +36,24 @@ import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.Annex$;
 import org.sireum.hamr.ir.AnnexLib;
+import org.sireum.hamr.ir.GclAccessExp;
 import org.sireum.hamr.ir.GclAccessExp$;
+import org.sireum.hamr.ir.GclAssume$;
 import org.sireum.hamr.ir.GclBinaryExp$;
 import org.sireum.hamr.ir.GclBinaryOp;
 import org.sireum.hamr.ir.GclCompute;
 import org.sireum.hamr.ir.GclExp;
 import org.sireum.hamr.ir.GclGuarantee;
+import org.sireum.hamr.ir.GclGuarantee$;
 import org.sireum.hamr.ir.GclIntegration;
+import org.sireum.hamr.ir.GclIntegration$;
 import org.sireum.hamr.ir.GclInvariant;
 import org.sireum.hamr.ir.GclInvariant$;
 import org.sireum.hamr.ir.GclLiteralExp;
 import org.sireum.hamr.ir.GclLiteralExp$;
 import org.sireum.hamr.ir.GclLiteralType;
 import org.sireum.hamr.ir.GclNameExp$;
+import org.sireum.hamr.ir.GclSpec;
 import org.sireum.hamr.ir.GclStateVar;
 import org.sireum.hamr.ir.GclSubclause$;
 import org.sireum.hamr.ir.GclUnaryExp$;
@@ -127,6 +136,7 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 		Option<GclIntegration> _integration = SlangUtils.toNone();
 		if (object.getSpecs().getIntegration() != null) {
 			visit(object.getSpecs().getIntegration());
+			_integration = SlangUtils.toSome(pop());
 		}
 
 		List<GclGuarantee> _initializes = new ArrayList<>();
@@ -145,6 +155,36 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 		return false;
 	}
 
+	@Override
+	public Boolean caseIntegration(Integration object) {
+		List<GclSpec> specs = new ArrayList<>();
+		for (SpecStatement spec : object.getSpecs()) {
+			visit(spec);
+			specs.add(pop());
+		}
+
+		push(GclIntegration$.MODULE$.apply(VisitorUtil.toISZ(specs)));
+
+		return false;
+	}
+
+	@Override
+	public Boolean caseAssumeStatement(AssumeStatement object) {
+		String name = object.getDisplayName();
+		visit(object.getExpr());
+		push(GclAssume$.MODULE$.apply(name, pop()));
+
+		return false;
+	}
+
+	@Override
+	public Boolean caseGuaranteeStatement(GuaranteeStatement object) {
+		String name = object.getDisplayName();
+		visit(object.getExpr());
+		push(GclGuarantee$.MODULE$.apply(name, pop()));
+
+		return false;
+	}
 
 	@Override
 	public Boolean caseBinaryExpr(BinaryExpr object) {
@@ -193,28 +233,40 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 			} else {
 				exp = GclNameExp$.MODULE$.apply(GumboUtils.toName(ds.getName()), GumboUtils.buildPosInfo(object));
 			}
+		} else if (o instanceof Port) {
+			Port p = (Port) o;
+
+			exp = GclNameExp$.MODULE$.apply(GumboUtils.toName(p.getName()), GumboUtils.buildPosInfo(object));
+
+		} else {
+			todo(o, "not yet");
 		}
 
 		if (object.getRef() != null) {
 			OtherDataRef ref = object.getRef();
-			NamedElement n = ref.getNamedElement();
+			String attName = ref.getNamedElement().getName();
 
-			if (n instanceof DataSubcomponent) {
-				DataSubcomponent ds = (DataSubcomponent) n;
-				String attName = ds.getName();
+			GclAccessExp accessExp = GclAccessExp$.MODULE$.apply(exp, attName, GumboUtils.buildPosInfo(ref));
 
-				push(GclAccessExp$.MODULE$.apply(exp, attName, GumboUtils.buildPosInfo(object)));
-			} else {
-				todo(n, "Not yet");
+			ref = ref.getPath();
 
-				push(dummy);
+			while (ref != null) {
+				attName = ref.getNamedElement().getName();
+
+				accessExp = GclAccessExp$.MODULE$.apply(accessExp, attName, GumboUtils.buildPosInfo(ref));
+
+				ref = ref.getPath();
 			}
+
+			push(accessExp);
+
 		} else {
 			push(exp);
 		}
 
 		return false;
 	}
+
 
 	@Override
 	public Boolean caseBoolLitExpr(BoolLitExpr object) {
