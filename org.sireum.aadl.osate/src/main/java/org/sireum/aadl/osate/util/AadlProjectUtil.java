@@ -28,7 +28,8 @@ public class AadlProjectUtil {
 	}
 
 	public static String getProjectName(File projectFile) {
-		assert (projectFile.getName().equals(".project"));
+		assertHalt(projectFile.getName().equals(".project"),
+				"Expecting project filename to be .project but it's " + projectFile.getName());
 
 		String marker = "<name>";
 		String line = IOUtils.readFile(projectFile).split("\n")[2];
@@ -71,8 +72,7 @@ public class AadlProjectUtil {
 						String SYS_IMPL = "system implementation";
 						if (line.contains(SYS_IMPL)) {
 							if (systemImplFile.isPresent()) {
-								addError("Found multiple system implementations in " + f.getParent());
-								return ret;
+								assertHalt(false, "Found multiple system implementations in " + f.getParent());
 							}
 							systemImplFile = Optional.of(a);
 							systemImplName = line.substring(line.indexOf(SYS_IMPL) + SYS_IMPL.length()).trim();
@@ -92,12 +92,15 @@ public class AadlProjectUtil {
 	public static AadlProject createAadlProject(File projectRoot) {
 		File projectFile = new File(projectRoot, ".project");
 
-		if (!projectFile.exists() || !projectFile.isFile()) {
-			addError(projectFile + " does not exist or isn't a file");
-			return null;
+		String projectName = "aadl_project";
+		if (projectFile.exists() && projectFile.isFile()) {
+			projectName = AadlProjectUtil.getProjectName(projectFile);
+		} else {
+			addWarning("Using '" + projectName
+					+ "' as the project name since the following directory does not contain a .project file: "
+					+ projectRoot.getPath());
 		}
 
-		String projectName = AadlProjectUtil.getProjectName(projectFile);
 		List<File> aadlFiles = IOUtils.collectFiles(projectRoot, ".aadl", true);
 		AadlProject project = new AadlProject(projectName, projectRoot, aadlFiles);
 
@@ -116,7 +119,7 @@ public class AadlProjectUtil {
 				File projectRoot = new File(systemFile.getParentFile(), p);
 
 				if (!projectRoot.exists() || !projectRoot.isDirectory()) {
-					addError(projectRoot + " doesn't exist or isn't a directory");
+					assertHalt(false, projectRoot + " doesn't exist or isn't a directory");
 				} else {
 					projects.add(createAadlProject(projectRoot));
 				}
@@ -135,9 +138,9 @@ public class AadlProjectUtil {
 		public List<File> aadlFiles;
 
 		public AadlProject(String _projectName, File _rootDirectory, List<File> _aadlFiles) {
-			assert (_projectName != null);
-			assert _rootDirectory != null && _rootDirectory.exists() && _rootDirectory.isDirectory();
-			assert !_aadlFiles.isEmpty() : "no aadl files for " + projectName + " in root dir " + rootDirectory;
+			assertHalt (_projectName != null, "_projectName cannot be null");
+			assertHalt (_rootDirectory != null && _rootDirectory.exists() && _rootDirectory.isDirectory(), "_rootDirectory is not a directory: " + _rootDirectory);
+			assertHalt(!_aadlFiles.isEmpty(), "No aadl files for " + projectName + " in root dir " + rootDirectory);
 
 			this.projectName = _projectName;
 			this.rootDirectory = _rootDirectory;
@@ -171,10 +174,12 @@ public class AadlProjectUtil {
 		public AadlSystem(String _systemImplementationName, Optional<SystemFileContainer> _systemFileContainer,
 				List<AadlProject> _projects, File _slangOutputFile) {
 
-			assert _systemImplementationName != null;
-			assert _projects.size() > 0;
-			assert !_systemFileContainer.isPresent() || (_systemFileContainer.get().systemImplementationFile.exists()
-					&& _systemFileContainer.get().systemImplementationFile.isFile());
+			assertHalt(_systemImplementationName != null, "_systemImplementationName cannot be null");
+			assertHalt(_projects.size() > 0, "There must be at least one project");
+			assertHalt (!_systemFileContainer.isPresent() || (_systemFileContainer.get().systemImplementationFile.exists()
+					&& _systemFileContainer.get().systemImplementationFile.isFile()),
+					"_systemFileContainer should either be empty or be a valid file: " + _systemFileContainer);
+
 			this.systemImplementationName = _systemImplementationName;
 			this.systemFileContainer = _systemFileContainer;
 			this.projects = _projects;
@@ -213,19 +218,13 @@ public class AadlProjectUtil {
 		public static AadlSystem makeAadlSystem(String _systemImplementationName,
 				Optional<File> _systemImplementationFile, List<AadlProject> _projects, File _slangOutputFile) {
 
-			if (_systemImplementationName == null) {
-				addError(AadlSystem.KEY_SYSTEM_IMPL + " property must be present");
-				return null;
-			}
-			if (_systemImplementationFile.isPresent()
-					&& (!_systemImplementationFile.get().exists() || !_systemImplementationFile.get().isFile())) {
-				addError(_systemImplementationFile.get() + " must be a file");
-				return null;
-			}
-			if (_projects.isEmpty()) {
-				addError("There must be at least one project");
-				return null;
-			}
+			assertHalt(_systemImplementationName != null, AadlSystem.KEY_SYSTEM_IMPL + " property must be present");
+
+			assertHalt(!_systemImplementationFile.isPresent()
+							|| (_systemImplementationFile.get().exists() && _systemImplementationFile.get().isFile()),
+					_systemImplementationFile.get() + " must be a file");
+
+			assertHalt(!_projects.isEmpty(), "There must be at least one project");
 
 			Optional<SystemFileContainer> _sysFileContainer = Optional.empty();
 			if (_systemImplementationFile.isPresent()) {
@@ -247,7 +246,7 @@ public class AadlProjectUtil {
 					_sysFileContainer = Optional
 							.of(new SystemFileContainer(_p, _projRelSysImplFilename, _systemImplementationFile.get()));
 				} else {
-					addError("Could not find " + _systemImplementationFile + " in any AADL project");
+					assertHalt(false, "Could not find " + _systemImplementationFile + " in any AADL project");
 					return null;
 				}
 			}
@@ -288,11 +287,17 @@ public class AadlProjectUtil {
 
 	}
 
-	static void addInfo(String msg) {
-		System.err.println(msg);
+	static void assertHalt(boolean cond, String mesg) {
+		if (!cond) {
+			throw new RuntimeException(mesg);
+		}
 	}
 
-	static void addError(String msg) {
-		System.err.println("Error: " + msg);
+	static void addInfo(String msg) {
+		System.out.println(msg);
+	}
+
+	static void addWarning(String msg) {
+		System.out.println("Warning: " + msg);
 	}
 }
