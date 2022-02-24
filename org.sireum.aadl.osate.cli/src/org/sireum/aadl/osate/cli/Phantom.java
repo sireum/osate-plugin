@@ -155,9 +155,13 @@ public class Phantom implements IApplication {
 
 	int phantom(SireumHamrPhantomOption po, ResourceSet rs) {
 
-		// XOR - one must be true but not both
-		if (po.args()
-				.nonEmpty() == (po.getProjects().nonEmpty() && po.getMain().nonEmpty() && po.getImpl().nonEmpty())) {
+		boolean userProvided = po.getProjects().nonEmpty() && po.getMain().nonEmpty() && po.getImpl().nonEmpty();
+
+		if ((userProvided == po.getArgs().nonEmpty()) // XOR, only one should be true
+				||
+				(po.getArgs().nonEmpty()
+						&& (po.getProjects().nonEmpty() || po.getMain().nonEmpty() || po.getImpl().nonEmpty()))) {
+
 			addError("Either point to a directory or supply the required options\n");
 
 			printUsage("hamr", "phantom", "-h");
@@ -165,7 +169,6 @@ public class Phantom implements IApplication {
 			return 1;
 		}
 
-		boolean userProvided = po.getArgs().isEmpty();
 
 		AadlSystem system = null;
 
