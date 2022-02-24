@@ -110,6 +110,8 @@ public class Phantom implements IApplication {
 
 		XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
 
+		checkApiCompatibility();
+
 		if (resourceSet != null) {
 
 			// Add predeclared resources
@@ -131,20 +133,7 @@ public class Phantom implements IApplication {
 			if (opts.get() instanceof SireumHamrPhantomOption) {
 				return phantom((SireumHamrPhantomOption) opts.get(), resourceSet);
 			} else if (opts.get() instanceof SireumHamrCodegenOption) {
-				int codegenRet = hamrCodegen((SireumHamrCodegenOption) opts.get(), resourceSet);
-
-				if (!ApiUtil.hamrCliApiCompatible(System.err)) {
-					String msg = "HAMR codegen was " + //
-							(codegenRet == 0 ? "succesful, but " : "unsuccesful. Also \n") + //
-							"the expected CLI for codegen was not found so will fail \n" + //
-							"if invoked from within OSATE IDE. Please report this issue.";
-
-					addError(msg);
-
-					return 1;
-				} else {
-					return codegenRet;
-				}
+				return hamrCodegen((SireumHamrCodegenOption) opts.get(), resourceSet);
 			} else {
 				org.sireum.Sireum$.MODULE$.main(appArgs);
 				return IApplication.EXIT_OK;
@@ -166,10 +155,13 @@ public class Phantom implements IApplication {
 
 	int phantom(SireumHamrPhantomOption po, ResourceSet rs) {
 
+		// XOR - one must be true but not both
 		if (po.args()
 				.nonEmpty() == (po.getProjects().nonEmpty() && po.getMain().nonEmpty() && po.getImpl().nonEmpty())) {
 			addError("Either point to a directory or supply the required options\n");
-			// printUsage();
+
+			printUsage("hamr", "phantom", "-h");
+
 			return 1;
 		}
 
@@ -361,7 +353,8 @@ public class Phantom implements IApplication {
 
 				if (sysImplResource == null || sysImplResource.getContents().isEmpty()
 						|| !(sysImplResource.getContents().get(0) instanceof AadlPackage)) {
-					addError("Couldn't find an AadlPackage in " + system.systemFileContainer.get().systemImplementationFile);
+					addError("Couldn't find an AadlPackage in "
+							+ system.systemFileContainer.get().systemImplementationFile);
 					return null;
 				}
 
@@ -493,8 +486,8 @@ public class Phantom implements IApplication {
 		return org.sireum.Z.apply(i);
 	}
 
-	void printUsage() {
-		getOptions();
+	void printUsage(String... args) {
+		getOptions(args);
 	}
 
 	void addInfo(String msg) {
@@ -509,4 +502,13 @@ public class Phantom implements IApplication {
 		System.out.println("Warning: " + msg);
 	}
 
+	void checkApiCompatibility() {
+		// HAMR Codegen's CI reg tests sets this environment variable.
+		if (System.getenv("CHECK_PHANTOM_HAMR_API_COMPATIBILITY") != null) {
+			// see javadoc for what this method is for
+			if (!ApiUtil.hamrCliApiCompatible(System.err)) {
+				throw new RuntimeException();
+			}
+		}
+	}
 }
