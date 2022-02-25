@@ -512,6 +512,7 @@ public class Phantom implements IApplication {
 			if (!ApiUtil.hamrCliApiCompatible(System.err)) {
 				throw new RuntimeException();
 			}
+			addInfo("HAMR plugin API compatibility check passed!");
 		}
 	}
 }
