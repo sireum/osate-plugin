@@ -18,18 +18,18 @@ import org.osate.aadl2.Port;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.Option;
 import org.sireum.aadl.gumbo.gumbo.AssumeStatement;
-import org.sireum.aadl.gumbo.gumbo.BinaryExpr;
-import org.sireum.aadl.gumbo.gumbo.BoolLitExpr;
-import org.sireum.aadl.gumbo.gumbo.DataRefExpr;
+//import org.sireum.aadl.gumbo.gumbo.BinaryExpr;
+//import org.sireum.aadl.gumbo.gumbo.BoolLitExpr;
+//import org.sireum.aadl.gumbo.gumbo.DataRefExpr;
 import org.sireum.aadl.gumbo.gumbo.GuaranteeStatement;
 import org.sireum.aadl.gumbo.gumbo.GumboSubclause;
-import org.sireum.aadl.gumbo.gumbo.IntLit;
+//import org.sireum.aadl.gumbo.gumbo.IntLit;
 import org.sireum.aadl.gumbo.gumbo.Integration;
 import org.sireum.aadl.gumbo.gumbo.InvSpec;
 import org.sireum.aadl.gumbo.gumbo.OtherDataRef;
-import org.sireum.aadl.gumbo.gumbo.RealLitExpr;
+//import org.sireum.aadl.gumbo.gumbo.RealLitExpr;
 import org.sireum.aadl.gumbo.gumbo.SpecStatement;
-import org.sireum.aadl.gumbo.gumbo.UnaryExpr;
+//import org.sireum.aadl.gumbo.gumbo.UnaryExpr;
 import org.sireum.aadl.gumbo.gumbo.util.GumboSwitch;
 import org.sireum.aadl.osate.util.GumboUtils;
 import org.sireum.aadl.osate.util.SlangUtils;
@@ -186,119 +186,119 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 		return false;
 	}
 
-	@Override
-	public Boolean caseBinaryExpr(BinaryExpr object) {
-
-		visit(object.getLeft());
-		GclExp lhs = pop();
-
-		visit(object.getRight());
-		GclExp rhs = pop();
-
-		GclBinaryOp.Type op = GumboUtils.toBinaryOp(object.getOp());
-
-		push(GclBinaryExp$.MODULE$.apply(op, lhs, rhs, GumboUtils.buildPosInfo(object)));
-
-		return false;
-	}
-
-	@Override
-	public Boolean caseUnaryExpr(UnaryExpr object) {
-		visit(object.getExpr());
-		GclExp exp = pop();
-
-		GclUnaryOp.Type op = GumboUtils.toUnaryOp(object.getOp());
-
-		push(GclUnaryExp$.MODULE$.apply(op, exp, GumboUtils.buildPosInfo(object)));
-
-		return false;
-	}
-
-	@Override
-	public Boolean caseDataRefExpr(DataRefExpr object) {
-		EObject o = object.getPortOrSubcomponentOrStateVar();
-
-		GclExp exp = null;
-
-		if (o instanceof DataSubcomponent) {
-			DataSubcomponent ds = (DataSubcomponent) o;
-
-			ComponentType ct = ds.getComponentType();
-			Element owner = ds.getOwner();
-
-			if (owner != this.entryClassifier) {
-				todo(object, "Probably not dealing with a data component");
-
-				exp = dummy;
-			} else {
-				exp = GclNameExp$.MODULE$.apply(GumboUtils.toName(ds.getName()), GumboUtils.buildPosInfo(object));
-			}
-		} else if (o instanceof Port) {
-			Port p = (Port) o;
-
-			exp = GclNameExp$.MODULE$.apply(GumboUtils.toName(p.getName()), GumboUtils.buildPosInfo(object));
-
-		} else {
-			todo(o, "not yet");
-		}
-
-		if (object.getRef() != null) {
-			OtherDataRef ref = object.getRef();
-			String attName = ref.getNamedElement().getName();
-
-			GclAccessExp accessExp = GclAccessExp$.MODULE$.apply(exp, attName, GumboUtils.buildPosInfo(ref));
-
-			ref = ref.getPath();
-
-			while (ref != null) {
-				attName = ref.getNamedElement().getName();
-
-				accessExp = GclAccessExp$.MODULE$.apply(accessExp, attName, GumboUtils.buildPosInfo(ref));
-
-				ref = ref.getPath();
-			}
-
-			push(accessExp);
-
-		} else {
-			push(exp);
-		}
-
-		return false;
-	}
-
-
-	@Override
-	public Boolean caseBoolLitExpr(BoolLitExpr object) {
-
-		GclLiteralType.Type typ = GclLiteralType.byName("Boolean").get();
-
-		Boolean b = Boolean.valueOf(object.getVal().getValue());
-
-		push(GclLiteralExp$.MODULE$.apply(typ, b.toString(), GumboUtils.buildPosInfo(object)));
-
-		return false;
-	}
-
-	@Override
-	public Boolean caseIntLit(IntLit object) {
-
-		GclLiteralType.Type typ = GclLiteralType.byName("Integer").get();
-
-		push(GclLiteralExp$.MODULE$.apply(typ, object.getValue(), GumboUtils.buildPosInfo(object)));
-
-		return false;
-	}
-
-	@Override
-	public Boolean caseRealLitExpr(RealLitExpr object) {
-
-		GclLiteralType.Type typ = GclLiteralType.byName("Real").get();
-
-		push(GclLiteralExp$.MODULE$.apply(typ, object.getVal(), GumboUtils.buildPosInfo(object)));
-
-		return false;
-	}
+//	@Override
+//	public Boolean caseBinaryExpr(BinaryExpr object) {
+//
+//		visit(object.getLeft());
+//		GclExp lhs = pop();
+//
+//		visit(object.getRight());
+//		GclExp rhs = pop();
+//
+//		GclBinaryOp.Type op = GumboUtils.toBinaryOp(object.getOp());
+//
+//		push(GclBinaryExp$.MODULE$.apply(op, lhs, rhs, GumboUtils.buildPosInfo(object)));
+//
+//		return false;
+//	}
+//
+//	@Override
+//	public Boolean caseUnaryExpr(UnaryExpr object) {
+//		visit(object.getExpr());
+//		GclExp exp = pop();
+//
+//		GclUnaryOp.Type op = GumboUtils.toUnaryOp(object.getOp());
+//
+//		push(GclUnaryExp$.MODULE$.apply(op, exp, GumboUtils.buildPosInfo(object)));
+//
+//		return false;
+//	}
+//
+//	@Override
+//	public Boolean caseDataRefExpr(DataRefExpr object) {
+//		EObject o = object.getPortOrSubcomponentOrStateVar();
+//
+//		GclExp exp = null;
+//
+//		if (o instanceof DataSubcomponent) {
+//			DataSubcomponent ds = (DataSubcomponent) o;
+//
+//			ComponentType ct = ds.getComponentType();
+//			Element owner = ds.getOwner();
+//
+//			if (owner != this.entryClassifier) {
+//				todo(object, "Probably not dealing with a data component");
+//
+//				exp = dummy;
+//			} else {
+//				exp = GclNameExp$.MODULE$.apply(GumboUtils.toName(ds.getName()), GumboUtils.buildPosInfo(object));
+//			}
+//		} else if (o instanceof Port) {
+//			Port p = (Port) o;
+//
+//			exp = GclNameExp$.MODULE$.apply(GumboUtils.toName(p.getName()), GumboUtils.buildPosInfo(object));
+//
+//		} else {
+//			todo(o, "not yet");
+//		}
+//
+//		if (object.getRef() != null) {
+//			OtherDataRef ref = object.getRef();
+//			String attName = ref.getNamedElement().getName();
+//
+//			GclAccessExp accessExp = GclAccessExp$.MODULE$.apply(exp, attName, GumboUtils.buildPosInfo(ref));
+//
+//			ref = ref.getPath();
+//
+//			while (ref != null) {
+//				attName = ref.getNamedElement().getName();
+//
+//				accessExp = GclAccessExp$.MODULE$.apply(accessExp, attName, GumboUtils.buildPosInfo(ref));
+//
+//				ref = ref.getPath();
+//			}
+//
+//			push(accessExp);
+//
+//		} else {
+//			push(exp);
+//		}
+//
+//		return false;
+//	}
+//
+//
+//	@Override
+//	public Boolean caseBoolLitExpr(BoolLitExpr object) {
+//
+//		GclLiteralType.Type typ = GclLiteralType.byName("Boolean").get();
+//
+//		Boolean b = Boolean.valueOf(object.getVal().getValue());
+//
+//		push(GclLiteralExp$.MODULE$.apply(typ, b.toString(), GumboUtils.buildPosInfo(object)));
+//
+//		return false;
+//	}
+//
+//	@Override
+//	public Boolean caseIntLit(IntLit object) {
+//
+//		GclLiteralType.Type typ = GclLiteralType.byName("Integer").get();
+//
+//		push(GclLiteralExp$.MODULE$.apply(typ, object.getValue(), GumboUtils.buildPosInfo(object)));
+//
+//		return false;
+//	}
+//
+//	@Override
+//	public Boolean caseRealLitExpr(RealLitExpr object) {
+//
+//		GclLiteralType.Type typ = GclLiteralType.byName("Real").get();
+//
+//		push(GclLiteralExp$.MODULE$.apply(typ, object.getVal(), GumboUtils.buildPosInfo(object)));
+//
+//		return false;
+//	}
 
 	public Boolean visit(EObject o) {
 		assert isSwitchFor(o.eClass().getEPackage()) : "Not a switch for " + o;
