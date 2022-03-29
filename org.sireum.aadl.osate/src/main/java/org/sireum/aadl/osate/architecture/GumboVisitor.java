@@ -10,54 +10,35 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.Classifier;
-import org.osate.aadl2.ComponentType;
 import org.osate.aadl2.DataClassifier;
-import org.osate.aadl2.DataSubcomponent;
 import org.osate.aadl2.Element;
-import org.osate.aadl2.Port;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.Option;
 import org.sireum.aadl.gumbo.gumbo.AssumeStatement;
-//import org.sireum.aadl.gumbo.gumbo.BinaryExpr;
-//import org.sireum.aadl.gumbo.gumbo.BoolLitExpr;
-//import org.sireum.aadl.gumbo.gumbo.DataRefExpr;
 import org.sireum.aadl.gumbo.gumbo.GuaranteeStatement;
 import org.sireum.aadl.gumbo.gumbo.GumboSubclause;
-//import org.sireum.aadl.gumbo.gumbo.IntLit;
 import org.sireum.aadl.gumbo.gumbo.Integration;
 import org.sireum.aadl.gumbo.gumbo.InvSpec;
-import org.sireum.aadl.gumbo.gumbo.OtherDataRef;
-//import org.sireum.aadl.gumbo.gumbo.RealLitExpr;
 import org.sireum.aadl.gumbo.gumbo.SpecStatement;
-//import org.sireum.aadl.gumbo.gumbo.UnaryExpr;
 import org.sireum.aadl.gumbo.gumbo.util.GumboSwitch;
-import org.sireum.aadl.osate.util.GumboUtils;
 import org.sireum.aadl.osate.util.SlangUtils;
+import org.sireum.lang.ast.*;
+import org.sireum.lang.ast.*;
+import org.sireum.hamr.ir.*;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.Annex$;
 import org.sireum.hamr.ir.AnnexLib;
-import org.sireum.hamr.ir.GclAccessExp;
-import org.sireum.hamr.ir.GclAccessExp$;
 import org.sireum.hamr.ir.GclAssume$;
-import org.sireum.hamr.ir.GclBinaryExp$;
-import org.sireum.hamr.ir.GclBinaryOp;
 import org.sireum.hamr.ir.GclCompute;
-import org.sireum.hamr.ir.GclExp;
 import org.sireum.hamr.ir.GclGuarantee;
 import org.sireum.hamr.ir.GclGuarantee$;
 import org.sireum.hamr.ir.GclIntegration;
 import org.sireum.hamr.ir.GclIntegration$;
 import org.sireum.hamr.ir.GclInvariant;
 import org.sireum.hamr.ir.GclInvariant$;
-import org.sireum.hamr.ir.GclLiteralExp;
-import org.sireum.hamr.ir.GclLiteralExp$;
-import org.sireum.hamr.ir.GclLiteralType;
-import org.sireum.hamr.ir.GclNameExp$;
 import org.sireum.hamr.ir.GclSpec;
 import org.sireum.hamr.ir.GclStateVar;
 import org.sireum.hamr.ir.GclSubclause$;
-import org.sireum.hamr.ir.GclUnaryExp$;
-import org.sireum.hamr.ir.GclUnaryOp;
 
 public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
@@ -65,9 +46,6 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 	Classifier entryClassifier = null;
 
 	private boolean TODO_HALT = true;
-
-	GclLiteralExp dummy = GclLiteralExp$.MODULE$.apply(GclLiteralType.byName("String").get(), "dummy",
-			SlangUtils.toNone());
 
 	private final String ANNEX_TYPE = "gumbo";
 	private List<String> path = null;
