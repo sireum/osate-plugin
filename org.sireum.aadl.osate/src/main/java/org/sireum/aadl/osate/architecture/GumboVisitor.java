@@ -38,6 +38,7 @@ import org.sireum.aadl.gumbo.gumbo.Integration;
 import org.sireum.aadl.gumbo.gumbo.InvSpec;
 import org.sireum.aadl.gumbo.gumbo.OtherDataRef;
 import org.sireum.aadl.gumbo.gumbo.RealLit;
+import org.sireum.aadl.gumbo.gumbo.SlangLiteralInterp;
 import org.sireum.aadl.gumbo.gumbo.SpecStatement;
 import org.sireum.aadl.gumbo.gumbo.State;
 import org.sireum.aadl.gumbo.gumbo.StateVarDecl;
@@ -73,9 +74,12 @@ import org.sireum.lang.ast.Exp.If;
 import org.sireum.lang.ast.Exp.If$;
 import org.sireum.lang.ast.Exp.LitB$;
 import org.sireum.lang.ast.Exp.LitR$;
+import org.sireum.lang.ast.Exp.LitString;
+import org.sireum.lang.ast.Exp.LitString$;
 import org.sireum.lang.ast.Exp.LitZ$;
 import org.sireum.lang.ast.Exp.Select;
 import org.sireum.lang.ast.Exp.Select$;
+import org.sireum.lang.ast.Exp.StringInterpolate$;
 import org.sireum.lang.ast.Exp.Unary;
 import org.sireum.lang.ast.Exp.Unary$;
 import org.sireum.lang.ast.Id;
@@ -449,6 +453,20 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 		assert r.nonEmpty() : "Not a valid R: " + object.getValue(); // TODO pass in reporter instead
 
 		Exp slangExp = LitR$.MODULE$.apply(r.get().value(), GumboUtils.buildAttr(object));
+
+		push(slangExp);
+
+		return false;
+	}
+
+	@Override
+	public Boolean caseSlangLiteralInterp(SlangLiteralInterp object) {
+
+		String[] parts = object.getSli().split("\"");
+		LitString lit = LitString$.MODULE$.apply(parts[1], GumboUtils.buildAttr(object));
+
+		Exp slangExp = StringInterpolate$.MODULE$.apply(parts[0], VisitorUtil.toISZ(lit), VisitorUtil.toISZ(),
+				GumboUtils.buildTypedAttr(object));
 
 		push(slangExp);
 
