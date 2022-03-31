@@ -16,6 +16,8 @@ import org.sireum.lang.ast.ResolvedAttr$;
 import org.sireum.lang.ast.TypedAttr;
 import org.sireum.lang.ast.TypedAttr$;
 import org.sireum.lang.tipe.JSON;
+import org.sireum.message.FlatPos;
+import org.sireum.message.FlatPos$;
 import org.sireum.message.Position;
 
 public class GumboUtils {
@@ -57,16 +59,16 @@ public class GumboUtils {
 		if (op.equalsIgnoreCase("=>") || op.equalsIgnoreCase("implies")) {
 			return "->:";
 		} //
-		else if (op.equalsIgnoreCase("or")) {
+		else if (op.equalsIgnoreCase("|")) {
 			return "|";
 		} //
-		else if (op.equalsIgnoreCase("orelse")) {
+		else if (op.equalsIgnoreCase("||")) {
 			return "||";
 		} //
-		else if (op.equalsIgnoreCase("and")) {
+		else if (op.equalsIgnoreCase("&")) {
 			return "&";
 		} //
-		else if (op.equalsIgnoreCase("andthen")) {
+		else if (op.equalsIgnoreCase("&&")) {
 			return "&&";
 		} //
 		else if (op.equalsIgnoreCase("<")) {
@@ -81,10 +83,10 @@ public class GumboUtils {
 		else if (op.equalsIgnoreCase(">=")) {
 			return ">=";
 		} //
-		else if (op.equalsIgnoreCase("=")) {
+		else if (op.equalsIgnoreCase("==")) {
 			return "==";
 		} //
-		else if (op.equalsIgnoreCase("<>")) {
+		else if (op.equalsIgnoreCase("!=")) {
 			return "!=";
 		} //
 		else if (op.equalsIgnoreCase("+")) {
@@ -117,7 +119,7 @@ public class GumboUtils {
 	public static UnaryOp toSlangUnaryOp(String op) {
 		if (op.equalsIgnoreCase("-")) {
 			return UnaryOp.Minus;
-		} else if (op.equalsIgnoreCase("not")) {
+		} else if (op.equalsIgnoreCase("!")) {
 			return UnaryOp.Not;
 		}
 
@@ -170,5 +172,27 @@ public class GumboUtils {
 	public static TypedAttr buildTypedAttr(EObject object) {
 		Position p = VisitorUtil.buildPosInfo(object);
 		return TypedAttr$.MODULE$.apply(p == null ? SlangUtils.toNone() : SlangUtils.toSome(p), SlangUtils.toNone());
+	}
+
+	public static Option<Position> mergePositions(Option<Position> a, Option<Position> b) {
+		if (a.isEmpty()) {
+			return b;
+		} else if (b.isEmpty()) {
+			return a;
+		} else {
+			FlatPos af = (FlatPos) a.get();
+			FlatPos bf = (FlatPos) b.get();
+			assert af.getOffset32() < bf.getOffset32();
+
+			int length = (bf.getOffset32() - (af.getOffset32() + af.getLength32())) + bf.length32();
+			return SlangUtils.toSome(FlatPos$.MODULE$.apply(af.getUriOpt(), //
+					af.getBeginLine32(), af.getBeginColumn32(), //
+					bf.getEndLine32(), bf.getEndColumn32(), af.getOffset32(), //
+					length));
+		}
+	}
+
+	public static String getSlangString(String s) {
+		return s.substring(1, s.length() - 1);
 	}
 }
