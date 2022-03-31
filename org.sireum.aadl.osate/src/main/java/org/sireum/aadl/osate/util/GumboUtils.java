@@ -153,7 +153,11 @@ public class GumboUtils {
 
 	public static Attr buildAttr(EObject object) {
 		Position p = VisitorUtil.buildPosInfo(object);
-		return Attr$.MODULE$.apply(p == null ? SlangUtils.toNone() : SlangUtils.toSome(p));
+		return buildAttr(p == null ? SlangUtils.toNone() : SlangUtils.toSome(p));
+	}
+
+	public static Attr buildAttr(Option<Position> p) {
+		return Attr$.MODULE$.apply(p);
 	}
 
 	public static ResolvedAttr buildResolvedAttr(EObject object) {
@@ -182,17 +186,34 @@ public class GumboUtils {
 		} else {
 			FlatPos af = (FlatPos) a.get();
 			FlatPos bf = (FlatPos) b.get();
-			assert af.getOffset32() < bf.getOffset32();
+			assert af.getOffset32() < bf.getOffset32() : af.getOffset32() + " vs " + bf.getOffset32();
 
-			int length = (bf.getOffset32() - (af.getOffset32() + af.getLength32())) + bf.length32();
+			int length = (bf.getOffset32() - af.getOffset32()) + bf.length32();
 			return SlangUtils.toSome(FlatPos$.MODULE$.apply(af.getUriOpt(), //
 					af.getBeginLine32(), af.getBeginColumn32(), //
-					bf.getEndLine32(), bf.getEndColumn32(), af.getOffset32(), //
+					bf.getEndLine32(), bf.getEndColumn32(), //
+					af.getOffset32(), //
 					length));
 		}
 	}
 
 	public static String getSlangString(String s) {
 		return s.substring(1, s.length() - 1);
+	}
+
+	public static Option<Position> shrinkPos(Option<Position> o, int newLength) {
+		if (o.isEmpty()) {
+			return o;
+		} else {
+			FlatPos fp = (FlatPos) o.get();
+
+			assert fp.getBeginColumn32() + newLength <= fp.getEndColumn32();
+
+			return SlangUtils.toSome(FlatPos$.MODULE$.apply(fp.getUriOpt(), //
+					fp.getBeginLine32(), fp.getBeginColumn32(), //
+					fp.getBeginLine32(), fp.getBeginColumn32() + newLength, //
+					fp.offset32(), //
+					newLength));
+		}
 	}
 }

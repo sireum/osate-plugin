@@ -309,12 +309,14 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 	@Override
 	public Boolean caseDataRefExpr(DataRefExpr object) {
-		EObject o = object.getPortOrSubcomponentOrStateVar();
+		EObject receiver = object.getPortOrSubcomponentOrStateVar();
 
 		Id slangId = null;
 
-		if (o instanceof DataSubcomponent) {
-			DataSubcomponent ds = (DataSubcomponent) o;
+		Option<Position> selectPos = GumboUtils.buildPosInfo(object);
+
+		if (receiver instanceof DataSubcomponent) {
+			DataSubcomponent ds = (DataSubcomponent) receiver;
 
 			ComponentType ct = ds.getComponentType();
 			Element owner = ds.getOwner();
@@ -323,35 +325,56 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 				todo(object, "Probably not dealing with a data component");
 
 			} else {
-				slangId = Id$.MODULE$.apply(ds.getName(), GumboUtils.buildAttr(o));
+				slangId = Id$.MODULE$.apply(ds.getName(),
+						GumboUtils.buildAttr(GumboUtils.shrinkPos(selectPos, ds.getName().length())));
 			}
-		} else if (o instanceof ProcessSubcomponent) {
-			ProcessSubcomponent psc = (ProcessSubcomponent) o;
+		} else if (receiver instanceof ProcessSubcomponent) {
+			ProcessSubcomponent psc = (ProcessSubcomponent) receiver;
 
-			slangId = Id$.MODULE$.apply(psc.getName(), GumboUtils.buildAttr(o));
+			slangId = Id$.MODULE$.apply(psc.getName(),
+					GumboUtils.buildAttr(GumboUtils.shrinkPos(selectPos, psc.getName().length())));
 
-		} else if (o instanceof Port) {
-			Port p = (Port) o;
+		} else if (receiver instanceof Port) {
+			Port p = (Port) receiver;
 
-			slangId = Id$.MODULE$.apply(p.getName(), GumboUtils.buildAttr(o));
+			slangId = Id$.MODULE$.apply(p.getName(),
+					GumboUtils.buildAttr(GumboUtils.shrinkPos(selectPos, p.getName().length())));
 
-		} else if (o instanceof StateVarDecl) {
-			StateVarDecl svd = (StateVarDecl) o;
+		} else if (receiver instanceof StateVarDecl) {
+			StateVarDecl svd = (StateVarDecl) receiver;
 
-			slangId = Id$.MODULE$.apply(svd.getName(), GumboUtils.buildAttr(o));
+			slangId = Id$.MODULE$.apply(svd.getName(),
+					GumboUtils.buildAttr(GumboUtils.shrinkPos(selectPos, svd.getName().length())));
 		} else {
-			todo(o, "not yet");
+			// FIXME: can invoke HAMR even if there are syntax errors in gumbo annexes. OSATE is likely
+			// showing the error. Use reporter instead?
+
+			String s = "<invalid>";
+			slangId = Id$.MODULE$.apply(s, GumboUtils.buildAttr(selectPos));
+
+			Ident slangExp = Ident$.MODULE$.apply(slangId, GumboUtils.buildResolvedAttr(object));
+
+			push(slangExp);
+
+			return false;
 		}
 
 		if (object.getRef() != null) {
 			OtherDataRef ref = object.getRef();
 			String attName = ref.getNamedElement().getName();
 
-			ref = ref.getPath();
+			if (attName == null) {
+				// FIXME: can still invoke HAMR when selector is invalid. OSATE is likely
+				// showing the error. For now use a string that can't appear in an id.
+				// Maybe use reporter instead.
+				attName = "<invalid>";
+			}
 
 			Stack<Object> names = new Stack<>();
 			names.push(Id$.MODULE$.apply(attName, GumboUtils.buildAttr(ref)));
 			names.push(slangId);
+
+			ref = ref.getPath();
 
 			while (ref != null) {
 				attName = ref.getNamedElement().getName();
@@ -367,13 +390,19 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 
 				// TODO: merge position info
 				if (a instanceof Id) {
-					Ident ident = Ident$.MODULE$.apply((Id) a,
-							GumboUtils.buildResolvedAttr(((Id) a).getAttr().getPosOpt()));
+					Id aAsId = (Id) a;
+					Option<Position> optPos = GumboUtils.mergePositions(aAsId.getAttr().getPosOpt(),
+							b.attr().getPosOpt());
+					Ident ident = Ident$.MODULE$.apply(aAsId,
+							GumboUtils.buildResolvedAttr(aAsId.getAttr().getPosOpt()));
 					names.push(Select$.MODULE$.apply(SlangUtils.toSome(ident), b, VisitorUtil.toISZ(),
-							GumboUtils.buildResolvedAttr(SlangUtils.toNone())));
+							GumboUtils.buildResolvedAttr(optPos)));
 				} else {
+					Select aAsSelect = (Select) a;
+					Option<Position> optPos = GumboUtils.mergePositions(aAsSelect.getAttr().getPosOpt(),
+							b.attr().getPosOpt());
 					names.push(Select$.MODULE$.apply(SlangUtils.toSome((Select) a), b, VisitorUtil.toISZ(),
-							GumboUtils.buildResolvedAttr(SlangUtils.toNone())));
+							GumboUtils.buildResolvedAttr(optPos)));
 				}
 			}
 
