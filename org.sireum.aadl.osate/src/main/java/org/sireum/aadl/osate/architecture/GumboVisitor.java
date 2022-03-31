@@ -388,7 +388,6 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 				Object a = names.pop();
 				Id b = (Id) names.pop();
 
-				// TODO: merge position info
 				if (a instanceof Id) {
 					Id aAsId = (Id) a;
 					Option<Position> optPos = GumboUtils.mergePositions(aAsId.getAttr().getPosOpt(),
