@@ -12,13 +12,13 @@
             "type" : "Position",
             "uriOpt" : {
               "type" : "Some",
-              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
             },
             "beginLine" : 57,
             "beginColumn" : 3,
             "endLine" : 60,
             "endColumn" : 14,
-            "offset" : 1754,
+            "offset" : 1777,
             "length" : 82
           }
         }
@@ -44,13 +44,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                 },
                 "beginLine" : 59,
                 "beginColumn" : 5,
                 "endLine" : 59,
                 "endColumn" : 23,
-                "offset" : 1804,
+                "offset" : 1827,
                 "length" : 18
               }
             }
@@ -63,7 +63,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "Integration_Contracts::p.impl"
+              "name" : "Initialize_Entrypoint::p.impl"
             }
           },
           "features" : [
@@ -80,13 +80,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                     },
                     "beginLine" : 67,
                     "beginColumn" : 5,
                     "endLine" : 67,
                     "endColumn" : 37,
-                    "offset" : 1920,
+                    "offset" : 1943,
                     "length" : 32
                   }
                 }
@@ -99,7 +99,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "Integration_Contracts::TempControl"
+                  "name" : "Initialize_Entrypoint::TempControl"
                 }
               },
               "features" : [
@@ -114,13 +114,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 75,
                         "beginColumn" : 5,
                         "endLine" : 75,
                         "endColumn" : 45,
-                        "offset" : 2121,
+                        "offset" : 2144,
                         "length" : 40
                       }
                     }
@@ -137,7 +137,7 @@
                     "type" : "Some",
                     "value" : {
                       "type" : "Classifier",
-                      "name" : "Integration_Contracts::SetPoint.i"
+                      "name" : "Initialize_Entrypoint::SetPoint.i"
                     }
                   },
                   "properties" : [
@@ -173,7 +173,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 },
                 {
                   "type" : "FeatureEnd",
@@ -186,13 +186,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 76,
                         "beginColumn" : 5,
                         "endLine" : 76,
                         "endColumn" : 51,
-                        "offset" : 2166,
+                        "offset" : 2189,
                         "length" : 46
                       }
                     }
@@ -209,7 +209,7 @@
                     "type" : "Some",
                     "value" : {
                       "type" : "Classifier",
-                      "name" : "Integration_Contracts::Temperature.i"
+                      "name" : "Initialize_Entrypoint::Temperature.i"
                     }
                   },
                   "properties" : [
@@ -245,7 +245,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.1"
+                  "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.1"
                 }
               ],
               "subComponents" : [
@@ -325,10 +325,426 @@
                   "clause" : {
                     "type" : "GclSubclause",
                     "state" : [
+                      {
+                        "type" : "GclStateVar",
+                        "name" : "currentSetPoint",
+                        "classifier" : "Initialize_Entrypoint::SetPoint.i"
+                      }
                     ],
                     "invariants" : [
                     ],
                     "initializes" : [
+                      {
+                        "type" : "GclGuarantee",
+                        "name" : "defaultSetPoint",
+                        "exp" : {
+                          "type" : "org.sireum.lang.ast.Exp.Binary",
+                          "left" : {
+                            "type" : "org.sireum.lang.ast.Exp.Binary",
+                            "left" : {
+                              "type" : "org.sireum.lang.ast.Exp.Select",
+                              "receiverOpt" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "org.sireum.lang.ast.Exp.Select",
+                                  "receiverOpt" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "org.sireum.lang.ast.Exp.Ident",
+                                      "id" : {
+                                        "type" : "org.sireum.lang.ast.Id",
+                                        "value" : "currentSetPoint",
+                                        "attr" : {
+                                          "type" : "org.sireum.lang.ast.Attr",
+                                          "posOpt" : {
+                                            "type" : "Some",
+                                            "value" : {
+                                              "type" : "Position",
+                                              "uriOpt" : {
+                                                "type" : "Some",
+                                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                              },
+                                              "beginLine" : 82,
+                                              "beginColumn" : 5,
+                                              "endLine" : 82,
+                                              "endColumn" : 33,
+                                              "offset" : 2321,
+                                              "length" : 28
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "attr" : {
+                                        "type" : "org.sireum.lang.ast.ResolvedAttr",
+                                        "posOpt" : {
+                                          "type" : "Some",
+                                          "value" : {
+                                            "type" : "Position",
+                                            "uriOpt" : {
+                                              "type" : "Some",
+                                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                            },
+                                            "beginLine" : 82,
+                                            "beginColumn" : 5,
+                                            "endLine" : 82,
+                                            "endColumn" : 33,
+                                            "offset" : 2321,
+                                            "length" : 28
+                                          }
+                                        },
+                                        "resOpt" : {
+                                          "type" : "None"
+                                        },
+                                        "typedOpt" : {
+                                          "type" : "None"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "id" : {
+                                    "type" : "org.sireum.lang.ast.Id",
+                                    "value" : "low",
+                                    "attr" : {
+                                      "type" : "org.sireum.lang.ast.Attr",
+                                      "posOpt" : {
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                          },
+                                          "beginLine" : 91,
+                                          "beginColumn" : 27,
+                                          "endLine" : 91,
+                                          "endColumn" : 34,
+                                          "offset" : 2688,
+                                          "length" : 7
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "targs" : [
+                                  ],
+                                  "attr" : {
+                                    "type" : "org.sireum.lang.ast.ResolvedAttr",
+                                    "posOpt" : {
+                                      "type" : "None"
+                                    },
+                                    "resOpt" : {
+                                      "type" : "None"
+                                    },
+                                    "typedOpt" : {
+                                      "type" : "None"
+                                    }
+                                  }
+                                }
+                              },
+                              "id" : {
+                                "type" : "org.sireum.lang.ast.Id",
+                                "value" : "degrees",
+                                "attr" : {
+                                  "type" : "org.sireum.lang.ast.Attr",
+                                  "posOpt" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                      },
+                                      "beginLine" : 91,
+                                      "beginColumn" : 27,
+                                      "endLine" : 91,
+                                      "endColumn" : 34,
+                                      "offset" : 2688,
+                                      "length" : 7
+                                    }
+                                  }
+                                }
+                              },
+                              "targs" : [
+                              ],
+                              "attr" : {
+                                "type" : "org.sireum.lang.ast.ResolvedAttr",
+                                "posOpt" : {
+                                  "type" : "None"
+                                },
+                                "resOpt" : {
+                                  "type" : "None"
+                                },
+                                "typedOpt" : {
+                                  "type" : "None"
+                                }
+                              }
+                            },
+                            "op" : "==",
+                            "right" : {
+                              "type" : "org.sireum.lang.ast.Exp.LitR",
+                              "value" : 70.0,
+                              "attr" : {
+                                "type" : "org.sireum.lang.ast.Attr",
+                                "posOpt" : {
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                    },
+                                    "beginLine" : 91,
+                                    "beginColumn" : 38,
+                                    "endLine" : 91,
+                                    "endColumn" : 42,
+                                    "offset" : 2699,
+                                    "length" : 4
+                                  }
+                                }
+                              }
+                            },
+                            "attr" : {
+                              "type" : "org.sireum.lang.ast.ResolvedAttr",
+                              "posOpt" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                  },
+                                  "beginLine" : 91,
+                                  "beginColumn" : 38,
+                                  "endLine" : 91,
+                                  "endColumn" : 42,
+                                  "offset" : 2699,
+                                  "length" : 4
+                                }
+                              },
+                              "resOpt" : {
+                                "type" : "None"
+                              },
+                              "typedOpt" : {
+                                "type" : "None"
+                              }
+                            }
+                          },
+                          "op" : "&&",
+                          "right" : {
+                            "type" : "org.sireum.lang.ast.Exp.Binary",
+                            "left" : {
+                              "type" : "org.sireum.lang.ast.Exp.Select",
+                              "receiverOpt" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "org.sireum.lang.ast.Exp.Select",
+                                  "receiverOpt" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "org.sireum.lang.ast.Exp.Ident",
+                                      "id" : {
+                                        "type" : "org.sireum.lang.ast.Id",
+                                        "value" : "currentSetPoint",
+                                        "attr" : {
+                                          "type" : "org.sireum.lang.ast.Attr",
+                                          "posOpt" : {
+                                            "type" : "Some",
+                                            "value" : {
+                                              "type" : "Position",
+                                              "uriOpt" : {
+                                                "type" : "Some",
+                                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                              },
+                                              "beginLine" : 82,
+                                              "beginColumn" : 5,
+                                              "endLine" : 82,
+                                              "endColumn" : 33,
+                                              "offset" : 2321,
+                                              "length" : 28
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "attr" : {
+                                        "type" : "org.sireum.lang.ast.ResolvedAttr",
+                                        "posOpt" : {
+                                          "type" : "Some",
+                                          "value" : {
+                                            "type" : "Position",
+                                            "uriOpt" : {
+                                              "type" : "Some",
+                                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                            },
+                                            "beginLine" : 82,
+                                            "beginColumn" : 5,
+                                            "endLine" : 82,
+                                            "endColumn" : 33,
+                                            "offset" : 2321,
+                                            "length" : 28
+                                          }
+                                        },
+                                        "resOpt" : {
+                                          "type" : "None"
+                                        },
+                                        "typedOpt" : {
+                                          "type" : "None"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "id" : {
+                                    "type" : "org.sireum.lang.ast.Id",
+                                    "value" : "high",
+                                    "attr" : {
+                                      "type" : "org.sireum.lang.ast.Attr",
+                                      "posOpt" : {
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                          },
+                                          "beginLine" : 91,
+                                          "beginColumn" : 69,
+                                          "endLine" : 91,
+                                          "endColumn" : 76,
+                                          "offset" : 2730,
+                                          "length" : 7
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "targs" : [
+                                  ],
+                                  "attr" : {
+                                    "type" : "org.sireum.lang.ast.ResolvedAttr",
+                                    "posOpt" : {
+                                      "type" : "None"
+                                    },
+                                    "resOpt" : {
+                                      "type" : "None"
+                                    },
+                                    "typedOpt" : {
+                                      "type" : "None"
+                                    }
+                                  }
+                                }
+                              },
+                              "id" : {
+                                "type" : "org.sireum.lang.ast.Id",
+                                "value" : "degrees",
+                                "attr" : {
+                                  "type" : "org.sireum.lang.ast.Attr",
+                                  "posOpt" : {
+                                    "type" : "Some",
+                                    "value" : {
+                                      "type" : "Position",
+                                      "uriOpt" : {
+                                        "type" : "Some",
+                                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                      },
+                                      "beginLine" : 91,
+                                      "beginColumn" : 69,
+                                      "endLine" : 91,
+                                      "endColumn" : 76,
+                                      "offset" : 2730,
+                                      "length" : 7
+                                    }
+                                  }
+                                }
+                              },
+                              "targs" : [
+                              ],
+                              "attr" : {
+                                "type" : "org.sireum.lang.ast.ResolvedAttr",
+                                "posOpt" : {
+                                  "type" : "None"
+                                },
+                                "resOpt" : {
+                                  "type" : "None"
+                                },
+                                "typedOpt" : {
+                                  "type" : "None"
+                                }
+                              }
+                            },
+                            "op" : "==",
+                            "right" : {
+                              "type" : "org.sireum.lang.ast.Exp.LitR",
+                              "value" : 80.0,
+                              "attr" : {
+                                "type" : "org.sireum.lang.ast.Attr",
+                                "posOpt" : {
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                    },
+                                    "beginLine" : 91,
+                                    "beginColumn" : 80,
+                                    "endLine" : 91,
+                                    "endColumn" : 84,
+                                    "offset" : 2741,
+                                    "length" : 4
+                                  }
+                                }
+                              }
+                            },
+                            "attr" : {
+                              "type" : "org.sireum.lang.ast.ResolvedAttr",
+                              "posOpt" : {
+                                "type" : "Some",
+                                "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                  },
+                                  "beginLine" : 91,
+                                  "beginColumn" : 80,
+                                  "endLine" : 91,
+                                  "endColumn" : 84,
+                                  "offset" : 2741,
+                                  "length" : 4
+                                }
+                              },
+                              "resOpt" : {
+                                "type" : "None"
+                              },
+                              "typedOpt" : {
+                                "type" : "None"
+                              }
+                            }
+                          },
+                          "attr" : {
+                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                            "posOpt" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                },
+                                "beginLine" : 91,
+                                "beginColumn" : 38,
+                                "endLine" : 91,
+                                "endColumn" : 84,
+                                "offset" : 2699,
+                                "length" : 42
+                              }
+                            },
+                            "resOpt" : {
+                              "type" : "None"
+                            },
+                            "typedOpt" : {
+                              "type" : "None"
+                            }
+                          }
+                        }
+                      }
                     ],
                     "integration" : {
                       "type" : "Some",
@@ -359,13 +775,13 @@
                                               "type" : "Position",
                                               "uriOpt" : {
                                                 "type" : "Some",
-                                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
                                               "beginLine" : 76,
                                               "beginColumn" : 5,
                                               "endLine" : 76,
                                               "endColumn" : 51,
-                                              "offset" : 2166,
+                                              "offset" : 2189,
                                               "length" : 46
                                             }
                                           }
@@ -379,13 +795,13 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
                                             "beginLine" : 76,
                                             "beginColumn" : 5,
                                             "endLine" : 76,
                                             "endColumn" : 51,
-                                            "offset" : 2166,
+                                            "offset" : 2189,
                                             "length" : 46
                                           }
                                         },
@@ -425,25 +841,57 @@
                                 },
                                 "op" : ">=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
-                                  "value" : 70.0,
+                                  "type" : "org.sireum.lang.ast.Exp.Unary",
+                                  "op" : {
+                                    "type" : "org.sireum.lang.ast.Exp.UnaryOp",
+                                    "value" : "Minus"
+                                  },
+                                  "exp" : {
+                                    "type" : "org.sireum.lang.ast.Exp.LitR",
+                                    "value" : 70.0,
+                                    "attr" : {
+                                      "type" : "org.sireum.lang.ast.Attr",
+                                      "posOpt" : {
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                          },
+                                          "beginLine" : 85,
+                                          "beginColumn" : 34,
+                                          "endLine" : 85,
+                                          "endColumn" : 38,
+                                          "offset" : 2434,
+                                          "length" : 4
+                                        }
+                                      }
+                                    }
+                                  },
                                   "attr" : {
-                                    "type" : "org.sireum.lang.ast.Attr",
+                                    "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
                                       "type" : "Some",
                                       "value" : {
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                         },
-                                        "beginLine" : 83,
-                                        "beginColumn" : 32,
-                                        "endLine" : 83,
-                                        "endColumn" : 36,
-                                        "offset" : 2367,
-                                        "length" : 4
+                                        "beginLine" : 85,
+                                        "beginColumn" : 33,
+                                        "endLine" : 85,
+                                        "endColumn" : 38,
+                                        "offset" : 2433,
+                                        "length" : 5
                                       }
+                                    },
+                                    "resOpt" : {
+                                      "type" : "None"
+                                    },
+                                    "typedOpt" : {
+                                      "type" : "None"
                                     }
                                   }
                                 },
@@ -455,14 +903,14 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
-                                      "beginLine" : 83,
-                                      "beginColumn" : 32,
-                                      "endLine" : 83,
-                                      "endColumn" : 36,
-                                      "offset" : 2367,
-                                      "length" : 4
+                                      "beginLine" : 85,
+                                      "beginColumn" : 33,
+                                      "endLine" : 85,
+                                      "endColumn" : 38,
+                                      "offset" : 2433,
+                                      "length" : 5
                                     }
                                   },
                                   "resOpt" : {
@@ -493,13 +941,13 @@
                                               "type" : "Position",
                                               "uriOpt" : {
                                                 "type" : "Some",
-                                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
                                               "beginLine" : 76,
                                               "beginColumn" : 5,
                                               "endLine" : 76,
                                               "endColumn" : 51,
-                                              "offset" : 2166,
+                                              "offset" : 2189,
                                               "length" : 46
                                             }
                                           }
@@ -513,13 +961,13 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
                                             "beginLine" : 76,
                                             "beginColumn" : 5,
                                             "endLine" : 76,
                                             "endColumn" : 51,
-                                            "offset" : 2166,
+                                            "offset" : 2189,
                                             "length" : 46
                                           }
                                         },
@@ -569,13 +1017,13 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                         },
-                                        "beginLine" : 83,
-                                        "beginColumn" : 65,
-                                        "endLine" : 83,
-                                        "endColumn" : 70,
-                                        "offset" : 2400,
+                                        "beginLine" : 85,
+                                        "beginColumn" : 68,
+                                        "endLine" : 85,
+                                        "endColumn" : 73,
+                                        "offset" : 2468,
                                         "length" : 5
                                       }
                                     }
@@ -589,13 +1037,13 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
-                                      "beginLine" : 83,
-                                      "beginColumn" : 65,
-                                      "endLine" : 83,
-                                      "endColumn" : 70,
-                                      "offset" : 2400,
+                                      "beginLine" : 85,
+                                      "beginColumn" : 68,
+                                      "endLine" : 85,
+                                      "endColumn" : 73,
+                                      "offset" : 2468,
                                       "length" : 5
                                     }
                                   },
@@ -615,14 +1063,14 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
-                                    "beginLine" : 83,
-                                    "beginColumn" : 32,
-                                    "endLine" : 83,
-                                    "endColumn" : 70,
-                                    "offset" : 2367,
-                                    "length" : 34
+                                    "beginLine" : 85,
+                                    "beginColumn" : 33,
+                                    "endLine" : 85,
+                                    "endColumn" : 73,
+                                    "offset" : 2433,
+                                    "length" : 35
                                   }
                                 },
                                 "resOpt" : {
@@ -662,13 +1110,13 @@
                                                   "type" : "Position",
                                                   "uriOpt" : {
                                                     "type" : "Some",
-                                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                                   },
                                                   "beginLine" : 75,
                                                   "beginColumn" : 5,
                                                   "endLine" : 75,
                                                   "endColumn" : 45,
-                                                  "offset" : 2121,
+                                                  "offset" : 2144,
                                                   "length" : 40
                                                 }
                                               }
@@ -682,13 +1130,13 @@
                                                 "type" : "Position",
                                                 "uriOpt" : {
                                                   "type" : "Some",
-                                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                                 },
                                                 "beginLine" : 75,
                                                 "beginColumn" : 5,
                                                 "endLine" : 75,
                                                 "endColumn" : 45,
-                                                "offset" : 2121,
+                                                "offset" : 2144,
                                                 "length" : 40
                                               }
                                             },
@@ -712,13 +1160,13 @@
                                               "type" : "Position",
                                               "uriOpt" : {
                                                 "type" : "Some",
-                                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 85,
+                                              "beginLine" : 87,
                                               "beginColumn" : 22,
-                                              "endLine" : 85,
+                                              "endLine" : 87,
                                               "endColumn" : 29,
-                                              "offset" : 2460,
+                                              "offset" : 2528,
                                               "length" : 7
                                             }
                                           }
@@ -751,13 +1199,13 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                           },
-                                          "beginLine" : 85,
+                                          "beginLine" : 87,
                                           "beginColumn" : 22,
-                                          "endLine" : 85,
+                                          "endLine" : 87,
                                           "endColumn" : 29,
-                                          "offset" : 2460,
+                                          "offset" : 2528,
                                           "length" : 7
                                         }
                                       }
@@ -790,13 +1238,13 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                         },
-                                        "beginLine" : 85,
+                                        "beginLine" : 87,
                                         "beginColumn" : 33,
-                                        "endLine" : 85,
+                                        "endLine" : 87,
                                         "endColumn" : 37,
-                                        "offset" : 2471,
+                                        "offset" : 2539,
                                         "length" : 4
                                       }
                                     }
@@ -810,13 +1258,13 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
-                                      "beginLine" : 85,
+                                      "beginLine" : 87,
                                       "beginColumn" : 33,
-                                      "endLine" : 85,
+                                      "endLine" : 87,
                                       "endColumn" : 37,
-                                      "offset" : 2471,
+                                      "offset" : 2539,
                                       "length" : 4
                                     }
                                   },
@@ -852,13 +1300,13 @@
                                                   "type" : "Position",
                                                   "uriOpt" : {
                                                     "type" : "Some",
-                                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                                   },
                                                   "beginLine" : 75,
                                                   "beginColumn" : 5,
                                                   "endLine" : 75,
                                                   "endColumn" : 45,
-                                                  "offset" : 2121,
+                                                  "offset" : 2144,
                                                   "length" : 40
                                                 }
                                               }
@@ -872,13 +1320,13 @@
                                                 "type" : "Position",
                                                 "uriOpt" : {
                                                   "type" : "Some",
-                                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                                 },
                                                 "beginLine" : 75,
                                                 "beginColumn" : 5,
                                                 "endLine" : 75,
                                                 "endColumn" : 45,
-                                                "offset" : 2121,
+                                                "offset" : 2144,
                                                 "length" : 40
                                               }
                                             },
@@ -902,13 +1350,13 @@
                                               "type" : "Position",
                                               "uriOpt" : {
                                                 "type" : "Some",
-                                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 85,
+                                              "beginLine" : 87,
                                               "beginColumn" : 57,
-                                              "endLine" : 85,
+                                              "endLine" : 87,
                                               "endColumn" : 64,
-                                              "offset" : 2495,
+                                              "offset" : 2563,
                                               "length" : 7
                                             }
                                           }
@@ -941,13 +1389,13 @@
                                           "type" : "Position",
                                           "uriOpt" : {
                                             "type" : "Some",
-                                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                           },
-                                          "beginLine" : 85,
+                                          "beginLine" : 87,
                                           "beginColumn" : 57,
-                                          "endLine" : 85,
+                                          "endLine" : 87,
                                           "endColumn" : 64,
-                                          "offset" : 2495,
+                                          "offset" : 2563,
                                           "length" : 7
                                         }
                                       }
@@ -980,13 +1428,13 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                         },
-                                        "beginLine" : 85,
+                                        "beginLine" : 87,
                                         "beginColumn" : 68,
-                                        "endLine" : 85,
+                                        "endLine" : 87,
                                         "endColumn" : 73,
-                                        "offset" : 2506,
+                                        "offset" : 2574,
                                         "length" : 5
                                       }
                                     }
@@ -1000,13 +1448,13 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
-                                      "beginLine" : 85,
+                                      "beginLine" : 87,
                                       "beginColumn" : 68,
-                                      "endLine" : 85,
+                                      "endLine" : 87,
                                       "endColumn" : 73,
-                                      "offset" : 2506,
+                                      "offset" : 2574,
                                       "length" : 5
                                     }
                                   },
@@ -1026,13 +1474,13 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
-                                    "beginLine" : 85,
+                                    "beginLine" : 87,
                                     "beginColumn" : 33,
-                                    "endLine" : 85,
+                                    "endLine" : 87,
                                     "endColumn" : 73,
-                                    "offset" : 2471,
+                                    "offset" : 2539,
                                     "length" : 36
                                   }
                                 },
@@ -1054,7 +1502,7 @@
                   }
                 }
               ],
-              "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
+              "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
             },
             {
               "type" : "Component",
@@ -1067,13 +1515,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                     },
                     "beginLine" : 68,
                     "beginColumn" : 5,
                     "endLine" : 68,
                     "endColumn" : 35,
-                    "offset" : 1957,
+                    "offset" : 1980,
                     "length" : 30
                   }
                 }
@@ -1086,7 +1534,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "Integration_Contracts::tempSensor"
+                  "name" : "Initialize_Entrypoint::tempSensor"
                 }
               },
               "features" : [
@@ -1101,13 +1549,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
-                        "beginLine" : 100,
+                        "beginLine" : 97,
                         "beginColumn" : 5,
-                        "endLine" : 100,
+                        "endLine" : 97,
                         "endColumn" : 52,
-                        "offset" : 2913,
+                        "offset" : 2819,
                         "length" : 47
                       }
                     }
@@ -1124,7 +1572,7 @@
                     "type" : "Some",
                     "value" : {
                       "type" : "Classifier",
-                      "name" : "Integration_Contracts::Temperature.i"
+                      "name" : "Initialize_Entrypoint::Temperature.i"
                     }
                   },
                   "properties" : [
@@ -1160,7 +1608,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -1309,13 +1757,13 @@
                                               "type" : "Position",
                                               "uriOpt" : {
                                                 "type" : "Some",
-                                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 100,
+                                              "beginLine" : 97,
                                               "beginColumn" : 5,
-                                              "endLine" : 100,
+                                              "endLine" : 97,
                                               "endColumn" : 52,
-                                              "offset" : 2913,
+                                              "offset" : 2819,
                                               "length" : 47
                                             }
                                           }
@@ -1329,13 +1777,13 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
-                                            "beginLine" : 100,
+                                            "beginLine" : 97,
                                             "beginColumn" : 5,
-                                            "endLine" : 100,
+                                            "endLine" : 97,
                                             "endColumn" : 52,
-                                            "offset" : 2913,
+                                            "offset" : 2819,
                                             "length" : 47
                                           }
                                         },
@@ -1375,25 +1823,57 @@
                                 },
                                 "op" : ">=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
-                                  "value" : 70.0,
+                                  "type" : "org.sireum.lang.ast.Exp.Unary",
+                                  "op" : {
+                                    "type" : "org.sireum.lang.ast.Exp.UnaryOp",
+                                    "value" : "Minus"
+                                  },
+                                  "exp" : {
+                                    "type" : "org.sireum.lang.ast.Exp.LitR",
+                                    "value" : 70.0,
+                                    "attr" : {
+                                      "type" : "org.sireum.lang.ast.Attr",
+                                      "posOpt" : {
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                          },
+                                          "beginLine" : 105,
+                                          "beginColumn" : 34,
+                                          "endLine" : 105,
+                                          "endColumn" : 38,
+                                          "offset" : 3065,
+                                          "length" : 4
+                                        }
+                                      }
+                                    }
+                                  },
                                   "attr" : {
-                                    "type" : "org.sireum.lang.ast.Attr",
+                                    "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
                                       "type" : "Some",
                                       "value" : {
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                         },
-                                        "beginLine" : 108,
-                                        "beginColumn" : 32,
-                                        "endLine" : 108,
-                                        "endColumn" : 36,
-                                        "offset" : 3157,
-                                        "length" : 4
+                                        "beginLine" : 105,
+                                        "beginColumn" : 33,
+                                        "endLine" : 105,
+                                        "endColumn" : 38,
+                                        "offset" : 3064,
+                                        "length" : 5
                                       }
+                                    },
+                                    "resOpt" : {
+                                      "type" : "None"
+                                    },
+                                    "typedOpt" : {
+                                      "type" : "None"
                                     }
                                   }
                                 },
@@ -1405,14 +1885,14 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
-                                      "beginLine" : 108,
-                                      "beginColumn" : 32,
-                                      "endLine" : 108,
-                                      "endColumn" : 36,
-                                      "offset" : 3157,
-                                      "length" : 4
+                                      "beginLine" : 105,
+                                      "beginColumn" : 33,
+                                      "endLine" : 105,
+                                      "endColumn" : 38,
+                                      "offset" : 3064,
+                                      "length" : 5
                                     }
                                   },
                                   "resOpt" : {
@@ -1443,13 +1923,13 @@
                                               "type" : "Position",
                                               "uriOpt" : {
                                                 "type" : "Some",
-                                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 100,
+                                              "beginLine" : 97,
                                               "beginColumn" : 5,
-                                              "endLine" : 100,
+                                              "endLine" : 97,
                                               "endColumn" : 52,
-                                              "offset" : 2913,
+                                              "offset" : 2819,
                                               "length" : 47
                                             }
                                           }
@@ -1463,13 +1943,13 @@
                                             "type" : "Position",
                                             "uriOpt" : {
                                               "type" : "Some",
-                                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
-                                            "beginLine" : 100,
+                                            "beginLine" : 97,
                                             "beginColumn" : 5,
-                                            "endLine" : 100,
+                                            "endLine" : 97,
                                             "endColumn" : 52,
-                                            "offset" : 2913,
+                                            "offset" : 2819,
                                             "length" : 47
                                           }
                                         },
@@ -1519,13 +1999,13 @@
                                         "type" : "Position",
                                         "uriOpt" : {
                                           "type" : "Some",
-                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                         },
-                                        "beginLine" : 108,
-                                        "beginColumn" : 65,
-                                        "endLine" : 108,
-                                        "endColumn" : 70,
-                                        "offset" : 3190,
+                                        "beginLine" : 105,
+                                        "beginColumn" : 68,
+                                        "endLine" : 105,
+                                        "endColumn" : 73,
+                                        "offset" : 3099,
                                         "length" : 5
                                       }
                                     }
@@ -1539,13 +2019,13 @@
                                       "type" : "Position",
                                       "uriOpt" : {
                                         "type" : "Some",
-                                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
-                                      "beginLine" : 108,
-                                      "beginColumn" : 65,
-                                      "endLine" : 108,
-                                      "endColumn" : 70,
-                                      "offset" : 3190,
+                                      "beginLine" : 105,
+                                      "beginColumn" : 68,
+                                      "endLine" : 105,
+                                      "endColumn" : 73,
+                                      "offset" : 3099,
                                       "length" : 5
                                     }
                                   },
@@ -1565,14 +2045,14 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
-                                    "beginLine" : 108,
-                                    "beginColumn" : 32,
-                                    "endLine" : 108,
-                                    "endColumn" : 70,
-                                    "offset" : 3157,
-                                    "length" : 34
+                                    "beginLine" : 105,
+                                    "beginColumn" : 33,
+                                    "endLine" : 105,
+                                    "endColumn" : 73,
+                                    "offset" : 3064,
+                                    "length" : 35
                                   }
                                 },
                                 "resOpt" : {
@@ -1593,7 +2073,7 @@
                   }
                 }
               ],
-              "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1"
+              "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1"
             }
           ],
           "connections" : [
@@ -1608,13 +2088,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                     },
                     "beginLine" : 70,
                     "beginColumn" : 5,
                     "endLine" : 70,
                     "endColumn" : 64,
-                    "offset" : 2007,
+                    "offset" : 2030,
                     "length" : 59
                   }
                 }
@@ -1631,13 +2111,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 68,
                         "beginColumn" : 5,
                         "endLine" : 68,
                         "endColumn" : 35,
-                        "offset" : 1957,
+                        "offset" : 1980,
                         "length" : 30
                       }
                     }
@@ -1653,13 +2133,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                           },
-                          "beginLine" : 100,
+                          "beginLine" : 97,
                           "beginColumn" : 5,
-                          "endLine" : 100,
+                          "endLine" : 97,
                           "endColumn" : 52,
-                          "offset" : 2913,
+                          "offset" : 2819,
                           "length" : 47
                         }
                       }
@@ -1686,13 +2166,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 67,
                         "beginColumn" : 5,
                         "endLine" : 67,
                         "endColumn" : 37,
-                        "offset" : 1920,
+                        "offset" : 1943,
                         "length" : 32
                       }
                     }
@@ -1708,13 +2188,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                           },
                           "beginLine" : 76,
                           "beginColumn" : 5,
                           "endLine" : 76,
                           "endColumn" : 51,
-                          "offset" : 2166,
+                          "offset" : 2189,
                           "length" : 46
                         }
                       }
@@ -1745,7 +2225,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@connectionInstance.0\/@connectionReference.0"
+              "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@connectionInstance.0\/@connectionReference.0"
             }
           ],
           "connectionInstances" : [
@@ -1760,13 +2240,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                     },
                     "beginLine" : 70,
                     "beginColumn" : 5,
                     "endLine" : 70,
                     "endColumn" : 64,
-                    "offset" : 2007,
+                    "offset" : 2030,
                     "length" : 59
                   }
                 }
@@ -1782,13 +2262,13 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                       },
                       "beginLine" : 68,
                       "beginColumn" : 5,
                       "endLine" : 68,
                       "endColumn" : 35,
-                      "offset" : 1957,
+                      "offset" : 1980,
                       "length" : 30
                     }
                   }
@@ -1804,13 +2284,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
-                        "beginLine" : 100,
+                        "beginLine" : 97,
                         "beginColumn" : 5,
-                        "endLine" : 100,
+                        "endLine" : 97,
                         "endColumn" : 52,
-                        "offset" : 2913,
+                        "offset" : 2819,
                         "length" : 47
                       }
                     }
@@ -1835,13 +2315,13 @@
                       "type" : "Position",
                       "uriOpt" : {
                         "type" : "Some",
-                        "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                       },
                       "beginLine" : 67,
                       "beginColumn" : 5,
                       "endLine" : 67,
                       "endColumn" : 37,
-                      "offset" : 1920,
+                      "offset" : 1943,
                       "length" : 32
                     }
                   }
@@ -1857,13 +2337,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 76,
                         "beginColumn" : 5,
                         "endLine" : 76,
                         "endColumn" : 51,
-                        "offset" : 2166,
+                        "offset" : 2189,
                         "length" : 46
                       }
                     }
@@ -1893,13 +2373,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 70,
                         "beginColumn" : 5,
                         "endLine" : 70,
                         "endColumn" : 64,
-                        "offset" : 2007,
+                        "offset" : 2030,
                         "length" : 59
                       }
                     }
@@ -1913,13 +2393,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 59,
                         "beginColumn" : 5,
                         "endLine" : 59,
                         "endColumn" : 23,
-                        "offset" : 1804,
+                        "offset" : 1827,
                         "length" : 18
                       }
                     }
@@ -1966,7 +2446,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/\/@componentInstance.0"
+          "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0"
         }
       ],
       "connections" : [
@@ -2008,7 +2488,7 @@
           }
         }
       ],
-      "uriFrag" : "platform:\/resource\/integration-contracts\/instances\/Integration_Contracts_s_impl_Instance.aaxl2#\/"
+      "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/"
     }
   ],
   "annexLib" : [
@@ -3726,7 +4206,7 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
-          "name" : "Integration_Contracts::Temperature.i"
+          "name" : "Initialize_Entrypoint::Temperature.i"
         }
       },
       "features" : [
@@ -3743,7 +4223,7 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                 },
                 "beginLine" : 18,
                 "beginColumn" : 7,
@@ -3871,111 +4351,27 @@
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
-                    "type" : "org.sireum.lang.ast.Exp.Binary",
-                    "left" : {
-                      "type" : "org.sireum.lang.ast.Exp.Ident",
-                      "id" : {
-                        "type" : "org.sireum.lang.ast.Id",
-                        "value" : "degrees",
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.Attr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 18,
-                              "beginColumn" : 7,
-                              "endLine" : 18,
-                              "endColumn" : 39,
-                              "offset" : 624,
-                              "length" : 32
-                            }
-                          }
-                        }
-                      },
+                    "type" : "org.sireum.lang.ast.Exp.Ident",
+                    "id" : {
+                      "type" : "org.sireum.lang.ast.Id",
+                      "value" : "degrees",
                       "attr" : {
-                        "type" : "org.sireum.lang.ast.ResolvedAttr",
+                        "type" : "org.sireum.lang.ast.Attr",
                         "posOpt" : {
                           "type" : "Some",
                           "value" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                             },
-                            "beginLine" : 27,
-                            "beginColumn" : 12,
-                            "endLine" : 27,
-                            "endColumn" : 19,
-                            "offset" : 951,
-                            "length" : 7
+                            "beginLine" : 18,
+                            "beginColumn" : 7,
+                            "endLine" : 18,
+                            "endColumn" : 39,
+                            "offset" : 624,
+                            "length" : 32
                           }
-                        },
-                        "resOpt" : {
-                          "type" : "None"
-                        },
-                        "typedOpt" : {
-                          "type" : "None"
-                        }
-                      }
-                    },
-                    "op" : ">=",
-                    "right" : {
-                      "type" : "org.sireum.lang.ast.Exp.Unary",
-                      "op" : {
-                        "type" : "org.sireum.lang.ast.Exp.UnaryOp",
-                        "value" : "Minus"
-                      },
-                      "exp" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
-                        "value" : 459.67,
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.Attr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 27,
-                              "beginColumn" : 25,
-                              "endLine" : 27,
-                              "endColumn" : 31,
-                              "offset" : 964,
-                              "length" : 6
-                            }
-                          }
-                        }
-                      },
-                      "attr" : {
-                        "type" : "org.sireum.lang.ast.ResolvedAttr",
-                        "posOpt" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                            },
-                            "beginLine" : 27,
-                            "beginColumn" : 24,
-                            "endLine" : 27,
-                            "endColumn" : 31,
-                            "offset" : 963,
-                            "length" : 7
-                          }
-                        },
-                        "resOpt" : {
-                          "type" : "None"
-                        },
-                        "typedOpt" : {
-                          "type" : "None"
                         }
                       }
                     },
@@ -3987,14 +4383,14 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                           },
                           "beginLine" : 27,
-                          "beginColumn" : 12,
+                          "beginColumn" : 11,
                           "endLine" : 27,
-                          "endColumn" : 31,
-                          "offset" : 951,
-                          "length" : 12
+                          "endColumn" : 18,
+                          "offset" : 950,
+                          "length" : 7
                         }
                       },
                       "resOpt" : {
@@ -4005,185 +4401,33 @@
                       }
                     }
                   },
-                  "op" : "&&",
+                  "op" : ">=",
                   "right" : {
-                    "type" : "org.sireum.lang.ast.Exp.Binary",
-                    "left" : {
-                      "type" : "org.sireum.lang.ast.Exp.Ident",
-                      "id" : {
-                        "type" : "org.sireum.lang.ast.Id",
-                        "value" : "degrees",
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.Attr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 18,
-                              "beginColumn" : 7,
-                              "endLine" : 18,
-                              "endColumn" : 39,
-                              "offset" : 624,
-                              "length" : 32
-                            }
-                          }
-                        }
-                      },
-                      "attr" : {
-                        "type" : "org.sireum.lang.ast.ResolvedAttr",
-                        "posOpt" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                            },
-                            "beginLine" : 27,
-                            "beginColumn" : 38,
-                            "endLine" : 27,
-                            "endColumn" : 45,
-                            "offset" : 977,
-                            "length" : 7
-                          }
-                        },
-                        "resOpt" : {
-                          "type" : "None"
-                        },
-                        "typedOpt" : {
-                          "type" : "None"
-                        }
-                      }
+                    "type" : "org.sireum.lang.ast.Exp.Unary",
+                    "op" : {
+                      "type" : "org.sireum.lang.ast.Exp.UnaryOp",
+                      "value" : "Minus"
                     },
-                    "op" : "<=",
-                    "right" : {
-                      "type" : "org.sireum.lang.ast.Exp.Binary",
-                      "left" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
-                          "value" : 5.0,
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.Attr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 51,
-                                "endLine" : 27,
-                                "endColumn" : 54,
-                                "offset" : 990,
-                                "length" : 3
-                              }
-                            }
-                          }
-                        },
-                        "op" : "+",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
-                          "value" : 1.0,
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.Attr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 57,
-                                "endLine" : 27,
-                                "endColumn" : 60,
-                                "offset" : 996,
-                                "length" : 3
-                              }
-                            }
-                          }
-                        },
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.ResolvedAttr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 27,
-                              "beginColumn" : 51,
-                              "endLine" : 27,
-                              "endColumn" : 60,
-                              "offset" : 990,
-                              "length" : 6
-                            }
-                          },
-                          "resOpt" : {
-                            "type" : "None"
-                          },
-                          "typedOpt" : {
-                            "type" : "None"
-                          }
-                        }
-                      },
-                      "op" : "\/",
-                      "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
-                        "value" : 1.0,
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.Attr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 27,
-                              "beginColumn" : 64,
-                              "endLine" : 27,
-                              "endColumn" : 67,
-                              "offset" : 1003,
-                              "length" : 3
-                            }
-                          }
-                        }
-                      },
+                    "exp" : {
+                      "type" : "org.sireum.lang.ast.Exp.LitR",
+                      "value" : 459.67,
                       "attr" : {
-                        "type" : "org.sireum.lang.ast.ResolvedAttr",
+                        "type" : "org.sireum.lang.ast.Attr",
                         "posOpt" : {
                           "type" : "Some",
                           "value" : {
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                             },
                             "beginLine" : 27,
-                            "beginColumn" : 51,
+                            "beginColumn" : 24,
                             "endLine" : 27,
-                            "endColumn" : 67,
-                            "offset" : 990,
-                            "length" : 10
+                            "endColumn" : 30,
+                            "offset" : 963,
+                            "length" : 6
                           }
-                        },
-                        "resOpt" : {
-                          "type" : "None"
-                        },
-                        "typedOpt" : {
-                          "type" : "None"
                         }
                       }
                     },
@@ -4195,14 +4439,14 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                           },
                           "beginLine" : 27,
-                          "beginColumn" : 38,
+                          "beginColumn" : 23,
                           "endLine" : 27,
-                          "endColumn" : 67,
-                          "offset" : 977,
-                          "length" : 16
+                          "endColumn" : 30,
+                          "offset" : 962,
+                          "length" : 7
                         }
                       },
                       "resOpt" : {
@@ -4221,14 +4465,14 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 27,
-                        "beginColumn" : 12,
+                        "beginColumn" : 11,
                         "endLine" : 27,
-                        "endColumn" : 67,
-                        "offset" : 951,
-                        "length" : 30
+                        "endColumn" : 30,
+                        "offset" : 950,
+                        "length" : 12
                       }
                     },
                     "resOpt" : {
@@ -4271,7 +4515,7 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
-          "name" : "Integration_Contracts::SetPoint.i"
+          "name" : "Initialize_Entrypoint::SetPoint.i"
         }
       },
       "features" : [
@@ -4288,13 +4532,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                 },
                 "beginLine" : 42,
                 "beginColumn" : 7,
                 "endLine" : 42,
                 "endColumn" : 31,
-                "offset" : 1438,
+                "offset" : 1461,
                 "length" : 24
               }
             }
@@ -4307,7 +4551,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "Integration_Contracts::Temperature.i"
+              "name" : "Initialize_Entrypoint::Temperature.i"
             }
           },
           "features" : [
@@ -4324,7 +4568,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                     },
                     "beginLine" : 18,
                     "beginColumn" : 7,
@@ -4452,111 +4696,27 @@
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.Ident",
-                          "id" : {
-                            "type" : "org.sireum.lang.ast.Id",
-                            "value" : "degrees",
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 18,
-                                  "beginColumn" : 7,
-                                  "endLine" : 18,
-                                  "endColumn" : 39,
-                                  "offset" : 624,
-                                  "length" : 32
-                                }
-                              }
-                            }
-                          },
+                        "type" : "org.sireum.lang.ast.Exp.Ident",
+                        "id" : {
+                          "type" : "org.sireum.lang.ast.Id",
+                          "value" : "degrees",
                           "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                            "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
                               "type" : "Some",
                               "value" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
-                                "beginLine" : 27,
-                                "beginColumn" : 12,
-                                "endLine" : 27,
-                                "endColumn" : 19,
-                                "offset" : 951,
-                                "length" : 7
+                                "beginLine" : 18,
+                                "beginColumn" : 7,
+                                "endLine" : 18,
+                                "endColumn" : 39,
+                                "offset" : 624,
+                                "length" : 32
                               }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
-                            }
-                          }
-                        },
-                        "op" : ">=",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.Unary",
-                          "op" : {
-                            "type" : "org.sireum.lang.ast.Exp.UnaryOp",
-                            "value" : "Minus"
-                          },
-                          "exp" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
-                            "value" : 459.67,
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 25,
-                                  "endLine" : 27,
-                                  "endColumn" : 31,
-                                  "offset" : 964,
-                                  "length" : 6
-                                }
-                              }
-                            }
-                          },
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 24,
-                                "endLine" : 27,
-                                "endColumn" : 31,
-                                "offset" : 963,
-                                "length" : 7
-                              }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
                             }
                           }
                         },
@@ -4568,14 +4728,14 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                               },
                               "beginLine" : 27,
-                              "beginColumn" : 12,
+                              "beginColumn" : 11,
                               "endLine" : 27,
-                              "endColumn" : 31,
-                              "offset" : 951,
-                              "length" : 12
+                              "endColumn" : 18,
+                              "offset" : 950,
+                              "length" : 7
                             }
                           },
                           "resOpt" : {
@@ -4586,185 +4746,33 @@
                           }
                         }
                       },
-                      "op" : "&&",
+                      "op" : ">=",
                       "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.Ident",
-                          "id" : {
-                            "type" : "org.sireum.lang.ast.Id",
-                            "value" : "degrees",
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 18,
-                                  "beginColumn" : 7,
-                                  "endLine" : 18,
-                                  "endColumn" : 39,
-                                  "offset" : 624,
-                                  "length" : 32
-                                }
-                              }
-                            }
-                          },
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 38,
-                                "endLine" : 27,
-                                "endColumn" : 45,
-                                "offset" : 977,
-                                "length" : 7
-                              }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
-                            }
-                          }
+                        "type" : "org.sireum.lang.ast.Exp.Unary",
+                        "op" : {
+                          "type" : "org.sireum.lang.ast.Exp.UnaryOp",
+                          "value" : "Minus"
                         },
-                        "op" : "<=",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.Binary",
-                          "left" : {
-                            "type" : "org.sireum.lang.ast.Exp.Binary",
-                            "left" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 5.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                    },
-                                    "beginLine" : 27,
-                                    "beginColumn" : 51,
-                                    "endLine" : 27,
-                                    "endColumn" : 54,
-                                    "offset" : 990,
-                                    "length" : 3
-                                  }
-                                }
-                              }
-                            },
-                            "op" : "+",
-                            "right" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 1.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                    },
-                                    "beginLine" : 27,
-                                    "beginColumn" : 57,
-                                    "endLine" : 27,
-                                    "endColumn" : 60,
-                                    "offset" : 996,
-                                    "length" : 3
-                                  }
-                                }
-                              }
-                            },
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.ResolvedAttr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 51,
-                                  "endLine" : 27,
-                                  "endColumn" : 60,
-                                  "offset" : 990,
-                                  "length" : 6
-                                }
-                              },
-                              "resOpt" : {
-                                "type" : "None"
-                              },
-                              "typedOpt" : {
-                                "type" : "None"
-                              }
-                            }
-                          },
-                          "op" : "\/",
-                          "right" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
-                            "value" : 1.0,
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 64,
-                                  "endLine" : 27,
-                                  "endColumn" : 67,
-                                  "offset" : 1003,
-                                  "length" : 3
-                                }
-                              }
-                            }
-                          },
+                        "exp" : {
+                          "type" : "org.sireum.lang.ast.Exp.LitR",
+                          "value" : 459.67,
                           "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                            "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
                               "type" : "Some",
                               "value" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
                                 "beginLine" : 27,
-                                "beginColumn" : 51,
+                                "beginColumn" : 24,
                                 "endLine" : 27,
-                                "endColumn" : 67,
-                                "offset" : 990,
-                                "length" : 10
+                                "endColumn" : 30,
+                                "offset" : 963,
+                                "length" : 6
                               }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
                             }
                           }
                         },
@@ -4776,14 +4784,14 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                               },
                               "beginLine" : 27,
-                              "beginColumn" : 38,
+                              "beginColumn" : 23,
                               "endLine" : 27,
-                              "endColumn" : 67,
-                              "offset" : 977,
-                              "length" : 16
+                              "endColumn" : 30,
+                              "offset" : 962,
+                              "length" : 7
                             }
                           },
                           "resOpt" : {
@@ -4802,14 +4810,14 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                             },
                             "beginLine" : 27,
-                            "beginColumn" : 12,
+                            "beginColumn" : 11,
                             "endLine" : 27,
-                            "endColumn" : 67,
-                            "offset" : 951,
-                            "length" : 30
+                            "endColumn" : 30,
+                            "offset" : 950,
+                            "length" : 12
                           }
                         },
                         "resOpt" : {
@@ -4833,7 +4841,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/integration-contracts\/Integration_Contracts.aadl#Integration_Contracts.Temperature.i"
+          "uriFrag" : "platform:\/resource\/initialize-entrypoint\/Initialize_Entrypoint.aadl#Initialize_Entrypoint.Temperature.i"
         },
         {
           "type" : "Component",
@@ -4846,13 +4854,13 @@
                 "type" : "Position",
                 "uriOpt" : {
                   "type" : "Some",
-                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                 },
                 "beginLine" : 43,
                 "beginColumn" : 7,
                 "endLine" : 43,
                 "endColumn" : 32,
-                "offset" : 1469,
+                "offset" : 1492,
                 "length" : 25
               }
             }
@@ -4865,7 +4873,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "Integration_Contracts::Temperature.i"
+              "name" : "Initialize_Entrypoint::Temperature.i"
             }
           },
           "features" : [
@@ -4882,7 +4890,7 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                     },
                     "beginLine" : 18,
                     "beginColumn" : 7,
@@ -5010,111 +5018,27 @@
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.Ident",
-                          "id" : {
-                            "type" : "org.sireum.lang.ast.Id",
-                            "value" : "degrees",
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 18,
-                                  "beginColumn" : 7,
-                                  "endLine" : 18,
-                                  "endColumn" : 39,
-                                  "offset" : 624,
-                                  "length" : 32
-                                }
-                              }
-                            }
-                          },
+                        "type" : "org.sireum.lang.ast.Exp.Ident",
+                        "id" : {
+                          "type" : "org.sireum.lang.ast.Id",
+                          "value" : "degrees",
                           "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                            "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
                               "type" : "Some",
                               "value" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
-                                "beginLine" : 27,
-                                "beginColumn" : 12,
-                                "endLine" : 27,
-                                "endColumn" : 19,
-                                "offset" : 951,
-                                "length" : 7
+                                "beginLine" : 18,
+                                "beginColumn" : 7,
+                                "endLine" : 18,
+                                "endColumn" : 39,
+                                "offset" : 624,
+                                "length" : 32
                               }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
-                            }
-                          }
-                        },
-                        "op" : ">=",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.Unary",
-                          "op" : {
-                            "type" : "org.sireum.lang.ast.Exp.UnaryOp",
-                            "value" : "Minus"
-                          },
-                          "exp" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
-                            "value" : 459.67,
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 25,
-                                  "endLine" : 27,
-                                  "endColumn" : 31,
-                                  "offset" : 964,
-                                  "length" : 6
-                                }
-                              }
-                            }
-                          },
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 24,
-                                "endLine" : 27,
-                                "endColumn" : 31,
-                                "offset" : 963,
-                                "length" : 7
-                              }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
                             }
                           }
                         },
@@ -5126,14 +5050,14 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                               },
                               "beginLine" : 27,
-                              "beginColumn" : 12,
+                              "beginColumn" : 11,
                               "endLine" : 27,
-                              "endColumn" : 31,
-                              "offset" : 951,
-                              "length" : 12
+                              "endColumn" : 18,
+                              "offset" : 950,
+                              "length" : 7
                             }
                           },
                           "resOpt" : {
@@ -5144,185 +5068,33 @@
                           }
                         }
                       },
-                      "op" : "&&",
+                      "op" : ">=",
                       "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.Ident",
-                          "id" : {
-                            "type" : "org.sireum.lang.ast.Id",
-                            "value" : "degrees",
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 18,
-                                  "beginColumn" : 7,
-                                  "endLine" : 18,
-                                  "endColumn" : 39,
-                                  "offset" : 624,
-                                  "length" : 32
-                                }
-                              }
-                            }
-                          },
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 38,
-                                "endLine" : 27,
-                                "endColumn" : 45,
-                                "offset" : 977,
-                                "length" : 7
-                              }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
-                            }
-                          }
+                        "type" : "org.sireum.lang.ast.Exp.Unary",
+                        "op" : {
+                          "type" : "org.sireum.lang.ast.Exp.UnaryOp",
+                          "value" : "Minus"
                         },
-                        "op" : "<=",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.Binary",
-                          "left" : {
-                            "type" : "org.sireum.lang.ast.Exp.Binary",
-                            "left" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 5.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                    },
-                                    "beginLine" : 27,
-                                    "beginColumn" : 51,
-                                    "endLine" : 27,
-                                    "endColumn" : 54,
-                                    "offset" : 990,
-                                    "length" : 3
-                                  }
-                                }
-                              }
-                            },
-                            "op" : "+",
-                            "right" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 1.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                    },
-                                    "beginLine" : 27,
-                                    "beginColumn" : 57,
-                                    "endLine" : 27,
-                                    "endColumn" : 60,
-                                    "offset" : 996,
-                                    "length" : 3
-                                  }
-                                }
-                              }
-                            },
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.ResolvedAttr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 51,
-                                  "endLine" : 27,
-                                  "endColumn" : 60,
-                                  "offset" : 990,
-                                  "length" : 6
-                                }
-                              },
-                              "resOpt" : {
-                                "type" : "None"
-                              },
-                              "typedOpt" : {
-                                "type" : "None"
-                              }
-                            }
-                          },
-                          "op" : "\/",
-                          "right" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
-                            "value" : 1.0,
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 64,
-                                  "endLine" : 27,
-                                  "endColumn" : 67,
-                                  "offset" : 1003,
-                                  "length" : 3
-                                }
-                              }
-                            }
-                          },
+                        "exp" : {
+                          "type" : "org.sireum.lang.ast.Exp.LitR",
+                          "value" : 459.67,
                           "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                            "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
                               "type" : "Some",
                               "value" : {
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
                                 "beginLine" : 27,
-                                "beginColumn" : 51,
+                                "beginColumn" : 24,
                                 "endLine" : 27,
-                                "endColumn" : 67,
-                                "offset" : 990,
-                                "length" : 10
+                                "endColumn" : 30,
+                                "offset" : 963,
+                                "length" : 6
                               }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
                             }
                           }
                         },
@@ -5334,14 +5106,14 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                               },
                               "beginLine" : 27,
-                              "beginColumn" : 38,
+                              "beginColumn" : 23,
                               "endLine" : 27,
-                              "endColumn" : 67,
-                              "offset" : 977,
-                              "length" : 16
+                              "endColumn" : 30,
+                              "offset" : 962,
+                              "length" : 7
                             }
                           },
                           "resOpt" : {
@@ -5360,14 +5132,14 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                             },
                             "beginLine" : 27,
-                            "beginColumn" : 12,
+                            "beginColumn" : 11,
                             "endLine" : 27,
-                            "endColumn" : 67,
-                            "offset" : 951,
-                            "length" : 30
+                            "endColumn" : 30,
+                            "offset" : 950,
+                            "length" : 12
                           }
                         },
                         "resOpt" : {
@@ -5391,7 +5163,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/integration-contracts\/Integration_Contracts.aadl#Integration_Contracts.Temperature.i"
+          "uriFrag" : "platform:\/resource\/initialize-entrypoint\/Initialize_Entrypoint.aadl#Initialize_Entrypoint.Temperature.i"
         }
       ],
       "connections" : [
@@ -5470,13 +5242,13 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
                                     "beginLine" : 42,
                                     "beginColumn" : 7,
                                     "endLine" : 42,
                                     "endColumn" : 31,
-                                    "offset" : 1438,
+                                    "offset" : 1461,
                                     "length" : 24
                                   }
                                 }
@@ -5490,13 +5262,13 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
                                   "beginLine" : 42,
                                   "beginColumn" : 7,
                                   "endLine" : 42,
                                   "endColumn" : 31,
-                                  "offset" : 1438,
+                                  "offset" : 1461,
                                   "length" : 24
                                 }
                               },
@@ -5546,13 +5318,13 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                               },
                               "beginLine" : 47,
                               "beginColumn" : 27,
                               "endLine" : 47,
                               "endColumn" : 31,
-                              "offset" : 1606,
+                              "offset" : 1629,
                               "length" : 4
                             }
                           }
@@ -5566,13 +5338,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                             },
                             "beginLine" : 47,
                             "beginColumn" : 27,
                             "endLine" : 47,
                             "endColumn" : 31,
-                            "offset" : 1606,
+                            "offset" : 1629,
                             "length" : 4
                           }
                         },
@@ -5604,13 +5376,13 @@
                                     "type" : "Position",
                                     "uriOpt" : {
                                       "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
                                     "beginLine" : 43,
                                     "beginColumn" : 7,
                                     "endLine" : 43,
                                     "endColumn" : 32,
-                                    "offset" : 1469,
+                                    "offset" : 1492,
                                     "length" : 25
                                   }
                                 }
@@ -5624,13 +5396,13 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
                                   "beginLine" : 43,
                                   "beginColumn" : 7,
                                   "endLine" : 43,
                                   "endColumn" : 32,
-                                  "offset" : 1469,
+                                  "offset" : 1492,
                                   "length" : 25
                                 }
                               },
@@ -5680,13 +5452,13 @@
                               "type" : "Position",
                               "uriOpt" : {
                                 "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                               },
                               "beginLine" : 48,
                               "beginColumn" : 28,
                               "endLine" : 48,
                               "endColumn" : 33,
-                              "offset" : 1642,
+                              "offset" : 1665,
                               "length" : 5
                             }
                           }
@@ -5700,13 +5472,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                             },
                             "beginLine" : 48,
                             "beginColumn" : 28,
                             "endLine" : 48,
                             "endColumn" : 33,
-                            "offset" : 1642,
+                            "offset" : 1665,
                             "length" : 5
                           }
                         },
@@ -5726,13 +5498,13 @@
                           "type" : "Position",
                           "uriOpt" : {
                             "type" : "Some",
-                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                           },
                           "beginLine" : 47,
                           "beginColumn" : 27,
                           "endLine" : 48,
                           "endColumn" : 33,
-                          "offset" : 1606,
+                          "offset" : 1629,
                           "length" : 37
                         }
                       },
@@ -5764,13 +5536,13 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
                                   "beginLine" : 42,
                                   "beginColumn" : 7,
                                   "endLine" : 42,
                                   "endColumn" : 31,
-                                  "offset" : 1438,
+                                  "offset" : 1461,
                                   "length" : 24
                                 }
                               }
@@ -5784,13 +5556,13 @@
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
                                 "beginLine" : 42,
                                 "beginColumn" : 7,
                                 "endLine" : 42,
                                 "endColumn" : 31,
-                                "offset" : 1438,
+                                "offset" : 1461,
                                 "length" : 24
                               }
                             },
@@ -5846,13 +5618,13 @@
                                   "type" : "Position",
                                   "uriOpt" : {
                                     "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
                                   "beginLine" : 43,
                                   "beginColumn" : 7,
                                   "endLine" : 43,
                                   "endColumn" : 32,
-                                  "offset" : 1469,
+                                  "offset" : 1492,
                                   "length" : 25
                                 }
                               }
@@ -5866,13 +5638,13 @@
                                 "type" : "Position",
                                 "uriOpt" : {
                                   "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
                                 "beginLine" : 43,
                                 "beginColumn" : 7,
                                 "endLine" : 43,
                                 "endColumn" : 32,
-                                "offset" : 1469,
+                                "offset" : 1492,
                                 "length" : 25
                               }
                             },
@@ -5931,13 +5703,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 47,
                         "beginColumn" : 27,
                         "endLine" : 48,
                         "endColumn" : 33,
-                        "offset" : 1606,
+                        "offset" : 1629,
                         "length" : 37
                       }
                     },

@@ -23,6 +23,11 @@ public class GumboTest extends SireumTest {
 		lexecute("integration-contracts", "Integration_Contracts.aadl", "s.impl");
 	}
 
+	@Test
+	public void initialize_entrypoint() {
+		lexecute("initialize-entrypoint", "Initialize_Entrypoint.aadl", "s.impl");
+	}
+
 	void lexecute(String dirName, String sysFilename, String sysImplName) {
 		execute(new File(ROOT_DIR, dirName), sysFilename, sysImplName);
 	}

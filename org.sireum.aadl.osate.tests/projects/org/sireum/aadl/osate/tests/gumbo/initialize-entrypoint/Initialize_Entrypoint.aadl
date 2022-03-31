@@ -1,4 +1,4 @@
-package Integration_Contracts
+package Initialize_Entrypoint
 public
 	with Data_Model;
 	with Base_Types;
@@ -24,7 +24,7 @@ public
       --                  and must be proved whenever a value of the data type is constructed
       invariants
         inv "Temperature Data Invariant":
-          (degrees >= (-459.67)) && (degrees <= ((5.0 + 1.0) / 1.0));      
+          degrees >= (-459.67); -- this works since codegen is emitting real lits as F32's        
     **};
   end Temperature.i;
 
@@ -78,20 +78,17 @@ public
   		Dispatch_Protocol => Sporadic;
   	annex
   		gumbo {**
+			state
+				currentSetPoint: SetPoint.i;
   			integration
   				assume "currentTemp Range":
-  					(currentTemp.degrees >= 70.0) && (currentTemp.degrees <= 180.0);
+  					(currentTemp.degrees >= (-70.0)) && (currentTemp.degrees <= 180.0);
   				assume "setPoint Range":
   					(setPoint.low.degrees >= 40.0) && (setPoint.high.degrees <= 110.0);
-  					
-				--assume "INVALID: refers to multiple ports":
-				--	setPoint.low.degrees >= 40.0 and currentTemp.degrees <= 180.0;
-					
-				--assume "INVALID: refers to no ports":
-				--	1 = 1;
-
-				--guarantee "INVALID: must use assume for incoming ports":
-				--	setPoint.low.degrees >= 40.0 and setPoint.high.degrees <= 110.0;
+ 			initialize
+				--modifies currentSetPoint;
+				guarantee "defaultSetPoint":
+					(currentSetPoint.low.degrees == 70.0) && (currentSetPoint.high.degrees == 80.0);
   		**}; 			
   end TempControl;
   
@@ -105,11 +102,11 @@ public
   		gumbo {**
   			integration
   				guarantee "currentTemp Range":
-  					(currentTemp.degrees >= 70.0) && (currentTemp.degrees <= 180.0);
+  					(currentTemp.degrees >= (-70.0)) && (currentTemp.degrees <= 180.0);
   					
 				--assume "INVALID: must use guarantee for outgoing ports":
   				--	currentTemp.degrees >= -70.0 and currentTemp.degrees <= 180.0;  					
   		**};  		
   end tempSensor;
   
-end Integration_Contracts;
+end Initialize_Entrypoint;
