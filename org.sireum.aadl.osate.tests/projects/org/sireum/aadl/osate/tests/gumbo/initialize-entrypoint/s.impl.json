@@ -18,7 +18,7 @@
             "beginColumn" : 3,
             "endLine" : 60,
             "endColumn" : 14,
-            "offset" : 1777,
+            "offset" : 1711,
             "length" : 82
           }
         }
@@ -50,7 +50,7 @@
                 "beginColumn" : 5,
                 "endLine" : 59,
                 "endColumn" : 23,
-                "offset" : 1827,
+                "offset" : 1761,
                 "length" : 18
               }
             }
@@ -86,7 +86,7 @@
                     "beginColumn" : 5,
                     "endLine" : 67,
                     "endColumn" : 37,
-                    "offset" : 1943,
+                    "offset" : 1877,
                     "length" : 32
                   }
                 }
@@ -120,7 +120,7 @@
                         "beginColumn" : 5,
                         "endLine" : 75,
                         "endColumn" : 45,
-                        "offset" : 2144,
+                        "offset" : 2078,
                         "length" : 40
                       }
                     }
@@ -192,7 +192,7 @@
                         "beginColumn" : 5,
                         "endLine" : 76,
                         "endColumn" : 51,
-                        "offset" : 2189,
+                        "offset" : 2123,
                         "length" : 46
                       }
                     }
@@ -364,12 +364,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 82,
-                                              "beginColumn" : 5,
-                                              "endLine" : 82,
-                                              "endColumn" : 33,
-                                              "offset" : 2321,
-                                              "length" : 28
+                                              "beginLine" : 91,
+                                              "beginColumn" : 7,
+                                              "endLine" : 91,
+                                              "endColumn" : 22,
+                                              "offset" : 2602,
+                                              "length" : 15
                                             }
                                           }
                                         }
@@ -384,12 +384,12 @@
                                               "type" : "Some",
                                               "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
-                                            "beginLine" : 82,
-                                            "beginColumn" : 5,
-                                            "endLine" : 82,
-                                            "endColumn" : 33,
-                                            "offset" : 2321,
-                                            "length" : 28
+                                            "beginLine" : 91,
+                                            "beginColumn" : 7,
+                                            "endLine" : 91,
+                                            "endColumn" : 22,
+                                            "offset" : 2602,
+                                            "length" : 15
                                           }
                                         },
                                         "resOpt" : {
@@ -415,11 +415,11 @@
                                             "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                           },
                                           "beginLine" : 91,
-                                          "beginColumn" : 27,
+                                          "beginColumn" : 23,
                                           "endLine" : 91,
                                           "endColumn" : 34,
-                                          "offset" : 2688,
-                                          "length" : 7
+                                          "offset" : 2618,
+                                          "length" : 11
                                         }
                                       }
                                     }
@@ -429,7 +429,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 91,
+                                        "beginColumn" : 7,
+                                        "endLine" : 91,
+                                        "endColumn" : 34,
+                                        "offset" : 2602,
+                                        "length" : 27
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -457,7 +470,7 @@
                                       "beginColumn" : 27,
                                       "endLine" : 91,
                                       "endColumn" : 34,
-                                      "offset" : 2688,
+                                      "offset" : 2622,
                                       "length" : 7
                                     }
                                   }
@@ -468,7 +481,20 @@
                               "attr" : {
                                 "type" : "org.sireum.lang.ast.ResolvedAttr",
                                 "posOpt" : {
-                                  "type" : "None"
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                    },
+                                    "beginLine" : 91,
+                                    "beginColumn" : 7,
+                                    "endLine" : 91,
+                                    "endColumn" : 34,
+                                    "offset" : 2602,
+                                    "length" : 27
+                                  }
                                 },
                                 "resOpt" : {
                                   "type" : "None"
@@ -496,7 +522,7 @@
                                     "beginColumn" : 38,
                                     "endLine" : 91,
                                     "endColumn" : 42,
-                                    "offset" : 2699,
+                                    "offset" : 2633,
                                     "length" : 4
                                   }
                                 }
@@ -513,11 +539,11 @@
                                     "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
                                   "beginLine" : 91,
-                                  "beginColumn" : 38,
+                                  "beginColumn" : 7,
                                   "endLine" : 91,
                                   "endColumn" : 42,
-                                  "offset" : 2699,
-                                  "length" : 4
+                                  "offset" : 2602,
+                                  "length" : 35
                                 }
                               },
                               "resOpt" : {
@@ -554,12 +580,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 82,
-                                              "beginColumn" : 5,
-                                              "endLine" : 82,
-                                              "endColumn" : 33,
-                                              "offset" : 2321,
-                                              "length" : 28
+                                              "beginLine" : 91,
+                                              "beginColumn" : 48,
+                                              "endLine" : 91,
+                                              "endColumn" : 63,
+                                              "offset" : 2643,
+                                              "length" : 15
                                             }
                                           }
                                         }
@@ -574,12 +600,12 @@
                                               "type" : "Some",
                                               "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
-                                            "beginLine" : 82,
-                                            "beginColumn" : 5,
-                                            "endLine" : 82,
-                                            "endColumn" : 33,
-                                            "offset" : 2321,
-                                            "length" : 28
+                                            "beginLine" : 91,
+                                            "beginColumn" : 48,
+                                            "endLine" : 91,
+                                            "endColumn" : 63,
+                                            "offset" : 2643,
+                                            "length" : 15
                                           }
                                         },
                                         "resOpt" : {
@@ -605,11 +631,11 @@
                                             "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                           },
                                           "beginLine" : 91,
-                                          "beginColumn" : 69,
+                                          "beginColumn" : 64,
                                           "endLine" : 91,
                                           "endColumn" : 76,
-                                          "offset" : 2730,
-                                          "length" : 7
+                                          "offset" : 2659,
+                                          "length" : 12
                                         }
                                       }
                                     }
@@ -619,7 +645,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 91,
+                                        "beginColumn" : 48,
+                                        "endLine" : 91,
+                                        "endColumn" : 76,
+                                        "offset" : 2643,
+                                        "length" : 28
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -647,7 +686,7 @@
                                       "beginColumn" : 69,
                                       "endLine" : 91,
                                       "endColumn" : 76,
-                                      "offset" : 2730,
+                                      "offset" : 2664,
                                       "length" : 7
                                     }
                                   }
@@ -658,7 +697,20 @@
                               "attr" : {
                                 "type" : "org.sireum.lang.ast.ResolvedAttr",
                                 "posOpt" : {
-                                  "type" : "None"
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                    },
+                                    "beginLine" : 91,
+                                    "beginColumn" : 48,
+                                    "endLine" : 91,
+                                    "endColumn" : 76,
+                                    "offset" : 2643,
+                                    "length" : 28
+                                  }
                                 },
                                 "resOpt" : {
                                   "type" : "None"
@@ -686,7 +738,7 @@
                                     "beginColumn" : 80,
                                     "endLine" : 91,
                                     "endColumn" : 84,
-                                    "offset" : 2741,
+                                    "offset" : 2675,
                                     "length" : 4
                                   }
                                 }
@@ -703,11 +755,11 @@
                                     "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
                                   "beginLine" : 91,
-                                  "beginColumn" : 80,
+                                  "beginColumn" : 48,
                                   "endLine" : 91,
                                   "endColumn" : 84,
-                                  "offset" : 2741,
-                                  "length" : 4
+                                  "offset" : 2643,
+                                  "length" : 36
                                 }
                               },
                               "resOpt" : {
@@ -729,11 +781,11 @@
                                   "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
                                 "beginLine" : 91,
-                                "beginColumn" : 38,
+                                "beginColumn" : 7,
                                 "endLine" : 91,
                                 "endColumn" : 84,
-                                "offset" : 2699,
-                                "length" : 42
+                                "offset" : 2602,
+                                "length" : 77
                               }
                             },
                             "resOpt" : {
@@ -777,12 +829,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 76,
-                                              "beginColumn" : 5,
-                                              "endLine" : 76,
-                                              "endColumn" : 51,
-                                              "offset" : 2189,
-                                              "length" : 46
+                                              "beginLine" : 85,
+                                              "beginColumn" : 9,
+                                              "endLine" : 85,
+                                              "endColumn" : 20,
+                                              "offset" : 2343,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -797,12 +849,12 @@
                                               "type" : "Some",
                                               "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
-                                            "beginLine" : 76,
-                                            "beginColumn" : 5,
-                                            "endLine" : 76,
-                                            "endColumn" : 51,
-                                            "offset" : 2189,
-                                            "length" : 46
+                                            "beginLine" : 85,
+                                            "beginColumn" : 9,
+                                            "endLine" : 85,
+                                            "endColumn" : 20,
+                                            "offset" : 2343,
+                                            "length" : 11
                                           }
                                         },
                                         "resOpt" : {
@@ -820,7 +872,20 @@
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
-                                        "type" : "None"
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                          },
+                                          "beginLine" : 85,
+                                          "beginColumn" : 21,
+                                          "endLine" : 85,
+                                          "endColumn" : 28,
+                                          "offset" : 2355,
+                                          "length" : 7
+                                        }
                                       }
                                     }
                                   },
@@ -829,7 +894,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 85,
+                                        "beginColumn" : 9,
+                                        "endLine" : 85,
+                                        "endColumn" : 28,
+                                        "offset" : 2343,
+                                        "length" : 19
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -863,7 +941,7 @@
                                           "beginColumn" : 34,
                                           "endLine" : 85,
                                           "endColumn" : 38,
-                                          "offset" : 2434,
+                                          "offset" : 2368,
                                           "length" : 4
                                         }
                                       }
@@ -883,7 +961,7 @@
                                         "beginColumn" : 33,
                                         "endLine" : 85,
                                         "endColumn" : 38,
-                                        "offset" : 2433,
+                                        "offset" : 2367,
                                         "length" : 5
                                       }
                                     },
@@ -906,11 +984,11 @@
                                         "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
                                       "beginLine" : 85,
-                                      "beginColumn" : 33,
+                                      "beginColumn" : 9,
                                       "endLine" : 85,
                                       "endColumn" : 38,
-                                      "offset" : 2433,
-                                      "length" : 5
+                                      "offset" : 2343,
+                                      "length" : 29
                                     }
                                   },
                                   "resOpt" : {
@@ -943,12 +1021,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 76,
-                                              "beginColumn" : 5,
-                                              "endLine" : 76,
-                                              "endColumn" : 51,
-                                              "offset" : 2189,
-                                              "length" : 46
+                                              "beginLine" : 85,
+                                              "beginColumn" : 45,
+                                              "endLine" : 85,
+                                              "endColumn" : 56,
+                                              "offset" : 2379,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -963,12 +1041,12 @@
                                               "type" : "Some",
                                               "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
-                                            "beginLine" : 76,
-                                            "beginColumn" : 5,
-                                            "endLine" : 76,
-                                            "endColumn" : 51,
-                                            "offset" : 2189,
-                                            "length" : 46
+                                            "beginLine" : 85,
+                                            "beginColumn" : 45,
+                                            "endLine" : 85,
+                                            "endColumn" : 56,
+                                            "offset" : 2379,
+                                            "length" : 11
                                           }
                                         },
                                         "resOpt" : {
@@ -986,7 +1064,20 @@
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
-                                        "type" : "None"
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                          },
+                                          "beginLine" : 85,
+                                          "beginColumn" : 57,
+                                          "endLine" : 85,
+                                          "endColumn" : 64,
+                                          "offset" : 2391,
+                                          "length" : 7
+                                        }
                                       }
                                     }
                                   },
@@ -995,7 +1086,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 85,
+                                        "beginColumn" : 45,
+                                        "endLine" : 85,
+                                        "endColumn" : 64,
+                                        "offset" : 2379,
+                                        "length" : 19
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -1023,7 +1127,7 @@
                                         "beginColumn" : 68,
                                         "endLine" : 85,
                                         "endColumn" : 73,
-                                        "offset" : 2468,
+                                        "offset" : 2402,
                                         "length" : 5
                                       }
                                     }
@@ -1040,11 +1144,11 @@
                                         "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
                                       "beginLine" : 85,
-                                      "beginColumn" : 68,
+                                      "beginColumn" : 45,
                                       "endLine" : 85,
                                       "endColumn" : 73,
-                                      "offset" : 2468,
-                                      "length" : 5
+                                      "offset" : 2379,
+                                      "length" : 28
                                     }
                                   },
                                   "resOpt" : {
@@ -1066,11 +1170,11 @@
                                       "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
                                     "beginLine" : 85,
-                                    "beginColumn" : 33,
+                                    "beginColumn" : 9,
                                     "endLine" : 85,
                                     "endColumn" : 73,
-                                    "offset" : 2433,
-                                    "length" : 35
+                                    "offset" : 2343,
+                                    "length" : 64
                                   }
                                 },
                                 "resOpt" : {
@@ -1112,12 +1216,12 @@
                                                     "type" : "Some",
                                                     "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                                   },
-                                                  "beginLine" : 75,
-                                                  "beginColumn" : 5,
-                                                  "endLine" : 75,
-                                                  "endColumn" : 45,
-                                                  "offset" : 2144,
-                                                  "length" : 40
+                                                  "beginLine" : 87,
+                                                  "beginColumn" : 9,
+                                                  "endLine" : 87,
+                                                  "endColumn" : 17,
+                                                  "offset" : 2449,
+                                                  "length" : 8
                                                 }
                                               }
                                             }
@@ -1132,12 +1236,12 @@
                                                   "type" : "Some",
                                                   "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                                 },
-                                                "beginLine" : 75,
-                                                "beginColumn" : 5,
-                                                "endLine" : 75,
-                                                "endColumn" : 45,
-                                                "offset" : 2144,
-                                                "length" : 40
+                                                "beginLine" : 87,
+                                                "beginColumn" : 9,
+                                                "endLine" : 87,
+                                                "endColumn" : 17,
+                                                "offset" : 2449,
+                                                "length" : 8
                                               }
                                             },
                                             "resOpt" : {
@@ -1163,11 +1267,11 @@
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
                                               "beginLine" : 87,
-                                              "beginColumn" : 22,
+                                              "beginColumn" : 18,
                                               "endLine" : 87,
                                               "endColumn" : 29,
-                                              "offset" : 2528,
-                                              "length" : 7
+                                              "offset" : 2458,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -1177,7 +1281,20 @@
                                       "attr" : {
                                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                                         "posOpt" : {
-                                          "type" : "None"
+                                          "type" : "Some",
+                                          "value" : {
+                                            "type" : "Position",
+                                            "uriOpt" : {
+                                              "type" : "Some",
+                                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                            },
+                                            "beginLine" : 87,
+                                            "beginColumn" : 9,
+                                            "endLine" : 87,
+                                            "endColumn" : 29,
+                                            "offset" : 2449,
+                                            "length" : 20
+                                          }
                                         },
                                         "resOpt" : {
                                           "type" : "None"
@@ -1205,7 +1322,7 @@
                                           "beginColumn" : 22,
                                           "endLine" : 87,
                                           "endColumn" : 29,
-                                          "offset" : 2528,
+                                          "offset" : 2462,
                                           "length" : 7
                                         }
                                       }
@@ -1216,7 +1333,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 87,
+                                        "beginColumn" : 9,
+                                        "endLine" : 87,
+                                        "endColumn" : 29,
+                                        "offset" : 2449,
+                                        "length" : 20
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -1244,7 +1374,7 @@
                                         "beginColumn" : 33,
                                         "endLine" : 87,
                                         "endColumn" : 37,
-                                        "offset" : 2539,
+                                        "offset" : 2473,
                                         "length" : 4
                                       }
                                     }
@@ -1261,11 +1391,11 @@
                                         "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
                                       "beginLine" : 87,
-                                      "beginColumn" : 33,
+                                      "beginColumn" : 9,
                                       "endLine" : 87,
                                       "endColumn" : 37,
-                                      "offset" : 2539,
-                                      "length" : 4
+                                      "offset" : 2449,
+                                      "length" : 28
                                     }
                                   },
                                   "resOpt" : {
@@ -1302,12 +1432,12 @@
                                                     "type" : "Some",
                                                     "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                                   },
-                                                  "beginLine" : 75,
-                                                  "beginColumn" : 5,
-                                                  "endLine" : 75,
-                                                  "endColumn" : 45,
-                                                  "offset" : 2144,
-                                                  "length" : 40
+                                                  "beginLine" : 87,
+                                                  "beginColumn" : 43,
+                                                  "endLine" : 87,
+                                                  "endColumn" : 51,
+                                                  "offset" : 2483,
+                                                  "length" : 8
                                                 }
                                               }
                                             }
@@ -1322,12 +1452,12 @@
                                                   "type" : "Some",
                                                   "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                                 },
-                                                "beginLine" : 75,
-                                                "beginColumn" : 5,
-                                                "endLine" : 75,
-                                                "endColumn" : 45,
-                                                "offset" : 2144,
-                                                "length" : 40
+                                                "beginLine" : 87,
+                                                "beginColumn" : 43,
+                                                "endLine" : 87,
+                                                "endColumn" : 51,
+                                                "offset" : 2483,
+                                                "length" : 8
                                               }
                                             },
                                             "resOpt" : {
@@ -1353,11 +1483,11 @@
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
                                               "beginLine" : 87,
-                                              "beginColumn" : 57,
+                                              "beginColumn" : 52,
                                               "endLine" : 87,
                                               "endColumn" : 64,
-                                              "offset" : 2563,
-                                              "length" : 7
+                                              "offset" : 2492,
+                                              "length" : 12
                                             }
                                           }
                                         }
@@ -1367,7 +1497,20 @@
                                       "attr" : {
                                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                                         "posOpt" : {
-                                          "type" : "None"
+                                          "type" : "Some",
+                                          "value" : {
+                                            "type" : "Position",
+                                            "uriOpt" : {
+                                              "type" : "Some",
+                                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                            },
+                                            "beginLine" : 87,
+                                            "beginColumn" : 43,
+                                            "endLine" : 87,
+                                            "endColumn" : 64,
+                                            "offset" : 2483,
+                                            "length" : 21
+                                          }
                                         },
                                         "resOpt" : {
                                           "type" : "None"
@@ -1395,7 +1538,7 @@
                                           "beginColumn" : 57,
                                           "endLine" : 87,
                                           "endColumn" : 64,
-                                          "offset" : 2563,
+                                          "offset" : 2497,
                                           "length" : 7
                                         }
                                       }
@@ -1406,7 +1549,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 87,
+                                        "beginColumn" : 43,
+                                        "endLine" : 87,
+                                        "endColumn" : 64,
+                                        "offset" : 2483,
+                                        "length" : 21
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -1434,7 +1590,7 @@
                                         "beginColumn" : 68,
                                         "endLine" : 87,
                                         "endColumn" : 73,
-                                        "offset" : 2574,
+                                        "offset" : 2508,
                                         "length" : 5
                                       }
                                     }
@@ -1451,11 +1607,11 @@
                                         "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
                                       "beginLine" : 87,
-                                      "beginColumn" : 68,
+                                      "beginColumn" : 43,
                                       "endLine" : 87,
                                       "endColumn" : 73,
-                                      "offset" : 2574,
-                                      "length" : 5
+                                      "offset" : 2483,
+                                      "length" : 30
                                     }
                                   },
                                   "resOpt" : {
@@ -1477,11 +1633,11 @@
                                       "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
                                     "beginLine" : 87,
-                                    "beginColumn" : 33,
+                                    "beginColumn" : 9,
                                     "endLine" : 87,
                                     "endColumn" : 73,
-                                    "offset" : 2539,
-                                    "length" : 36
+                                    "offset" : 2449,
+                                    "length" : 64
                                   }
                                 },
                                 "resOpt" : {
@@ -1521,7 +1677,7 @@
                     "beginColumn" : 5,
                     "endLine" : 68,
                     "endColumn" : 35,
-                    "offset" : 1980,
+                    "offset" : 1914,
                     "length" : 30
                   }
                 }
@@ -1555,7 +1711,7 @@
                         "beginColumn" : 5,
                         "endLine" : 97,
                         "endColumn" : 52,
-                        "offset" : 2819,
+                        "offset" : 2753,
                         "length" : 47
                       }
                     }
@@ -1759,12 +1915,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 97,
-                                              "beginColumn" : 5,
-                                              "endLine" : 97,
-                                              "endColumn" : 52,
-                                              "offset" : 2819,
-                                              "length" : 47
+                                              "beginLine" : 105,
+                                              "beginColumn" : 9,
+                                              "endLine" : 105,
+                                              "endColumn" : 20,
+                                              "offset" : 2974,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -1779,12 +1935,12 @@
                                               "type" : "Some",
                                               "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
-                                            "beginLine" : 97,
-                                            "beginColumn" : 5,
-                                            "endLine" : 97,
-                                            "endColumn" : 52,
-                                            "offset" : 2819,
-                                            "length" : 47
+                                            "beginLine" : 105,
+                                            "beginColumn" : 9,
+                                            "endLine" : 105,
+                                            "endColumn" : 20,
+                                            "offset" : 2974,
+                                            "length" : 11
                                           }
                                         },
                                         "resOpt" : {
@@ -1802,7 +1958,20 @@
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
-                                        "type" : "None"
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                          },
+                                          "beginLine" : 105,
+                                          "beginColumn" : 21,
+                                          "endLine" : 105,
+                                          "endColumn" : 28,
+                                          "offset" : 2986,
+                                          "length" : 7
+                                        }
                                       }
                                     }
                                   },
@@ -1811,7 +1980,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 105,
+                                        "beginColumn" : 9,
+                                        "endLine" : 105,
+                                        "endColumn" : 28,
+                                        "offset" : 2974,
+                                        "length" : 19
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -1845,7 +2027,7 @@
                                           "beginColumn" : 34,
                                           "endLine" : 105,
                                           "endColumn" : 38,
-                                          "offset" : 3065,
+                                          "offset" : 2999,
                                           "length" : 4
                                         }
                                       }
@@ -1865,7 +2047,7 @@
                                         "beginColumn" : 33,
                                         "endLine" : 105,
                                         "endColumn" : 38,
-                                        "offset" : 3064,
+                                        "offset" : 2998,
                                         "length" : 5
                                       }
                                     },
@@ -1888,11 +2070,11 @@
                                         "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
                                       "beginLine" : 105,
-                                      "beginColumn" : 33,
+                                      "beginColumn" : 9,
                                       "endLine" : 105,
                                       "endColumn" : 38,
-                                      "offset" : 3064,
-                                      "length" : 5
+                                      "offset" : 2974,
+                                      "length" : 29
                                     }
                                   },
                                   "resOpt" : {
@@ -1925,12 +2107,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
-                                              "beginLine" : 97,
-                                              "beginColumn" : 5,
-                                              "endLine" : 97,
-                                              "endColumn" : 52,
-                                              "offset" : 2819,
-                                              "length" : 47
+                                              "beginLine" : 105,
+                                              "beginColumn" : 45,
+                                              "endLine" : 105,
+                                              "endColumn" : 56,
+                                              "offset" : 3010,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -1945,12 +2127,12 @@
                                               "type" : "Some",
                                               "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                             },
-                                            "beginLine" : 97,
-                                            "beginColumn" : 5,
-                                            "endLine" : 97,
-                                            "endColumn" : 52,
-                                            "offset" : 2819,
-                                            "length" : 47
+                                            "beginLine" : 105,
+                                            "beginColumn" : 45,
+                                            "endLine" : 105,
+                                            "endColumn" : 56,
+                                            "offset" : 3010,
+                                            "length" : 11
                                           }
                                         },
                                         "resOpt" : {
@@ -1968,7 +2150,20 @@
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
-                                        "type" : "None"
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                          },
+                                          "beginLine" : 105,
+                                          "beginColumn" : 57,
+                                          "endLine" : 105,
+                                          "endColumn" : 64,
+                                          "offset" : 3022,
+                                          "length" : 7
+                                        }
                                       }
                                     }
                                   },
@@ -1977,7 +2172,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 105,
+                                        "beginColumn" : 45,
+                                        "endLine" : 105,
+                                        "endColumn" : 64,
+                                        "offset" : 3010,
+                                        "length" : 19
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -2005,7 +2213,7 @@
                                         "beginColumn" : 68,
                                         "endLine" : 105,
                                         "endColumn" : 73,
-                                        "offset" : 3099,
+                                        "offset" : 3033,
                                         "length" : 5
                                       }
                                     }
@@ -2022,11 +2230,11 @@
                                         "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
                                       "beginLine" : 105,
-                                      "beginColumn" : 68,
+                                      "beginColumn" : 45,
                                       "endLine" : 105,
                                       "endColumn" : 73,
-                                      "offset" : 3099,
-                                      "length" : 5
+                                      "offset" : 3010,
+                                      "length" : 28
                                     }
                                   },
                                   "resOpt" : {
@@ -2048,11 +2256,11 @@
                                       "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
                                     "beginLine" : 105,
-                                    "beginColumn" : 33,
+                                    "beginColumn" : 9,
                                     "endLine" : 105,
                                     "endColumn" : 73,
-                                    "offset" : 3064,
-                                    "length" : 35
+                                    "offset" : 2974,
+                                    "length" : 64
                                   }
                                 },
                                 "resOpt" : {
@@ -2094,7 +2302,7 @@
                     "beginColumn" : 5,
                     "endLine" : 70,
                     "endColumn" : 64,
-                    "offset" : 2030,
+                    "offset" : 1964,
                     "length" : 59
                   }
                 }
@@ -2117,7 +2325,7 @@
                         "beginColumn" : 5,
                         "endLine" : 68,
                         "endColumn" : 35,
-                        "offset" : 1980,
+                        "offset" : 1914,
                         "length" : 30
                       }
                     }
@@ -2139,7 +2347,7 @@
                           "beginColumn" : 5,
                           "endLine" : 97,
                           "endColumn" : 52,
-                          "offset" : 2819,
+                          "offset" : 2753,
                           "length" : 47
                         }
                       }
@@ -2172,7 +2380,7 @@
                         "beginColumn" : 5,
                         "endLine" : 67,
                         "endColumn" : 37,
-                        "offset" : 1943,
+                        "offset" : 1877,
                         "length" : 32
                       }
                     }
@@ -2194,7 +2402,7 @@
                           "beginColumn" : 5,
                           "endLine" : 76,
                           "endColumn" : 51,
-                          "offset" : 2189,
+                          "offset" : 2123,
                           "length" : 46
                         }
                       }
@@ -2246,7 +2454,7 @@
                     "beginColumn" : 5,
                     "endLine" : 70,
                     "endColumn" : 64,
-                    "offset" : 2030,
+                    "offset" : 1964,
                     "length" : 59
                   }
                 }
@@ -2268,7 +2476,7 @@
                       "beginColumn" : 5,
                       "endLine" : 68,
                       "endColumn" : 35,
-                      "offset" : 1980,
+                      "offset" : 1914,
                       "length" : 30
                     }
                   }
@@ -2290,7 +2498,7 @@
                         "beginColumn" : 5,
                         "endLine" : 97,
                         "endColumn" : 52,
-                        "offset" : 2819,
+                        "offset" : 2753,
                         "length" : 47
                       }
                     }
@@ -2321,7 +2529,7 @@
                       "beginColumn" : 5,
                       "endLine" : 67,
                       "endColumn" : 37,
-                      "offset" : 1943,
+                      "offset" : 1877,
                       "length" : 32
                     }
                   }
@@ -2343,7 +2551,7 @@
                         "beginColumn" : 5,
                         "endLine" : 76,
                         "endColumn" : 51,
-                        "offset" : 2189,
+                        "offset" : 2123,
                         "length" : 46
                       }
                     }
@@ -2379,7 +2587,7 @@
                         "beginColumn" : 5,
                         "endLine" : 70,
                         "endColumn" : 64,
-                        "offset" : 2030,
+                        "offset" : 1964,
                         "length" : 59
                       }
                     }
@@ -2399,7 +2607,7 @@
                         "beginColumn" : 5,
                         "endLine" : 59,
                         "endColumn" : 23,
-                        "offset" : 1827,
+                        "offset" : 1761,
                         "length" : 18
                       }
                     }
@@ -4365,12 +4573,12 @@
                               "type" : "Some",
                               "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                             },
-                            "beginLine" : 18,
-                            "beginColumn" : 7,
-                            "endLine" : 18,
-                            "endColumn" : 39,
-                            "offset" : 624,
-                            "length" : 32
+                            "beginLine" : 27,
+                            "beginColumn" : 11,
+                            "endLine" : 27,
+                            "endColumn" : 18,
+                            "offset" : 950,
+                            "length" : 7
                           }
                         }
                       }
@@ -4472,7 +4680,7 @@
                         "endLine" : 27,
                         "endColumn" : 30,
                         "offset" : 950,
-                        "length" : 12
+                        "length" : 19
                       }
                     },
                     "resOpt" : {
@@ -4538,7 +4746,7 @@
                 "beginColumn" : 7,
                 "endLine" : 42,
                 "endColumn" : 31,
-                "offset" : 1461,
+                "offset" : 1395,
                 "length" : 24
               }
             }
@@ -4710,12 +4918,12 @@
                                   "type" : "Some",
                                   "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
-                                "beginLine" : 18,
-                                "beginColumn" : 7,
-                                "endLine" : 18,
-                                "endColumn" : 39,
-                                "offset" : 624,
-                                "length" : 32
+                                "beginLine" : 27,
+                                "beginColumn" : 11,
+                                "endLine" : 27,
+                                "endColumn" : 18,
+                                "offset" : 950,
+                                "length" : 7
                               }
                             }
                           }
@@ -4817,7 +5025,7 @@
                             "endLine" : 27,
                             "endColumn" : 30,
                             "offset" : 950,
-                            "length" : 12
+                            "length" : 19
                           }
                         },
                         "resOpt" : {
@@ -4860,7 +5068,7 @@
                 "beginColumn" : 7,
                 "endLine" : 43,
                 "endColumn" : 32,
-                "offset" : 1492,
+                "offset" : 1426,
                 "length" : 25
               }
             }
@@ -5032,12 +5240,12 @@
                                   "type" : "Some",
                                   "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
-                                "beginLine" : 18,
-                                "beginColumn" : 7,
-                                "endLine" : 18,
-                                "endColumn" : 39,
-                                "offset" : 624,
-                                "length" : 32
+                                "beginLine" : 27,
+                                "beginColumn" : 11,
+                                "endLine" : 27,
+                                "endColumn" : 18,
+                                "offset" : 950,
+                                "length" : 7
                               }
                             }
                           }
@@ -5139,7 +5347,7 @@
                             "endLine" : 27,
                             "endColumn" : 30,
                             "offset" : 950,
-                            "length" : 12
+                            "length" : 19
                           }
                         },
                         "resOpt" : {
@@ -5244,12 +5452,12 @@
                                       "type" : "Some",
                                       "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
-                                    "beginLine" : 42,
-                                    "beginColumn" : 7,
-                                    "endLine" : 42,
-                                    "endColumn" : 31,
-                                    "offset" : 1461,
-                                    "length" : 24
+                                    "beginLine" : 47,
+                                    "beginColumn" : 12,
+                                    "endLine" : 47,
+                                    "endColumn" : 15,
+                                    "offset" : 1548,
+                                    "length" : 3
                                   }
                                 }
                               }
@@ -5264,12 +5472,12 @@
                                     "type" : "Some",
                                     "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
-                                  "beginLine" : 42,
-                                  "beginColumn" : 7,
-                                  "endLine" : 42,
-                                  "endColumn" : 31,
-                                  "offset" : 1461,
-                                  "length" : 24
+                                  "beginLine" : 47,
+                                  "beginColumn" : 12,
+                                  "endLine" : 47,
+                                  "endColumn" : 15,
+                                  "offset" : 1548,
+                                  "length" : 3
                                 }
                               },
                               "resOpt" : {
@@ -5287,7 +5495,20 @@
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
-                              "type" : "None"
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                },
+                                "beginLine" : 47,
+                                "beginColumn" : 16,
+                                "endLine" : 47,
+                                "endColumn" : 23,
+                                "offset" : 1552,
+                                "length" : 7
+                              }
                             }
                           }
                         },
@@ -5296,7 +5517,20 @@
                         "attr" : {
                           "type" : "org.sireum.lang.ast.ResolvedAttr",
                           "posOpt" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                              },
+                              "beginLine" : 47,
+                              "beginColumn" : 12,
+                              "endLine" : 47,
+                              "endColumn" : 23,
+                              "offset" : 1548,
+                              "length" : 11
+                            }
                           },
                           "resOpt" : {
                             "type" : "None"
@@ -5324,7 +5558,7 @@
                               "beginColumn" : 27,
                               "endLine" : 47,
                               "endColumn" : 31,
-                              "offset" : 1629,
+                              "offset" : 1563,
                               "length" : 4
                             }
                           }
@@ -5341,11 +5575,11 @@
                               "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                             },
                             "beginLine" : 47,
-                            "beginColumn" : 27,
+                            "beginColumn" : 12,
                             "endLine" : 47,
                             "endColumn" : 31,
-                            "offset" : 1629,
-                            "length" : 4
+                            "offset" : 1548,
+                            "length" : 19
                           }
                         },
                         "resOpt" : {
@@ -5378,12 +5612,12 @@
                                       "type" : "Some",
                                       "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
-                                    "beginLine" : 43,
-                                    "beginColumn" : 7,
-                                    "endLine" : 43,
-                                    "endColumn" : 32,
-                                    "offset" : 1492,
-                                    "length" : 25
+                                    "beginLine" : 48,
+                                    "beginColumn" : 12,
+                                    "endLine" : 48,
+                                    "endColumn" : 16,
+                                    "offset" : 1583,
+                                    "length" : 4
                                   }
                                 }
                               }
@@ -5398,12 +5632,12 @@
                                     "type" : "Some",
                                     "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
-                                  "beginLine" : 43,
-                                  "beginColumn" : 7,
-                                  "endLine" : 43,
-                                  "endColumn" : 32,
-                                  "offset" : 1492,
-                                  "length" : 25
+                                  "beginLine" : 48,
+                                  "beginColumn" : 12,
+                                  "endLine" : 48,
+                                  "endColumn" : 16,
+                                  "offset" : 1583,
+                                  "length" : 4
                                 }
                               },
                               "resOpt" : {
@@ -5421,7 +5655,20 @@
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
-                              "type" : "None"
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                },
+                                "beginLine" : 48,
+                                "beginColumn" : 17,
+                                "endLine" : 48,
+                                "endColumn" : 24,
+                                "offset" : 1588,
+                                "length" : 7
+                              }
                             }
                           }
                         },
@@ -5430,7 +5677,20 @@
                         "attr" : {
                           "type" : "org.sireum.lang.ast.ResolvedAttr",
                           "posOpt" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                              },
+                              "beginLine" : 48,
+                              "beginColumn" : 12,
+                              "endLine" : 48,
+                              "endColumn" : 24,
+                              "offset" : 1583,
+                              "length" : 12
+                            }
                           },
                           "resOpt" : {
                             "type" : "None"
@@ -5458,7 +5718,7 @@
                               "beginColumn" : 28,
                               "endLine" : 48,
                               "endColumn" : 33,
-                              "offset" : 1665,
+                              "offset" : 1599,
                               "length" : 5
                             }
                           }
@@ -5475,11 +5735,11 @@
                               "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                             },
                             "beginLine" : 48,
-                            "beginColumn" : 28,
+                            "beginColumn" : 12,
                             "endLine" : 48,
                             "endColumn" : 33,
-                            "offset" : 1665,
-                            "length" : 5
+                            "offset" : 1583,
+                            "length" : 21
                           }
                         },
                         "resOpt" : {
@@ -5501,11 +5761,11 @@
                             "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                           },
                           "beginLine" : 47,
-                          "beginColumn" : 27,
+                          "beginColumn" : 12,
                           "endLine" : 48,
                           "endColumn" : 33,
-                          "offset" : 1629,
-                          "length" : 37
+                          "offset" : 1548,
+                          "length" : 56
                         }
                       },
                       "resOpt" : {
@@ -5538,12 +5798,12 @@
                                     "type" : "Some",
                                     "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
-                                  "beginLine" : 42,
-                                  "beginColumn" : 7,
-                                  "endLine" : 42,
-                                  "endColumn" : 31,
-                                  "offset" : 1461,
-                                  "length" : 24
+                                  "beginLine" : 49,
+                                  "beginColumn" : 12,
+                                  "endLine" : 49,
+                                  "endColumn" : 15,
+                                  "offset" : 1620,
+                                  "length" : 3
                                 }
                               }
                             }
@@ -5558,12 +5818,12 @@
                                   "type" : "Some",
                                   "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
-                                "beginLine" : 42,
-                                "beginColumn" : 7,
-                                "endLine" : 42,
-                                "endColumn" : 31,
-                                "offset" : 1461,
-                                "length" : 24
+                                "beginLine" : 49,
+                                "beginColumn" : 12,
+                                "endLine" : 49,
+                                "endColumn" : 15,
+                                "offset" : 1620,
+                                "length" : 3
                               }
                             },
                             "resOpt" : {
@@ -5581,7 +5841,20 @@
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
                           "posOpt" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                              },
+                              "beginLine" : 49,
+                              "beginColumn" : 16,
+                              "endLine" : 49,
+                              "endColumn" : 23,
+                              "offset" : 1624,
+                              "length" : 7
+                            }
                           }
                         }
                       },
@@ -5590,7 +5863,20 @@
                       "attr" : {
                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                         "posOpt" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                            },
+                            "beginLine" : 49,
+                            "beginColumn" : 12,
+                            "endLine" : 49,
+                            "endColumn" : 23,
+                            "offset" : 1620,
+                            "length" : 11
+                          }
                         },
                         "resOpt" : {
                           "type" : "None"
@@ -5620,12 +5906,12 @@
                                     "type" : "Some",
                                     "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
-                                  "beginLine" : 43,
-                                  "beginColumn" : 7,
-                                  "endLine" : 43,
-                                  "endColumn" : 32,
-                                  "offset" : 1492,
-                                  "length" : 25
+                                  "beginLine" : 49,
+                                  "beginColumn" : 27,
+                                  "endLine" : 49,
+                                  "endColumn" : 31,
+                                  "offset" : 1635,
+                                  "length" : 4
                                 }
                               }
                             }
@@ -5640,12 +5926,12 @@
                                   "type" : "Some",
                                   "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                 },
-                                "beginLine" : 43,
-                                "beginColumn" : 7,
-                                "endLine" : 43,
-                                "endColumn" : 32,
-                                "offset" : 1492,
-                                "length" : 25
+                                "beginLine" : 49,
+                                "beginColumn" : 27,
+                                "endLine" : 49,
+                                "endColumn" : 31,
+                                "offset" : 1635,
+                                "length" : 4
                               }
                             },
                             "resOpt" : {
@@ -5663,7 +5949,20 @@
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
                           "posOpt" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                              },
+                              "beginLine" : 49,
+                              "beginColumn" : 32,
+                              "endLine" : 49,
+                              "endColumn" : 39,
+                              "offset" : 1640,
+                              "length" : 7
+                            }
                           }
                         }
                       },
@@ -5672,7 +5971,20 @@
                       "attr" : {
                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                         "posOpt" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                            },
+                            "beginLine" : 49,
+                            "beginColumn" : 27,
+                            "endLine" : 49,
+                            "endColumn" : 39,
+                            "offset" : 1635,
+                            "length" : 12
+                          }
                         },
                         "resOpt" : {
                           "type" : "None"
@@ -5685,7 +5997,20 @@
                     "attr" : {
                       "type" : "org.sireum.lang.ast.ResolvedAttr",
                       "posOpt" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                          },
+                          "beginLine" : 49,
+                          "beginColumn" : 12,
+                          "endLine" : 49,
+                          "endColumn" : 39,
+                          "offset" : 1620,
+                          "length" : 27
+                        }
                       },
                       "resOpt" : {
                         "type" : "None"
@@ -5706,11 +6031,11 @@
                           "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                         },
                         "beginLine" : 47,
-                        "beginColumn" : 27,
-                        "endLine" : 48,
-                        "endColumn" : 33,
-                        "offset" : 1629,
-                        "length" : 37
+                        "beginColumn" : 12,
+                        "endLine" : 49,
+                        "endColumn" : 39,
+                        "offset" : 1548,
+                        "length" : 99
                       }
                     },
                     "resOpt" : {

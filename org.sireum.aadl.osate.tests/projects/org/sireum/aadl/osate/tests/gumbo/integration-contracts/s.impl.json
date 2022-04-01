@@ -18,7 +18,7 @@
             "beginColumn" : 3,
             "endLine" : 60,
             "endColumn" : 14,
-            "offset" : 1754,
+            "offset" : 1728,
             "length" : 82
           }
         }
@@ -50,7 +50,7 @@
                 "beginColumn" : 5,
                 "endLine" : 59,
                 "endColumn" : 23,
-                "offset" : 1804,
+                "offset" : 1778,
                 "length" : 18
               }
             }
@@ -86,7 +86,7 @@
                     "beginColumn" : 5,
                     "endLine" : 67,
                     "endColumn" : 37,
-                    "offset" : 1920,
+                    "offset" : 1894,
                     "length" : 32
                   }
                 }
@@ -120,7 +120,7 @@
                         "beginColumn" : 5,
                         "endLine" : 75,
                         "endColumn" : 45,
-                        "offset" : 2121,
+                        "offset" : 2095,
                         "length" : 40
                       }
                     }
@@ -192,7 +192,7 @@
                         "beginColumn" : 5,
                         "endLine" : 76,
                         "endColumn" : 51,
-                        "offset" : 2166,
+                        "offset" : 2140,
                         "length" : 46
                       }
                     }
@@ -361,12 +361,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                               },
-                                              "beginLine" : 76,
-                                              "beginColumn" : 5,
-                                              "endLine" : 76,
-                                              "endColumn" : 51,
-                                              "offset" : 2166,
-                                              "length" : 46
+                                              "beginLine" : 83,
+                                              "beginColumn" : 9,
+                                              "endLine" : 83,
+                                              "endColumn" : 20,
+                                              "offset" : 2318,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -381,12 +381,12 @@
                                               "type" : "Some",
                                               "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                             },
-                                            "beginLine" : 76,
-                                            "beginColumn" : 5,
-                                            "endLine" : 76,
-                                            "endColumn" : 51,
-                                            "offset" : 2166,
-                                            "length" : 46
+                                            "beginLine" : 83,
+                                            "beginColumn" : 9,
+                                            "endLine" : 83,
+                                            "endColumn" : 20,
+                                            "offset" : 2318,
+                                            "length" : 11
                                           }
                                         },
                                         "resOpt" : {
@@ -404,7 +404,20 @@
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
-                                        "type" : "None"
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          },
+                                          "beginLine" : 83,
+                                          "beginColumn" : 21,
+                                          "endLine" : 83,
+                                          "endColumn" : 28,
+                                          "offset" : 2330,
+                                          "length" : 7
+                                        }
                                       }
                                     }
                                   },
@@ -413,7 +426,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 83,
+                                        "beginColumn" : 9,
+                                        "endLine" : 83,
+                                        "endColumn" : 28,
+                                        "offset" : 2318,
+                                        "length" : 19
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -425,7 +451,7 @@
                                 },
                                 "op" : ">=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF32",
                                   "value" : 70.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -440,9 +466,9 @@
                                         "beginLine" : 83,
                                         "beginColumn" : 32,
                                         "endLine" : 83,
-                                        "endColumn" : 36,
-                                        "offset" : 2367,
-                                        "length" : 4
+                                        "endColumn" : 41,
+                                        "offset" : 2341,
+                                        "length" : 9
                                       }
                                     }
                                   }
@@ -458,11 +484,11 @@
                                         "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                       },
                                       "beginLine" : 83,
-                                      "beginColumn" : 32,
+                                      "beginColumn" : 9,
                                       "endLine" : 83,
-                                      "endColumn" : 36,
-                                      "offset" : 2367,
-                                      "length" : 4
+                                      "endColumn" : 41,
+                                      "offset" : 2318,
+                                      "length" : 32
                                     }
                                   },
                                   "resOpt" : {
@@ -495,12 +521,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                               },
-                                              "beginLine" : 76,
-                                              "beginColumn" : 5,
-                                              "endLine" : 76,
-                                              "endColumn" : 51,
-                                              "offset" : 2166,
-                                              "length" : 46
+                                              "beginLine" : 83,
+                                              "beginColumn" : 47,
+                                              "endLine" : 83,
+                                              "endColumn" : 58,
+                                              "offset" : 2356,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -515,12 +541,12 @@
                                               "type" : "Some",
                                               "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                             },
-                                            "beginLine" : 76,
-                                            "beginColumn" : 5,
-                                            "endLine" : 76,
-                                            "endColumn" : 51,
-                                            "offset" : 2166,
-                                            "length" : 46
+                                            "beginLine" : 83,
+                                            "beginColumn" : 47,
+                                            "endLine" : 83,
+                                            "endColumn" : 58,
+                                            "offset" : 2356,
+                                            "length" : 11
                                           }
                                         },
                                         "resOpt" : {
@@ -538,7 +564,20 @@
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
-                                        "type" : "None"
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          },
+                                          "beginLine" : 83,
+                                          "beginColumn" : 59,
+                                          "endLine" : 83,
+                                          "endColumn" : 66,
+                                          "offset" : 2368,
+                                          "length" : 7
+                                        }
                                       }
                                     }
                                   },
@@ -547,7 +586,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 83,
+                                        "beginColumn" : 47,
+                                        "endLine" : 83,
+                                        "endColumn" : 66,
+                                        "offset" : 2356,
+                                        "length" : 19
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -559,7 +611,7 @@
                                 },
                                 "op" : "<=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF32",
                                   "value" : 180.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -572,11 +624,11 @@
                                           "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                         },
                                         "beginLine" : 83,
-                                        "beginColumn" : 65,
+                                        "beginColumn" : 70,
                                         "endLine" : 83,
-                                        "endColumn" : 70,
-                                        "offset" : 2400,
-                                        "length" : 5
+                                        "endColumn" : 80,
+                                        "offset" : 2379,
+                                        "length" : 10
                                       }
                                     }
                                   }
@@ -592,11 +644,11 @@
                                         "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                       },
                                       "beginLine" : 83,
-                                      "beginColumn" : 65,
+                                      "beginColumn" : 47,
                                       "endLine" : 83,
-                                      "endColumn" : 70,
-                                      "offset" : 2400,
-                                      "length" : 5
+                                      "endColumn" : 80,
+                                      "offset" : 2356,
+                                      "length" : 33
                                     }
                                   },
                                   "resOpt" : {
@@ -618,11 +670,11 @@
                                       "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                     },
                                     "beginLine" : 83,
-                                    "beginColumn" : 32,
+                                    "beginColumn" : 9,
                                     "endLine" : 83,
-                                    "endColumn" : 70,
-                                    "offset" : 2367,
-                                    "length" : 34
+                                    "endColumn" : 80,
+                                    "offset" : 2318,
+                                    "length" : 71
                                   }
                                 },
                                 "resOpt" : {
@@ -664,12 +716,12 @@
                                                     "type" : "Some",
                                                     "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                                   },
-                                                  "beginLine" : 75,
-                                                  "beginColumn" : 5,
-                                                  "endLine" : 75,
-                                                  "endColumn" : 45,
-                                                  "offset" : 2121,
-                                                  "length" : 40
+                                                  "beginLine" : 85,
+                                                  "beginColumn" : 9,
+                                                  "endLine" : 85,
+                                                  "endColumn" : 17,
+                                                  "offset" : 2431,
+                                                  "length" : 8
                                                 }
                                               }
                                             }
@@ -684,12 +736,12 @@
                                                   "type" : "Some",
                                                   "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                                 },
-                                                "beginLine" : 75,
-                                                "beginColumn" : 5,
-                                                "endLine" : 75,
-                                                "endColumn" : 45,
-                                                "offset" : 2121,
-                                                "length" : 40
+                                                "beginLine" : 85,
+                                                "beginColumn" : 9,
+                                                "endLine" : 85,
+                                                "endColumn" : 17,
+                                                "offset" : 2431,
+                                                "length" : 8
                                               }
                                             },
                                             "resOpt" : {
@@ -715,11 +767,11 @@
                                                 "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                               },
                                               "beginLine" : 85,
-                                              "beginColumn" : 22,
+                                              "beginColumn" : 18,
                                               "endLine" : 85,
                                               "endColumn" : 29,
-                                              "offset" : 2460,
-                                              "length" : 7
+                                              "offset" : 2440,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -729,7 +781,20 @@
                                       "attr" : {
                                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                                         "posOpt" : {
-                                          "type" : "None"
+                                          "type" : "Some",
+                                          "value" : {
+                                            "type" : "Position",
+                                            "uriOpt" : {
+                                              "type" : "Some",
+                                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                            },
+                                            "beginLine" : 85,
+                                            "beginColumn" : 9,
+                                            "endLine" : 85,
+                                            "endColumn" : 29,
+                                            "offset" : 2431,
+                                            "length" : 20
+                                          }
                                         },
                                         "resOpt" : {
                                           "type" : "None"
@@ -757,7 +822,7 @@
                                           "beginColumn" : 22,
                                           "endLine" : 85,
                                           "endColumn" : 29,
-                                          "offset" : 2460,
+                                          "offset" : 2444,
                                           "length" : 7
                                         }
                                       }
@@ -768,7 +833,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 85,
+                                        "beginColumn" : 9,
+                                        "endLine" : 85,
+                                        "endColumn" : 29,
+                                        "offset" : 2431,
+                                        "length" : 20
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -780,7 +858,7 @@
                                 },
                                 "op" : ">=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF32",
                                   "value" : 40.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -795,9 +873,9 @@
                                         "beginLine" : 85,
                                         "beginColumn" : 33,
                                         "endLine" : 85,
-                                        "endColumn" : 37,
-                                        "offset" : 2471,
-                                        "length" : 4
+                                        "endColumn" : 42,
+                                        "offset" : 2455,
+                                        "length" : 9
                                       }
                                     }
                                   }
@@ -813,11 +891,11 @@
                                         "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                       },
                                       "beginLine" : 85,
-                                      "beginColumn" : 33,
+                                      "beginColumn" : 9,
                                       "endLine" : 85,
-                                      "endColumn" : 37,
-                                      "offset" : 2471,
-                                      "length" : 4
+                                      "endColumn" : 42,
+                                      "offset" : 2431,
+                                      "length" : 33
                                     }
                                   },
                                   "resOpt" : {
@@ -854,12 +932,12 @@
                                                     "type" : "Some",
                                                     "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                                   },
-                                                  "beginLine" : 75,
-                                                  "beginColumn" : 5,
-                                                  "endLine" : 75,
-                                                  "endColumn" : 45,
-                                                  "offset" : 2121,
-                                                  "length" : 40
+                                                  "beginLine" : 85,
+                                                  "beginColumn" : 48,
+                                                  "endLine" : 85,
+                                                  "endColumn" : 56,
+                                                  "offset" : 2470,
+                                                  "length" : 8
                                                 }
                                               }
                                             }
@@ -874,12 +952,12 @@
                                                   "type" : "Some",
                                                   "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                                 },
-                                                "beginLine" : 75,
-                                                "beginColumn" : 5,
-                                                "endLine" : 75,
-                                                "endColumn" : 45,
-                                                "offset" : 2121,
-                                                "length" : 40
+                                                "beginLine" : 85,
+                                                "beginColumn" : 48,
+                                                "endLine" : 85,
+                                                "endColumn" : 56,
+                                                "offset" : 2470,
+                                                "length" : 8
                                               }
                                             },
                                             "resOpt" : {
@@ -907,9 +985,9 @@
                                               "beginLine" : 85,
                                               "beginColumn" : 57,
                                               "endLine" : 85,
-                                              "endColumn" : 64,
-                                              "offset" : 2495,
-                                              "length" : 7
+                                              "endColumn" : 69,
+                                              "offset" : 2479,
+                                              "length" : 12
                                             }
                                           }
                                         }
@@ -919,7 +997,20 @@
                                       "attr" : {
                                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                                         "posOpt" : {
-                                          "type" : "None"
+                                          "type" : "Some",
+                                          "value" : {
+                                            "type" : "Position",
+                                            "uriOpt" : {
+                                              "type" : "Some",
+                                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                            },
+                                            "beginLine" : 85,
+                                            "beginColumn" : 48,
+                                            "endLine" : 85,
+                                            "endColumn" : 69,
+                                            "offset" : 2470,
+                                            "length" : 21
+                                          }
                                         },
                                         "resOpt" : {
                                           "type" : "None"
@@ -944,10 +1035,10 @@
                                             "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                           },
                                           "beginLine" : 85,
-                                          "beginColumn" : 57,
+                                          "beginColumn" : 62,
                                           "endLine" : 85,
-                                          "endColumn" : 64,
-                                          "offset" : 2495,
+                                          "endColumn" : 69,
+                                          "offset" : 2484,
                                           "length" : 7
                                         }
                                       }
@@ -958,7 +1049,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 85,
+                                        "beginColumn" : 48,
+                                        "endLine" : 85,
+                                        "endColumn" : 69,
+                                        "offset" : 2470,
+                                        "length" : 21
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -970,7 +1074,7 @@
                                 },
                                 "op" : "<=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF32",
                                   "value" : 110.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -983,11 +1087,11 @@
                                           "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                         },
                                         "beginLine" : 85,
-                                        "beginColumn" : 68,
+                                        "beginColumn" : 73,
                                         "endLine" : 85,
-                                        "endColumn" : 73,
-                                        "offset" : 2506,
-                                        "length" : 5
+                                        "endColumn" : 83,
+                                        "offset" : 2495,
+                                        "length" : 10
                                       }
                                     }
                                   }
@@ -1003,11 +1107,11 @@
                                         "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                       },
                                       "beginLine" : 85,
-                                      "beginColumn" : 68,
+                                      "beginColumn" : 48,
                                       "endLine" : 85,
-                                      "endColumn" : 73,
-                                      "offset" : 2506,
-                                      "length" : 5
+                                      "endColumn" : 83,
+                                      "offset" : 2470,
+                                      "length" : 35
                                     }
                                   },
                                   "resOpt" : {
@@ -1029,11 +1133,11 @@
                                       "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                     },
                                     "beginLine" : 85,
-                                    "beginColumn" : 33,
+                                    "beginColumn" : 9,
                                     "endLine" : 85,
-                                    "endColumn" : 73,
-                                    "offset" : 2471,
-                                    "length" : 36
+                                    "endColumn" : 83,
+                                    "offset" : 2431,
+                                    "length" : 74
                                   }
                                 },
                                 "resOpt" : {
@@ -1073,7 +1177,7 @@
                     "beginColumn" : 5,
                     "endLine" : 68,
                     "endColumn" : 35,
-                    "offset" : 1957,
+                    "offset" : 1931,
                     "length" : 30
                   }
                 }
@@ -1107,7 +1211,7 @@
                         "beginColumn" : 5,
                         "endLine" : 100,
                         "endColumn" : 52,
-                        "offset" : 2913,
+                        "offset" : 2907,
                         "length" : 47
                       }
                     }
@@ -1311,12 +1415,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                               },
-                                              "beginLine" : 100,
-                                              "beginColumn" : 5,
-                                              "endLine" : 100,
-                                              "endColumn" : 52,
-                                              "offset" : 2913,
-                                              "length" : 47
+                                              "beginLine" : 108,
+                                              "beginColumn" : 9,
+                                              "endLine" : 108,
+                                              "endColumn" : 20,
+                                              "offset" : 3128,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -1331,12 +1435,12 @@
                                               "type" : "Some",
                                               "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                             },
-                                            "beginLine" : 100,
-                                            "beginColumn" : 5,
-                                            "endLine" : 100,
-                                            "endColumn" : 52,
-                                            "offset" : 2913,
-                                            "length" : 47
+                                            "beginLine" : 108,
+                                            "beginColumn" : 9,
+                                            "endLine" : 108,
+                                            "endColumn" : 20,
+                                            "offset" : 3128,
+                                            "length" : 11
                                           }
                                         },
                                         "resOpt" : {
@@ -1354,7 +1458,20 @@
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
-                                        "type" : "None"
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          },
+                                          "beginLine" : 108,
+                                          "beginColumn" : 21,
+                                          "endLine" : 108,
+                                          "endColumn" : 28,
+                                          "offset" : 3140,
+                                          "length" : 7
+                                        }
                                       }
                                     }
                                   },
@@ -1363,7 +1480,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 108,
+                                        "beginColumn" : 9,
+                                        "endLine" : 108,
+                                        "endColumn" : 28,
+                                        "offset" : 3128,
+                                        "length" : 19
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -1375,7 +1505,7 @@
                                 },
                                 "op" : ">=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF32",
                                   "value" : 70.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -1390,9 +1520,9 @@
                                         "beginLine" : 108,
                                         "beginColumn" : 32,
                                         "endLine" : 108,
-                                        "endColumn" : 36,
-                                        "offset" : 3157,
-                                        "length" : 4
+                                        "endColumn" : 41,
+                                        "offset" : 3151,
+                                        "length" : 9
                                       }
                                     }
                                   }
@@ -1408,11 +1538,11 @@
                                         "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                       },
                                       "beginLine" : 108,
-                                      "beginColumn" : 32,
+                                      "beginColumn" : 9,
                                       "endLine" : 108,
-                                      "endColumn" : 36,
-                                      "offset" : 3157,
-                                      "length" : 4
+                                      "endColumn" : 41,
+                                      "offset" : 3128,
+                                      "length" : 32
                                     }
                                   },
                                   "resOpt" : {
@@ -1445,12 +1575,12 @@
                                                 "type" : "Some",
                                                 "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                               },
-                                              "beginLine" : 100,
-                                              "beginColumn" : 5,
-                                              "endLine" : 100,
-                                              "endColumn" : 52,
-                                              "offset" : 2913,
-                                              "length" : 47
+                                              "beginLine" : 108,
+                                              "beginColumn" : 47,
+                                              "endLine" : 108,
+                                              "endColumn" : 58,
+                                              "offset" : 3166,
+                                              "length" : 11
                                             }
                                           }
                                         }
@@ -1465,12 +1595,12 @@
                                               "type" : "Some",
                                               "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                             },
-                                            "beginLine" : 100,
-                                            "beginColumn" : 5,
-                                            "endLine" : 100,
-                                            "endColumn" : 52,
-                                            "offset" : 2913,
-                                            "length" : 47
+                                            "beginLine" : 108,
+                                            "beginColumn" : 47,
+                                            "endLine" : 108,
+                                            "endColumn" : 58,
+                                            "offset" : 3166,
+                                            "length" : 11
                                           }
                                         },
                                         "resOpt" : {
@@ -1488,7 +1618,20 @@
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
-                                        "type" : "None"
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "Position",
+                                          "uriOpt" : {
+                                            "type" : "Some",
+                                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                          },
+                                          "beginLine" : 108,
+                                          "beginColumn" : 59,
+                                          "endLine" : 108,
+                                          "endColumn" : 66,
+                                          "offset" : 3178,
+                                          "length" : 7
+                                        }
                                       }
                                     }
                                   },
@@ -1497,7 +1640,20 @@
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.ResolvedAttr",
                                     "posOpt" : {
-                                      "type" : "None"
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                        },
+                                        "beginLine" : 108,
+                                        "beginColumn" : 47,
+                                        "endLine" : 108,
+                                        "endColumn" : 66,
+                                        "offset" : 3166,
+                                        "length" : 19
+                                      }
                                     },
                                     "resOpt" : {
                                       "type" : "None"
@@ -1509,7 +1665,7 @@
                                 },
                                 "op" : "<=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF32",
                                   "value" : 180.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -1522,11 +1678,11 @@
                                           "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                         },
                                         "beginLine" : 108,
-                                        "beginColumn" : 65,
+                                        "beginColumn" : 70,
                                         "endLine" : 108,
-                                        "endColumn" : 70,
-                                        "offset" : 3190,
-                                        "length" : 5
+                                        "endColumn" : 80,
+                                        "offset" : 3189,
+                                        "length" : 10
                                       }
                                     }
                                   }
@@ -1542,11 +1698,11 @@
                                         "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                       },
                                       "beginLine" : 108,
-                                      "beginColumn" : 65,
+                                      "beginColumn" : 47,
                                       "endLine" : 108,
-                                      "endColumn" : 70,
-                                      "offset" : 3190,
-                                      "length" : 5
+                                      "endColumn" : 80,
+                                      "offset" : 3166,
+                                      "length" : 33
                                     }
                                   },
                                   "resOpt" : {
@@ -1568,11 +1724,11 @@
                                       "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                     },
                                     "beginLine" : 108,
-                                    "beginColumn" : 32,
+                                    "beginColumn" : 9,
                                     "endLine" : 108,
-                                    "endColumn" : 70,
-                                    "offset" : 3157,
-                                    "length" : 34
+                                    "endColumn" : 80,
+                                    "offset" : 3128,
+                                    "length" : 71
                                   }
                                 },
                                 "resOpt" : {
@@ -1614,7 +1770,7 @@
                     "beginColumn" : 5,
                     "endLine" : 70,
                     "endColumn" : 64,
-                    "offset" : 2007,
+                    "offset" : 1981,
                     "length" : 59
                   }
                 }
@@ -1637,7 +1793,7 @@
                         "beginColumn" : 5,
                         "endLine" : 68,
                         "endColumn" : 35,
-                        "offset" : 1957,
+                        "offset" : 1931,
                         "length" : 30
                       }
                     }
@@ -1659,7 +1815,7 @@
                           "beginColumn" : 5,
                           "endLine" : 100,
                           "endColumn" : 52,
-                          "offset" : 2913,
+                          "offset" : 2907,
                           "length" : 47
                         }
                       }
@@ -1692,7 +1848,7 @@
                         "beginColumn" : 5,
                         "endLine" : 67,
                         "endColumn" : 37,
-                        "offset" : 1920,
+                        "offset" : 1894,
                         "length" : 32
                       }
                     }
@@ -1714,7 +1870,7 @@
                           "beginColumn" : 5,
                           "endLine" : 76,
                           "endColumn" : 51,
-                          "offset" : 2166,
+                          "offset" : 2140,
                           "length" : 46
                         }
                       }
@@ -1766,7 +1922,7 @@
                     "beginColumn" : 5,
                     "endLine" : 70,
                     "endColumn" : 64,
-                    "offset" : 2007,
+                    "offset" : 1981,
                     "length" : 59
                   }
                 }
@@ -1788,7 +1944,7 @@
                       "beginColumn" : 5,
                       "endLine" : 68,
                       "endColumn" : 35,
-                      "offset" : 1957,
+                      "offset" : 1931,
                       "length" : 30
                     }
                   }
@@ -1810,7 +1966,7 @@
                         "beginColumn" : 5,
                         "endLine" : 100,
                         "endColumn" : 52,
-                        "offset" : 2913,
+                        "offset" : 2907,
                         "length" : 47
                       }
                     }
@@ -1841,7 +1997,7 @@
                       "beginColumn" : 5,
                       "endLine" : 67,
                       "endColumn" : 37,
-                      "offset" : 1920,
+                      "offset" : 1894,
                       "length" : 32
                     }
                   }
@@ -1863,7 +2019,7 @@
                         "beginColumn" : 5,
                         "endLine" : 76,
                         "endColumn" : 51,
-                        "offset" : 2166,
+                        "offset" : 2140,
                         "length" : 46
                       }
                     }
@@ -1899,7 +2055,7 @@
                         "beginColumn" : 5,
                         "endLine" : 70,
                         "endColumn" : 64,
-                        "offset" : 2007,
+                        "offset" : 1981,
                         "length" : 59
                       }
                     }
@@ -1919,7 +2075,7 @@
                         "beginColumn" : 5,
                         "endLine" : 59,
                         "endColumn" : 23,
-                        "offset" : 1804,
+                        "offset" : 1778,
                         "length" : 18
                       }
                     }
@@ -2031,7 +2187,7 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
-          "name" : "Base_Types::Float"
+          "name" : "Base_Types::Float_32"
         }
       },
       "features" : [
@@ -2043,6 +2199,72 @@
       "connectionInstances" : [
       ],
       "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "32.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::IEEE754_Precision"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 53,
+                "beginColumn" : 4,
+                "endLine" : 53,
+                "endColumn" : 84,
+                "offset" : 2369,
+                "length" : 80
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Simple"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
         {
           "type" : "Property",
           "name" : {
@@ -3318,7 +3540,7 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
-          "name" : "Base_Types::Float_32"
+          "name" : "Base_Types::Float"
         }
       },
       "features" : [
@@ -3330,72 +3552,6 @@
       "connectionInstances" : [
       ],
       "properties" : [
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Memory_Properties::Data_Size"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
-                },
-                "beginLine" : 92,
-                "beginColumn" : 2,
-                "endLine" : 93,
-                "endColumn" : 137,
-                "offset" : 4808,
-                "length" : 152
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "UnitProp",
-              "value" : "32.0",
-              "unit" : {
-                "type" : "Some",
-                "value" : "bits"
-              }
-            }
-          ],
-          "appliesTo" : [
-          ]
-        },
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Data_Model::IEEE754_Precision"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                },
-                "beginLine" : 53,
-                "beginColumn" : 4,
-                "endLine" : 53,
-                "endColumn" : 84,
-                "offset" : 2369,
-                "length" : 80
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "ValueProp",
-              "value" : "Simple"
-            }
-          ],
-          "appliesTo" : [
-          ]
-        },
         {
           "type" : "Property",
           "name" : {
@@ -3748,9 +3904,9 @@
                 "beginLine" : 18,
                 "beginColumn" : 7,
                 "endLine" : 18,
-                "endColumn" : 39,
+                "endColumn" : 42,
                 "offset" : 624,
-                "length" : 32
+                "length" : 35
               }
             }
           },
@@ -3762,7 +3918,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "Base_Types::Float"
+              "name" : "Base_Types::Float_32"
             }
           },
           "features" : [
@@ -3774,6 +3930,72 @@
           "connectionInstances" : [
           ],
           "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Memory_Properties::Data_Size"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                    },
+                    "beginLine" : 92,
+                    "beginColumn" : 2,
+                    "endLine" : 93,
+                    "endColumn" : 137,
+                    "offset" : 4808,
+                    "length" : 152
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "32.0",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "bits"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::IEEE754_Precision"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                    },
+                    "beginLine" : 53,
+                    "beginColumn" : 4,
+                    "endLine" : 53,
+                    "endColumn" : 84,
+                    "offset" : 2369,
+                    "length" : 80
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Simple"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
             {
               "type" : "Property",
               "name" : {
@@ -3812,7 +4034,7 @@
           ],
           "annexes" : [
           ],
-          "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float"
+          "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_32"
         }
       ],
       "connections" : [
@@ -3871,34 +4093,12 @@
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
-                    "type" : "org.sireum.lang.ast.Exp.Binary",
-                    "left" : {
-                      "type" : "org.sireum.lang.ast.Exp.Ident",
-                      "id" : {
-                        "type" : "org.sireum.lang.ast.Id",
-                        "value" : "degrees",
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.Attr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 18,
-                              "beginColumn" : 7,
-                              "endLine" : 18,
-                              "endColumn" : 39,
-                              "offset" : 624,
-                              "length" : 32
-                            }
-                          }
-                        }
-                      },
+                    "type" : "org.sireum.lang.ast.Exp.Ident",
+                    "id" : {
+                      "type" : "org.sireum.lang.ast.Id",
+                      "value" : "degrees",
                       "attr" : {
-                        "type" : "org.sireum.lang.ast.ResolvedAttr",
+                        "type" : "org.sireum.lang.ast.Attr",
                         "posOpt" : {
                           "type" : "Some",
                           "value" : {
@@ -3908,53 +4108,53 @@
                               "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                             },
                             "beginLine" : 27,
-                            "beginColumn" : 12,
+                            "beginColumn" : 11,
                             "endLine" : 27,
-                            "endColumn" : 19,
-                            "offset" : 951,
+                            "endColumn" : 18,
+                            "offset" : 953,
                             "length" : 7
                           }
-                        },
-                        "resOpt" : {
-                          "type" : "None"
-                        },
-                        "typedOpt" : {
-                          "type" : "None"
                         }
                       }
                     },
-                    "op" : ">=",
-                    "right" : {
-                      "type" : "org.sireum.lang.ast.Exp.Unary",
-                      "op" : {
-                        "type" : "org.sireum.lang.ast.Exp.UnaryOp",
-                        "value" : "Minus"
-                      },
-                      "exp" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
-                        "value" : 459.67,
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.Attr",
-                          "posOpt" : {
+                    "attr" : {
+                      "type" : "org.sireum.lang.ast.ResolvedAttr",
+                      "posOpt" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
                             "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 27,
-                              "beginColumn" : 25,
-                              "endLine" : 27,
-                              "endColumn" : 31,
-                              "offset" : 964,
-                              "length" : 6
-                            }
-                          }
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 27,
+                          "beginColumn" : 11,
+                          "endLine" : 27,
+                          "endColumn" : 18,
+                          "offset" : 953,
+                          "length" : 7
                         }
                       },
+                      "resOpt" : {
+                        "type" : "None"
+                      },
+                      "typedOpt" : {
+                        "type" : "None"
+                      }
+                    }
+                  },
+                  "op" : ">=",
+                  "right" : {
+                    "type" : "org.sireum.lang.ast.Exp.Unary",
+                    "op" : {
+                      "type" : "org.sireum.lang.ast.Exp.UnaryOp",
+                      "value" : "Minus"
+                    },
+                    "exp" : {
+                      "type" : "org.sireum.lang.ast.Exp.LitF32",
+                      "value" : 459.67,
                       "attr" : {
-                        "type" : "org.sireum.lang.ast.ResolvedAttr",
+                        "type" : "org.sireum.lang.ast.Attr",
                         "posOpt" : {
                           "type" : "Some",
                           "value" : {
@@ -3966,16 +4166,10 @@
                             "beginLine" : 27,
                             "beginColumn" : 24,
                             "endLine" : 27,
-                            "endColumn" : 31,
-                            "offset" : 963,
-                            "length" : 7
+                            "endColumn" : 35,
+                            "offset" : 966,
+                            "length" : 11
                           }
-                        },
-                        "resOpt" : {
-                          "type" : "None"
-                        },
-                        "typedOpt" : {
-                          "type" : "None"
                         }
                       }
                     },
@@ -3990,219 +4184,11 @@
                             "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                           },
                           "beginLine" : 27,
-                          "beginColumn" : 12,
+                          "beginColumn" : 23,
                           "endLine" : 27,
-                          "endColumn" : 31,
-                          "offset" : 951,
+                          "endColumn" : 35,
+                          "offset" : 965,
                           "length" : 12
-                        }
-                      },
-                      "resOpt" : {
-                        "type" : "None"
-                      },
-                      "typedOpt" : {
-                        "type" : "None"
-                      }
-                    }
-                  },
-                  "op" : "&&",
-                  "right" : {
-                    "type" : "org.sireum.lang.ast.Exp.Binary",
-                    "left" : {
-                      "type" : "org.sireum.lang.ast.Exp.Ident",
-                      "id" : {
-                        "type" : "org.sireum.lang.ast.Id",
-                        "value" : "degrees",
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.Attr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 18,
-                              "beginColumn" : 7,
-                              "endLine" : 18,
-                              "endColumn" : 39,
-                              "offset" : 624,
-                              "length" : 32
-                            }
-                          }
-                        }
-                      },
-                      "attr" : {
-                        "type" : "org.sireum.lang.ast.ResolvedAttr",
-                        "posOpt" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                            },
-                            "beginLine" : 27,
-                            "beginColumn" : 38,
-                            "endLine" : 27,
-                            "endColumn" : 45,
-                            "offset" : 977,
-                            "length" : 7
-                          }
-                        },
-                        "resOpt" : {
-                          "type" : "None"
-                        },
-                        "typedOpt" : {
-                          "type" : "None"
-                        }
-                      }
-                    },
-                    "op" : "<=",
-                    "right" : {
-                      "type" : "org.sireum.lang.ast.Exp.Binary",
-                      "left" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
-                          "value" : 5.0,
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.Attr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 51,
-                                "endLine" : 27,
-                                "endColumn" : 54,
-                                "offset" : 990,
-                                "length" : 3
-                              }
-                            }
-                          }
-                        },
-                        "op" : "+",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
-                          "value" : 1.0,
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.Attr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 57,
-                                "endLine" : 27,
-                                "endColumn" : 60,
-                                "offset" : 996,
-                                "length" : 3
-                              }
-                            }
-                          }
-                        },
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.ResolvedAttr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 27,
-                              "beginColumn" : 51,
-                              "endLine" : 27,
-                              "endColumn" : 60,
-                              "offset" : 990,
-                              "length" : 6
-                            }
-                          },
-                          "resOpt" : {
-                            "type" : "None"
-                          },
-                          "typedOpt" : {
-                            "type" : "None"
-                          }
-                        }
-                      },
-                      "op" : "\/",
-                      "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
-                        "value" : 1.0,
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.Attr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 27,
-                              "beginColumn" : 64,
-                              "endLine" : 27,
-                              "endColumn" : 67,
-                              "offset" : 1003,
-                              "length" : 3
-                            }
-                          }
-                        }
-                      },
-                      "attr" : {
-                        "type" : "org.sireum.lang.ast.ResolvedAttr",
-                        "posOpt" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                            },
-                            "beginLine" : 27,
-                            "beginColumn" : 51,
-                            "endLine" : 27,
-                            "endColumn" : 67,
-                            "offset" : 990,
-                            "length" : 10
-                          }
-                        },
-                        "resOpt" : {
-                          "type" : "None"
-                        },
-                        "typedOpt" : {
-                          "type" : "None"
-                        }
-                      }
-                    },
-                    "attr" : {
-                      "type" : "org.sireum.lang.ast.ResolvedAttr",
-                      "posOpt" : {
-                        "type" : "Some",
-                        "value" : {
-                          "type" : "Position",
-                          "uriOpt" : {
-                            "type" : "Some",
-                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                          },
-                          "beginLine" : 27,
-                          "beginColumn" : 38,
-                          "endLine" : 27,
-                          "endColumn" : 67,
-                          "offset" : 977,
-                          "length" : 16
                         }
                       },
                       "resOpt" : {
@@ -4224,11 +4210,11 @@
                           "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                         },
                         "beginLine" : 27,
-                        "beginColumn" : 12,
+                        "beginColumn" : 11,
                         "endLine" : 27,
-                        "endColumn" : 67,
-                        "offset" : 951,
-                        "length" : 30
+                        "endColumn" : 35,
+                        "offset" : 953,
+                        "length" : 24
                       }
                     },
                     "resOpt" : {
@@ -4294,7 +4280,7 @@
                 "beginColumn" : 7,
                 "endLine" : 42,
                 "endColumn" : 31,
-                "offset" : 1438,
+                "offset" : 1402,
                 "length" : 24
               }
             }
@@ -4329,9 +4315,9 @@
                     "beginLine" : 18,
                     "beginColumn" : 7,
                     "endLine" : 18,
-                    "endColumn" : 39,
+                    "endColumn" : 42,
                     "offset" : 624,
-                    "length" : 32
+                    "length" : 35
                   }
                 }
               },
@@ -4343,7 +4329,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "Base_Types::Float"
+                  "name" : "Base_Types::Float_32"
                 }
               },
               "features" : [
@@ -4355,6 +4341,72 @@
               "connectionInstances" : [
               ],
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 2,
+                        "endLine" : 93,
+                        "endColumn" : 137,
+                        "offset" : 4808,
+                        "length" : 152
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "32.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::IEEE754_Precision"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 4,
+                        "endLine" : 53,
+                        "endColumn" : 84,
+                        "offset" : 2369,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Simple"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -4393,7 +4445,7 @@
               ],
               "annexes" : [
               ],
-              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float"
+              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_32"
             }
           ],
           "connections" : [
@@ -4452,34 +4504,12 @@
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.Ident",
-                          "id" : {
-                            "type" : "org.sireum.lang.ast.Id",
-                            "value" : "degrees",
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 18,
-                                  "beginColumn" : 7,
-                                  "endLine" : 18,
-                                  "endColumn" : 39,
-                                  "offset" : 624,
-                                  "length" : 32
-                                }
-                              }
-                            }
-                          },
+                        "type" : "org.sireum.lang.ast.Exp.Ident",
+                        "id" : {
+                          "type" : "org.sireum.lang.ast.Id",
+                          "value" : "degrees",
                           "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                            "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
                               "type" : "Some",
                               "value" : {
@@ -4489,53 +4519,53 @@
                                   "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                 },
                                 "beginLine" : 27,
-                                "beginColumn" : 12,
+                                "beginColumn" : 11,
                                 "endLine" : 27,
-                                "endColumn" : 19,
-                                "offset" : 951,
+                                "endColumn" : 18,
+                                "offset" : 953,
                                 "length" : 7
                               }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
                             }
                           }
                         },
-                        "op" : ">=",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.Unary",
-                          "op" : {
-                            "type" : "org.sireum.lang.ast.Exp.UnaryOp",
-                            "value" : "Minus"
-                          },
-                          "exp" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
-                            "value" : 459.67,
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
+                        "attr" : {
+                          "type" : "org.sireum.lang.ast.ResolvedAttr",
+                          "posOpt" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
                                 "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 25,
-                                  "endLine" : 27,
-                                  "endColumn" : 31,
-                                  "offset" : 964,
-                                  "length" : 6
-                                }
-                              }
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 27,
+                              "beginColumn" : 11,
+                              "endLine" : 27,
+                              "endColumn" : 18,
+                              "offset" : 953,
+                              "length" : 7
                             }
                           },
+                          "resOpt" : {
+                            "type" : "None"
+                          },
+                          "typedOpt" : {
+                            "type" : "None"
+                          }
+                        }
+                      },
+                      "op" : ">=",
+                      "right" : {
+                        "type" : "org.sireum.lang.ast.Exp.Unary",
+                        "op" : {
+                          "type" : "org.sireum.lang.ast.Exp.UnaryOp",
+                          "value" : "Minus"
+                        },
+                        "exp" : {
+                          "type" : "org.sireum.lang.ast.Exp.LitF32",
+                          "value" : 459.67,
                           "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                            "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
                               "type" : "Some",
                               "value" : {
@@ -4547,16 +4577,10 @@
                                 "beginLine" : 27,
                                 "beginColumn" : 24,
                                 "endLine" : 27,
-                                "endColumn" : 31,
-                                "offset" : 963,
-                                "length" : 7
+                                "endColumn" : 35,
+                                "offset" : 966,
+                                "length" : 11
                               }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
                             }
                           }
                         },
@@ -4571,219 +4595,11 @@
                                 "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                               },
                               "beginLine" : 27,
-                              "beginColumn" : 12,
+                              "beginColumn" : 23,
                               "endLine" : 27,
-                              "endColumn" : 31,
-                              "offset" : 951,
+                              "endColumn" : 35,
+                              "offset" : 965,
                               "length" : 12
-                            }
-                          },
-                          "resOpt" : {
-                            "type" : "None"
-                          },
-                          "typedOpt" : {
-                            "type" : "None"
-                          }
-                        }
-                      },
-                      "op" : "&&",
-                      "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.Ident",
-                          "id" : {
-                            "type" : "org.sireum.lang.ast.Id",
-                            "value" : "degrees",
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 18,
-                                  "beginColumn" : 7,
-                                  "endLine" : 18,
-                                  "endColumn" : 39,
-                                  "offset" : 624,
-                                  "length" : 32
-                                }
-                              }
-                            }
-                          },
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 38,
-                                "endLine" : 27,
-                                "endColumn" : 45,
-                                "offset" : 977,
-                                "length" : 7
-                              }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
-                            }
-                          }
-                        },
-                        "op" : "<=",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.Binary",
-                          "left" : {
-                            "type" : "org.sireum.lang.ast.Exp.Binary",
-                            "left" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 5.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                    },
-                                    "beginLine" : 27,
-                                    "beginColumn" : 51,
-                                    "endLine" : 27,
-                                    "endColumn" : 54,
-                                    "offset" : 990,
-                                    "length" : 3
-                                  }
-                                }
-                              }
-                            },
-                            "op" : "+",
-                            "right" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 1.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                    },
-                                    "beginLine" : 27,
-                                    "beginColumn" : 57,
-                                    "endLine" : 27,
-                                    "endColumn" : 60,
-                                    "offset" : 996,
-                                    "length" : 3
-                                  }
-                                }
-                              }
-                            },
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.ResolvedAttr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 51,
-                                  "endLine" : 27,
-                                  "endColumn" : 60,
-                                  "offset" : 990,
-                                  "length" : 6
-                                }
-                              },
-                              "resOpt" : {
-                                "type" : "None"
-                              },
-                              "typedOpt" : {
-                                "type" : "None"
-                              }
-                            }
-                          },
-                          "op" : "\/",
-                          "right" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
-                            "value" : 1.0,
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 64,
-                                  "endLine" : 27,
-                                  "endColumn" : 67,
-                                  "offset" : 1003,
-                                  "length" : 3
-                                }
-                              }
-                            }
-                          },
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 51,
-                                "endLine" : 27,
-                                "endColumn" : 67,
-                                "offset" : 990,
-                                "length" : 10
-                              }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
-                            }
-                          }
-                        },
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.ResolvedAttr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 27,
-                              "beginColumn" : 38,
-                              "endLine" : 27,
-                              "endColumn" : 67,
-                              "offset" : 977,
-                              "length" : 16
                             }
                           },
                           "resOpt" : {
@@ -4805,11 +4621,11 @@
                               "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                             },
                             "beginLine" : 27,
-                            "beginColumn" : 12,
+                            "beginColumn" : 11,
                             "endLine" : 27,
-                            "endColumn" : 67,
-                            "offset" : 951,
-                            "length" : 30
+                            "endColumn" : 35,
+                            "offset" : 953,
+                            "length" : 24
                           }
                         },
                         "resOpt" : {
@@ -4852,7 +4668,7 @@
                 "beginColumn" : 7,
                 "endLine" : 43,
                 "endColumn" : 32,
-                "offset" : 1469,
+                "offset" : 1433,
                 "length" : 25
               }
             }
@@ -4887,9 +4703,9 @@
                     "beginLine" : 18,
                     "beginColumn" : 7,
                     "endLine" : 18,
-                    "endColumn" : 39,
+                    "endColumn" : 42,
                     "offset" : 624,
-                    "length" : 32
+                    "length" : 35
                   }
                 }
               },
@@ -4901,7 +4717,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "Base_Types::Float"
+                  "name" : "Base_Types::Float_32"
                 }
               },
               "features" : [
@@ -4913,6 +4729,72 @@
               "connectionInstances" : [
               ],
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 2,
+                        "endLine" : 93,
+                        "endColumn" : 137,
+                        "offset" : 4808,
+                        "length" : 152
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "32.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::IEEE754_Precision"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 4,
+                        "endLine" : 53,
+                        "endColumn" : 84,
+                        "offset" : 2369,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Simple"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -4951,7 +4833,7 @@
               ],
               "annexes" : [
               ],
-              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float"
+              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_32"
             }
           ],
           "connections" : [
@@ -5010,34 +4892,12 @@
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.Ident",
-                          "id" : {
-                            "type" : "org.sireum.lang.ast.Id",
-                            "value" : "degrees",
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 18,
-                                  "beginColumn" : 7,
-                                  "endLine" : 18,
-                                  "endColumn" : 39,
-                                  "offset" : 624,
-                                  "length" : 32
-                                }
-                              }
-                            }
-                          },
+                        "type" : "org.sireum.lang.ast.Exp.Ident",
+                        "id" : {
+                          "type" : "org.sireum.lang.ast.Id",
+                          "value" : "degrees",
                           "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                            "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
                               "type" : "Some",
                               "value" : {
@@ -5047,53 +4907,53 @@
                                   "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                 },
                                 "beginLine" : 27,
-                                "beginColumn" : 12,
+                                "beginColumn" : 11,
                                 "endLine" : 27,
-                                "endColumn" : 19,
-                                "offset" : 951,
+                                "endColumn" : 18,
+                                "offset" : 953,
                                 "length" : 7
                               }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
                             }
                           }
                         },
-                        "op" : ">=",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.Unary",
-                          "op" : {
-                            "type" : "org.sireum.lang.ast.Exp.UnaryOp",
-                            "value" : "Minus"
-                          },
-                          "exp" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
-                            "value" : 459.67,
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
+                        "attr" : {
+                          "type" : "org.sireum.lang.ast.ResolvedAttr",
+                          "posOpt" : {
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
                                 "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 25,
-                                  "endLine" : 27,
-                                  "endColumn" : 31,
-                                  "offset" : 964,
-                                  "length" : 6
-                                }
-                              }
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 27,
+                              "beginColumn" : 11,
+                              "endLine" : 27,
+                              "endColumn" : 18,
+                              "offset" : 953,
+                              "length" : 7
                             }
                           },
+                          "resOpt" : {
+                            "type" : "None"
+                          },
+                          "typedOpt" : {
+                            "type" : "None"
+                          }
+                        }
+                      },
+                      "op" : ">=",
+                      "right" : {
+                        "type" : "org.sireum.lang.ast.Exp.Unary",
+                        "op" : {
+                          "type" : "org.sireum.lang.ast.Exp.UnaryOp",
+                          "value" : "Minus"
+                        },
+                        "exp" : {
+                          "type" : "org.sireum.lang.ast.Exp.LitF32",
+                          "value" : 459.67,
                           "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                            "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
                               "type" : "Some",
                               "value" : {
@@ -5105,16 +4965,10 @@
                                 "beginLine" : 27,
                                 "beginColumn" : 24,
                                 "endLine" : 27,
-                                "endColumn" : 31,
-                                "offset" : 963,
-                                "length" : 7
+                                "endColumn" : 35,
+                                "offset" : 966,
+                                "length" : 11
                               }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
                             }
                           }
                         },
@@ -5129,219 +4983,11 @@
                                 "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                               },
                               "beginLine" : 27,
-                              "beginColumn" : 12,
+                              "beginColumn" : 23,
                               "endLine" : 27,
-                              "endColumn" : 31,
-                              "offset" : 951,
+                              "endColumn" : 35,
+                              "offset" : 965,
                               "length" : 12
-                            }
-                          },
-                          "resOpt" : {
-                            "type" : "None"
-                          },
-                          "typedOpt" : {
-                            "type" : "None"
-                          }
-                        }
-                      },
-                      "op" : "&&",
-                      "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.Binary",
-                        "left" : {
-                          "type" : "org.sireum.lang.ast.Exp.Ident",
-                          "id" : {
-                            "type" : "org.sireum.lang.ast.Id",
-                            "value" : "degrees",
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 18,
-                                  "beginColumn" : 7,
-                                  "endLine" : 18,
-                                  "endColumn" : 39,
-                                  "offset" : 624,
-                                  "length" : 32
-                                }
-                              }
-                            }
-                          },
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 38,
-                                "endLine" : 27,
-                                "endColumn" : 45,
-                                "offset" : 977,
-                                "length" : 7
-                              }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
-                            }
-                          }
-                        },
-                        "op" : "<=",
-                        "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.Binary",
-                          "left" : {
-                            "type" : "org.sireum.lang.ast.Exp.Binary",
-                            "left" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 5.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                    },
-                                    "beginLine" : 27,
-                                    "beginColumn" : 51,
-                                    "endLine" : 27,
-                                    "endColumn" : 54,
-                                    "offset" : 990,
-                                    "length" : 3
-                                  }
-                                }
-                              }
-                            },
-                            "op" : "+",
-                            "right" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 1.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                    },
-                                    "beginLine" : 27,
-                                    "beginColumn" : 57,
-                                    "endLine" : 27,
-                                    "endColumn" : 60,
-                                    "offset" : 996,
-                                    "length" : 3
-                                  }
-                                }
-                              }
-                            },
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.ResolvedAttr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 51,
-                                  "endLine" : 27,
-                                  "endColumn" : 60,
-                                  "offset" : 990,
-                                  "length" : 6
-                                }
-                              },
-                              "resOpt" : {
-                                "type" : "None"
-                              },
-                              "typedOpt" : {
-                                "type" : "None"
-                              }
-                            }
-                          },
-                          "op" : "\/",
-                          "right" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
-                            "value" : 1.0,
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.Attr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                  },
-                                  "beginLine" : 27,
-                                  "beginColumn" : 64,
-                                  "endLine" : 27,
-                                  "endColumn" : 67,
-                                  "offset" : 1003,
-                                  "length" : 3
-                                }
-                              }
-                            }
-                          },
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                                },
-                                "beginLine" : 27,
-                                "beginColumn" : 51,
-                                "endLine" : 27,
-                                "endColumn" : 67,
-                                "offset" : 990,
-                                "length" : 10
-                              }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
-                            }
-                          }
-                        },
-                        "attr" : {
-                          "type" : "org.sireum.lang.ast.ResolvedAttr",
-                          "posOpt" : {
-                            "type" : "Some",
-                            "value" : {
-                              "type" : "Position",
-                              "uriOpt" : {
-                                "type" : "Some",
-                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
-                              },
-                              "beginLine" : 27,
-                              "beginColumn" : 38,
-                              "endLine" : 27,
-                              "endColumn" : 67,
-                              "offset" : 977,
-                              "length" : 16
                             }
                           },
                           "resOpt" : {
@@ -5363,11 +5009,11 @@
                               "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                             },
                             "beginLine" : 27,
-                            "beginColumn" : 12,
+                            "beginColumn" : 11,
                             "endLine" : 27,
-                            "endColumn" : 67,
-                            "offset" : 951,
-                            "length" : 30
+                            "endColumn" : 35,
+                            "offset" : 953,
+                            "length" : 24
                           }
                         },
                         "resOpt" : {
@@ -5472,12 +5118,12 @@
                                       "type" : "Some",
                                       "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                     },
-                                    "beginLine" : 42,
-                                    "beginColumn" : 7,
-                                    "endLine" : 42,
-                                    "endColumn" : 31,
-                                    "offset" : 1438,
-                                    "length" : 24
+                                    "beginLine" : 47,
+                                    "beginColumn" : 12,
+                                    "endLine" : 47,
+                                    "endColumn" : 15,
+                                    "offset" : 1555,
+                                    "length" : 3
                                   }
                                 }
                               }
@@ -5492,12 +5138,12 @@
                                     "type" : "Some",
                                     "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                   },
-                                  "beginLine" : 42,
-                                  "beginColumn" : 7,
-                                  "endLine" : 42,
-                                  "endColumn" : 31,
-                                  "offset" : 1438,
-                                  "length" : 24
+                                  "beginLine" : 47,
+                                  "beginColumn" : 12,
+                                  "endLine" : 47,
+                                  "endColumn" : 15,
+                                  "offset" : 1555,
+                                  "length" : 3
                                 }
                               },
                               "resOpt" : {
@@ -5515,7 +5161,20 @@
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
-                              "type" : "None"
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                },
+                                "beginLine" : 47,
+                                "beginColumn" : 16,
+                                "endLine" : 47,
+                                "endColumn" : 23,
+                                "offset" : 1559,
+                                "length" : 7
+                              }
                             }
                           }
                         },
@@ -5524,7 +5183,20 @@
                         "attr" : {
                           "type" : "org.sireum.lang.ast.ResolvedAttr",
                           "posOpt" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 47,
+                              "beginColumn" : 12,
+                              "endLine" : 47,
+                              "endColumn" : 23,
+                              "offset" : 1555,
+                              "length" : 11
+                            }
                           },
                           "resOpt" : {
                             "type" : "None"
@@ -5536,7 +5208,7 @@
                       },
                       "op" : ">=",
                       "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
+                        "type" : "org.sireum.lang.ast.Exp.LitF32",
                         "value" : 70.0,
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
@@ -5551,9 +5223,9 @@
                               "beginLine" : 47,
                               "beginColumn" : 27,
                               "endLine" : 47,
-                              "endColumn" : 31,
-                              "offset" : 1606,
-                              "length" : 4
+                              "endColumn" : 36,
+                              "offset" : 1570,
+                              "length" : 9
                             }
                           }
                         }
@@ -5569,11 +5241,11 @@
                               "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                             },
                             "beginLine" : 47,
-                            "beginColumn" : 27,
+                            "beginColumn" : 12,
                             "endLine" : 47,
-                            "endColumn" : 31,
-                            "offset" : 1606,
-                            "length" : 4
+                            "endColumn" : 36,
+                            "offset" : 1555,
+                            "length" : 24
                           }
                         },
                         "resOpt" : {
@@ -5606,12 +5278,12 @@
                                       "type" : "Some",
                                       "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                     },
-                                    "beginLine" : 43,
-                                    "beginColumn" : 7,
-                                    "endLine" : 43,
-                                    "endColumn" : 32,
-                                    "offset" : 1469,
-                                    "length" : 25
+                                    "beginLine" : 48,
+                                    "beginColumn" : 12,
+                                    "endLine" : 48,
+                                    "endColumn" : 16,
+                                    "offset" : 1595,
+                                    "length" : 4
                                   }
                                 }
                               }
@@ -5626,12 +5298,12 @@
                                     "type" : "Some",
                                     "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                   },
-                                  "beginLine" : 43,
-                                  "beginColumn" : 7,
-                                  "endLine" : 43,
-                                  "endColumn" : 32,
-                                  "offset" : 1469,
-                                  "length" : 25
+                                  "beginLine" : 48,
+                                  "beginColumn" : 12,
+                                  "endLine" : 48,
+                                  "endColumn" : 16,
+                                  "offset" : 1595,
+                                  "length" : 4
                                 }
                               },
                               "resOpt" : {
@@ -5649,7 +5321,20 @@
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
                             "posOpt" : {
-                              "type" : "None"
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                },
+                                "beginLine" : 48,
+                                "beginColumn" : 17,
+                                "endLine" : 48,
+                                "endColumn" : 24,
+                                "offset" : 1600,
+                                "length" : 7
+                              }
                             }
                           }
                         },
@@ -5658,7 +5343,20 @@
                         "attr" : {
                           "type" : "org.sireum.lang.ast.ResolvedAttr",
                           "posOpt" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 48,
+                              "beginColumn" : 12,
+                              "endLine" : 48,
+                              "endColumn" : 24,
+                              "offset" : 1595,
+                              "length" : 12
+                            }
                           },
                           "resOpt" : {
                             "type" : "None"
@@ -5670,7 +5368,7 @@
                       },
                       "op" : "<=",
                       "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
+                        "type" : "org.sireum.lang.ast.Exp.LitF32",
                         "value" : 100.0,
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
@@ -5685,9 +5383,9 @@
                               "beginLine" : 48,
                               "beginColumn" : 28,
                               "endLine" : 48,
-                              "endColumn" : 33,
-                              "offset" : 1642,
-                              "length" : 5
+                              "endColumn" : 38,
+                              "offset" : 1611,
+                              "length" : 10
                             }
                           }
                         }
@@ -5703,11 +5401,11 @@
                               "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                             },
                             "beginLine" : 48,
-                            "beginColumn" : 28,
+                            "beginColumn" : 12,
                             "endLine" : 48,
-                            "endColumn" : 33,
-                            "offset" : 1642,
-                            "length" : 5
+                            "endColumn" : 38,
+                            "offset" : 1595,
+                            "length" : 26
                           }
                         },
                         "resOpt" : {
@@ -5729,11 +5427,11 @@
                             "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                           },
                           "beginLine" : 47,
-                          "beginColumn" : 27,
+                          "beginColumn" : 12,
                           "endLine" : 48,
-                          "endColumn" : 33,
-                          "offset" : 1606,
-                          "length" : 37
+                          "endColumn" : 38,
+                          "offset" : 1555,
+                          "length" : 66
                         }
                       },
                       "resOpt" : {
@@ -5766,12 +5464,12 @@
                                     "type" : "Some",
                                     "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                   },
-                                  "beginLine" : 42,
-                                  "beginColumn" : 7,
-                                  "endLine" : 42,
-                                  "endColumn" : 31,
-                                  "offset" : 1438,
-                                  "length" : 24
+                                  "beginLine" : 49,
+                                  "beginColumn" : 12,
+                                  "endLine" : 49,
+                                  "endColumn" : 15,
+                                  "offset" : 1637,
+                                  "length" : 3
                                 }
                               }
                             }
@@ -5786,12 +5484,12 @@
                                   "type" : "Some",
                                   "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                 },
-                                "beginLine" : 42,
-                                "beginColumn" : 7,
-                                "endLine" : 42,
-                                "endColumn" : 31,
-                                "offset" : 1438,
-                                "length" : 24
+                                "beginLine" : 49,
+                                "beginColumn" : 12,
+                                "endLine" : 49,
+                                "endColumn" : 15,
+                                "offset" : 1637,
+                                "length" : 3
                               }
                             },
                             "resOpt" : {
@@ -5809,7 +5507,20 @@
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
                           "posOpt" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 49,
+                              "beginColumn" : 16,
+                              "endLine" : 49,
+                              "endColumn" : 23,
+                              "offset" : 1641,
+                              "length" : 7
+                            }
                           }
                         }
                       },
@@ -5818,7 +5529,20 @@
                       "attr" : {
                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                         "posOpt" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 49,
+                            "beginColumn" : 12,
+                            "endLine" : 49,
+                            "endColumn" : 23,
+                            "offset" : 1637,
+                            "length" : 11
+                          }
                         },
                         "resOpt" : {
                           "type" : "None"
@@ -5848,12 +5572,12 @@
                                     "type" : "Some",
                                     "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                   },
-                                  "beginLine" : 43,
-                                  "beginColumn" : 7,
-                                  "endLine" : 43,
-                                  "endColumn" : 32,
-                                  "offset" : 1469,
-                                  "length" : 25
+                                  "beginLine" : 49,
+                                  "beginColumn" : 27,
+                                  "endLine" : 49,
+                                  "endColumn" : 31,
+                                  "offset" : 1652,
+                                  "length" : 4
                                 }
                               }
                             }
@@ -5868,12 +5592,12 @@
                                   "type" : "Some",
                                   "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                                 },
-                                "beginLine" : 43,
-                                "beginColumn" : 7,
-                                "endLine" : 43,
-                                "endColumn" : 32,
-                                "offset" : 1469,
-                                "length" : 25
+                                "beginLine" : 49,
+                                "beginColumn" : 27,
+                                "endLine" : 49,
+                                "endColumn" : 31,
+                                "offset" : 1652,
+                                "length" : 4
                               }
                             },
                             "resOpt" : {
@@ -5891,7 +5615,20 @@
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
                           "posOpt" : {
-                            "type" : "None"
+                            "type" : "Some",
+                            "value" : {
+                              "type" : "Position",
+                              "uriOpt" : {
+                                "type" : "Some",
+                                "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                              },
+                              "beginLine" : 49,
+                              "beginColumn" : 32,
+                              "endLine" : 49,
+                              "endColumn" : 39,
+                              "offset" : 1657,
+                              "length" : 7
+                            }
                           }
                         }
                       },
@@ -5900,7 +5637,20 @@
                       "attr" : {
                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                         "posOpt" : {
-                          "type" : "None"
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                            },
+                            "beginLine" : 49,
+                            "beginColumn" : 27,
+                            "endLine" : 49,
+                            "endColumn" : 39,
+                            "offset" : 1652,
+                            "length" : 12
+                          }
                         },
                         "resOpt" : {
                           "type" : "None"
@@ -5913,7 +5663,20 @@
                     "attr" : {
                       "type" : "org.sireum.lang.ast.ResolvedAttr",
                       "posOpt" : {
-                        "type" : "None"
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                          },
+                          "beginLine" : 49,
+                          "beginColumn" : 12,
+                          "endLine" : 49,
+                          "endColumn" : 39,
+                          "offset" : 1637,
+                          "length" : 27
+                        }
                       },
                       "resOpt" : {
                         "type" : "None"
@@ -5934,11 +5697,11 @@
                           "value" : "\/integration-contracts\/Integration_Contracts.aadl"
                         },
                         "beginLine" : 47,
-                        "beginColumn" : 27,
-                        "endLine" : 48,
-                        "endColumn" : 33,
-                        "offset" : 1606,
-                        "length" : 37
+                        "beginColumn" : 12,
+                        "endLine" : 49,
+                        "endColumn" : 39,
+                        "offset" : 1555,
+                        "length" : 109
                       }
                     },
                     "resOpt" : {

@@ -39,6 +39,7 @@ import org.sireum.aadl.gumbo.gumbo.InvSpec;
 import org.sireum.aadl.gumbo.gumbo.OtherDataRef;
 import org.sireum.aadl.gumbo.gumbo.RealLit;
 import org.sireum.aadl.gumbo.gumbo.SlangLiteralInterp;
+import org.sireum.aadl.gumbo.gumbo.SlangStringLit;
 import org.sireum.aadl.gumbo.gumbo.SpecStatement;
 import org.sireum.aadl.gumbo.gumbo.State;
 import org.sireum.aadl.gumbo.gumbo.StateVarDecl;
@@ -460,15 +461,61 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 	}
 
 	@Override
+	public Boolean caseSlangStringLit(SlangStringLit object) {
+
+		push(Exp.LitString$.MODULE$.apply(GumboUtils.getSlangString(object.getValue()), GumboUtils.buildAttr(object)));
+
+		return false;
+	}
+
+	@Override
 	public Boolean caseSlangLiteralInterp(SlangLiteralInterp object) {
 
 		String[] parts = object.getSli().split("\"");
-		LitString lit = LitString$.MODULE$.apply(parts[1], GumboUtils.buildAttr(object));
 
-		Exp slangExp = StringInterpolate$.MODULE$.apply(parts[0], VisitorUtil.toISZ(lit), VisitorUtil.toISZ(),
-				GumboUtils.buildTypedAttr(object));
+		switch (parts[0]) {
+		case "c":
+			assert parts[1].length() == 1;
 
-		push(slangExp);
+			int c = parts[1].charAt(0);
+			push(Exp.LitC$.MODULE$.apply(c, GumboUtils.buildAttr(object)));
+
+			break;
+		case "string":
+			push(Exp.LitString$.MODULE$.apply(parts[1], GumboUtils.buildAttr(object)));
+
+			break;
+		case "f32":
+			float f32 = Float.parseFloat(parts[1]);
+			push(Exp.LitF32$.MODULE$.apply(f32, GumboUtils.buildAttr(object)));
+
+			break;
+		case "f64":
+			double f64 = Double.parseDouble(parts[1]);
+			push(Exp.LitF64$.MODULE$.apply(f64, GumboUtils.buildAttr(object)));
+
+			break;
+		case "r":
+			scala.math.BigDecimal r = new scala.math.BigDecimal(new java.math.BigDecimal(parts[1]));
+			push(Exp.LitR$.MODULE$.apply(r, GumboUtils.buildAttr(object)));
+
+			break;
+		case "z":
+			Z z = Z.apply(parts[1]).get();
+			push(Exp.LitZ$.MODULE$.apply(z, GumboUtils.buildAttr(object)));
+
+			break;
+		default:
+
+			LitString lit = LitString$.MODULE$.apply(parts[1], GumboUtils.buildAttr(object));
+
+			Exp slangExp = StringInterpolate$.MODULE$.apply(parts[0], VisitorUtil.toISZ(lit), VisitorUtil.toISZ(),
+					GumboUtils.buildTypedAttr(object));
+
+			push(slangExp);
+
+			break;
+		}
 
 		return false;
 	}

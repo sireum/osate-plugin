@@ -40,8 +40,19 @@ public
           (T | T) || ((T & ((!T)) && T));
         inv "V: arith ops":
           2 - 1 - (5 / 5) + (1 * 5) == 5;
+          
+        inv "litInters":
+          (s8"9" > s8"8") && (s16"16" > s16"15") && (s32"32" > s32"31") && (s64"64" > s64"63") && 
+          (u8"9" > u8"8") && (u16"16" > u16"15") && (u32"32" > u32"31") && (u64"64" > u64"63") && 
+          (z"1" > z"0") &&
+          (f32"1.0" > f32"0.0") && (f64"1.0" > f64"0.0") &&
+          (r"1.0" > r"0.0") &&
+          --(c"B" > c"A") && -- FIXME - results in StringLits
+          --(string"bbbbb" != string"aaaaa"); -- FIXME results in StringLits
+          --('B' > 'A') &&
+          ("bbbbb" != "aaaaa");
+          
 
-        -- currently emitted an F32 <op> Z.  Need to convert one to the other first
         --inv "I: Real vs Int":
         --  1.0 >= 0;
         
