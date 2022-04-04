@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.Classifier;
+import org.osate.aadl2.ComponentImplementation;
 import org.osate.aadl2.ComponentType;
 import org.osate.aadl2.DataClassifier;
 import org.osate.aadl2.DataSubcomponent;
@@ -111,6 +112,12 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 		List<Annex> ret = new ArrayList<>();
 
 		List<GumboSubclause> bas = EcoreUtil2.eAllOfType(c, GumboSubclause.class);
+		if (c instanceof ComponentImplementation) {
+			ComponentImplementation ci = (ComponentImplementation) c;
+			bas.addAll(EcoreUtil2.eAllOfType(ci.getType(), GumboSubclause.class));
+		}
+
+		// TODO: change to reporter
 		assert bas.size() <= 1
 				: "Expecting at most one Gumbo clause for " + c.getFullName() + " but found " + bas.size();
 
