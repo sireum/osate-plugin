@@ -28,7 +28,9 @@ import org.sireum.aadl.gumbo.gumbo.BasicExp;
 import org.sireum.aadl.gumbo.gumbo.BooleanLit;
 import org.sireum.aadl.gumbo.gumbo.CaseStatementClause;
 import org.sireum.aadl.gumbo.gumbo.Compute;
+import org.sireum.aadl.gumbo.gumbo.DataElement;
 import org.sireum.aadl.gumbo.gumbo.DataRefExpr;
+import org.sireum.aadl.gumbo.gumbo.EnumLitExpr;
 import org.sireum.aadl.gumbo.gumbo.Expr;
 import org.sireum.aadl.gumbo.gumbo.GuaranteeStatement;
 import org.sireum.aadl.gumbo.gumbo.GumboSubclause;
@@ -471,6 +473,28 @@ public class GumboVisitor extends GumboSwitch<Boolean> implements AnnexVisitor {
 	public Boolean caseSlangStringLit(SlangStringLit object) {
 
 		push(Exp.LitString$.MODULE$.apply(GumboUtils.getSlangString(object.getValue()), GumboUtils.buildAttr(object)));
+
+		return false;
+	}
+
+	@Override
+	public Boolean caseEnumLitExpr(EnumLitExpr object) {
+
+		DataElement de = object.getEnumType();
+		String name = de.getDataElement().getName();
+
+		Option<Position> selectPos = GumboUtils.buildPosInfo(object);
+
+		Option<Position> enumPos = GumboUtils.shrinkPos(selectPos, name.length());
+		Id slangEnumId = Id$.MODULE$.apply(name, GumboUtils.buildAttr(enumPos));
+		Ident slangIdent = Ident$.MODULE$.apply(slangEnumId, GumboUtils.buildResolvedAttr(enumPos));
+
+		Id slangEnumValue = Id$.MODULE$.apply(object.getValue().getValue(), GumboUtils.buildAttr(object.getValue()));
+
+		Select slangSelect = Select$.MODULE$.apply(SlangUtils.toSome(slangIdent), slangEnumValue, VisitorUtil.toISZ(),
+				GumboUtils.buildResolvedAttr(selectPos));
+
+		push(slangSelect);
 
 		return false;
 	}
