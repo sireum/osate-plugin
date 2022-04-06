@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.AnnexSubclause;
-import org.osate.aadl2.ComponentClassifier;
+import org.osate.aadl2.Classifier;
 import org.osate.aadl2.ComponentImplementation;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.ModelUnit;
@@ -45,7 +45,12 @@ public class SmfVisitor implements AnnexVisitor {
 
 	@Override
 	public List<Annex> visit(ComponentInstance root, List<String> path) {
-		Annex a = visitSmfComp(root, path);
+		return visit(root.getComponentClassifier(), path);
+	}
+
+	@Override
+	public List<Annex> visit(Classifier c, List<String> path) {
+		Annex a = visitSmfComp(c, path);
 		if (a != null) {
 			return VisitorUtil.toIList(a);
 		} else {
@@ -53,7 +58,7 @@ public class SmfVisitor implements AnnexVisitor {
 		}
 	}
 
-	public Annex visitSmfComp(ComponentInstance root, List<String> path) {
+	public Annex visitSmfComp(Classifier root, List<String> path) {
 		List<SecModelSubclause> temp = getSecModelSubclause(root);
 		List<SmfClassification> classes = VisitorUtil.iList();
 		List<SmfDeclass> declasses = VisitorUtil.iList();
@@ -139,9 +144,9 @@ public class SmfVisitor implements AnnexVisitor {
 
 	// private findAllModelUnits()
 
-	private List<SecModelSubclause> getSecModelSubclause(ComponentInstance element) {
-		ComponentClassifier cl = element.getComponentClassifier();
-		EList<AnnexSubclause> asc = AnnexUtil.getAllAnnexSubclauses(cl, SecMFPackage.eINSTANCE.getSecModelSubclause());
+	private List<SecModelSubclause> getSecModelSubclause(Classifier element) {
+		EList<AnnexSubclause> asc = AnnexUtil.getAllAnnexSubclauses(element,
+				SecMFPackage.eINSTANCE.getSecModelSubclause());
 		return asc.stream().map(it -> (SecModelSubclause) it).collect(Collectors.toList());
 	}
 

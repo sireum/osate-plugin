@@ -15,7 +15,6 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.LineAndColumn;
 import org.osate.aadl2.AadlPackage;
-import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.annexsupport.AnnexRegistry;
@@ -99,7 +98,7 @@ public class VisitorUtil {
 		return Collections.emptySet();
 	}
 
-	private static String getResourcePath(NamedElement component) {
+	private static String getResourcePath(EObject component) {
 		Resource res = component.eResource();
 		URI uri = res.getURI();
 		IPath path = Util.toIFile(uri).getFullPath();
@@ -110,7 +109,7 @@ public class VisitorUtil {
 		return EcoreUtil.getURI(eobj).toString();
 	}
 
-	public static Position buildPosInfo(NamedElement elem) {
+	public static Position buildPosInfo(EObject elem) {
 
 		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 		EObject obj = elem;

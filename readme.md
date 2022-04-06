@@ -3,14 +3,27 @@
 This repository contains the Sireum [OSATE](http://osate.org) Plugin that translates AADL instance
 models to [AIR](https://github.com/sireum/air) and then to downstream Sireum tools such as [AWAS](https://github.com/sireum/v3-awas).
 
-## Installation for Developers 
+## Installation for Gumbo Developers 
 
 1. Install an [OSATE development environment](http://osate.org/setup-development.html) -- the rest of these instructions
    will refer to this as Eclipse
 
-1. Install [Sireum Kekinian](https://github.com/sireum/kekinian#installing)
+1. Install [Sireum Kekinian](https://github.com/sireum/kekinian#installing), but checkout the dev branch of HAMR codegen
+   
+   ```
+   git clone --recursive https://github.com/sireum/kekinian
+   cd kekinian/hamr/codegen
+   git checkout dev
+   git pull --recurse-submodules
+   cd ../../../
+   kekinian/bin/build.cmd setup  # for non-POSIX shell, prefix with sh
+   ```
 
-1. Clone the repository ``git clone --recurse-submodules git@github.com:sireum/osate-plugin.git``
+1. Clone the gubmo branch of the osate-plugin repository 
+
+   ```
+   git clone --recurse-submodules git@github.com:sireum/osate-plugin.git
+   ```
 
 1. From the command line
 

@@ -21,6 +21,8 @@ public class MenuContributions extends CompoundContributionItem {
 		l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
 				map("org.sireum.commands.launchsireum.generator", Generators.SERIALIZE.toString())));
 
+		l.add(new org.eclipse.jface.action.Separator());
+
 		return l.toArray(new IContributionItem[0]);
 	}
 

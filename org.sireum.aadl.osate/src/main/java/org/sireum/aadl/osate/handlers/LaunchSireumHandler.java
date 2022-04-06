@@ -69,29 +69,4 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			return Status.CANCEL_STATUS;
 		}
 	}
-	/*
-	 * public boolean check(ComponentInstance root) {
-	 * boolean hasErrors = false;
-	 * List<Report> l = Check.check(root);
-	 * if (!l.isEmpty()) {
-	 * String m = "";
-	 * for (Report er : l) {
-	 * hasErrors |= er instanceof ErrorReport;
-	 * String name = ((NamedElement) er.component().eContainer()).getQualifiedName() + "."
-	 * + er.component().getQualifiedName();
-	 * m += name + " : " + er.message() + "\n";
-	 *
-	 * try {
-	 * int severity = er instanceof ErrorReport ? IMarker.SEVERITY_ERROR : IMarker.SEVERITY_WARNING;
-	 * IMarker marker = getIResource(er.component().eResource()).createMarker(IMarker.PROBLEM);
-	 * marker.setAttribute(IMarker.MESSAGE, name + " - " + er.message());
-	 * marker.setAttribute(IMarker.SEVERITY, severity);
-	 * } catch (CoreException exception) {
-	 * exception.printStackTrace();
-	 * }
-	 * }
-	 * }
-	 * return !hasErrors;
-	 * }
-	 */
 }

@@ -3,6 +3,7 @@ package org.sireum.aadl.osate.architecture;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.eclipse.emf.common.util.EList;
+import org.osate.aadl2.Classifier;
 import org.osate.aadl2.DirectionType;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.NamedElement;
@@ -73,6 +75,13 @@ public class Emv2Visitor implements AnnexVisitor {
 	@Override
 	public List<Annex> visit(ComponentInstance root, List<String> path) {
 		return VisitorUtil.toIList(visitEmv2Comp(root, path));
+	}
+
+	@Override
+	public List<Annex> visit(Classifier c, List<String> path) {
+		// annexes are actually attached to classifiers so this really should
+		// be the entrypoint
+		return Collections.emptyList();
 	}
 
 	public Annex visitEmv2Comp(ComponentInstance root, List<String> path) {

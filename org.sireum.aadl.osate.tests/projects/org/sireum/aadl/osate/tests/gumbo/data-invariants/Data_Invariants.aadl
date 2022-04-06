@@ -1,0 +1,115 @@
+package Data_Invariants
+public
+	with Data_Model;
+	with Base_Types;
+	
+  data Temperature
+    properties
+      -- Indicate that the temperature info will be a struct (record)
+      -- For structs, use of the type must refer to the data component implementation (Temperature.i),
+      --  which defines the fields and associated types of the struct.
+      Data_Model::Data_Representation => Struct;
+  end Temperature;
+
+  data implementation Temperature.i
+    subcomponents
+      -- temperature message contains degrees, which is represented using an AADL Base Type
+      -- defined in the AADL Data Modeling annex.
+      degrees: data Base_Types::Float;
+
+    annex GUMBO
+    {**
+      -- data invariant
+      --  data invariants are assumed whenever value of the datatype is consumed
+      --                  and must be proved whenever a value of the data type is constructed
+      invariants
+        inv "Temperature Data Invariant":
+          degrees >= (-459.67); 
+          
+        inv "V: real vs neg real":
+          1.0 >= (-459.67);
+        inv "V: comparing ints":
+          (1 + 1) <= (3 - 1);
+        inv "V: T":
+          T;
+        inv "V: !F":
+          !F;
+        inv "V: mixed":
+          F != ((1 + 1) <= (3 - 1));
+        inv "V: logical ops":
+          (T | T) || ((T & ((!T)) && T));
+        inv "V: arith ops":
+          2 - 1 - (5 / 5) + (1 * 5) == 5;
+          
+        inv "litInters":
+          (s8"9" > s8"8") && (s16"16" > s16"15") && (s32"32" > s32"31") && (s64"64" > s64"63") && 
+          (u8"9" > u8"8") && (u16"16" > u16"15") && (u32"32" > u32"31") && (u64"64" > u64"63") && 
+          (z"1" > z"0") &&
+          (f32"1.0" > f32"0.0") && (f64"1.0" > f64"0.0") &&
+          (r"1.0" > r"0.0") &&
+          --(c"B" > c"A") && -- FIXME - results in StringLits
+          --(string"bbbbb" != string"aaaaa"); -- FIXME results in StringLits
+          --('B' > 'A') &&
+          ("bbbbb" != "aaaaa");
+          
+
+        --inv "I: Real vs Int":
+        --  1.0 >= 0;
+        
+        --inv "I: int expression":
+        --  ((1) + 2);
+        --inv "I: logical op on ints":
+        --  1 and 2;
+        --inv "I: arith op on bools":
+        --  (1 = 1) + true;
+        --inv "I: string lits?":
+        --  "invalid";
+    **};
+  end Temperature.i;
+
+
+ data SetPoint
+        -- Indicate that the set point info will be a struct (record)
+    -- For structs, use of the type must refer to the data component implementation (SetPoint.i),
+    --  which defines the fields and associated types of the struct.
+    properties
+      Data_Model::Data_Representation => Struct;
+  end SetPoint;
+
+  data implementation SetPoint.i
+    subcomponents
+      low: data Temperature.i;
+      high: data Temperature.i;
+      annex GUMBO {**       
+      invariants
+        inv "SetPoint Data Invariant":
+          (low.degrees >= 70.0) &&
+          (high.degrees <= 100.0) &&
+          (low.degrees <= high.degrees);
+      **};
+  end SetPoint.i;
+  
+  system s
+  	
+  end s;
+  
+  system implementation s.impl
+  	subcomponents
+  		p: process p.impl;
+  end s.impl;
+  
+  process p  	
+  end p;
+  
+  process implementation p.impl
+  	subcomponents
+  		t: thread t;
+  end p.impl;
+  
+  thread t
+  	features
+  		setPoint: out data port SetPoint.i;
+  		temp: out data port Temperature.i;
+  end t;
+  
+end Data_Invariants;

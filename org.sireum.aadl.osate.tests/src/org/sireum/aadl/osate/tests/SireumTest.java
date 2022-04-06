@@ -80,7 +80,7 @@ public abstract class SireumTest extends XtextTest {
 				expected = IOUtils.readFile(expectedFile);
 			}
 
-			Assert.assertEquals(ir, expected);
+			Assert.assertEquals(expected, ir);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.assertFalse(true);

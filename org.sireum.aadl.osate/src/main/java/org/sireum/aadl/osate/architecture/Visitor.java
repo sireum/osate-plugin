@@ -71,6 +71,7 @@ import org.sireum.Option;
 import org.sireum.Some;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.hamr.ir.AadlASTJavaFactory;
+import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.message.Position;
 
@@ -100,9 +101,16 @@ public class Visitor {
 			annexVisitors.add(new BAVisitor(this));
 		}
 
-		Bundle gumbo = Platform.getBundle("org.sireum.aadl.gumbo");
+		Bundle gumbo = Platform.getBundle("org.sireum.aadl.osate.gumbo");
 		if (gumbo != null) {
-			annexVisitors.add(new GumboVisitor(this));
+			Class<?> cls = gumbo.loadClass("org.sireum.aadl.osate.gumbo.GumboVisitor");
+			if (AnnexVisitor.class.isAssignableFrom(cls)) {
+				Constructor<?> cons = cls.getConstructor(new Class[] { Visitor.class });
+				annexVisitors.add((AnnexVisitor) cons.newInstance(this));
+			} else {
+				throw new RuntimeException("Could not load GUMBO to AIR plugin: " + cls.getCanonicalName()
+						+ " doesn't implement AnnexVisitor");
+			}
 		}
 
 		Bundle bless = Platform.getBundle("com.multitude.aadl.bless");
@@ -1037,6 +1045,11 @@ public class Visitor {
 				.map(op -> buildProperty(op, VisitorUtil.iList()))
 				.collect(Collectors.toList());
 
+		List<Annex> annexes = new ArrayList<>();
+		for (AnnexVisitor av : annexVisitors) {
+			annexes.addAll(av.visit(f, new ArrayList<>()));
+		}
+
 		// this is a hack as we're sticking something from the declarative
 		// model into a node meant for things from the instance model. Todo
 		// would be to add a declarative model AIR AST and ...
@@ -1049,7 +1062,7 @@ public class Visitor {
 				properties, // properties
 				VisitorUtil.iList(), // flows
 				VisitorUtil.iList(), // modes
-				VisitorUtil.iList(), // annexes
+				annexes, // annexes
 				""
 		);
 		datamap.put(name, c);

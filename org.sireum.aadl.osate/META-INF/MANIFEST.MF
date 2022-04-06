@@ -16,7 +16,6 @@ Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.annexsupport,
  org.sireum.aadl.osate.securitymodel;resolution:=optional,
  org.osate.ba;resolution:=optional,
- org.sireum.aadl.gumbo;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.mylyn.commons.ui;bundle-version="3.24.2"
 Bundle-ActivationPolicy: lazy
 Export-Package: 
@@ -48,6 +47,7 @@ Export-Package:
  org.sireum.hamr.act,
  org.sireum.hamr.arsit,
  org.sireum.hamr.ir,
+ org.sireum.lang.ast,
  org.sireum.logika,
  org.sireum.message,
  org.sireum.ops,

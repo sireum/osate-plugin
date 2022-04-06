@@ -6,9 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.MessageConsole;
@@ -30,6 +36,8 @@ import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.arsit.ArsitBridge;
 import org.sireum.hamr.ir.Aadl;
+import org.sireum.message.Message;
+import org.sireum.message.Position;
 import org.sireum.message.Reporter;
 
 public class LaunchHAMR extends AbstractSireumHandler {
@@ -199,6 +207,19 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									aadlRootDir, //
 									//
 									experimentalOptions);
+
+							// Currently the only way to remove HAMR markers is to resolve the issue
+							// and then run the full HAMR toolchain. The expected approach would be to
+							// do a quick validation check when the resource is saved. That could be
+							// done by:
+							// a) doing all the checking at the OSATE level
+							// b) having a HAMR cli option that just runs the symbol res phase
+							// and then a validation check
+							// For now just making HAMR markers an opt-in feature
+							if (PreferenceValues.HAMR_PROPOGATE_MARKERS.getValue()) {
+								report(reporter, si);
+							}
+
 							return reporter.hasError() ? 1 : 0;
 						});
 
@@ -241,5 +262,75 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		}
 
 		return Status.OK_STATUS;
+	}
+
+	private void clearHamrMarkers(SystemInstance si) {
+		ResourceSet rs = si.eResource().getResourceSet();
+		for (Resource r : rs.getResources()) {
+			IFile i = Util.toIFile(r.getURI());
+			try {
+				i.deleteMarkers(PreferenceValues.HAMR_MARKER_ID, true, IResource.DEPTH_INFINITE);
+			} catch (CoreException e) {
+				// e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Adds any message with position info to the OSATE problems view
+	 * @param reporter
+	 * @param si
+	 */
+	private void report(Reporter reporter, SystemInstance si) {
+		clearHamrMarkers(si);
+
+		for (int i = 0; i < reporter.messages().size().toInt(); i++) {
+			Message m = reporter.messages().apply(SlangUtils.toZ(i));
+
+			if (m.getPosOpt() == null) {
+				System.out.println(
+						"Sireum message's position info is null rather than None.  Please report - " + m.getText());
+			} else if (m.getPosOpt().nonEmpty()) {
+				Position pos = m.getPosOpt().get();
+				if (pos.uriOpt().nonEmpty()) {
+					String uri = "/resource" + pos.uriOpt().get().value();
+
+					Resource r = null;
+					for (Resource cand : si.eResource().getResourceSet().getResources()) {
+						if (cand.getURI().path().equals(uri)) {
+							r = cand;
+							break;
+						}
+					}
+
+					if (r != null) {
+						IFile iresource = Util.toIFile(r.getURI());
+						try {
+							IMarker marker = iresource.createMarker(PreferenceValues.HAMR_MARKER_ID);
+
+							marker.setAttribute(IMarker.MESSAGE, m.getText().toString());
+							if (m.isError()) {
+								marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+								marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+							} else if (m.isWarning()) {
+								marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
+								marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
+							} else {
+								marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_LOW);
+								marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
+							}
+							marker.setAttribute(IMarker.LINE_NUMBER, pos.beginLine().toInt());
+							if (pos.offset().toInt() != 0 && pos.length().toInt() > 0) {
+								marker.setAttribute(IMarker.CHAR_START, pos.offset().toInt());
+								marker.setAttribute(IMarker.CHAR_END, pos.offset().toInt() + pos.length().toInt());
+							}
+
+						} catch (CoreException e) {
+							// e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
 	}
 }

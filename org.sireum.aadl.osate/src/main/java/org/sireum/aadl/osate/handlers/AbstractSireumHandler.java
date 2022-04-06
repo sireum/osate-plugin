@@ -78,8 +78,6 @@ public abstract class AbstractSireumHandler extends AbstractHandler {
 		return getToolName() + " job";
 	}
 
-	protected final String MARKER_TYPE = "org.sireum.hamr.marker";
-
 	protected static IResource getIResource(Resource r) {
 		final URI uri = r.getURI();
 		final IPath path = new Path(uri.toPlatformString(true));
