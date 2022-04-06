@@ -101,9 +101,16 @@ public class Visitor {
 			annexVisitors.add(new BAVisitor(this));
 		}
 
-		Bundle gumbo = Platform.getBundle("org.sireum.aadl.gumbo");
+		Bundle gumbo = Platform.getBundle("org.sireum.aadl.osate.gumbo");
 		if (gumbo != null) {
-			annexVisitors.add(new GumboVisitor(this));
+			Class<?> cls = gumbo.loadClass("org.sireum.aadl.osate.gumbo.GumboVisitor");
+			if (AnnexVisitor.class.isAssignableFrom(cls)) {
+				Constructor<?> cons = cls.getConstructor(new Class[] { Visitor.class });
+				annexVisitors.add((AnnexVisitor) cons.newInstance(this));
+			} else {
+				throw new RuntimeException("Could not load GUMBO to AIR plugin: " + cls.getCanonicalName()
+						+ " doesn't implement AnnexVisitor");
+			}
 		}
 
 		Bundle bless = Platform.getBundle("com.multitude.aadl.bless");
