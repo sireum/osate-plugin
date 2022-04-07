@@ -101,9 +101,10 @@ public class Visitor {
 			annexVisitors.add(new BAVisitor(this));
 		}
 
-		Bundle gumbo = Platform.getBundle("org.sireum.aadl.osate.gumbo");
-		if (gumbo != null) {
-			Class<?> cls = gumbo.loadClass("org.sireum.aadl.osate.gumbo.GumboVisitor");
+		Bundle gumbo = Platform.getBundle("org.sireum.aadl.gumbo");
+		Bundle gumbo2air = Platform.getBundle("org.sireum.aadl.osate.gumbo2air");
+		if (gumbo != null && gumbo2air != null) {
+			Class<?> cls = gumbo2air.loadClass("org.sireum.aadl.osate.gumbo2air.GumboVisitor");
 			if (AnnexVisitor.class.isAssignableFrom(cls)) {
 				Constructor<?> cons = cls.getConstructor(new Class[] { Visitor.class });
 				annexVisitors.add((AnnexVisitor) cons.newInstance(this));
