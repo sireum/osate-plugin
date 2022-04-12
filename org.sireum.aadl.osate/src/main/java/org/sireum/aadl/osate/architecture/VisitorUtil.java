@@ -144,8 +144,8 @@ public class VisitorUtil {
 			if (defaultannex != null) {
 				node = NodeModelUtils.findActualNodeFor(obj);
 				if (node != null) {
-					return factory.flatPos(getResourcePath(elem), node.getStartLine(), node.getOffset(),
-							node.getEndLine(), node.getEndOffset(), node.getOffset(), node.getLength());
+					return factory.flatPos(getResourcePath(elem), node.getTotalStartLine(), node.getOffset(),
+							node.getTotalEndLine(), node.getEndOffset(), node.getOffset(), node.getLength());
 				}
 			}
 		}
