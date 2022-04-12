@@ -15,12 +15,12 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.LineAndColumn;
 import org.osate.aadl2.AadlPackage;
+import org.osate.aadl2.AnnexLibrary;
+import org.osate.aadl2.AnnexSubclause;
 import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.annexsupport.AnnexRegistry;
 import org.osate.annexsupport.AnnexTextPositionResolverRegistry;
-import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelLibrary;
-import org.osate.xtext.aadl2.errormodel.errorModel.ErrorModelSubclause;
 import org.sireum.IS;
 import org.sireum.IS$;
 import org.sireum.aadl.osate.util.Util;
@@ -123,9 +123,10 @@ public class VisitorUtil {
 			int startOffset = node.getOffset();
 			int endOffset = node.getEndOffset();
 			INode rnode = node.getRootNode();
-			if (rnode.getSemanticElement() != null && (rnode.getSemanticElement() instanceof ErrorModelLibrary
-					|| rnode.getSemanticElement() instanceof ErrorModelSubclause)) {
 
+			if (rnode.getSemanticElement() != null && //
+					(rnode.getSemanticElement() instanceof AnnexLibrary
+							|| rnode.getSemanticElement() instanceof AnnexSubclause)) {
 				AadlPackage pack = AadlUtil.getContainingPackage(node.getRootNode().getSemanticElement());
 				INode ccNode = NodeModelUtils.findActualNodeFor(pack);
 				rnode = ccNode.getRootNode();
@@ -143,8 +144,8 @@ public class VisitorUtil {
 			if (defaultannex != null) {
 				node = NodeModelUtils.findActualNodeFor(obj);
 				if (node != null) {
-					return factory.flatPos(getResourcePath(elem), node.getTotalStartLine(), node.getOffset(),
-							node.getTotalEndLine(), node.getEndOffset(), node.getOffset(), node.getLength());
+					return factory.flatPos(getResourcePath(elem), node.getStartLine(), node.getOffset(),
+							node.getEndLine(), node.getEndOffset(), node.getOffset(), node.getLength());
 				}
 			}
 		}

@@ -86,7 +86,7 @@ public
   				assume "setPoint Range":
   					(setPoint.low.degrees >= 40.0) && (setPoint.high.degrees <= 110.0);
  			initialize
-				--modifies currentSetPoint;
+				modifies currentSetPoint
 				guarantee "defaultSetPoint":
 					(currentSetPoint.low.degrees == 70.0) && (currentSetPoint.high.degrees == 80.0);
   		**}; 			
