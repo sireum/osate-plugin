@@ -333,27 +333,134 @@
                     ],
                     "invariants" : [
                     ],
-                    "initializes" : [
-                      {
-                        "type" : "GclGuarantee",
-                        "name" : "defaultSetPoint",
-                        "exp" : {
-                          "type" : "org.sireum.lang.ast.Exp.Binary",
-                          "left" : {
-                            "type" : "org.sireum.lang.ast.Exp.Binary",
-                            "left" : {
-                              "type" : "org.sireum.lang.ast.Exp.Select",
-                              "receiverOpt" : {
+                    "initializes" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "GclInitialize",
+                        "modifies" : [
+                          {
+                            "type" : "org.sireum.lang.ast.Exp.Ident",
+                            "id" : {
+                              "type" : "org.sireum.lang.ast.Id",
+                              "value" : "currentSetPoint",
+                              "attr" : {
+                                "type" : "org.sireum.lang.ast.Attr",
+                                "posOpt" : {
+                                  "type" : "Some",
+                                  "value" : {
+                                    "type" : "Position",
+                                    "uriOpt" : {
+                                      "type" : "Some",
+                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                    },
+                                    "beginLine" : 89,
+                                    "beginColumn" : 14,
+                                    "endLine" : 89,
+                                    "endColumn" : 29,
+                                    "offset" : 2544,
+                                    "length" : 15
+                                  }
+                                }
+                              }
+                            },
+                            "attr" : {
+                              "type" : "org.sireum.lang.ast.ResolvedAttr",
+                              "posOpt" : {
                                 "type" : "Some",
                                 "value" : {
+                                  "type" : "Position",
+                                  "uriOpt" : {
+                                    "type" : "Some",
+                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                  },
+                                  "beginLine" : 89,
+                                  "beginColumn" : 14,
+                                  "endLine" : 89,
+                                  "endColumn" : 29,
+                                  "offset" : 2544,
+                                  "length" : 15
+                                }
+                              },
+                              "resOpt" : {
+                                "type" : "None"
+                              },
+                              "typedOpt" : {
+                                "type" : "None"
+                              }
+                            }
+                          }
+                        ],
+                        "guarantees" : [
+                          {
+                            "type" : "GclGuarantee",
+                            "name" : "defaultSetPoint",
+                            "exp" : {
+                              "type" : "org.sireum.lang.ast.Exp.Binary",
+                              "left" : {
+                                "type" : "org.sireum.lang.ast.Exp.Binary",
+                                "left" : {
                                   "type" : "org.sireum.lang.ast.Exp.Select",
                                   "receiverOpt" : {
                                     "type" : "Some",
                                     "value" : {
-                                      "type" : "org.sireum.lang.ast.Exp.Ident",
+                                      "type" : "org.sireum.lang.ast.Exp.Select",
+                                      "receiverOpt" : {
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "org.sireum.lang.ast.Exp.Ident",
+                                          "id" : {
+                                            "type" : "org.sireum.lang.ast.Id",
+                                            "value" : "currentSetPoint",
+                                            "attr" : {
+                                              "type" : "org.sireum.lang.ast.Attr",
+                                              "posOpt" : {
+                                                "type" : "Some",
+                                                "value" : {
+                                                  "type" : "Position",
+                                                  "uriOpt" : {
+                                                    "type" : "Some",
+                                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                                  },
+                                                  "beginLine" : 91,
+                                                  "beginColumn" : 7,
+                                                  "endLine" : 91,
+                                                  "endColumn" : 22,
+                                                  "offset" : 2599,
+                                                  "length" : 15
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "attr" : {
+                                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                                            "posOpt" : {
+                                              "type" : "Some",
+                                              "value" : {
+                                                "type" : "Position",
+                                                "uriOpt" : {
+                                                  "type" : "Some",
+                                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                                },
+                                                "beginLine" : 91,
+                                                "beginColumn" : 7,
+                                                "endLine" : 91,
+                                                "endColumn" : 22,
+                                                "offset" : 2599,
+                                                "length" : 15
+                                              }
+                                            },
+                                            "resOpt" : {
+                                              "type" : "None"
+                                            },
+                                            "typedOpt" : {
+                                              "type" : "None"
+                                            }
+                                          }
+                                        }
+                                      },
                                       "id" : {
                                         "type" : "org.sireum.lang.ast.Id",
-                                        "value" : "currentSetPoint",
+                                        "value" : "low",
                                         "attr" : {
                                           "type" : "org.sireum.lang.ast.Attr",
                                           "posOpt" : {
@@ -365,15 +472,17 @@
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
                                               "beginLine" : 91,
-                                              "beginColumn" : 7,
+                                              "beginColumn" : 23,
                                               "endLine" : 91,
-                                              "endColumn" : 22,
-                                              "offset" : 2602,
-                                              "length" : 15
+                                              "endColumn" : 34,
+                                              "offset" : 2615,
+                                              "length" : 11
                                             }
                                           }
                                         }
                                       },
+                                      "targs" : [
+                                      ],
                                       "attr" : {
                                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                                         "posOpt" : {
@@ -387,9 +496,9 @@
                                             "beginLine" : 91,
                                             "beginColumn" : 7,
                                             "endLine" : 91,
-                                            "endColumn" : 22,
-                                            "offset" : 2602,
-                                            "length" : 15
+                                            "endColumn" : 34,
+                                            "offset" : 2599,
+                                            "length" : 27
                                           }
                                         },
                                         "resOpt" : {
@@ -403,7 +512,7 @@
                                   },
                                   "id" : {
                                     "type" : "org.sireum.lang.ast.Id",
-                                    "value" : "low",
+                                    "value" : "degrees",
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
@@ -415,11 +524,11 @@
                                             "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                           },
                                           "beginLine" : 91,
-                                          "beginColumn" : 23,
+                                          "beginColumn" : 27,
                                           "endLine" : 91,
                                           "endColumn" : 34,
-                                          "offset" : 2618,
-                                          "length" : 11
+                                          "offset" : 2619,
+                                          "length" : 7
                                         }
                                       }
                                     }
@@ -440,7 +549,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 91,
                                         "endColumn" : 34,
-                                        "offset" : 2602,
+                                        "offset" : 2599,
                                         "length" : 27
                                       }
                                     },
@@ -451,13 +560,33 @@
                                       "type" : "None"
                                     }
                                   }
-                                }
-                              },
-                              "id" : {
-                                "type" : "org.sireum.lang.ast.Id",
-                                "value" : "degrees",
+                                },
+                                "op" : "==",
+                                "right" : {
+                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "value" : 70.0,
+                                  "attr" : {
+                                    "type" : "org.sireum.lang.ast.Attr",
+                                    "posOpt" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 91,
+                                        "beginColumn" : 38,
+                                        "endLine" : 91,
+                                        "endColumn" : 42,
+                                        "offset" : 2630,
+                                        "length" : 4
+                                      }
+                                    }
+                                  }
+                                },
                                 "attr" : {
-                                  "type" : "org.sireum.lang.ast.Attr",
+                                  "type" : "org.sireum.lang.ast.ResolvedAttr",
                                   "posOpt" : {
                                     "type" : "Some",
                                     "value" : {
@@ -467,109 +596,87 @@
                                         "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
                                       "beginLine" : 91,
-                                      "beginColumn" : 27,
+                                      "beginColumn" : 7,
                                       "endLine" : 91,
-                                      "endColumn" : 34,
-                                      "offset" : 2622,
-                                      "length" : 7
+                                      "endColumn" : 42,
+                                      "offset" : 2599,
+                                      "length" : 35
                                     }
-                                  }
-                                }
-                              },
-                              "targs" : [
-                              ],
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.ResolvedAttr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
-                                    },
-                                    "beginLine" : 91,
-                                    "beginColumn" : 7,
-                                    "endLine" : 91,
-                                    "endColumn" : 34,
-                                    "offset" : 2602,
-                                    "length" : 27
-                                  }
-                                },
-                                "resOpt" : {
-                                  "type" : "None"
-                                },
-                                "typedOpt" : {
-                                  "type" : "None"
-                                }
-                              }
-                            },
-                            "op" : "==",
-                            "right" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 70.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
-                                    },
-                                    "beginLine" : 91,
-                                    "beginColumn" : 38,
-                                    "endLine" : 91,
-                                    "endColumn" : 42,
-                                    "offset" : 2633,
-                                    "length" : 4
-                                  }
-                                }
-                              }
-                            },
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.ResolvedAttr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                   },
-                                  "beginLine" : 91,
-                                  "beginColumn" : 7,
-                                  "endLine" : 91,
-                                  "endColumn" : 42,
-                                  "offset" : 2602,
-                                  "length" : 35
+                                  "resOpt" : {
+                                    "type" : "None"
+                                  },
+                                  "typedOpt" : {
+                                    "type" : "None"
+                                  }
                                 }
                               },
-                              "resOpt" : {
-                                "type" : "None"
-                              },
-                              "typedOpt" : {
-                                "type" : "None"
-                              }
-                            }
-                          },
-                          "op" : "&&",
-                          "right" : {
-                            "type" : "org.sireum.lang.ast.Exp.Binary",
-                            "left" : {
-                              "type" : "org.sireum.lang.ast.Exp.Select",
-                              "receiverOpt" : {
-                                "type" : "Some",
-                                "value" : {
+                              "op" : "&&",
+                              "right" : {
+                                "type" : "org.sireum.lang.ast.Exp.Binary",
+                                "left" : {
                                   "type" : "org.sireum.lang.ast.Exp.Select",
                                   "receiverOpt" : {
                                     "type" : "Some",
                                     "value" : {
-                                      "type" : "org.sireum.lang.ast.Exp.Ident",
+                                      "type" : "org.sireum.lang.ast.Exp.Select",
+                                      "receiverOpt" : {
+                                        "type" : "Some",
+                                        "value" : {
+                                          "type" : "org.sireum.lang.ast.Exp.Ident",
+                                          "id" : {
+                                            "type" : "org.sireum.lang.ast.Id",
+                                            "value" : "currentSetPoint",
+                                            "attr" : {
+                                              "type" : "org.sireum.lang.ast.Attr",
+                                              "posOpt" : {
+                                                "type" : "Some",
+                                                "value" : {
+                                                  "type" : "Position",
+                                                  "uriOpt" : {
+                                                    "type" : "Some",
+                                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                                  },
+                                                  "beginLine" : 91,
+                                                  "beginColumn" : 48,
+                                                  "endLine" : 91,
+                                                  "endColumn" : 63,
+                                                  "offset" : 2640,
+                                                  "length" : 15
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "attr" : {
+                                            "type" : "org.sireum.lang.ast.ResolvedAttr",
+                                            "posOpt" : {
+                                              "type" : "Some",
+                                              "value" : {
+                                                "type" : "Position",
+                                                "uriOpt" : {
+                                                  "type" : "Some",
+                                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                                },
+                                                "beginLine" : 91,
+                                                "beginColumn" : 48,
+                                                "endLine" : 91,
+                                                "endColumn" : 63,
+                                                "offset" : 2640,
+                                                "length" : 15
+                                              }
+                                            },
+                                            "resOpt" : {
+                                              "type" : "None"
+                                            },
+                                            "typedOpt" : {
+                                              "type" : "None"
+                                            }
+                                          }
+                                        }
+                                      },
                                       "id" : {
                                         "type" : "org.sireum.lang.ast.Id",
-                                        "value" : "currentSetPoint",
+                                        "value" : "high",
                                         "attr" : {
                                           "type" : "org.sireum.lang.ast.Attr",
                                           "posOpt" : {
@@ -581,15 +688,17 @@
                                                 "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                               },
                                               "beginLine" : 91,
-                                              "beginColumn" : 48,
+                                              "beginColumn" : 64,
                                               "endLine" : 91,
-                                              "endColumn" : 63,
-                                              "offset" : 2643,
-                                              "length" : 15
+                                              "endColumn" : 76,
+                                              "offset" : 2656,
+                                              "length" : 12
                                             }
                                           }
                                         }
                                       },
+                                      "targs" : [
+                                      ],
                                       "attr" : {
                                         "type" : "org.sireum.lang.ast.ResolvedAttr",
                                         "posOpt" : {
@@ -603,9 +712,9 @@
                                             "beginLine" : 91,
                                             "beginColumn" : 48,
                                             "endLine" : 91,
-                                            "endColumn" : 63,
-                                            "offset" : 2643,
-                                            "length" : 15
+                                            "endColumn" : 76,
+                                            "offset" : 2640,
+                                            "length" : 28
                                           }
                                         },
                                         "resOpt" : {
@@ -619,7 +728,7 @@
                                   },
                                   "id" : {
                                     "type" : "org.sireum.lang.ast.Id",
-                                    "value" : "high",
+                                    "value" : "degrees",
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
                                       "posOpt" : {
@@ -631,11 +740,11 @@
                                             "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                           },
                                           "beginLine" : 91,
-                                          "beginColumn" : 64,
+                                          "beginColumn" : 69,
                                           "endLine" : 91,
                                           "endColumn" : 76,
-                                          "offset" : 2659,
-                                          "length" : 12
+                                          "offset" : 2661,
+                                          "length" : 7
                                         }
                                       }
                                     }
@@ -656,7 +765,7 @@
                                         "beginColumn" : 48,
                                         "endLine" : 91,
                                         "endColumn" : 76,
-                                        "offset" : 2643,
+                                        "offset" : 2640,
                                         "length" : 28
                                       }
                                     },
@@ -667,13 +776,33 @@
                                       "type" : "None"
                                     }
                                   }
-                                }
-                              },
-                              "id" : {
-                                "type" : "org.sireum.lang.ast.Id",
-                                "value" : "degrees",
+                                },
+                                "op" : "==",
+                                "right" : {
+                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "value" : 80.0,
+                                  "attr" : {
+                                    "type" : "org.sireum.lang.ast.Attr",
+                                    "posOpt" : {
+                                      "type" : "Some",
+                                      "value" : {
+                                        "type" : "Position",
+                                        "uriOpt" : {
+                                          "type" : "Some",
+                                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                        },
+                                        "beginLine" : 91,
+                                        "beginColumn" : 80,
+                                        "endLine" : 91,
+                                        "endColumn" : 84,
+                                        "offset" : 2672,
+                                        "length" : 4
+                                      }
+                                    }
+                                  }
+                                },
                                 "attr" : {
-                                  "type" : "org.sireum.lang.ast.Attr",
+                                  "type" : "org.sireum.lang.ast.ResolvedAttr",
                                   "posOpt" : {
                                     "type" : "Some",
                                     "value" : {
@@ -683,17 +812,21 @@
                                         "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                       },
                                       "beginLine" : 91,
-                                      "beginColumn" : 69,
+                                      "beginColumn" : 48,
                                       "endLine" : 91,
-                                      "endColumn" : 76,
-                                      "offset" : 2664,
-                                      "length" : 7
+                                      "endColumn" : 84,
+                                      "offset" : 2640,
+                                      "length" : 36
                                     }
+                                  },
+                                  "resOpt" : {
+                                    "type" : "None"
+                                  },
+                                  "typedOpt" : {
+                                    "type" : "None"
                                   }
                                 }
                               },
-                              "targs" : [
-                              ],
                               "attr" : {
                                 "type" : "org.sireum.lang.ast.ResolvedAttr",
                                 "posOpt" : {
@@ -705,11 +838,11 @@
                                       "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
                                     },
                                     "beginLine" : 91,
-                                    "beginColumn" : 48,
+                                    "beginColumn" : 7,
                                     "endLine" : 91,
-                                    "endColumn" : 76,
-                                    "offset" : 2643,
-                                    "length" : 28
+                                    "endColumn" : 84,
+                                    "offset" : 2599,
+                                    "length" : 77
                                   }
                                 },
                                 "resOpt" : {
@@ -719,85 +852,11 @@
                                   "type" : "None"
                                 }
                               }
-                            },
-                            "op" : "==",
-                            "right" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
-                              "value" : 80.0,
-                              "attr" : {
-                                "type" : "org.sireum.lang.ast.Attr",
-                                "posOpt" : {
-                                  "type" : "Some",
-                                  "value" : {
-                                    "type" : "Position",
-                                    "uriOpt" : {
-                                      "type" : "Some",
-                                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
-                                    },
-                                    "beginLine" : 91,
-                                    "beginColumn" : 80,
-                                    "endLine" : 91,
-                                    "endColumn" : 84,
-                                    "offset" : 2675,
-                                    "length" : 4
-                                  }
-                                }
-                              }
-                            },
-                            "attr" : {
-                              "type" : "org.sireum.lang.ast.ResolvedAttr",
-                              "posOpt" : {
-                                "type" : "Some",
-                                "value" : {
-                                  "type" : "Position",
-                                  "uriOpt" : {
-                                    "type" : "Some",
-                                    "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
-                                  },
-                                  "beginLine" : 91,
-                                  "beginColumn" : 48,
-                                  "endLine" : 91,
-                                  "endColumn" : 84,
-                                  "offset" : 2643,
-                                  "length" : 36
-                                }
-                              },
-                              "resOpt" : {
-                                "type" : "None"
-                              },
-                              "typedOpt" : {
-                                "type" : "None"
-                              }
-                            }
-                          },
-                          "attr" : {
-                            "type" : "org.sireum.lang.ast.ResolvedAttr",
-                            "posOpt" : {
-                              "type" : "Some",
-                              "value" : {
-                                "type" : "Position",
-                                "uriOpt" : {
-                                  "type" : "Some",
-                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
-                                },
-                                "beginLine" : 91,
-                                "beginColumn" : 7,
-                                "endLine" : 91,
-                                "endColumn" : 84,
-                                "offset" : 2602,
-                                "length" : 77
-                              }
-                            },
-                            "resOpt" : {
-                              "type" : "None"
-                            },
-                            "typedOpt" : {
-                              "type" : "None"
                             }
                           }
-                        }
+                        ]
                       }
-                    ],
+                    },
                     "integration" : {
                       "type" : "Some",
                       "value" : {
@@ -1711,7 +1770,7 @@
                         "beginColumn" : 5,
                         "endLine" : 97,
                         "endColumn" : 52,
-                        "offset" : 2753,
+                        "offset" : 2750,
                         "length" : 47
                       }
                     }
@@ -1882,8 +1941,9 @@
                     ],
                     "invariants" : [
                     ],
-                    "initializes" : [
-                    ],
+                    "initializes" : {
+                      "type" : "None"
+                    },
                     "integration" : {
                       "type" : "Some",
                       "value" : {
@@ -1919,7 +1979,7 @@
                                               "beginColumn" : 9,
                                               "endLine" : 105,
                                               "endColumn" : 20,
-                                              "offset" : 2974,
+                                              "offset" : 2971,
                                               "length" : 11
                                             }
                                           }
@@ -1939,7 +1999,7 @@
                                             "beginColumn" : 9,
                                             "endLine" : 105,
                                             "endColumn" : 20,
-                                            "offset" : 2974,
+                                            "offset" : 2971,
                                             "length" : 11
                                           }
                                         },
@@ -1969,7 +2029,7 @@
                                           "beginColumn" : 21,
                                           "endLine" : 105,
                                           "endColumn" : 28,
-                                          "offset" : 2986,
+                                          "offset" : 2983,
                                           "length" : 7
                                         }
                                       }
@@ -1991,7 +2051,7 @@
                                         "beginColumn" : 9,
                                         "endLine" : 105,
                                         "endColumn" : 28,
-                                        "offset" : 2974,
+                                        "offset" : 2971,
                                         "length" : 19
                                       }
                                     },
@@ -2027,7 +2087,7 @@
                                           "beginColumn" : 34,
                                           "endLine" : 105,
                                           "endColumn" : 38,
-                                          "offset" : 2999,
+                                          "offset" : 2996,
                                           "length" : 4
                                         }
                                       }
@@ -2047,7 +2107,7 @@
                                         "beginColumn" : 33,
                                         "endLine" : 105,
                                         "endColumn" : 38,
-                                        "offset" : 2998,
+                                        "offset" : 2995,
                                         "length" : 5
                                       }
                                     },
@@ -2073,7 +2133,7 @@
                                       "beginColumn" : 9,
                                       "endLine" : 105,
                                       "endColumn" : 38,
-                                      "offset" : 2974,
+                                      "offset" : 2971,
                                       "length" : 29
                                     }
                                   },
@@ -2111,7 +2171,7 @@
                                               "beginColumn" : 45,
                                               "endLine" : 105,
                                               "endColumn" : 56,
-                                              "offset" : 3010,
+                                              "offset" : 3007,
                                               "length" : 11
                                             }
                                           }
@@ -2131,7 +2191,7 @@
                                             "beginColumn" : 45,
                                             "endLine" : 105,
                                             "endColumn" : 56,
-                                            "offset" : 3010,
+                                            "offset" : 3007,
                                             "length" : 11
                                           }
                                         },
@@ -2161,7 +2221,7 @@
                                           "beginColumn" : 57,
                                           "endLine" : 105,
                                           "endColumn" : 64,
-                                          "offset" : 3022,
+                                          "offset" : 3019,
                                           "length" : 7
                                         }
                                       }
@@ -2183,7 +2243,7 @@
                                         "beginColumn" : 45,
                                         "endLine" : 105,
                                         "endColumn" : 64,
-                                        "offset" : 3010,
+                                        "offset" : 3007,
                                         "length" : 19
                                       }
                                     },
@@ -2213,7 +2273,7 @@
                                         "beginColumn" : 68,
                                         "endLine" : 105,
                                         "endColumn" : 73,
-                                        "offset" : 3033,
+                                        "offset" : 3030,
                                         "length" : 5
                                       }
                                     }
@@ -2233,7 +2293,7 @@
                                       "beginColumn" : 45,
                                       "endLine" : 105,
                                       "endColumn" : 73,
-                                      "offset" : 3010,
+                                      "offset" : 3007,
                                       "length" : 28
                                     }
                                   },
@@ -2259,7 +2319,7 @@
                                     "beginColumn" : 9,
                                     "endLine" : 105,
                                     "endColumn" : 73,
-                                    "offset" : 2974,
+                                    "offset" : 2971,
                                     "length" : 64
                                   }
                                 },
@@ -2347,7 +2407,7 @@
                           "beginColumn" : 5,
                           "endLine" : 97,
                           "endColumn" : 52,
-                          "offset" : 2753,
+                          "offset" : 2750,
                           "length" : 47
                         }
                       }
@@ -2498,7 +2558,7 @@
                         "beginColumn" : 5,
                         "endLine" : 97,
                         "endColumn" : 52,
-                        "offset" : 2753,
+                        "offset" : 2750,
                         "length" : 47
                       }
                     }
@@ -4693,8 +4753,9 @@
                 }
               }
             ],
-            "initializes" : [
-            ],
+            "initializes" : {
+              "type" : "None"
+            },
             "integration" : {
               "type" : "None"
             },
@@ -5038,8 +5099,9 @@
                     }
                   }
                 ],
-                "initializes" : [
-                ],
+                "initializes" : {
+                  "type" : "None"
+                },
                 "integration" : {
                   "type" : "None"
                 },
@@ -5360,8 +5422,9 @@
                     }
                   }
                 ],
-                "initializes" : [
-                ],
+                "initializes" : {
+                  "type" : "None"
+                },
                 "integration" : {
                   "type" : "None"
                 },
@@ -6048,8 +6111,9 @@
                 }
               }
             ],
-            "initializes" : [
-            ],
+            "initializes" : {
+              "type" : "None"
+            },
             "integration" : {
               "type" : "None"
             },

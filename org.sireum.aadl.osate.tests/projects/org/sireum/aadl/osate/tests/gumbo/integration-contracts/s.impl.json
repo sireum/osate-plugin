@@ -328,8 +328,9 @@
                     ],
                     "invariants" : [
                     ],
-                    "initializes" : [
-                    ],
+                    "initializes" : {
+                      "type" : "None"
+                    },
                     "integration" : {
                       "type" : "Some",
                       "value" : {
@@ -1382,8 +1383,9 @@
                     ],
                     "invariants" : [
                     ],
-                    "initializes" : [
-                    ],
+                    "initializes" : {
+                      "type" : "None"
+                    },
                     "integration" : {
                       "type" : "Some",
                       "value" : {
@@ -4227,8 +4229,9 @@
                 }
               }
             ],
-            "initializes" : [
-            ],
+            "initializes" : {
+              "type" : "None"
+            },
             "integration" : {
               "type" : "None"
             },
@@ -4638,8 +4641,9 @@
                     }
                   }
                 ],
-                "initializes" : [
-                ],
+                "initializes" : {
+                  "type" : "None"
+                },
                 "integration" : {
                   "type" : "None"
                 },
@@ -5026,8 +5030,9 @@
                     }
                   }
                 ],
-                "initializes" : [
-                ],
+                "initializes" : {
+                  "type" : "None"
+                },
                 "integration" : {
                   "type" : "None"
                 },
@@ -5714,8 +5719,9 @@
                 }
               }
             ],
-            "initializes" : [
-            ],
+            "initializes" : {
+              "type" : "None"
+            },
             "integration" : {
               "type" : "None"
             },

@@ -5398,8 +5398,9 @@
                 }
               }
             ],
-            "initializes" : [
-            ],
+            "initializes" : {
+              "type" : "None"
+            },
             "integration" : {
               "type" : "None"
             },
@@ -8771,8 +8772,9 @@
                     }
                   }
                 ],
-                "initializes" : [
-                ],
+                "initializes" : {
+                  "type" : "None"
+                },
                 "integration" : {
                   "type" : "None"
                 },
@@ -12121,8 +12123,9 @@
                     }
                   }
                 ],
-                "initializes" : [
-                ],
+                "initializes" : {
+                  "type" : "None"
+                },
                 "integration" : {
                   "type" : "None"
                 },
@@ -12809,8 +12812,9 @@
                 }
               }
             ],
-            "initializes" : [
-            ],
+            "initializes" : {
+              "type" : "None"
+            },
             "integration" : {
               "type" : "None"
             },
