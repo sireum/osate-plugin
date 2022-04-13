@@ -27,7 +27,7 @@ models to [AIR](https://github.com/sireum/air) and then to downstream Sireum too
 1. Enter the path to the directory where you cloned the repository and then select all the 
    available projects from the project listings and click *__Finish__*.
 
-1. Navigate to *__Window -> Preferences -> Java -> Installed JREs__*.  Select the JRE that is checked (probably '*jre (default)*') 
+1. Navigate to *__Preferences -> Java -> Installed JREs__*.  Select the JRE that is checked (probably '*jre (default)*') 
    and then click *__Edit...__*.  If you launch Eclipse from the command line (ie. it will inherit your environment variables) then 
    add ``-ea -Dorg.sireum.home=${env_var:SIREUM_HOME}`` to *__Default VM arguments__*, otherwise add ``-ea -Dorg.sireum.home=<path-to-sireum-home>``.
    Click *__Finish__* then *__Apply and Close__*.
