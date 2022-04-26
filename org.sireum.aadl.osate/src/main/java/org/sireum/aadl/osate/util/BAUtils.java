@@ -27,7 +27,7 @@ public class BAUtils {
 
 		return SlangUtils.toSome(factory.flatPos(abr.getFilename(), //
 				abr.getLine(), //
-				abr.getColumn(),//
+				abr.getColumn(), //
 
 				abr.getLine(), // FIXME
 				abr.getColumn(), // FIXME
@@ -110,6 +110,13 @@ public class BAUtils {
 		} //
 		else if (binaryOp.equalsIgnoreCase(">=")) {
 			return BTSBinaryOp.byName("GTE").get();
+		}
+		// BRL literals for operator in Expression
+		else if (binaryOp.equalsIgnoreCase("implies")) {
+			return BTSBinaryOp.byName("IMPLIES").get();
+		} //
+		else if (binaryOp.equalsIgnoreCase("iff")) {
+			return BTSBinaryOp.byName("IFF").get();
 		} //
 
 		// TODO: does BA have short circuit versions?
