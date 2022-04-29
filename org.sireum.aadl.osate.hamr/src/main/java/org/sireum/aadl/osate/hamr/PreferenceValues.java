@@ -51,7 +51,7 @@ public class PreferenceValues {
 			"HAMR_SERIALIZE_AIR_OPT", //
 			"Serialize AIR to JSON (non-compact) when generating code", //
 			Optional.empty(), //
-			true);
+			false);
 
 	public static final StringOption HAMR_AIR_OUTPUT_FOLDER_OPT = new StringOption(//
 			"HAMR_AIR_OUTPUT_FOLDER_OPT", //

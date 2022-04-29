@@ -32,10 +32,9 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 		addField(PreferenceValues.HAMR_VERBOSE_OPT.getEditor(comp));
 
-		addField(PreferenceValues.HAMR_SERIALIZE_AIR_OPT.getEditor(comp));
-
 		addField(PreferenceValues.HAMR_PROPOGATE_MARKERS.getEditor(comp));
 
+		addField(PreferenceValues.HAMR_SERIALIZE_AIR_OPT.getEditor(comp));
 		addField(PreferenceValues.HAMR_AIR_OUTPUT_FOLDER_OPT.getEditor(comp));
 
 
