@@ -82,7 +82,7 @@ public class PreferenceValues {
 			"Display HAMR issues in OSATE", //
 			Optional.of(
 					"Converts HAMR messages that contain position information into OSATE markers (e.g. populates the Problems View)"), //
-			false);
+			true);
 
 	public static String sireumCVC4() {
 		String shome = System.getProperty("org.sireum.home");
