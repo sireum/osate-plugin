@@ -39,6 +39,7 @@ public class ApiUtil {
 					clsBool, // noProyekIve
 					clsBool, // noEmbedArt
 					clsBool, // devicesAsThreads
+					clsBool, // genSbtMill
 					//
 					clsIS, // slangAuxCodeDir
 					clsOption, // slangOutputCDirectory
