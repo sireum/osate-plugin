@@ -16,6 +16,18 @@ public class PreferenceValues {
 
 	public static final String PLUGIN_ID = "HAMR";
 
+	public static final BoolOption HAMR_GEN_SBT_MILL_OPT = new BoolOption(//
+			"HAMR_GEN_SBT_MILL_OPT", //
+			"Generate SBT and Mill projects in addition to Proyek", //
+			Optional.empty(), //
+			false);
+
+	public static final BoolOption HAMR_RUN_PROYEK_IVE_OPT = new BoolOption(//
+			"HAMR_RUN_PROYEK_IVE_OPT", //
+			"Generate IVE project", //
+			Optional.of("Generate IVE/IntelliJ IDEA project using Proyek IVE"), //
+			true);
+
 	public static final BoolOption HAMR_DEVICES_AS_THREADS_OPT = new BoolOption(//
 			"HAMR_DEVICES_AS_THREADS_OPT", //
 			"Treat AADL devices as threads", //
@@ -51,12 +63,6 @@ public class PreferenceValues {
 			"HAMR_VERBOSE_OPT", //
 			"Verbose Output", //
 			Optional.empty(), //
-			true);
-
-	public static final BoolOption HAMR_RUN_PROYEK_IVE_OPT = new BoolOption(//
-			"HAMR_RUN_PROYEK_IVE_OPT", //
-			"Generate IVE project", //
-			Optional.of("Generate IVE project using Proyek IVE"), //
 			true);
 
 	public static final BoolOption HAMR_PROOF_GENERATE = new BoolOption(//

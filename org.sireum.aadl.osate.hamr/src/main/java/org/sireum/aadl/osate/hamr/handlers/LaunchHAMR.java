@@ -154,6 +154,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue();
 							boolean noEmbedArt = !PreferenceValues.HAMR_EMBED_ART_OPT.getValue();
 							boolean devicesAsThreads = PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getValue();
+							boolean genSbtMill = PreferenceValues.HAMR_GEN_SBT_MILL_OPT.getValue();
 							IS<Z, org.sireum.String> slangAuxCodeDirs = prompt.getOptionCAuxSourceDirectory().equals("")
 									? VisitorUtil.toISZ()
 									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionCAuxSourceDirectory()));
@@ -193,6 +194,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									noProyekIve, //
 									noEmbedArt, //
 									devicesAsThreads, //
+									genSbtMill, //
 									//
 									slangAuxCodeDirs, //
 									slangOutputCDirectory, //

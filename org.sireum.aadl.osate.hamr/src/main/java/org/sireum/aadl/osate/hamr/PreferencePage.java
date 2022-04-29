@@ -47,11 +47,13 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		seGroup.setText("Slang-Embedded Options");
 		seGroup.setLayoutData(new GridData(SWT.FILL, SWT.LEFT, true, false, 3, 1));
 
+		addField(PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getEditor(seGroup));
+
+		addField(PreferenceValues.HAMR_GEN_SBT_MILL_OPT.getEditor(seGroup));
+
 		addField(PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getEditor(seGroup));
 
 		addField(PreferenceValues.HAMR_EMBED_ART_OPT.getEditor(seGroup));
-
-		addField(PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getEditor(seGroup));
 
 		addField(PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getEditor(seGroup));
 
