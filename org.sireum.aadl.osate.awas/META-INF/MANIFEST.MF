@@ -5,30 +5,24 @@ Bundle-SymbolicName: org.sireum.aadl.osate.awas;singleton:=true
 Bundle-Version: 1.2022.01051723.qualifier
 Bundle-Activator: org.sireum.aadl.osate.awas.Activator
 Require-Bundle: org.osate.aadl2,
+ org.osate.ui,
  org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.eclipse.ui.console;bundle-version="3.7.1",
- org.sireum.aadl.osate;bundle-version="1.0.2007301421",
- org.osate.pluginsupport,
- org.eclipse.ui,
- org.osate.ge,
- org.osate.ge.diagram;bundle-version="2.0.1",
+ org.sireum.aadl.osate,
  org.eclipse.core.expressions,
- org.eclipse.core.commands,
- org.osate.ui,
- org.osate.ge.gef;bundle-version="1.0.0",
- org.osate.ge.gef.ui;bundle-version="1.0.0",
- org.eclipse.gef.common;bundle-version="5.0.1",
- org.eclipse.ui.views.properties.tabbed;bundle-version="3.9.100"
+ org.eclipse.core.commands
 Automatic-Module-Name: Awas
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  lib/awas.jar,
  bin/,
- external:$SIREUM_JAR$
-Import-Package: org.osate.ge.diagram,
+ external:$org.sireum.home$/bin/sireum.jar
+Import-Package: org.osate.ge,
+ org.osate.ge.diagram,
  org.osate.ge.gef,
  org.osate.ge.gef.ui.editor,
- org.osate.pluginsupport
+ org.osate.pluginsupport,
+ org.eclipse.ui.views.properties.tabbed
 Export-Package: org.sireum.aadl.osate.awas.util,
  org.sireum.awas.AADLBridge,
  org.sireum.awas.AliranAman,
