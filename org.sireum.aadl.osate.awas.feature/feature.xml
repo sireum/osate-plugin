@@ -36,16 +36,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
    <requires>
       <import plugin="org.osate.aadl2"/>
+      <import plugin="org.osate.ui"/>
       <import plugin="org.osate.xtext.aadl2.ui" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.console" version="3.7.1" match="greaterOrEqual"/>
       <import plugin="org.sireum.aadl.osate" version="1.2022.01051723" match="greaterOrEqual"/>
-      <import plugin="org.osate.pluginsupport"/>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.osate.ge"/>
-      <import plugin="org.osate.ge.diagram" version="2.0.1" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.expressions"/>
       <import plugin="org.eclipse.core.commands"/>
-      <import plugin="org.osate.ui"/>
+      <import plugin="org.osate.ge"/>
+      <import plugin="org.osate.ge.diagram" version="2.0.1" match="greaterOrEqual"/>
+      <import plugin="org.osate.pluginsupport"/>
+      <import plugin="org.osate.ge.gef"/>
+      <import plugin="org.osate.ge.gef.ui"/>
+      <import plugin="org.eclipse.ui.views.properties.tabbed"/>
    </requires>
 
    <plugin
