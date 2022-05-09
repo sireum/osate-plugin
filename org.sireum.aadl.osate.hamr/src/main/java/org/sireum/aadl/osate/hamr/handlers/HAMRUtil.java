@@ -71,8 +71,6 @@ public class HAMRUtil {
 		return p.replaceAll("-", "_");
 	}
 
-	private final static HAMRUtil inst = new HAMRUtil();
-
 	abstract class Report {
 		String kind;
 		NamedElement component;

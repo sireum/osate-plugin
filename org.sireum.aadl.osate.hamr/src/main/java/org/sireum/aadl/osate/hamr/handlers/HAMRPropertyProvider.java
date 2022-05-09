@@ -88,18 +88,18 @@ public class HAMRPropertyProvider {
 	}
 
 	public static int getDefaultBitWidthFromElement(NamedElement ne) {
-		return new Long(HAMRPropertyProvider.getIntegerValue(ne, HAMRPropertyProvider.PROP_HAMR__DEFAULT_BIT_WIDTH,
+		return Long.valueOf(HAMRPropertyProvider.getIntegerValue(ne, HAMRPropertyProvider.PROP_HAMR__DEFAULT_BIT_WIDTH,
 				HAMRPropertyProvider.DEFAULT_BIT_WIDTH)).intValue();
 	}
 
 	public static int getDefaultMaxSequenceSizeFromElement(NamedElement ne) {
-		return new Long(
+		return Long.valueOf(
 				HAMRPropertyProvider.getIntegerValue(ne, HAMRPropertyProvider.PROP_HAMR__DEFAULT_MAX_SEQUENCE_SIZE,
 						HAMRPropertyProvider.DEFAULT_MAX_SEQUENCE_SIZE)).intValue();
 	}
 
 	public static int getDefaultMaxStringSizeFromElement(NamedElement ne) {
-		return new Long(HAMRPropertyProvider.getIntegerValue(ne, HAMRPropertyProvider.PROP_HAMR__MAX_STRING_SIZE,
+		return Long.valueOf(HAMRPropertyProvider.getIntegerValue(ne, HAMRPropertyProvider.PROP_HAMR__MAX_STRING_SIZE,
 				HAMRPropertyProvider.DEFAULT_MAX_STRING_SIZE)).intValue();
 	}
 }

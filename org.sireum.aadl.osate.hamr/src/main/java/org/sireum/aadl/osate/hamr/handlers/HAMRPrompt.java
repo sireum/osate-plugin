@@ -795,7 +795,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			} else if (c instanceof Combo) {
 				return org.sireum.Some$.MODULE$.apply(((Combo) c).getText());
 			} else if (c instanceof Button) {
-				return org.sireum.Some$.MODULE$.apply(new Boolean(((Button) c).getSelection()).toString());
+				return org.sireum.Some$.MODULE$.apply(Boolean.valueOf(((Button) c).getSelection()).toString());
 			}
 		}
 		return org.sireum.None.apply();
@@ -803,7 +803,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	private Option<Integer> getIntFromControl(HAMROption key) {
 		try {
-			return org.sireum.Some$.MODULE$.apply(new Integer(getStringFromControl(key).get()));
+			return org.sireum.Some$.MODULE$.apply(Integer.valueOf(getStringFromControl(key).get()));
 		} catch (Exception nfe) {
 		}
 		return org.sireum.None.apply();
@@ -811,7 +811,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	private Option<Boolean> getBooleanFromControl(HAMROption key) {
 		try {
-			return org.sireum.Some$.MODULE$.apply(new Boolean(getStringFromControl(key).get()));
+			return org.sireum.Some$.MODULE$.apply(Boolean.valueOf(getStringFromControl(key).get()));
 		} catch (Exception nfe) {
 		}
 		return org.sireum.None.apply();
