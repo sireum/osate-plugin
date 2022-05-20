@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +41,17 @@ public class IOUtils {
 	}
 
 	public static void writeFile(File f, String str) {
-		try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(f.toURI()))) {
-			writer.write(str);
-			System.out.println("Wrote: " + f);
-		} catch (IOException e) {
+		try {
+			Path path = Paths.get(f.toURI());
+			Files.createDirectories(path.getParent());
+			try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+				writer.write(str);
+				System.out.println("Wrote: " + f);
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(1);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -86,11 +94,10 @@ public class IOUtils {
 
 		List<File> ret = new ArrayList<>();
 		for (File f : root.listFiles()) {
-			if (f.isFile()
-					&& (st == SearchType.STARTS_WITH ? f.getName().startsWith(str) : //
-							(st == SearchType.ENDS_WITH ? f.getName().endsWith(str) : //
-									(st == SearchType.CONTAINS ? f.getName().contains(str) : //
-											(st == SearchType.EQUALS ? f.getName().equals(str) : false))))) {
+			if (f.isFile() && (st == SearchType.STARTS_WITH ? f.getName().startsWith(str) : //
+					(st == SearchType.ENDS_WITH ? f.getName().endsWith(str) : //
+							(st == SearchType.CONTAINS ? f.getName().contains(str) : //
+									(st == SearchType.EQUALS ? f.getName().equals(str) : false))))) {
 				ret.add(f);
 			} else if (f.isDirectory() && recursive) {
 				ret.addAll(collectFiles(f, str, recursive, st));
