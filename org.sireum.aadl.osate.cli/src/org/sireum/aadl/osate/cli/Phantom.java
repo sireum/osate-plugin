@@ -158,8 +158,7 @@ public class Phantom implements IApplication {
 		boolean userProvided = po.getProjects().nonEmpty() && po.getMain().nonEmpty() && po.getImpl().nonEmpty();
 
 		if ((userProvided == po.getArgs().nonEmpty()) // XOR, only one should be true
-				||
-				(po.getArgs().nonEmpty()
+				|| (po.getArgs().nonEmpty()
 						&& (po.getProjects().nonEmpty() || po.getMain().nonEmpty() || po.getImpl().nonEmpty()))) {
 
 			addError("Either point to a directory or supply the required options\n");
@@ -168,7 +167,6 @@ public class Phantom implements IApplication {
 
 			return 1;
 		}
-
 
 		AadlSystem system = null;
 
@@ -215,14 +213,25 @@ public class Phantom implements IApplication {
 			system = systems.get(0);
 		}
 
-		// Slang enum's type def nested inside a Slang object don't seem to be
-		// accessible via Eclipse jdt
-		boolean toJson = po.getMode().name().equals("Json");
-
 		File outputFile = po.getOutput().nonEmpty() ? new File(po.getOutput().get().string()) : null;
 
-		SerializerType st = toJson ? SerializerType.JSON : SerializerType.MSG_PACK;
-		String ext = toJson ? ".json" : ".msgpack";
+		String ext = ".json";
+		SerializerType st = null;
+		switch (po.getMode().name()) {
+		case "Json":
+			st = SerializerType.JSON;
+			break;
+		case "Json_compact":
+			st = SerializerType.JSON_COMPACT;
+			break;
+		case "Msgpack":
+			st = SerializerType.MSG_PACK;
+			ext = ".msgpack";
+			break;
+		default:
+			addError("Invalid serializer type: " + po.getMode().name());
+			return 1;
+		}
 
 		SystemInstance instance = getSystemInstance(system, rs);
 
