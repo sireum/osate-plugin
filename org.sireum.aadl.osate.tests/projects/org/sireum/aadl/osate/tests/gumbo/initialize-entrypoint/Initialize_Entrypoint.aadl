@@ -23,7 +23,7 @@ public
       --  data invariants are assumed whenever value of the datatype is consumed
       --                  and must be proved whenever a value of the data type is constructed
       invariants
-        inv "Temperature Data Invariant":
+        inv i1 "Temperature Data Invariant":
           degrees >= (-459.67); 
     **};
   end Temperature.i;
@@ -43,7 +43,7 @@ public
       high: data Temperature.i;
       annex GUMBO {**       
       invariants
-        inv "SetPoint Data Invariant":
+        inv i1 "SetPoint Data Invariant":
           (low.degrees >= 70.0) &&
           (high.degrees <= 100.0) &&
           (low.degrees <= high.degrees);
@@ -81,13 +81,13 @@ public
 			state
 				currentSetPoint: SetPoint.i;
   			integration
-  				assume "currentTemp Range":
+  				assume i1 "currentTemp Range":
   					(currentTemp.degrees >= (-70.0)) && (currentTemp.degrees <= 180.0);
-  				assume "setPoint Range":
+  				assume a1 "setPoint Range":
   					(setPoint.low.degrees >= 40.0) && (setPoint.high.degrees <= 110.0);
  			initialize
-				modifies currentSetPoint
-				guarantee "defaultSetPoint":
+				modifies currentSetPoint;
+				guarantee g1 "defaultSetPoint":
 					(currentSetPoint.low.degrees == 70.0) && (currentSetPoint.high.degrees == 80.0);
   		**}; 			
   end TempControl;
@@ -101,7 +101,7 @@ public
 	annex
   		gumbo {**
   			integration
-  				guarantee "currentTemp Range":
+  				guarantee g1 "currentTemp Range":
   					(currentTemp.degrees >= (-70.0)) && (currentTemp.degrees <= 180.0);
   					
 				--assume "INVALID: must use guarantee for outgoing ports":

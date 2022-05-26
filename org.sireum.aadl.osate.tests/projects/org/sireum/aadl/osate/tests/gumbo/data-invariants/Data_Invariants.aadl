@@ -23,25 +23,25 @@ public
       --  data invariants are assumed whenever value of the datatype is consumed
       --                  and must be proved whenever a value of the data type is constructed
       invariants
-        inv "Temperature Data Invariant":
+        inv i1 "Temperature Data Invariant" :
           degrees >= (-459.67); 
           
-        inv "V: real vs neg real":
+        inv i2 "V: real vs neg real":
           1.0 >= (-459.67);
-        inv "V: comparing ints":
+        inv i3 "V: comparing ints":
           (1 + 1) <= (3 - 1);
-        inv "V: T":
+        inv i4 "V: T":
           T;
-        inv "V: !F":
+        inv i5 "V: !F":
           !F;
-        inv "V: mixed":
+        inv i6 "V: mixed":
           F != ((1 + 1) <= (3 - 1));
-        inv "V: logical ops":
+        inv i7 "V: logical ops":
           (T | T) || ((T & ((!T)) && T));
-        inv "V: arith ops":
+        inv i8 "V: arith ops":
           2 - 1 - (5 / 5) + (1 * 5) == 5;
           
-        inv "litInters":
+        inv i9 "litInters":
           (s8"9" > s8"8") && (s16"16" > s16"15") && (s32"32" > s32"31") && (s64"64" > s64"63") && 
           (u8"9" > u8"8") && (u16"16" > u16"15") && (u32"32" > u32"31") && (u64"64" > u64"63") && 
           (z"1" > z"0") &&
@@ -53,16 +53,16 @@ public
           ("bbbbb" != "aaaaa");
           
 
-        --inv "I: Real vs Int":
+        --inv i10 "I: Real vs Int":
         --  1.0 >= 0;
         
-        --inv "I: int expression":
+        --inv i11 "I: int expression":
         --  ((1) + 2);
-        --inv "I: logical op on ints":
+        --inv i12 "I: logical op on ints":
         --  1 and 2;
-        --inv "I: arith op on bools":
+        --inv i13 "I: arith op on bools":
         --  (1 = 1) + true;
-        --inv "I: string lits?":
+        --inv i14 "I: string lits?":
         --  "invalid";
     **};
   end Temperature.i;
@@ -82,7 +82,7 @@ public
       high: data Temperature.i;
       annex GUMBO {**       
       invariants
-        inv "SetPoint Data Invariant":
+        inv i1 "SetPoint Data Invariant":
           (low.degrees >= 70.0) &&
           (high.degrees <= 100.0) &&
           (low.degrees <= high.degrees);
