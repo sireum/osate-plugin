@@ -278,6 +278,7 @@ public class Phantom implements IApplication {
 
 		addInfo("Sireum Version: " + SireumApi.version());
 
+		Reporter reporter = org.sireum.message.Reporter$.MODULE$.create();
 		int ret = 0;
 		if (f.getName().equals(".project") || f.getName().startsWith(".system")) {
 			List<AadlSystem> systems = AadlProjectUtil.findSystems(f);
@@ -295,12 +296,12 @@ public class Phantom implements IApplication {
 				ret = 1;
 			} else {
 				Aadl model = Util.getAir(si, true);
-				Reporter reporter = org.sireum.cli.HAMR.codeGenReporter(model, ho);
+				org.sireum.cli.HAMR.codeGenReporter(model, ho, reporter);
 				ret = reporter.hasError() ? 1 : 0;
 			}
 		} else {
 			// assume it's a serialized AIR file
-			ret = org.sireum.cli.HAMR.codeGen(ho).toInt();
+			ret = org.sireum.cli.HAMR.codeGen(ho, reporter).toInt();
 		}
 
 		addInfo("HAMR Codegen was " + ((ret != 0) ? "un" : "") + "succesful");

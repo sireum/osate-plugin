@@ -27,7 +27,8 @@ public class ApiUtil {
 			Class<?> clsOption = Class.forName("org.sireum.Option");
 			Class<?> clsIS = Class.forName("org.sireum.IS");
 			Class<?> clsZ = Class.forName("org.sireum.Z");
-
+			Class<?> clsReporter = Class.forName("org.sireum.message.Reporter");
+			
 			Method m = clsHAMR.getMethod("codeGenR", //
 					clsAadl, // model
 					//
@@ -53,12 +54,13 @@ public class ApiUtil {
 					clsIS, // camkesAuxCodeDirs
 					clsOption, // aadlRootDir
 					//
-					clsIS // experimentalOptions
+					clsIS, // experimentalOptions
+					//
+					clsReporter // reporter
 			);
 
-			Class<?> reporter = Class.forName("org.sireum.message.Reporter");
-			if (m.getReturnType() != reporter) {
-				throw new NoSuchMethodException("Expecting HAMR's cli to return a " + reporter.getName()
+			if (m.getReturnType() != clsZ) {
+				throw new NoSuchMethodException("Expecting HAMR's cli to return " + clsZ.getName()
 						+ " but it's returning a " + m.getReturnType().getName());
 			}
 			return true;

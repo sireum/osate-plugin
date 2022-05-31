@@ -183,7 +183,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
 
-							Reporter reporter = org.sireum.cli.HAMR.codeGenR( //
+							Reporter reporter = org.sireum.message.Reporter$.MODULE$.create();
+							Z codegenRet = org.sireum.cli.HAMR.codeGenR( //
 									model, //
 									//
 									verbose, //
@@ -208,7 +209,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									camkesAuxCodeDirs, //
 									aadlRootDir, //
 									//
-									experimentalOptions);
+									experimentalOptions,
+
+									reporter);
 
 							// Currently the only way to remove HAMR markers is to resolve the issue
 							// and then run the full HAMR toolchain. The expected approach would be to
@@ -222,7 +225,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								report(reporter, si);
 							}
 
-							return reporter.hasError() ? 1 : 0;
+							return codegenRet.toInt();
 						});
 
 						if (toolRet == 0 && PreferenceValues.HAMR_PROOF_GENERATE.getValue()
