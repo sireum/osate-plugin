@@ -393,7 +393,11 @@
                         "guarantees" : [
                           {
                             "type" : "GclGuarantee",
-                            "name" : "defaultSetPoint",
+                            "id" : "g1",
+                            "descriptor" : {
+                              "type" : "Some",
+                              "value" : "defaultSetPoint"
+                            },
                             "exp" : {
                               "type" : "org.sireum.lang.ast.Exp.Binary",
                               "left" : {
@@ -864,7 +868,11 @@
                         "specs" : [
                           {
                             "type" : "GclAssume",
-                            "name" : "currentTemp Range",
+                            "id" : "i1",
+                            "descriptor" : {
+                              "type" : "Some",
+                              "value" : "currentTemp Range"
+                            },
                             "exp" : {
                               "type" : "org.sireum.lang.ast.Exp.Binary",
                               "left" : {
@@ -1247,7 +1255,11 @@
                           },
                           {
                             "type" : "GclAssume",
-                            "name" : "setPoint Range",
+                            "id" : "a1",
+                            "descriptor" : {
+                              "type" : "Some",
+                              "value" : "setPoint Range"
+                            },
                             "exp" : {
                               "type" : "org.sireum.lang.ast.Exp.Binary",
                               "left" : {
@@ -1951,7 +1963,11 @@
                         "specs" : [
                           {
                             "type" : "GclGuarantee",
-                            "name" : "currentTemp Range",
+                            "id" : "g1",
+                            "descriptor" : {
+                              "type" : "Some",
+                              "value" : "currentTemp Range"
+                            },
                             "exp" : {
                               "type" : "org.sireum.lang.ast.Exp.Binary",
                               "left" : {
@@ -4615,7 +4631,11 @@
             "invariants" : [
               {
                 "type" : "GclInvariant",
-                "name" : "Temperature Data Invariant",
+                "id" : "i1",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "Temperature Data Invariant"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
@@ -4961,7 +4981,11 @@
                 "invariants" : [
                   {
                     "type" : "GclInvariant",
-                    "name" : "Temperature Data Invariant",
+                    "id" : "i1",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "Temperature Data Invariant"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -5284,7 +5308,11 @@
                 "invariants" : [
                   {
                     "type" : "GclInvariant",
-                    "name" : "Temperature Data Invariant",
+                    "id" : "i1",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "Temperature Data Invariant"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -5489,7 +5517,11 @@
             "invariants" : [
               {
                 "type" : "GclInvariant",
-                "name" : "SetPoint Data Invariant",
+                "id" : "i1",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "SetPoint Data Invariant"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {

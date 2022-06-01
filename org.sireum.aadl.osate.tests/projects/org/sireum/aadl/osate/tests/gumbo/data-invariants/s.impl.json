@@ -2232,7 +2232,11 @@
             "invariants" : [
               {
                 "type" : "GclInvariant",
-                "name" : "Temperature Data Invariant",
+                "id" : "i1",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "Temperature Data Invariant"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
@@ -2371,7 +2375,11 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "V: real vs neg real",
+                "id" : "i2",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "V: real vs neg real"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
@@ -2482,7 +2490,11 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "V: comparing ints",
+                "id" : "i3",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "V: comparing ints"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
@@ -2665,7 +2677,11 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "V: T",
+                "id" : "i4",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "V: T"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.LitB",
                   "value" : true,
@@ -2692,7 +2708,11 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "V: !F",
+                "id" : "i5",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "V: !F"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Unary",
                   "op" : {
@@ -2751,7 +2771,11 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "V: mixed",
+                "id" : "i6",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "V: mixed"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
@@ -2986,7 +3010,11 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "V: logical ops",
+                "id" : "i7",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "V: logical ops"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
@@ -3253,7 +3281,11 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "V: arith ops",
+                "id" : "i8",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "V: arith ops"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
@@ -3592,7 +3624,11 @@
               },
               {
                 "type" : "GclInvariant",
-                "name" : "litInters",
+                "id" : "i9",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "litInters"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
@@ -5606,7 +5642,11 @@
                 "invariants" : [
                   {
                     "type" : "GclInvariant",
-                    "name" : "Temperature Data Invariant",
+                    "id" : "i1",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "Temperature Data Invariant"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -5745,7 +5785,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: real vs neg real",
+                    "id" : "i2",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: real vs neg real"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -5856,7 +5900,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: comparing ints",
+                    "id" : "i3",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: comparing ints"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -6039,7 +6087,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: T",
+                    "id" : "i4",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: T"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.LitB",
                       "value" : true,
@@ -6066,7 +6118,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: !F",
+                    "id" : "i5",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: !F"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Unary",
                       "op" : {
@@ -6125,7 +6181,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: mixed",
+                    "id" : "i6",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: mixed"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -6360,7 +6420,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: logical ops",
+                    "id" : "i7",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: logical ops"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -6627,7 +6691,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: arith ops",
+                    "id" : "i8",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: arith ops"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -6966,7 +7034,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "litInters",
+                    "id" : "i9",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "litInters"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -8957,7 +9029,11 @@
                 "invariants" : [
                   {
                     "type" : "GclInvariant",
-                    "name" : "Temperature Data Invariant",
+                    "id" : "i1",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "Temperature Data Invariant"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -9096,7 +9172,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: real vs neg real",
+                    "id" : "i2",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: real vs neg real"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -9207,7 +9287,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: comparing ints",
+                    "id" : "i3",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: comparing ints"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -9390,7 +9474,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: T",
+                    "id" : "i4",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: T"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.LitB",
                       "value" : true,
@@ -9417,7 +9505,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: !F",
+                    "id" : "i5",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: !F"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Unary",
                       "op" : {
@@ -9476,7 +9568,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: mixed",
+                    "id" : "i6",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: mixed"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -9711,7 +9807,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: logical ops",
+                    "id" : "i7",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: logical ops"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -9978,7 +10078,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "V: arith ops",
+                    "id" : "i8",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "V: arith ops"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -10317,7 +10421,11 @@
                   },
                   {
                     "type" : "GclInvariant",
-                    "name" : "litInters",
+                    "id" : "i9",
+                    "descriptor" : {
+                      "type" : "Some",
+                      "value" : "litInters"
+                    },
                     "exp" : {
                       "type" : "org.sireum.lang.ast.Exp.Binary",
                       "left" : {
@@ -12190,7 +12298,11 @@
             "invariants" : [
               {
                 "type" : "GclInvariant",
-                "name" : "SetPoint Data Invariant",
+                "id" : "i1",
+                "descriptor" : {
+                  "type" : "Some",
+                  "value" : "SetPoint Data Invariant"
+                },
                 "exp" : {
                   "type" : "org.sireum.lang.ast.Exp.Binary",
                   "left" : {
