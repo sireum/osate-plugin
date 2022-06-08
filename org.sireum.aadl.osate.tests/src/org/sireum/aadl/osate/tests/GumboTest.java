@@ -28,6 +28,11 @@ public class GumboTest extends SireumTest {
 		lexecute("initialize-entrypoint", "Initialize_Entrypoint.aadl", "s.impl");
 	}
 
+	@Test
+	public void enum_test() {
+		lexecute("enum-test", "Enum_Test.aadl", "s.impl");
+	}
+
 	void lexecute(String dirName, String sysFilename, String sysImplName) {
 		execute(new File(ROOT_DIR, dirName), sysFilename, sysImplName);
 	}

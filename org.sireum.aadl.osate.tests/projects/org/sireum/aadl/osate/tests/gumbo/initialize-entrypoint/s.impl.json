@@ -328,7 +328,23 @@
                       {
                         "type" : "GclStateVar",
                         "name" : "currentSetPoint",
-                        "classifier" : "Initialize_Entrypoint::SetPoint.i"
+                        "classifier" : "Initialize_Entrypoint::SetPoint.i",
+                        "posOpt" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                            },
+                            "beginLine" : 82,
+                            "beginColumn" : 5,
+                            "endLine" : 82,
+                            "endColumn" : 33,
+                            "offset" : 2261,
+                            "length" : 28
+                          }
+                        }
                       }
                     ],
                     "invariants" : [
