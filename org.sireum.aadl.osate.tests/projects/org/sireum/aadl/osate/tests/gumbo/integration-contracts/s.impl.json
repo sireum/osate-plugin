@@ -689,6 +689,22 @@
                                   "type" : "None"
                                 }
                               }
+                            },
+                            "posOpt" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                },
+                                "beginLine" : 82,
+                                "beginColumn" : 7,
+                                "endLine" : 83,
+                                "endColumn" : 82,
+                                "offset" : 2288,
+                                "length" : 112
+                              }
                             }
                           },
                           {
@@ -1155,6 +1171,22 @@
                                 "typedOpt" : {
                                   "type" : "None"
                                 }
+                              }
+                            },
+                            "posOpt" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                },
+                                "beginLine" : 84,
+                                "beginColumn" : 7,
+                                "endLine" : 85,
+                                "endColumn" : 85,
+                                "offset" : 2407,
+                                "length" : 112
                               }
                             }
                           }
@@ -1751,6 +1783,22 @@
                                 "typedOpt" : {
                                   "type" : "None"
                                 }
+                              }
+                            },
+                            "posOpt" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                                },
+                                "beginLine" : 107,
+                                "beginColumn" : 7,
+                                "endLine" : 108,
+                                "endColumn" : 82,
+                                "offset" : 3101,
+                                "length" : 115
                               }
                             }
                           }
@@ -4242,6 +4290,22 @@
                       "type" : "None"
                     }
                   }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                    },
+                    "beginLine" : 26,
+                    "beginColumn" : 9,
+                    "endLine" : 27,
+                    "endColumn" : 37,
+                    "offset" : 909,
+                    "length" : 73
+                  }
                 }
               }
             ],
@@ -4658,6 +4722,22 @@
                           "type" : "None"
                         }
                       }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 26,
+                        "beginColumn" : 9,
+                        "endLine" : 27,
+                        "endColumn" : 37,
+                        "offset" : 909,
+                        "length" : 73
+                      }
                     }
                   }
                 ],
@@ -5050,6 +5130,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                        },
+                        "beginLine" : 26,
+                        "beginColumn" : 9,
+                        "endLine" : 27,
+                        "endColumn" : 37,
+                        "offset" : 909,
+                        "length" : 73
                       }
                     }
                   }
@@ -5743,6 +5839,22 @@
                     "typedOpt" : {
                       "type" : "None"
                     }
+                  }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/integration-contracts\/Integration_Contracts.aadl"
+                    },
+                    "beginLine" : 46,
+                    "beginColumn" : 9,
+                    "endLine" : 49,
+                    "endColumn" : 41,
+                    "offset" : 1516,
+                    "length" : 156
                   }
                 }
               }

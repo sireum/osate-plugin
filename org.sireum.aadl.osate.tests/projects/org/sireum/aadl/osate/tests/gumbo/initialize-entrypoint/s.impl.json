@@ -872,6 +872,22 @@
                                   "type" : "None"
                                 }
                               }
+                            },
+                            "posOpt" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                },
+                                "beginLine" : 90,
+                                "beginColumn" : 5,
+                                "endLine" : 91,
+                                "endColumn" : 86,
+                                "offset" : 2577,
+                                "length" : 117
+                              }
                             }
                           }
                         ]
@@ -1266,6 +1282,22 @@
                                 "typedOpt" : {
                                   "type" : "None"
                                 }
+                              }
+                            },
+                            "posOpt" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                },
+                                "beginLine" : 84,
+                                "beginColumn" : 7,
+                                "endLine" : 85,
+                                "endColumn" : 75,
+                                "offset" : 2313,
+                                "length" : 105
                               }
                             }
                           },
@@ -1733,6 +1765,22 @@
                                 "typedOpt" : {
                                   "type" : "None"
                                 }
+                              }
+                            },
+                            "posOpt" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                },
+                                "beginLine" : 86,
+                                "beginColumn" : 7,
+                                "endLine" : 87,
+                                "endColumn" : 75,
+                                "offset" : 2425,
+                                "length" : 102
                               }
                             }
                           }
@@ -2361,6 +2409,22 @@
                                 "typedOpt" : {
                                   "type" : "None"
                                 }
+                              }
+                            },
+                            "posOpt" : {
+                              "type" : "Some",
+                              "value" : {
+                                "type" : "Position",
+                                "uriOpt" : {
+                                  "type" : "Some",
+                                  "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                                },
+                                "beginLine" : 104,
+                                "beginColumn" : 7,
+                                "endLine" : 105,
+                                "endColumn" : 75,
+                                "offset" : 2948,
+                                "length" : 108
                               }
                             }
                           }
@@ -4786,6 +4850,22 @@
                       "type" : "None"
                     }
                   }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                    },
+                    "beginLine" : 26,
+                    "beginColumn" : 9,
+                    "endLine" : 27,
+                    "endColumn" : 32,
+                    "offset" : 906,
+                    "length" : 68
+                  }
                 }
               }
             ],
@@ -5136,6 +5216,22 @@
                           "type" : "None"
                         }
                       }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                        },
+                        "beginLine" : 26,
+                        "beginColumn" : 9,
+                        "endLine" : 27,
+                        "endColumn" : 32,
+                        "offset" : 906,
+                        "length" : 68
+                      }
                     }
                   }
                 ],
@@ -5462,6 +5558,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                        },
+                        "beginLine" : 26,
+                        "beginColumn" : 9,
+                        "endLine" : 27,
+                        "endColumn" : 32,
+                        "offset" : 906,
+                        "length" : 68
                       }
                     }
                   }
@@ -6155,6 +6267,22 @@
                     "typedOpt" : {
                       "type" : "None"
                     }
+                  }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/initialize-entrypoint\/Initialize_Entrypoint.aadl"
+                    },
+                    "beginLine" : 46,
+                    "beginColumn" : 9,
+                    "endLine" : 49,
+                    "endColumn" : 41,
+                    "offset" : 1509,
+                    "length" : 146
                   }
                 }
               }

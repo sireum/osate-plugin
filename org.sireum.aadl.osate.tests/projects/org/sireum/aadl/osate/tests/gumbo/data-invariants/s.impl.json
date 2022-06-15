@@ -2371,6 +2371,22 @@
                       "type" : "None"
                     }
                   }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 26,
+                    "beginColumn" : 9,
+                    "endLine" : 27,
+                    "endColumn" : 32,
+                    "offset" : 900,
+                    "length" : 69
+                  }
                 }
               },
               {
@@ -2485,6 +2501,22 @@
                     "typedOpt" : {
                       "type" : "None"
                     }
+                  }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 29,
+                    "beginColumn" : 9,
+                    "endLine" : 30,
+                    "endColumn" : 28,
+                    "offset" : 990,
+                    "length" : 57
                   }
                 }
               },
@@ -2673,6 +2705,22 @@
                       "type" : "None"
                     }
                   }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 31,
+                    "beginColumn" : 9,
+                    "endLine" : 32,
+                    "endColumn" : 30,
+                    "offset" : 1056,
+                    "length" : 57
+                  }
                 }
               },
               {
@@ -2703,6 +2751,22 @@
                         "length" : 1
                       }
                     }
+                  }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 33,
+                    "beginColumn" : 9,
+                    "endLine" : 34,
+                    "endColumn" : 13,
+                    "offset" : 1122,
+                    "length" : 27
                   }
                 }
               },
@@ -2766,6 +2830,22 @@
                     "typedOpt" : {
                       "type" : "None"
                     }
+                  }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 35,
+                    "beginColumn" : 9,
+                    "endLine" : 36,
+                    "endColumn" : 14,
+                    "offset" : 1158,
+                    "length" : 29
                   }
                 }
               },
@@ -3005,6 +3085,22 @@
                     "typedOpt" : {
                       "type" : "None"
                     }
+                  }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 37,
+                    "beginColumn" : 9,
+                    "endLine" : 38,
+                    "endColumn" : 37,
+                    "offset" : 1196,
+                    "length" : 55
                   }
                 }
               },
@@ -3276,6 +3372,22 @@
                     "typedOpt" : {
                       "type" : "None"
                     }
+                  }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 39,
+                    "beginColumn" : 9,
+                    "endLine" : 40,
+                    "endColumn" : 42,
+                    "offset" : 1260,
+                    "length" : 66
                   }
                 }
               },
@@ -3619,6 +3731,22 @@
                     "typedOpt" : {
                       "type" : "None"
                     }
+                  }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 41,
+                    "beginColumn" : 9,
+                    "endLine" : 42,
+                    "endColumn" : 42,
+                    "offset" : 1335,
+                    "length" : 64
                   }
                 }
               },
@@ -5431,6 +5559,22 @@
                       "type" : "None"
                     }
                   }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 44,
+                    "beginColumn" : 9,
+                    "endLine" : 53,
+                    "endColumn" : 32,
+                    "offset" : 1419,
+                    "length" : 533
+                  }
                 }
               }
             ],
@@ -5781,6 +5925,22 @@
                           "type" : "None"
                         }
                       }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 26,
+                        "beginColumn" : 9,
+                        "endLine" : 27,
+                        "endColumn" : 32,
+                        "offset" : 900,
+                        "length" : 69
+                      }
                     }
                   },
                   {
@@ -5895,6 +6055,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 29,
+                        "beginColumn" : 9,
+                        "endLine" : 30,
+                        "endColumn" : 28,
+                        "offset" : 990,
+                        "length" : 57
                       }
                     }
                   },
@@ -6083,6 +6259,22 @@
                           "type" : "None"
                         }
                       }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 31,
+                        "beginColumn" : 9,
+                        "endLine" : 32,
+                        "endColumn" : 30,
+                        "offset" : 1056,
+                        "length" : 57
+                      }
                     }
                   },
                   {
@@ -6113,6 +6305,22 @@
                             "length" : 1
                           }
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 33,
+                        "beginColumn" : 9,
+                        "endLine" : 34,
+                        "endColumn" : 13,
+                        "offset" : 1122,
+                        "length" : 27
                       }
                     }
                   },
@@ -6176,6 +6384,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 35,
+                        "beginColumn" : 9,
+                        "endLine" : 36,
+                        "endColumn" : 14,
+                        "offset" : 1158,
+                        "length" : 29
                       }
                     }
                   },
@@ -6415,6 +6639,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 37,
+                        "beginColumn" : 9,
+                        "endLine" : 38,
+                        "endColumn" : 37,
+                        "offset" : 1196,
+                        "length" : 55
                       }
                     }
                   },
@@ -6686,6 +6926,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 39,
+                        "beginColumn" : 9,
+                        "endLine" : 40,
+                        "endColumn" : 42,
+                        "offset" : 1260,
+                        "length" : 66
                       }
                     }
                   },
@@ -7029,6 +7285,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 9,
+                        "endLine" : 42,
+                        "endColumn" : 42,
+                        "offset" : 1335,
+                        "length" : 64
                       }
                     }
                   },
@@ -8840,6 +9112,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 44,
+                        "beginColumn" : 9,
+                        "endLine" : 53,
+                        "endColumn" : 32,
+                        "offset" : 1419,
+                        "length" : 533
                       }
                     }
                   }
@@ -9168,6 +9456,22 @@
                           "type" : "None"
                         }
                       }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 26,
+                        "beginColumn" : 9,
+                        "endLine" : 27,
+                        "endColumn" : 32,
+                        "offset" : 900,
+                        "length" : 69
+                      }
                     }
                   },
                   {
@@ -9282,6 +9586,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 29,
+                        "beginColumn" : 9,
+                        "endLine" : 30,
+                        "endColumn" : 28,
+                        "offset" : 990,
+                        "length" : 57
                       }
                     }
                   },
@@ -9470,6 +9790,22 @@
                           "type" : "None"
                         }
                       }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 31,
+                        "beginColumn" : 9,
+                        "endLine" : 32,
+                        "endColumn" : 30,
+                        "offset" : 1056,
+                        "length" : 57
+                      }
                     }
                   },
                   {
@@ -9500,6 +9836,22 @@
                             "length" : 1
                           }
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 33,
+                        "beginColumn" : 9,
+                        "endLine" : 34,
+                        "endColumn" : 13,
+                        "offset" : 1122,
+                        "length" : 27
                       }
                     }
                   },
@@ -9563,6 +9915,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 35,
+                        "beginColumn" : 9,
+                        "endLine" : 36,
+                        "endColumn" : 14,
+                        "offset" : 1158,
+                        "length" : 29
                       }
                     }
                   },
@@ -9802,6 +10170,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 37,
+                        "beginColumn" : 9,
+                        "endLine" : 38,
+                        "endColumn" : 37,
+                        "offset" : 1196,
+                        "length" : 55
                       }
                     }
                   },
@@ -10073,6 +10457,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 39,
+                        "beginColumn" : 9,
+                        "endLine" : 40,
+                        "endColumn" : 42,
+                        "offset" : 1260,
+                        "length" : 66
                       }
                     }
                   },
@@ -10416,6 +10816,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 41,
+                        "beginColumn" : 9,
+                        "endLine" : 42,
+                        "endColumn" : 42,
+                        "offset" : 1335,
+                        "length" : 64
                       }
                     }
                   },
@@ -12227,6 +12643,22 @@
                         "typedOpt" : {
                           "type" : "None"
                         }
+                      }
+                    },
+                    "posOpt" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/data-invariants\/Data_Invariants.aadl"
+                        },
+                        "beginLine" : 44,
+                        "beginColumn" : 9,
+                        "endLine" : 53,
+                        "endColumn" : 32,
+                        "offset" : 1419,
+                        "length" : 533
                       }
                     }
                   }
@@ -12920,6 +13352,22 @@
                     "typedOpt" : {
                       "type" : "None"
                     }
+                  }
+                },
+                "posOpt" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/data-invariants\/Data_Invariants.aadl"
+                    },
+                    "beginLine" : 85,
+                    "beginColumn" : 9,
+                    "endLine" : 88,
+                    "endColumn" : 41,
+                    "offset" : 2821,
+                    "length" : 146
                   }
                 }
               }
