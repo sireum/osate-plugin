@@ -50,7 +50,8 @@ public
           --(c"B" > c"A") && -- FIXME - results in StringLits
           --(string"bbbbb" != string"aaaaa"); -- FIXME results in StringLits
           --('B' > 'A') &&
-          ("bbbbb" != "aaaaa");
+          ("bbbbb" != "aaaaa") &&
+          ((-f32"1.0") == f32"-1.0");
           
 
         --inv i10 "I: Real vs Int":
