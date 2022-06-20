@@ -58,25 +58,19 @@ public class AadlProjectUtil {
 			}
 		} else {
 			if (f.getName().equals(".project")) {
-				// assumes there is only one system implementation in the
-				// directory rooted at f
 
 				AadlProject project = createAadlProject(f.getParentFile());
-				if (project == null) {
-					return ret;
-				}
+
 				String systemImplName = null;
 				Optional<File> systemImplFile = Optional.empty();
 				for (File a : project.aadlFiles) {
 					for (String line : IOUtils.readFile(a).split("\n")) {
 						String SYS_IMPL = "system implementation";
-						if (line.contains(SYS_IMPL)) {
-							if (systemImplFile.isPresent()) {
-								assertHalt(false, "Found multiple system implementations in " + f.getParent());
-							}
+						if (line.toLowerCase().contains(SYS_IMPL)) {
+							assertHalt(!systemImplFile.isPresent(),
+									"Found multiple system implementations in " + f.getParent());
 							systemImplFile = Optional.of(a);
 							systemImplName = line.substring(line.indexOf(SYS_IMPL) + SYS_IMPL.length()).trim();
-							break;
 						}
 					}
 				}
