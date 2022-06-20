@@ -155,3 +155,4 @@ Bundle-ClassPath: .,
  bin/,
  external:$org.sireum.home$/bin/sireum.jar
 Import-Package: org.sireum.message
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
