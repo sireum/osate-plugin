@@ -24,3 +24,4 @@ Export-Package: org.sireum.aadl.osate.cli;
    org.eclipse.emf.ecore.resource"
 Bundle-ClassPath: .,
  external:$org.sireum.home$/bin/sireum.jar
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
