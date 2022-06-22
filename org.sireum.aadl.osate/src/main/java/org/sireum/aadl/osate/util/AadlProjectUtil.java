@@ -48,8 +48,9 @@ public class AadlProjectUtil {
 			if (!systems.isEmpty()) {
 				// found user provided .system file so use that
 
-				assert (systems.size() == 1);
-				ret.add(AadlProjectUtil.createAadlSystem(systems.get(0)));
+				for (File systemFile : systems) {
+					ret.add(AadlProjectUtil.createAadlSystem(systemFile));
+				}
 				return ret;
 			}
 
