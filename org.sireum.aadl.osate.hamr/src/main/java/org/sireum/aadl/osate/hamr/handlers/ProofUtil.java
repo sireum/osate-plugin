@@ -52,7 +52,7 @@ public class ProofUtil {
 			File propFile = null;
 			String propName = "org.sireum.aadl.hamr.prefs";
 			if (f.isDirectory()) {
-				if(f.getName().equals(".settings") && new File(f, propName).exists()) {
+				if (f.getName().equals(".settings") && new File(f, propName).exists()) {
 					propFile = new File(f, propName);
 				} else if (new File(f, ".settings" + sep + propName).exists()) {
 					propFile = new File(f, ".settings" + sep + propName);

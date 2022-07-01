@@ -13,8 +13,11 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
@@ -25,6 +28,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.TextSelection;
@@ -61,10 +65,14 @@ import org.osate.aadl2.instantiation.InstantiateModel;
 import org.osate.aadl2.modelsupport.util.AadlUtil;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.aadl.osate.util.SelectionHelper;
+import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.hamr.ir.JSON;
+import org.sireum.message.Message;
+import org.sireum.message.Position;
+import org.sireum.message.Reporter;
 
 public abstract class AbstractSireumHandler extends AbstractHandler {
 

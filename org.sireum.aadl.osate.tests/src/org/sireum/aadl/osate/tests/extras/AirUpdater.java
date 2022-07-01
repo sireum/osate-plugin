@@ -20,6 +20,7 @@ import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
 import org.sireum.aadl.osate.util.IOUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
+import org.sireum.message.Reporter;
 
 import com.google.inject.Inject;
 
@@ -37,8 +38,7 @@ public class AirUpdater extends SireumTest {
 				new File(System.getenv("SIREUM_HOME")
 						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/sirfur_omnibus/gumbo/git_models/temp_control/simple_temp_aadl/aadl"),
 				new File(System.getenv("SIREUM_HOME")
-						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/GumboAdventiumTest/simple_temp_aadl/aadl")
-				);
+						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/GumboAdventiumTest/simple_temp_aadl/aadl"));
 
 		for (File hamrModelsDir : hamrModelsDirs) {
 			if (hamrModelsDir.exists()) {
@@ -82,8 +82,11 @@ public class AirUpdater extends SireumTest {
 		SystemInstance instance = getSystemInstance(system);
 		assert instance != null : "System is null " + system.systemImplementationName;
 
-		String air = Util.serialize(Util.getAir(instance, true), SerializerType.JSON);
+		Reporter reporter = Util.createReporter();
+		String air = Util.serialize(Util.getAir(instance, true, reporter), SerializerType.JSON);
 
+		assert(!reporter.hasError());
+		
 		String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
 		String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ".json";
 

@@ -31,13 +31,13 @@ public class HAMRPropertyProvider {
 
 		Platform() {
 			if (org.sireum.Cli.SireumHamrCodegenHamrPlatform$.MODULE$.byName(hamrName()).isEmpty()) {
-				throw new RuntimeException(this.hamrName() + " is not a valid HamrPlatform value");
+				throw new RuntimeException(hamrName() + " is not a valid HamrPlatform value");
 			}
 		}
 
 		public String hamrName() {
 			// first char in cli-gen'ed slang enum values are upper cased
-			return this.name().substring(0, 1).toUpperCase() + this.name().substring(1);
+			return name().substring(0, 1).toUpperCase() + name().substring(1);
 		}
 	}
 
@@ -95,7 +95,8 @@ public class HAMRPropertyProvider {
 	public static int getDefaultMaxSequenceSizeFromElement(NamedElement ne) {
 		return Long.valueOf(
 				HAMRPropertyProvider.getIntegerValue(ne, HAMRPropertyProvider.PROP_HAMR__DEFAULT_MAX_SEQUENCE_SIZE,
-						HAMRPropertyProvider.DEFAULT_MAX_SEQUENCE_SIZE)).intValue();
+						HAMRPropertyProvider.DEFAULT_MAX_SEQUENCE_SIZE))
+				.intValue();
 	}
 
 	public static int getDefaultMaxStringSizeFromElement(NamedElement ne) {

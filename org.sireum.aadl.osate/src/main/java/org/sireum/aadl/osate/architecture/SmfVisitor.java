@@ -30,11 +30,12 @@ import org.sireum.hamr.ir.Name;
 import org.sireum.hamr.ir.SmfClassification;
 import org.sireum.hamr.ir.SmfDeclass;
 import org.sireum.hamr.ir.SmfType;
+import org.sireum.message.Reporter;
 
 public class SmfVisitor implements AnnexVisitor {
 
 	final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
-	final Set<SecModelLibrary> smfLib = new HashSet();
+	final Set<SecModelLibrary> smfLib = new HashSet<>();
 	static final String SMF_ID = "smf";
 
 	private Visitor coreVisitor = null;
@@ -44,12 +45,12 @@ public class SmfVisitor implements AnnexVisitor {
 	}
 
 	@Override
-	public List<Annex> visit(ComponentInstance root, List<String> path) {
-		return visit(root.getComponentClassifier(), path);
+	public List<Annex> visit(ComponentInstance root, List<String> path, Reporter reporter) {
+		return visit(root.getComponentClassifier(), path, reporter);
 	}
 
 	@Override
-	public List<Annex> visit(Classifier c, List<String> path) {
+	public List<Annex> visit(Classifier c, List<String> path, Reporter reporter) {
 		Annex a = visitSmfComp(c, path);
 		if (a != null) {
 			return VisitorUtil.toIList(a);
@@ -79,7 +80,7 @@ public class SmfVisitor implements AnnexVisitor {
 	}
 
 	@Override
-	public List<AnnexLib> buildAnnexLibraries(Element root) {
+	public List<AnnexLib> buildAnnexLibraries(Element root, Reporter reporter) {
 		return visitSmfLib(root);
 	}
 

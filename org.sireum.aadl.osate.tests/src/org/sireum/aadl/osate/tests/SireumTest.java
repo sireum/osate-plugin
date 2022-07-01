@@ -32,6 +32,7 @@ import org.sireum.aadl.osate.util.IOUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.hamr.ir.Aadl;
+import org.sireum.message.Reporter;
 
 import com.google.inject.Inject;
 import com.itemis.xtext.testing.XtextTest;
@@ -61,7 +62,14 @@ public abstract class SireumTest extends XtextTest {
 
 			SystemInstance instance = getSystemInstance(system);
 
-			Aadl model = Util.getAir(instance, true, System.out);
+			Reporter reporter = Util.createReporter();
+			Aadl model = Util.getAir(instance, true, reporter, System.out);
+
+			if (reporter.hasError()) {
+				reporter.printMessages();
+				Assert.assertTrue("Reporter has errors", !reporter.hasError());
+			}
+
 			String ir = Util.serialize(model, SerializerType.JSON);
 
 			if (writeResults) {

@@ -12,9 +12,9 @@ import org.eclipse.swt.widgets.Composite;
 
 public class PreferenceValues {
 
-	public static final String HAMR_MARKER_ID = "hamr.marker";
+	public static final String HAMR_MARKER_ID = "org.sireum.aadl.osate.hamr.marker"; // must match id used in the extension def
 
-	public static final String PLUGIN_ID = "HAMR";
+	public static final String HAMR_PLUGIN_ID = "HAMR";
 
 	public static final BoolOption HAMR_GEN_SBT_MILL_OPT = new BoolOption(//
 			"HAMR_GEN_SBT_MILL_OPT", //
@@ -90,9 +90,9 @@ public class PreferenceValues {
 
 			String os = "";
 			String ext = "";
-			if(org.sireum.Os.isLinux()) {
+			if (org.sireum.Os.isLinux()) {
 				os = "linux";
-			} else if(org.sireum.Os.isWin()) {
+			} else if (org.sireum.Os.isWin()) {
 				os = "win";
 				ext = ".exe";
 			} else if (org.sireum.Os.isMac()) {
@@ -112,11 +112,7 @@ public class PreferenceValues {
 	}
 
 	public static final PathOption HAMR_SMT2_PATH = new PathOption(//
-			"HAMR_SMT2_PATH",
-			"SMT2 Solver",
-			Optional.of("Location of SMT2 solver executable"),
-			sireumCVC4()
-	);
+			"HAMR_SMT2_PATH", "SMT2 Solver", Optional.of("Location of SMT2 solver executable"), sireumCVC4());
 
 	public static final StringOption HAMR_SMT2_OPTIONS = new StringOption(//
 			"HAMR_SMT2_OPTIONS", //
@@ -166,9 +162,9 @@ public class PreferenceValues {
 
 		public FileFieldEditor getEditor(Composite parent) {
 			FileFieldEditor ret = new FileFieldEditor(key, name, parent);
-			if (this.tooltip.isPresent()) {
-				ret.getTextControl(parent).setToolTipText(this.tooltip.get());
-				ret.getLabelControl(parent).setToolTipText(this.tooltip.get());
+			if (tooltip.isPresent()) {
+				ret.getTextControl(parent).setToolTipText(tooltip.get());
+				ret.getLabelControl(parent).setToolTipText(tooltip.get());
 			}
 			return ret;
 		}
@@ -192,8 +188,8 @@ public class PreferenceValues {
 
 		public BooleanFieldEditor getEditor(Composite parent) {
 			BooleanFieldEditor ret = new BooleanFieldEditor(key, name, parent);
-			if (this.tooltip.isPresent()) {
-				ret.getDescriptionControl(parent).setToolTipText(this.tooltip.get());
+			if (tooltip.isPresent()) {
+				ret.getDescriptionControl(parent).setToolTipText(tooltip.get());
 			}
 			return ret;
 		}
@@ -214,8 +210,8 @@ public class PreferenceValues {
 			this.name = name;
 			this.tooltip = tooltip;
 			this.defaultValue = defaultValue;
-			this.minRange = lowRange;
-			this.maxRange = highRange;
+			minRange = lowRange;
+			maxRange = highRange;
 
 			store.setDefault(key, this.defaultValue);
 		}
@@ -226,10 +222,10 @@ public class PreferenceValues {
 
 		public IntegerFieldEditor getEditor(Composite parent) {
 			IntegerFieldEditor ret = new IntegerFieldEditor(key, name, parent);
-			ret.setValidRange(this.minRange, this.maxRange);
-			if (this.tooltip.isPresent()) {
-				ret.getTextControl(parent).setToolTipText(this.tooltip.get());
-				ret.getLabelControl(parent).setToolTipText(this.tooltip.get());
+			ret.setValidRange(minRange, maxRange);
+			if (tooltip.isPresent()) {
+				ret.getTextControl(parent).setToolTipText(tooltip.get());
+				ret.getLabelControl(parent).setToolTipText(tooltip.get());
 			}
 			return ret;
 		}
@@ -253,12 +249,11 @@ public class PreferenceValues {
 
 		public StringFieldEditor getEditor(Composite parent) {
 			StringFieldEditor ret = new StringFieldEditor(key, name, parent);
-			if (this.tooltip.isPresent()) {
-				ret.getTextControl(parent).setToolTipText(this.tooltip.get());
-				ret.getLabelControl(parent).setToolTipText(this.tooltip.get());
+			if (tooltip.isPresent()) {
+				ret.getTextControl(parent).setToolTipText(tooltip.get());
+				ret.getLabelControl(parent).setToolTipText(tooltip.get());
 			}
 			return ret;
 		}
 	}
 }
-

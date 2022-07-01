@@ -57,6 +57,7 @@ import org.sireum.hamr.ir.ErrorTransition;
 import org.sireum.hamr.ir.ErrorTypeDef;
 import org.sireum.hamr.ir.ErrorTypeSetDef;
 import org.sireum.hamr.ir.Name;
+import org.sireum.message.Reporter;
 
 public class Emv2Visitor implements AnnexVisitor {
 
@@ -73,12 +74,12 @@ public class Emv2Visitor implements AnnexVisitor {
 	}
 
 	@Override
-	public List<Annex> visit(ComponentInstance root, List<String> path) {
+	public List<Annex> visit(ComponentInstance root, List<String> path, Reporter reporter) {
 		return VisitorUtil.toIList(visitEmv2Comp(root, path));
 	}
 
 	@Override
-	public List<Annex> visit(Classifier c, List<String> path) {
+	public List<Annex> visit(Classifier c, List<String> path, Reporter reporter) {
 		// annexes are actually attached to classifiers so this really should
 		// be the entrypoint
 		return Collections.emptyList();
@@ -519,7 +520,7 @@ public class Emv2Visitor implements AnnexVisitor {
 	}
 
 	@Override
-	public List<AnnexLib> buildAnnexLibraries(Element root) {
+	public List<AnnexLib> buildAnnexLibraries(Element root, Reporter reporter) {
 		return buildLibs();
 	}
 

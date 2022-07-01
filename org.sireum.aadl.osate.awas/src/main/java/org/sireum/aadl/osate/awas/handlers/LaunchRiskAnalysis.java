@@ -24,6 +24,7 @@ import org.osate.aadl2.instance.ComponentInstance;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.ir.Aadl;
+import org.sireum.message.Reporter;
 
 public class LaunchRiskAnalysis extends AbstractSireumHandler {
 
@@ -44,9 +45,10 @@ public class LaunchRiskAnalysis extends AbstractSireumHandler {
 
 		MessageConsole console = displayConsole("Awas Console");
 
-		Aadl model = Util.getAir(root, true, console);
+		Reporter reporter = Util.createReporter();
+		Aadl model = Util.getAir(root, true, console, reporter);
 
-		if (model != null) {
+		if (model != null && !reporter.hasError()) {
 
 			File f = serializeToFile(model, ".IR", root);
 			writeToConsole(console, "Wrote: " + f.getAbsolutePath());
@@ -74,6 +76,8 @@ public class LaunchRiskAnalysis extends AbstractSireumHandler {
 			}
 
 			return null;
+		} else {
+			// TODO: could convert errors to markers -- see hamr plugin
 		}
 		return null;
 	}

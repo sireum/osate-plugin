@@ -41,8 +41,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	public final HAMROption OPTION_PLATFORM = new HAMROption("platform", "Platform", "Target platform");
 
-	public final HAMROption OPTION_SLANG_OUTPUT_DIRECTORY = new HAMROption("slang.output.directory",
-			"Output Directory", "Directory where Slang resources will be written to");
+	public final HAMROption OPTION_SLANG_OUTPUT_DIRECTORY = new HAMROption("slang.output.directory", "Output Directory",
+			"Directory where Slang resources will be written to");
 	public final HAMROption OPTION_BASE_PACKAGE_NAME = new HAMROption("base.package.name", "Base Package Name",
 			"The root package name for the generated Slang project");
 
@@ -472,8 +472,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 				btn.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						String path = promptForDirectory("Select C Output Directory",
-								getOptionCOutputDirectory());
+						String path = promptForDirectory("Select C Output Directory", getOptionCOutputDirectory());
 						if (path != null) {
 							txt.setText(path);
 						}
@@ -503,8 +502,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 				btn.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						String path = promptForDirectory("Select C Source Directory",
-								getOptionCAuxSourceDirectory());
+						String path = promptForDirectory("Select C Source Directory", getOptionCAuxSourceDirectory());
 						if (path != null) {
 							txt.setText(path);
 						}
@@ -533,7 +531,6 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 			final GridLayout grpLayout = new GridLayout(numGroupCols, false);
 			grpContainer.setLayout(grpLayout);
-
 
 			/****************************************************************
 			 * ROW - Camkes Output Directory
@@ -783,8 +780,14 @@ public class HAMRPrompt extends TitleAreaDialog {
 	}
 
 	private String[] filterHW(HW... validOption) {
-		return Arrays.asList(validOption).stream().distinct().filter(theHardwares::contains).collect(Collectors.toSet())
-				.stream().map(f -> f.toString()).toArray(String[]::new);
+		return Arrays.asList(validOption)
+				.stream()
+				.distinct()
+				.filter(theHardwares::contains)
+				.collect(Collectors.toSet())
+				.stream()
+				.map(f -> f.toString())
+				.toArray(String[]::new);
 	}
 
 	private Option<String> getStringFromControl(HAMROption key) {
@@ -909,4 +912,3 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 	}
 }
-

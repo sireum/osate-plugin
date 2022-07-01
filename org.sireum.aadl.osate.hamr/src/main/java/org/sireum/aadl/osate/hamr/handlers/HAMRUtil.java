@@ -28,8 +28,10 @@ public class HAMRUtil {
 		// .filter(f -> isThread(f)).collect(Collectors.toList());
 		// List<ComponentInstance> allDevices = root.getAllComponentInstances().stream()
 		// .filter(f -> isDevice(f)).collect(Collectors.toList());
-		List<ConnectionInstance> allConnections = root.getAllComponentInstances().stream()
-				.flatMap(f -> f.getConnectionInstances().stream()).collect(Collectors.toList());
+		List<ConnectionInstance> allConnections = root.getAllComponentInstances()
+				.stream()
+				.flatMap(f -> f.getConnectionInstances().stream())
+				.collect(Collectors.toList());
 
 		if (!trustedBuild) {
 			List<ConnectionInstance> threadDeviceConnections = allConnections.stream().filter(conn -> {

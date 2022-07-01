@@ -74,6 +74,7 @@ import org.sireum.hamr.ir.AadlASTJavaFactory;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.message.Position;
+import org.sireum.message.Reporter;
 
 
 public class Visitor {
@@ -82,13 +83,19 @@ public class Visitor {
 	protected final Map<String, org.sireum.hamr.ir.Component> datamap = new LinkedHashMap<>();
 	final Map<List<String>, Set<ConnectionReference>> compConnMap = new HashMap<>();
 	List<AnnexVisitor> annexVisitors = new ArrayList<>();
+	Reporter reporter;
 
 	/** allowing this to throw exceptions as they will be caught by {@link org.sireum.aadl.osate.util.Util#getAir }
 	 * and printed to the passed in output stream
 	 *
 	 * @throws Exception
 	 */
-	public Visitor() throws Exception {
+	public Visitor(Reporter reporter) throws Exception {
+		if (reporter == null) {
+			throw new RuntimeException("Reporter cannot be null");
+		}
+		this.reporter = reporter;
+
 		annexVisitors.add(new Emv2Visitor(this));
 
 		Bundle sm = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
@@ -148,7 +155,7 @@ public class Visitor {
 
 			List<AnnexLib> libs = VisitorUtil.iList();
 			for (AnnexVisitor av : annexVisitors) {
-				libs = VisitorUtil.addAll(libs, av.buildAnnexLibraries(root));
+				libs = VisitorUtil.addAll(libs, av.buildAnnexLibraries(root, reporter));
 			}
 
 			return new Some<>(factory.aadl(VisitorUtil.toIList(t.get()), libs, dataComponents));
@@ -573,7 +580,7 @@ public class Visitor {
 		List<org.sireum.hamr.ir.Annex> annexes = VisitorUtil.iList();
 
 		for (AnnexVisitor av : annexVisitors) {
-			annexes = VisitorUtil.addAll(annexes, av.visit(compInst, currentPath));
+			annexes = VisitorUtil.addAll(annexes, av.visit(compInst, currentPath, reporter));
 		}
 
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
@@ -1048,7 +1055,7 @@ public class Visitor {
 
 		List<Annex> annexes = new ArrayList<>();
 		for (AnnexVisitor av : annexVisitors) {
-			annexes.addAll(av.visit(f, new ArrayList<>()));
+			annexes.addAll(av.visit(f, new ArrayList<>(), reporter));
 		}
 
 		// this is a hack as we're sticking something from the declarative

@@ -90,7 +90,7 @@
       </aadlcontribution>
    </extension>
    <extension
-         id="hamr.marker"
+         id="org.sireum.aadl.osate.hamr.marker"
          name="HAMR Issue"
          point="org.eclipse.core.resources.markers">
          <super type="org.eclipse.core.resources.problemmarker"></super>

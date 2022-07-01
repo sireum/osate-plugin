@@ -6,25 +6,43 @@ import java.io.PrintStream;
 import java.util.function.IntSupplier;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.instance.ComponentInstance;
+import org.osate.aadl2.instance.SystemInstance;
 import org.sireum.IS;
 import org.sireum.SireumApi;
 import org.sireum.U8;
 import org.sireum.Z;
+import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.architecture.Visitor;
+import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.hamr.ir.JSON;
 import org.sireum.hamr.ir.MsgPack;
+import org.sireum.message.Message;
+import org.sireum.message.Position;
+import org.sireum.message.Reporter;
 
 import scala.Console;
 import scala.Function0;
 import scala.runtime.BoxedUnit;
 
 public class Util {
+
+	public static Reporter createReporter() {
+		return org.sireum.message.Reporter$.MODULE$.create();
+	}
 
 	public enum SerializerType {
 		JSON, JSON_COMPACT, MSG_PACK
@@ -45,26 +63,31 @@ public class Util {
 		}
 	}
 
-	public static Aadl getAir(ComponentInstance root) {
-		return getAir(root, true);
+	public static Aadl getAir(ComponentInstance root, Reporter reporter) {
+		return getAir(root, true, reporter);
 	}
 
-	public static Aadl getAir(ComponentInstance root, boolean includeDataComponents) {
-		return getAir(root, includeDataComponents, System.out);
+	public static Aadl getAir(ComponentInstance root, boolean includeDataComponents, Reporter reporter) {
+		return getAir(root, includeDataComponents, reporter, System.out);
 	}
 
-	public static Aadl getAir(ComponentInstance root, boolean includeDataComponents, MessageConsole console) {
+	public static Aadl getAir(ComponentInstance root, boolean includeDataComponents, MessageConsole console,
+			Reporter reporter) {
 		try (OutputStream out = console.newOutputStream()) {
-			return getAir(root, includeDataComponents, out);
+			return getAir(root, includeDataComponents, reporter, out);
 		} catch (Throwable t) {
 			return null;
 		}
 	}
 
-	public static Aadl getAir(ComponentInstance root, boolean includeDataComponents, OutputStream out) {
+	public static Aadl getAir(ComponentInstance root, boolean includeDataComponents, Reporter reporter,
+			OutputStream out) {
 		try {
-			return new Visitor().convert(root, includeDataComponents).get();
+			return new Visitor(reporter).convert(root, includeDataComponents).get();
 		} catch (Throwable t) {
+			VisitorUtil.reportError("Error encountered while generating AIR", PreferenceValues.SIREUM_PLUGIN_ID,
+					reporter);
+
 			PrintStream p = new PrintStream(out);
 			p.println("Error encountered while generating AIR");
 			t.printStackTrace(p);
@@ -74,7 +97,7 @@ public class Util {
 	}
 
 	public static int callWrapper(String toolName, MessageConsole ms, IntSupplier f) {
-		int[] ret = {-1};
+		int[] ret = { -1 };
 
 		PrintStream out = new PrintStream(ms.newMessageStream());
 		PrintStream outOld = System.out;
@@ -84,25 +107,28 @@ public class Util {
 		System.setErr(out);
 
 		Console.withOut(System.out, (Function0<Object>) () -> {
-            Console.withErr(System.err, (Function0<Object>) ()  -> {
+			Console.withErr(System.err, (Function0<Object>) () -> {
 
-            	try {
-            		ret[0] = f.getAsInt();
-            	} catch (Throwable t) {
+				try {
+					ret[0] = f.getAsInt();
+				} catch (Throwable t) {
 					System.err.println("Exception raised when invoking " + toolName);
-            		t.printStackTrace(out);
-            	} finally {
-            		out.flush();
-            		try { if(out != null) {
-						out.close();
-					} }
-            		catch (Throwable t) { t.printStackTrace(); }
-            	}
+					t.printStackTrace(out);
+				} finally {
+					out.flush();
+					try {
+						if (out != null) {
+							out.close();
+						}
+					} catch (Throwable t) {
+						t.printStackTrace();
+					}
+				}
 
-            	return BoxedUnit.UNIT;
-            });
-            return BoxedUnit.UNIT;
-        });
+				return BoxedUnit.UNIT;
+			});
+			return BoxedUnit.UNIT;
+		});
 
 		System.setOut(outOld);
 		System.setErr(errOld);
@@ -151,9 +177,8 @@ public class Util {
 						+ "You must restart OSATE in order for changes to osate.ini to take effect.\n");
 				return false;
 			} else {
-				out.print(
-						"Sireum Version: " + SireumApi.version() + " located at " + sireum_jar.getAbsolutePath()
-								+ "\n");
+				out.print("Sireum Version: " + SireumApi.version() + " located at " + sireum_jar.getAbsolutePath()
+						+ "\n");
 				return true;
 			}
 		} else {
@@ -181,4 +206,91 @@ public class Util {
 		}
 	}
 
+	/**
+	 * Adds any message with position info to the OSATE problems view
+	 * @param reporter
+	 * @param si
+	 */
+	public static void addMarkers(String markerId, SystemInstance si, Reporter reporter) {
+		Util.clearMarkers(si, markerId);
+
+		for (int i = 0; i < reporter.messages().size().toInt(); i++) {
+			Message m = reporter.messages().apply(SlangUtils.toZ(i));
+
+			if (m.getPosOpt() == null) {
+				System.out.println(
+						"Sireum message's position info is null rather than None.  Please report - " + m.getText());
+			} else if (m.getPosOpt().nonEmpty()) {
+				Position pos = m.getPosOpt().get();
+				if (pos.uriOpt().nonEmpty()) {
+					String uri = "/resource" + pos.uriOpt().get().value();
+
+					Resource r = null;
+					for (Resource cand : si.eResource().getResourceSet().getResources()) {
+						if (cand.getURI().path().equals(uri)) {
+							r = cand;
+							break;
+						}
+					}
+
+					if (r != null) {
+						IFile iresource = Util.toIFile(r.getURI());
+						try {
+							IWorkspaceRunnable runnable = monitor -> {
+								IMarker marker = iresource.createMarker(markerId);
+
+								marker.setAttribute(IMarker.MESSAGE, m.getText().toString());
+
+								if (m.isError()) {
+									marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+									marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+								} else if (m.isWarning()) {
+									marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
+									marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
+								} else {
+									marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_LOW);
+									marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
+								}
+								marker.setAttribute(IMarker.LINE_NUMBER, pos.beginLine().toInt());
+								if (pos.offset().toInt() != 0 && pos.length().toInt() > 0) {
+									marker.setAttribute(IMarker.CHAR_START, pos.offset().toInt());
+									marker.setAttribute(IMarker.CHAR_END, pos.offset().toInt() + pos.length().toInt());
+								}
+							};
+
+							iresource.getWorkspace().run(runnable, null, IWorkspace.AVOID_UPDATE, null);
+
+						} catch (CoreException e) {
+							 e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public static void clearMarkers(SystemInstance si, String markerId) {
+		ResourceSet rs = si.eResource().getResourceSet();
+		for (Resource r : rs.getResources()) {
+			IFile i = Util.toIFile(r.getURI());
+			try {
+				i.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);
+			} catch (CoreException e) {
+				// e.printStackTrace();
+			}
+		}
+	}
+
+	public static void clearMarkers(String markerId) {
+		IProject project = SelectionHelper.getProject();
+		if (project != null) {
+			try {
+				for (IResource r : project.members()) {
+					r.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);
+				}
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

@@ -23,8 +23,10 @@ import org.osate.annexsupport.AnnexRegistry;
 import org.osate.annexsupport.AnnexTextPositionResolverRegistry;
 import org.sireum.IS;
 import org.sireum.IS$;
+import org.sireum.aadl.osate.util.SlangUtils;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.message.Position;
+import org.sireum.message.Reporter;
 
 public class VisitorUtil {
 
@@ -150,6 +152,28 @@ public class VisitorUtil {
 			}
 		}
 		return null;
+	}
+
+	public static void reportError(String msg, String msgKind, Reporter reporter) {
+		reportError(false, null, msg, reporter);
+	}
+
+	public static void reportError(boolean cond, String msg, String msgKind, Reporter reporter) {
+		reportError(cond, null, msg, reporter);
+	}
+
+	/**
+	 * 
+	 * @param cond report error if cond is false
+	 * @param o used to get AADL position info if non-null
+	 * @param msg the error message
+	 * @param msgKind used for filtering (e.g. use the annex's name)
+	 * @param reporter
+	 */
+	public static void reportError(boolean cond, EObject o, String msg, String msgKind, Reporter reporter) {
+		if (!cond) {
+			reporter.error(o == null ? SlangUtils.toNone() : SlangUtils.buildPositionInfo(o), msgKind, msg);
+		}
 	}
 
 	/**

@@ -16,6 +16,7 @@ import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.hamr.ir.Aadl;
+import org.sireum.message.Reporter;
 
 public class LaunchSireumHandler extends AbstractSireumHandler {
 
@@ -38,9 +39,11 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 		writeToConsole("Generating AIR ...");
 
-		Aadl model = Util.getAir(si, true, console);
+		Reporter reporter = Util.createReporter();
+		
+		Aadl model = Util.getAir(si, true, console, reporter);
 
-		if (model != null) {
+		if (model != null && !reporter.hasError()) {
 			SerializerType ser = PreferenceValues.getSERIALIZATION_METHOD_OPT();
 
 			writeToConsole("Serializing AIR to " + ser.name() + " ...");
@@ -65,7 +68,10 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 			return Status.OK_STATUS;
 		} else {
-			Dialog.showError(getToolName(), "Could not generate AIR");
+			// TODO: convert errors to markers.  Need to add a way for
+			// users to clear them -- see hamr plugin
+			Dialog.showError(getToolName(), "AIR generation failed");
+			writeToConsole("AIR generation failed");
 			return Status.CANCEL_STATUS;
 		}
 	}

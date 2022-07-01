@@ -236,9 +236,10 @@ public class Phantom implements IApplication {
 		SystemInstance instance = getSystemInstance(system, rs);
 
 		if (instance != null) {
-			Aadl model = Util.getAir(instance, true);
+			Reporter reporter = Util.createReporter();
+			Aadl model = Util.getAir(instance, true, reporter);
 
-			if (model != null) {
+			if (model != null && !reporter.hasError()) {
 				String air = Util.serialize(model, st);
 
 				if (outputFile == null) {
@@ -254,6 +255,8 @@ public class Phantom implements IApplication {
 				// IOUtils.zipFile(outFile);
 
 				return IApplication.EXIT_OK;
+			} else {
+				reporter.printMessages();
 			}
 		}
 
@@ -278,7 +281,7 @@ public class Phantom implements IApplication {
 
 		addInfo("Sireum Version: " + SireumApi.version());
 
-		Reporter reporter = org.sireum.message.Reporter$.MODULE$.create();
+		Reporter reporter = Util.createReporter();
 		int ret = 0;
 		if (f.getName().equals(".project") || f.getName().startsWith(".system")) {
 			List<AadlSystem> systems = AadlProjectUtil.findSystems(f);
@@ -295,9 +298,14 @@ public class Phantom implements IApplication {
 			if (si == null) {
 				ret = 1;
 			} else {
-				Aadl model = Util.getAir(si, true);
-				org.sireum.cli.HAMR.codeGenReporter(model, ho, reporter);
-				ret = reporter.hasError() ? 1 : 0;
+				Aadl model = Util.getAir(si, true, reporter);
+				if (!reporter.hasError()) {
+					org.sireum.cli.HAMR.codeGenReporter(model, ho, reporter);
+					ret = reporter.hasError() ? 1 : 0;
+				} else {
+					reporter.printMessages();
+					ret = 1;
+				}
 			}
 		} else {
 			// assume it's a serialized AIR file

@@ -37,10 +37,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(PreferenceValues.HAMR_SERIALIZE_AIR_OPT.getEditor(comp));
 		addField(PreferenceValues.HAMR_AIR_OUTPUT_FOLDER_OPT.getEditor(comp));
 
-
 		// blank line
 		new Label(comp, SWT.NONE).setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 3, 1));
-
 
 		Group seGroup = new Group(comp, SWT.BORDER);
 		seGroup.setText("Slang-Embedded Options");
@@ -55,8 +53,6 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(PreferenceValues.HAMR_EMBED_ART_OPT.getEditor(seGroup));
 
 		addField(PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getEditor(seGroup));
-
-
 
 		Group proofGroup = new Group(comp, SWT.BORDER);
 		proofGroup.setText("Proof Options");
