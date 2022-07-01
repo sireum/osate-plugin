@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.Classifier;
-import org.sireum.aadl.osate.util.IOUtils.SearchType;
+import org.sireum.aadl.osate.util.IOUtil.SearchType;
 
 public class AadlProjectUtil {
 
@@ -32,7 +32,7 @@ public class AadlProjectUtil {
 				"Expecting project filename to be .project but it's " + projectFile.getName());
 
 		String marker = "<name>";
-		String line = IOUtils.readFile(projectFile).split("\n")[2];
+		String line = IOUtil.readFile(projectFile).split("\n")[2];
 		return line.substring(line.indexOf(marker) + marker.length(), line.indexOf("</name>"));
 	}
 
@@ -44,7 +44,7 @@ public class AadlProjectUtil {
 		List<AadlSystem> ret = new ArrayList<>();
 		if (f.isDirectory()) {
 
-			List<File> systems = IOUtils.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
+			List<File> systems = IOUtil.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
 			if (!systems.isEmpty()) {
 				// found user provided .system file so use that
 
@@ -65,7 +65,7 @@ public class AadlProjectUtil {
 				String systemImplName = null;
 				Optional<File> systemImplFile = Optional.empty();
 				for (File a : project.aadlFiles) {
-					for (String line : IOUtils.readFile(a).split("\n")) {
+					for (String line : IOUtil.readFile(a).split("\n")) {
 						String SYS_IMPL = "system implementation";
 						if (line.toLowerCase().contains(SYS_IMPL)) {
 							assertHalt(!systemImplFile.isPresent(),
@@ -96,7 +96,7 @@ public class AadlProjectUtil {
 					+ projectRoot.getPath());
 		}
 
-		List<File> aadlFiles = IOUtils.collectFiles(projectRoot, ".aadl", true);
+		List<File> aadlFiles = IOUtil.collectFiles(projectRoot, ".aadl", true);
 		AadlProject project = new AadlProject(projectName, projectRoot, aadlFiles);
 
 		return project;
@@ -253,11 +253,11 @@ public class AadlProjectUtil {
 		}
 
 		public static String getSystemImplementationClassifierName(File systemFile) {
-			return IOUtils.getPropertiesFile(systemFile).getProperty(KEY_SYSTEM_IMPL);
+			return IOUtil.getPropertiesFile(systemFile).getProperty(KEY_SYSTEM_IMPL);
 		}
 
 		static String[] getProjectsProperty(File systemFile) {
-			String x = IOUtils.getPropertiesFile(systemFile).getProperty(KEY_PROJECT);
+			String x = IOUtil.getPropertiesFile(systemFile).getProperty(KEY_PROJECT);
 			if (x == null) {
 				return new String[] { "." };
 			} else {
@@ -266,7 +266,7 @@ public class AadlProjectUtil {
 		}
 
 		public static Optional<String> getSystemImplementationFilename(File systemFile) {
-			String systemImplFilename = IOUtils.getPropertiesFile(systemFile).getProperty(KEY_SYSTEM_IMPL_FILE);
+			String systemImplFilename = IOUtil.getPropertiesFile(systemFile).getProperty(KEY_SYSTEM_IMPL_FILE);
 			if (systemImplFilename != null) {
 				return Optional.of(systemImplFilename);
 			} else {

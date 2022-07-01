@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate.architecture;
+package org.sireum.aadl.osate.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,8 +23,7 @@ import org.osate.annexsupport.AnnexRegistry;
 import org.osate.annexsupport.AnnexTextPositionResolverRegistry;
 import org.sireum.IS;
 import org.sireum.IS$;
-import org.sireum.aadl.osate.util.SlangUtils;
-import org.sireum.aadl.osate.util.Util;
+import org.sireum.Option;
 import org.sireum.message.Position;
 import org.sireum.message.Reporter;
 
@@ -111,7 +110,12 @@ public class VisitorUtil {
 		return EcoreUtil.getURI(eobj).toString();
 	}
 
-	public static Position buildPosInfo(EObject elem) {
+	public static Option<Position> buildPositionOpt(EObject object) {
+		Position p = VisitorUtil.buildPosition(object);
+		return p == null ? SlangUtil.toNone() : SlangUtil.toSome(p);
+	}
+	
+	public static Position buildPosition(EObject elem) {
 
 		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 		EObject obj = elem;
@@ -172,7 +176,7 @@ public class VisitorUtil {
 	 */
 	public static void reportError(boolean cond, EObject o, String msg, String msgKind, Reporter reporter) {
 		if (!cond) {
-			reporter.error(o == null ? SlangUtils.toNone() : SlangUtils.buildPositionInfo(o), msgKind, msg);
+			reporter.error(o == null ? SlangUtil.toNone() : buildPositionOpt(o), msgKind, msg);
 		}
 	}
 

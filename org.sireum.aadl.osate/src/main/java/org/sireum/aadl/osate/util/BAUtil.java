@@ -18,14 +18,14 @@ import org.sireum.hamr.ir.BTSUnaryExp$;
 import org.sireum.hamr.ir.BTSUnaryOp;
 import org.sireum.message.Position;
 
-public class BAUtils {
+public class BAUtil {
 
 	public static org.sireum.Option<Position> buildPosInfo(BehaviorElement elem) {
 		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 
 		AadlBaLocationReference abr = elem.getAadlBaLocationReference();
 
-		return SlangUtils.toSome(factory.flatPos(abr.getFilename(), //
+		return SlangUtil.toSome(factory.flatPos(abr.getFilename(), //
 				abr.getLine(), //
 				abr.getColumn(), //
 

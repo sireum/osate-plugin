@@ -26,7 +26,6 @@ import org.sireum.U8;
 import org.sireum.Z;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.architecture.Visitor;
-import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.hamr.ir.JSON;
 import org.sireum.hamr.ir.MsgPack;
@@ -215,7 +214,7 @@ public class Util {
 		Util.clearMarkers(si, markerId);
 
 		for (int i = 0; i < reporter.messages().size().toInt(); i++) {
-			Message m = reporter.messages().apply(SlangUtils.toZ(i));
+			Message m = reporter.messages().apply(SlangUtil.toZ(i));
 
 			if (m.getPosOpt() == null) {
 				System.out.println(

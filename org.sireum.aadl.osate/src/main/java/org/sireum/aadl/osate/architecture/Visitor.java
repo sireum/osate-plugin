@@ -70,6 +70,7 @@ import org.osgi.framework.Bundle;
 import org.sireum.Option;
 import org.sireum.Some;
 import org.sireum.aadl.osate.PreferenceValues;
+import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.ir.AadlASTJavaFactory;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.AnnexLib;
@@ -209,7 +210,7 @@ public class Visitor {
 		if (!connInst.isEmpty()) {
 			connectionInstances = connInst.stream()
 					.map(ci -> factory.name(Arrays.asList(ci.getInstanceObjectPath().split("\\.")),
-							VisitorUtil.buildPosInfo(ci)))
+							VisitorUtil.buildPosition(ci)))
 					.collect(Collectors.toList());
 		}
 
@@ -269,7 +270,7 @@ public class Visitor {
 		}
 
 		if (!src.equals(dst)) {
-			return VisitorUtil.toIList(factory.connection(factory.name(na, VisitorUtil.buildPosInfo(conn)), src, dst,
+			return VisitorUtil.toIList(factory.connection(factory.name(na, VisitorUtil.buildPosition(conn)), src, dst,
 					kind, isBiDirectional, connectionInstances, properties, VisitorUtil.getUriFragment(connRef)));
 		} else if (dst.isEmpty() && src.isEmpty()) {
 			// System.out.println(conn.getName());
@@ -282,11 +283,11 @@ public class Visitor {
 	private org.sireum.hamr.ir.EndPoint buildEndPoint(ConnectionInstanceEnd cie) {
 		final List<String> component = Arrays.asList(cie.getComponentInstance().getInstanceObjectPath().split("\\."));
 		final Position componentPos = VisitorUtil
-				.buildPosInfo(cie.getComponentInstance().getInstantiatedObjects().get(0));
+				.buildPosition(cie.getComponentInstance().getInstantiatedObjects().get(0));
 
 		if (cie instanceof FeatureInstance) {
 			final List<String> feature = Arrays.asList(cie.getInstanceObjectPath().split("\\."));
-			final Position featurePos = VisitorUtil.buildPosInfo(cie.getInstantiatedObjects().get(0));
+			final Position featurePos = VisitorUtil.buildPosition(cie.getInstantiatedObjects().get(0));
 
 			final AadlASTJavaFactory.Direction direction = handleDirection(((FeatureInstance) cie).getDirection());
 
@@ -315,7 +316,7 @@ public class Visitor {
 		} else {
 			String fname = featurePre + "_" + fii.getName();
 			List<String> feature = VisitorUtil.add(component, fname);
-			final Position featurePos = VisitorUtil.buildPosInfo(fii.getInstantiatedObjects().get(0));
+			final Position featurePos = VisitorUtil.buildPosition(fii.getInstantiatedObjects().get(0));
 			AadlASTJavaFactory.Direction dir = null;
 			if (isInverse) {
 				dir = (handleDirection(fii.getDirection()) == AadlASTJavaFactory.Direction.In)
@@ -340,7 +341,7 @@ public class Visitor {
 		final List<String> component = Arrays
 				.asList(connInstEnd.getComponentInstance().getInstanceObjectPath().split("\\."));
 		final Position componentPos = VisitorUtil
-				.buildPosInfo(connInstEnd.getComponentInstance().getInstantiatedObjects().get(0));
+				.buildPosition(connInstEnd.getComponentInstance().getInstantiatedObjects().get(0));
 		if (connInstEnd instanceof FeatureInstance) {
 			FeatureInstance connElem = (FeatureInstance) connInstEnd;
 			String featurePre = connElem.getFeature().getName();
@@ -362,13 +363,13 @@ public class Visitor {
 
 			} else if (connElem.getCategory() == FeatureCategory.BUS_ACCESS) {
 				final List<String> feature = VisitorUtil.add(component, featurePre);
-				final Position featurePos = VisitorUtil.buildPosInfo(connElem.getInstantiatedObjects().get(0));
+				final Position featurePos = VisitorUtil.buildPosition(connElem.getInstantiatedObjects().get(0));
 				final AadlASTJavaFactory.Direction direction = AadlASTJavaFactory.Direction.InOut;
 				result = VisitorUtil.add(result, factory.endPoint(factory.name(component, componentPos),
 						factory.name(feature, featurePos), direction));
 			} else {
 				final List<String> feature = VisitorUtil.add(component, featurePre);
-				final Position featurePos = VisitorUtil.buildPosInfo(connElem.getInstantiatedObjects().get(0));
+				final Position featurePos = VisitorUtil.buildPosition(connElem.getInstantiatedObjects().get(0));
 				final AadlASTJavaFactory.Direction direction = handleDirection(connElem.getDirection());
 				result = VisitorUtil.add(result, factory.endPoint(factory.name(component, componentPos),
 						factory.name(feature, featurePos), direction));
@@ -427,23 +428,23 @@ public class Visitor {
 			result = VisitorUtil.addAll(result, flattenFeatureGroup(component, fgce.getFullName(), fgce, connElem));
 		} else if (ce instanceof BusSubcomponentImpl) {
 			result = VisitorUtil.add(result,
-					factory.endPoint(factory.name(feature, VisitorUtil.buildPosInfo(connElem.getConnectionEnd())), null,
+					factory.endPoint(factory.name(feature, VisitorUtil.buildPosition(connElem.getConnectionEnd())), null,
 							AadlASTJavaFactory.Direction.InOut));
 		} else if (ce instanceof BusAccessImpl) {
 			result = VisitorUtil.add(result,
 					factory.endPoint(
 							factory.name(component,
-									(connElem.getContext() != null) ? VisitorUtil.buildPosInfo(connElem.getContext())
+									(connElem.getContext() != null) ? VisitorUtil.buildPosition(connElem.getContext())
 											: null),
-							factory.name(feature, VisitorUtil.buildPosInfo(connElem.getConnectionEnd())),
+							factory.name(feature, VisitorUtil.buildPosition(connElem.getConnectionEnd())),
 							AadlASTJavaFactory.Direction.InOut));
 		} else {
 			result = VisitorUtil.add(result,
 					factory.endPoint(
 							factory.name(component,
-									(connElem.getContext() != null) ? VisitorUtil.buildPosInfo(connElem.getContext())
+									(connElem.getContext() != null) ? VisitorUtil.buildPosition(connElem.getContext())
 											: null),
-							factory.name(feature, VisitorUtil.buildPosInfo(connElem.getConnectionEnd())), dir));
+							factory.name(feature, VisitorUtil.buildPosition(connElem.getConnectionEnd())), dir));
 		}
 		if (result.size() > 1) {
 //			System.out.println("");
@@ -489,7 +490,7 @@ public class Visitor {
 					res = VisitorUtil.add(res,
 							factory.endPoint(factory.name(component, null),
 									factory.name(VisitorUtil.add(component, parentName + "_" + rf.getFullName()),
-											VisitorUtil.buildPosInfo(rf)),
+											VisitorUtil.buildPosition(rf)),
 									dir));
 				}
 			}
@@ -582,7 +583,7 @@ public class Visitor {
 		}
 
 		final org.sireum.hamr.ir.Name identifier = factory.name(currentPath,
-				VisitorUtil.buildPosInfo(compInst.getInstantiatedObjects().get(0)));
+				VisitorUtil.buildPosition(compInst.getInstantiatedObjects().get(0)));
 
 		final org.sireum.hamr.ir.Classifier classifier = compInst.getClassifier() != null
 				? factory.classifier(compInst.getClassifier().getQualifiedName())
@@ -674,7 +675,7 @@ public class Visitor {
 		}
 
 		org.sireum.hamr.ir.Name identifier = factory.name(currentPath,
-				VisitorUtil.buildPosInfo(featureInst.getInstantiatedObjects().get(0)));
+				VisitorUtil.buildPosition(featureInst.getInstantiatedObjects().get(0)));
 
 		final List<FeatureInstance> featureInstances = featureInst.getFeatureInstances();
 		if (featureInstances.isEmpty()) {
@@ -730,8 +731,8 @@ public class Visitor {
 		} else {
 			compConnMap.put(context, VisitorUtil.toISet(connRef));
 		}
-		return factory.connectionReference(factory.name(name, VisitorUtil.buildPosInfo(connRef.getConnection())),
-				factory.name(context, VisitorUtil.buildPosInfo(connRef.getContext().getInstantiatedObjects().get(0))),
+		return factory.connectionReference(factory.name(name, VisitorUtil.buildPosition(connRef.getConnection())),
+				factory.name(context, VisitorUtil.buildPosition(connRef.getContext().getInstantiatedObjects().get(0))),
 				path.equals(context));
 	}
 
@@ -739,7 +740,7 @@ public class Visitor {
 		final List<String> currentPath = VisitorUtil.add(path, connInst.getName());
 
 		final org.sireum.hamr.ir.Name name = factory.name(currentPath,
-				VisitorUtil.buildPosInfo(connInst.getInstantiatedObjects().get(0)));
+				VisitorUtil.buildPosition(connInst.getInstantiatedObjects().get(0)));
 
 		final List<org.sireum.hamr.ir.Property> properties = connInst.getOwnedPropertyAssociations()
 				.stream()
@@ -785,7 +786,7 @@ public class Visitor {
 		final List<String> currentPath = VisitorUtil.add(path, flowInst.getQualifiedName());
 
 		final org.sireum.hamr.ir.Name name = factory.name(currentPath,
-				VisitorUtil.buildPosInfo(flowInst.getInstantiatedObjects().get(0)));
+				VisitorUtil.buildPosition(flowInst.getInstantiatedObjects().get(0)));
 
 		AadlASTJavaFactory.FlowKind kind = null;
 		switch (flowInst.getFlowSpecification().getKind()) {
@@ -825,7 +826,7 @@ public class Visitor {
 		}
 
 		return factory.name(VisitorUtil.add(path, name),
-				VisitorUtil.buildPosInfo(featureRef.getInstantiatedObjects().get(0)));
+				VisitorUtil.buildPosition(featureRef.getInstantiatedObjects().get(0)));
 	}
 
 	protected org.sireum.hamr.ir.Property buildProperty(PropertyAssociation pa, List<String> path) {
@@ -842,7 +843,7 @@ public class Visitor {
 					+ prop.getQualifiedName() + " from " + cont.getQualifiedName() + " : " + t.getMessage());
 		}
 
-		return factory.property(factory.name(currentPath, VisitorUtil.buildPosInfo(prop)), propertyValues,
+		return factory.property(factory.name(currentPath, VisitorUtil.buildPosition(prop)), propertyValues,
 				VisitorUtil.iList());
 	}
 
@@ -916,14 +917,14 @@ public class Visitor {
 					.stream()
 					.map(fv -> factory.property(
 							factory.name(VisitorUtil.add(path, fv.getProperty().getQualifiedName()),
-									VisitorUtil.buildPosInfo(fv.getProperty())),
+									VisitorUtil.buildPosition(fv.getProperty())),
 							getPropertyExpressionValue(fv.getOwnedValue(), path), VisitorUtil.iList()))
 					.collect(Collectors.toList());
 			return VisitorUtil.toIList(factory.recordProp(properties));
 		} else if (pe instanceof ReferenceValue) {
 			final ReferenceValue rvx = (ReferenceValue) pe;
 			final org.sireum.hamr.ir.Name refName = factory.name(VisitorUtil.toIList(rvx.toString()),
-					VisitorUtil.buildPosInfo(rvx.getPath().getNamedElement()));
+					VisitorUtil.buildPosition(rvx.getPath().getNamedElement()));
 			return VisitorUtil.toIList(factory.referenceProp(refName));
 		} else if (pe instanceof InstanceReferenceValue) {
 
@@ -931,7 +932,7 @@ public class Visitor {
 			final String t = irv.getReferencedInstanceObject().getInstanceObjectPath();
 
 			return VisitorUtil.toIList(factory.referenceProp(factory.name(Arrays.asList(t.split("\\.")),
-					VisitorUtil.buildPosInfo(irv.getReferencedInstanceObject()))));
+					VisitorUtil.buildPosition(irv.getReferencedInstanceObject()))));
 		} else {
 			java.lang.System.err.println("Need to handle " + pe + " " + pe.eClass().getClassifierID());
 			if (pe.getClass().getName() != null) {
@@ -988,7 +989,7 @@ public class Visitor {
 				DataSubcomponent dsc = (DataSubcomponent) subcom;
 
 				final org.sireum.hamr.ir.Name subName = factory.name(VisitorUtil.toIList(dsc.getName()),
-						VisitorUtil.buildPosInfo(dsc));
+						VisitorUtil.buildPosition(dsc));
 				final List<org.sireum.hamr.ir.Property> fProperties = dsc.getOwnedPropertyAssociations()
 						.stream()
 						.map(op -> buildProperty(op, VisitorUtil.iList()))

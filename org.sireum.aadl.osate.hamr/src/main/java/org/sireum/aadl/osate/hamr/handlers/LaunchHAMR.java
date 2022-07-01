@@ -18,7 +18,6 @@ import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
 import org.sireum.Option;
 import org.sireum.Z;
-import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
@@ -26,8 +25,9 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.ErrorReport;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.Report;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.ApiUtil;
-import org.sireum.aadl.osate.util.SlangUtils;
+import org.sireum.aadl.osate.util.SlangUtil;
 import org.sireum.aadl.osate.util.Util;
+import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.arsit.ArsitBridge;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.message.Reporter;
@@ -155,9 +155,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Option<org.sireum.String> slangOutputCDirectory = ArsitBridge
 									.sireumOption(_cOutputDirectory);
 							boolean excludeComponentImpl = prompt.getOptionExcludesSlangImplementations();
-							Z bitWidth = SlangUtils.toZ(prompt.getOptionBitWidth());
-							Z maxStringSize = SlangUtils.toZ(prompt.getOptionMaxStringSize());
-							Z maxArraySize = SlangUtils.toZ(prompt.getOptionMaxSequenceSize());
+							Z bitWidth = SlangUtil.toZ(prompt.getOptionBitWidth());
+							Z maxStringSize = SlangUtil.toZ(prompt.getOptionMaxStringSize());
+							Z maxArraySize = SlangUtil.toZ(prompt.getOptionMaxSequenceSize());
 							boolean runTranspiler = PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getValue();
 							Option<org.sireum.String> camkesOutputDirectory = ArsitBridge
 									.sireumOption(_camkesOutputDir);

@@ -47,6 +47,7 @@ import org.osate.xtext.aadl2.errormodel.errorModel.impl.ErrorPropagationImpl;
 import org.osate.xtext.aadl2.errormodel.util.EMV2Properties;
 import org.osate.xtext.aadl2.errormodel.util.EMV2Util;
 import org.osate.xtext.aadl2.naming.Aadl2QualifiedNameProvider;
+import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.hamr.ir.BehaveStateMachine;
@@ -100,17 +101,17 @@ public class Emv2Visitor implements AnnexVisitor {
 		if (ne instanceof ErrorSource) {
 			ErrorSource es = (ErrorSource) ne;
 			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Source,
-					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosition(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorSink) {
 			ErrorSink es = (ErrorSink) ne;
 			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Sink,
-					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosition(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorPath) {
 			ErrorPath es = (ErrorPath) ne;
 			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Path,
-					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosition(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorPropagation) {
 			ErrorPropagation es = (ErrorPropagation) ne;
@@ -147,21 +148,21 @@ public class Emv2Visitor implements AnnexVisitor {
 				}
 			}
 			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Propagation,
-					factory.name(VisitorUtil.add(path, pathName2), VisitorUtil.buildPosInfo(ne)), errorTypes);
+					factory.name(VisitorUtil.add(path, pathName2), VisitorUtil.buildPosition(ne)), errorTypes);
 		} else if (ne instanceof ErrorBehaviorState) {
 			ErrorBehaviorState es = (ErrorBehaviorState) ne;
 			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.State,
-					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosition(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorBehaviorEvent) {
 			ErrorBehaviorEvent es = (ErrorBehaviorEvent) ne;
 			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Event,
-					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosition(ne)),
 					VisitorUtil.iList());
 		} else if (ne instanceof ErrorBehaviorTransition) {
 			ErrorBehaviorTransition es = (ErrorBehaviorTransition) ne;
 			return factory.emv2ElementRef(org.sireum.hamr.ir.AadlASTJavaFactory.Emv2ElementKind.Event,
-					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosInfo(ne)),
+					factory.name(VisitorUtil.add(path, EMV2Util.getPrintName(ne)), VisitorUtil.buildPosition(ne)),
 					VisitorUtil.iList());
 		} else {
 			System.out.println("not matched :" + ne.getClass().getName());
@@ -192,7 +193,7 @@ public class Emv2Visitor implements AnnexVisitor {
 				java.lang.System.err.println("Error encountered while trying to fetch property value for "
 						+ prop.getQualifiedName() + " from " + cont.getQualifiedName() + " : " + t.getMessage());
 			}
-			return factory.property(factory.name(currentPath, VisitorUtil.buildPosInfo(prop)), propertyValues, elems);
+			return factory.property(factory.name(currentPath, VisitorUtil.buildPosition(prop)), propertyValues, elems);
 		}).collect(Collectors.toList());
 
 //				pas.stream().map(pa -> {
@@ -253,11 +254,11 @@ public class Emv2Visitor implements AnnexVisitor {
 					: org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.Out;
 			Name curPath = null;
 			if (ep.getFeatureorPPRef() == null) {
-				curPath = factory.name(VisitorUtil.add(path, ep.getKind()), VisitorUtil.buildPosInfo(ep));
+				curPath = factory.name(VisitorUtil.add(path, ep.getKind()), VisitorUtil.buildPosition(ep));
 			} else {
 //				ep.getFeatureorPPRef().getFeatureorPP().getContainingComponentImpl().get
 				curPath = factory.name(VisitorUtil.add(path, getFeatureString(ep.getFeatureorPPRef()) + dirAdd),
-						VisitorUtil.buildPosInfo(ep.getFeatureorPPRef().getFeatureorPP()));
+						VisitorUtil.buildPosition(ep.getFeatureorPPRef().getFeatureorPP()));
 			}
 			List<Name> errorTokens = new ArrayList<>();
 			errorTokens.addAll(inErrorTokens);
@@ -271,7 +272,7 @@ public class Emv2Visitor implements AnnexVisitor {
 		if (EMV2Util.getContainingErrorModelLibrary(error) != null) {
 			return Optional.of(factory.name(VisitorUtil.add(
 					VisitorUtil.toIList(EMV2Util.getPrintName(EMV2Util.getContainingErrorModelLibrary(error))),
-					error.getName()), VisitorUtil.buildPosInfo(error)));
+					error.getName()), VisitorUtil.buildPosition(error)));
 		} else {
 			return Optional.empty();
 		}
@@ -327,11 +328,11 @@ public class Emv2Visitor implements AnnexVisitor {
 											: Stream.empty()))
 							.collect(Collectors.toList());
 					prop = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.Out,
-							factory.name(VisitorUtil.add(path, featureName), VisitorUtil.buildPosInfo(s)), errorP);
+							factory.name(VisitorUtil.add(path, featureName), VisitorUtil.buildPosition(s)), errorP);
 				} else {
 					prop = errorProp2Map(VisitorUtil.toIList(s), false, path).get(0);
 				}
-				sources.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(src)),
+				sources.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosition(src)),
 						org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Source, null, prop,
 						VisitorUtil.getUriFragment(src)));
 			}
@@ -358,11 +359,11 @@ public class Emv2Visitor implements AnnexVisitor {
 										: Stream.empty()))
 						.collect(Collectors.toList());
 				prop = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.In,
-						factory.name(VisitorUtil.add(path, featureName), VisitorUtil.buildPosInfo(snk)), errorP);
+						factory.name(VisitorUtil.add(path, featureName), VisitorUtil.buildPosition(snk)), errorP);
 			} else {
 				prop = errorProp2Map(VisitorUtil.toIList(snk.getIncoming()), false, path).get(0);
 			}
-			sinks.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(snk)),
+			sinks.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosition(snk)),
 					org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Sink, prop, null, VisitorUtil.getUriFragment(snk)));
 
 		});
@@ -389,7 +390,7 @@ public class Emv2Visitor implements AnnexVisitor {
 										: Stream.empty()))
 						.collect(Collectors.toList());
 				inError = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.In,
-						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosInfo(pth)), errorTokens);
+						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosition(pth)), errorTokens);
 			} else if (pth.isAllIncoming()) {
 				ErrorPropagation ep = EMV2Util.getErrorPropagation((EMV2Path) pth);
 				// System.out.println(ep);
@@ -410,7 +411,7 @@ public class Emv2Visitor implements AnnexVisitor {
 										: Stream.empty()))
 						.collect(Collectors.toList());
 				outError = factory.emv2Propagation(org.sireum.hamr.ir.AadlASTJavaFactory.PropagationDirection.Out,
-						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosInfo(pth.getOutgoing())),
+						factory.name(VisitorUtil.add(path, pp), VisitorUtil.buildPosition(pth.getOutgoing())),
 						errorTokens);
 			} else if (pth.isAllOutgoing()) {
 				Collection<ErrorPropagation> ep = EMV2Util.getOutgoingPropagationOrAll(pth);
@@ -419,7 +420,7 @@ public class Emv2Visitor implements AnnexVisitor {
 				outError = errorProp2Map(VisitorUtil.toIList(pth.getOutgoing()), false, path).get(0);
 			}
 
-			paths.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosInfo(pth)),
+			paths.add(factory.emv2Flow(factory.name(VisitorUtil.add(path, name), VisitorUtil.buildPosition(pth)),
 					org.sireum.hamr.ir.AadlASTJavaFactory.FlowKind.Path, inError, outError,
 					VisitorUtil.getUriFragment(pth)));
 		});
@@ -430,7 +431,7 @@ public class Emv2Visitor implements AnnexVisitor {
 
 		List<org.sireum.hamr.ir.ErrorEvent> events = EMV2Util.getAllErrorBehaviorEvents(root).stream().map(be -> {
 
-			return factory.errorEvent(factory.name(VisitorUtil.add(path, be.getName()), VisitorUtil.buildPosInfo(be)));
+			return factory.errorEvent(factory.name(VisitorUtil.add(path, be.getName()), VisitorUtil.buildPosition(be)));
 		}).collect(Collectors.toList());
 
 		List<ErrorTransition> transitions = EMV2Util.getAllErrorBehaviorTransitions(root)
@@ -450,13 +451,13 @@ public class Emv2Visitor implements AnnexVisitor {
 		Name id = null;
 		if (opc.getName() != null) {
 			List<String> cPath = VisitorUtil.add(path, opc.getName());
-			id = factory.name(cPath, VisitorUtil.buildPosInfo(opc));
+			id = factory.name(cPath, VisitorUtil.buildPosition(opc));
 		}
 
 		List<Name> source = VisitorUtil.iList();
 		if (!opc.isAllStates()) {
 			source = VisitorUtil.toIList(factory.name(VisitorUtil.toIList(opc.getState().getFullName()),
-					VisitorUtil.buildPosInfo(opc.getState())));
+					VisitorUtil.buildPosition(opc.getState())));
 		} else {
 			source = EMV2Util.getAllErrorBehaviorStates(opc.getContainingComponentImpl())
 					.stream()
@@ -491,7 +492,7 @@ public class Emv2Visitor implements AnnexVisitor {
 			el.forEach(e -> {
 				errorLibs.put(EMV2Util.getLibraryName(e), e);
 				libNames.add(
-						factory.name(VisitorUtil.toIList(EMV2Util.getLibraryName(e)), VisitorUtil.buildPosInfo(e)));
+						factory.name(VisitorUtil.toIList(EMV2Util.getLibraryName(e)), VisitorUtil.buildPosition(e)));
 			});
 		}
 
@@ -501,12 +502,12 @@ public class Emv2Visitor implements AnnexVisitor {
 				tempName = factory.name(
 						VisitorUtil.toIList(clause.getUseBehavior().getElementRoot().getName() + "."
 								+ clause.getUseBehavior().getQualifiedName()),
-						VisitorUtil.buildPosInfo(clause.getUseBehavior()));
+						VisitorUtil.buildPosition(clause.getUseBehavior()));
 				ErrorModelLibrary el2 = EMV2Util.getContainingErrorModelLibrary(clause.getUseBehavior());
 				if (el2 != null) {
 					errorLibs.put(EMV2Util.getLibraryName(el2), el2);
 					libNames.add(factory.name(VisitorUtil.toIList(EMV2Util.getLibraryName(el2)),
-							VisitorUtil.buildPosInfo(el2)));
+							VisitorUtil.buildPosition(el2)));
 
 				}
 			}
@@ -557,7 +558,7 @@ public class Emv2Visitor implements AnnexVisitor {
 	}
 
 	private Emv2Library emv2Lib(ErrorModelLibrary eml) {
-		Name name = factory.name(VisitorUtil.toIList(EMV2Util.getLibraryName(eml)), VisitorUtil.buildPosInfo(eml));
+		Name name = factory.name(VisitorUtil.toIList(EMV2Util.getLibraryName(eml)), VisitorUtil.buildPosition(eml));
 		List<String> useTypes = eml.getUseTypes().stream().map(ut -> ut.getName()).collect(Collectors.toList());
 		List<String> useExtends = eml.getExtends().stream().map(ue -> ue.getName()).collect(Collectors.toList());
 		List<ErrorTypeDef> etds = eml.getTypes().stream().map(et -> errorType(et)).collect(Collectors.toList());
@@ -609,7 +610,7 @@ public class Emv2Visitor implements AnnexVisitor {
 		Name tsn = factory.name(
 				VisitorUtil.add(VisitorUtil.toIList(EMV2Util.getPrintName(EMV2Util.getContainingErrorModelLibrary(ts))),
 						ts.getName()),
-				VisitorUtil.buildPosInfo(ts));
+				VisitorUtil.buildPosition(ts));
 
 		List<Name> errorTkn = ts.getTypeTokens()
 				.stream()
@@ -642,13 +643,13 @@ public class Emv2Visitor implements AnnexVisitor {
 		List<org.sireum.hamr.ir.ErrorEvent> events = ebsm.getEvents()
 				.stream()
 				.map(evnt -> factory.errorEvent(
-						factory.name(VisitorUtil.add(path, evnt.getName()), VisitorUtil.buildPosInfo(evnt))))
+						factory.name(VisitorUtil.add(path, evnt.getName()), VisitorUtil.buildPosition(evnt))))
 				.collect(Collectors.toList());
 
 		List<org.sireum.hamr.ir.ErrorState> states = ebsm.getStates()
 				.stream()
 				.map(st -> factory.errorState(
-						factory.name(VisitorUtil.add(path, st.getName()), VisitorUtil.buildPosInfo(st)), st.isIntial()))
+						factory.name(VisitorUtil.add(path, st.getName()), VisitorUtil.buildPosition(st)), st.isIntial()))
 				.collect(Collectors.toList());
 
 		List<ErrorTransition> transitions = ebsm.getTransitions()
@@ -685,7 +686,7 @@ public class Emv2Visitor implements AnnexVisitor {
 		List<String> cp = (ebt.getName() != null) ? VisitorUtil.add(path, ebt.getName()) : path;
 		Name name = null;
 		if (ebt.getName() != null) {
-			factory.name(cp, VisitorUtil.buildPosInfo(ebt));
+			factory.name(cp, VisitorUtil.buildPosition(ebt));
 		}
 
 		Name source = null;
@@ -697,7 +698,7 @@ public class Emv2Visitor implements AnnexVisitor {
 						.findFirst()
 						.get());
 			}
-			source = factory.name(VisitorUtil.add(VisitorUtil.iList(), ALL_STATE), VisitorUtil.buildPosInfo(ebt));
+			source = factory.name(VisitorUtil.add(VisitorUtil.iList(), ALL_STATE), VisitorUtil.buildPosition(ebt));
 		} else {
 			source = getStateName(ebt.getSource());
 		}
@@ -720,7 +721,7 @@ public class Emv2Visitor implements AnnexVisitor {
 				.toIList(EMV2Util.getPrintName(EMV2Util.getContainingErrorModelLibrary(state)));
 		List<String> bsm = eqp.getFullyQualifiedName(state.getOwner()).skipFirst(1).getSegments();
 		return factory.name(VisitorUtil.addAll(libName, VisitorUtil.add(bsm, state.getName())),
-				VisitorUtil.buildPosInfo(state));
+				VisitorUtil.buildPosition(state));
 	}
 
 	private org.sireum.hamr.ir.ErrorCondition errorCondition(ConditionExpression cond, List<String> path) {
@@ -745,7 +746,7 @@ public class Emv2Visitor implements AnnexVisitor {
 
 				return factory.conditionTrigger(
 						VisitorUtil.toIList(
-								factory.name(VisitorUtil.add(path, ee.getName()), VisitorUtil.buildPosInfo(ee))),
+								factory.name(VisitorUtil.add(path, ee.getName()), VisitorUtil.buildPosition(ee))),
 						VisitorUtil.iList());
 			}
 		} else if (cond instanceof AndExpression) {

@@ -24,6 +24,7 @@ import org.sireum.aadl.osate.securitymodel.secMF.SecMFPackage;
 import org.sireum.aadl.osate.securitymodel.secMF.SecModelLibrary;
 import org.sireum.aadl.osate.securitymodel.secMF.SecModelSubclause;
 import org.sireum.aadl.osate.securitymodel.secMF.SmfTypeDef;
+import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.hamr.ir.Name;
@@ -110,11 +111,11 @@ public class SmfVisitor implements AnnexVisitor {
 	}
 
 	private SmfType visitSMFTypeDef(SmfTypeDef typeDef) {
-		Name typeName = factory.name(VisitorUtil.toIList(typeDef.getFullName()), VisitorUtil.buildPosInfo(typeDef));
+		Name typeName = factory.name(VisitorUtil.toIList(typeDef.getFullName()), VisitorUtil.buildPosition(typeDef));
 		List<Name> parentName = VisitorUtil.iList();
 		if (typeDef.getType() != null) {
 			parentName = typeDef.getType().stream().map(it -> {
-				return factory.name(VisitorUtil.toIList(it.getFullName()), VisitorUtil.buildPosInfo(it));
+				return factory.name(VisitorUtil.toIList(it.getFullName()), VisitorUtil.buildPosition(it));
 			}).collect(Collectors.toList());
 		}
 		return factory.smfType(typeName, parentName);
@@ -161,8 +162,8 @@ public class SmfVisitor implements AnnexVisitor {
 	private SmfClassification visitClassification(SMFClassification smfc, List<String> path) {
 		NamedElement pname = smfc.getFeature();
 		NamedElement tname = smfc.getTypeRef();
-		Name portName = factory.name(VisitorUtil.add(path, pname.getName()), VisitorUtil.buildPosInfo(pname));
-		Name typeName = factory.name(VisitorUtil.add(path, tname.getName()), VisitorUtil.buildPosInfo(tname));
+		Name portName = factory.name(VisitorUtil.add(path, pname.getName()), VisitorUtil.buildPosition(pname));
+		Name typeName = factory.name(VisitorUtil.add(path, tname.getName()), VisitorUtil.buildPosition(tname));
 
 		return factory.smfClassification(portName, typeName);
 	}
@@ -172,13 +173,13 @@ public class SmfVisitor implements AnnexVisitor {
 		NamedElement sname = smfdc.getSrcName();
 		NamedElement tname = smfdc.getSnkName();
 
-		Name flowName = factory.name(VisitorUtil.add(path, fname.getName()), VisitorUtil.buildPosInfo(fname));
+		Name flowName = factory.name(VisitorUtil.add(path, fname.getName()), VisitorUtil.buildPosition(fname));
 		Name srcType = null;
 		if (sname != null) {
-			srcType = factory.name(VisitorUtil.add(path, sname.getName()), VisitorUtil.buildPosInfo(sname));
+			srcType = factory.name(VisitorUtil.add(path, sname.getName()), VisitorUtil.buildPosition(sname));
 		}
 
-		Name snkType = factory.name(VisitorUtil.add(path, tname.getName()), VisitorUtil.buildPosInfo(tname));
+		Name snkType = factory.name(VisitorUtil.add(path, tname.getName()), VisitorUtil.buildPosition(tname));
 
 		return factory.smfDeclass(flowName, srcType, snkType);
 	}

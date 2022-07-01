@@ -13,13 +13,13 @@ import org.osate.aadl2.instance.SystemInstance;
 import org.osate.testsupport.TestResourceSetHelper;
 import org.sireum.Os;
 import org.sireum.Os.Path;
-import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.tests.SireumTest;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
-import org.sireum.aadl.osate.util.IOUtils;
+import org.sireum.aadl.osate.util.IOUtil;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
+import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.message.Reporter;
 
 import com.google.inject.Inject;
@@ -96,6 +96,6 @@ public class AirUpdater extends SireumTest {
 		assert slangDir.exists() && slangDir.isDirectory() : slangDir + " does not exist";
 
 		File outFile = new File(slangDir, fname);
-		IOUtils.writeFile(outFile, air);
+		IOUtil.writeFile(outFile, air);
 	}
 }

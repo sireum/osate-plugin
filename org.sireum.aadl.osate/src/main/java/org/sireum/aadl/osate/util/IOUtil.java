@@ -15,7 +15,7 @@ import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-public class IOUtils {
+public class IOUtil {
 
 	public static Properties getPropertiesFile(File f) {
 		try {

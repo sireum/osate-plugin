@@ -62,8 +62,9 @@ import org.osate.ba.aadlba.util.AadlBaSwitch;
 import org.sireum.Option;
 import org.sireum.Z;
 import org.sireum.Z$;
-import org.sireum.aadl.osate.util.BAUtils;
-import org.sireum.aadl.osate.util.SlangUtils;
+import org.sireum.aadl.osate.util.BAUtil;
+import org.sireum.aadl.osate.util.SlangUtil;
+import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.ir.AadlASTFactory;
 import org.sireum.hamr.ir.Annex;
 import org.sireum.hamr.ir.Annex$;
@@ -226,7 +227,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 		List<BTSAssertion> _assertions = new ArrayList<>(); // NA for BA
 
-		Option<BTSAssertion> _invariant = SlangUtils.toNone(); // NA for BA
+		Option<BTSAssertion> _invariant = SlangUtil.toNone(); // NA for BA
 
 		List<BTSVariableDeclaration> _variables = new ArrayList<>();
 		if (o.getVariables() != null) {
@@ -274,7 +275,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 			categories.add(BTSStateCategory.byName("Execute").get());
 		}
 
-		Option<BTSAssertion> assertion = SlangUtils.toNone(); // NA for BA
+		Option<BTSAssertion> assertion = SlangUtil.toNone(); // NA for BA
 
 		BTSStateDeclaration bsd = BTSStateDeclaration$.MODULE$.apply(id, VisitorUtil.toISZ(categories), assertion);
 		push(bsd);
@@ -287,7 +288,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 		Z value = Z$.MODULE$.apply(object.getPriority());
 
-		Option<Z> priority = SlangUtils.toSome(value);
+		Option<Z> priority = SlangUtil.toSome(value);
 
 		List<Name> _sourceStates = new ArrayList<>();
 		BehaviorState src = object.getSourceState();
@@ -306,26 +307,26 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		}
 		BTSTransitionLabel label = BTSTransitionLabel$.MODULE$.apply(id, priority);
 
-		Option<BTSTransitionCondition> _transitionCondition = SlangUtils.toNone();
+		Option<BTSTransitionCondition> _transitionCondition = SlangUtil.toNone();
 		BehaviorCondition bc = object.getCondition();
 		if (bc != null) {
 			visit(bc);
 			if (bc instanceof DispatchCondition) {
-				_transitionCondition = SlangUtils.toSome(pop());
+				_transitionCondition = SlangUtil.toSome(pop());
 			} else if (bc instanceof ValueExpression) {
-				_transitionCondition = SlangUtils.toSome(BTSExecuteConditionExp$.MODULE$.apply(pop()));
+				_transitionCondition = SlangUtil.toSome(BTSExecuteConditionExp$.MODULE$.apply(pop()));
 			} else {
 				throw new RuntimeException("handle transition condition: " + bc);
 			}
 		}
 
-		Option<BTSBehaviorActions> actions = SlangUtils.toNone();
+		Option<BTSBehaviorActions> actions = SlangUtil.toNone();
 		if (object.getActionBlock() != null) {
 			visit(object.getActionBlock());
-			actions = SlangUtils.toSome(pop());
+			actions = SlangUtil.toSome(pop());
 		}
 
-		Option<BTSAssertion> assertion = SlangUtils.toNone(); // NA for BA
+		Option<BTSAssertion> assertion = SlangUtil.toNone(); // NA for BA
 
 		BTSTransition bt = BTSTransition$.MODULE$.apply(label, VisitorUtil.toISZ(_sourceStates), destState,
 				_transitionCondition, actions, assertion);
@@ -346,8 +347,8 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		} else {
 			BTSAction baa = (BTSAction) r;
 
-			Option<BTSAssertion> pre = SlangUtils.toNone();
-			Option<BTSAssertion> post = SlangUtils.toNone();
+			Option<BTSAssertion> pre = SlangUtil.toNone();
+			Option<BTSAssertion> post = SlangUtil.toNone();
 			BTSAssertedAction baa2 = BTSAssertedAction$.MODULE$.apply(pre, baa, post);
 
 			push(BTSBehaviorActions$.MODULE$.apply(Sequential, VisitorUtil.toISZ(baa2)));
@@ -359,10 +360,10 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 	public Boolean casePortSendAction(PortSendAction object) {
 		Name name = toName(object.getPort().getPort().getName());
 
-		Option<BTSExp> exp = SlangUtils.toNone();
+		Option<BTSExp> exp = SlangUtil.toNone();
 		if (object.getValueExpression() != null) {
 			visit(object.getValueExpression());
-			exp = SlangUtils.toSome(pop());
+			exp = SlangUtil.toSome(pop());
 		}
 
 		push(BTSPortOutAction$.MODULE$.apply(name, exp));
@@ -391,8 +392,8 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 			visit(ba);
 			BTSAction action = pop();
 
-			Option<BTSAssertion> pre = SlangUtils.toNone(); // NA for BA
-			Option<BTSAssertion> post = SlangUtils.toNone(); // NA for BA
+			Option<BTSAssertion> pre = SlangUtil.toNone(); // NA for BA
+			Option<BTSAssertion> post = SlangUtil.toNone(); // NA for BA
 			actions.add(BTSAssertedAction$.MODULE$.apply(pre, action, post));
 		}
 
@@ -416,7 +417,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		BTSConditionalActions ifBranch = BTSConditionalActions$.MODULE$.apply(ifCond, ifActions);
 
 		List<BTSConditionalActions> elseIfBranches = new ArrayList<>();
-		Option<BTSBehaviorActions> elseBranch = SlangUtils.toNone();
+		Option<BTSBehaviorActions> elseBranch = SlangUtil.toNone();
 		if (object.getElseStatement() != null) {
 			ElseStatement current = object.getElseStatement();
 
@@ -439,7 +440,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 					ElseStatement els = current;
 
 					visit(els.getBehaviorActions());
-					elseBranch = SlangUtils.toSome(pop());
+					elseBranch = SlangUtil.toSome(pop());
 
 					current = null;
 				} else {
@@ -484,8 +485,8 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 			BTSExp ne = pop();
 
 			// TODO:
-			Option<Name> paramName = SlangUtils.toSome(toSimpleName(f.getName()));
-			params.add(BTSFormalExpPair$.MODULE$.apply(paramName, SlangUtils.toSome(ne), SlangUtils.toNone()));
+			Option<Name> paramName = SlangUtil.toSome(toSimpleName(f.getName()));
+			params.add(BTSFormalExpPair$.MODULE$.apply(paramName, SlangUtil.toSome(ne), SlangUtil.toNone()));
 		}
 
 		push(BTSSubprogramCallAction$.MODULE$.apply(name, VisitorUtil.toISZ(params)));
@@ -542,7 +543,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 	@Override
 	public Boolean caseBehaviorVariable(BehaviorVariable object) {
 
-		Option<BTSVariableCategory.Type> category = SlangUtils.toNone();
+		Option<BTSVariableCategory.Type> category = SlangUtil.toNone();
 
 		List<BTSVariableDeclaration> names = new ArrayList<>();
 
@@ -554,12 +555,12 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 		Name name = toSimpleName(object.getName());
 
-		Option<BTSExp> assignExpression = SlangUtils.toNone();
+		Option<BTSExp> assignExpression = SlangUtil.toNone();
 		reportError(object.getOwnedValueConstant() == null, object, "Need to handle ba variable const init " + object);
 
-		Option<BLESSIntConst> arraySize = SlangUtils.toNone();
+		Option<BLESSIntConst> arraySize = SlangUtil.toNone();
 
-		Option<BTSAssertion> variableAssertion = SlangUtils.toNone(); // NA for BA
+		Option<BTSAssertion> variableAssertion = SlangUtil.toNone(); // NA for BA
 
 		BTSVariableDeclaration vd = BTSVariableDeclaration$.MODULE$.apply(name, category, varType, assignExpression,
 				arraySize, variableAssertion);
@@ -586,7 +587,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		reportError(arrayIndexes.isEmpty(), object, "Not handling array indexes yet");
 
 		BehaviorVariable bv = object.getBehaviorVariable();
-		push(BTSNameExp$.MODULE$.apply(toSimpleName(bv.getName()), SlangUtils.toNone()));
+		push(BTSNameExp$.MODULE$.apply(toSimpleName(bv.getName()), SlangUtil.toNone()));
 
 		return false;
 	}
@@ -601,12 +602,12 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 		visit(object.getData().get(1));
 		String attributeName = pop();
-		BTSAccessExp bts = BTSAccessExp$.MODULE$.apply(exp, attributeName, SlangUtils.toNone());
+		BTSAccessExp bts = BTSAccessExp$.MODULE$.apply(exp, attributeName, SlangUtil.toNone());
 
 		for (int i = 2; i < object.getData().size(); i++) {
 			visit(object.getData().get(i));
 			attributeName = pop();
-			bts = BTSAccessExp$.MODULE$.apply(bts, attributeName, SlangUtils.toNone());
+			bts = BTSAccessExp$.MODULE$.apply(bts, attributeName, SlangUtil.toNone());
 		}
 
 		push(bts);
@@ -616,7 +617,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 	@Override
 	public Boolean caseActualPortHolder(ActualPortHolder object) {
-		push(BTSNameExp$.MODULE$.apply(toName(object.getPort().getName()), SlangUtils.toNone()));
+		push(BTSNameExp$.MODULE$.apply(toName(object.getPort().getName()), SlangUtil.toNone()));
 
 		return false;
 	}
@@ -631,20 +632,20 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		BTSExp lhs = pop();
 
 		if (object.getSecondValue() != null) {
-			reportError(!BAUtils.isNoneEnumerator(bno), object.getSecondValue(),
+			reportError(!BAUtil.isNoneEnumerator(bno), object.getSecondValue(),
 					"Not expecting the none enumerator here");
 
 			visit(object.getSecondValue());
 			BTSExp rhs = pop();
 
-			BTSBinaryOp.Type op = BAUtils.toBinaryOp(bno);
+			BTSBinaryOp.Type op = BAUtil.toBinaryOp(bno);
 
-			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, SlangUtils.toNone()));
+			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, SlangUtil.toNone()));
 		} else {
-			if (BAUtils.isNoneEnumerator(ubo)) {
+			if (BAUtil.isNoneEnumerator(ubo)) {
 				push(lhs);
 			} else {
-				BAUtils.convertToUnaryExp(lhs, ubo);
+				BAUtil.convertToUnaryExp(lhs, ubo);
 			}
 		}
 
@@ -669,8 +670,8 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 						// TODO can we trust BA that this a valid enum value
 						StringLiteral sl = ((StringLiteral) secondElem);
 						BTSNameExp ne = BTSNameExp$.MODULE$
-								.apply(toSimpleName(object.getClassifier().getQualifiedName()), SlangUtils.toNone());
-						push(BTSAccessExp$.MODULE$.apply(ne, sl.getValue(), SlangUtils.toNone()));
+								.apply(toSimpleName(object.getClassifier().getQualifiedName()), SlangUtil.toNone());
+						push(BTSAccessExp$.MODULE$.apply(ne, sl.getValue(), SlangUtil.toNone()));
 					} else {
 						throw new RuntimeException("Looks like an enum ref but second element isn't a string lit");
 					}
@@ -725,10 +726,10 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		if (expressions.size() > 1) {
 			push(convertToBinaryExp(expressions, binOps));
 		} else {
-			if (BAUtils.isNoneEnumerator(unaryOp)) {
+			if (BAUtil.isNoneEnumerator(unaryOp)) {
 				push(expressions.get(0));
 			} else {
-				push(BAUtils.convertToUnaryExp(expressions.get(0), unaryOp));
+				push(BAUtil.convertToUnaryExp(expressions.get(0), unaryOp));
 			}
 		}
 		return false;
@@ -750,11 +751,11 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		// TODO: operator precedence in BA (or is it just paren expr?)
 
 		for (int i = 0; i < expressions.size() - 1; i++) {
-			BTSBinaryOp.Type op = BAUtils.toBinaryOp(binOps.get(i).getLiteral());
+			BTSBinaryOp.Type op = BAUtil.toBinaryOp(binOps.get(i).getLiteral());
 
 			// treat list as a stack
 			BTSBinaryExp be = BTSBinaryExp$.MODULE$.apply(op, expressions.get(i), expressions.get(i + 1),
-					SlangUtils.toNone());
+					SlangUtil.toNone());
 			expressions.set(i + 1, be);
 		}
 
@@ -768,14 +769,14 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		BTSExp lhs = pop();
 
 		if (object.getSecondExpression() != null) {
-			BTSBinaryOp.Type op = BAUtils.toBinaryOp(object.getRelationalOperator().getLiteral());
+			BTSBinaryOp.Type op = BAUtil.toBinaryOp(object.getRelationalOperator().getLiteral());
 
 			visit(object.getSecondExpression());
 			BTSExp rhs = pop();
 
-			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, SlangUtils.toNone()));
+			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, SlangUtil.toNone()));
 		} else {
-			reportError(BAUtils.isNoneEnumerator(object.getRelationalOperator()), object,
+			reportError(BAUtil.isNoneEnumerator(object.getRelationalOperator()), object,
 					"Expecting the none enumerator here");
 
 			push(lhs);
@@ -807,14 +808,14 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 	@Override
 	public Boolean caseBehaviorIntegerLiteral(BehaviorIntegerLiteral object) {
 		push(BTSLiteralExp$.MODULE$.apply(IntegerLiteral, String.valueOf(object.getValue()),
-				BAUtils.buildPosInfo(object)));
+				BAUtil.buildPosInfo(object)));
 		return false;
 	}
 
 	@Override
 	public Boolean caseBehaviorStringLiteral(BehaviorStringLiteral object) {
 		push(BTSLiteralExp$.MODULE$.apply(StringLiteral, String.valueOf(object.getValue()),
-				BAUtils.buildPosInfo(object)));
+				BAUtil.buildPosInfo(object)));
 		return false;
 	}
 

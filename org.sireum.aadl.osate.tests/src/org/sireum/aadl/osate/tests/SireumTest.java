@@ -28,7 +28,7 @@ import org.osate.testsupport.TestResourceSetHelper;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
-import org.sireum.aadl.osate.util.IOUtils;
+import org.sireum.aadl.osate.util.IOUtil;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.hamr.ir.Aadl;
@@ -51,7 +51,7 @@ public abstract class SireumTest extends XtextTest {
 		try {
 			File root = modelDir;
 
-			List<File> aadlFiles = IOUtils.collectFiles(root, ".aadl", true);
+			List<File> aadlFiles = IOUtil.collectFiles(root, ".aadl", true);
 			File sysImplFile = new File(root, sysFilename);
 			assert sysImplFile.exists() : sysImplFile.getAbsolutePath() + "doesn't exist";
 
@@ -74,18 +74,18 @@ public abstract class SireumTest extends XtextTest {
 
 			if (writeResults) {
 				File results = new File(root, sysImplName + "_results.json");
-				IOUtils.writeFile(results, ir);
+				IOUtil.writeFile(results, ir);
 			}
 
 			File expectedFile = new File(root, sysImplName + ".json");
 			String expected = null;
 			if (generateExpected) {
-				IOUtils.writeFile(expectedFile, ir);
+				IOUtil.writeFile(expectedFile, ir);
 				expected = ir;
 			} else {
 				Assert.assertTrue("Expected results not found: " + expectedFile.getCanonicalPath(),
 						expectedFile.exists());
-				expected = IOUtils.readFile(expectedFile);
+				expected = IOUtil.readFile(expectedFile);
 			}
 
 			Assert.assertEquals(expected, ir);

@@ -40,14 +40,14 @@ import org.sireum.Cli.SireumHamrPhantomOption;
 import org.sireum.Cli.SireumTopOption;
 import org.sireum.Option;
 import org.sireum.SireumApi;
-import org.sireum.aadl.osate.architecture.VisitorUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
 import org.sireum.aadl.osate.util.ApiUtil;
-import org.sireum.aadl.osate.util.IOUtils;
+import org.sireum.aadl.osate.util.IOUtil;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
+import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.message.Reporter;
 
@@ -250,7 +250,7 @@ public class Phantom implements IApplication {
 					outputFile = new File(slangDir, fname);
 				}
 
-				IOUtils.writeFile(outputFile, air);
+				IOUtil.writeFile(outputFile, air);
 
 				// IOUtils.zipFile(outFile);
 
