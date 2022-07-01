@@ -41,7 +41,7 @@ public class AadlProjectUtil {
 	}
 
 	public static List<AadlSystem> findSystems(File f) {
-		List<AadlSystem> ret = new ArrayList<AadlSystem>();
+		List<AadlSystem> ret = new ArrayList<>();
 		if (f.isDirectory()) {
 
 			List<File> systems = IOUtils.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
@@ -109,7 +109,7 @@ public class AadlProjectUtil {
 			Optional<File> systemImplFile = AadlSystem.getSystemImplementationFile(systemFile);
 			String systemImpl = AadlSystem.getSystemImplementationClassifierName(systemFile);
 
-			List<AadlProject> projects = new ArrayList<AadlProject>();
+			List<AadlProject> projects = new ArrayList<>();
 			for (String p : _projects) {
 				File projectRoot = new File(systemFile.getParentFile(), p);
 
@@ -133,13 +133,14 @@ public class AadlProjectUtil {
 		public List<File> aadlFiles;
 
 		public AadlProject(String _projectName, File _rootDirectory, List<File> _aadlFiles) {
-			assertHalt (_projectName != null, "_projectName cannot be null");
-			assertHalt (_rootDirectory != null && _rootDirectory.exists() && _rootDirectory.isDirectory(), "_rootDirectory is not a directory: " + _rootDirectory);
+			assertHalt(_projectName != null, "_projectName cannot be null");
+			assertHalt(_rootDirectory != null && _rootDirectory.exists() && _rootDirectory.isDirectory(),
+					"_rootDirectory is not a directory: " + _rootDirectory);
 			assertHalt(!_aadlFiles.isEmpty(), "No aadl files for " + projectName + " in root dir " + rootDirectory);
 
-			this.projectName = _projectName;
-			this.rootDirectory = _rootDirectory;
-			this.aadlFiles = _aadlFiles;
+			projectName = _projectName;
+			rootDirectory = _rootDirectory;
+			aadlFiles = _aadlFiles;
 		}
 	}
 
@@ -149,9 +150,9 @@ public class AadlProjectUtil {
 		public File systemImplementationFile;
 
 		public SystemFileContainer(AadlProject _proj, String _projectRelativePath, File _systemImplementationFile) {
-			this.proj = _proj;
-			this.projectRelativePath = _projectRelativePath;
-			this.systemImplementationFile = _systemImplementationFile;
+			proj = _proj;
+			projectRelativePath = _projectRelativePath;
+			systemImplementationFile = _systemImplementationFile;
 		}
 
 		public String getProjectRelativeURI() {
@@ -171,14 +172,15 @@ public class AadlProjectUtil {
 
 			assertHalt(_systemImplementationName != null, "_systemImplementationName cannot be null");
 			assertHalt(_projects.size() > 0, "There must be at least one project");
-			assertHalt (!_systemFileContainer.isPresent() || (_systemFileContainer.get().systemImplementationFile.exists()
-					&& _systemFileContainer.get().systemImplementationFile.isFile()),
+			assertHalt(
+					!_systemFileContainer.isPresent() || (_systemFileContainer.get().systemImplementationFile.exists()
+							&& _systemFileContainer.get().systemImplementationFile.isFile()),
 					"_systemFileContainer should either be empty or be a valid file: " + _systemFileContainer);
 
-			this.systemImplementationName = _systemImplementationName;
-			this.systemFileContainer = _systemFileContainer;
-			this.projects = _projects;
-			this.slangOutputFile = _slangOutputFile;
+			systemImplementationName = _systemImplementationName;
+			systemFileContainer = _systemFileContainer;
+			projects = _projects;
+			slangOutputFile = _slangOutputFile;
 		}
 
 		public AadlSystem(String _systemImplementationName, Optional<SystemFileContainer> _systemFileContainer,
@@ -215,7 +217,8 @@ public class AadlProjectUtil {
 
 			assertHalt(_systemImplementationName != null, AadlSystem.KEY_SYSTEM_IMPL + " property must be present");
 
-			assertHalt(!_systemImplementationFile.isPresent()
+			assertHalt(
+					!_systemImplementationFile.isPresent()
 							|| (_systemImplementationFile.get().exists() && _systemImplementationFile.get().isFile()),
 					_systemImplementationFile.get() + " must be a file");
 

@@ -41,7 +41,7 @@ public class SmfVisitor implements AnnexVisitor {
 	private Visitor coreVisitor = null;
 
 	public SmfVisitor(Visitor visitor) {
-		this.coreVisitor = visitor;
+		coreVisitor = visitor;
 	}
 
 	@Override
@@ -64,11 +64,16 @@ public class SmfVisitor implements AnnexVisitor {
 		List<SmfClassification> classes = VisitorUtil.iList();
 		List<SmfDeclass> declasses = VisitorUtil.iList();
 
-
 		if (!temp.isEmpty()) {
-			classes = temp.get(0).getClassification().stream().map(it -> visitClassification(it, path))
+			classes = temp.get(0)
+					.getClassification()
+					.stream()
+					.map(it -> visitClassification(it, path))
 					.collect(Collectors.toList());
-			declasses = temp.get(0).getDeclassification().stream().map(it -> visitDeclass(it, path))
+			declasses = temp.get(0)
+					.getDeclassification()
+					.stream()
+					.map(it -> visitDeclass(it, path))
 					.collect(Collectors.toList());
 		}
 
@@ -116,7 +121,7 @@ public class SmfVisitor implements AnnexVisitor {
 	}
 
 	private HashSet<SecModelLibrary> getAllPackages(Element root) {
-		HashSet<SecModelLibrary> secLibs = new HashSet<SecModelLibrary>();
+		HashSet<SecModelLibrary> secLibs = new HashSet<>();
 		HashSet<ModelUnit> seens = new HashSet(); // no need of seen set as the circular imports are not allowed
 		PackageSection ps = AadlUtil.getContainingPackageSection(((SystemInstance) root).getComponentClassifier());
 		EList<ComponentImplementation> ais = AadlUtil.getAllComponentImpl();
@@ -132,7 +137,9 @@ public class SmfVisitor implements AnnexVisitor {
 				if (head != null && head instanceof AadlPackage) {
 					secLibs.addAll(AnnexUtil
 							.getAllActualAnnexLibraries((AadlPackage) head, SecMFPackage.eINSTANCE.getSecModelLibrary())
-							.stream().map(al -> (SecModelLibrary) al).collect(Collectors.toList()));
+							.stream()
+							.map(al -> (SecModelLibrary) al)
+							.collect(Collectors.toList()));
 
 				}
 			}

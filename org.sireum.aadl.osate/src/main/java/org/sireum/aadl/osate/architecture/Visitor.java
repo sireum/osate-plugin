@@ -76,7 +76,6 @@ import org.sireum.hamr.ir.AnnexLib;
 import org.sireum.message.Position;
 import org.sireum.message.Reporter;
 
-
 public class Visitor {
 	protected final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 
@@ -143,7 +142,7 @@ public class Visitor {
 
 	public Map<String, org.sireum.hamr.ir.Component> getDataComponents() {
 		// TODO should be an immutable copy
-		return this.datamap;
+		return datamap;
 	}
 
 	public Option<org.sireum.hamr.ir.Aadl> convert(Element root, boolean includeDataComponents) {
@@ -176,15 +175,12 @@ public class Visitor {
 		}
 	}
 
-	private List<org.sireum.hamr.ir.Connection> buildConnection(
-			ConnectionReference connRef,
-			List<String> path,
+	private List<org.sireum.hamr.ir.Connection> buildConnection(ConnectionReference connRef, List<String> path,
 			ComponentInstance compInst) {
 		final Connection conn = connRef.getConnection();
 		List<String> name = VisitorUtil.add(path, conn.getName());
 		final ConnectionInstanceEnd scie = connRef.getSource();
 		final ConnectionInstanceEnd dcie = connRef.getDestination();
-
 
 //		List<org.sireum.hamr.ir.EndPoint> sep = buildEndPoint(sfii, path);
 //		List<org.sireum.hamr.ir.EndPoint> dep = buildEndPoint(dcie, path);
@@ -211,8 +207,9 @@ public class Visitor {
 
 		List<org.sireum.hamr.ir.Name> connectionInstances = VisitorUtil.iList();
 		if (!connInst.isEmpty()) {
-			connectionInstances = connInst.stream().map(ci -> factory
-					.name(Arrays.asList(ci.getInstanceObjectPath().split("\\.")), VisitorUtil.buildPosInfo(ci)))
+			connectionInstances = connInst.stream()
+					.map(ci -> factory.name(Arrays.asList(ci.getInstanceObjectPath().split("\\.")),
+							VisitorUtil.buildPosInfo(ci)))
 					.collect(Collectors.toList());
 		}
 
@@ -233,9 +230,15 @@ public class Visitor {
 		if (src.size() == 1 && dst.size() == 1 && src.get(0).getFeature().nonEmpty()
 				&& dst.get(0).getFeature().nonEmpty() && (conn instanceof FeatureGroupConnection)) {
 
-			scala.collection.immutable.Seq<org.sireum.String> srcNameSeq = src.get(0).getFeature().get().name()
+			scala.collection.immutable.Seq<org.sireum.String> srcNameSeq = src.get(0)
+					.getFeature()
+					.get()
+					.name()
 					.elements();
-			scala.collection.immutable.Seq<org.sireum.String> dstNameSeq = dst.get(0).getFeature().get().name()
+			scala.collection.immutable.Seq<org.sireum.String> dstNameSeq = dst.get(0)
+					.getFeature()
+					.get()
+					.name()
 					.elements();
 
 			// eclipse jdt hack
@@ -252,8 +255,10 @@ public class Visitor {
 
 		final List<String> na = name;
 
-		final List<org.sireum.hamr.ir.Property> properties = conn.getOwnedPropertyAssociations().stream()
-				.map(pa -> buildProperty(pa, na)).collect(Collectors.toList());
+		final List<org.sireum.hamr.ir.Property> properties = conn.getOwnedPropertyAssociations()
+				.stream()
+				.map(pa -> buildProperty(pa, na))
+				.collect(Collectors.toList());
 
 		if (src.size() != dst.size()) {
 			throw new RuntimeException("Incorrect translation!");
@@ -264,9 +269,7 @@ public class Visitor {
 		}
 
 		if (!src.equals(dst)) {
-			return VisitorUtil.toIList(factory.connection(factory.name(na, VisitorUtil.buildPosInfo(conn)),
-					src,
-					dst,
+			return VisitorUtil.toIList(factory.connection(factory.name(na, VisitorUtil.buildPosInfo(conn)), src, dst,
 					kind, isBiDirectional, connectionInstances, properties, VisitorUtil.getUriFragment(connRef)));
 		} else if (dst.isEmpty() && src.isEmpty()) {
 			// System.out.println(conn.getName());
@@ -299,16 +302,14 @@ public class Visitor {
 		}
 	}
 
-	private List<org.sireum.hamr.ir.EndPoint> flattenFeatureGroupInstance(
-			FeatureInstance fii,
-			String featurePre,
-			List<String> component,
-			Position componentPos, Boolean isInverse) {
+	private List<org.sireum.hamr.ir.EndPoint> flattenFeatureGroupInstance(FeatureInstance fii, String featurePre,
+			List<String> component, Position componentPos, Boolean isInverse) {
 		List<org.sireum.hamr.ir.EndPoint> result = VisitorUtil.iList();
 		if (fii.getCategory() == FeatureCategory.FEATURE_GROUP && !fii.getFeatureInstances().isEmpty()) {
-			result = fii
-					.getFeatureInstances().stream().flatMap(fisl -> flattenFeatureGroupInstance(fisl,
-							featurePre + "_" + fii.getName(), component, componentPos, isInverse).stream())
+			result = fii.getFeatureInstances()
+					.stream()
+					.flatMap(fisl -> flattenFeatureGroupInstance(fisl, featurePre + "_" + fii.getName(), component,
+							componentPos, isInverse).stream())
 					.collect(Collectors.toList());
 
 		} else {
@@ -316,14 +317,16 @@ public class Visitor {
 			List<String> feature = VisitorUtil.add(component, fname);
 			final Position featurePos = VisitorUtil.buildPosInfo(fii.getInstantiatedObjects().get(0));
 			AadlASTJavaFactory.Direction dir = null;
-			if(isInverse) {
-				dir = (handleDirection(fii.getDirection()) == AadlASTJavaFactory.Direction.In) ? AadlASTJavaFactory.Direction.Out : AadlASTJavaFactory.Direction.In;
+			if (isInverse) {
+				dir = (handleDirection(fii.getDirection()) == AadlASTJavaFactory.Direction.In)
+						? AadlASTJavaFactory.Direction.Out
+						: AadlASTJavaFactory.Direction.In;
 			} else {
 				dir = handleDirection(fii.getDirection());
 			}
 
-			result = VisitorUtil.add(result, factory.endPoint(factory.name(component, componentPos),
-					factory.name(feature, featurePos), dir));
+			result = VisitorUtil.add(result,
+					factory.endPoint(factory.name(component, componentPos), factory.name(feature, featurePos), dir));
 		}
 		if (result.size() > 1) {
 //			System.out.println("");
@@ -352,11 +355,10 @@ public class Visitor {
 				// Feature ff = connElem.getFeature().getRefined();
 				final String fp = featurePre;
 
-				result = VisitorUtil.addAll(
-						result,
-						connElem.getFeatureInstances().stream().flatMap(fii -> flattenFeatureGroupInstance(fii, fp,
-								component, componentPos, false).stream())
-								.collect(Collectors.toList()));
+				result = VisitorUtil.addAll(result, connElem.getFeatureInstances()
+						.stream()
+						.flatMap(fii -> flattenFeatureGroupInstance(fii, fp, component, componentPos, false).stream())
+						.collect(Collectors.toList()));
 
 			} else if (connElem.getCategory() == FeatureCategory.BUS_ACCESS) {
 				final List<String> feature = VisitorUtil.add(component, featurePre);
@@ -380,7 +382,6 @@ public class Visitor {
 //				});
 //			}
 
-
 //			final List<String> component = (connElem.getgetContext() != null) && (connElem
 //			.getContext() instanceof Subcomponent)
 //			? VisitorUtil.add(path, connElem.getContext().getName())
@@ -400,10 +401,10 @@ public class Visitor {
 
 	private List<org.sireum.hamr.ir.EndPoint> buildEndPoint(ConnectedElement connElem, List<String> path) {
 		List<org.sireum.hamr.ir.EndPoint> result = VisitorUtil.iList();
-		final List<String> component = (connElem.getContext() != null) && (connElem
-				.getContext() instanceof Subcomponent)
-				? VisitorUtil.add(path, connElem.getContext().getName())
-				: path;
+		final List<String> component = (connElem.getContext() != null)
+				&& (connElem.getContext() instanceof Subcomponent)
+						? VisitorUtil.add(path, connElem.getContext().getName())
+						: path;
 		final List<String> feature = (connElem.getContext() instanceof FeatureGroup)
 				? VisitorUtil.add(component,
 						connElem.getContext().getName() + "_" + connElem.getConnectionEnd().getName())
@@ -467,57 +468,69 @@ public class Visitor {
 			// }
 		*/
 		if (fgt != null) {
-		for (Feature f : fgt.getAllFeatures()) {
-			Feature rf = f;// .getRefined();
+			for (Feature f : fgt.getAllFeatures()) {
+				Feature rf = f;// .getRefined();
 //			if (rf == null) {
 //				rf = f;
 //			}
-			if (rf instanceof FeatureGroupImpl) {
-				res = VisitorUtil.addAll(res, flattenFeatureGroup(component, parentName + "_" + rf.getFullName(),
-						(FeatureGroupImpl) rf, connElem));
-			} else {
-				AadlASTJavaFactory.Direction dir = null;
-				if (AadlUtil.isIncomingFeature(rf) && AadlUtil.isOutgoingFeature(rf)) {
-					dir = AadlASTJavaFactory.Direction.InOut;
-				} else if (AadlUtil.isIncomingFeature(rf)) {
-					dir = fgi.isInverse() ? AadlASTJavaFactory.Direction.Out : AadlASTJavaFactory.Direction.In;
+				if (rf instanceof FeatureGroupImpl) {
+					res = VisitorUtil.addAll(res, flattenFeatureGroup(component, parentName + "_" + rf.getFullName(),
+							(FeatureGroupImpl) rf, connElem));
 				} else {
-					dir = fgi.isInverse() ? AadlASTJavaFactory.Direction.In : AadlASTJavaFactory.Direction.Out;
-				}
+					AadlASTJavaFactory.Direction dir = null;
+					if (AadlUtil.isIncomingFeature(rf) && AadlUtil.isOutgoingFeature(rf)) {
+						dir = AadlASTJavaFactory.Direction.InOut;
+					} else if (AadlUtil.isIncomingFeature(rf)) {
+						dir = fgi.isInverse() ? AadlASTJavaFactory.Direction.Out : AadlASTJavaFactory.Direction.In;
+					} else {
+						dir = fgi.isInverse() ? AadlASTJavaFactory.Direction.In : AadlASTJavaFactory.Direction.Out;
+					}
 
-				res = VisitorUtil.add(res,
-						factory.endPoint(factory.name(component, null),
-								factory.name(VisitorUtil.add(component, parentName + "_" + rf.getFullName()),
-										VisitorUtil.buildPosInfo(rf)),
-								dir));
+					res = VisitorUtil.add(res,
+							factory.endPoint(factory.name(component, null),
+									factory.name(VisitorUtil.add(component, parentName + "_" + rf.getFullName()),
+											VisitorUtil.buildPosInfo(rf)),
+									dir));
+				}
 			}
 		}
-	}
 		return res;
 	}
 
 	private org.sireum.hamr.ir.Component buildComponent(ComponentInstance compInst, List<String> path) {
 		final List<String> currentPath = VisitorUtil.add(path, compInst.getName());
 
-		final List<org.sireum.hamr.ir.Feature> features = compInst.getFeatureInstances().stream()
-				.map(fi -> buildFeature(fi, currentPath)).collect(Collectors.toList());
+		final List<org.sireum.hamr.ir.Feature> features = compInst.getFeatureInstances()
+				.stream()
+				.map(fi -> buildFeature(fi, currentPath))
+				.collect(Collectors.toList());
 
 		final List<org.sireum.hamr.ir.ConnectionInstance> connectionInstances = compInst.getConnectionInstances()
-				.stream().map(ci -> buildConnectionInst(ci, currentPath)).collect(Collectors.toList());
+				.stream()
+				.map(ci -> buildConnectionInst(ci, currentPath))
+				.collect(Collectors.toList());
 
-		final List<org.sireum.hamr.ir.Property> properties = compInst.getOwnedPropertyAssociations().stream()
-				.map(pa -> buildProperty(pa, currentPath)).collect(Collectors.toList());
+		final List<org.sireum.hamr.ir.Property> properties = compInst.getOwnedPropertyAssociations()
+				.stream()
+				.map(pa -> buildProperty(pa, currentPath))
+				.collect(Collectors.toList());
 
-		final List<org.sireum.hamr.ir.Flow> flows = compInst.getFlowSpecifications().stream()
-				.map(fs -> buildFlow(fs, currentPath)).collect(Collectors.toList());
+		final List<org.sireum.hamr.ir.Flow> flows = compInst.getFlowSpecifications()
+				.stream()
+				.map(fs -> buildFlow(fs, currentPath))
+				.collect(Collectors.toList());
 
-		final List<org.sireum.hamr.ir.Component> subComponents = compInst.getComponentInstances().stream()
-				.map(ci -> buildComponent(ci, currentPath)).collect(Collectors.toList());
+		final List<org.sireum.hamr.ir.Component> subComponents = compInst.getComponentInstances()
+				.stream()
+				.map(ci -> buildComponent(ci, currentPath))
+				.collect(Collectors.toList());
 
 		List<org.sireum.hamr.ir.Connection> connections = VisitorUtil.iList();
 		if (compConnMap.containsKey(currentPath)) {
-			connections = compConnMap.get(currentPath).stream()
-					.flatMap(c -> buildConnection(c, currentPath, compInst).stream()).collect(Collectors.toList());
+			connections = compConnMap.get(currentPath)
+					.stream()
+					.flatMap(c -> buildConnection(c, currentPath, compInst).stream())
+					.collect(Collectors.toList());
 		}
 
 		AadlASTJavaFactory.ComponentCategory category = null;
@@ -598,7 +611,7 @@ public class Visitor {
 			if (f.getFeatureClassifier() instanceof NamedElement) {
 				if (((NamedElement) f.getFeatureClassifier()).getQualifiedName() != null) {
 					classifier = factory
-						.classifier(((NamedElement) f.getFeatureClassifier()).getQualifiedName().toString());
+							.classifier(((NamedElement) f.getFeatureClassifier()).getQualifiedName().toString());
 				} else {
 					System.out.println("failing here");
 				}
@@ -608,8 +621,10 @@ public class Visitor {
 			}
 		}
 
-		final List<org.sireum.hamr.ir.Property> properties = featureInst.getOwnedPropertyAssociations().stream()
-				.map(pa -> buildProperty(pa, currentPath)).collect(Collectors.toList());
+		final List<org.sireum.hamr.ir.Property> properties = featureInst.getOwnedPropertyAssociations()
+				.stream()
+				.map(pa -> buildProperty(pa, currentPath))
+				.collect(Collectors.toList());
 
 		AadlASTJavaFactory.FeatureCategory category = null;
 		switch (featureInst.getCategory()) {
@@ -658,8 +673,7 @@ public class Visitor {
 		default: // do nothing
 		}
 
-		org.sireum.hamr.ir.Name identifier = factory.name(
-				currentPath,
+		org.sireum.hamr.ir.Name identifier = factory.name(currentPath,
 				VisitorUtil.buildPosInfo(featureInst.getInstantiatedObjects().get(0)));
 
 		final List<FeatureInstance> featureInstances = featureInst.getFeatureInstances();
@@ -700,7 +714,8 @@ public class Visitor {
 		} else {
 			final boolean isInverse = ((FeatureGroupImpl) f).isInverse();
 			final List<org.sireum.hamr.ir.Feature> features = featureInstances.stream()
-					.map(fi -> buildFeature(fi, currentPath)).collect(Collectors.toList());
+					.map(fi -> buildFeature(fi, currentPath))
+					.collect(Collectors.toList());
 			return factory.featureGroup(identifier, features, isInverse, category, properties,
 					VisitorUtil.getUriFragment(featureInst));
 		}
@@ -726,8 +741,10 @@ public class Visitor {
 		final org.sireum.hamr.ir.Name name = factory.name(currentPath,
 				VisitorUtil.buildPosInfo(connInst.getInstantiatedObjects().get(0)));
 
-		final List<org.sireum.hamr.ir.Property> properties = connInst.getOwnedPropertyAssociations().stream()
-				.map(pa -> buildProperty(pa, currentPath)).collect(Collectors.toList());
+		final List<org.sireum.hamr.ir.Property> properties = connInst.getOwnedPropertyAssociations()
+				.stream()
+				.map(pa -> buildProperty(pa, currentPath))
+				.collect(Collectors.toList());
 
 		AadlASTJavaFactory.ConnectionKind kind = null;
 		switch (connInst.getKind()) {
@@ -751,8 +768,10 @@ public class Visitor {
 			break;
 		}
 
-		final List<org.sireum.hamr.ir.ConnectionReference> connectionRefs = connInst.getConnectionReferences().stream()
-				.map(ci -> buildConnectionRef(ci, path)).collect(Collectors.toList());
+		final List<org.sireum.hamr.ir.ConnectionReference> connectionRefs = connInst.getConnectionReferences()
+				.stream()
+				.map(ci -> buildConnectionRef(ci, path))
+				.collect(Collectors.toList());
 
 		final org.sireum.hamr.ir.EndPoint src = buildEndPoint(connInst.getSource());
 
@@ -765,8 +784,7 @@ public class Visitor {
 
 		final List<String> currentPath = VisitorUtil.add(path, flowInst.getQualifiedName());
 
-		final org.sireum.hamr.ir.Name name = factory
-				.name(currentPath,
+		final org.sireum.hamr.ir.Name name = factory.name(currentPath,
 				VisitorUtil.buildPosInfo(flowInst.getInstantiatedObjects().get(0)));
 
 		AadlASTJavaFactory.FlowKind kind = null;
@@ -841,23 +859,19 @@ public class Visitor {
 	protected List<org.sireum.hamr.ir.PropertyValue> getPropertyExpressionValue(PropertyExpression pe,
 			List<String> path) {
 
-		if(pe instanceof BooleanLiteral) {
+		if (pe instanceof BooleanLiteral) {
 			final String b = Boolean.toString(((BooleanLiteral) pe).getValue());
 			return VisitorUtil.toIList(factory.valueProp(b));
-		}
-		else if(pe instanceof NumberValue) {
+		} else if (pe instanceof NumberValue) {
 			return VisitorUtil.toIList(getUnitProp((NumberValue) pe));
-		}
-		else if(pe instanceof StringLiteral) {
+		} else if (pe instanceof StringLiteral) {
 			final String v = ((StringLiteral) pe).getValue();
 			return VisitorUtil.toIList(factory.valueProp(v));
-		}
-		else if(pe instanceof RangeValue) {
+		} else if (pe instanceof RangeValue) {
 			final RangeValue rv = (RangeValue) pe;
 			return VisitorUtil
 					.toIList(factory.rangeProp(getUnitProp(rv.getMinimumValue()), getUnitProp(rv.getMaximumValue())));
-		}
-		else if(pe instanceof ClassifierValue) {
+		} else if (pe instanceof ClassifierValue) {
 			final Classifier cv = ((ClassifierValue) pe).getClassifier();
 			if (cv instanceof DataClassifier) {
 				processDataType((DataClassifier) cv);
@@ -868,65 +882,57 @@ public class Visitor {
 				return VisitorUtil.iList();
 			}
 			// return VisitorUtil.toIList(factory.classifierProp(cv.getQualifiedName()));
-		}
-		else if(pe instanceof ListValue) {
+		} else if (pe instanceof ListValue) {
 			final ListValue lv = (ListValue) pe;
 			List<org.sireum.hamr.ir.PropertyValue> elems = VisitorUtil.iList();
 			for (PropertyExpression e : lv.getOwnedListElements()) {
 				elems = VisitorUtil.addAll(elems, getPropertyExpressionValue(e, path));
 			}
 			return elems;
-		}
-		else if(pe instanceof NamedValue) {
+		} else if (pe instanceof NamedValue) {
 			final NamedValue nv = (NamedValue) pe;
 			final AbstractNamedValue nv2 = nv.getNamedValue();
 
 			if (nv2 instanceof EnumerationLiteral) {
 				final EnumerationLiteral el = (EnumerationLiteral) nv2;
 				return VisitorUtil.toIList(factory.valueProp(el.getFullName()));
-			}
-			else if (nv2 instanceof Property) {
+			} else if (nv2 instanceof Property) {
 				final Property _p = (Property) nv2;
 				if (_p.getDefaultValue() != null) {
 					return getPropertyExpressionValue(_p.getDefaultValue(), path);
 				} else {
 					return VisitorUtil.toIList(factory.valueProp(_p.getQualifiedName()));
 				}
-			}
-			else if (nv2 instanceof PropertyConstant) {
+			} else if (nv2 instanceof PropertyConstant) {
 				final PropertyConstant pc = (PropertyConstant) nv2;
 				return getPropertyExpressionValue(pc.getConstantValue(), path);
-			}
-			else {
+			} else {
 				java.lang.System.err.println("Not handling " + pe.eClass().getClassifierID() + " " + nv2);
 				return VisitorUtil.iList();
 			}
-		}
-		else if (pe instanceof RecordValue) {
+		} else if (pe instanceof RecordValue) {
 			final RecordValue rvy = (RecordValue) pe;
-			final List<org.sireum.hamr.ir.Property> properties = rvy.getOwnedFieldValues().stream()
+			final List<org.sireum.hamr.ir.Property> properties = rvy.getOwnedFieldValues()
+					.stream()
 					.map(fv -> factory.property(
 							factory.name(VisitorUtil.add(path, fv.getProperty().getQualifiedName()),
 									VisitorUtil.buildPosInfo(fv.getProperty())),
 							getPropertyExpressionValue(fv.getOwnedValue(), path), VisitorUtil.iList()))
 					.collect(Collectors.toList());
 			return VisitorUtil.toIList(factory.recordProp(properties));
-		}
-		else if (pe instanceof ReferenceValue) {
+		} else if (pe instanceof ReferenceValue) {
 			final ReferenceValue rvx = (ReferenceValue) pe;
 			final org.sireum.hamr.ir.Name refName = factory.name(VisitorUtil.toIList(rvx.toString()),
 					VisitorUtil.buildPosInfo(rvx.getPath().getNamedElement()));
 			return VisitorUtil.toIList(factory.referenceProp(refName));
-		}
-		else if (pe instanceof InstanceReferenceValue) {
+		} else if (pe instanceof InstanceReferenceValue) {
 
 			final InstanceReferenceValue irv = (InstanceReferenceValue) pe;
 			final String t = irv.getReferencedInstanceObject().getInstanceObjectPath();
 
 			return VisitorUtil.toIList(factory.referenceProp(factory.name(Arrays.asList(t.split("\\.")),
 					VisitorUtil.buildPosInfo(irv.getReferencedInstanceObject()))));
-		}
-		else {
+		} else {
 			java.lang.System.err.println("Need to handle " + pe + " " + pe.eClass().getClassifierID());
 			if (pe.getClass().getName() != null) {
 				return VisitorUtil.toIList(factory.classifierProp(pe.getClass().getName()));
@@ -983,18 +989,23 @@ public class Visitor {
 
 				final org.sireum.hamr.ir.Name subName = factory.name(VisitorUtil.toIList(dsc.getName()),
 						VisitorUtil.buildPosInfo(dsc));
-				final List<org.sireum.hamr.ir.Property> fProperties = dsc.getOwnedPropertyAssociations().stream()
-						.map(op -> buildProperty(op, VisitorUtil.iList())).collect(Collectors.toList());
+				final List<org.sireum.hamr.ir.Property> fProperties = dsc.getOwnedPropertyAssociations()
+						.stream()
+						.map(op -> buildProperty(op, VisitorUtil.iList()))
+						.collect(Collectors.toList());
 
 				DataClassifier sct = null;
 				if (dsc.getDataSubcomponentType() instanceof DataClassifier) {
 					sct = (DataClassifier) dsc.getDataSubcomponentType();
 				} else {
-					if(dsc.getDataSubcomponentType() != null) {
+					if (dsc.getDataSubcomponentType() != null) {
 						String mesg = "Expecting a DataClassifier for " + dsc.qualifiedName()
-							+ " but found something of type " + dsc.getDataSubcomponentType().getClass().getSimpleName()
-							+ (dsc.getDataSubcomponentType().hasName() ? " whose name is " + dsc.getDataSubcomponentType().getQualifiedName() : "")
-							+ ". This can happen when your model has multiple copies of the same resource.";
+								+ " but found something of type "
+								+ dsc.getDataSubcomponentType().getClass().getSimpleName()
+								+ (dsc.getDataSubcomponentType().hasName()
+										? " whose name is " + dsc.getDataSubcomponentType().getQualifiedName()
+										: "")
+								+ ". This can happen when your model has multiple copies of the same resource.";
 
 						throw new RuntimeException(mesg);
 					}
@@ -1032,8 +1043,7 @@ public class Visitor {
 							VisitorUtil.iList(), // flows
 							VisitorUtil.iList(), // modes
 							VisitorUtil.iList(), // annexes
-							""
-					);
+							"");
 
 					subComponents = VisitorUtil.add(subComponents, sub);
 				}
@@ -1071,12 +1081,10 @@ public class Visitor {
 				VisitorUtil.iList(), // flows
 				VisitorUtil.iList(), // modes
 				annexes, // annexes
-				""
-		);
+				"");
 		datamap.put(name, c);
 		return c;
 	}
-
 
 	private AadlASTJavaFactory.Direction handleDirection(DirectionType d) {
 		AadlASTJavaFactory.Direction direction = null;

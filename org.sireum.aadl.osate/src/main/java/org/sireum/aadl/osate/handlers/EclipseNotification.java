@@ -17,11 +17,11 @@ public class EclipseNotification extends AbstractNotificationPopup {
 	String message;
 
 	/**
-     * @param display
-     */
+	 * @param display
+	 */
 	private EclipseNotification(Display display) {
 		super(display);
-    }
+	}
 
 	public EclipseNotification(Display display, String _title, String _message) {
 		super(display);

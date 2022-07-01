@@ -6,9 +6,9 @@ import org.sireum.aadl.osate.util.Util.SerializerType;
 public class PreferenceValues {
 
 	public static final String SIREUM_MARKER_ID = "org.sireum.plugin.marker";
-	
+
 	public static final String SIREUM_PLUGIN_ID = "Sireum";
-	
+
 	public enum Generators {
 		SERIALIZE
 	}
@@ -28,4 +28,3 @@ public class PreferenceValues {
 		store.setValue(PreferenceConstants.PROCESS_BA_OPT, value);
 	}
 }
-

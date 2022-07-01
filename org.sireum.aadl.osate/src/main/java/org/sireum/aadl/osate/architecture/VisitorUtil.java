@@ -163,7 +163,7 @@ public class VisitorUtil {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param cond report error if cond is false
 	 * @param o used to get AADL position info if non-null
 	 * @param msg the error message

@@ -85,8 +85,8 @@ public class AirUpdater extends SireumTest {
 		Reporter reporter = Util.createReporter();
 		String air = Util.serialize(Util.getAir(instance, true, reporter), SerializerType.JSON);
 
-		assert(!reporter.hasError());
-		
+		assert (!reporter.hasError());
+
 		String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
 		String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ".json";
 

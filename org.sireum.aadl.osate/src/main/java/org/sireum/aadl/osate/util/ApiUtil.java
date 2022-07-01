@@ -28,7 +28,7 @@ public class ApiUtil {
 			Class<?> clsIS = Class.forName("org.sireum.IS");
 			Class<?> clsZ = Class.forName("org.sireum.Z");
 			Class<?> clsReporter = Class.forName("org.sireum.message.Reporter");
-			
+
 			Method m = clsHAMR.getMethod("codeGenR", //
 					clsAadl, // model
 					//

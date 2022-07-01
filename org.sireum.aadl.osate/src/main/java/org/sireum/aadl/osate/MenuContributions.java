@@ -16,7 +16,7 @@ public class MenuContributions extends CompoundContributionItem {
 
 	@Override
 	protected IContributionItem[] getContributionItems() {
-		List<IContributionItem> l = new ArrayList<IContributionItem>();
+		List<IContributionItem> l = new ArrayList<>();
 
 		l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
 				map("org.sireum.commands.launchsireum.generator", Generators.SERIALIZE.toString())));
@@ -49,7 +49,7 @@ public class MenuContributions extends CompoundContributionItem {
 
 	private Map<String, String> map(String... args) {
 		assert (args.length % 2 == 0);
-		Map<String, String> m = new HashMap<String, String>();
+		Map<String, String> m = new HashMap<>();
 		for (int i = 0; i < args.length; i += 2) {
 			m.put(args[i], args[i + 1]);
 		}

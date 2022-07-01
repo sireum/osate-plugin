@@ -261,7 +261,7 @@ public class Util {
 							iresource.getWorkspace().run(runnable, null, IWorkspace.AVOID_UPDATE, null);
 
 						} catch (CoreException e) {
-							 e.printStackTrace();
+							e.printStackTrace();
 						}
 					}
 				}

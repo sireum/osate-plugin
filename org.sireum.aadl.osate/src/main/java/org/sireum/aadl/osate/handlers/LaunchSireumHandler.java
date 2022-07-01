@@ -40,7 +40,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 		writeToConsole("Generating AIR ...");
 
 		Reporter reporter = Util.createReporter();
-		
+
 		Aadl model = Util.getAir(si, true, console, reporter);
 
 		if (model != null && !reporter.hasError()) {
@@ -68,7 +68,7 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 
 			return Status.OK_STATUS;
 		} else {
-			// TODO: convert errors to markers.  Need to add a way for
+			// TODO: convert errors to markers. Need to add a way for
 			// users to clear them -- see hamr plugin
 			Dialog.showError(getToolName(), "AIR generation failed");
 			writeToConsole("AIR generation failed");
