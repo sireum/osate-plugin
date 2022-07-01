@@ -55,6 +55,7 @@ import org.sireum.aadl.osate.awas.util.AwasUtil;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.ir.Aadl;
+import org.sireum.message.Reporter;
 
 public class AwasServerHandler extends AbstractSireumHandler implements IElementUpdater {
 
@@ -104,7 +105,12 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 							Element elem = AadlUtil.getElement(res2);
 							if (elem instanceof ComponentInstance) {
 								ComponentInstance root2 = (ComponentInstance) elem;
-								Aadl air2 = Util.getAir(root2, true, console);
+								Reporter reporter = Util.createReporter();
+								Aadl air2 = Util.getAir(root2, true, console, reporter);
+								if(reporter.hasError()) {
+									// TODO probably should handle this. The errors could be
+									// converted to markers -- see harm plugin
+								}
 								org.sireum.awas.ast.Model awasModel2 = org.sireum.awas.AADLBridge.AadlHandler
 										.buildAwasModel(air2);
 
@@ -164,13 +170,16 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 //			Set<IProject> projects = new HashSet();
 //			projects.add(currProject);
 
-			Aadl air = Util.getAir(root, true, console);
+			Reporter reporter = Util.createReporter();
+			Aadl air = Util.getAir(root, true, console, reporter);
 
-			if (air != null) {
+			if (air != null && !reporter.hasError()) {
 
 				org.sireum.awas.ast.Model awasModel = org.sireum.awas.AADLBridge.AadlHandler.buildAwasModel(air);
 				server = new AwasServer(awasModel, root.getSystemInstance(),
 						HandlerUtil.getActiveWorkbenchWindowChecked(event).getActivePage());
+			} else {
+				// TODO could convert errors to markes -- see hamr plugin
 			}
 		}
 

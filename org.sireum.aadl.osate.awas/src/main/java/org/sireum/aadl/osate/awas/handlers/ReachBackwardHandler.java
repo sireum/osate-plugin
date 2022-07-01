@@ -39,6 +39,7 @@ import org.sireum.awas.flow.FlowGraph;
 import org.sireum.awas.flow.FlowNode;
 import org.sireum.awas.symbol.SymbolTable;
 import org.sireum.hamr.ir.Aadl;
+import org.sireum.message.Reporter;
 import org.sireum.util.ConsoleTagReporter;
 
 public class ReachBackwardHandler extends AbstractSireumHandler {
@@ -66,7 +67,11 @@ public class ReachBackwardHandler extends AbstractSireumHandler {
 
 			MessageConsole console = displayConsole("Awas Console");
 			try {
-				Aadl model = Util.getAir(ios.get(0).getSystemInstance(), true, console);
+				Reporter reporter = Util.createReporter();
+				Aadl model = Util.getAir(ios.get(0).getSystemInstance(), true, console, reporter);
+				if(reporter.hasError()) {
+					// TODO should handle this.  Could convert errors to markers -- see hamr plugin
+				}
 				Model awasModel = org.sireum.awas.slang.Aadl2Awas$.MODULE$.apply(model);
 				SymbolTable st = org.sireum.awas.symbol.SymbolTable$.MODULE$.apply(awasModel, new ConsoleTagReporter());
 				FlowGraph<FlowNode, FlowEdge<FlowNode>> graph = org.sireum.awas.flow.FlowGraph$.MODULE$.apply(awasModel,
