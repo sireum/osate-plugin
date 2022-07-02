@@ -64,6 +64,10 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 				}
 			});
 
+			if (reporter.hasMessage()) {
+				Util.addMarkers(PreferenceValues.SIREUM_MARKER_ID, si, reporter);
+			}
+
 			refreshWorkspace();
 
 			return Status.OK_STATUS;
@@ -72,6 +76,9 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 			// users to clear them -- see hamr plugin
 			Dialog.showError(getToolName(), "AIR generation failed");
 			writeToConsole("AIR generation failed");
+
+			Util.addMarkers(PreferenceValues.SIREUM_MARKER_ID, si, reporter);
+
 			return Status.CANCEL_STATUS;
 		}
 	}

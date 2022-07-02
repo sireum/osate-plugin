@@ -23,11 +23,6 @@ public class MenuContributions extends CompoundContributionItem {
 				"org.sireum.commands.launchhamr", //
 				map("org.sireum.commands.launchhamr.generator", Generators.HAMR_GENERATOR.toString())));
 
-		l.add(getItem(//
-				"Clear HAMR Markers", //
-				"org.sireum.commands.clearhamrmarkers", //
-				map("org.sireum.commands.clearhamrmarkers.generator", Generators.HAMR_GENERATOR.toString())));
-
 		l.add(new org.eclipse.jface.action.Separator());
 
 		return l.toArray(new IContributionItem[0]);

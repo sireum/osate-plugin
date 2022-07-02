@@ -8,6 +8,12 @@
         <commandParameter id="org.sireum.commands.launchsireum.generator"
                           name="Generator"/>
       </command>
+      <command id="org.sireum.commands.clearmarkers"
+               name="Clear Sireum Markers"
+               defaultHandler="org.sireum.aadl.osate.handlers.EraseMarkersHandler">
+        <commandParameter id="org.sireum.commands.clearmarkers.generator"
+                          name="Generator"/>
+      </command>       
    </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution
@@ -27,4 +33,12 @@
             name="Sireum HAMR">
       </page>
    </extension>
+   <extension
+         id="org.sireum.aadl.osate.marker"
+         name="Sireum Issue"
+         point="org.eclipse.core.resources.markers">
+         <super type="org.eclipse.core.resources.problemmarker"></super>
+         <super type="org.eclipse.core.resources.textmarker"></super>
+         --<persistent value="false"></persistent>
+   </extension>     
 </plugin>

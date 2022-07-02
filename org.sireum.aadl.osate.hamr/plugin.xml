@@ -8,12 +8,6 @@
         <commandParameter id="org.sireum.commands.launchhamr.generator"
                           name="Generator"/>
       </command>
-      <command id="org.sireum.commands.clearhamrmarkers"
-               name="Clear HAMR Markers"
-               defaultHandler="org.sireum.aadl.osate.hamr.handlers.EraseHamrMarkersHandler">
-        <commandParameter id="org.sireum.commands.clearhamrmarkers.generator"
-                          name="Generator"/>
-      </command>      
    </extension>   
    <extension point="org.eclipse.ui.menus">
      <!-- CASE menu bar-->
@@ -93,6 +87,7 @@
          id="org.sireum.aadl.osate.hamr.marker"
          name="HAMR Issue"
          point="org.eclipse.core.resources.markers">
+         <super type="org.sireum.aadl.osate.marker"></super>
          <super type="org.eclipse.core.resources.problemmarker"></super>
          <super type="org.eclipse.core.resources.textmarker"></super>
          --<persistent value="false"></persistent>

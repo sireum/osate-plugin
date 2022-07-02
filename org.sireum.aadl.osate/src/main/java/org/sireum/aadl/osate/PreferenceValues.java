@@ -5,12 +5,12 @@ import org.sireum.aadl.osate.util.Util.SerializerType;
 
 public class PreferenceValues {
 
-	public static final String SIREUM_MARKER_ID = "org.sireum.plugin.marker";
+	public static final String SIREUM_MARKER_ID = "org.sireum.aadl.osate.marker";
 
 	public static final String SIREUM_PLUGIN_ID = "Sireum";
 
 	public enum Generators {
-		SERIALIZE
+		SERIALIZE, MARKERS
 	}
 
 	public static SerializerType getSERIALIZATION_METHOD_OPT() {

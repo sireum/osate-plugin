@@ -206,17 +206,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 									reporter);
 
-							// Currently the only way to remove HAMR markers is to resolve the issue
-							// and then run the full HAMR toolchain. The expected approach would be to
-							// do a quick validation check when the resource is saved. That could be
-							// done by:
-							// a) doing all the checking at the OSATE level
-							// b) having a HAMR cli option that just runs the symbol res phase
-							// and then a validation check
-							// For now just making HAMR markers an opt-in feature
-							if (PreferenceValues.HAMR_PROPOGATE_MARKERS.getValue()) {
-								Util.addMarkers(PreferenceValues.HAMR_MARKER_ID, si, reporter);
-							}
+							Util.addMarkers(PreferenceValues.HAMR_MARKER_ID, si, reporter);
 
 							return codegenRet.toInt();
 						});

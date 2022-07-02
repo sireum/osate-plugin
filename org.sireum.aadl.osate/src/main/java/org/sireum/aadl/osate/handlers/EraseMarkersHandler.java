@@ -1,4 +1,4 @@
-package org.sireum.aadl.osate.hamr.handlers;
+package org.sireum.aadl.osate.handlers;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -6,16 +6,14 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.osate.aadl2.Element;
-import org.sireum.aadl.osate.hamr.PreferenceValues;
-import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
 
-public class EraseHamrMarkersHandler extends AbstractSireumHandler {
+public class EraseMarkersHandler extends AbstractSireumHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		Util.clearMarkers(PreferenceValues.HAMR_MARKER_ID);
+		Util.clearAllSireumMarkers();
 
 		return Status.OK_STATUS;
 	}

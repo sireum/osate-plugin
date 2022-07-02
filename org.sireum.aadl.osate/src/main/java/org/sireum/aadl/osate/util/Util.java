@@ -211,7 +211,7 @@ public class Util {
 	 * @param si
 	 */
 	public static void addMarkers(String markerId, SystemInstance si, Reporter reporter) {
-		Util.clearMarkers(si, markerId);
+		Util.clearMarkers(si, markerId, true);
 
 		for (int i = 0; i < reporter.messages().size().toInt(); i++) {
 			Message m = reporter.messages().apply(SlangUtil.toZ(i));
@@ -268,27 +268,31 @@ public class Util {
 		}
 	}
 
-	public static void clearMarkers(SystemInstance si, String markerId) {
+	public static void clearAllSireumMarkers() {
+		clearMarkers(PreferenceValues.SIREUM_MARKER_ID, true);
+	}
+
+	public static void clearMarkers(SystemInstance si, String markerId, boolean includeSubtypes) {
 		ResourceSet rs = si.eResource().getResourceSet();
 		for (Resource r : rs.getResources()) {
 			IFile i = Util.toIFile(r.getURI());
 			try {
-				i.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);
+				i.deleteMarkers(markerId, includeSubtypes, IResource.DEPTH_INFINITE);
 			} catch (CoreException e) {
 				// e.printStackTrace();
 			}
 		}
 	}
 
-	public static void clearMarkers(String markerId) {
+	public static void clearMarkers(String markerId, boolean includeSubtypes) {
 		IProject project = SelectionHelper.getProject();
 		if (project != null) {
 			try {
 				for (IResource r : project.members()) {
-					r.deleteMarkers(markerId, true, IResource.DEPTH_INFINITE);
+					r.deleteMarkers(markerId, includeSubtypes, IResource.DEPTH_INFINITE);
 				}
 			} catch (CoreException e) {
-				e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 	}

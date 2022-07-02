@@ -18,8 +18,18 @@ public class MenuContributions extends CompoundContributionItem {
 	protected IContributionItem[] getContributionItems() {
 		List<IContributionItem> l = new ArrayList<>();
 
-		l.add(getItem("Serialize AIR to file", "org.sireum.commands.launchsireum",
-				map("org.sireum.commands.launchsireum.generator", Generators.SERIALIZE.toString())));
+		l.add(getItem("Serialize AIR to file", //
+				"org.sireum.commands.launchsireum", //
+				map("org.sireum.commands.launchsireum.generator", //
+						Generators.SERIALIZE.toString())));
+
+		l.add(new org.eclipse.jface.action.Separator());
+
+		l.add(getItem(//
+				"Clear Sireum Markers", //
+				"org.sireum.commands.clearmarkers", //
+				map("org.sireum.commands.clearmarkers.generator", //
+						Generators.MARKERS.toString())));
 
 		l.add(new org.eclipse.jface.action.Separator());
 

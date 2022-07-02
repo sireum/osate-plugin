@@ -77,13 +77,6 @@ public class PreferenceValues {
 			Optional.of("Check Information Flow Preservation Proof"), //
 			false);
 
-	public static final BoolOption HAMR_PROPOGATE_MARKERS = new BoolOption(//
-			"HAMR_PROPOGATE_MARKERS", //
-			"Display HAMR issues in OSATE", //
-			Optional.of(
-					"Converts HAMR messages that contain position information into OSATE markers (e.g. populates the Problems View)"), //
-			true);
-
 	public static String sireumCVC4() {
 		String shome = System.getProperty("org.sireum.home");
 		if (shome != null && (new File(shome).exists())) {
