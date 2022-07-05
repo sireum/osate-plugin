@@ -46,6 +46,16 @@ public class SmfVisitor implements AnnexVisitor {
 	}
 
 	@Override
+	public String getVisitorName() {
+		return "SMF Visitor";
+	}
+
+	@Override
+	public List<String> getHandledAnnexes() {
+		return VisitorUtil.toIList(SMF_ID);
+	}
+
+	@Override
 	public List<Annex> visit(ComponentInstance root, List<String> path, Reporter reporter) {
 		return visit(root.getComponentClassifier(), path, reporter);
 	}

@@ -114,7 +114,7 @@ public class VisitorUtil {
 		Position p = VisitorUtil.buildPosition(object);
 		return p == null ? SlangUtil.toNone() : SlangUtil.toSome(p);
 	}
-	
+
 	public static Position buildPosition(EObject elem) {
 
 		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();

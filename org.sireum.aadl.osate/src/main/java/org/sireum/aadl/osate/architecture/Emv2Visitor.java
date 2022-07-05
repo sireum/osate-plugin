@@ -75,6 +75,16 @@ public class Emv2Visitor implements AnnexVisitor {
 	}
 
 	@Override
+	public String getVisitorName() {
+		return "EMV2 Visitor";
+	}
+
+	@Override
+	public List<String> getHandledAnnexes() {
+		return VisitorUtil.toIList("emv2");
+	}
+
+	@Override
 	public List<Annex> visit(ComponentInstance root, List<String> path, Reporter reporter) {
 		return VisitorUtil.toIList(visitEmv2Comp(root, path));
 	}

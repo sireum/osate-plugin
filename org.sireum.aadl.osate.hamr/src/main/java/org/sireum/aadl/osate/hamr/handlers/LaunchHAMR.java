@@ -27,6 +27,7 @@ import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.ApiUtil;
 import org.sireum.aadl.osate.util.SlangUtil;
 import org.sireum.aadl.osate.util.Util;
+import org.sireum.aadl.osate.util.Util.SeverityLevel;
 import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.arsit.ArsitBridge;
 import org.sireum.hamr.ir.Aadl;
@@ -206,7 +207,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 									reporter);
 
-							Util.addMarkers(PreferenceValues.HAMR_MARKER_ID, si, reporter);
+							// only propagate error messages to eclipse's problem view (all messages are emitted
+							// to the console view)
+							Util.addMarkers(PreferenceValues.HAMR_MARKER_ID, VisitorUtil.toIList(SeverityLevel.Error),
+									si, reporter);
 
 							return codegenRet.toInt();
 						});
@@ -250,7 +254,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		} else {
 			Dialog.showError(getToolName(), "AIR generation failed");
 			writeToConsole("AIR generation failed");
-			Util.addMarkers(PreferenceValues.HAMR_MARKER_ID, si, reporter);
+
+			Util.addMarkers(PreferenceValues.HAMR_MARKER_ID, VisitorUtil.toIList(), si, reporter);
+
 			return Status.CANCEL_STATUS;
 		}
 

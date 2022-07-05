@@ -15,6 +15,7 @@ import org.osate.ui.dialogs.Dialog;
 import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
+import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.message.Reporter;
 
@@ -64,20 +65,16 @@ public class LaunchSireumHandler extends AbstractSireumHandler {
 				}
 			});
 
-			if (reporter.hasMessage()) {
-				Util.addMarkers(PreferenceValues.SIREUM_MARKER_ID, si, reporter);
-			}
+			Util.addMarkers(PreferenceValues.SIREUM_MARKER_ID, VisitorUtil.toIList(), si, reporter);
 
 			refreshWorkspace();
 
 			return Status.OK_STATUS;
 		} else {
-			// TODO: convert errors to markers. Would need to add a way for
-			// users to clear them -- see hamr plugin
 			Dialog.showError(getToolName(), "AIR generation failed");
 			writeToConsole("AIR generation failed");
 
-			Util.addMarkers(PreferenceValues.SIREUM_MARKER_ID, si, reporter);
+			Util.addMarkers(PreferenceValues.SIREUM_MARKER_ID, VisitorUtil.toIList(), si, reporter);
 
 			return Status.CANCEL_STATUS;
 		}

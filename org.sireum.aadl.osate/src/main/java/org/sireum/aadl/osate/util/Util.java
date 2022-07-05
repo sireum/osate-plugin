@@ -3,6 +3,7 @@ package org.sireum.aadl.osate.util;
 import java.io.File;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.function.IntSupplier;
 
 import org.eclipse.core.resources.IFile;
@@ -18,9 +19,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.console.MessageConsole;
+import org.osate.aadl2.ComponentClassifier;
 import org.osate.aadl2.instance.ComponentInstance;
 import org.osate.aadl2.instance.SystemInstance;
+import org.sireum.B;
 import org.sireum.IS;
+import org.sireum.Option;
 import org.sireum.SireumApi;
 import org.sireum.U8;
 import org.sireum.Z;
@@ -35,6 +39,7 @@ import org.sireum.message.Reporter;
 
 import scala.Console;
 import scala.Function0;
+import scala.Function1;
 import scala.runtime.BoxedUnit;
 
 public class Util {
@@ -205,65 +210,91 @@ public class Util {
 		}
 	}
 
+	public enum SeverityLevel {
+		Info, Warning, Error
+	}
+
 	/**
 	 * Adds any message with position info to the OSATE problems view
-	 * @param reporter
+	 * @param markerId marker's unique id e.g. org.sireum.aadl.osate.marker
+	 * @param severityToDisplay messages to be displayed.  Displays all if null or empty
 	 * @param si
+	 * @param reporter
 	 */
-	public static void addMarkers(String markerId, SystemInstance si, Reporter reporter) {
+	public static void addMarkers(String markerId, List<SeverityLevel> severityToDisplay, SystemInstance si,
+			Reporter reporter) {
+
 		Util.clearMarkers(si, markerId, true);
 
-		for (int i = 0; i < reporter.messages().size().toInt(); i++) {
-			Message m = reporter.messages().apply(SlangUtil.toZ(i));
+		IS<Z, Message> messages = reporter.messages().filter((Function1<Message, B>) (Message message) -> { //
+			if (severityToDisplay == null || severityToDisplay.isEmpty()) {
+				return new org.sireum.B(true);
+			} else {
+				return new org.sireum.B(//
+						(message.isError() && severityToDisplay.contains(SeverityLevel.Error)) //
+								|| (message.isInfo() && severityToDisplay.contains(SeverityLevel.Info)) //
+								|| (message.isWarning() && severityToDisplay.contains(SeverityLevel.Warning)));
+			}
+		});
 
-			if (m.getPosOpt() == null) {
-				System.out.println(
-						"Sireum message's position info is null rather than None.  Please report - " + m.getText());
-			} else if (m.getPosOpt().nonEmpty()) {
-				Position pos = m.getPosOpt().get();
-				if (pos.uriOpt().nonEmpty()) {
-					String uri = "/resource" + pos.uriOpt().get().value();
+		for (int i = 0; i < messages.size().toInt(); i++) {
 
-					Resource r = null;
-					for (Resource cand : si.eResource().getResourceSet().getResources()) {
-						if (cand.getURI().path().equals(uri)) {
-							r = cand;
-							break;
-						}
-					}
+			Message m = messages.apply(SlangUtil.toZ(i));
 
-					if (r != null) {
-						IFile iresource = Util.toIFile(r.getURI());
-						try {
-							IWorkspaceRunnable runnable = monitor -> {
-								IMarker marker = iresource.createMarker(markerId);
+			IResource _iresource = null;
+			Option<Position> _posOpt = SlangUtil.toNone();
 
-								marker.setAttribute(IMarker.MESSAGE, m.getText().toString());
+			if (m.getPosOpt() != null && m.getPosOpt().nonEmpty() && m.getPosOpt().get().uriOpt().nonEmpty()) {
+				String uri = "/resource" + m.getPosOpt().get().uriOpt().get().value();
+				_posOpt = m.getPosOpt();
 
-								if (m.isError()) {
-									marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
-									marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
-								} else if (m.isWarning()) {
-									marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
-									marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
-								} else {
-									marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_LOW);
-									marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
-								}
-								marker.setAttribute(IMarker.LINE_NUMBER, pos.beginLine().toInt());
-								if (pos.offset().toInt() != 0 && pos.length().toInt() > 0) {
-									marker.setAttribute(IMarker.CHAR_START, pos.offset().toInt());
-									marker.setAttribute(IMarker.CHAR_END, pos.offset().toInt() + pos.length().toInt());
-								}
-							};
-
-							iresource.getWorkspace().run(runnable, null, IWorkspace.AVOID_UPDATE, null);
-
-						} catch (CoreException e) {
-							e.printStackTrace();
-						}
+				for (Resource cand : si.eResource().getResourceSet().getResources()) {
+					if (cand.getURI().path().equals(uri)) {
+						_iresource = Util.toIFile(cand.getURI());
+						break;
 					}
 				}
+			} else {
+				ComponentClassifier sysC = si.getComponentImplementation() != null ? si.getComponentImplementation()
+						: si.getComponentClassifier();
+				_posOpt = VisitorUtil.buildPositionOpt(sysC);
+				_iresource = Util.toIFile(sysC.eResource().getURI());
+			}
+
+			final IResource iresource = _iresource;
+			final Option<Position> posOpt = _posOpt;
+
+			try {
+				IWorkspaceRunnable runnable = monitor -> {
+					IMarker marker = iresource.createMarker(markerId);
+
+					marker.setAttribute(IMarker.MESSAGE, m.getText().toString());
+
+					if (m.isError() || m.isInternalError()) {
+						marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_HIGH);
+						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+					} else if (m.isWarning()) {
+						marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_NORMAL);
+						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
+					} else if (m.isInfo()) {
+						marker.setAttribute(IMarker.PRIORITY, IMarker.PRIORITY_LOW);
+						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
+					}
+
+					if (posOpt.nonEmpty()) {
+						marker.setAttribute(IMarker.LINE_NUMBER, posOpt.get().beginLine().toInt());
+						if (posOpt.get().offset().toInt() != 0 && posOpt.get().length().toInt() > 0) {
+							marker.setAttribute(IMarker.CHAR_START, posOpt.get().offset().toInt());
+							marker.setAttribute(IMarker.CHAR_END,
+									posOpt.get().offset().toInt() + posOpt.get().length().toInt());
+						}
+					}
+				};
+
+				iresource.getWorkspace().run(runnable, null, IWorkspace.AVOID_UPDATE, null);
+
+			} catch (CoreException e) {
+				e.printStackTrace();
 			}
 		}
 	}

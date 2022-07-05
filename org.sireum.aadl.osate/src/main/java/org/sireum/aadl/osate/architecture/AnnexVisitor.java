@@ -11,6 +11,14 @@ import org.sireum.message.Reporter;
 
 public interface AnnexVisitor {
 
+	// currently used to provide feedback to users
+	// e.g. ".. visitorX failed .."
+	public String getVisitorName();
+
+	// currently used to provide feedback to users
+	// e.g. ".. visitorX that handles annexes (a1, a2) failed .."
+	public List<String> getHandledAnnexes();
+
 	public List<Annex> visit(Classifier c, List<String> path, Reporter reporter);
 
 	// Annexes are attached to Classifiers so it's expected that this

@@ -1,5 +1,7 @@
 package org.sireum.aadl.osate.architecture;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,6 +72,7 @@ import org.osgi.framework.Bundle;
 import org.sireum.Option;
 import org.sireum.Some;
 import org.sireum.aadl.osate.PreferenceValues;
+import org.sireum.aadl.osate.util.SlangUtil;
 import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.ir.AadlASTJavaFactory;
 import org.sireum.hamr.ir.Annex;
@@ -96,21 +99,28 @@ public class Visitor {
 		}
 		this.reporter = reporter;
 
-		annexVisitors.add(new Emv2Visitor(this));
+		// TODO: make this dynamic. E.g. find the annex visitors installed
+		// in an OSATE instance and then check if the annexes they handle
+		// are installed and enabled
+
+		if (org.osate.annexsupport.AnnexModel.getAnnexEnabled("emv2")) {
+			annexVisitors.add(new Emv2Visitor(this));
+		}
 
 		Bundle sm = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
-		if (sm != null) {
+		if (sm != null && org.osate.annexsupport.AnnexModel.getAnnexEnabled("smf")) {
 			annexVisitors.add(new SmfVisitor(this));
 		}
 
 		Bundle ba = Platform.getBundle("org.osate.ba");
-		if (ba != null && PreferenceValues.getPROCESS_BA_OPT()) {
+		if (ba != null && PreferenceValues.getPROCESS_BA_OPT()
+				&& org.osate.annexsupport.AnnexModel.getAnnexEnabled("behavior_specification")) {
 			annexVisitors.add(new BAVisitor(this));
 		}
 
 		Bundle gumbo = Platform.getBundle("org.sireum.aadl.gumbo");
 		Bundle gumbo2air = Platform.getBundle("org.sireum.aadl.osate.gumbo2air");
-		if (gumbo != null && gumbo2air != null) {
+		if (gumbo != null && gumbo2air != null && org.osate.annexsupport.AnnexModel.getAnnexEnabled("gumbo")) {
 			Class<?> cls = gumbo2air.loadClass("org.sireum.aadl.osate.gumbo2air.GumboVisitor");
 			if (AnnexVisitor.class.isAssignableFrom(cls)) {
 				Constructor<?> cons = cls.getConstructor(new Class[] { Visitor.class });
@@ -123,7 +133,8 @@ public class Visitor {
 
 		Bundle bless = Platform.getBundle("com.multitude.aadl.bless");
 		Bundle bless2Air = Platform.getBundle("org.sireum.aadl.osate.bless2Air");
-		if (bless != null && bless2Air != null && PreferenceValues.getPROCESS_BA_OPT()) {
+		if (bless != null && bless2Air != null && PreferenceValues.getPROCESS_BA_OPT()
+				&& org.osate.annexsupport.AnnexModel.getAnnexEnabled("bless")) {
 
 			// Bless is closed source so a Sireum OSATE plugin developer may not have
 			// access to its source code. Therefore the BlessVisitor was placed in a separate
@@ -155,7 +166,19 @@ public class Visitor {
 
 			List<AnnexLib> libs = VisitorUtil.iList();
 			for (AnnexVisitor av : annexVisitors) {
-				libs = VisitorUtil.addAll(libs, av.buildAnnexLibraries(root, reporter));
+				try {
+					libs = VisitorUtil.addAll(libs, av.buildAnnexLibraries(root, reporter));
+				} catch (Exception e) {
+					StringWriter sw = new StringWriter();
+					PrintWriter pw = new PrintWriter(sw);
+					e.printStackTrace(pw);
+
+					String sannexes = av.getHandledAnnexes() == null ? "" : String.join(", ", av.getHandledAnnexes());
+					reporter.error(SlangUtil.toNone(), "SireumVisitor",
+							"Annex visitor '" + av.getVisitorName() + "' that handles annexes (" + sannexes
+									+ ") threw the following exception while processing the annex libraries. "
+									+ "Disable the plugin or the annex if you want to proceed." + "\n" + sw.toString());
+				}
 			}
 
 			return new Some<>(factory.aadl(VisitorUtil.toIList(t.get()), libs, dataComponents));
@@ -428,8 +451,8 @@ public class Visitor {
 			result = VisitorUtil.addAll(result, flattenFeatureGroup(component, fgce.getFullName(), fgce, connElem));
 		} else if (ce instanceof BusSubcomponentImpl) {
 			result = VisitorUtil.add(result,
-					factory.endPoint(factory.name(feature, VisitorUtil.buildPosition(connElem.getConnectionEnd())), null,
-							AadlASTJavaFactory.Direction.InOut));
+					factory.endPoint(factory.name(feature, VisitorUtil.buildPosition(connElem.getConnectionEnd())),
+							null, AadlASTJavaFactory.Direction.InOut));
 		} else if (ce instanceof BusAccessImpl) {
 			result = VisitorUtil.add(result,
 					factory.endPoint(
@@ -594,7 +617,21 @@ public class Visitor {
 		List<org.sireum.hamr.ir.Annex> annexes = VisitorUtil.iList();
 
 		for (AnnexVisitor av : annexVisitors) {
-			annexes = VisitorUtil.addAll(annexes, av.visit(compInst, currentPath, reporter));
+			try {
+				annexes = VisitorUtil.addAll(annexes, av.visit(compInst, currentPath, reporter));
+			} catch (Exception e) {
+				StringWriter sw = new StringWriter();
+				PrintWriter pw = new PrintWriter(sw);
+				e.printStackTrace(pw);
+
+				Option<Position> posOpt = VisitorUtil.buildPositionOpt(compInst.getComponentClassifier());
+
+				String sannexes = av.getHandledAnnexes() == null ? "" : String.join(", ", av.getHandledAnnexes());
+				reporter.error(posOpt, "SireumVisitor",
+						"Annex visitor '" + av.getVisitorName() + "' that handles annexes (" + sannexes
+								+ ") threw the following exception while processing the component's annex subclauses. "
+								+ "Disable the plugin or the annex if you want to proceed." + "\n" + sw.toString());
+			}
 		}
 
 		return factory.component(identifier, category, classifier, features, subComponents, connections,
@@ -1066,7 +1103,21 @@ public class Visitor {
 
 		List<Annex> annexes = new ArrayList<>();
 		for (AnnexVisitor av : annexVisitors) {
-			annexes.addAll(av.visit(f, new ArrayList<>(), reporter));
+			try {
+				annexes.addAll(av.visit(f, new ArrayList<>(), reporter));
+			} catch (Exception e) {
+				StringWriter sw = new StringWriter();
+				PrintWriter pw = new PrintWriter(sw);
+				e.printStackTrace(pw);
+
+				Option<Position> posOpt = VisitorUtil.buildPositionOpt(f);
+
+				String sannexes = av.getHandledAnnexes() == null ? "" : String.join(", ", av.getHandledAnnexes());
+				reporter.error(posOpt, "SireumVisitor",
+						"Annex visitor '" + av.getVisitorName() + "' that handles annexes (" + sannexes
+								+ ") threw the following exception while processing the component's annex subclauses. "
+								+ "Disable the plugin or the annex if you want to proceed." + "\n" + sw.toString());
+			}
 		}
 
 		// this is a hack as we're sticking something from the declarative

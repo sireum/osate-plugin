@@ -178,6 +178,16 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 	}
 
 	@Override
+	public String getVisitorName() {
+		return "BA Visitor";
+	}
+
+	@Override
+	public List<String> getHandledAnnexes() {
+		return VisitorUtil.toIList(ANNEX_TYPE);
+	}
+
+	@Override
 	public List<Annex> visit(ComponentInstance ci, List<String> path, Reporter reporter) {
 		featureNames = ci.getFeatureInstances().stream().map(f -> f.getName()).collect(Collectors.toList());
 
