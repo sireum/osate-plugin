@@ -159,11 +159,11 @@ public class VisitorUtil {
 	}
 
 	public static void reportError(String msg, String msgKind, Reporter reporter) {
-		reportError(false, null, msg, reporter);
+		reportError(false, null, msg, msgKind, reporter);
 	}
 
 	public static void reportError(boolean cond, String msg, String msgKind, Reporter reporter) {
-		reportError(cond, null, msg, reporter);
+		reportError(cond, null, msg, msgKind, reporter);
 	}
 
 	/**
