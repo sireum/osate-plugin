@@ -32,12 +32,17 @@ public class AirUpdater extends SireumTest {
 
 	@Test
 	public void updateAirHamr() {
+		String SIREUM_HOME = System.getenv("SIREUM_HOME") != null ? System.getenv("SIREUM_HOME")
+				: System.getenv("HOME") != null ? System.getenv("HOME") + "/devel/sireum/kekinian" : null;
+
+		assert SIREUM_HOME != null && new File(SIREUM_HOME).exists()
+				: SIREUM_HOME + " does not exist of isn't a directory";
+
 		List<File> hamrModelsDirs = VisitorUtil.toIList(
-				new File(System.getenv("SIREUM_HOME") + "/hamr/codegen/jvm/src/test/resources/models"),
-				new File(System.getenv("SIREUM_HOME") + "/hamr/codegen/arsit/jvm/src/test/scala/models"),
-				new File(System.getenv("SIREUM_HOME")
+				new File(SIREUM_HOME + "/hamr/codegen/jvm/src/test/resources/models"),
+				new File(SIREUM_HOME + "/hamr/codegen/arsit/jvm/src/test/scala/models"), new File(SIREUM_HOME
 						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/sirfur_omnibus/gumbo/git_models/temp_control/simple_temp_aadl/aadl"),
-				new File(System.getenv("SIREUM_HOME")
+				new File(SIREUM_HOME
 						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/GumboAdventiumTest/simple_temp_aadl/aadl"));
 
 		for (File hamrModelsDir : hamrModelsDirs) {
@@ -85,7 +90,10 @@ public class AirUpdater extends SireumTest {
 		Reporter reporter = Util.createReporter();
 		String air = Util.serialize(Util.getAir(instance, true, reporter), SerializerType.JSON);
 
-		assert (!reporter.hasError());
+		if (reporter.hasError()) {
+			reporter.printMessages();
+			assert false : "Reporter has errors";
+		}
 
 		String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
 		String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ".json";

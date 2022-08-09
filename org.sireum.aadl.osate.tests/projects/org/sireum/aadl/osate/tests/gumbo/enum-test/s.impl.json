@@ -347,6 +347,8 @@
                         }
                       }
                     ],
+                    "methods" : [
+                    ],
                     "invariants" : [
                     ],
                     "initializes" : {
@@ -2014,6 +2016,8 @@
                   "clause" : {
                     "type" : "GclSubclause",
                     "state" : [
+                    ],
+                    "methods" : [
                     ],
                     "invariants" : [
                     ],
@@ -4937,6 +4941,8 @@
             "type" : "GclSubclause",
             "state" : [
             ],
+            "methods" : [
+            ],
             "invariants" : [
               {
                 "type" : "GclInvariant",
@@ -6489,6 +6495,8 @@
                 "type" : "GclSubclause",
                 "state" : [
                 ],
+                "methods" : [
+                ],
                 "invariants" : [
                   {
                     "type" : "GclInvariant",
@@ -8018,6 +8026,8 @@
                 "type" : "GclSubclause",
                 "state" : [
                 ],
+                "methods" : [
+                ],
                 "invariants" : [
                   {
                     "type" : "GclInvariant",
@@ -9307,6 +9317,8 @@
           "clause" : {
             "type" : "GclSubclause",
             "state" : [
+            ],
+            "methods" : [
             ],
             "invariants" : [
               {
