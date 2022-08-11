@@ -30,19 +30,25 @@ public class AirUpdater extends SireumTest {
 	@Inject
 	TestResourceSetHelper rsHelper;
 
-	@Test
-	public void updateAirHamr() {
+	String SIREUM_HOME() {
 		String SIREUM_HOME = System.getenv("SIREUM_HOME") != null ? System.getenv("SIREUM_HOME")
 				: System.getenv("HOME") != null ? System.getenv("HOME") + "/devel/sireum/kekinian" : null;
 
 		assert SIREUM_HOME != null && new File(SIREUM_HOME).exists()
 				: SIREUM_HOME + " does not exist of isn't a directory";
 
+		return SIREUM_HOME;
+	}
+
+	@Test
+	public void updateAirHamr() {
+
 		List<File> hamrModelsDirs = VisitorUtil.toIList(
-				new File(SIREUM_HOME + "/hamr/codegen/jvm/src/test/resources/models"),
-				new File(SIREUM_HOME + "/hamr/codegen/arsit/jvm/src/test/scala/models"), new File(SIREUM_HOME
-						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/sirfur_omnibus/gumbo/git_models/temp_control/simple_temp_aadl/aadl"),
-				new File(SIREUM_HOME
+				new File(SIREUM_HOME() + "/hamr/codegen/jvm/src/test/resources/models"), //
+				new File(SIREUM_HOME() + "/hamr/codegen/arsit/jvm/src/test/scala/models"), //
+				new File(SIREUM_HOME()
+						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/sirfur_omnibus/gumbo/git_models/temp_control/simple_temp_aadl/aadl"), //
+				new File(SIREUM_HOME()
 						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/GumboAdventiumTest/simple_temp_aadl/aadl"));
 
 		for (File hamrModelsDir : hamrModelsDirs) {
@@ -72,7 +78,7 @@ public class AirUpdater extends SireumTest {
 	@Test
 	public void syncGumbo() throws IOException {
 		Path srcPath = Os.path("./projects/org/sireum/aadl/osate/tests/gumbo");
-		Path destPath = Os.path(System.getenv("SIREUM_HOME") + "/hamr/codegen/jvm/src/test/resources/models/GumboTest");
+		Path destPath = Os.path(SIREUM_HOME() + "/hamr/codegen/jvm/src/test/resources/models/GumboTest");
 
 		srcPath.copyOverTo(destPath);
 
