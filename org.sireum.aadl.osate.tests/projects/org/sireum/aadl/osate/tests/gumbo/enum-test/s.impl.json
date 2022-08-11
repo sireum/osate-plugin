@@ -18,7 +18,7 @@
             "beginColumn" : 2,
             "endLine" : 68,
             "endColumn" : 13,
-            "offset" : 1932,
+            "offset" : 1947,
             "length" : 79
           }
         }
@@ -50,7 +50,7 @@
                 "beginColumn" : 4,
                 "endLine" : 67,
                 "endColumn" : 22,
-                "offset" : 1980,
+                "offset" : 1995,
                 "length" : 18
               }
             }
@@ -86,7 +86,7 @@
                     "beginColumn" : 4,
                     "endLine" : 75,
                     "endColumn" : 36,
-                    "offset" : 2083,
+                    "offset" : 2098,
                     "length" : 32
                   }
                 }
@@ -120,7 +120,7 @@
                         "beginColumn" : 4,
                         "endLine" : 83,
                         "endColumn" : 44,
-                        "offset" : 2275,
+                        "offset" : 2290,
                         "length" : 40
                       }
                     }
@@ -192,7 +192,7 @@
                         "beginColumn" : 4,
                         "endLine" : 84,
                         "endColumn" : 50,
-                        "offset" : 2319,
+                        "offset" : 2334,
                         "length" : 46
                       }
                     }
@@ -341,7 +341,7 @@
                             "beginColumn" : 5,
                             "endLine" : 89,
                             "endColumn" : 33,
-                            "offset" : 2444,
+                            "offset" : 2459,
                             "length" : 28
                           }
                         }
@@ -375,7 +375,7 @@
                                     "beginColumn" : 14,
                                     "endLine" : 96,
                                     "endColumn" : 29,
-                                    "offset" : 2728,
+                                    "offset" : 2743,
                                     "length" : 15
                                   }
                                 }
@@ -395,7 +395,7 @@
                                   "beginColumn" : 14,
                                   "endLine" : 96,
                                   "endColumn" : 29,
-                                  "offset" : 2728,
+                                  "offset" : 2743,
                                   "length" : 15
                                 }
                               },
@@ -447,7 +447,7 @@
                                                   "beginColumn" : 7,
                                                   "endLine" : 98,
                                                   "endColumn" : 22,
-                                                  "offset" : 2787,
+                                                  "offset" : 2802,
                                                   "length" : 15
                                                 }
                                               }
@@ -467,7 +467,7 @@
                                                 "beginColumn" : 7,
                                                 "endLine" : 98,
                                                 "endColumn" : 22,
-                                                "offset" : 2787,
+                                                "offset" : 2802,
                                                 "length" : 15
                                               }
                                             },
@@ -497,7 +497,7 @@
                                               "beginColumn" : 23,
                                               "endLine" : 98,
                                               "endColumn" : 34,
-                                              "offset" : 2803,
+                                              "offset" : 2818,
                                               "length" : 11
                                             }
                                           }
@@ -519,7 +519,7 @@
                                             "beginColumn" : 7,
                                             "endLine" : 98,
                                             "endColumn" : 34,
-                                            "offset" : 2787,
+                                            "offset" : 2802,
                                             "length" : 27
                                           }
                                         },
@@ -549,7 +549,7 @@
                                           "beginColumn" : 27,
                                           "endLine" : 98,
                                           "endColumn" : 34,
-                                          "offset" : 2807,
+                                          "offset" : 2822,
                                           "length" : 7
                                         }
                                       }
@@ -571,7 +571,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 98,
                                         "endColumn" : 34,
-                                        "offset" : 2787,
+                                        "offset" : 2802,
                                         "length" : 27
                                       }
                                     },
@@ -601,7 +601,7 @@
                                         "beginColumn" : 38,
                                         "endLine" : 98,
                                         "endColumn" : 42,
-                                        "offset" : 2818,
+                                        "offset" : 2833,
                                         "length" : 4
                                       }
                                     }
@@ -621,7 +621,7 @@
                                       "beginColumn" : 7,
                                       "endLine" : 98,
                                       "endColumn" : 42,
-                                      "offset" : 2787,
+                                      "offset" : 2802,
                                       "length" : 35
                                     }
                                   },
@@ -663,7 +663,7 @@
                                                   "beginColumn" : 48,
                                                   "endLine" : 98,
                                                   "endColumn" : 63,
-                                                  "offset" : 2828,
+                                                  "offset" : 2843,
                                                   "length" : 15
                                                 }
                                               }
@@ -683,7 +683,7 @@
                                                 "beginColumn" : 48,
                                                 "endLine" : 98,
                                                 "endColumn" : 63,
-                                                "offset" : 2828,
+                                                "offset" : 2843,
                                                 "length" : 15
                                               }
                                             },
@@ -713,7 +713,7 @@
                                               "beginColumn" : 64,
                                               "endLine" : 98,
                                               "endColumn" : 76,
-                                              "offset" : 2844,
+                                              "offset" : 2859,
                                               "length" : 12
                                             }
                                           }
@@ -735,7 +735,7 @@
                                             "beginColumn" : 48,
                                             "endLine" : 98,
                                             "endColumn" : 76,
-                                            "offset" : 2828,
+                                            "offset" : 2843,
                                             "length" : 28
                                           }
                                         },
@@ -765,7 +765,7 @@
                                           "beginColumn" : 69,
                                           "endLine" : 98,
                                           "endColumn" : 76,
-                                          "offset" : 2849,
+                                          "offset" : 2864,
                                           "length" : 7
                                         }
                                       }
@@ -787,7 +787,7 @@
                                         "beginColumn" : 48,
                                         "endLine" : 98,
                                         "endColumn" : 76,
-                                        "offset" : 2828,
+                                        "offset" : 2843,
                                         "length" : 28
                                       }
                                     },
@@ -817,7 +817,7 @@
                                         "beginColumn" : 80,
                                         "endLine" : 98,
                                         "endColumn" : 84,
-                                        "offset" : 2860,
+                                        "offset" : 2875,
                                         "length" : 4
                                       }
                                     }
@@ -837,7 +837,7 @@
                                       "beginColumn" : 48,
                                       "endLine" : 98,
                                       "endColumn" : 84,
-                                      "offset" : 2828,
+                                      "offset" : 2843,
                                       "length" : 36
                                     }
                                   },
@@ -863,7 +863,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 98,
                                     "endColumn" : 84,
-                                    "offset" : 2787,
+                                    "offset" : 2802,
                                     "length" : 77
                                   }
                                 },
@@ -887,7 +887,7 @@
                                 "beginColumn" : 5,
                                 "endLine" : 98,
                                 "endColumn" : 86,
-                                "offset" : 2749,
+                                "offset" : 2764,
                                 "length" : 117
                               }
                             }
@@ -934,7 +934,7 @@
                                               "beginColumn" : 7,
                                               "endLine" : 92,
                                               "endColumn" : 18,
-                                              "offset" : 2529,
+                                              "offset" : 2544,
                                               "length" : 11
                                             }
                                           }
@@ -954,7 +954,7 @@
                                             "beginColumn" : 7,
                                             "endLine" : 92,
                                             "endColumn" : 18,
-                                            "offset" : 2529,
+                                            "offset" : 2544,
                                             "length" : 11
                                           }
                                         },
@@ -984,7 +984,7 @@
                                           "beginColumn" : 19,
                                           "endLine" : 92,
                                           "endColumn" : 26,
-                                          "offset" : 2541,
+                                          "offset" : 2556,
                                           "length" : 7
                                         }
                                       }
@@ -1006,7 +1006,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 92,
                                         "endColumn" : 26,
-                                        "offset" : 2529,
+                                        "offset" : 2544,
                                         "length" : 19
                                       }
                                     },
@@ -1042,7 +1042,7 @@
                                           "beginColumn" : 32,
                                           "endLine" : 92,
                                           "endColumn" : 36,
-                                          "offset" : 2554,
+                                          "offset" : 2569,
                                           "length" : 4
                                         }
                                       }
@@ -1062,7 +1062,7 @@
                                         "beginColumn" : 31,
                                         "endLine" : 92,
                                         "endColumn" : 36,
-                                        "offset" : 2553,
+                                        "offset" : 2568,
                                         "length" : 5
                                       }
                                     },
@@ -1088,7 +1088,7 @@
                                       "beginColumn" : 7,
                                       "endLine" : 92,
                                       "endColumn" : 36,
-                                      "offset" : 2529,
+                                      "offset" : 2544,
                                       "length" : 29
                                     }
                                   },
@@ -1126,7 +1126,7 @@
                                               "beginColumn" : 43,
                                               "endLine" : 92,
                                               "endColumn" : 54,
-                                              "offset" : 2565,
+                                              "offset" : 2580,
                                               "length" : 11
                                             }
                                           }
@@ -1146,7 +1146,7 @@
                                             "beginColumn" : 43,
                                             "endLine" : 92,
                                             "endColumn" : 54,
-                                            "offset" : 2565,
+                                            "offset" : 2580,
                                             "length" : 11
                                           }
                                         },
@@ -1176,7 +1176,7 @@
                                           "beginColumn" : 55,
                                           "endLine" : 92,
                                           "endColumn" : 62,
-                                          "offset" : 2577,
+                                          "offset" : 2592,
                                           "length" : 7
                                         }
                                       }
@@ -1198,7 +1198,7 @@
                                         "beginColumn" : 43,
                                         "endLine" : 92,
                                         "endColumn" : 62,
-                                        "offset" : 2565,
+                                        "offset" : 2580,
                                         "length" : 19
                                       }
                                     },
@@ -1228,7 +1228,7 @@
                                         "beginColumn" : 66,
                                         "endLine" : 92,
                                         "endColumn" : 71,
-                                        "offset" : 2588,
+                                        "offset" : 2603,
                                         "length" : 5
                                       }
                                     }
@@ -1248,7 +1248,7 @@
                                       "beginColumn" : 43,
                                       "endLine" : 92,
                                       "endColumn" : 71,
-                                      "offset" : 2565,
+                                      "offset" : 2580,
                                       "length" : 28
                                     }
                                   },
@@ -1274,7 +1274,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 92,
                                     "endColumn" : 71,
-                                    "offset" : 2529,
+                                    "offset" : 2544,
                                     "length" : 64
                                   }
                                 },
@@ -1298,7 +1298,7 @@
                                 "beginColumn" : 5,
                                 "endLine" : 92,
                                 "endColumn" : 73,
-                                "offset" : 2492,
+                                "offset" : 2507,
                                 "length" : 103
                               }
                             }
@@ -1341,7 +1341,7 @@
                                                   "beginColumn" : 7,
                                                   "endLine" : 94,
                                                   "endColumn" : 15,
-                                                  "offset" : 2634,
+                                                  "offset" : 2649,
                                                   "length" : 8
                                                 }
                                               }
@@ -1361,7 +1361,7 @@
                                                 "beginColumn" : 7,
                                                 "endLine" : 94,
                                                 "endColumn" : 15,
-                                                "offset" : 2634,
+                                                "offset" : 2649,
                                                 "length" : 8
                                               }
                                             },
@@ -1391,7 +1391,7 @@
                                               "beginColumn" : 16,
                                               "endLine" : 94,
                                               "endColumn" : 27,
-                                              "offset" : 2643,
+                                              "offset" : 2658,
                                               "length" : 11
                                             }
                                           }
@@ -1413,7 +1413,7 @@
                                             "beginColumn" : 7,
                                             "endLine" : 94,
                                             "endColumn" : 27,
-                                            "offset" : 2634,
+                                            "offset" : 2649,
                                             "length" : 20
                                           }
                                         },
@@ -1443,7 +1443,7 @@
                                           "beginColumn" : 20,
                                           "endLine" : 94,
                                           "endColumn" : 27,
-                                          "offset" : 2647,
+                                          "offset" : 2662,
                                           "length" : 7
                                         }
                                       }
@@ -1465,7 +1465,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 94,
                                         "endColumn" : 27,
-                                        "offset" : 2634,
+                                        "offset" : 2649,
                                         "length" : 20
                                       }
                                     },
@@ -1495,7 +1495,7 @@
                                         "beginColumn" : 31,
                                         "endLine" : 94,
                                         "endColumn" : 35,
-                                        "offset" : 2658,
+                                        "offset" : 2673,
                                         "length" : 4
                                       }
                                     }
@@ -1515,7 +1515,7 @@
                                       "beginColumn" : 7,
                                       "endLine" : 94,
                                       "endColumn" : 35,
-                                      "offset" : 2634,
+                                      "offset" : 2649,
                                       "length" : 28
                                     }
                                   },
@@ -1557,7 +1557,7 @@
                                                   "beginColumn" : 41,
                                                   "endLine" : 94,
                                                   "endColumn" : 49,
-                                                  "offset" : 2668,
+                                                  "offset" : 2683,
                                                   "length" : 8
                                                 }
                                               }
@@ -1577,7 +1577,7 @@
                                                 "beginColumn" : 41,
                                                 "endLine" : 94,
                                                 "endColumn" : 49,
-                                                "offset" : 2668,
+                                                "offset" : 2683,
                                                 "length" : 8
                                               }
                                             },
@@ -1607,7 +1607,7 @@
                                               "beginColumn" : 50,
                                               "endLine" : 94,
                                               "endColumn" : 62,
-                                              "offset" : 2677,
+                                              "offset" : 2692,
                                               "length" : 12
                                             }
                                           }
@@ -1629,7 +1629,7 @@
                                             "beginColumn" : 41,
                                             "endLine" : 94,
                                             "endColumn" : 62,
-                                            "offset" : 2668,
+                                            "offset" : 2683,
                                             "length" : 21
                                           }
                                         },
@@ -1659,7 +1659,7 @@
                                           "beginColumn" : 55,
                                           "endLine" : 94,
                                           "endColumn" : 62,
-                                          "offset" : 2682,
+                                          "offset" : 2697,
                                           "length" : 7
                                         }
                                       }
@@ -1681,7 +1681,7 @@
                                         "beginColumn" : 41,
                                         "endLine" : 94,
                                         "endColumn" : 62,
-                                        "offset" : 2668,
+                                        "offset" : 2683,
                                         "length" : 21
                                       }
                                     },
@@ -1711,7 +1711,7 @@
                                         "beginColumn" : 66,
                                         "endLine" : 94,
                                         "endColumn" : 71,
-                                        "offset" : 2693,
+                                        "offset" : 2708,
                                         "length" : 5
                                       }
                                     }
@@ -1731,7 +1731,7 @@
                                       "beginColumn" : 41,
                                       "endLine" : 94,
                                       "endColumn" : 71,
-                                      "offset" : 2668,
+                                      "offset" : 2683,
                                       "length" : 30
                                     }
                                   },
@@ -1757,7 +1757,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 94,
                                     "endColumn" : 71,
-                                    "offset" : 2634,
+                                    "offset" : 2649,
                                     "length" : 64
                                   }
                                 },
@@ -1781,7 +1781,7 @@
                                 "beginColumn" : 5,
                                 "endLine" : 94,
                                 "endColumn" : 73,
-                                "offset" : 2600,
+                                "offset" : 2615,
                                 "length" : 100
                               }
                             }
@@ -1814,7 +1814,7 @@
                     "beginColumn" : 4,
                     "endLine" : 76,
                     "endColumn" : 34,
-                    "offset" : 2119,
+                    "offset" : 2134,
                     "length" : 30
                   }
                 }
@@ -1848,7 +1848,7 @@
                         "beginColumn" : 4,
                         "endLine" : 104,
                         "endColumn" : 51,
-                        "offset" : 2926,
+                        "offset" : 2941,
                         "length" : 47
                       }
                     }
@@ -2063,7 +2063,7 @@
                                               "beginColumn" : 7,
                                               "endLine" : 111,
                                               "endColumn" : 18,
-                                              "offset" : 3138,
+                                              "offset" : 3153,
                                               "length" : 11
                                             }
                                           }
@@ -2083,7 +2083,7 @@
                                             "beginColumn" : 7,
                                             "endLine" : 111,
                                             "endColumn" : 18,
-                                            "offset" : 3138,
+                                            "offset" : 3153,
                                             "length" : 11
                                           }
                                         },
@@ -2113,7 +2113,7 @@
                                           "beginColumn" : 19,
                                           "endLine" : 111,
                                           "endColumn" : 26,
-                                          "offset" : 3150,
+                                          "offset" : 3165,
                                           "length" : 7
                                         }
                                       }
@@ -2135,7 +2135,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 111,
                                         "endColumn" : 26,
-                                        "offset" : 3138,
+                                        "offset" : 3153,
                                         "length" : 19
                                       }
                                     },
@@ -2171,7 +2171,7 @@
                                           "beginColumn" : 32,
                                           "endLine" : 111,
                                           "endColumn" : 36,
-                                          "offset" : 3163,
+                                          "offset" : 3178,
                                           "length" : 4
                                         }
                                       }
@@ -2191,7 +2191,7 @@
                                         "beginColumn" : 31,
                                         "endLine" : 111,
                                         "endColumn" : 36,
-                                        "offset" : 3162,
+                                        "offset" : 3177,
                                         "length" : 5
                                       }
                                     },
@@ -2217,7 +2217,7 @@
                                       "beginColumn" : 7,
                                       "endLine" : 111,
                                       "endColumn" : 36,
-                                      "offset" : 3138,
+                                      "offset" : 3153,
                                       "length" : 29
                                     }
                                   },
@@ -2255,7 +2255,7 @@
                                               "beginColumn" : 43,
                                               "endLine" : 111,
                                               "endColumn" : 54,
-                                              "offset" : 3174,
+                                              "offset" : 3189,
                                               "length" : 11
                                             }
                                           }
@@ -2275,7 +2275,7 @@
                                             "beginColumn" : 43,
                                             "endLine" : 111,
                                             "endColumn" : 54,
-                                            "offset" : 3174,
+                                            "offset" : 3189,
                                             "length" : 11
                                           }
                                         },
@@ -2305,7 +2305,7 @@
                                           "beginColumn" : 55,
                                           "endLine" : 111,
                                           "endColumn" : 62,
-                                          "offset" : 3186,
+                                          "offset" : 3201,
                                           "length" : 7
                                         }
                                       }
@@ -2327,7 +2327,7 @@
                                         "beginColumn" : 43,
                                         "endLine" : 111,
                                         "endColumn" : 62,
-                                        "offset" : 3174,
+                                        "offset" : 3189,
                                         "length" : 19
                                       }
                                     },
@@ -2357,7 +2357,7 @@
                                         "beginColumn" : 66,
                                         "endLine" : 111,
                                         "endColumn" : 71,
-                                        "offset" : 3197,
+                                        "offset" : 3212,
                                         "length" : 5
                                       }
                                     }
@@ -2377,7 +2377,7 @@
                                       "beginColumn" : 43,
                                       "endLine" : 111,
                                       "endColumn" : 71,
-                                      "offset" : 3174,
+                                      "offset" : 3189,
                                       "length" : 28
                                     }
                                   },
@@ -2403,7 +2403,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 111,
                                     "endColumn" : 71,
-                                    "offset" : 3138,
+                                    "offset" : 3153,
                                     "length" : 64
                                   }
                                 },
@@ -2427,7 +2427,7 @@
                                 "beginColumn" : 5,
                                 "endLine" : 111,
                                 "endColumn" : 73,
-                                "offset" : 3098,
+                                "offset" : 3113,
                                 "length" : 106
                               }
                             }
@@ -2462,7 +2462,7 @@
                     "beginColumn" : 4,
                     "endLine" : 78,
                     "endColumn" : 63,
-                    "offset" : 2167,
+                    "offset" : 2182,
                     "length" : 59
                   }
                 }
@@ -2485,7 +2485,7 @@
                         "beginColumn" : 4,
                         "endLine" : 76,
                         "endColumn" : 34,
-                        "offset" : 2119,
+                        "offset" : 2134,
                         "length" : 30
                       }
                     }
@@ -2507,7 +2507,7 @@
                           "beginColumn" : 4,
                           "endLine" : 104,
                           "endColumn" : 51,
-                          "offset" : 2926,
+                          "offset" : 2941,
                           "length" : 47
                         }
                       }
@@ -2540,7 +2540,7 @@
                         "beginColumn" : 4,
                         "endLine" : 75,
                         "endColumn" : 36,
-                        "offset" : 2083,
+                        "offset" : 2098,
                         "length" : 32
                       }
                     }
@@ -2562,7 +2562,7 @@
                           "beginColumn" : 4,
                           "endLine" : 84,
                           "endColumn" : 50,
-                          "offset" : 2319,
+                          "offset" : 2334,
                           "length" : 46
                         }
                       }
@@ -2614,7 +2614,7 @@
                     "beginColumn" : 4,
                     "endLine" : 78,
                     "endColumn" : 63,
-                    "offset" : 2167,
+                    "offset" : 2182,
                     "length" : 59
                   }
                 }
@@ -2636,7 +2636,7 @@
                       "beginColumn" : 4,
                       "endLine" : 76,
                       "endColumn" : 34,
-                      "offset" : 2119,
+                      "offset" : 2134,
                       "length" : 30
                     }
                   }
@@ -2658,7 +2658,7 @@
                         "beginColumn" : 4,
                         "endLine" : 104,
                         "endColumn" : 51,
-                        "offset" : 2926,
+                        "offset" : 2941,
                         "length" : 47
                       }
                     }
@@ -2689,7 +2689,7 @@
                       "beginColumn" : 4,
                       "endLine" : 75,
                       "endColumn" : 36,
-                      "offset" : 2083,
+                      "offset" : 2098,
                       "length" : 32
                     }
                   }
@@ -2711,7 +2711,7 @@
                         "beginColumn" : 4,
                         "endLine" : 84,
                         "endColumn" : 50,
-                        "offset" : 2319,
+                        "offset" : 2334,
                         "length" : 46
                       }
                     }
@@ -2747,7 +2747,7 @@
                         "beginColumn" : 4,
                         "endLine" : 78,
                         "endColumn" : 63,
-                        "offset" : 2167,
+                        "offset" : 2182,
                         "length" : 59
                       }
                     }
@@ -2767,7 +2767,7 @@
                         "beginColumn" : 4,
                         "endLine" : 67,
                         "endColumn" : 22,
-                        "offset" : 1980,
+                        "offset" : 1995,
                         "length" : 18
                       }
                     }
@@ -4971,10 +4971,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 33,
-                              "beginColumn" : 7,
+                              "beginColumn" : 10,
                               "endLine" : 33,
-                              "endColumn" : 11,
-                              "offset" : 1039,
+                              "endColumn" : 14,
+                              "offset" : 1042,
                               "length" : 4
                             }
                           }
@@ -4991,10 +4991,10 @@
                               "value" : "\/enum-test\/Enum_Test.aadl"
                             },
                             "beginLine" : 33,
-                            "beginColumn" : 7,
+                            "beginColumn" : 10,
                             "endLine" : 33,
-                            "endColumn" : 11,
-                            "offset" : 1039,
+                            "endColumn" : 14,
+                            "offset" : 1042,
                             "length" : 4
                           }
                         },
@@ -5031,10 +5031,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 33,
-                                      "beginColumn" : 15,
+                                      "beginColumn" : 18,
                                       "endLine" : 33,
-                                      "endColumn" : 34,
-                                      "offset" : 1047,
+                                      "endColumn" : 37,
+                                      "offset" : 1050,
                                       "length" : 19
                                     }
                                   }
@@ -5051,10 +5051,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 33,
-                                    "beginColumn" : 15,
+                                    "beginColumn" : 18,
                                     "endLine" : 33,
-                                    "endColumn" : 34,
-                                    "offset" : 1047,
+                                    "endColumn" : 37,
+                                    "offset" : 1050,
                                     "length" : 19
                                   }
                                 },
@@ -5081,10 +5081,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 33,
-                                  "beginColumn" : 15,
+                                  "beginColumn" : 18,
                                   "endLine" : 33,
-                                  "endColumn" : 34,
-                                  "offset" : 1047,
+                                  "endColumn" : 37,
+                                  "offset" : 1050,
                                   "length" : 19
                                 }
                               }
@@ -5103,10 +5103,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 33,
-                                "beginColumn" : 15,
+                                "beginColumn" : 18,
                                 "endLine" : 33,
-                                "endColumn" : 34,
-                                "offset" : 1047,
+                                "endColumn" : 37,
+                                "offset" : 1050,
                                 "length" : 19
                               }
                             },
@@ -5133,10 +5133,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 33,
-                              "beginColumn" : 15,
+                              "beginColumn" : 18,
                               "endLine" : 33,
-                              "endColumn" : 34,
-                              "offset" : 1047,
+                              "endColumn" : 37,
+                              "offset" : 1050,
                               "length" : 19
                             }
                           }
@@ -5155,10 +5155,10 @@
                               "value" : "\/enum-test\/Enum_Test.aadl"
                             },
                             "beginLine" : 33,
-                            "beginColumn" : 15,
+                            "beginColumn" : 18,
                             "endLine" : 33,
-                            "endColumn" : 34,
-                            "offset" : 1047,
+                            "endColumn" : 37,
+                            "offset" : 1050,
                             "length" : 19
                           }
                         },
@@ -5181,10 +5181,10 @@
                             "value" : "\/enum-test\/Enum_Test.aadl"
                           },
                           "beginLine" : 33,
-                          "beginColumn" : 7,
+                          "beginColumn" : 10,
                           "endLine" : 33,
-                          "endColumn" : 34,
-                          "offset" : 1039,
+                          "endColumn" : 37,
+                          "offset" : 1042,
                           "length" : 27
                         }
                       },
@@ -5214,10 +5214,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 33,
-                              "beginColumn" : 38,
+                              "beginColumn" : 39,
                               "endLine" : 33,
-                              "endColumn" : 45,
-                              "offset" : 1070,
+                              "endColumn" : 46,
+                              "offset" : 1071,
                               "length" : 7
                             }
                           }
@@ -5234,10 +5234,10 @@
                               "value" : "\/enum-test\/Enum_Test.aadl"
                             },
                             "beginLine" : 33,
-                            "beginColumn" : 38,
+                            "beginColumn" : 39,
                             "endLine" : 33,
-                            "endColumn" : 45,
-                            "offset" : 1070,
+                            "endColumn" : 46,
+                            "offset" : 1071,
                             "length" : 7
                           }
                         },
@@ -5264,10 +5264,10 @@
                               "value" : "\/enum-test\/Enum_Test.aadl"
                             },
                             "beginLine" : 33,
-                            "beginColumn" : 49,
+                            "beginColumn" : 50,
                             "endLine" : 33,
-                            "endColumn" : 52,
-                            "offset" : 1081,
+                            "endColumn" : 53,
+                            "offset" : 1082,
                             "length" : 3
                           }
                         }
@@ -5284,10 +5284,10 @@
                             "value" : "\/enum-test\/Enum_Test.aadl"
                           },
                           "beginLine" : 33,
-                          "beginColumn" : 38,
+                          "beginColumn" : 39,
                           "endLine" : 33,
-                          "endColumn" : 52,
-                          "offset" : 1070,
+                          "endColumn" : 53,
+                          "offset" : 1071,
                           "length" : 14
                         }
                       },
@@ -5319,10 +5319,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 34,
-                                "beginColumn" : 7,
+                                "beginColumn" : 15,
                                 "endLine" : 34,
-                                "endColumn" : 11,
-                                "offset" : 1093,
+                                "endColumn" : 19,
+                                "offset" : 1101,
                                 "length" : 4
                               }
                             }
@@ -5339,10 +5339,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 34,
-                              "beginColumn" : 7,
+                              "beginColumn" : 15,
                               "endLine" : 34,
-                              "endColumn" : 11,
-                              "offset" : 1093,
+                              "endColumn" : 19,
+                              "offset" : 1101,
                               "length" : 4
                             }
                           },
@@ -5379,10 +5379,10 @@
                                           "value" : "\/enum-test\/Enum_Test.aadl"
                                         },
                                         "beginLine" : 34,
-                                        "beginColumn" : 15,
+                                        "beginColumn" : 23,
                                         "endLine" : 34,
-                                        "endColumn" : 34,
-                                        "offset" : 1101,
+                                        "endColumn" : 42,
+                                        "offset" : 1109,
                                         "length" : 19
                                       }
                                     }
@@ -5399,10 +5399,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 34,
-                                      "beginColumn" : 15,
+                                      "beginColumn" : 23,
                                       "endLine" : 34,
-                                      "endColumn" : 34,
-                                      "offset" : 1101,
+                                      "endColumn" : 42,
+                                      "offset" : 1109,
                                       "length" : 19
                                     }
                                   },
@@ -5429,10 +5429,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 34,
-                                    "beginColumn" : 15,
+                                    "beginColumn" : 23,
                                     "endLine" : 34,
-                                    "endColumn" : 34,
-                                    "offset" : 1101,
+                                    "endColumn" : 42,
+                                    "offset" : 1109,
                                     "length" : 19
                                   }
                                 }
@@ -5451,10 +5451,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 34,
-                                  "beginColumn" : 15,
+                                  "beginColumn" : 23,
                                   "endLine" : 34,
-                                  "endColumn" : 34,
-                                  "offset" : 1101,
+                                  "endColumn" : 42,
+                                  "offset" : 1109,
                                   "length" : 19
                                 }
                               },
@@ -5481,10 +5481,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 34,
-                                "beginColumn" : 15,
+                                "beginColumn" : 23,
                                 "endLine" : 34,
-                                "endColumn" : 34,
-                                "offset" : 1101,
+                                "endColumn" : 42,
+                                "offset" : 1109,
                                 "length" : 19
                               }
                             }
@@ -5503,10 +5503,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 34,
-                              "beginColumn" : 15,
+                              "beginColumn" : 23,
                               "endLine" : 34,
-                              "endColumn" : 34,
-                              "offset" : 1101,
+                              "endColumn" : 42,
+                              "offset" : 1109,
                               "length" : 19
                             }
                           },
@@ -5529,10 +5529,10 @@
                               "value" : "\/enum-test\/Enum_Test.aadl"
                             },
                             "beginLine" : 34,
-                            "beginColumn" : 7,
+                            "beginColumn" : 15,
                             "endLine" : 34,
-                            "endColumn" : 34,
-                            "offset" : 1093,
+                            "endColumn" : 42,
+                            "offset" : 1101,
                             "length" : 27
                           }
                         },
@@ -5562,10 +5562,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 34,
-                                "beginColumn" : 38,
+                                "beginColumn" : 44,
                                 "endLine" : 34,
-                                "endColumn" : 45,
-                                "offset" : 1124,
+                                "endColumn" : 51,
+                                "offset" : 1130,
                                 "length" : 7
                               }
                             }
@@ -5582,10 +5582,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 34,
-                              "beginColumn" : 38,
+                              "beginColumn" : 44,
                               "endLine" : 34,
-                              "endColumn" : 45,
-                              "offset" : 1124,
+                              "endColumn" : 51,
+                              "offset" : 1130,
                               "length" : 7
                             }
                           },
@@ -5618,10 +5618,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 34,
-                                "beginColumn" : 51,
+                                "beginColumn" : 57,
                                 "endLine" : 34,
-                                "endColumn" : 56,
-                                "offset" : 1137,
+                                "endColumn" : 62,
+                                "offset" : 1143,
                                 "length" : 5
                               }
                             }
@@ -5638,10 +5638,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 34,
-                              "beginColumn" : 50,
+                              "beginColumn" : 56,
                               "endLine" : 34,
-                              "endColumn" : 56,
-                              "offset" : 1136,
+                              "endColumn" : 62,
+                              "offset" : 1142,
                               "length" : 6
                             }
                           },
@@ -5664,10 +5664,10 @@
                               "value" : "\/enum-test\/Enum_Test.aadl"
                             },
                             "beginLine" : 34,
-                            "beginColumn" : 38,
+                            "beginColumn" : 44,
                             "endLine" : 34,
-                            "endColumn" : 56,
-                            "offset" : 1124,
+                            "endColumn" : 62,
+                            "offset" : 1130,
                             "length" : 18
                           }
                         },
@@ -5699,10 +5699,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 35,
-                                  "beginColumn" : 7,
+                                  "beginColumn" : 15,
                                   "endLine" : 35,
-                                  "endColumn" : 11,
-                                  "offset" : 1152,
+                                  "endColumn" : 19,
+                                  "offset" : 1165,
                                   "length" : 4
                                 }
                               }
@@ -5719,10 +5719,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 35,
-                                "beginColumn" : 7,
+                                "beginColumn" : 15,
                                 "endLine" : 35,
-                                "endColumn" : 11,
-                                "offset" : 1152,
+                                "endColumn" : 19,
+                                "offset" : 1165,
                                 "length" : 4
                               }
                             },
@@ -5759,10 +5759,10 @@
                                             "value" : "\/enum-test\/Enum_Test.aadl"
                                           },
                                           "beginLine" : 35,
-                                          "beginColumn" : 15,
+                                          "beginColumn" : 23,
                                           "endLine" : 35,
-                                          "endColumn" : 34,
-                                          "offset" : 1160,
+                                          "endColumn" : 42,
+                                          "offset" : 1173,
                                           "length" : 19
                                         }
                                       }
@@ -5779,10 +5779,10 @@
                                           "value" : "\/enum-test\/Enum_Test.aadl"
                                         },
                                         "beginLine" : 35,
-                                        "beginColumn" : 15,
+                                        "beginColumn" : 23,
                                         "endLine" : 35,
-                                        "endColumn" : 34,
-                                        "offset" : 1160,
+                                        "endColumn" : 42,
+                                        "offset" : 1173,
                                         "length" : 19
                                       }
                                     },
@@ -5809,10 +5809,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 35,
-                                      "beginColumn" : 15,
+                                      "beginColumn" : 23,
                                       "endLine" : 35,
-                                      "endColumn" : 34,
-                                      "offset" : 1160,
+                                      "endColumn" : 42,
+                                      "offset" : 1173,
                                       "length" : 19
                                     }
                                   }
@@ -5831,10 +5831,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 35,
-                                    "beginColumn" : 15,
+                                    "beginColumn" : 23,
                                     "endLine" : 35,
-                                    "endColumn" : 34,
-                                    "offset" : 1160,
+                                    "endColumn" : 42,
+                                    "offset" : 1173,
                                     "length" : 19
                                   }
                                 },
@@ -5861,10 +5861,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 35,
-                                  "beginColumn" : 15,
+                                  "beginColumn" : 23,
                                   "endLine" : 35,
-                                  "endColumn" : 34,
-                                  "offset" : 1160,
+                                  "endColumn" : 42,
+                                  "offset" : 1173,
                                   "length" : 19
                                 }
                               }
@@ -5883,10 +5883,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 35,
-                                "beginColumn" : 15,
+                                "beginColumn" : 23,
                                 "endLine" : 35,
-                                "endColumn" : 34,
-                                "offset" : 1160,
+                                "endColumn" : 42,
+                                "offset" : 1173,
                                 "length" : 19
                               }
                             },
@@ -5909,10 +5909,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 35,
-                              "beginColumn" : 7,
+                              "beginColumn" : 15,
                               "endLine" : 35,
-                              "endColumn" : 34,
-                              "offset" : 1152,
+                              "endColumn" : 42,
+                              "offset" : 1165,
                               "length" : 27
                             }
                           },
@@ -5942,10 +5942,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 35,
-                                  "beginColumn" : 38,
+                                  "beginColumn" : 44,
                                   "endLine" : 35,
-                                  "endColumn" : 45,
-                                  "offset" : 1183,
+                                  "endColumn" : 51,
+                                  "offset" : 1194,
                                   "length" : 7
                                 }
                               }
@@ -5962,10 +5962,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 35,
-                                "beginColumn" : 38,
+                                "beginColumn" : 44,
                                 "endLine" : 35,
-                                "endColumn" : 45,
-                                "offset" : 1183,
+                                "endColumn" : 51,
+                                "offset" : 1194,
                                 "length" : 7
                               }
                             },
@@ -5998,10 +5998,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 35,
-                                  "beginColumn" : 51,
+                                  "beginColumn" : 57,
                                   "endLine" : 35,
-                                  "endColumn" : 57,
-                                  "offset" : 1196,
+                                  "endColumn" : 63,
+                                  "offset" : 1207,
                                   "length" : 6
                                 }
                               }
@@ -6018,10 +6018,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 35,
-                                "beginColumn" : 50,
+                                "beginColumn" : 56,
                                 "endLine" : 35,
-                                "endColumn" : 57,
-                                "offset" : 1195,
+                                "endColumn" : 63,
+                                "offset" : 1206,
                                 "length" : 7
                               }
                             },
@@ -6044,10 +6044,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 35,
-                              "beginColumn" : 38,
+                              "beginColumn" : 44,
                               "endLine" : 35,
-                              "endColumn" : 57,
-                              "offset" : 1183,
+                              "endColumn" : 63,
+                              "offset" : 1194,
                               "length" : 19
                             }
                           },
@@ -6073,10 +6073,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 36,
-                              "beginColumn" : 6,
+                              "beginColumn" : 11,
                               "endLine" : 36,
-                              "endColumn" : 7,
-                              "offset" : 1211,
+                              "endColumn" : 12,
+                              "offset" : 1226,
                               "length" : 1
                             }
                           }
@@ -6093,11 +6093,11 @@
                               "value" : "\/enum-test\/Enum_Test.aadl"
                             },
                             "beginLine" : 35,
-                            "beginColumn" : 6,
+                            "beginColumn" : 11,
                             "endLine" : 36,
-                            "endColumn" : 7,
-                            "offset" : 1151,
-                            "length" : 61
+                            "endColumn" : 12,
+                            "offset" : 1161,
+                            "length" : 66
                           }
                         },
                         "typedOpt" : {
@@ -6116,11 +6116,11 @@
                             "value" : "\/enum-test\/Enum_Test.aadl"
                           },
                           "beginLine" : 34,
-                          "beginColumn" : 6,
+                          "beginColumn" : 11,
                           "endLine" : 36,
-                          "endColumn" : 7,
-                          "offset" : 1092,
-                          "length" : 120
+                          "endColumn" : 12,
+                          "offset" : 1097,
+                          "length" : 130
                         }
                       },
                       "typedOpt" : {
@@ -6141,9 +6141,9 @@
                         "beginLine" : 33,
                         "beginColumn" : 6,
                         "endLine" : 36,
-                        "endColumn" : 7,
+                        "endColumn" : 12,
                         "offset" : 1038,
-                        "length" : 174
+                        "length" : 189
                       }
                     },
                     "typedOpt" : {
@@ -6162,9 +6162,9 @@
                     "beginLine" : 32,
                     "beginColumn" : 5,
                     "endLine" : 36,
-                    "endColumn" : 8,
+                    "endColumn" : 13,
                     "offset" : 996,
-                    "length" : 217
+                    "length" : 232
                   }
                 }
               }
@@ -6223,7 +6223,7 @@
                 "beginColumn" : 4,
                 "endLine" : 50,
                 "endColumn" : 28,
-                "offset" : 1664,
+                "offset" : 1679,
                 "length" : 24
               }
             }
@@ -6525,10 +6525,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 33,
-                                  "beginColumn" : 7,
+                                  "beginColumn" : 10,
                                   "endLine" : 33,
-                                  "endColumn" : 11,
-                                  "offset" : 1039,
+                                  "endColumn" : 14,
+                                  "offset" : 1042,
                                   "length" : 4
                                 }
                               }
@@ -6545,10 +6545,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 33,
-                                "beginColumn" : 7,
+                                "beginColumn" : 10,
                                 "endLine" : 33,
-                                "endColumn" : 11,
-                                "offset" : 1039,
+                                "endColumn" : 14,
+                                "offset" : 1042,
                                 "length" : 4
                               }
                             },
@@ -6585,10 +6585,10 @@
                                             "value" : "\/enum-test\/Enum_Test.aadl"
                                           },
                                           "beginLine" : 33,
-                                          "beginColumn" : 15,
+                                          "beginColumn" : 18,
                                           "endLine" : 33,
-                                          "endColumn" : 34,
-                                          "offset" : 1047,
+                                          "endColumn" : 37,
+                                          "offset" : 1050,
                                           "length" : 19
                                         }
                                       }
@@ -6605,10 +6605,10 @@
                                           "value" : "\/enum-test\/Enum_Test.aadl"
                                         },
                                         "beginLine" : 33,
-                                        "beginColumn" : 15,
+                                        "beginColumn" : 18,
                                         "endLine" : 33,
-                                        "endColumn" : 34,
-                                        "offset" : 1047,
+                                        "endColumn" : 37,
+                                        "offset" : 1050,
                                         "length" : 19
                                       }
                                     },
@@ -6635,10 +6635,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 33,
-                                      "beginColumn" : 15,
+                                      "beginColumn" : 18,
                                       "endLine" : 33,
-                                      "endColumn" : 34,
-                                      "offset" : 1047,
+                                      "endColumn" : 37,
+                                      "offset" : 1050,
                                       "length" : 19
                                     }
                                   }
@@ -6657,10 +6657,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 33,
-                                    "beginColumn" : 15,
+                                    "beginColumn" : 18,
                                     "endLine" : 33,
-                                    "endColumn" : 34,
-                                    "offset" : 1047,
+                                    "endColumn" : 37,
+                                    "offset" : 1050,
                                     "length" : 19
                                   }
                                 },
@@ -6687,10 +6687,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 33,
-                                  "beginColumn" : 15,
+                                  "beginColumn" : 18,
                                   "endLine" : 33,
-                                  "endColumn" : 34,
-                                  "offset" : 1047,
+                                  "endColumn" : 37,
+                                  "offset" : 1050,
                                   "length" : 19
                                 }
                               }
@@ -6709,10 +6709,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 33,
-                                "beginColumn" : 15,
+                                "beginColumn" : 18,
                                 "endLine" : 33,
-                                "endColumn" : 34,
-                                "offset" : 1047,
+                                "endColumn" : 37,
+                                "offset" : 1050,
                                 "length" : 19
                               }
                             },
@@ -6735,10 +6735,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 33,
-                              "beginColumn" : 7,
+                              "beginColumn" : 10,
                               "endLine" : 33,
-                              "endColumn" : 34,
-                              "offset" : 1039,
+                              "endColumn" : 37,
+                              "offset" : 1042,
                               "length" : 27
                             }
                           },
@@ -6768,10 +6768,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 33,
-                                  "beginColumn" : 38,
+                                  "beginColumn" : 39,
                                   "endLine" : 33,
-                                  "endColumn" : 45,
-                                  "offset" : 1070,
+                                  "endColumn" : 46,
+                                  "offset" : 1071,
                                   "length" : 7
                                 }
                               }
@@ -6788,10 +6788,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 33,
-                                "beginColumn" : 38,
+                                "beginColumn" : 39,
                                 "endLine" : 33,
-                                "endColumn" : 45,
-                                "offset" : 1070,
+                                "endColumn" : 46,
+                                "offset" : 1071,
                                 "length" : 7
                               }
                             },
@@ -6818,10 +6818,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 33,
-                                "beginColumn" : 49,
+                                "beginColumn" : 50,
                                 "endLine" : 33,
-                                "endColumn" : 52,
-                                "offset" : 1081,
+                                "endColumn" : 53,
+                                "offset" : 1082,
                                 "length" : 3
                               }
                             }
@@ -6838,10 +6838,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 33,
-                              "beginColumn" : 38,
+                              "beginColumn" : 39,
                               "endLine" : 33,
-                              "endColumn" : 52,
-                              "offset" : 1070,
+                              "endColumn" : 53,
+                              "offset" : 1071,
                               "length" : 14
                             }
                           },
@@ -6873,10 +6873,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 34,
-                                    "beginColumn" : 7,
+                                    "beginColumn" : 15,
                                     "endLine" : 34,
-                                    "endColumn" : 11,
-                                    "offset" : 1093,
+                                    "endColumn" : 19,
+                                    "offset" : 1101,
                                     "length" : 4
                                   }
                                 }
@@ -6893,10 +6893,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 34,
-                                  "beginColumn" : 7,
+                                  "beginColumn" : 15,
                                   "endLine" : 34,
-                                  "endColumn" : 11,
-                                  "offset" : 1093,
+                                  "endColumn" : 19,
+                                  "offset" : 1101,
                                   "length" : 4
                                 }
                               },
@@ -6933,10 +6933,10 @@
                                               "value" : "\/enum-test\/Enum_Test.aadl"
                                             },
                                             "beginLine" : 34,
-                                            "beginColumn" : 15,
+                                            "beginColumn" : 23,
                                             "endLine" : 34,
-                                            "endColumn" : 34,
-                                            "offset" : 1101,
+                                            "endColumn" : 42,
+                                            "offset" : 1109,
                                             "length" : 19
                                           }
                                         }
@@ -6953,10 +6953,10 @@
                                             "value" : "\/enum-test\/Enum_Test.aadl"
                                           },
                                           "beginLine" : 34,
-                                          "beginColumn" : 15,
+                                          "beginColumn" : 23,
                                           "endLine" : 34,
-                                          "endColumn" : 34,
-                                          "offset" : 1101,
+                                          "endColumn" : 42,
+                                          "offset" : 1109,
                                           "length" : 19
                                         }
                                       },
@@ -6983,10 +6983,10 @@
                                           "value" : "\/enum-test\/Enum_Test.aadl"
                                         },
                                         "beginLine" : 34,
-                                        "beginColumn" : 15,
+                                        "beginColumn" : 23,
                                         "endLine" : 34,
-                                        "endColumn" : 34,
-                                        "offset" : 1101,
+                                        "endColumn" : 42,
+                                        "offset" : 1109,
                                         "length" : 19
                                       }
                                     }
@@ -7005,10 +7005,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 34,
-                                      "beginColumn" : 15,
+                                      "beginColumn" : 23,
                                       "endLine" : 34,
-                                      "endColumn" : 34,
-                                      "offset" : 1101,
+                                      "endColumn" : 42,
+                                      "offset" : 1109,
                                       "length" : 19
                                     }
                                   },
@@ -7035,10 +7035,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 34,
-                                    "beginColumn" : 15,
+                                    "beginColumn" : 23,
                                     "endLine" : 34,
-                                    "endColumn" : 34,
-                                    "offset" : 1101,
+                                    "endColumn" : 42,
+                                    "offset" : 1109,
                                     "length" : 19
                                   }
                                 }
@@ -7057,10 +7057,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 34,
-                                  "beginColumn" : 15,
+                                  "beginColumn" : 23,
                                   "endLine" : 34,
-                                  "endColumn" : 34,
-                                  "offset" : 1101,
+                                  "endColumn" : 42,
+                                  "offset" : 1109,
                                   "length" : 19
                                 }
                               },
@@ -7083,10 +7083,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 34,
-                                "beginColumn" : 7,
+                                "beginColumn" : 15,
                                 "endLine" : 34,
-                                "endColumn" : 34,
-                                "offset" : 1093,
+                                "endColumn" : 42,
+                                "offset" : 1101,
                                 "length" : 27
                               }
                             },
@@ -7116,10 +7116,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 34,
-                                    "beginColumn" : 38,
+                                    "beginColumn" : 44,
                                     "endLine" : 34,
-                                    "endColumn" : 45,
-                                    "offset" : 1124,
+                                    "endColumn" : 51,
+                                    "offset" : 1130,
                                     "length" : 7
                                   }
                                 }
@@ -7136,10 +7136,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 34,
-                                  "beginColumn" : 38,
+                                  "beginColumn" : 44,
                                   "endLine" : 34,
-                                  "endColumn" : 45,
-                                  "offset" : 1124,
+                                  "endColumn" : 51,
+                                  "offset" : 1130,
                                   "length" : 7
                                 }
                               },
@@ -7172,10 +7172,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 34,
-                                    "beginColumn" : 51,
+                                    "beginColumn" : 57,
                                     "endLine" : 34,
-                                    "endColumn" : 56,
-                                    "offset" : 1137,
+                                    "endColumn" : 62,
+                                    "offset" : 1143,
                                     "length" : 5
                                   }
                                 }
@@ -7192,10 +7192,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 34,
-                                  "beginColumn" : 50,
+                                  "beginColumn" : 56,
                                   "endLine" : 34,
-                                  "endColumn" : 56,
-                                  "offset" : 1136,
+                                  "endColumn" : 62,
+                                  "offset" : 1142,
                                   "length" : 6
                                 }
                               },
@@ -7218,10 +7218,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 34,
-                                "beginColumn" : 38,
+                                "beginColumn" : 44,
                                 "endLine" : 34,
-                                "endColumn" : 56,
-                                "offset" : 1124,
+                                "endColumn" : 62,
+                                "offset" : 1130,
                                 "length" : 18
                               }
                             },
@@ -7253,10 +7253,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 35,
-                                      "beginColumn" : 7,
+                                      "beginColumn" : 15,
                                       "endLine" : 35,
-                                      "endColumn" : 11,
-                                      "offset" : 1152,
+                                      "endColumn" : 19,
+                                      "offset" : 1165,
                                       "length" : 4
                                     }
                                   }
@@ -7273,10 +7273,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 35,
-                                    "beginColumn" : 7,
+                                    "beginColumn" : 15,
                                     "endLine" : 35,
-                                    "endColumn" : 11,
-                                    "offset" : 1152,
+                                    "endColumn" : 19,
+                                    "offset" : 1165,
                                     "length" : 4
                                   }
                                 },
@@ -7313,10 +7313,10 @@
                                                 "value" : "\/enum-test\/Enum_Test.aadl"
                                               },
                                               "beginLine" : 35,
-                                              "beginColumn" : 15,
+                                              "beginColumn" : 23,
                                               "endLine" : 35,
-                                              "endColumn" : 34,
-                                              "offset" : 1160,
+                                              "endColumn" : 42,
+                                              "offset" : 1173,
                                               "length" : 19
                                             }
                                           }
@@ -7333,10 +7333,10 @@
                                               "value" : "\/enum-test\/Enum_Test.aadl"
                                             },
                                             "beginLine" : 35,
-                                            "beginColumn" : 15,
+                                            "beginColumn" : 23,
                                             "endLine" : 35,
-                                            "endColumn" : 34,
-                                            "offset" : 1160,
+                                            "endColumn" : 42,
+                                            "offset" : 1173,
                                             "length" : 19
                                           }
                                         },
@@ -7363,10 +7363,10 @@
                                             "value" : "\/enum-test\/Enum_Test.aadl"
                                           },
                                           "beginLine" : 35,
-                                          "beginColumn" : 15,
+                                          "beginColumn" : 23,
                                           "endLine" : 35,
-                                          "endColumn" : 34,
-                                          "offset" : 1160,
+                                          "endColumn" : 42,
+                                          "offset" : 1173,
                                           "length" : 19
                                         }
                                       }
@@ -7385,10 +7385,10 @@
                                           "value" : "\/enum-test\/Enum_Test.aadl"
                                         },
                                         "beginLine" : 35,
-                                        "beginColumn" : 15,
+                                        "beginColumn" : 23,
                                         "endLine" : 35,
-                                        "endColumn" : 34,
-                                        "offset" : 1160,
+                                        "endColumn" : 42,
+                                        "offset" : 1173,
                                         "length" : 19
                                       }
                                     },
@@ -7415,10 +7415,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 35,
-                                      "beginColumn" : 15,
+                                      "beginColumn" : 23,
                                       "endLine" : 35,
-                                      "endColumn" : 34,
-                                      "offset" : 1160,
+                                      "endColumn" : 42,
+                                      "offset" : 1173,
                                       "length" : 19
                                     }
                                   }
@@ -7437,10 +7437,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 35,
-                                    "beginColumn" : 15,
+                                    "beginColumn" : 23,
                                     "endLine" : 35,
-                                    "endColumn" : 34,
-                                    "offset" : 1160,
+                                    "endColumn" : 42,
+                                    "offset" : 1173,
                                     "length" : 19
                                   }
                                 },
@@ -7463,10 +7463,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 35,
-                                  "beginColumn" : 7,
+                                  "beginColumn" : 15,
                                   "endLine" : 35,
-                                  "endColumn" : 34,
-                                  "offset" : 1152,
+                                  "endColumn" : 42,
+                                  "offset" : 1165,
                                   "length" : 27
                                 }
                               },
@@ -7496,10 +7496,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 35,
-                                      "beginColumn" : 38,
+                                      "beginColumn" : 44,
                                       "endLine" : 35,
-                                      "endColumn" : 45,
-                                      "offset" : 1183,
+                                      "endColumn" : 51,
+                                      "offset" : 1194,
                                       "length" : 7
                                     }
                                   }
@@ -7516,10 +7516,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 35,
-                                    "beginColumn" : 38,
+                                    "beginColumn" : 44,
                                     "endLine" : 35,
-                                    "endColumn" : 45,
-                                    "offset" : 1183,
+                                    "endColumn" : 51,
+                                    "offset" : 1194,
                                     "length" : 7
                                   }
                                 },
@@ -7552,10 +7552,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 35,
-                                      "beginColumn" : 51,
+                                      "beginColumn" : 57,
                                       "endLine" : 35,
-                                      "endColumn" : 57,
-                                      "offset" : 1196,
+                                      "endColumn" : 63,
+                                      "offset" : 1207,
                                       "length" : 6
                                     }
                                   }
@@ -7572,10 +7572,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 35,
-                                    "beginColumn" : 50,
+                                    "beginColumn" : 56,
                                     "endLine" : 35,
-                                    "endColumn" : 57,
-                                    "offset" : 1195,
+                                    "endColumn" : 63,
+                                    "offset" : 1206,
                                     "length" : 7
                                   }
                                 },
@@ -7598,10 +7598,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 35,
-                                  "beginColumn" : 38,
+                                  "beginColumn" : 44,
                                   "endLine" : 35,
-                                  "endColumn" : 57,
-                                  "offset" : 1183,
+                                  "endColumn" : 63,
+                                  "offset" : 1194,
                                   "length" : 19
                                 }
                               },
@@ -7627,10 +7627,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 36,
-                                  "beginColumn" : 6,
+                                  "beginColumn" : 11,
                                   "endLine" : 36,
-                                  "endColumn" : 7,
-                                  "offset" : 1211,
+                                  "endColumn" : 12,
+                                  "offset" : 1226,
                                   "length" : 1
                                 }
                               }
@@ -7647,11 +7647,11 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 35,
-                                "beginColumn" : 6,
+                                "beginColumn" : 11,
                                 "endLine" : 36,
-                                "endColumn" : 7,
-                                "offset" : 1151,
-                                "length" : 61
+                                "endColumn" : 12,
+                                "offset" : 1161,
+                                "length" : 66
                               }
                             },
                             "typedOpt" : {
@@ -7670,11 +7670,11 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 34,
-                              "beginColumn" : 6,
+                              "beginColumn" : 11,
                               "endLine" : 36,
-                              "endColumn" : 7,
-                              "offset" : 1092,
-                              "length" : 120
+                              "endColumn" : 12,
+                              "offset" : 1097,
+                              "length" : 130
                             }
                           },
                           "typedOpt" : {
@@ -7695,9 +7695,9 @@
                             "beginLine" : 33,
                             "beginColumn" : 6,
                             "endLine" : 36,
-                            "endColumn" : 7,
+                            "endColumn" : 12,
                             "offset" : 1038,
-                            "length" : 174
+                            "length" : 189
                           }
                         },
                         "typedOpt" : {
@@ -7716,9 +7716,9 @@
                         "beginLine" : 32,
                         "beginColumn" : 5,
                         "endLine" : 36,
-                        "endColumn" : 8,
+                        "endColumn" : 13,
                         "offset" : 996,
-                        "length" : 217
+                        "length" : 232
                       }
                     }
                   }
@@ -7754,7 +7754,7 @@
                 "beginColumn" : 4,
                 "endLine" : 51,
                 "endColumn" : 29,
-                "offset" : 1692,
+                "offset" : 1707,
                 "length" : 25
               }
             }
@@ -8056,10 +8056,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 33,
-                                  "beginColumn" : 7,
+                                  "beginColumn" : 10,
                                   "endLine" : 33,
-                                  "endColumn" : 11,
-                                  "offset" : 1039,
+                                  "endColumn" : 14,
+                                  "offset" : 1042,
                                   "length" : 4
                                 }
                               }
@@ -8076,10 +8076,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 33,
-                                "beginColumn" : 7,
+                                "beginColumn" : 10,
                                 "endLine" : 33,
-                                "endColumn" : 11,
-                                "offset" : 1039,
+                                "endColumn" : 14,
+                                "offset" : 1042,
                                 "length" : 4
                               }
                             },
@@ -8116,10 +8116,10 @@
                                             "value" : "\/enum-test\/Enum_Test.aadl"
                                           },
                                           "beginLine" : 33,
-                                          "beginColumn" : 15,
+                                          "beginColumn" : 18,
                                           "endLine" : 33,
-                                          "endColumn" : 34,
-                                          "offset" : 1047,
+                                          "endColumn" : 37,
+                                          "offset" : 1050,
                                           "length" : 19
                                         }
                                       }
@@ -8136,10 +8136,10 @@
                                           "value" : "\/enum-test\/Enum_Test.aadl"
                                         },
                                         "beginLine" : 33,
-                                        "beginColumn" : 15,
+                                        "beginColumn" : 18,
                                         "endLine" : 33,
-                                        "endColumn" : 34,
-                                        "offset" : 1047,
+                                        "endColumn" : 37,
+                                        "offset" : 1050,
                                         "length" : 19
                                       }
                                     },
@@ -8166,10 +8166,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 33,
-                                      "beginColumn" : 15,
+                                      "beginColumn" : 18,
                                       "endLine" : 33,
-                                      "endColumn" : 34,
-                                      "offset" : 1047,
+                                      "endColumn" : 37,
+                                      "offset" : 1050,
                                       "length" : 19
                                     }
                                   }
@@ -8188,10 +8188,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 33,
-                                    "beginColumn" : 15,
+                                    "beginColumn" : 18,
                                     "endLine" : 33,
-                                    "endColumn" : 34,
-                                    "offset" : 1047,
+                                    "endColumn" : 37,
+                                    "offset" : 1050,
                                     "length" : 19
                                   }
                                 },
@@ -8218,10 +8218,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 33,
-                                  "beginColumn" : 15,
+                                  "beginColumn" : 18,
                                   "endLine" : 33,
-                                  "endColumn" : 34,
-                                  "offset" : 1047,
+                                  "endColumn" : 37,
+                                  "offset" : 1050,
                                   "length" : 19
                                 }
                               }
@@ -8240,10 +8240,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 33,
-                                "beginColumn" : 15,
+                                "beginColumn" : 18,
                                 "endLine" : 33,
-                                "endColumn" : 34,
-                                "offset" : 1047,
+                                "endColumn" : 37,
+                                "offset" : 1050,
                                 "length" : 19
                               }
                             },
@@ -8266,10 +8266,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 33,
-                              "beginColumn" : 7,
+                              "beginColumn" : 10,
                               "endLine" : 33,
-                              "endColumn" : 34,
-                              "offset" : 1039,
+                              "endColumn" : 37,
+                              "offset" : 1042,
                               "length" : 27
                             }
                           },
@@ -8299,10 +8299,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 33,
-                                  "beginColumn" : 38,
+                                  "beginColumn" : 39,
                                   "endLine" : 33,
-                                  "endColumn" : 45,
-                                  "offset" : 1070,
+                                  "endColumn" : 46,
+                                  "offset" : 1071,
                                   "length" : 7
                                 }
                               }
@@ -8319,10 +8319,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 33,
-                                "beginColumn" : 38,
+                                "beginColumn" : 39,
                                 "endLine" : 33,
-                                "endColumn" : 45,
-                                "offset" : 1070,
+                                "endColumn" : 46,
+                                "offset" : 1071,
                                 "length" : 7
                               }
                             },
@@ -8349,10 +8349,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 33,
-                                "beginColumn" : 49,
+                                "beginColumn" : 50,
                                 "endLine" : 33,
-                                "endColumn" : 52,
-                                "offset" : 1081,
+                                "endColumn" : 53,
+                                "offset" : 1082,
                                 "length" : 3
                               }
                             }
@@ -8369,10 +8369,10 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 33,
-                              "beginColumn" : 38,
+                              "beginColumn" : 39,
                               "endLine" : 33,
-                              "endColumn" : 52,
-                              "offset" : 1070,
+                              "endColumn" : 53,
+                              "offset" : 1071,
                               "length" : 14
                             }
                           },
@@ -8404,10 +8404,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 34,
-                                    "beginColumn" : 7,
+                                    "beginColumn" : 15,
                                     "endLine" : 34,
-                                    "endColumn" : 11,
-                                    "offset" : 1093,
+                                    "endColumn" : 19,
+                                    "offset" : 1101,
                                     "length" : 4
                                   }
                                 }
@@ -8424,10 +8424,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 34,
-                                  "beginColumn" : 7,
+                                  "beginColumn" : 15,
                                   "endLine" : 34,
-                                  "endColumn" : 11,
-                                  "offset" : 1093,
+                                  "endColumn" : 19,
+                                  "offset" : 1101,
                                   "length" : 4
                                 }
                               },
@@ -8464,10 +8464,10 @@
                                               "value" : "\/enum-test\/Enum_Test.aadl"
                                             },
                                             "beginLine" : 34,
-                                            "beginColumn" : 15,
+                                            "beginColumn" : 23,
                                             "endLine" : 34,
-                                            "endColumn" : 34,
-                                            "offset" : 1101,
+                                            "endColumn" : 42,
+                                            "offset" : 1109,
                                             "length" : 19
                                           }
                                         }
@@ -8484,10 +8484,10 @@
                                             "value" : "\/enum-test\/Enum_Test.aadl"
                                           },
                                           "beginLine" : 34,
-                                          "beginColumn" : 15,
+                                          "beginColumn" : 23,
                                           "endLine" : 34,
-                                          "endColumn" : 34,
-                                          "offset" : 1101,
+                                          "endColumn" : 42,
+                                          "offset" : 1109,
                                           "length" : 19
                                         }
                                       },
@@ -8514,10 +8514,10 @@
                                           "value" : "\/enum-test\/Enum_Test.aadl"
                                         },
                                         "beginLine" : 34,
-                                        "beginColumn" : 15,
+                                        "beginColumn" : 23,
                                         "endLine" : 34,
-                                        "endColumn" : 34,
-                                        "offset" : 1101,
+                                        "endColumn" : 42,
+                                        "offset" : 1109,
                                         "length" : 19
                                       }
                                     }
@@ -8536,10 +8536,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 34,
-                                      "beginColumn" : 15,
+                                      "beginColumn" : 23,
                                       "endLine" : 34,
-                                      "endColumn" : 34,
-                                      "offset" : 1101,
+                                      "endColumn" : 42,
+                                      "offset" : 1109,
                                       "length" : 19
                                     }
                                   },
@@ -8566,10 +8566,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 34,
-                                    "beginColumn" : 15,
+                                    "beginColumn" : 23,
                                     "endLine" : 34,
-                                    "endColumn" : 34,
-                                    "offset" : 1101,
+                                    "endColumn" : 42,
+                                    "offset" : 1109,
                                     "length" : 19
                                   }
                                 }
@@ -8588,10 +8588,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 34,
-                                  "beginColumn" : 15,
+                                  "beginColumn" : 23,
                                   "endLine" : 34,
-                                  "endColumn" : 34,
-                                  "offset" : 1101,
+                                  "endColumn" : 42,
+                                  "offset" : 1109,
                                   "length" : 19
                                 }
                               },
@@ -8614,10 +8614,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 34,
-                                "beginColumn" : 7,
+                                "beginColumn" : 15,
                                 "endLine" : 34,
-                                "endColumn" : 34,
-                                "offset" : 1093,
+                                "endColumn" : 42,
+                                "offset" : 1101,
                                 "length" : 27
                               }
                             },
@@ -8647,10 +8647,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 34,
-                                    "beginColumn" : 38,
+                                    "beginColumn" : 44,
                                     "endLine" : 34,
-                                    "endColumn" : 45,
-                                    "offset" : 1124,
+                                    "endColumn" : 51,
+                                    "offset" : 1130,
                                     "length" : 7
                                   }
                                 }
@@ -8667,10 +8667,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 34,
-                                  "beginColumn" : 38,
+                                  "beginColumn" : 44,
                                   "endLine" : 34,
-                                  "endColumn" : 45,
-                                  "offset" : 1124,
+                                  "endColumn" : 51,
+                                  "offset" : 1130,
                                   "length" : 7
                                 }
                               },
@@ -8703,10 +8703,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 34,
-                                    "beginColumn" : 51,
+                                    "beginColumn" : 57,
                                     "endLine" : 34,
-                                    "endColumn" : 56,
-                                    "offset" : 1137,
+                                    "endColumn" : 62,
+                                    "offset" : 1143,
                                     "length" : 5
                                   }
                                 }
@@ -8723,10 +8723,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 34,
-                                  "beginColumn" : 50,
+                                  "beginColumn" : 56,
                                   "endLine" : 34,
-                                  "endColumn" : 56,
-                                  "offset" : 1136,
+                                  "endColumn" : 62,
+                                  "offset" : 1142,
                                   "length" : 6
                                 }
                               },
@@ -8749,10 +8749,10 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 34,
-                                "beginColumn" : 38,
+                                "beginColumn" : 44,
                                 "endLine" : 34,
-                                "endColumn" : 56,
-                                "offset" : 1124,
+                                "endColumn" : 62,
+                                "offset" : 1130,
                                 "length" : 18
                               }
                             },
@@ -8784,10 +8784,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 35,
-                                      "beginColumn" : 7,
+                                      "beginColumn" : 15,
                                       "endLine" : 35,
-                                      "endColumn" : 11,
-                                      "offset" : 1152,
+                                      "endColumn" : 19,
+                                      "offset" : 1165,
                                       "length" : 4
                                     }
                                   }
@@ -8804,10 +8804,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 35,
-                                    "beginColumn" : 7,
+                                    "beginColumn" : 15,
                                     "endLine" : 35,
-                                    "endColumn" : 11,
-                                    "offset" : 1152,
+                                    "endColumn" : 19,
+                                    "offset" : 1165,
                                     "length" : 4
                                   }
                                 },
@@ -8844,10 +8844,10 @@
                                                 "value" : "\/enum-test\/Enum_Test.aadl"
                                               },
                                               "beginLine" : 35,
-                                              "beginColumn" : 15,
+                                              "beginColumn" : 23,
                                               "endLine" : 35,
-                                              "endColumn" : 34,
-                                              "offset" : 1160,
+                                              "endColumn" : 42,
+                                              "offset" : 1173,
                                               "length" : 19
                                             }
                                           }
@@ -8864,10 +8864,10 @@
                                               "value" : "\/enum-test\/Enum_Test.aadl"
                                             },
                                             "beginLine" : 35,
-                                            "beginColumn" : 15,
+                                            "beginColumn" : 23,
                                             "endLine" : 35,
-                                            "endColumn" : 34,
-                                            "offset" : 1160,
+                                            "endColumn" : 42,
+                                            "offset" : 1173,
                                             "length" : 19
                                           }
                                         },
@@ -8894,10 +8894,10 @@
                                             "value" : "\/enum-test\/Enum_Test.aadl"
                                           },
                                           "beginLine" : 35,
-                                          "beginColumn" : 15,
+                                          "beginColumn" : 23,
                                           "endLine" : 35,
-                                          "endColumn" : 34,
-                                          "offset" : 1160,
+                                          "endColumn" : 42,
+                                          "offset" : 1173,
                                           "length" : 19
                                         }
                                       }
@@ -8916,10 +8916,10 @@
                                           "value" : "\/enum-test\/Enum_Test.aadl"
                                         },
                                         "beginLine" : 35,
-                                        "beginColumn" : 15,
+                                        "beginColumn" : 23,
                                         "endLine" : 35,
-                                        "endColumn" : 34,
-                                        "offset" : 1160,
+                                        "endColumn" : 42,
+                                        "offset" : 1173,
                                         "length" : 19
                                       }
                                     },
@@ -8946,10 +8946,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 35,
-                                      "beginColumn" : 15,
+                                      "beginColumn" : 23,
                                       "endLine" : 35,
-                                      "endColumn" : 34,
-                                      "offset" : 1160,
+                                      "endColumn" : 42,
+                                      "offset" : 1173,
                                       "length" : 19
                                     }
                                   }
@@ -8968,10 +8968,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 35,
-                                    "beginColumn" : 15,
+                                    "beginColumn" : 23,
                                     "endLine" : 35,
-                                    "endColumn" : 34,
-                                    "offset" : 1160,
+                                    "endColumn" : 42,
+                                    "offset" : 1173,
                                     "length" : 19
                                   }
                                 },
@@ -8994,10 +8994,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 35,
-                                  "beginColumn" : 7,
+                                  "beginColumn" : 15,
                                   "endLine" : 35,
-                                  "endColumn" : 34,
-                                  "offset" : 1152,
+                                  "endColumn" : 42,
+                                  "offset" : 1165,
                                   "length" : 27
                                 }
                               },
@@ -9027,10 +9027,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 35,
-                                      "beginColumn" : 38,
+                                      "beginColumn" : 44,
                                       "endLine" : 35,
-                                      "endColumn" : 45,
-                                      "offset" : 1183,
+                                      "endColumn" : 51,
+                                      "offset" : 1194,
                                       "length" : 7
                                     }
                                   }
@@ -9047,10 +9047,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 35,
-                                    "beginColumn" : 38,
+                                    "beginColumn" : 44,
                                     "endLine" : 35,
-                                    "endColumn" : 45,
-                                    "offset" : 1183,
+                                    "endColumn" : 51,
+                                    "offset" : 1194,
                                     "length" : 7
                                   }
                                 },
@@ -9083,10 +9083,10 @@
                                         "value" : "\/enum-test\/Enum_Test.aadl"
                                       },
                                       "beginLine" : 35,
-                                      "beginColumn" : 51,
+                                      "beginColumn" : 57,
                                       "endLine" : 35,
-                                      "endColumn" : 57,
-                                      "offset" : 1196,
+                                      "endColumn" : 63,
+                                      "offset" : 1207,
                                       "length" : 6
                                     }
                                   }
@@ -9103,10 +9103,10 @@
                                       "value" : "\/enum-test\/Enum_Test.aadl"
                                     },
                                     "beginLine" : 35,
-                                    "beginColumn" : 50,
+                                    "beginColumn" : 56,
                                     "endLine" : 35,
-                                    "endColumn" : 57,
-                                    "offset" : 1195,
+                                    "endColumn" : 63,
+                                    "offset" : 1206,
                                     "length" : 7
                                   }
                                 },
@@ -9129,10 +9129,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 35,
-                                  "beginColumn" : 38,
+                                  "beginColumn" : 44,
                                   "endLine" : 35,
-                                  "endColumn" : 57,
-                                  "offset" : 1183,
+                                  "endColumn" : 63,
+                                  "offset" : 1194,
                                   "length" : 19
                                 }
                               },
@@ -9158,10 +9158,10 @@
                                     "value" : "\/enum-test\/Enum_Test.aadl"
                                   },
                                   "beginLine" : 36,
-                                  "beginColumn" : 6,
+                                  "beginColumn" : 11,
                                   "endLine" : 36,
-                                  "endColumn" : 7,
-                                  "offset" : 1211,
+                                  "endColumn" : 12,
+                                  "offset" : 1226,
                                   "length" : 1
                                 }
                               }
@@ -9178,11 +9178,11 @@
                                   "value" : "\/enum-test\/Enum_Test.aadl"
                                 },
                                 "beginLine" : 35,
-                                "beginColumn" : 6,
+                                "beginColumn" : 11,
                                 "endLine" : 36,
-                                "endColumn" : 7,
-                                "offset" : 1151,
-                                "length" : 61
+                                "endColumn" : 12,
+                                "offset" : 1161,
+                                "length" : 66
                               }
                             },
                             "typedOpt" : {
@@ -9201,11 +9201,11 @@
                                 "value" : "\/enum-test\/Enum_Test.aadl"
                               },
                               "beginLine" : 34,
-                              "beginColumn" : 6,
+                              "beginColumn" : 11,
                               "endLine" : 36,
-                              "endColumn" : 7,
-                              "offset" : 1092,
-                              "length" : 120
+                              "endColumn" : 12,
+                              "offset" : 1097,
+                              "length" : 130
                             }
                           },
                           "typedOpt" : {
@@ -9226,9 +9226,9 @@
                             "beginLine" : 33,
                             "beginColumn" : 6,
                             "endLine" : 36,
-                            "endColumn" : 7,
+                            "endColumn" : 12,
                             "offset" : 1038,
-                            "length" : 174
+                            "length" : 189
                           }
                         },
                         "typedOpt" : {
@@ -9247,9 +9247,9 @@
                         "beginLine" : 32,
                         "beginColumn" : 5,
                         "endLine" : 36,
-                        "endColumn" : 8,
+                        "endColumn" : 13,
                         "offset" : 996,
-                        "length" : 217
+                        "length" : 232
                       }
                     }
                   }
@@ -9357,7 +9357,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 55,
                                     "endColumn" : 10,
-                                    "offset" : 1794,
+                                    "offset" : 1809,
                                     "length" : 3
                                   }
                                 }
@@ -9377,7 +9377,7 @@
                                   "beginColumn" : 7,
                                   "endLine" : 55,
                                   "endColumn" : 10,
-                                  "offset" : 1794,
+                                  "offset" : 1809,
                                   "length" : 3
                                 }
                               },
@@ -9407,7 +9407,7 @@
                                 "beginColumn" : 11,
                                 "endLine" : 55,
                                 "endColumn" : 18,
-                                "offset" : 1798,
+                                "offset" : 1813,
                                 "length" : 7
                               }
                             }
@@ -9429,7 +9429,7 @@
                               "beginColumn" : 7,
                               "endLine" : 55,
                               "endColumn" : 18,
-                              "offset" : 1794,
+                              "offset" : 1809,
                               "length" : 11
                             }
                           },
@@ -9459,7 +9459,7 @@
                               "beginColumn" : 22,
                               "endLine" : 55,
                               "endColumn" : 26,
-                              "offset" : 1809,
+                              "offset" : 1824,
                               "length" : 4
                             }
                           }
@@ -9479,7 +9479,7 @@
                             "beginColumn" : 7,
                             "endLine" : 55,
                             "endColumn" : 26,
-                            "offset" : 1794,
+                            "offset" : 1809,
                             "length" : 19
                           }
                         },
@@ -9517,7 +9517,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 56,
                                     "endColumn" : 11,
-                                    "offset" : 1824,
+                                    "offset" : 1839,
                                     "length" : 4
                                   }
                                 }
@@ -9537,7 +9537,7 @@
                                   "beginColumn" : 7,
                                   "endLine" : 56,
                                   "endColumn" : 11,
-                                  "offset" : 1824,
+                                  "offset" : 1839,
                                   "length" : 4
                                 }
                               },
@@ -9567,7 +9567,7 @@
                                 "beginColumn" : 12,
                                 "endLine" : 56,
                                 "endColumn" : 19,
-                                "offset" : 1829,
+                                "offset" : 1844,
                                 "length" : 7
                               }
                             }
@@ -9589,7 +9589,7 @@
                               "beginColumn" : 7,
                               "endLine" : 56,
                               "endColumn" : 19,
-                              "offset" : 1824,
+                              "offset" : 1839,
                               "length" : 12
                             }
                           },
@@ -9619,7 +9619,7 @@
                               "beginColumn" : 23,
                               "endLine" : 56,
                               "endColumn" : 28,
-                              "offset" : 1840,
+                              "offset" : 1855,
                               "length" : 5
                             }
                           }
@@ -9639,7 +9639,7 @@
                             "beginColumn" : 7,
                             "endLine" : 56,
                             "endColumn" : 28,
-                            "offset" : 1824,
+                            "offset" : 1839,
                             "length" : 21
                           }
                         },
@@ -9665,7 +9665,7 @@
                           "beginColumn" : 7,
                           "endLine" : 56,
                           "endColumn" : 28,
-                          "offset" : 1794,
+                          "offset" : 1809,
                           "length" : 51
                         }
                       },
@@ -9703,7 +9703,7 @@
                                   "beginColumn" : 7,
                                   "endLine" : 57,
                                   "endColumn" : 10,
-                                  "offset" : 1856,
+                                  "offset" : 1871,
                                   "length" : 3
                                 }
                               }
@@ -9723,7 +9723,7 @@
                                 "beginColumn" : 7,
                                 "endLine" : 57,
                                 "endColumn" : 10,
-                                "offset" : 1856,
+                                "offset" : 1871,
                                 "length" : 3
                               }
                             },
@@ -9753,7 +9753,7 @@
                               "beginColumn" : 11,
                               "endLine" : 57,
                               "endColumn" : 18,
-                              "offset" : 1860,
+                              "offset" : 1875,
                               "length" : 7
                             }
                           }
@@ -9775,7 +9775,7 @@
                             "beginColumn" : 7,
                             "endLine" : 57,
                             "endColumn" : 18,
-                            "offset" : 1856,
+                            "offset" : 1871,
                             "length" : 11
                           }
                         },
@@ -9811,7 +9811,7 @@
                                   "beginColumn" : 22,
                                   "endLine" : 57,
                                   "endColumn" : 26,
-                                  "offset" : 1871,
+                                  "offset" : 1886,
                                   "length" : 4
                                 }
                               }
@@ -9831,7 +9831,7 @@
                                 "beginColumn" : 22,
                                 "endLine" : 57,
                                 "endColumn" : 26,
-                                "offset" : 1871,
+                                "offset" : 1886,
                                 "length" : 4
                               }
                             },
@@ -9861,7 +9861,7 @@
                               "beginColumn" : 27,
                               "endLine" : 57,
                               "endColumn" : 34,
-                              "offset" : 1876,
+                              "offset" : 1891,
                               "length" : 7
                             }
                           }
@@ -9883,7 +9883,7 @@
                             "beginColumn" : 22,
                             "endLine" : 57,
                             "endColumn" : 34,
-                            "offset" : 1871,
+                            "offset" : 1886,
                             "length" : 12
                           }
                         },
@@ -9909,7 +9909,7 @@
                           "beginColumn" : 7,
                           "endLine" : 57,
                           "endColumn" : 34,
-                          "offset" : 1856,
+                          "offset" : 1871,
                           "length" : 27
                         }
                       },
@@ -9935,7 +9935,7 @@
                         "beginColumn" : 7,
                         "endLine" : 57,
                         "endColumn" : 34,
-                        "offset" : 1794,
+                        "offset" : 1809,
                         "length" : 89
                       }
                     },
@@ -9959,7 +9959,7 @@
                     "beginColumn" : 5,
                     "endLine" : 57,
                     "endColumn" : 36,
-                    "offset" : 1754,
+                    "offset" : 1769,
                     "length" : 131
                   }
                 }

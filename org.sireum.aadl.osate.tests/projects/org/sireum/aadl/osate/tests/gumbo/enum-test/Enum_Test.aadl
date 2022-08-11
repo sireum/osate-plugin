@@ -30,10 +30,10 @@ public
 			--                  and must be proved whenever a value of the data type is constructed
 			invariants
 				inv i1 "Temperature Data Invariant":
-					(unit == Enum_Test::Unity.Ke) ? degrees >= 0.0 :
-					(unit == Enum_Test::Unity.Ce) ? degrees >= (-273.0) :
-					(unit == Enum_Test::Unity.Fa) ? degrees >= (-459.67) :
-					F; -- infeasible but want to sym resolve all enum values
+					if (unit == Enum_Test::Unity.Ke) degrees >= 0.0 
+					else if (unit == Enum_Test::Unity.Ce) degrees >= (-273.0) 
+					else if (unit == Enum_Test::Unity.Fa) degrees >= (-459.67) 
+					else F; -- infeasible but want to sym resolve all enum values
 		**};
 	end Temperature.i;
 
