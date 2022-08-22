@@ -44,9 +44,9 @@ public
       annex GUMBO {**       
       invariants
         inv i1 "SetPoint Data Invariant":
-          (low.degrees >= f32"70.0") &&
-          (high.degrees <= f32"100.0") &&
-          (low.degrees <= high.degrees);
+           low.degrees >= f32"70.0"  &&
+           high.degrees <= f32"100.0"  &&
+           low.degrees <= high.degrees ;
       **};
   end SetPoint.i;
   
@@ -80,9 +80,9 @@ public
   		gumbo {**
   			integration
   				assume a1 "currentTemp Range":
-  					(currentTemp.degrees >= f32"70.0") && (currentTemp.degrees <= f32"180.0");
+  					 currentTemp.degrees >= f32"70.0"  &&  currentTemp.degrees <= f32"180.0" ;
   				assume a2 "setPoint Range":
-  					(setPoint.low.degrees >= f32"40.0") && (setPoint.high.degrees <= f32"110.0");
+  					 setPoint.low.degrees >= f32"40.0"  &&  setPoint.high.degrees <= f32"110.0" ;
   					
 				--assume "INVALID: refers to multiple ports":
 				--	setPoint.low.degrees >= 40.0 and currentTemp.degrees <= 180.0;
@@ -105,7 +105,7 @@ public
   		gumbo {**
   			integration
   				guarantee g1 "currentTemp Range":
-  					(currentTemp.degrees >= f32"70.0") && (currentTemp.degrees <= f32"180.0");
+  					 currentTemp.degrees >= f32"70.0"  &&  currentTemp.degrees <= f32"180.0" ;
   					
 				--assume "INVALID: must use guarantee for outgoing ports":
   				--	currentTemp.degrees >= -70.0 and currentTemp.degrees <= 180.0;  					

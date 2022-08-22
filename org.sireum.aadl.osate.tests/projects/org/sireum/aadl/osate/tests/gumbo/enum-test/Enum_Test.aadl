@@ -52,9 +52,9 @@ public
 		annex GUMBO {**
 			invariants
 				inv i1 "SetPoint Data Invariant":
-					(low.degrees >= 70.0) &&
-					(high.degrees <= 100.0) &&
-					(low.degrees <= high.degrees);
+					 low.degrees >= 70.0  &&
+					 high.degrees <= 100.0  &&
+					 low.degrees <= high.degrees ;
 		**};
 	end SetPoint.i;
 
@@ -89,13 +89,13 @@ public
 				currentSetPoint: SetPoint.i;
 			integration
 				assume i1 "currentTemp Range":
-					(currentTemp.degrees >= (-70.0)) && (currentTemp.degrees <= 180.0);
+					 currentTemp.degrees >= (-70.0)  &&  currentTemp.degrees <= 180.0 ;
 				assume a1 "setPoint Range":
-					(setPoint.low.degrees >= 40.0) && (setPoint.high.degrees <= 110.0);
+					 setPoint.low.degrees >= 40.0  &&  setPoint.high.degrees <= 110.0 ;
 			initialize
 				modifies currentSetPoint;
 				guarantee g1 "defaultSetPoint":
-					(currentSetPoint.low.degrees == 70.0) && (currentSetPoint.high.degrees == 80.0);
+					 currentSetPoint.low.degrees == 70.0  &&  currentSetPoint.high.degrees == 80.0 ;
 		**};
 	end TempControl;
 
@@ -108,7 +108,7 @@ public
 		annex gumbo {**
 			integration
 				guarantee g1 "currentTemp Range":
-					(currentTemp.degrees >= (-70.0)) && (currentTemp.degrees <= 180.0);
+					 currentTemp.degrees >= (-70.0)  &&  currentTemp.degrees <= 180.0 ;
 
 			-- assume "INVALID: must use guarantee for outgoing ports":
 				--	currentTemp.degrees >= -70.0 and currentTemp.degrees <= 180.0;  					

@@ -47,7 +47,9 @@ public class AirUpdater extends SireumTest {
 				new File(SIREUM_HOME() + "/hamr/codegen/jvm/src/test/resources/models"), //
 				new File(SIREUM_HOME() + "/hamr/codegen/arsit/jvm/src/test/scala/models"), //
 				new File(SIREUM_HOME()
-						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/sirfur_omnibus/gumbo/git_models/temp_control/simple_temp_aadl/aadl"), //
+						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/sirfur_omnibus/gumbo/git_models/temp_control/simple_temp_aadl"), //
+				new File(SIREUM_HOME()
+						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/sirfur_omnibus/gumbo/git_models/temp_control/unit_temp_aadl"), //
 				new File(SIREUM_HOME()
 						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/GumboAdventiumTest/simple_temp_aadl/aadl"));
 
