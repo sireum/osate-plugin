@@ -169,9 +169,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 
 							List<org.sireum.String> exOptions = new ArrayList<>();
-							if (org.sireum.aadl.osate.PreferenceValues.getPROCESS_BA_OPT()) {
-								exOptions.add(new org.sireum.String("PROCESS_BTS_NODES"));
-							}
+
+							exOptions.add(new org.sireum.String("PROCESS_BTS_NODES"));
+
 							if (PreferenceValues.HAMR_PROOF_GENERATE.getValue()) {
 								exOptions.add(new org.sireum.String("GENERATE_REFINEMENT_PROOF"));
 							}

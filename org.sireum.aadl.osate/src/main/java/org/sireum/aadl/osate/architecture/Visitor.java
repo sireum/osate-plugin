@@ -71,7 +71,6 @@ import org.osate.xtext.aadl2.properties.util.PropertyUtils;
 import org.osgi.framework.Bundle;
 import org.sireum.Option;
 import org.sireum.Some;
-import org.sireum.aadl.osate.PreferenceValues;
 import org.sireum.aadl.osate.util.SlangUtil;
 import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.ir.AadlASTJavaFactory;
@@ -113,8 +112,7 @@ public class Visitor {
 		}
 
 		Bundle ba = Platform.getBundle("org.osate.ba");
-		if (ba != null && PreferenceValues.getPROCESS_BA_OPT()
-				&& org.osate.annexsupport.AnnexModel.getAnnexEnabled("behavior_specification")) {
+		if (ba != null && org.osate.annexsupport.AnnexModel.getAnnexEnabled("behavior_specification")) {
 			annexVisitors.add(new BAVisitor(this));
 		}
 
@@ -133,8 +131,7 @@ public class Visitor {
 
 		Bundle bless = Platform.getBundle("com.multitude.aadl.bless");
 		Bundle bless2Air = Platform.getBundle("org.sireum.aadl.osate.bless2Air");
-		if (bless != null && bless2Air != null && PreferenceValues.getPROCESS_BA_OPT()
-				&& org.osate.annexsupport.AnnexModel.getAnnexEnabled("bless")) {
+		if (bless != null && bless2Air != null && org.osate.annexsupport.AnnexModel.getAnnexEnabled("bless")) {
 
 			// Bless is closed source so a Sireum OSATE plugin developer may not have
 			// access to its source code. Therefore the BlessVisitor was placed in a separate
