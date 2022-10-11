@@ -28,7 +28,11 @@
         "value" : "System"
       },
       "classifier" : {
-        "type" : "None"
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Enum_Test::s.impl"
+        }
       },
       "features" : [
       ],
@@ -585,7 +589,7 @@
                                 },
                                 "op" : "==",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 70.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -801,7 +805,7 @@
                                 },
                                 "op" : "==",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 80.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -1026,7 +1030,7 @@
                                     "value" : "Minus"
                                   },
                                   "exp" : {
-                                    "type" : "org.sireum.lang.ast.Exp.LitR",
+                                    "type" : "org.sireum.lang.ast.Exp.LitF64",
                                     "value" : 70.0,
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
@@ -1212,7 +1216,7 @@
                                 },
                                 "op" : "<=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 180.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -1479,7 +1483,7 @@
                                 },
                                 "op" : ">=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 40.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -1695,7 +1699,7 @@
                                 },
                                 "op" : "<=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 110.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -2155,7 +2159,7 @@
                                     "value" : "Minus"
                                   },
                                   "exp" : {
-                                    "type" : "org.sireum.lang.ast.Exp.LitR",
+                                    "type" : "org.sireum.lang.ast.Exp.LitF64",
                                     "value" : 70.0,
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
@@ -2341,7 +2345,7 @@
                                 },
                                 "op" : "<=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 180.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -5251,7 +5255,7 @@
                     },
                     "op" : ">=",
                     "right" : {
-                      "type" : "org.sireum.lang.ast.Exp.LitR",
+                      "type" : "org.sireum.lang.ast.Exp.LitF64",
                       "value" : 0.0,
                       "attr" : {
                         "type" : "org.sireum.lang.ast.Attr",
@@ -5605,7 +5609,7 @@
                           "value" : "Minus"
                         },
                         "exp" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
+                          "type" : "org.sireum.lang.ast.Exp.LitF64",
                           "value" : 273.0,
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
@@ -5985,7 +5989,7 @@
                             "value" : "Minus"
                           },
                           "exp" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
+                            "type" : "org.sireum.lang.ast.Exp.LitF64",
                             "value" : 459.67,
                             "attr" : {
                               "type" : "org.sireum.lang.ast.Attr",
@@ -6805,7 +6809,7 @@
                         },
                         "op" : ">=",
                         "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
+                          "type" : "org.sireum.lang.ast.Exp.LitF64",
                           "value" : 0.0,
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
@@ -7159,7 +7163,7 @@
                               "value" : "Minus"
                             },
                             "exp" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
+                              "type" : "org.sireum.lang.ast.Exp.LitF64",
                               "value" : 273.0,
                               "attr" : {
                                 "type" : "org.sireum.lang.ast.Attr",
@@ -7539,7 +7543,7 @@
                                 "value" : "Minus"
                               },
                               "exp" : {
-                                "type" : "org.sireum.lang.ast.Exp.LitR",
+                                "type" : "org.sireum.lang.ast.Exp.LitF64",
                                 "value" : 459.67,
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.Attr",
@@ -8336,7 +8340,7 @@
                         },
                         "op" : ">=",
                         "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
+                          "type" : "org.sireum.lang.ast.Exp.LitF64",
                           "value" : 0.0,
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
@@ -8690,7 +8694,7 @@
                               "value" : "Minus"
                             },
                             "exp" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
+                              "type" : "org.sireum.lang.ast.Exp.LitF64",
                               "value" : 273.0,
                               "attr" : {
                                 "type" : "org.sireum.lang.ast.Attr",
@@ -9070,7 +9074,7 @@
                                 "value" : "Minus"
                               },
                               "exp" : {
-                                "type" : "org.sireum.lang.ast.Exp.LitR",
+                                "type" : "org.sireum.lang.ast.Exp.LitF64",
                                 "value" : 459.67,
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.Attr",
@@ -9443,7 +9447,7 @@
                       },
                       "op" : ">=",
                       "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
+                        "type" : "org.sireum.lang.ast.Exp.LitF64",
                         "value" : 70.0,
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
@@ -9603,7 +9607,7 @@
                       },
                       "op" : "<=",
                       "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
+                        "type" : "org.sireum.lang.ast.Exp.LitF64",
                         "value" : 100.0,
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
