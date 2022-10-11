@@ -18,7 +18,7 @@
             "beginColumn" : 3,
             "endLine" : 60,
             "endColumn" : 14,
-            "offset" : 1717,
+            "offset" : 1720,
             "length" : 82
           }
         }
@@ -54,7 +54,7 @@
                 "beginColumn" : 5,
                 "endLine" : 59,
                 "endColumn" : 23,
-                "offset" : 1767,
+                "offset" : 1770,
                 "length" : 18
               }
             }
@@ -90,7 +90,7 @@
                     "beginColumn" : 5,
                     "endLine" : 67,
                     "endColumn" : 37,
-                    "offset" : 1883,
+                    "offset" : 1886,
                     "length" : 32
                   }
                 }
@@ -124,7 +124,7 @@
                         "beginColumn" : 5,
                         "endLine" : 75,
                         "endColumn" : 45,
-                        "offset" : 2084,
+                        "offset" : 2087,
                         "length" : 40
                       }
                     }
@@ -196,7 +196,7 @@
                         "beginColumn" : 5,
                         "endLine" : 76,
                         "endColumn" : 51,
-                        "offset" : 2129,
+                        "offset" : 2132,
                         "length" : 46
                       }
                     }
@@ -345,7 +345,7 @@
                             "beginColumn" : 5,
                             "endLine" : 82,
                             "endColumn" : 33,
-                            "offset" : 2261,
+                            "offset" : 2264,
                             "length" : 28
                           }
                         }
@@ -379,7 +379,7 @@
                                     "beginColumn" : 14,
                                     "endLine" : 89,
                                     "endColumn" : 29,
-                                    "offset" : 2556,
+                                    "offset" : 2559,
                                     "length" : 15
                                   }
                                 }
@@ -399,7 +399,7 @@
                                   "beginColumn" : 14,
                                   "endLine" : 89,
                                   "endColumn" : 29,
-                                  "offset" : 2556,
+                                  "offset" : 2559,
                                   "length" : 15
                                 }
                               },
@@ -451,7 +451,7 @@
                                                   "beginColumn" : 7,
                                                   "endLine" : 91,
                                                   "endColumn" : 22,
-                                                  "offset" : 2615,
+                                                  "offset" : 2618,
                                                   "length" : 15
                                                 }
                                               }
@@ -471,7 +471,7 @@
                                                 "beginColumn" : 7,
                                                 "endLine" : 91,
                                                 "endColumn" : 22,
-                                                "offset" : 2615,
+                                                "offset" : 2618,
                                                 "length" : 15
                                               }
                                             },
@@ -501,7 +501,7 @@
                                               "beginColumn" : 23,
                                               "endLine" : 91,
                                               "endColumn" : 34,
-                                              "offset" : 2631,
+                                              "offset" : 2634,
                                               "length" : 11
                                             }
                                           }
@@ -523,7 +523,7 @@
                                             "beginColumn" : 7,
                                             "endLine" : 91,
                                             "endColumn" : 34,
-                                            "offset" : 2615,
+                                            "offset" : 2618,
                                             "length" : 27
                                           }
                                         },
@@ -553,7 +553,7 @@
                                           "beginColumn" : 27,
                                           "endLine" : 91,
                                           "endColumn" : 34,
-                                          "offset" : 2635,
+                                          "offset" : 2638,
                                           "length" : 7
                                         }
                                       }
@@ -575,7 +575,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 91,
                                         "endColumn" : 34,
-                                        "offset" : 2615,
+                                        "offset" : 2618,
                                         "length" : 27
                                       }
                                     },
@@ -605,7 +605,7 @@
                                         "beginColumn" : 38,
                                         "endLine" : 91,
                                         "endColumn" : 42,
-                                        "offset" : 2646,
+                                        "offset" : 2649,
                                         "length" : 4
                                       }
                                     }
@@ -625,7 +625,7 @@
                                       "beginColumn" : 7,
                                       "endLine" : 91,
                                       "endColumn" : 42,
-                                      "offset" : 2615,
+                                      "offset" : 2618,
                                       "length" : 35
                                     }
                                   },
@@ -667,7 +667,7 @@
                                                   "beginColumn" : 48,
                                                   "endLine" : 91,
                                                   "endColumn" : 63,
-                                                  "offset" : 2656,
+                                                  "offset" : 2659,
                                                   "length" : 15
                                                 }
                                               }
@@ -687,7 +687,7 @@
                                                 "beginColumn" : 48,
                                                 "endLine" : 91,
                                                 "endColumn" : 63,
-                                                "offset" : 2656,
+                                                "offset" : 2659,
                                                 "length" : 15
                                               }
                                             },
@@ -717,7 +717,7 @@
                                               "beginColumn" : 64,
                                               "endLine" : 91,
                                               "endColumn" : 76,
-                                              "offset" : 2672,
+                                              "offset" : 2675,
                                               "length" : 12
                                             }
                                           }
@@ -739,7 +739,7 @@
                                             "beginColumn" : 48,
                                             "endLine" : 91,
                                             "endColumn" : 76,
-                                            "offset" : 2656,
+                                            "offset" : 2659,
                                             "length" : 28
                                           }
                                         },
@@ -769,7 +769,7 @@
                                           "beginColumn" : 69,
                                           "endLine" : 91,
                                           "endColumn" : 76,
-                                          "offset" : 2677,
+                                          "offset" : 2680,
                                           "length" : 7
                                         }
                                       }
@@ -791,7 +791,7 @@
                                         "beginColumn" : 48,
                                         "endLine" : 91,
                                         "endColumn" : 76,
-                                        "offset" : 2656,
+                                        "offset" : 2659,
                                         "length" : 28
                                       }
                                     },
@@ -821,7 +821,7 @@
                                         "beginColumn" : 80,
                                         "endLine" : 91,
                                         "endColumn" : 84,
-                                        "offset" : 2688,
+                                        "offset" : 2691,
                                         "length" : 4
                                       }
                                     }
@@ -841,7 +841,7 @@
                                       "beginColumn" : 48,
                                       "endLine" : 91,
                                       "endColumn" : 84,
-                                      "offset" : 2656,
+                                      "offset" : 2659,
                                       "length" : 36
                                     }
                                   },
@@ -867,7 +867,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 91,
                                     "endColumn" : 84,
-                                    "offset" : 2615,
+                                    "offset" : 2618,
                                     "length" : 77
                                   }
                                 },
@@ -891,7 +891,7 @@
                                 "beginColumn" : 5,
                                 "endLine" : 91,
                                 "endColumn" : 86,
-                                "offset" : 2577,
+                                "offset" : 2580,
                                 "length" : 117
                               }
                             }
@@ -938,7 +938,7 @@
                                               "beginColumn" : 9,
                                               "endLine" : 85,
                                               "endColumn" : 20,
-                                              "offset" : 2352,
+                                              "offset" : 2355,
                                               "length" : 11
                                             }
                                           }
@@ -958,7 +958,7 @@
                                             "beginColumn" : 9,
                                             "endLine" : 85,
                                             "endColumn" : 20,
-                                            "offset" : 2352,
+                                            "offset" : 2355,
                                             "length" : 11
                                           }
                                         },
@@ -988,7 +988,7 @@
                                           "beginColumn" : 21,
                                           "endLine" : 85,
                                           "endColumn" : 28,
-                                          "offset" : 2364,
+                                          "offset" : 2367,
                                           "length" : 7
                                         }
                                       }
@@ -1010,7 +1010,7 @@
                                         "beginColumn" : 9,
                                         "endLine" : 85,
                                         "endColumn" : 28,
-                                        "offset" : 2352,
+                                        "offset" : 2355,
                                         "length" : 19
                                       }
                                     },
@@ -1046,7 +1046,7 @@
                                           "beginColumn" : 34,
                                           "endLine" : 85,
                                           "endColumn" : 38,
-                                          "offset" : 2377,
+                                          "offset" : 2380,
                                           "length" : 4
                                         }
                                       }
@@ -1066,7 +1066,7 @@
                                         "beginColumn" : 33,
                                         "endLine" : 85,
                                         "endColumn" : 38,
-                                        "offset" : 2376,
+                                        "offset" : 2379,
                                         "length" : 5
                                       }
                                     },
@@ -1092,7 +1092,7 @@
                                       "beginColumn" : 9,
                                       "endLine" : 85,
                                       "endColumn" : 38,
-                                      "offset" : 2352,
+                                      "offset" : 2355,
                                       "length" : 29
                                     }
                                   },
@@ -1130,7 +1130,7 @@
                                               "beginColumn" : 45,
                                               "endLine" : 85,
                                               "endColumn" : 56,
-                                              "offset" : 2388,
+                                              "offset" : 2391,
                                               "length" : 11
                                             }
                                           }
@@ -1150,7 +1150,7 @@
                                             "beginColumn" : 45,
                                             "endLine" : 85,
                                             "endColumn" : 56,
-                                            "offset" : 2388,
+                                            "offset" : 2391,
                                             "length" : 11
                                           }
                                         },
@@ -1180,7 +1180,7 @@
                                           "beginColumn" : 57,
                                           "endLine" : 85,
                                           "endColumn" : 64,
-                                          "offset" : 2400,
+                                          "offset" : 2403,
                                           "length" : 7
                                         }
                                       }
@@ -1202,7 +1202,7 @@
                                         "beginColumn" : 45,
                                         "endLine" : 85,
                                         "endColumn" : 64,
-                                        "offset" : 2388,
+                                        "offset" : 2391,
                                         "length" : 19
                                       }
                                     },
@@ -1232,7 +1232,7 @@
                                         "beginColumn" : 68,
                                         "endLine" : 85,
                                         "endColumn" : 73,
-                                        "offset" : 2411,
+                                        "offset" : 2414,
                                         "length" : 5
                                       }
                                     }
@@ -1252,7 +1252,7 @@
                                       "beginColumn" : 45,
                                       "endLine" : 85,
                                       "endColumn" : 73,
-                                      "offset" : 2388,
+                                      "offset" : 2391,
                                       "length" : 28
                                     }
                                   },
@@ -1278,7 +1278,7 @@
                                     "beginColumn" : 9,
                                     "endLine" : 85,
                                     "endColumn" : 73,
-                                    "offset" : 2352,
+                                    "offset" : 2355,
                                     "length" : 64
                                   }
                                 },
@@ -1302,7 +1302,7 @@
                                 "beginColumn" : 7,
                                 "endLine" : 85,
                                 "endColumn" : 75,
-                                "offset" : 2313,
+                                "offset" : 2316,
                                 "length" : 105
                               }
                             }
@@ -1345,7 +1345,7 @@
                                                   "beginColumn" : 9,
                                                   "endLine" : 87,
                                                   "endColumn" : 17,
-                                                  "offset" : 2461,
+                                                  "offset" : 2464,
                                                   "length" : 8
                                                 }
                                               }
@@ -1365,7 +1365,7 @@
                                                 "beginColumn" : 9,
                                                 "endLine" : 87,
                                                 "endColumn" : 17,
-                                                "offset" : 2461,
+                                                "offset" : 2464,
                                                 "length" : 8
                                               }
                                             },
@@ -1395,7 +1395,7 @@
                                               "beginColumn" : 18,
                                               "endLine" : 87,
                                               "endColumn" : 29,
-                                              "offset" : 2470,
+                                              "offset" : 2473,
                                               "length" : 11
                                             }
                                           }
@@ -1417,7 +1417,7 @@
                                             "beginColumn" : 9,
                                             "endLine" : 87,
                                             "endColumn" : 29,
-                                            "offset" : 2461,
+                                            "offset" : 2464,
                                             "length" : 20
                                           }
                                         },
@@ -1447,7 +1447,7 @@
                                           "beginColumn" : 22,
                                           "endLine" : 87,
                                           "endColumn" : 29,
-                                          "offset" : 2474,
+                                          "offset" : 2477,
                                           "length" : 7
                                         }
                                       }
@@ -1469,7 +1469,7 @@
                                         "beginColumn" : 9,
                                         "endLine" : 87,
                                         "endColumn" : 29,
-                                        "offset" : 2461,
+                                        "offset" : 2464,
                                         "length" : 20
                                       }
                                     },
@@ -1499,7 +1499,7 @@
                                         "beginColumn" : 33,
                                         "endLine" : 87,
                                         "endColumn" : 37,
-                                        "offset" : 2485,
+                                        "offset" : 2488,
                                         "length" : 4
                                       }
                                     }
@@ -1519,7 +1519,7 @@
                                       "beginColumn" : 9,
                                       "endLine" : 87,
                                       "endColumn" : 37,
-                                      "offset" : 2461,
+                                      "offset" : 2464,
                                       "length" : 28
                                     }
                                   },
@@ -1561,7 +1561,7 @@
                                                   "beginColumn" : 43,
                                                   "endLine" : 87,
                                                   "endColumn" : 51,
-                                                  "offset" : 2495,
+                                                  "offset" : 2498,
                                                   "length" : 8
                                                 }
                                               }
@@ -1581,7 +1581,7 @@
                                                 "beginColumn" : 43,
                                                 "endLine" : 87,
                                                 "endColumn" : 51,
-                                                "offset" : 2495,
+                                                "offset" : 2498,
                                                 "length" : 8
                                               }
                                             },
@@ -1611,7 +1611,7 @@
                                               "beginColumn" : 52,
                                               "endLine" : 87,
                                               "endColumn" : 64,
-                                              "offset" : 2504,
+                                              "offset" : 2507,
                                               "length" : 12
                                             }
                                           }
@@ -1633,7 +1633,7 @@
                                             "beginColumn" : 43,
                                             "endLine" : 87,
                                             "endColumn" : 64,
-                                            "offset" : 2495,
+                                            "offset" : 2498,
                                             "length" : 21
                                           }
                                         },
@@ -1663,7 +1663,7 @@
                                           "beginColumn" : 57,
                                           "endLine" : 87,
                                           "endColumn" : 64,
-                                          "offset" : 2509,
+                                          "offset" : 2512,
                                           "length" : 7
                                         }
                                       }
@@ -1685,7 +1685,7 @@
                                         "beginColumn" : 43,
                                         "endLine" : 87,
                                         "endColumn" : 64,
-                                        "offset" : 2495,
+                                        "offset" : 2498,
                                         "length" : 21
                                       }
                                     },
@@ -1715,7 +1715,7 @@
                                         "beginColumn" : 68,
                                         "endLine" : 87,
                                         "endColumn" : 73,
-                                        "offset" : 2520,
+                                        "offset" : 2523,
                                         "length" : 5
                                       }
                                     }
@@ -1735,7 +1735,7 @@
                                       "beginColumn" : 43,
                                       "endLine" : 87,
                                       "endColumn" : 73,
-                                      "offset" : 2495,
+                                      "offset" : 2498,
                                       "length" : 30
                                     }
                                   },
@@ -1761,7 +1761,7 @@
                                     "beginColumn" : 9,
                                     "endLine" : 87,
                                     "endColumn" : 73,
-                                    "offset" : 2461,
+                                    "offset" : 2464,
                                     "length" : 64
                                   }
                                 },
@@ -1785,7 +1785,7 @@
                                 "beginColumn" : 7,
                                 "endLine" : 87,
                                 "endColumn" : 75,
-                                "offset" : 2425,
+                                "offset" : 2428,
                                 "length" : 102
                               }
                             }
@@ -1818,7 +1818,7 @@
                     "beginColumn" : 5,
                     "endLine" : 68,
                     "endColumn" : 35,
-                    "offset" : 1920,
+                    "offset" : 1923,
                     "length" : 30
                   }
                 }
@@ -1852,7 +1852,7 @@
                         "beginColumn" : 5,
                         "endLine" : 97,
                         "endColumn" : 52,
-                        "offset" : 2766,
+                        "offset" : 2769,
                         "length" : 47
                       }
                     }
@@ -2067,7 +2067,7 @@
                                               "beginColumn" : 9,
                                               "endLine" : 105,
                                               "endColumn" : 20,
-                                              "offset" : 2990,
+                                              "offset" : 2993,
                                               "length" : 11
                                             }
                                           }
@@ -2087,7 +2087,7 @@
                                             "beginColumn" : 9,
                                             "endLine" : 105,
                                             "endColumn" : 20,
-                                            "offset" : 2990,
+                                            "offset" : 2993,
                                             "length" : 11
                                           }
                                         },
@@ -2117,7 +2117,7 @@
                                           "beginColumn" : 21,
                                           "endLine" : 105,
                                           "endColumn" : 28,
-                                          "offset" : 3002,
+                                          "offset" : 3005,
                                           "length" : 7
                                         }
                                       }
@@ -2139,7 +2139,7 @@
                                         "beginColumn" : 9,
                                         "endLine" : 105,
                                         "endColumn" : 28,
-                                        "offset" : 2990,
+                                        "offset" : 2993,
                                         "length" : 19
                                       }
                                     },
@@ -2175,7 +2175,7 @@
                                           "beginColumn" : 34,
                                           "endLine" : 105,
                                           "endColumn" : 38,
-                                          "offset" : 3015,
+                                          "offset" : 3018,
                                           "length" : 4
                                         }
                                       }
@@ -2195,7 +2195,7 @@
                                         "beginColumn" : 33,
                                         "endLine" : 105,
                                         "endColumn" : 38,
-                                        "offset" : 3014,
+                                        "offset" : 3017,
                                         "length" : 5
                                       }
                                     },
@@ -2221,7 +2221,7 @@
                                       "beginColumn" : 9,
                                       "endLine" : 105,
                                       "endColumn" : 38,
-                                      "offset" : 2990,
+                                      "offset" : 2993,
                                       "length" : 29
                                     }
                                   },
@@ -2259,7 +2259,7 @@
                                               "beginColumn" : 45,
                                               "endLine" : 105,
                                               "endColumn" : 56,
-                                              "offset" : 3026,
+                                              "offset" : 3029,
                                               "length" : 11
                                             }
                                           }
@@ -2279,7 +2279,7 @@
                                             "beginColumn" : 45,
                                             "endLine" : 105,
                                             "endColumn" : 56,
-                                            "offset" : 3026,
+                                            "offset" : 3029,
                                             "length" : 11
                                           }
                                         },
@@ -2309,7 +2309,7 @@
                                           "beginColumn" : 57,
                                           "endLine" : 105,
                                           "endColumn" : 64,
-                                          "offset" : 3038,
+                                          "offset" : 3041,
                                           "length" : 7
                                         }
                                       }
@@ -2331,7 +2331,7 @@
                                         "beginColumn" : 45,
                                         "endLine" : 105,
                                         "endColumn" : 64,
-                                        "offset" : 3026,
+                                        "offset" : 3029,
                                         "length" : 19
                                       }
                                     },
@@ -2361,7 +2361,7 @@
                                         "beginColumn" : 68,
                                         "endLine" : 105,
                                         "endColumn" : 73,
-                                        "offset" : 3049,
+                                        "offset" : 3052,
                                         "length" : 5
                                       }
                                     }
@@ -2381,7 +2381,7 @@
                                       "beginColumn" : 45,
                                       "endLine" : 105,
                                       "endColumn" : 73,
-                                      "offset" : 3026,
+                                      "offset" : 3029,
                                       "length" : 28
                                     }
                                   },
@@ -2407,7 +2407,7 @@
                                     "beginColumn" : 9,
                                     "endLine" : 105,
                                     "endColumn" : 73,
-                                    "offset" : 2990,
+                                    "offset" : 2993,
                                     "length" : 64
                                   }
                                 },
@@ -2431,7 +2431,7 @@
                                 "beginColumn" : 7,
                                 "endLine" : 105,
                                 "endColumn" : 75,
-                                "offset" : 2948,
+                                "offset" : 2951,
                                 "length" : 108
                               }
                             }
@@ -2466,7 +2466,7 @@
                     "beginColumn" : 5,
                     "endLine" : 70,
                     "endColumn" : 64,
-                    "offset" : 1970,
+                    "offset" : 1973,
                     "length" : 59
                   }
                 }
@@ -2489,7 +2489,7 @@
                         "beginColumn" : 5,
                         "endLine" : 68,
                         "endColumn" : 35,
-                        "offset" : 1920,
+                        "offset" : 1923,
                         "length" : 30
                       }
                     }
@@ -2511,7 +2511,7 @@
                           "beginColumn" : 5,
                           "endLine" : 97,
                           "endColumn" : 52,
-                          "offset" : 2766,
+                          "offset" : 2769,
                           "length" : 47
                         }
                       }
@@ -2544,7 +2544,7 @@
                         "beginColumn" : 5,
                         "endLine" : 67,
                         "endColumn" : 37,
-                        "offset" : 1883,
+                        "offset" : 1886,
                         "length" : 32
                       }
                     }
@@ -2566,7 +2566,7 @@
                           "beginColumn" : 5,
                           "endLine" : 76,
                           "endColumn" : 51,
-                          "offset" : 2129,
+                          "offset" : 2132,
                           "length" : 46
                         }
                       }
@@ -2618,7 +2618,7 @@
                     "beginColumn" : 5,
                     "endLine" : 70,
                     "endColumn" : 64,
-                    "offset" : 1970,
+                    "offset" : 1973,
                     "length" : 59
                   }
                 }
@@ -2640,7 +2640,7 @@
                       "beginColumn" : 5,
                       "endLine" : 68,
                       "endColumn" : 35,
-                      "offset" : 1920,
+                      "offset" : 1923,
                       "length" : 30
                     }
                   }
@@ -2662,7 +2662,7 @@
                         "beginColumn" : 5,
                         "endLine" : 97,
                         "endColumn" : 52,
-                        "offset" : 2766,
+                        "offset" : 2769,
                         "length" : 47
                       }
                     }
@@ -2693,7 +2693,7 @@
                       "beginColumn" : 5,
                       "endLine" : 67,
                       "endColumn" : 37,
-                      "offset" : 1883,
+                      "offset" : 1886,
                       "length" : 32
                     }
                   }
@@ -2715,7 +2715,7 @@
                         "beginColumn" : 5,
                         "endLine" : 76,
                         "endColumn" : 51,
-                        "offset" : 2129,
+                        "offset" : 2132,
                         "length" : 46
                       }
                     }
@@ -2751,7 +2751,7 @@
                         "beginColumn" : 5,
                         "endLine" : 70,
                         "endColumn" : 64,
-                        "offset" : 1970,
+                        "offset" : 1973,
                         "length" : 59
                       }
                     }
@@ -2771,7 +2771,7 @@
                         "beginColumn" : 5,
                         "endLine" : 59,
                         "endColumn" : 23,
-                        "offset" : 1767,
+                        "offset" : 1770,
                         "length" : 18
                       }
                     }
@@ -2883,7 +2883,7 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
-          "name" : "Base_Types::Float"
+          "name" : "Base_Types::Float_64"
         }
       },
       "features" : [
@@ -2895,6 +2895,72 @@
       "connectionInstances" : [
       ],
       "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "64.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::IEEE754_Precision"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 53,
+                "beginColumn" : 4,
+                "endLine" : 53,
+                "endColumn" : 84,
+                "offset" : 2369,
+                "length" : 80
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Double"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
         {
           "type" : "Property",
           "name" : {
@@ -4170,6 +4236,75 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
+          "name" : "Base_Types::Float"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Float"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
           "name" : "Base_Types::Float_32"
         }
       },
@@ -4243,141 +4378,6 @@
             {
               "type" : "ValueProp",
               "value" : "Simple"
-            }
-          ],
-          "appliesTo" : [
-          ]
-        },
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Data_Model::Data_Representation"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                },
-                "beginLine" : 27,
-                "beginColumn" : 4,
-                "endLine" : 30,
-                "endColumn" : 36,
-                "offset" : 1165,
-                "length" : 162
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "ValueProp",
-              "value" : "Float"
-            }
-          ],
-          "appliesTo" : [
-          ]
-        }
-      ],
-      "flows" : [
-      ],
-      "modes" : [
-      ],
-      "annexes" : [
-      ],
-      "uriFrag" : ""
-    },
-    {
-      "type" : "Component",
-      "identifier" : {
-        "type" : "Name",
-        "name" : [],
-        "pos" : {
-          "type" : "None"
-        }
-      },
-      "category" : {
-        "type" : "ComponentCategory",
-        "value" : "Data"
-      },
-      "classifier" : {
-        "type" : "Some",
-        "value" : {
-          "type" : "Classifier",
-          "name" : "Base_Types::Float_64"
-        }
-      },
-      "features" : [
-      ],
-      "subComponents" : [
-      ],
-      "connections" : [
-      ],
-      "connectionInstances" : [
-      ],
-      "properties" : [
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Memory_Properties::Data_Size"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
-                },
-                "beginLine" : 92,
-                "beginColumn" : 2,
-                "endLine" : 93,
-                "endColumn" : 137,
-                "offset" : 4808,
-                "length" : 152
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "UnitProp",
-              "value" : "64.0",
-              "unit" : {
-                "type" : "Some",
-                "value" : "bits"
-              }
-            }
-          ],
-          "appliesTo" : [
-          ]
-        },
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Data_Model::IEEE754_Precision"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                },
-                "beginLine" : 53,
-                "beginColumn" : 4,
-                "endLine" : 53,
-                "endColumn" : 84,
-                "offset" : 2369,
-                "length" : 80
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "ValueProp",
-              "value" : "Double"
             }
           ],
           "appliesTo" : [
@@ -4600,9 +4600,9 @@
                 "beginLine" : 18,
                 "beginColumn" : 7,
                 "endLine" : 18,
-                "endColumn" : 39,
+                "endColumn" : 42,
                 "offset" : 624,
-                "length" : 32
+                "length" : 35
               }
             }
           },
@@ -4614,7 +4614,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "Base_Types::Float"
+              "name" : "Base_Types::Float_64"
             }
           },
           "features" : [
@@ -4626,6 +4626,72 @@
           "connectionInstances" : [
           ],
           "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Memory_Properties::Data_Size"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                    },
+                    "beginLine" : 92,
+                    "beginColumn" : 2,
+                    "endLine" : 93,
+                    "endColumn" : 137,
+                    "offset" : 4808,
+                    "length" : 152
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "64.0",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "bits"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::IEEE754_Precision"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                    },
+                    "beginLine" : 53,
+                    "beginColumn" : 4,
+                    "endLine" : 53,
+                    "endColumn" : 84,
+                    "offset" : 2369,
+                    "length" : 80
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Double"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
             {
               "type" : "Property",
               "name" : {
@@ -4664,7 +4730,7 @@
           ],
           "annexes" : [
           ],
-          "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float"
+          "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_64"
         }
       ],
       "connections" : [
@@ -4747,7 +4813,7 @@
                             "beginColumn" : 11,
                             "endLine" : 27,
                             "endColumn" : 18,
-                            "offset" : 953,
+                            "offset" : 956,
                             "length" : 7
                           }
                         }
@@ -4767,7 +4833,7 @@
                           "beginColumn" : 11,
                           "endLine" : 27,
                           "endColumn" : 18,
-                          "offset" : 953,
+                          "offset" : 956,
                           "length" : 7
                         }
                       },
@@ -4803,7 +4869,7 @@
                             "beginColumn" : 24,
                             "endLine" : 27,
                             "endColumn" : 30,
-                            "offset" : 966,
+                            "offset" : 969,
                             "length" : 6
                           }
                         }
@@ -4823,7 +4889,7 @@
                           "beginColumn" : 23,
                           "endLine" : 27,
                           "endColumn" : 30,
-                          "offset" : 965,
+                          "offset" : 968,
                           "length" : 7
                         }
                       },
@@ -4849,7 +4915,7 @@
                         "beginColumn" : 11,
                         "endLine" : 27,
                         "endColumn" : 30,
-                        "offset" : 953,
+                        "offset" : 956,
                         "length" : 19
                       }
                     },
@@ -4873,7 +4939,7 @@
                     "beginColumn" : 9,
                     "endLine" : 27,
                     "endColumn" : 32,
-                    "offset" : 906,
+                    "offset" : 909,
                     "length" : 68
                   }
                 }
@@ -4933,7 +4999,7 @@
                 "beginColumn" : 7,
                 "endLine" : 42,
                 "endColumn" : 31,
-                "offset" : 1398,
+                "offset" : 1401,
                 "length" : 24
               }
             }
@@ -4968,9 +5034,9 @@
                     "beginLine" : 18,
                     "beginColumn" : 7,
                     "endLine" : 18,
-                    "endColumn" : 39,
+                    "endColumn" : 42,
                     "offset" : 624,
-                    "length" : 32
+                    "length" : 35
                   }
                 }
               },
@@ -4982,7 +5048,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "Base_Types::Float"
+                  "name" : "Base_Types::Float_64"
                 }
               },
               "features" : [
@@ -4994,6 +5060,72 @@
               "connectionInstances" : [
               ],
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 2,
+                        "endLine" : 93,
+                        "endColumn" : 137,
+                        "offset" : 4808,
+                        "length" : 152
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "64.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::IEEE754_Precision"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 4,
+                        "endLine" : 53,
+                        "endColumn" : 84,
+                        "offset" : 2369,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Double"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -5032,7 +5164,7 @@
               ],
               "annexes" : [
               ],
-              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float"
+              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_64"
             }
           ],
           "connections" : [
@@ -5115,7 +5247,7 @@
                                 "beginColumn" : 11,
                                 "endLine" : 27,
                                 "endColumn" : 18,
-                                "offset" : 953,
+                                "offset" : 956,
                                 "length" : 7
                               }
                             }
@@ -5135,7 +5267,7 @@
                               "beginColumn" : 11,
                               "endLine" : 27,
                               "endColumn" : 18,
-                              "offset" : 953,
+                              "offset" : 956,
                               "length" : 7
                             }
                           },
@@ -5171,7 +5303,7 @@
                                 "beginColumn" : 24,
                                 "endLine" : 27,
                                 "endColumn" : 30,
-                                "offset" : 966,
+                                "offset" : 969,
                                 "length" : 6
                               }
                             }
@@ -5191,7 +5323,7 @@
                               "beginColumn" : 23,
                               "endLine" : 27,
                               "endColumn" : 30,
-                              "offset" : 965,
+                              "offset" : 968,
                               "length" : 7
                             }
                           },
@@ -5217,7 +5349,7 @@
                             "beginColumn" : 11,
                             "endLine" : 27,
                             "endColumn" : 30,
-                            "offset" : 953,
+                            "offset" : 956,
                             "length" : 19
                           }
                         },
@@ -5241,7 +5373,7 @@
                         "beginColumn" : 9,
                         "endLine" : 27,
                         "endColumn" : 32,
-                        "offset" : 906,
+                        "offset" : 909,
                         "length" : 68
                       }
                     }
@@ -5278,7 +5410,7 @@
                 "beginColumn" : 7,
                 "endLine" : 43,
                 "endColumn" : 32,
-                "offset" : 1429,
+                "offset" : 1432,
                 "length" : 25
               }
             }
@@ -5313,9 +5445,9 @@
                     "beginLine" : 18,
                     "beginColumn" : 7,
                     "endLine" : 18,
-                    "endColumn" : 39,
+                    "endColumn" : 42,
                     "offset" : 624,
-                    "length" : 32
+                    "length" : 35
                   }
                 }
               },
@@ -5327,7 +5459,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "Base_Types::Float"
+                  "name" : "Base_Types::Float_64"
                 }
               },
               "features" : [
@@ -5339,6 +5471,72 @@
               "connectionInstances" : [
               ],
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 2,
+                        "endLine" : 93,
+                        "endColumn" : 137,
+                        "offset" : 4808,
+                        "length" : 152
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "64.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::IEEE754_Precision"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 4,
+                        "endLine" : 53,
+                        "endColumn" : 84,
+                        "offset" : 2369,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Double"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -5377,7 +5575,7 @@
               ],
               "annexes" : [
               ],
-              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float"
+              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_64"
             }
           ],
           "connections" : [
@@ -5460,7 +5658,7 @@
                                 "beginColumn" : 11,
                                 "endLine" : 27,
                                 "endColumn" : 18,
-                                "offset" : 953,
+                                "offset" : 956,
                                 "length" : 7
                               }
                             }
@@ -5480,7 +5678,7 @@
                               "beginColumn" : 11,
                               "endLine" : 27,
                               "endColumn" : 18,
-                              "offset" : 953,
+                              "offset" : 956,
                               "length" : 7
                             }
                           },
@@ -5516,7 +5714,7 @@
                                 "beginColumn" : 24,
                                 "endLine" : 27,
                                 "endColumn" : 30,
-                                "offset" : 966,
+                                "offset" : 969,
                                 "length" : 6
                               }
                             }
@@ -5536,7 +5734,7 @@
                               "beginColumn" : 23,
                               "endLine" : 27,
                               "endColumn" : 30,
-                              "offset" : 965,
+                              "offset" : 968,
                               "length" : 7
                             }
                           },
@@ -5562,7 +5760,7 @@
                             "beginColumn" : 11,
                             "endLine" : 27,
                             "endColumn" : 30,
-                            "offset" : 953,
+                            "offset" : 956,
                             "length" : 19
                           }
                         },
@@ -5586,7 +5784,7 @@
                         "beginColumn" : 9,
                         "endLine" : 27,
                         "endColumn" : 32,
-                        "offset" : 906,
+                        "offset" : 909,
                         "length" : 68
                       }
                     }
@@ -5695,7 +5893,7 @@
                                     "beginColumn" : 12,
                                     "endLine" : 47,
                                     "endColumn" : 15,
-                                    "offset" : 1554,
+                                    "offset" : 1557,
                                     "length" : 3
                                   }
                                 }
@@ -5715,7 +5913,7 @@
                                   "beginColumn" : 12,
                                   "endLine" : 47,
                                   "endColumn" : 15,
-                                  "offset" : 1554,
+                                  "offset" : 1557,
                                   "length" : 3
                                 }
                               },
@@ -5745,7 +5943,7 @@
                                 "beginColumn" : 16,
                                 "endLine" : 47,
                                 "endColumn" : 23,
-                                "offset" : 1558,
+                                "offset" : 1561,
                                 "length" : 7
                               }
                             }
@@ -5767,7 +5965,7 @@
                               "beginColumn" : 12,
                               "endLine" : 47,
                               "endColumn" : 23,
-                              "offset" : 1554,
+                              "offset" : 1557,
                               "length" : 11
                             }
                           },
@@ -5797,7 +5995,7 @@
                               "beginColumn" : 27,
                               "endLine" : 47,
                               "endColumn" : 31,
-                              "offset" : 1569,
+                              "offset" : 1572,
                               "length" : 4
                             }
                           }
@@ -5817,7 +6015,7 @@
                             "beginColumn" : 12,
                             "endLine" : 47,
                             "endColumn" : 31,
-                            "offset" : 1554,
+                            "offset" : 1557,
                             "length" : 19
                           }
                         },
@@ -5855,7 +6053,7 @@
                                     "beginColumn" : 12,
                                     "endLine" : 48,
                                     "endColumn" : 16,
-                                    "offset" : 1589,
+                                    "offset" : 1592,
                                     "length" : 4
                                   }
                                 }
@@ -5875,7 +6073,7 @@
                                   "beginColumn" : 12,
                                   "endLine" : 48,
                                   "endColumn" : 16,
-                                  "offset" : 1589,
+                                  "offset" : 1592,
                                   "length" : 4
                                 }
                               },
@@ -5905,7 +6103,7 @@
                                 "beginColumn" : 17,
                                 "endLine" : 48,
                                 "endColumn" : 24,
-                                "offset" : 1594,
+                                "offset" : 1597,
                                 "length" : 7
                               }
                             }
@@ -5927,7 +6125,7 @@
                               "beginColumn" : 12,
                               "endLine" : 48,
                               "endColumn" : 24,
-                              "offset" : 1589,
+                              "offset" : 1592,
                               "length" : 12
                             }
                           },
@@ -5957,7 +6155,7 @@
                               "beginColumn" : 28,
                               "endLine" : 48,
                               "endColumn" : 33,
-                              "offset" : 1605,
+                              "offset" : 1608,
                               "length" : 5
                             }
                           }
@@ -5977,7 +6175,7 @@
                             "beginColumn" : 12,
                             "endLine" : 48,
                             "endColumn" : 33,
-                            "offset" : 1589,
+                            "offset" : 1592,
                             "length" : 21
                           }
                         },
@@ -6003,7 +6201,7 @@
                           "beginColumn" : 12,
                           "endLine" : 48,
                           "endColumn" : 33,
-                          "offset" : 1554,
+                          "offset" : 1557,
                           "length" : 56
                         }
                       },
@@ -6041,7 +6239,7 @@
                                   "beginColumn" : 12,
                                   "endLine" : 49,
                                   "endColumn" : 15,
-                                  "offset" : 1626,
+                                  "offset" : 1629,
                                   "length" : 3
                                 }
                               }
@@ -6061,7 +6259,7 @@
                                 "beginColumn" : 12,
                                 "endLine" : 49,
                                 "endColumn" : 15,
-                                "offset" : 1626,
+                                "offset" : 1629,
                                 "length" : 3
                               }
                             },
@@ -6091,7 +6289,7 @@
                               "beginColumn" : 16,
                               "endLine" : 49,
                               "endColumn" : 23,
-                              "offset" : 1630,
+                              "offset" : 1633,
                               "length" : 7
                             }
                           }
@@ -6113,7 +6311,7 @@
                             "beginColumn" : 12,
                             "endLine" : 49,
                             "endColumn" : 23,
-                            "offset" : 1626,
+                            "offset" : 1629,
                             "length" : 11
                           }
                         },
@@ -6149,7 +6347,7 @@
                                   "beginColumn" : 27,
                                   "endLine" : 49,
                                   "endColumn" : 31,
-                                  "offset" : 1641,
+                                  "offset" : 1644,
                                   "length" : 4
                                 }
                               }
@@ -6169,7 +6367,7 @@
                                 "beginColumn" : 27,
                                 "endLine" : 49,
                                 "endColumn" : 31,
-                                "offset" : 1641,
+                                "offset" : 1644,
                                 "length" : 4
                               }
                             },
@@ -6199,7 +6397,7 @@
                               "beginColumn" : 32,
                               "endLine" : 49,
                               "endColumn" : 39,
-                              "offset" : 1646,
+                              "offset" : 1649,
                               "length" : 7
                             }
                           }
@@ -6221,7 +6419,7 @@
                             "beginColumn" : 27,
                             "endLine" : 49,
                             "endColumn" : 39,
-                            "offset" : 1641,
+                            "offset" : 1644,
                             "length" : 12
                           }
                         },
@@ -6247,7 +6445,7 @@
                           "beginColumn" : 12,
                           "endLine" : 49,
                           "endColumn" : 39,
-                          "offset" : 1626,
+                          "offset" : 1629,
                           "length" : 27
                         }
                       },
@@ -6273,7 +6471,7 @@
                         "beginColumn" : 12,
                         "endLine" : 49,
                         "endColumn" : 39,
-                        "offset" : 1554,
+                        "offset" : 1557,
                         "length" : 99
                       }
                     },
@@ -6297,7 +6495,7 @@
                     "beginColumn" : 9,
                     "endLine" : 49,
                     "endColumn" : 41,
-                    "offset" : 1509,
+                    "offset" : 1512,
                     "length" : 146
                   }
                 }

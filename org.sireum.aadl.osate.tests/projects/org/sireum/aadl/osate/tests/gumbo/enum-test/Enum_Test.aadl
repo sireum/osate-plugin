@@ -21,7 +21,7 @@ public
 		subcomponents
 			-- temperature message contains degrees, which is represented using an AADL Base Type
 			-- defined in the AADL Data Modeling annex.
-			degrees: data Base_Types::Float;
+			degrees: data Base_Types::Float_64;
 			unit: data Unity;
 
 		annex GUMBO {**
