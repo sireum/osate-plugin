@@ -1,6 +1,5 @@
 package org.sireum.aadl.osate;
 
-import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.RadioGroupFieldEditor;
 import org.eclipse.swt.SWT;
@@ -33,11 +32,6 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 						{ "JSON (compact)", SerializerType.JSON_COMPACT.toString() }, //
 						{ "MsgPack", SerializerType.MSG_PACK.toString() } },
 				airTab, true));
-
-		BooleanFieldEditor ba = new BooleanFieldEditor(PreferenceConstants.PROCESS_BA_OPT, "Process BA", airTab);
-		ba.getDescriptionControl(airTab).setToolTipText("Process BA/Bless annexes");
-		addField(ba);
-
 	}
 
 	private Composite addTab(TabFolder tabFolder, String tabName) {

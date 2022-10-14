@@ -28,7 +28,11 @@
         "value" : "System"
       },
       "classifier" : {
-        "type" : "None"
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Feature_Group_TestCase::Concrete_Sys.impl"
+        }
       },
       "features" : [
         {

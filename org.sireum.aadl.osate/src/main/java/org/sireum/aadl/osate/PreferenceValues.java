@@ -17,14 +17,4 @@ public class PreferenceValues {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 		return SerializerType.valueOf(store.getString(PreferenceConstants.SERIALIZATION_METHOD_OPT));
 	}
-
-	public static boolean getPROCESS_BA_OPT() {
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		return store.getBoolean(PreferenceConstants.PROCESS_BA_OPT);
-	}
-
-	public static void setPROCESS_BA_OPT(boolean value) {
-		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
-		store.setValue(PreferenceConstants.PROCESS_BA_OPT, value);
-	}
 }

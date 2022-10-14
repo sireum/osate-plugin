@@ -18,7 +18,7 @@
             "beginColumn" : 2,
             "endLine" : 68,
             "endColumn" : 13,
-            "offset" : 1947,
+            "offset" : 1950,
             "length" : 79
           }
         }
@@ -28,7 +28,11 @@
         "value" : "System"
       },
       "classifier" : {
-        "type" : "None"
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Enum_Test::s.impl"
+        }
       },
       "features" : [
       ],
@@ -50,7 +54,7 @@
                 "beginColumn" : 4,
                 "endLine" : 67,
                 "endColumn" : 22,
-                "offset" : 1995,
+                "offset" : 1998,
                 "length" : 18
               }
             }
@@ -86,7 +90,7 @@
                     "beginColumn" : 4,
                     "endLine" : 75,
                     "endColumn" : 36,
-                    "offset" : 2098,
+                    "offset" : 2101,
                     "length" : 32
                   }
                 }
@@ -120,7 +124,7 @@
                         "beginColumn" : 4,
                         "endLine" : 83,
                         "endColumn" : 44,
-                        "offset" : 2290,
+                        "offset" : 2293,
                         "length" : 40
                       }
                     }
@@ -192,7 +196,7 @@
                         "beginColumn" : 4,
                         "endLine" : 84,
                         "endColumn" : 50,
-                        "offset" : 2334,
+                        "offset" : 2337,
                         "length" : 46
                       }
                     }
@@ -341,7 +345,7 @@
                             "beginColumn" : 5,
                             "endLine" : 89,
                             "endColumn" : 33,
-                            "offset" : 2459,
+                            "offset" : 2462,
                             "length" : 28
                           }
                         }
@@ -375,7 +379,7 @@
                                     "beginColumn" : 14,
                                     "endLine" : 96,
                                     "endColumn" : 29,
-                                    "offset" : 2743,
+                                    "offset" : 2746,
                                     "length" : 15
                                   }
                                 }
@@ -395,7 +399,7 @@
                                   "beginColumn" : 14,
                                   "endLine" : 96,
                                   "endColumn" : 29,
-                                  "offset" : 2743,
+                                  "offset" : 2746,
                                   "length" : 15
                                 }
                               },
@@ -447,7 +451,7 @@
                                                   "beginColumn" : 7,
                                                   "endLine" : 98,
                                                   "endColumn" : 22,
-                                                  "offset" : 2802,
+                                                  "offset" : 2805,
                                                   "length" : 15
                                                 }
                                               }
@@ -467,7 +471,7 @@
                                                 "beginColumn" : 7,
                                                 "endLine" : 98,
                                                 "endColumn" : 22,
-                                                "offset" : 2802,
+                                                "offset" : 2805,
                                                 "length" : 15
                                               }
                                             },
@@ -497,7 +501,7 @@
                                               "beginColumn" : 23,
                                               "endLine" : 98,
                                               "endColumn" : 34,
-                                              "offset" : 2818,
+                                              "offset" : 2821,
                                               "length" : 11
                                             }
                                           }
@@ -519,7 +523,7 @@
                                             "beginColumn" : 7,
                                             "endLine" : 98,
                                             "endColumn" : 34,
-                                            "offset" : 2802,
+                                            "offset" : 2805,
                                             "length" : 27
                                           }
                                         },
@@ -549,7 +553,7 @@
                                           "beginColumn" : 27,
                                           "endLine" : 98,
                                           "endColumn" : 34,
-                                          "offset" : 2822,
+                                          "offset" : 2825,
                                           "length" : 7
                                         }
                                       }
@@ -571,7 +575,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 98,
                                         "endColumn" : 34,
-                                        "offset" : 2802,
+                                        "offset" : 2805,
                                         "length" : 27
                                       }
                                     },
@@ -585,7 +589,7 @@
                                 },
                                 "op" : "==",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 70.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -601,7 +605,7 @@
                                         "beginColumn" : 38,
                                         "endLine" : 98,
                                         "endColumn" : 42,
-                                        "offset" : 2833,
+                                        "offset" : 2836,
                                         "length" : 4
                                       }
                                     }
@@ -621,7 +625,7 @@
                                       "beginColumn" : 7,
                                       "endLine" : 98,
                                       "endColumn" : 42,
-                                      "offset" : 2802,
+                                      "offset" : 2805,
                                       "length" : 35
                                     }
                                   },
@@ -663,7 +667,7 @@
                                                   "beginColumn" : 48,
                                                   "endLine" : 98,
                                                   "endColumn" : 63,
-                                                  "offset" : 2843,
+                                                  "offset" : 2846,
                                                   "length" : 15
                                                 }
                                               }
@@ -683,7 +687,7 @@
                                                 "beginColumn" : 48,
                                                 "endLine" : 98,
                                                 "endColumn" : 63,
-                                                "offset" : 2843,
+                                                "offset" : 2846,
                                                 "length" : 15
                                               }
                                             },
@@ -713,7 +717,7 @@
                                               "beginColumn" : 64,
                                               "endLine" : 98,
                                               "endColumn" : 76,
-                                              "offset" : 2859,
+                                              "offset" : 2862,
                                               "length" : 12
                                             }
                                           }
@@ -735,7 +739,7 @@
                                             "beginColumn" : 48,
                                             "endLine" : 98,
                                             "endColumn" : 76,
-                                            "offset" : 2843,
+                                            "offset" : 2846,
                                             "length" : 28
                                           }
                                         },
@@ -765,7 +769,7 @@
                                           "beginColumn" : 69,
                                           "endLine" : 98,
                                           "endColumn" : 76,
-                                          "offset" : 2864,
+                                          "offset" : 2867,
                                           "length" : 7
                                         }
                                       }
@@ -787,7 +791,7 @@
                                         "beginColumn" : 48,
                                         "endLine" : 98,
                                         "endColumn" : 76,
-                                        "offset" : 2843,
+                                        "offset" : 2846,
                                         "length" : 28
                                       }
                                     },
@@ -801,7 +805,7 @@
                                 },
                                 "op" : "==",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 80.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -817,7 +821,7 @@
                                         "beginColumn" : 80,
                                         "endLine" : 98,
                                         "endColumn" : 84,
-                                        "offset" : 2875,
+                                        "offset" : 2878,
                                         "length" : 4
                                       }
                                     }
@@ -837,7 +841,7 @@
                                       "beginColumn" : 48,
                                       "endLine" : 98,
                                       "endColumn" : 84,
-                                      "offset" : 2843,
+                                      "offset" : 2846,
                                       "length" : 36
                                     }
                                   },
@@ -863,7 +867,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 98,
                                     "endColumn" : 84,
-                                    "offset" : 2802,
+                                    "offset" : 2805,
                                     "length" : 77
                                   }
                                 },
@@ -887,7 +891,7 @@
                                 "beginColumn" : 5,
                                 "endLine" : 98,
                                 "endColumn" : 86,
-                                "offset" : 2764,
+                                "offset" : 2767,
                                 "length" : 117
                               }
                             }
@@ -934,7 +938,7 @@
                                               "beginColumn" : 7,
                                               "endLine" : 92,
                                               "endColumn" : 18,
-                                              "offset" : 2544,
+                                              "offset" : 2547,
                                               "length" : 11
                                             }
                                           }
@@ -954,7 +958,7 @@
                                             "beginColumn" : 7,
                                             "endLine" : 92,
                                             "endColumn" : 18,
-                                            "offset" : 2544,
+                                            "offset" : 2547,
                                             "length" : 11
                                           }
                                         },
@@ -984,7 +988,7 @@
                                           "beginColumn" : 19,
                                           "endLine" : 92,
                                           "endColumn" : 26,
-                                          "offset" : 2556,
+                                          "offset" : 2559,
                                           "length" : 7
                                         }
                                       }
@@ -1006,7 +1010,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 92,
                                         "endColumn" : 26,
-                                        "offset" : 2544,
+                                        "offset" : 2547,
                                         "length" : 19
                                       }
                                     },
@@ -1026,7 +1030,7 @@
                                     "value" : "Minus"
                                   },
                                   "exp" : {
-                                    "type" : "org.sireum.lang.ast.Exp.LitR",
+                                    "type" : "org.sireum.lang.ast.Exp.LitF64",
                                     "value" : 70.0,
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
@@ -1042,7 +1046,7 @@
                                           "beginColumn" : 32,
                                           "endLine" : 92,
                                           "endColumn" : 36,
-                                          "offset" : 2569,
+                                          "offset" : 2572,
                                           "length" : 4
                                         }
                                       }
@@ -1062,7 +1066,7 @@
                                         "beginColumn" : 31,
                                         "endLine" : 92,
                                         "endColumn" : 36,
-                                        "offset" : 2568,
+                                        "offset" : 2571,
                                         "length" : 5
                                       }
                                     },
@@ -1088,7 +1092,7 @@
                                       "beginColumn" : 7,
                                       "endLine" : 92,
                                       "endColumn" : 36,
-                                      "offset" : 2544,
+                                      "offset" : 2547,
                                       "length" : 29
                                     }
                                   },
@@ -1126,7 +1130,7 @@
                                               "beginColumn" : 43,
                                               "endLine" : 92,
                                               "endColumn" : 54,
-                                              "offset" : 2580,
+                                              "offset" : 2583,
                                               "length" : 11
                                             }
                                           }
@@ -1146,7 +1150,7 @@
                                             "beginColumn" : 43,
                                             "endLine" : 92,
                                             "endColumn" : 54,
-                                            "offset" : 2580,
+                                            "offset" : 2583,
                                             "length" : 11
                                           }
                                         },
@@ -1176,7 +1180,7 @@
                                           "beginColumn" : 55,
                                           "endLine" : 92,
                                           "endColumn" : 62,
-                                          "offset" : 2592,
+                                          "offset" : 2595,
                                           "length" : 7
                                         }
                                       }
@@ -1198,7 +1202,7 @@
                                         "beginColumn" : 43,
                                         "endLine" : 92,
                                         "endColumn" : 62,
-                                        "offset" : 2580,
+                                        "offset" : 2583,
                                         "length" : 19
                                       }
                                     },
@@ -1212,7 +1216,7 @@
                                 },
                                 "op" : "<=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 180.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -1228,7 +1232,7 @@
                                         "beginColumn" : 66,
                                         "endLine" : 92,
                                         "endColumn" : 71,
-                                        "offset" : 2603,
+                                        "offset" : 2606,
                                         "length" : 5
                                       }
                                     }
@@ -1248,7 +1252,7 @@
                                       "beginColumn" : 43,
                                       "endLine" : 92,
                                       "endColumn" : 71,
-                                      "offset" : 2580,
+                                      "offset" : 2583,
                                       "length" : 28
                                     }
                                   },
@@ -1274,7 +1278,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 92,
                                     "endColumn" : 71,
-                                    "offset" : 2544,
+                                    "offset" : 2547,
                                     "length" : 64
                                   }
                                 },
@@ -1298,7 +1302,7 @@
                                 "beginColumn" : 5,
                                 "endLine" : 92,
                                 "endColumn" : 73,
-                                "offset" : 2507,
+                                "offset" : 2510,
                                 "length" : 103
                               }
                             }
@@ -1341,7 +1345,7 @@
                                                   "beginColumn" : 7,
                                                   "endLine" : 94,
                                                   "endColumn" : 15,
-                                                  "offset" : 2649,
+                                                  "offset" : 2652,
                                                   "length" : 8
                                                 }
                                               }
@@ -1361,7 +1365,7 @@
                                                 "beginColumn" : 7,
                                                 "endLine" : 94,
                                                 "endColumn" : 15,
-                                                "offset" : 2649,
+                                                "offset" : 2652,
                                                 "length" : 8
                                               }
                                             },
@@ -1391,7 +1395,7 @@
                                               "beginColumn" : 16,
                                               "endLine" : 94,
                                               "endColumn" : 27,
-                                              "offset" : 2658,
+                                              "offset" : 2661,
                                               "length" : 11
                                             }
                                           }
@@ -1413,7 +1417,7 @@
                                             "beginColumn" : 7,
                                             "endLine" : 94,
                                             "endColumn" : 27,
-                                            "offset" : 2649,
+                                            "offset" : 2652,
                                             "length" : 20
                                           }
                                         },
@@ -1443,7 +1447,7 @@
                                           "beginColumn" : 20,
                                           "endLine" : 94,
                                           "endColumn" : 27,
-                                          "offset" : 2662,
+                                          "offset" : 2665,
                                           "length" : 7
                                         }
                                       }
@@ -1465,7 +1469,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 94,
                                         "endColumn" : 27,
-                                        "offset" : 2649,
+                                        "offset" : 2652,
                                         "length" : 20
                                       }
                                     },
@@ -1479,7 +1483,7 @@
                                 },
                                 "op" : ">=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 40.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -1495,7 +1499,7 @@
                                         "beginColumn" : 31,
                                         "endLine" : 94,
                                         "endColumn" : 35,
-                                        "offset" : 2673,
+                                        "offset" : 2676,
                                         "length" : 4
                                       }
                                     }
@@ -1515,7 +1519,7 @@
                                       "beginColumn" : 7,
                                       "endLine" : 94,
                                       "endColumn" : 35,
-                                      "offset" : 2649,
+                                      "offset" : 2652,
                                       "length" : 28
                                     }
                                   },
@@ -1557,7 +1561,7 @@
                                                   "beginColumn" : 41,
                                                   "endLine" : 94,
                                                   "endColumn" : 49,
-                                                  "offset" : 2683,
+                                                  "offset" : 2686,
                                                   "length" : 8
                                                 }
                                               }
@@ -1577,7 +1581,7 @@
                                                 "beginColumn" : 41,
                                                 "endLine" : 94,
                                                 "endColumn" : 49,
-                                                "offset" : 2683,
+                                                "offset" : 2686,
                                                 "length" : 8
                                               }
                                             },
@@ -1607,7 +1611,7 @@
                                               "beginColumn" : 50,
                                               "endLine" : 94,
                                               "endColumn" : 62,
-                                              "offset" : 2692,
+                                              "offset" : 2695,
                                               "length" : 12
                                             }
                                           }
@@ -1629,7 +1633,7 @@
                                             "beginColumn" : 41,
                                             "endLine" : 94,
                                             "endColumn" : 62,
-                                            "offset" : 2683,
+                                            "offset" : 2686,
                                             "length" : 21
                                           }
                                         },
@@ -1659,7 +1663,7 @@
                                           "beginColumn" : 55,
                                           "endLine" : 94,
                                           "endColumn" : 62,
-                                          "offset" : 2697,
+                                          "offset" : 2700,
                                           "length" : 7
                                         }
                                       }
@@ -1681,7 +1685,7 @@
                                         "beginColumn" : 41,
                                         "endLine" : 94,
                                         "endColumn" : 62,
-                                        "offset" : 2683,
+                                        "offset" : 2686,
                                         "length" : 21
                                       }
                                     },
@@ -1695,7 +1699,7 @@
                                 },
                                 "op" : "<=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 110.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -1711,7 +1715,7 @@
                                         "beginColumn" : 66,
                                         "endLine" : 94,
                                         "endColumn" : 71,
-                                        "offset" : 2708,
+                                        "offset" : 2711,
                                         "length" : 5
                                       }
                                     }
@@ -1731,7 +1735,7 @@
                                       "beginColumn" : 41,
                                       "endLine" : 94,
                                       "endColumn" : 71,
-                                      "offset" : 2683,
+                                      "offset" : 2686,
                                       "length" : 30
                                     }
                                   },
@@ -1757,7 +1761,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 94,
                                     "endColumn" : 71,
-                                    "offset" : 2649,
+                                    "offset" : 2652,
                                     "length" : 64
                                   }
                                 },
@@ -1781,7 +1785,7 @@
                                 "beginColumn" : 5,
                                 "endLine" : 94,
                                 "endColumn" : 73,
-                                "offset" : 2615,
+                                "offset" : 2618,
                                 "length" : 100
                               }
                             }
@@ -1814,7 +1818,7 @@
                     "beginColumn" : 4,
                     "endLine" : 76,
                     "endColumn" : 34,
-                    "offset" : 2134,
+                    "offset" : 2137,
                     "length" : 30
                   }
                 }
@@ -1848,7 +1852,7 @@
                         "beginColumn" : 4,
                         "endLine" : 104,
                         "endColumn" : 51,
-                        "offset" : 2941,
+                        "offset" : 2944,
                         "length" : 47
                       }
                     }
@@ -2063,7 +2067,7 @@
                                               "beginColumn" : 7,
                                               "endLine" : 111,
                                               "endColumn" : 18,
-                                              "offset" : 3153,
+                                              "offset" : 3156,
                                               "length" : 11
                                             }
                                           }
@@ -2083,7 +2087,7 @@
                                             "beginColumn" : 7,
                                             "endLine" : 111,
                                             "endColumn" : 18,
-                                            "offset" : 3153,
+                                            "offset" : 3156,
                                             "length" : 11
                                           }
                                         },
@@ -2113,7 +2117,7 @@
                                           "beginColumn" : 19,
                                           "endLine" : 111,
                                           "endColumn" : 26,
-                                          "offset" : 3165,
+                                          "offset" : 3168,
                                           "length" : 7
                                         }
                                       }
@@ -2135,7 +2139,7 @@
                                         "beginColumn" : 7,
                                         "endLine" : 111,
                                         "endColumn" : 26,
-                                        "offset" : 3153,
+                                        "offset" : 3156,
                                         "length" : 19
                                       }
                                     },
@@ -2155,7 +2159,7 @@
                                     "value" : "Minus"
                                   },
                                   "exp" : {
-                                    "type" : "org.sireum.lang.ast.Exp.LitR",
+                                    "type" : "org.sireum.lang.ast.Exp.LitF64",
                                     "value" : 70.0,
                                     "attr" : {
                                       "type" : "org.sireum.lang.ast.Attr",
@@ -2171,7 +2175,7 @@
                                           "beginColumn" : 32,
                                           "endLine" : 111,
                                           "endColumn" : 36,
-                                          "offset" : 3178,
+                                          "offset" : 3181,
                                           "length" : 4
                                         }
                                       }
@@ -2191,7 +2195,7 @@
                                         "beginColumn" : 31,
                                         "endLine" : 111,
                                         "endColumn" : 36,
-                                        "offset" : 3177,
+                                        "offset" : 3180,
                                         "length" : 5
                                       }
                                     },
@@ -2217,7 +2221,7 @@
                                       "beginColumn" : 7,
                                       "endLine" : 111,
                                       "endColumn" : 36,
-                                      "offset" : 3153,
+                                      "offset" : 3156,
                                       "length" : 29
                                     }
                                   },
@@ -2255,7 +2259,7 @@
                                               "beginColumn" : 43,
                                               "endLine" : 111,
                                               "endColumn" : 54,
-                                              "offset" : 3189,
+                                              "offset" : 3192,
                                               "length" : 11
                                             }
                                           }
@@ -2275,7 +2279,7 @@
                                             "beginColumn" : 43,
                                             "endLine" : 111,
                                             "endColumn" : 54,
-                                            "offset" : 3189,
+                                            "offset" : 3192,
                                             "length" : 11
                                           }
                                         },
@@ -2305,7 +2309,7 @@
                                           "beginColumn" : 55,
                                           "endLine" : 111,
                                           "endColumn" : 62,
-                                          "offset" : 3201,
+                                          "offset" : 3204,
                                           "length" : 7
                                         }
                                       }
@@ -2327,7 +2331,7 @@
                                         "beginColumn" : 43,
                                         "endLine" : 111,
                                         "endColumn" : 62,
-                                        "offset" : 3189,
+                                        "offset" : 3192,
                                         "length" : 19
                                       }
                                     },
@@ -2341,7 +2345,7 @@
                                 },
                                 "op" : "<=",
                                 "right" : {
-                                  "type" : "org.sireum.lang.ast.Exp.LitR",
+                                  "type" : "org.sireum.lang.ast.Exp.LitF64",
                                   "value" : 180.0,
                                   "attr" : {
                                     "type" : "org.sireum.lang.ast.Attr",
@@ -2357,7 +2361,7 @@
                                         "beginColumn" : 66,
                                         "endLine" : 111,
                                         "endColumn" : 71,
-                                        "offset" : 3212,
+                                        "offset" : 3215,
                                         "length" : 5
                                       }
                                     }
@@ -2377,7 +2381,7 @@
                                       "beginColumn" : 43,
                                       "endLine" : 111,
                                       "endColumn" : 71,
-                                      "offset" : 3189,
+                                      "offset" : 3192,
                                       "length" : 28
                                     }
                                   },
@@ -2403,7 +2407,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 111,
                                     "endColumn" : 71,
-                                    "offset" : 3153,
+                                    "offset" : 3156,
                                     "length" : 64
                                   }
                                 },
@@ -2427,7 +2431,7 @@
                                 "beginColumn" : 5,
                                 "endLine" : 111,
                                 "endColumn" : 73,
-                                "offset" : 3113,
+                                "offset" : 3116,
                                 "length" : 106
                               }
                             }
@@ -2462,7 +2466,7 @@
                     "beginColumn" : 4,
                     "endLine" : 78,
                     "endColumn" : 63,
-                    "offset" : 2182,
+                    "offset" : 2185,
                     "length" : 59
                   }
                 }
@@ -2485,7 +2489,7 @@
                         "beginColumn" : 4,
                         "endLine" : 76,
                         "endColumn" : 34,
-                        "offset" : 2134,
+                        "offset" : 2137,
                         "length" : 30
                       }
                     }
@@ -2507,7 +2511,7 @@
                           "beginColumn" : 4,
                           "endLine" : 104,
                           "endColumn" : 51,
-                          "offset" : 2941,
+                          "offset" : 2944,
                           "length" : 47
                         }
                       }
@@ -2540,7 +2544,7 @@
                         "beginColumn" : 4,
                         "endLine" : 75,
                         "endColumn" : 36,
-                        "offset" : 2098,
+                        "offset" : 2101,
                         "length" : 32
                       }
                     }
@@ -2562,7 +2566,7 @@
                           "beginColumn" : 4,
                           "endLine" : 84,
                           "endColumn" : 50,
-                          "offset" : 2334,
+                          "offset" : 2337,
                           "length" : 46
                         }
                       }
@@ -2614,7 +2618,7 @@
                     "beginColumn" : 4,
                     "endLine" : 78,
                     "endColumn" : 63,
-                    "offset" : 2182,
+                    "offset" : 2185,
                     "length" : 59
                   }
                 }
@@ -2636,7 +2640,7 @@
                       "beginColumn" : 4,
                       "endLine" : 76,
                       "endColumn" : 34,
-                      "offset" : 2134,
+                      "offset" : 2137,
                       "length" : 30
                     }
                   }
@@ -2658,7 +2662,7 @@
                         "beginColumn" : 4,
                         "endLine" : 104,
                         "endColumn" : 51,
-                        "offset" : 2941,
+                        "offset" : 2944,
                         "length" : 47
                       }
                     }
@@ -2689,7 +2693,7 @@
                       "beginColumn" : 4,
                       "endLine" : 75,
                       "endColumn" : 36,
-                      "offset" : 2098,
+                      "offset" : 2101,
                       "length" : 32
                     }
                   }
@@ -2711,7 +2715,7 @@
                         "beginColumn" : 4,
                         "endLine" : 84,
                         "endColumn" : 50,
-                        "offset" : 2334,
+                        "offset" : 2337,
                         "length" : 46
                       }
                     }
@@ -2747,7 +2751,7 @@
                         "beginColumn" : 4,
                         "endLine" : 78,
                         "endColumn" : 63,
-                        "offset" : 2182,
+                        "offset" : 2185,
                         "length" : 59
                       }
                     }
@@ -2767,7 +2771,7 @@
                         "beginColumn" : 4,
                         "endLine" : 67,
                         "endColumn" : 22,
-                        "offset" : 1995,
+                        "offset" : 1998,
                         "length" : 18
                       }
                     }
@@ -2879,7 +2883,7 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
-          "name" : "Base_Types::Float"
+          "name" : "Base_Types::Float_64"
         }
       },
       "features" : [
@@ -2891,6 +2895,72 @@
       "connectionInstances" : [
       ],
       "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 2,
+                "endLine" : 93,
+                "endColumn" : 137,
+                "offset" : 4808,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "64.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::IEEE754_Precision"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 53,
+                "beginColumn" : 4,
+                "endLine" : 53,
+                "endColumn" : 84,
+                "offset" : 2369,
+                "length" : 80
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Double"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
         {
           "type" : "Property",
           "name" : {
@@ -4274,6 +4344,75 @@
         "type" : "Some",
         "value" : {
           "type" : "Classifier",
+          "name" : "Base_Types::Float"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Data_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 27,
+                "beginColumn" : 4,
+                "endLine" : 30,
+                "endColumn" : 36,
+                "offset" : 1165,
+                "length" : 162
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Float"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ],
+      "uriFrag" : ""
+    },
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
           "name" : "Base_Types::Float_32"
         }
       },
@@ -4347,141 +4486,6 @@
             {
               "type" : "ValueProp",
               "value" : "Simple"
-            }
-          ],
-          "appliesTo" : [
-          ]
-        },
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Data_Model::Data_Representation"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                },
-                "beginLine" : 27,
-                "beginColumn" : 4,
-                "endLine" : 30,
-                "endColumn" : 36,
-                "offset" : 1165,
-                "length" : 162
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "ValueProp",
-              "value" : "Float"
-            }
-          ],
-          "appliesTo" : [
-          ]
-        }
-      ],
-      "flows" : [
-      ],
-      "modes" : [
-      ],
-      "annexes" : [
-      ],
-      "uriFrag" : ""
-    },
-    {
-      "type" : "Component",
-      "identifier" : {
-        "type" : "Name",
-        "name" : [],
-        "pos" : {
-          "type" : "None"
-        }
-      },
-      "category" : {
-        "type" : "ComponentCategory",
-        "value" : "Data"
-      },
-      "classifier" : {
-        "type" : "Some",
-        "value" : {
-          "type" : "Classifier",
-          "name" : "Base_Types::Float_64"
-        }
-      },
-      "features" : [
-      ],
-      "subComponents" : [
-      ],
-      "connections" : [
-      ],
-      "connectionInstances" : [
-      ],
-      "properties" : [
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Memory_Properties::Data_Size"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
-                },
-                "beginLine" : 92,
-                "beginColumn" : 2,
-                "endLine" : 93,
-                "endColumn" : 137,
-                "offset" : 4808,
-                "length" : 152
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "UnitProp",
-              "value" : "64.0",
-              "unit" : {
-                "type" : "Some",
-                "value" : "bits"
-              }
-            }
-          ],
-          "appliesTo" : [
-          ]
-        },
-        {
-          "type" : "Property",
-          "name" : {
-            "type" : "Name",
-            "name" : ["Data_Model::IEEE754_Precision"],
-            "pos" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Position",
-                "uriOpt" : {
-                  "type" : "Some",
-                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
-                },
-                "beginLine" : 53,
-                "beginColumn" : 4,
-                "endLine" : 53,
-                "endColumn" : 84,
-                "offset" : 2369,
-                "length" : 80
-              }
-            }
-          },
-          "propertyValues" : [
-            {
-              "type" : "ValueProp",
-              "value" : "Double"
             }
           ],
           "appliesTo" : [
@@ -4704,9 +4708,9 @@
                 "beginLine" : 24,
                 "beginColumn" : 4,
                 "endLine" : 24,
-                "endColumn" : 36,
+                "endColumn" : 39,
                 "offset" : 715,
-                "length" : 32
+                "length" : 35
               }
             }
           },
@@ -4718,7 +4722,7 @@
             "type" : "Some",
             "value" : {
               "type" : "Classifier",
-              "name" : "Base_Types::Float"
+              "name" : "Base_Types::Float_64"
             }
           },
           "features" : [
@@ -4730,6 +4734,72 @@
           "connectionInstances" : [
           ],
           "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Memory_Properties::Data_Size"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                    },
+                    "beginLine" : 92,
+                    "beginColumn" : 2,
+                    "endLine" : 93,
+                    "endColumn" : 137,
+                    "offset" : 4808,
+                    "length" : 152
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "64.0",
+                  "unit" : {
+                    "type" : "Some",
+                    "value" : "bits"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["Data_Model::IEEE754_Precision"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                    },
+                    "beginLine" : 53,
+                    "beginColumn" : 4,
+                    "endLine" : 53,
+                    "endColumn" : 84,
+                    "offset" : 2369,
+                    "length" : 80
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ValueProp",
+                  "value" : "Double"
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
             {
               "type" : "Property",
               "name" : {
@@ -4768,7 +4838,7 @@
           ],
           "annexes" : [
           ],
-          "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float"
+          "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_64"
         },
         {
           "type" : "Component",
@@ -4787,7 +4857,7 @@
                 "beginColumn" : 4,
                 "endLine" : 25,
                 "endColumn" : 21,
-                "offset" : 751,
+                "offset" : 754,
                 "length" : 17
               }
             }
@@ -4974,7 +5044,7 @@
                               "beginColumn" : 10,
                               "endLine" : 33,
                               "endColumn" : 14,
-                              "offset" : 1042,
+                              "offset" : 1045,
                               "length" : 4
                             }
                           }
@@ -4994,7 +5064,7 @@
                             "beginColumn" : 10,
                             "endLine" : 33,
                             "endColumn" : 14,
-                            "offset" : 1042,
+                            "offset" : 1045,
                             "length" : 4
                           }
                         },
@@ -5034,7 +5104,7 @@
                                       "beginColumn" : 18,
                                       "endLine" : 33,
                                       "endColumn" : 37,
-                                      "offset" : 1050,
+                                      "offset" : 1053,
                                       "length" : 19
                                     }
                                   }
@@ -5054,7 +5124,7 @@
                                     "beginColumn" : 18,
                                     "endLine" : 33,
                                     "endColumn" : 37,
-                                    "offset" : 1050,
+                                    "offset" : 1053,
                                     "length" : 19
                                   }
                                 },
@@ -5084,7 +5154,7 @@
                                   "beginColumn" : 18,
                                   "endLine" : 33,
                                   "endColumn" : 37,
-                                  "offset" : 1050,
+                                  "offset" : 1053,
                                   "length" : 19
                                 }
                               }
@@ -5106,7 +5176,7 @@
                                 "beginColumn" : 18,
                                 "endLine" : 33,
                                 "endColumn" : 37,
-                                "offset" : 1050,
+                                "offset" : 1053,
                                 "length" : 19
                               }
                             },
@@ -5136,7 +5206,7 @@
                               "beginColumn" : 18,
                               "endLine" : 33,
                               "endColumn" : 37,
-                              "offset" : 1050,
+                              "offset" : 1053,
                               "length" : 19
                             }
                           }
@@ -5158,7 +5228,7 @@
                             "beginColumn" : 18,
                             "endLine" : 33,
                             "endColumn" : 37,
-                            "offset" : 1050,
+                            "offset" : 1053,
                             "length" : 19
                           }
                         },
@@ -5184,7 +5254,7 @@
                           "beginColumn" : 10,
                           "endLine" : 33,
                           "endColumn" : 37,
-                          "offset" : 1042,
+                          "offset" : 1045,
                           "length" : 27
                         }
                       },
@@ -5217,7 +5287,7 @@
                               "beginColumn" : 39,
                               "endLine" : 33,
                               "endColumn" : 46,
-                              "offset" : 1071,
+                              "offset" : 1074,
                               "length" : 7
                             }
                           }
@@ -5237,7 +5307,7 @@
                             "beginColumn" : 39,
                             "endLine" : 33,
                             "endColumn" : 46,
-                            "offset" : 1071,
+                            "offset" : 1074,
                             "length" : 7
                           }
                         },
@@ -5251,7 +5321,7 @@
                     },
                     "op" : ">=",
                     "right" : {
-                      "type" : "org.sireum.lang.ast.Exp.LitR",
+                      "type" : "org.sireum.lang.ast.Exp.LitF64",
                       "value" : 0.0,
                       "attr" : {
                         "type" : "org.sireum.lang.ast.Attr",
@@ -5267,7 +5337,7 @@
                             "beginColumn" : 50,
                             "endLine" : 33,
                             "endColumn" : 53,
-                            "offset" : 1082,
+                            "offset" : 1085,
                             "length" : 3
                           }
                         }
@@ -5287,7 +5357,7 @@
                           "beginColumn" : 39,
                           "endLine" : 33,
                           "endColumn" : 53,
-                          "offset" : 1071,
+                          "offset" : 1074,
                           "length" : 14
                         }
                       },
@@ -5322,7 +5392,7 @@
                                 "beginColumn" : 15,
                                 "endLine" : 34,
                                 "endColumn" : 19,
-                                "offset" : 1101,
+                                "offset" : 1104,
                                 "length" : 4
                               }
                             }
@@ -5342,7 +5412,7 @@
                               "beginColumn" : 15,
                               "endLine" : 34,
                               "endColumn" : 19,
-                              "offset" : 1101,
+                              "offset" : 1104,
                               "length" : 4
                             }
                           },
@@ -5382,7 +5452,7 @@
                                         "beginColumn" : 23,
                                         "endLine" : 34,
                                         "endColumn" : 42,
-                                        "offset" : 1109,
+                                        "offset" : 1112,
                                         "length" : 19
                                       }
                                     }
@@ -5402,7 +5472,7 @@
                                       "beginColumn" : 23,
                                       "endLine" : 34,
                                       "endColumn" : 42,
-                                      "offset" : 1109,
+                                      "offset" : 1112,
                                       "length" : 19
                                     }
                                   },
@@ -5432,7 +5502,7 @@
                                     "beginColumn" : 23,
                                     "endLine" : 34,
                                     "endColumn" : 42,
-                                    "offset" : 1109,
+                                    "offset" : 1112,
                                     "length" : 19
                                   }
                                 }
@@ -5454,7 +5524,7 @@
                                   "beginColumn" : 23,
                                   "endLine" : 34,
                                   "endColumn" : 42,
-                                  "offset" : 1109,
+                                  "offset" : 1112,
                                   "length" : 19
                                 }
                               },
@@ -5484,7 +5554,7 @@
                                 "beginColumn" : 23,
                                 "endLine" : 34,
                                 "endColumn" : 42,
-                                "offset" : 1109,
+                                "offset" : 1112,
                                 "length" : 19
                               }
                             }
@@ -5506,7 +5576,7 @@
                               "beginColumn" : 23,
                               "endLine" : 34,
                               "endColumn" : 42,
-                              "offset" : 1109,
+                              "offset" : 1112,
                               "length" : 19
                             }
                           },
@@ -5532,7 +5602,7 @@
                             "beginColumn" : 15,
                             "endLine" : 34,
                             "endColumn" : 42,
-                            "offset" : 1101,
+                            "offset" : 1104,
                             "length" : 27
                           }
                         },
@@ -5565,7 +5635,7 @@
                                 "beginColumn" : 44,
                                 "endLine" : 34,
                                 "endColumn" : 51,
-                                "offset" : 1130,
+                                "offset" : 1133,
                                 "length" : 7
                               }
                             }
@@ -5585,7 +5655,7 @@
                               "beginColumn" : 44,
                               "endLine" : 34,
                               "endColumn" : 51,
-                              "offset" : 1130,
+                              "offset" : 1133,
                               "length" : 7
                             }
                           },
@@ -5605,7 +5675,7 @@
                           "value" : "Minus"
                         },
                         "exp" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
+                          "type" : "org.sireum.lang.ast.Exp.LitF64",
                           "value" : 273.0,
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
@@ -5621,7 +5691,7 @@
                                 "beginColumn" : 57,
                                 "endLine" : 34,
                                 "endColumn" : 62,
-                                "offset" : 1143,
+                                "offset" : 1146,
                                 "length" : 5
                               }
                             }
@@ -5641,7 +5711,7 @@
                               "beginColumn" : 56,
                               "endLine" : 34,
                               "endColumn" : 62,
-                              "offset" : 1142,
+                              "offset" : 1145,
                               "length" : 6
                             }
                           },
@@ -5667,7 +5737,7 @@
                             "beginColumn" : 44,
                             "endLine" : 34,
                             "endColumn" : 62,
-                            "offset" : 1130,
+                            "offset" : 1133,
                             "length" : 18
                           }
                         },
@@ -5702,7 +5772,7 @@
                                   "beginColumn" : 15,
                                   "endLine" : 35,
                                   "endColumn" : 19,
-                                  "offset" : 1165,
+                                  "offset" : 1168,
                                   "length" : 4
                                 }
                               }
@@ -5722,7 +5792,7 @@
                                 "beginColumn" : 15,
                                 "endLine" : 35,
                                 "endColumn" : 19,
-                                "offset" : 1165,
+                                "offset" : 1168,
                                 "length" : 4
                               }
                             },
@@ -5762,7 +5832,7 @@
                                           "beginColumn" : 23,
                                           "endLine" : 35,
                                           "endColumn" : 42,
-                                          "offset" : 1173,
+                                          "offset" : 1176,
                                           "length" : 19
                                         }
                                       }
@@ -5782,7 +5852,7 @@
                                         "beginColumn" : 23,
                                         "endLine" : 35,
                                         "endColumn" : 42,
-                                        "offset" : 1173,
+                                        "offset" : 1176,
                                         "length" : 19
                                       }
                                     },
@@ -5812,7 +5882,7 @@
                                       "beginColumn" : 23,
                                       "endLine" : 35,
                                       "endColumn" : 42,
-                                      "offset" : 1173,
+                                      "offset" : 1176,
                                       "length" : 19
                                     }
                                   }
@@ -5834,7 +5904,7 @@
                                     "beginColumn" : 23,
                                     "endLine" : 35,
                                     "endColumn" : 42,
-                                    "offset" : 1173,
+                                    "offset" : 1176,
                                     "length" : 19
                                   }
                                 },
@@ -5864,7 +5934,7 @@
                                   "beginColumn" : 23,
                                   "endLine" : 35,
                                   "endColumn" : 42,
-                                  "offset" : 1173,
+                                  "offset" : 1176,
                                   "length" : 19
                                 }
                               }
@@ -5886,7 +5956,7 @@
                                 "beginColumn" : 23,
                                 "endLine" : 35,
                                 "endColumn" : 42,
-                                "offset" : 1173,
+                                "offset" : 1176,
                                 "length" : 19
                               }
                             },
@@ -5912,7 +5982,7 @@
                               "beginColumn" : 15,
                               "endLine" : 35,
                               "endColumn" : 42,
-                              "offset" : 1165,
+                              "offset" : 1168,
                               "length" : 27
                             }
                           },
@@ -5945,7 +6015,7 @@
                                   "beginColumn" : 44,
                                   "endLine" : 35,
                                   "endColumn" : 51,
-                                  "offset" : 1194,
+                                  "offset" : 1197,
                                   "length" : 7
                                 }
                               }
@@ -5965,7 +6035,7 @@
                                 "beginColumn" : 44,
                                 "endLine" : 35,
                                 "endColumn" : 51,
-                                "offset" : 1194,
+                                "offset" : 1197,
                                 "length" : 7
                               }
                             },
@@ -5985,7 +6055,7 @@
                             "value" : "Minus"
                           },
                           "exp" : {
-                            "type" : "org.sireum.lang.ast.Exp.LitR",
+                            "type" : "org.sireum.lang.ast.Exp.LitF64",
                             "value" : 459.67,
                             "attr" : {
                               "type" : "org.sireum.lang.ast.Attr",
@@ -6001,7 +6071,7 @@
                                   "beginColumn" : 57,
                                   "endLine" : 35,
                                   "endColumn" : 63,
-                                  "offset" : 1207,
+                                  "offset" : 1210,
                                   "length" : 6
                                 }
                               }
@@ -6021,7 +6091,7 @@
                                 "beginColumn" : 56,
                                 "endLine" : 35,
                                 "endColumn" : 63,
-                                "offset" : 1206,
+                                "offset" : 1209,
                                 "length" : 7
                               }
                             },
@@ -6047,7 +6117,7 @@
                               "beginColumn" : 44,
                               "endLine" : 35,
                               "endColumn" : 63,
-                              "offset" : 1194,
+                              "offset" : 1197,
                               "length" : 19
                             }
                           },
@@ -6076,7 +6146,7 @@
                               "beginColumn" : 11,
                               "endLine" : 36,
                               "endColumn" : 12,
-                              "offset" : 1226,
+                              "offset" : 1229,
                               "length" : 1
                             }
                           }
@@ -6096,7 +6166,7 @@
                             "beginColumn" : 11,
                             "endLine" : 36,
                             "endColumn" : 12,
-                            "offset" : 1161,
+                            "offset" : 1164,
                             "length" : 66
                           }
                         },
@@ -6119,7 +6189,7 @@
                           "beginColumn" : 11,
                           "endLine" : 36,
                           "endColumn" : 12,
-                          "offset" : 1097,
+                          "offset" : 1100,
                           "length" : 130
                         }
                       },
@@ -6142,7 +6212,7 @@
                         "beginColumn" : 6,
                         "endLine" : 36,
                         "endColumn" : 12,
-                        "offset" : 1038,
+                        "offset" : 1041,
                         "length" : 189
                       }
                     },
@@ -6163,7 +6233,7 @@
                     "beginColumn" : 5,
                     "endLine" : 36,
                     "endColumn" : 13,
-                    "offset" : 996,
+                    "offset" : 999,
                     "length" : 232
                   }
                 }
@@ -6223,7 +6293,7 @@
                 "beginColumn" : 4,
                 "endLine" : 50,
                 "endColumn" : 28,
-                "offset" : 1679,
+                "offset" : 1682,
                 "length" : 24
               }
             }
@@ -6258,9 +6328,9 @@
                     "beginLine" : 24,
                     "beginColumn" : 4,
                     "endLine" : 24,
-                    "endColumn" : 36,
+                    "endColumn" : 39,
                     "offset" : 715,
-                    "length" : 32
+                    "length" : 35
                   }
                 }
               },
@@ -6272,7 +6342,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "Base_Types::Float"
+                  "name" : "Base_Types::Float_64"
                 }
               },
               "features" : [
@@ -6284,6 +6354,72 @@
               "connectionInstances" : [
               ],
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 2,
+                        "endLine" : 93,
+                        "endColumn" : 137,
+                        "offset" : 4808,
+                        "length" : 152
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "64.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::IEEE754_Precision"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 4,
+                        "endLine" : 53,
+                        "endColumn" : 84,
+                        "offset" : 2369,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Double"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -6322,7 +6458,7 @@
               ],
               "annexes" : [
               ],
-              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float"
+              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_64"
             },
             {
               "type" : "Component",
@@ -6341,7 +6477,7 @@
                     "beginColumn" : 4,
                     "endLine" : 25,
                     "endColumn" : 21,
-                    "offset" : 751,
+                    "offset" : 754,
                     "length" : 17
                   }
                 }
@@ -6528,7 +6664,7 @@
                                   "beginColumn" : 10,
                                   "endLine" : 33,
                                   "endColumn" : 14,
-                                  "offset" : 1042,
+                                  "offset" : 1045,
                                   "length" : 4
                                 }
                               }
@@ -6548,7 +6684,7 @@
                                 "beginColumn" : 10,
                                 "endLine" : 33,
                                 "endColumn" : 14,
-                                "offset" : 1042,
+                                "offset" : 1045,
                                 "length" : 4
                               }
                             },
@@ -6588,7 +6724,7 @@
                                           "beginColumn" : 18,
                                           "endLine" : 33,
                                           "endColumn" : 37,
-                                          "offset" : 1050,
+                                          "offset" : 1053,
                                           "length" : 19
                                         }
                                       }
@@ -6608,7 +6744,7 @@
                                         "beginColumn" : 18,
                                         "endLine" : 33,
                                         "endColumn" : 37,
-                                        "offset" : 1050,
+                                        "offset" : 1053,
                                         "length" : 19
                                       }
                                     },
@@ -6638,7 +6774,7 @@
                                       "beginColumn" : 18,
                                       "endLine" : 33,
                                       "endColumn" : 37,
-                                      "offset" : 1050,
+                                      "offset" : 1053,
                                       "length" : 19
                                     }
                                   }
@@ -6660,7 +6796,7 @@
                                     "beginColumn" : 18,
                                     "endLine" : 33,
                                     "endColumn" : 37,
-                                    "offset" : 1050,
+                                    "offset" : 1053,
                                     "length" : 19
                                   }
                                 },
@@ -6690,7 +6826,7 @@
                                   "beginColumn" : 18,
                                   "endLine" : 33,
                                   "endColumn" : 37,
-                                  "offset" : 1050,
+                                  "offset" : 1053,
                                   "length" : 19
                                 }
                               }
@@ -6712,7 +6848,7 @@
                                 "beginColumn" : 18,
                                 "endLine" : 33,
                                 "endColumn" : 37,
-                                "offset" : 1050,
+                                "offset" : 1053,
                                 "length" : 19
                               }
                             },
@@ -6738,7 +6874,7 @@
                               "beginColumn" : 10,
                               "endLine" : 33,
                               "endColumn" : 37,
-                              "offset" : 1042,
+                              "offset" : 1045,
                               "length" : 27
                             }
                           },
@@ -6771,7 +6907,7 @@
                                   "beginColumn" : 39,
                                   "endLine" : 33,
                                   "endColumn" : 46,
-                                  "offset" : 1071,
+                                  "offset" : 1074,
                                   "length" : 7
                                 }
                               }
@@ -6791,7 +6927,7 @@
                                 "beginColumn" : 39,
                                 "endLine" : 33,
                                 "endColumn" : 46,
-                                "offset" : 1071,
+                                "offset" : 1074,
                                 "length" : 7
                               }
                             },
@@ -6805,7 +6941,7 @@
                         },
                         "op" : ">=",
                         "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
+                          "type" : "org.sireum.lang.ast.Exp.LitF64",
                           "value" : 0.0,
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
@@ -6821,7 +6957,7 @@
                                 "beginColumn" : 50,
                                 "endLine" : 33,
                                 "endColumn" : 53,
-                                "offset" : 1082,
+                                "offset" : 1085,
                                 "length" : 3
                               }
                             }
@@ -6841,7 +6977,7 @@
                               "beginColumn" : 39,
                               "endLine" : 33,
                               "endColumn" : 53,
-                              "offset" : 1071,
+                              "offset" : 1074,
                               "length" : 14
                             }
                           },
@@ -6876,7 +7012,7 @@
                                     "beginColumn" : 15,
                                     "endLine" : 34,
                                     "endColumn" : 19,
-                                    "offset" : 1101,
+                                    "offset" : 1104,
                                     "length" : 4
                                   }
                                 }
@@ -6896,7 +7032,7 @@
                                   "beginColumn" : 15,
                                   "endLine" : 34,
                                   "endColumn" : 19,
-                                  "offset" : 1101,
+                                  "offset" : 1104,
                                   "length" : 4
                                 }
                               },
@@ -6936,7 +7072,7 @@
                                             "beginColumn" : 23,
                                             "endLine" : 34,
                                             "endColumn" : 42,
-                                            "offset" : 1109,
+                                            "offset" : 1112,
                                             "length" : 19
                                           }
                                         }
@@ -6956,7 +7092,7 @@
                                           "beginColumn" : 23,
                                           "endLine" : 34,
                                           "endColumn" : 42,
-                                          "offset" : 1109,
+                                          "offset" : 1112,
                                           "length" : 19
                                         }
                                       },
@@ -6986,7 +7122,7 @@
                                         "beginColumn" : 23,
                                         "endLine" : 34,
                                         "endColumn" : 42,
-                                        "offset" : 1109,
+                                        "offset" : 1112,
                                         "length" : 19
                                       }
                                     }
@@ -7008,7 +7144,7 @@
                                       "beginColumn" : 23,
                                       "endLine" : 34,
                                       "endColumn" : 42,
-                                      "offset" : 1109,
+                                      "offset" : 1112,
                                       "length" : 19
                                     }
                                   },
@@ -7038,7 +7174,7 @@
                                     "beginColumn" : 23,
                                     "endLine" : 34,
                                     "endColumn" : 42,
-                                    "offset" : 1109,
+                                    "offset" : 1112,
                                     "length" : 19
                                   }
                                 }
@@ -7060,7 +7196,7 @@
                                   "beginColumn" : 23,
                                   "endLine" : 34,
                                   "endColumn" : 42,
-                                  "offset" : 1109,
+                                  "offset" : 1112,
                                   "length" : 19
                                 }
                               },
@@ -7086,7 +7222,7 @@
                                 "beginColumn" : 15,
                                 "endLine" : 34,
                                 "endColumn" : 42,
-                                "offset" : 1101,
+                                "offset" : 1104,
                                 "length" : 27
                               }
                             },
@@ -7119,7 +7255,7 @@
                                     "beginColumn" : 44,
                                     "endLine" : 34,
                                     "endColumn" : 51,
-                                    "offset" : 1130,
+                                    "offset" : 1133,
                                     "length" : 7
                                   }
                                 }
@@ -7139,7 +7275,7 @@
                                   "beginColumn" : 44,
                                   "endLine" : 34,
                                   "endColumn" : 51,
-                                  "offset" : 1130,
+                                  "offset" : 1133,
                                   "length" : 7
                                 }
                               },
@@ -7159,7 +7295,7 @@
                               "value" : "Minus"
                             },
                             "exp" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
+                              "type" : "org.sireum.lang.ast.Exp.LitF64",
                               "value" : 273.0,
                               "attr" : {
                                 "type" : "org.sireum.lang.ast.Attr",
@@ -7175,7 +7311,7 @@
                                     "beginColumn" : 57,
                                     "endLine" : 34,
                                     "endColumn" : 62,
-                                    "offset" : 1143,
+                                    "offset" : 1146,
                                     "length" : 5
                                   }
                                 }
@@ -7195,7 +7331,7 @@
                                   "beginColumn" : 56,
                                   "endLine" : 34,
                                   "endColumn" : 62,
-                                  "offset" : 1142,
+                                  "offset" : 1145,
                                   "length" : 6
                                 }
                               },
@@ -7221,7 +7357,7 @@
                                 "beginColumn" : 44,
                                 "endLine" : 34,
                                 "endColumn" : 62,
-                                "offset" : 1130,
+                                "offset" : 1133,
                                 "length" : 18
                               }
                             },
@@ -7256,7 +7392,7 @@
                                       "beginColumn" : 15,
                                       "endLine" : 35,
                                       "endColumn" : 19,
-                                      "offset" : 1165,
+                                      "offset" : 1168,
                                       "length" : 4
                                     }
                                   }
@@ -7276,7 +7412,7 @@
                                     "beginColumn" : 15,
                                     "endLine" : 35,
                                     "endColumn" : 19,
-                                    "offset" : 1165,
+                                    "offset" : 1168,
                                     "length" : 4
                                   }
                                 },
@@ -7316,7 +7452,7 @@
                                               "beginColumn" : 23,
                                               "endLine" : 35,
                                               "endColumn" : 42,
-                                              "offset" : 1173,
+                                              "offset" : 1176,
                                               "length" : 19
                                             }
                                           }
@@ -7336,7 +7472,7 @@
                                             "beginColumn" : 23,
                                             "endLine" : 35,
                                             "endColumn" : 42,
-                                            "offset" : 1173,
+                                            "offset" : 1176,
                                             "length" : 19
                                           }
                                         },
@@ -7366,7 +7502,7 @@
                                           "beginColumn" : 23,
                                           "endLine" : 35,
                                           "endColumn" : 42,
-                                          "offset" : 1173,
+                                          "offset" : 1176,
                                           "length" : 19
                                         }
                                       }
@@ -7388,7 +7524,7 @@
                                         "beginColumn" : 23,
                                         "endLine" : 35,
                                         "endColumn" : 42,
-                                        "offset" : 1173,
+                                        "offset" : 1176,
                                         "length" : 19
                                       }
                                     },
@@ -7418,7 +7554,7 @@
                                       "beginColumn" : 23,
                                       "endLine" : 35,
                                       "endColumn" : 42,
-                                      "offset" : 1173,
+                                      "offset" : 1176,
                                       "length" : 19
                                     }
                                   }
@@ -7440,7 +7576,7 @@
                                     "beginColumn" : 23,
                                     "endLine" : 35,
                                     "endColumn" : 42,
-                                    "offset" : 1173,
+                                    "offset" : 1176,
                                     "length" : 19
                                   }
                                 },
@@ -7466,7 +7602,7 @@
                                   "beginColumn" : 15,
                                   "endLine" : 35,
                                   "endColumn" : 42,
-                                  "offset" : 1165,
+                                  "offset" : 1168,
                                   "length" : 27
                                 }
                               },
@@ -7499,7 +7635,7 @@
                                       "beginColumn" : 44,
                                       "endLine" : 35,
                                       "endColumn" : 51,
-                                      "offset" : 1194,
+                                      "offset" : 1197,
                                       "length" : 7
                                     }
                                   }
@@ -7519,7 +7655,7 @@
                                     "beginColumn" : 44,
                                     "endLine" : 35,
                                     "endColumn" : 51,
-                                    "offset" : 1194,
+                                    "offset" : 1197,
                                     "length" : 7
                                   }
                                 },
@@ -7539,7 +7675,7 @@
                                 "value" : "Minus"
                               },
                               "exp" : {
-                                "type" : "org.sireum.lang.ast.Exp.LitR",
+                                "type" : "org.sireum.lang.ast.Exp.LitF64",
                                 "value" : 459.67,
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.Attr",
@@ -7555,7 +7691,7 @@
                                       "beginColumn" : 57,
                                       "endLine" : 35,
                                       "endColumn" : 63,
-                                      "offset" : 1207,
+                                      "offset" : 1210,
                                       "length" : 6
                                     }
                                   }
@@ -7575,7 +7711,7 @@
                                     "beginColumn" : 56,
                                     "endLine" : 35,
                                     "endColumn" : 63,
-                                    "offset" : 1206,
+                                    "offset" : 1209,
                                     "length" : 7
                                   }
                                 },
@@ -7601,7 +7737,7 @@
                                   "beginColumn" : 44,
                                   "endLine" : 35,
                                   "endColumn" : 63,
-                                  "offset" : 1194,
+                                  "offset" : 1197,
                                   "length" : 19
                                 }
                               },
@@ -7630,7 +7766,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 36,
                                   "endColumn" : 12,
-                                  "offset" : 1226,
+                                  "offset" : 1229,
                                   "length" : 1
                                 }
                               }
@@ -7650,7 +7786,7 @@
                                 "beginColumn" : 11,
                                 "endLine" : 36,
                                 "endColumn" : 12,
-                                "offset" : 1161,
+                                "offset" : 1164,
                                 "length" : 66
                               }
                             },
@@ -7673,7 +7809,7 @@
                               "beginColumn" : 11,
                               "endLine" : 36,
                               "endColumn" : 12,
-                              "offset" : 1097,
+                              "offset" : 1100,
                               "length" : 130
                             }
                           },
@@ -7696,7 +7832,7 @@
                             "beginColumn" : 6,
                             "endLine" : 36,
                             "endColumn" : 12,
-                            "offset" : 1038,
+                            "offset" : 1041,
                             "length" : 189
                           }
                         },
@@ -7717,7 +7853,7 @@
                         "beginColumn" : 5,
                         "endLine" : 36,
                         "endColumn" : 13,
-                        "offset" : 996,
+                        "offset" : 999,
                         "length" : 232
                       }
                     }
@@ -7754,7 +7890,7 @@
                 "beginColumn" : 4,
                 "endLine" : 51,
                 "endColumn" : 29,
-                "offset" : 1707,
+                "offset" : 1710,
                 "length" : 25
               }
             }
@@ -7789,9 +7925,9 @@
                     "beginLine" : 24,
                     "beginColumn" : 4,
                     "endLine" : 24,
-                    "endColumn" : 36,
+                    "endColumn" : 39,
                     "offset" : 715,
-                    "length" : 32
+                    "length" : 35
                   }
                 }
               },
@@ -7803,7 +7939,7 @@
                 "type" : "Some",
                 "value" : {
                   "type" : "Classifier",
-                  "name" : "Base_Types::Float"
+                  "name" : "Base_Types::Float_64"
                 }
               },
               "features" : [
@@ -7815,6 +7951,72 @@
               "connectionInstances" : [
               ],
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Memory_Properties::Data_Size"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                        },
+                        "beginLine" : 92,
+                        "beginColumn" : 2,
+                        "endLine" : 93,
+                        "endColumn" : 137,
+                        "offset" : 4808,
+                        "length" : 152
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "64.0",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "bits"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["Data_Model::IEEE754_Precision"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                        },
+                        "beginLine" : 53,
+                        "beginColumn" : 4,
+                        "endLine" : 53,
+                        "endColumn" : 84,
+                        "offset" : 2369,
+                        "length" : 80
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Double"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -7853,7 +8055,7 @@
               ],
               "annexes" : [
               ],
-              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float"
+              "uriFrag" : "platform:\/plugin\/org.osate.contribution.sei\/resources\/packages\/Base_Types.aadl#Base_Types.Float_64"
             },
             {
               "type" : "Component",
@@ -7872,7 +8074,7 @@
                     "beginColumn" : 4,
                     "endLine" : 25,
                     "endColumn" : 21,
-                    "offset" : 751,
+                    "offset" : 754,
                     "length" : 17
                   }
                 }
@@ -8059,7 +8261,7 @@
                                   "beginColumn" : 10,
                                   "endLine" : 33,
                                   "endColumn" : 14,
-                                  "offset" : 1042,
+                                  "offset" : 1045,
                                   "length" : 4
                                 }
                               }
@@ -8079,7 +8281,7 @@
                                 "beginColumn" : 10,
                                 "endLine" : 33,
                                 "endColumn" : 14,
-                                "offset" : 1042,
+                                "offset" : 1045,
                                 "length" : 4
                               }
                             },
@@ -8119,7 +8321,7 @@
                                           "beginColumn" : 18,
                                           "endLine" : 33,
                                           "endColumn" : 37,
-                                          "offset" : 1050,
+                                          "offset" : 1053,
                                           "length" : 19
                                         }
                                       }
@@ -8139,7 +8341,7 @@
                                         "beginColumn" : 18,
                                         "endLine" : 33,
                                         "endColumn" : 37,
-                                        "offset" : 1050,
+                                        "offset" : 1053,
                                         "length" : 19
                                       }
                                     },
@@ -8169,7 +8371,7 @@
                                       "beginColumn" : 18,
                                       "endLine" : 33,
                                       "endColumn" : 37,
-                                      "offset" : 1050,
+                                      "offset" : 1053,
                                       "length" : 19
                                     }
                                   }
@@ -8191,7 +8393,7 @@
                                     "beginColumn" : 18,
                                     "endLine" : 33,
                                     "endColumn" : 37,
-                                    "offset" : 1050,
+                                    "offset" : 1053,
                                     "length" : 19
                                   }
                                 },
@@ -8221,7 +8423,7 @@
                                   "beginColumn" : 18,
                                   "endLine" : 33,
                                   "endColumn" : 37,
-                                  "offset" : 1050,
+                                  "offset" : 1053,
                                   "length" : 19
                                 }
                               }
@@ -8243,7 +8445,7 @@
                                 "beginColumn" : 18,
                                 "endLine" : 33,
                                 "endColumn" : 37,
-                                "offset" : 1050,
+                                "offset" : 1053,
                                 "length" : 19
                               }
                             },
@@ -8269,7 +8471,7 @@
                               "beginColumn" : 10,
                               "endLine" : 33,
                               "endColumn" : 37,
-                              "offset" : 1042,
+                              "offset" : 1045,
                               "length" : 27
                             }
                           },
@@ -8302,7 +8504,7 @@
                                   "beginColumn" : 39,
                                   "endLine" : 33,
                                   "endColumn" : 46,
-                                  "offset" : 1071,
+                                  "offset" : 1074,
                                   "length" : 7
                                 }
                               }
@@ -8322,7 +8524,7 @@
                                 "beginColumn" : 39,
                                 "endLine" : 33,
                                 "endColumn" : 46,
-                                "offset" : 1071,
+                                "offset" : 1074,
                                 "length" : 7
                               }
                             },
@@ -8336,7 +8538,7 @@
                         },
                         "op" : ">=",
                         "right" : {
-                          "type" : "org.sireum.lang.ast.Exp.LitR",
+                          "type" : "org.sireum.lang.ast.Exp.LitF64",
                           "value" : 0.0,
                           "attr" : {
                             "type" : "org.sireum.lang.ast.Attr",
@@ -8352,7 +8554,7 @@
                                 "beginColumn" : 50,
                                 "endLine" : 33,
                                 "endColumn" : 53,
-                                "offset" : 1082,
+                                "offset" : 1085,
                                 "length" : 3
                               }
                             }
@@ -8372,7 +8574,7 @@
                               "beginColumn" : 39,
                               "endLine" : 33,
                               "endColumn" : 53,
-                              "offset" : 1071,
+                              "offset" : 1074,
                               "length" : 14
                             }
                           },
@@ -8407,7 +8609,7 @@
                                     "beginColumn" : 15,
                                     "endLine" : 34,
                                     "endColumn" : 19,
-                                    "offset" : 1101,
+                                    "offset" : 1104,
                                     "length" : 4
                                   }
                                 }
@@ -8427,7 +8629,7 @@
                                   "beginColumn" : 15,
                                   "endLine" : 34,
                                   "endColumn" : 19,
-                                  "offset" : 1101,
+                                  "offset" : 1104,
                                   "length" : 4
                                 }
                               },
@@ -8467,7 +8669,7 @@
                                             "beginColumn" : 23,
                                             "endLine" : 34,
                                             "endColumn" : 42,
-                                            "offset" : 1109,
+                                            "offset" : 1112,
                                             "length" : 19
                                           }
                                         }
@@ -8487,7 +8689,7 @@
                                           "beginColumn" : 23,
                                           "endLine" : 34,
                                           "endColumn" : 42,
-                                          "offset" : 1109,
+                                          "offset" : 1112,
                                           "length" : 19
                                         }
                                       },
@@ -8517,7 +8719,7 @@
                                         "beginColumn" : 23,
                                         "endLine" : 34,
                                         "endColumn" : 42,
-                                        "offset" : 1109,
+                                        "offset" : 1112,
                                         "length" : 19
                                       }
                                     }
@@ -8539,7 +8741,7 @@
                                       "beginColumn" : 23,
                                       "endLine" : 34,
                                       "endColumn" : 42,
-                                      "offset" : 1109,
+                                      "offset" : 1112,
                                       "length" : 19
                                     }
                                   },
@@ -8569,7 +8771,7 @@
                                     "beginColumn" : 23,
                                     "endLine" : 34,
                                     "endColumn" : 42,
-                                    "offset" : 1109,
+                                    "offset" : 1112,
                                     "length" : 19
                                   }
                                 }
@@ -8591,7 +8793,7 @@
                                   "beginColumn" : 23,
                                   "endLine" : 34,
                                   "endColumn" : 42,
-                                  "offset" : 1109,
+                                  "offset" : 1112,
                                   "length" : 19
                                 }
                               },
@@ -8617,7 +8819,7 @@
                                 "beginColumn" : 15,
                                 "endLine" : 34,
                                 "endColumn" : 42,
-                                "offset" : 1101,
+                                "offset" : 1104,
                                 "length" : 27
                               }
                             },
@@ -8650,7 +8852,7 @@
                                     "beginColumn" : 44,
                                     "endLine" : 34,
                                     "endColumn" : 51,
-                                    "offset" : 1130,
+                                    "offset" : 1133,
                                     "length" : 7
                                   }
                                 }
@@ -8670,7 +8872,7 @@
                                   "beginColumn" : 44,
                                   "endLine" : 34,
                                   "endColumn" : 51,
-                                  "offset" : 1130,
+                                  "offset" : 1133,
                                   "length" : 7
                                 }
                               },
@@ -8690,7 +8892,7 @@
                               "value" : "Minus"
                             },
                             "exp" : {
-                              "type" : "org.sireum.lang.ast.Exp.LitR",
+                              "type" : "org.sireum.lang.ast.Exp.LitF64",
                               "value" : 273.0,
                               "attr" : {
                                 "type" : "org.sireum.lang.ast.Attr",
@@ -8706,7 +8908,7 @@
                                     "beginColumn" : 57,
                                     "endLine" : 34,
                                     "endColumn" : 62,
-                                    "offset" : 1143,
+                                    "offset" : 1146,
                                     "length" : 5
                                   }
                                 }
@@ -8726,7 +8928,7 @@
                                   "beginColumn" : 56,
                                   "endLine" : 34,
                                   "endColumn" : 62,
-                                  "offset" : 1142,
+                                  "offset" : 1145,
                                   "length" : 6
                                 }
                               },
@@ -8752,7 +8954,7 @@
                                 "beginColumn" : 44,
                                 "endLine" : 34,
                                 "endColumn" : 62,
-                                "offset" : 1130,
+                                "offset" : 1133,
                                 "length" : 18
                               }
                             },
@@ -8787,7 +8989,7 @@
                                       "beginColumn" : 15,
                                       "endLine" : 35,
                                       "endColumn" : 19,
-                                      "offset" : 1165,
+                                      "offset" : 1168,
                                       "length" : 4
                                     }
                                   }
@@ -8807,7 +9009,7 @@
                                     "beginColumn" : 15,
                                     "endLine" : 35,
                                     "endColumn" : 19,
-                                    "offset" : 1165,
+                                    "offset" : 1168,
                                     "length" : 4
                                   }
                                 },
@@ -8847,7 +9049,7 @@
                                               "beginColumn" : 23,
                                               "endLine" : 35,
                                               "endColumn" : 42,
-                                              "offset" : 1173,
+                                              "offset" : 1176,
                                               "length" : 19
                                             }
                                           }
@@ -8867,7 +9069,7 @@
                                             "beginColumn" : 23,
                                             "endLine" : 35,
                                             "endColumn" : 42,
-                                            "offset" : 1173,
+                                            "offset" : 1176,
                                             "length" : 19
                                           }
                                         },
@@ -8897,7 +9099,7 @@
                                           "beginColumn" : 23,
                                           "endLine" : 35,
                                           "endColumn" : 42,
-                                          "offset" : 1173,
+                                          "offset" : 1176,
                                           "length" : 19
                                         }
                                       }
@@ -8919,7 +9121,7 @@
                                         "beginColumn" : 23,
                                         "endLine" : 35,
                                         "endColumn" : 42,
-                                        "offset" : 1173,
+                                        "offset" : 1176,
                                         "length" : 19
                                       }
                                     },
@@ -8949,7 +9151,7 @@
                                       "beginColumn" : 23,
                                       "endLine" : 35,
                                       "endColumn" : 42,
-                                      "offset" : 1173,
+                                      "offset" : 1176,
                                       "length" : 19
                                     }
                                   }
@@ -8971,7 +9173,7 @@
                                     "beginColumn" : 23,
                                     "endLine" : 35,
                                     "endColumn" : 42,
-                                    "offset" : 1173,
+                                    "offset" : 1176,
                                     "length" : 19
                                   }
                                 },
@@ -8997,7 +9199,7 @@
                                   "beginColumn" : 15,
                                   "endLine" : 35,
                                   "endColumn" : 42,
-                                  "offset" : 1165,
+                                  "offset" : 1168,
                                   "length" : 27
                                 }
                               },
@@ -9030,7 +9232,7 @@
                                       "beginColumn" : 44,
                                       "endLine" : 35,
                                       "endColumn" : 51,
-                                      "offset" : 1194,
+                                      "offset" : 1197,
                                       "length" : 7
                                     }
                                   }
@@ -9050,7 +9252,7 @@
                                     "beginColumn" : 44,
                                     "endLine" : 35,
                                     "endColumn" : 51,
-                                    "offset" : 1194,
+                                    "offset" : 1197,
                                     "length" : 7
                                   }
                                 },
@@ -9070,7 +9272,7 @@
                                 "value" : "Minus"
                               },
                               "exp" : {
-                                "type" : "org.sireum.lang.ast.Exp.LitR",
+                                "type" : "org.sireum.lang.ast.Exp.LitF64",
                                 "value" : 459.67,
                                 "attr" : {
                                   "type" : "org.sireum.lang.ast.Attr",
@@ -9086,7 +9288,7 @@
                                       "beginColumn" : 57,
                                       "endLine" : 35,
                                       "endColumn" : 63,
-                                      "offset" : 1207,
+                                      "offset" : 1210,
                                       "length" : 6
                                     }
                                   }
@@ -9106,7 +9308,7 @@
                                     "beginColumn" : 56,
                                     "endLine" : 35,
                                     "endColumn" : 63,
-                                    "offset" : 1206,
+                                    "offset" : 1209,
                                     "length" : 7
                                   }
                                 },
@@ -9132,7 +9334,7 @@
                                   "beginColumn" : 44,
                                   "endLine" : 35,
                                   "endColumn" : 63,
-                                  "offset" : 1194,
+                                  "offset" : 1197,
                                   "length" : 19
                                 }
                               },
@@ -9161,7 +9363,7 @@
                                   "beginColumn" : 11,
                                   "endLine" : 36,
                                   "endColumn" : 12,
-                                  "offset" : 1226,
+                                  "offset" : 1229,
                                   "length" : 1
                                 }
                               }
@@ -9181,7 +9383,7 @@
                                 "beginColumn" : 11,
                                 "endLine" : 36,
                                 "endColumn" : 12,
-                                "offset" : 1161,
+                                "offset" : 1164,
                                 "length" : 66
                               }
                             },
@@ -9204,7 +9406,7 @@
                               "beginColumn" : 11,
                               "endLine" : 36,
                               "endColumn" : 12,
-                              "offset" : 1097,
+                              "offset" : 1100,
                               "length" : 130
                             }
                           },
@@ -9227,7 +9429,7 @@
                             "beginColumn" : 6,
                             "endLine" : 36,
                             "endColumn" : 12,
-                            "offset" : 1038,
+                            "offset" : 1041,
                             "length" : 189
                           }
                         },
@@ -9248,7 +9450,7 @@
                         "beginColumn" : 5,
                         "endLine" : 36,
                         "endColumn" : 13,
-                        "offset" : 996,
+                        "offset" : 999,
                         "length" : 232
                       }
                     }
@@ -9357,7 +9559,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 55,
                                     "endColumn" : 10,
-                                    "offset" : 1809,
+                                    "offset" : 1812,
                                     "length" : 3
                                   }
                                 }
@@ -9377,7 +9579,7 @@
                                   "beginColumn" : 7,
                                   "endLine" : 55,
                                   "endColumn" : 10,
-                                  "offset" : 1809,
+                                  "offset" : 1812,
                                   "length" : 3
                                 }
                               },
@@ -9407,7 +9609,7 @@
                                 "beginColumn" : 11,
                                 "endLine" : 55,
                                 "endColumn" : 18,
-                                "offset" : 1813,
+                                "offset" : 1816,
                                 "length" : 7
                               }
                             }
@@ -9429,7 +9631,7 @@
                               "beginColumn" : 7,
                               "endLine" : 55,
                               "endColumn" : 18,
-                              "offset" : 1809,
+                              "offset" : 1812,
                               "length" : 11
                             }
                           },
@@ -9443,7 +9645,7 @@
                       },
                       "op" : ">=",
                       "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
+                        "type" : "org.sireum.lang.ast.Exp.LitF64",
                         "value" : 70.0,
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
@@ -9459,7 +9661,7 @@
                               "beginColumn" : 22,
                               "endLine" : 55,
                               "endColumn" : 26,
-                              "offset" : 1824,
+                              "offset" : 1827,
                               "length" : 4
                             }
                           }
@@ -9479,7 +9681,7 @@
                             "beginColumn" : 7,
                             "endLine" : 55,
                             "endColumn" : 26,
-                            "offset" : 1809,
+                            "offset" : 1812,
                             "length" : 19
                           }
                         },
@@ -9517,7 +9719,7 @@
                                     "beginColumn" : 7,
                                     "endLine" : 56,
                                     "endColumn" : 11,
-                                    "offset" : 1839,
+                                    "offset" : 1842,
                                     "length" : 4
                                   }
                                 }
@@ -9537,7 +9739,7 @@
                                   "beginColumn" : 7,
                                   "endLine" : 56,
                                   "endColumn" : 11,
-                                  "offset" : 1839,
+                                  "offset" : 1842,
                                   "length" : 4
                                 }
                               },
@@ -9567,7 +9769,7 @@
                                 "beginColumn" : 12,
                                 "endLine" : 56,
                                 "endColumn" : 19,
-                                "offset" : 1844,
+                                "offset" : 1847,
                                 "length" : 7
                               }
                             }
@@ -9589,7 +9791,7 @@
                               "beginColumn" : 7,
                               "endLine" : 56,
                               "endColumn" : 19,
-                              "offset" : 1839,
+                              "offset" : 1842,
                               "length" : 12
                             }
                           },
@@ -9603,7 +9805,7 @@
                       },
                       "op" : "<=",
                       "right" : {
-                        "type" : "org.sireum.lang.ast.Exp.LitR",
+                        "type" : "org.sireum.lang.ast.Exp.LitF64",
                         "value" : 100.0,
                         "attr" : {
                           "type" : "org.sireum.lang.ast.Attr",
@@ -9619,7 +9821,7 @@
                               "beginColumn" : 23,
                               "endLine" : 56,
                               "endColumn" : 28,
-                              "offset" : 1855,
+                              "offset" : 1858,
                               "length" : 5
                             }
                           }
@@ -9639,7 +9841,7 @@
                             "beginColumn" : 7,
                             "endLine" : 56,
                             "endColumn" : 28,
-                            "offset" : 1839,
+                            "offset" : 1842,
                             "length" : 21
                           }
                         },
@@ -9665,7 +9867,7 @@
                           "beginColumn" : 7,
                           "endLine" : 56,
                           "endColumn" : 28,
-                          "offset" : 1809,
+                          "offset" : 1812,
                           "length" : 51
                         }
                       },
@@ -9703,7 +9905,7 @@
                                   "beginColumn" : 7,
                                   "endLine" : 57,
                                   "endColumn" : 10,
-                                  "offset" : 1871,
+                                  "offset" : 1874,
                                   "length" : 3
                                 }
                               }
@@ -9723,7 +9925,7 @@
                                 "beginColumn" : 7,
                                 "endLine" : 57,
                                 "endColumn" : 10,
-                                "offset" : 1871,
+                                "offset" : 1874,
                                 "length" : 3
                               }
                             },
@@ -9753,7 +9955,7 @@
                               "beginColumn" : 11,
                               "endLine" : 57,
                               "endColumn" : 18,
-                              "offset" : 1875,
+                              "offset" : 1878,
                               "length" : 7
                             }
                           }
@@ -9775,7 +9977,7 @@
                             "beginColumn" : 7,
                             "endLine" : 57,
                             "endColumn" : 18,
-                            "offset" : 1871,
+                            "offset" : 1874,
                             "length" : 11
                           }
                         },
@@ -9811,7 +10013,7 @@
                                   "beginColumn" : 22,
                                   "endLine" : 57,
                                   "endColumn" : 26,
-                                  "offset" : 1886,
+                                  "offset" : 1889,
                                   "length" : 4
                                 }
                               }
@@ -9831,7 +10033,7 @@
                                 "beginColumn" : 22,
                                 "endLine" : 57,
                                 "endColumn" : 26,
-                                "offset" : 1886,
+                                "offset" : 1889,
                                 "length" : 4
                               }
                             },
@@ -9861,7 +10063,7 @@
                               "beginColumn" : 27,
                               "endLine" : 57,
                               "endColumn" : 34,
-                              "offset" : 1891,
+                              "offset" : 1894,
                               "length" : 7
                             }
                           }
@@ -9883,7 +10085,7 @@
                             "beginColumn" : 22,
                             "endLine" : 57,
                             "endColumn" : 34,
-                            "offset" : 1886,
+                            "offset" : 1889,
                             "length" : 12
                           }
                         },
@@ -9909,7 +10111,7 @@
                           "beginColumn" : 7,
                           "endLine" : 57,
                           "endColumn" : 34,
-                          "offset" : 1871,
+                          "offset" : 1874,
                           "length" : 27
                         }
                       },
@@ -9935,7 +10137,7 @@
                         "beginColumn" : 7,
                         "endLine" : 57,
                         "endColumn" : 34,
-                        "offset" : 1809,
+                        "offset" : 1812,
                         "length" : 89
                       }
                     },
@@ -9959,7 +10161,7 @@
                     "beginColumn" : 5,
                     "endLine" : 57,
                     "endColumn" : 36,
-                    "offset" : 1769,
+                    "offset" : 1772,
                     "length" : 131
                   }
                 }

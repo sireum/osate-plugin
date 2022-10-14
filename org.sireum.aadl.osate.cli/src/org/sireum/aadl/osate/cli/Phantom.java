@@ -321,8 +321,6 @@ public class Phantom implements IApplication {
 		try {
 			populateResourceSet(system.projects, rset);
 
-			org.sireum.aadl.osate.PreferenceValues.setPROCESS_BA_OPT(true);
-
 			SystemImplementation sysImpl = null;
 
 			if (!system.systemFileContainer.isPresent()) {
