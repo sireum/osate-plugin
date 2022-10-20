@@ -597,7 +597,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 		reportError(arrayIndexes.isEmpty(), object, "Not handling array indexes yet");
 
 		BehaviorVariable bv = object.getBehaviorVariable();
-		push(BTSNameExp$.MODULE$.apply(toSimpleName(bv.getName()), SlangUtil.toNone(), SlangUtil.toNone()));
+		push(BTSNameExp$.MODULE$.apply(toSimpleName(bv.getName()), SlangUtil.toNone()));
 
 		return false;
 	}
@@ -612,12 +612,12 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 		visit(object.getData().get(1));
 		String attributeName = pop();
-		BTSAccessExp bts = BTSAccessExp$.MODULE$.apply(exp, attributeName, SlangUtil.toNone(), SlangUtil.toNone());
+		BTSAccessExp bts = BTSAccessExp$.MODULE$.apply(exp, attributeName, SlangUtil.toNone());
 
 		for (int i = 2; i < object.getData().size(); i++) {
 			visit(object.getData().get(i));
 			attributeName = pop();
-			bts = BTSAccessExp$.MODULE$.apply(bts, attributeName, SlangUtil.toNone(), SlangUtil.toNone());
+			bts = BTSAccessExp$.MODULE$.apply(bts, attributeName, SlangUtil.toNone());
 		}
 
 		push(bts);
@@ -627,7 +627,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 	@Override
 	public Boolean caseActualPortHolder(ActualPortHolder object) {
-		push(BTSNameExp$.MODULE$.apply(toName(object.getPort().getName()), SlangUtil.toNone(), SlangUtil.toNone()));
+		push(BTSNameExp$.MODULE$.apply(toName(object.getPort().getName()), SlangUtil.toNone()));
 
 		return false;
 	}
@@ -650,7 +650,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 			BTSBinaryOp.Type op = BAUtil.toBinaryOp(bno);
 
-			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, SlangUtil.toNone(), SlangUtil.toNone()));
+			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, SlangUtil.toNone()));
 		} else {
 			if (BAUtil.isNoneEnumerator(ubo)) {
 				push(lhs);
@@ -680,8 +680,8 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 						// TODO can we trust BA that this a valid enum value
 						StringLiteral sl = ((StringLiteral) secondElem);
 						BTSNameExp ne = BTSNameExp$.MODULE$
-								.apply(toSimpleName(object.getClassifier().getQualifiedName()), SlangUtil.toNone(), SlangUtil.toNone());
-						push(BTSAccessExp$.MODULE$.apply(ne, sl.getValue(), SlangUtil.toNone(), SlangUtil.toNone()));
+								.apply(toSimpleName(object.getClassifier().getQualifiedName()), SlangUtil.toNone());
+						push(BTSAccessExp$.MODULE$.apply(ne, sl.getValue(), SlangUtil.toNone()));
 					} else {
 						throw new RuntimeException("Looks like an enum ref but second element isn't a string lit");
 					}
@@ -765,7 +765,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 
 			// treat list as a stack
 			BTSBinaryExp be = BTSBinaryExp$.MODULE$.apply(op, expressions.get(i), expressions.get(i + 1),
-					SlangUtil.toNone(),SlangUtil.toNone());
+					SlangUtil.toNone() );
 			expressions.set(i + 1, be);
 		}
 
@@ -784,7 +784,7 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 			visit(object.getSecondExpression());
 			BTSExp rhs = pop();
 
-			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, SlangUtil.toNone(), SlangUtil.toNone()));
+			push(BTSBinaryExp$.MODULE$.apply(op, lhs, rhs, SlangUtil.toNone() ));
 		} else {
 			reportError(BAUtil.isNoneEnumerator(object.getRelationalOperator()), object,
 					"Expecting the none enumerator here");
@@ -818,14 +818,14 @@ public class BAVisitor extends AadlBaSwitch<Boolean> implements AnnexVisitor {
 	@Override
 	public Boolean caseBehaviorIntegerLiteral(BehaviorIntegerLiteral object) {
 		push(BTSLiteralExp$.MODULE$.apply(IntegerLiteral, String.valueOf(object.getValue()),
-				BAUtil.buildPosInfo(object), SlangUtil.toNone()));
+				BAUtil.buildPosInfo(object) ));
 		return false;
 	}
 
 	@Override
 	public Boolean caseBehaviorStringLiteral(BehaviorStringLiteral object) {
 		push(BTSLiteralExp$.MODULE$.apply(StringLiteral, String.valueOf(object.getValue()),
-				BAUtil.buildPosInfo(object), SlangUtil.toNone()));
+				BAUtil.buildPosInfo(object) ));
 		return false;
 	}
 

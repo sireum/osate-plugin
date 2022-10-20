@@ -38,7 +38,7 @@ public class BAUtil {
 	}
 
 	public static BTSUnaryExp convertToUnaryExp(BTSExp btsExp, Enumerator unaryOp) {
-		return BTSUnaryExp$.MODULE$.apply(toUnaryOp(unaryOp), btsExp, btsExp.pos(), null);
+		return BTSUnaryExp$.MODULE$.apply(toUnaryOp(unaryOp), btsExp, btsExp.pos());
 	}
 
 	public static boolean isNoneEnumerator(Enumerator op) {
