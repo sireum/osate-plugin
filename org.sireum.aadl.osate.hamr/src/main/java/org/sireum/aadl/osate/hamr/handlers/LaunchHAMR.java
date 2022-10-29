@@ -177,8 +177,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							}
 
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
-
-							Z codegenRet = org.sireum.cli.HAMR.codeGenR( //
+							
+							IS<Z, org.sireum.hamr.codegen.common.plugin.Plugin> plugins = VisitorUtil.toISZ(new EP(si));
+							Z codegenRet = org.sireum.cli.HAMR.codeGenP( //
 									model, //
 									//
 									verbose, //
@@ -205,6 +206,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									//
 									experimentalOptions,
 
+									plugins,
+									
 									reporter);
 
 							// only propagate error messages to eclipse's problem view (all messages are emitted
