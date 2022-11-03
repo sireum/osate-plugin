@@ -263,7 +263,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 },
                 {
                   "type" : "FeatureEnd",
@@ -300,7 +300,7 @@
                   },
                   "properties" : [
                   ],
-                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.1"
+                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0\/@featureInstance.1"
                 }
               ],
               "subComponents" : [
@@ -410,7 +410,7 @@
                   }
                 }
               ],
-              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
+              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0"
             },
             {
               "type" : "Component",
@@ -602,7 +602,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.1\/@featureInstance.0"
                 },
                 {
                   "type" : "FeatureEnd",
@@ -639,7 +639,7 @@
                   },
                   "properties" : [
                   ],
-                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1\/@featureInstance.1"
+                  "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.1\/@featureInstance.1"
                 }
               ],
               "subComponents" : [
@@ -749,7 +749,7 @@
                   }
                 }
               ],
-              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1"
+              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.1"
             }
           ],
           "connections" : [
@@ -901,7 +901,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@connectionInstance.0\/@connectionReference.0"
+              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0\/@componentInstance.0\/@connectionInstance.0\/@connectionReference.0"
             },
             {
               "type" : "Connection",
@@ -1051,7 +1051,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0\/@connectionInstance.1\/@connectionReference.0"
+              "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0\/@componentInstance.0\/@connectionInstance.1\/@connectionReference.0"
             }
           ],
           "connectionInstances" : [
@@ -1453,7 +1453,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/\/@componentInstance.0"
+          "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0\/@componentInstance.0"
         }
       ],
       "connections" : [
@@ -1495,7 +1495,7 @@
           }
         }
       ],
-      "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/"
+      "uriFrag" : "platform:\/resource\/pca-pump-chasis-gen\/instances\/Chassis_Chassis_System_i_Instance.aaxl2#\/0"
     }
   ],
   "annexLib" : [

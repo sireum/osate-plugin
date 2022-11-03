@@ -113,7 +113,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@componentInstance.0"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@componentInstance.0"
         },
         {
           "type" : "Component",
@@ -192,7 +192,7 @@
               },
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@componentInstance.1\/@featureInstance.0"
+              "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@componentInstance.1\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -236,7 +236,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@componentInstance.1"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@componentInstance.1"
         },
         {
           "type" : "Component",
@@ -315,7 +315,7 @@
               },
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@componentInstance.2\/@featureInstance.0"
+              "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@componentInstance.2\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -359,7 +359,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@componentInstance.2"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@componentInstance.2"
         },
         {
           "type" : "Component",
@@ -438,7 +438,7 @@
               },
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@componentInstance.3\/@featureInstance.0"
+              "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@componentInstance.3\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -482,7 +482,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@componentInstance.3"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@componentInstance.3"
         }
       ],
       "connections" : [
@@ -621,7 +621,7 @@
           ],
           "properties" : [
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.0"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@connectionInstance.0\/@connectionReference.0"
         },
         {
           "type" : "Connection",
@@ -758,7 +758,7 @@
           ],
           "properties" : [
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@connectionInstance.1\/@connectionReference.0"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@connectionInstance.1\/@connectionReference.0"
         },
         {
           "type" : "Connection",
@@ -895,7 +895,7 @@
           ],
           "properties" : [
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@connectionInstance.2\/@connectionReference.0"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@connectionInstance.2\/@connectionReference.0"
         },
         {
           "type" : "Connection",
@@ -1032,7 +1032,7 @@
           ],
           "properties" : [
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@connectionInstance.3\/@connectionReference.0"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@connectionInstance.3\/@connectionReference.0"
         },
         {
           "type" : "Connection",
@@ -1169,7 +1169,7 @@
           ],
           "properties" : [
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@connectionInstance.4\/@connectionReference.0"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@connectionInstance.4\/@connectionReference.0"
         },
         {
           "type" : "Connection",
@@ -1306,7 +1306,7 @@
           ],
           "properties" : [
           ],
-          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/\/@connectionInstance.5\/@connectionReference.0"
+          "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0\/@connectionInstance.5\/@connectionReference.0"
         }
       ],
       "connectionInstances" : [
@@ -2288,7 +2288,7 @@
           }
         }
       ],
-      "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/"
+      "uriFrag" : "platform:\/resource\/bus-access-tests\/instances\/Bus_Access_Dual_Processor_PowerPC_Instance.aaxl2#\/0"
     }
   ],
   "annexLib" : [

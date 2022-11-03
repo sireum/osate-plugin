@@ -177,7 +177,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 },
                 {
                   "type" : "FeatureEnd",
@@ -249,7 +249,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.1"
+                  "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0\/@featureInstance.1"
                 }
               ],
               "subComponents" : [
@@ -1799,7 +1799,7 @@
                   }
                 }
               ],
-              "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
+              "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.0"
             },
             {
               "type" : "Component",
@@ -1905,7 +1905,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.1\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -2445,7 +2445,7 @@
                   }
                 }
               ],
-              "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1"
+              "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@componentInstance.1"
             }
           ],
           "connections" : [
@@ -2597,7 +2597,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0\/@connectionInstance.0\/@connectionReference.0"
+              "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/0\/@componentInstance.0\/@connectionInstance.0\/@connectionReference.0"
             }
           ],
           "connectionInstances" : [
@@ -2818,7 +2818,7 @@
               }
             }
           ],
-          "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/\/@componentInstance.0"
+          "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/0\/@componentInstance.0"
         }
       ],
       "connections" : [
@@ -2860,7 +2860,7 @@
           }
         }
       ],
-      "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/"
+      "uriFrag" : "platform:\/resource\/initialize-entrypoint\/instances\/Initialize_Entrypoint_s_impl_Instance.aaxl2#\/0"
     }
   ],
   "annexLib" : [
