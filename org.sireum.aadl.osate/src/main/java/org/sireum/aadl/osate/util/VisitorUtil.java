@@ -24,6 +24,7 @@ import org.osate.annexsupport.AnnexTextPositionResolverRegistry;
 import org.sireum.IS;
 import org.sireum.IS$;
 import org.sireum.Option;
+import org.sireum.Z;
 import org.sireum.message.Position;
 import org.sireum.message.Reporter;
 
@@ -50,6 +51,10 @@ public class VisitorUtil {
 		scala.collection.immutable.Seq<T> iseq = ((scala.collection.IterableOnceOps<T, ?, ?>) seq).toSeq();
 
 		return IS$.MODULE$.apply(iseq, org.sireum.Z$.MODULE$);
+	}
+
+	public static <T> List<T> toIList(IS<Z, T> isz) {
+		return toIList(scala.jdk.CollectionConverters.SeqHasAsJava(isz.elements()).asJava());
 	}
 
 	public static <T> List<T> toIList(List<T> l) {
