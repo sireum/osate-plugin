@@ -48,6 +48,8 @@ Export-Package:
  org.sireum.hamr.arsit,
  org.sireum.hamr.arsit.plugin,
  org.sireum.hamr.arsit.templates,
+ org.sireum.hamr.codegen,
+ org.sireum.hamr.codegen.common.containers,
  org.sireum.hamr.codegen.common.plugin,
  org.sireum.hamr.codegen.common.symbols,
  org.sireum.hamr.codegen.common.types,

@@ -8,11 +8,16 @@ Require-Bundle: org.osate.aadl2,
  org.osate.ui,
  org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.eclipse.ui.console;bundle-version="3.7.1",
- org.sireum.aadl.osate
+ org.sireum.aadl.osate,
+ com.multitude.bless,
+ com.multitude.aadl.bless,
+ com.multitude.bless.codegeneration
 Automatic-Module-Name: HAMR
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  bin/,
  external:$org.sireum.home$/bin/sireum.jar
-Import-Package: org.osate.pluginsupport
+Import-Package: org.antlr.stringtemplate;version="3.2.0",
+ org.osate.pluginsupport,
+ org.stringtemplate.v4
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
