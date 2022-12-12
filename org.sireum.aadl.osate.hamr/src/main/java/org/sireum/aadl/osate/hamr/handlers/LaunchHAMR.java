@@ -180,7 +180,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
 //add BLESS entrypoint provider (EP) and component behavior provider (BP)							
-							IS<Z, org.sireum.hamr.codegen.common.plugin.Plugin> plugins = VisitorUtil.toISZ(new BlessEntrypointProvider(si), new BlessBehaviorProvider(si));
+							IS<Z, org.sireum.hamr.codegen.common.plugin.Plugin> 
+							  plugins = VisitorUtil.toISZ(new BlessEntrypointProvider(si), new BlessBehaviorProvider(si));
 							Z codegenRet = org.sireum.cli.HAMR.codeGenP( //
 									model, //
 									//
