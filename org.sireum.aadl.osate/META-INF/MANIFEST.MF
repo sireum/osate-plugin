@@ -51,6 +51,7 @@ Export-Package:
  org.sireum.hamr.codegen,
  org.sireum.hamr.codegen.common.containers,
  org.sireum.hamr.codegen.common.plugin,
+ org.sireum.hamr.codegen.common.properties,
  org.sireum.hamr.codegen.common.symbols,
  org.sireum.hamr.codegen.common.types,
  org.sireum.hamr.codegen.common.util,

@@ -19,6 +19,7 @@ import org.sireum.IS;
 import org.sireum.Option;
 import org.sireum.Z;
 import org.sireum.aadl.osate.architecture.BlessBehaviorProvider;
+import org.sireum.aadl.osate.architecture.BlessDatatypeProvider;
 import org.sireum.aadl.osate.architecture.BlessEntrypointProvider;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
@@ -179,9 +180,12 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							}
 
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
-//add BLESS entrypoint provider (EP) and component behavior provider (BP)							
+//add BLESS provider plugins						
 							IS<Z, org.sireum.hamr.codegen.common.plugin.Plugin> 
-							  plugins = VisitorUtil.toISZ(new BlessEntrypointProvider(si), new BlessBehaviorProvider(si));
+							  plugins = VisitorUtil.toISZ(
+							      new BlessEntrypointProvider(si), 
+							      new BlessBehaviorProvider(si),
+							      new BlessDatatypeProvider());
 							Z codegenRet = org.sireum.cli.HAMR.codeGenP( //
 									model, //
 									//
