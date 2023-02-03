@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="HamrBehaviorProvider" name="HAMR Behavior Provider" schema="schema/HamrBehaviorProvider.exsd"/>
+   <extension-point id="HamrEntrypointProvider" name="HAMR Entrypoint Provider" schema="schema/HamrEntrypointProvider.exsd"/>
+   <extension-point id="HamrDatatypeProvider" name="HAMR Datatype Provider" schema="schema/HamrDatatypeProvider.exsd"/>
+
+</plugin>
