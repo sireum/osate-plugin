@@ -21,7 +21,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
 import org.osate.aadl2.instance.ComponentInstance;
-import org.sireum.aadl.osate.awas.util.EMV2Rewriter;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.hamr.ir.Aadl;
@@ -51,8 +50,6 @@ public class LaunchAwas extends AbstractSireumHandler {
 
 		if (model != null && !reporter.hasError()) {
 
-			model = EMV2Rewriter.addEMV2(model);
-			
 			File f = serializeToFile(model, ".IR", root);
 			writeToConsole(console, "Wrote: " + f.getAbsolutePath());
 
@@ -100,10 +97,6 @@ public class LaunchAwas extends AbstractSireumHandler {
 		dialog2.setFilterPath(getProjectPath(root).toString());
 		String outputPath = dialog2.open();
 		org.sireum.awas.ast.Model awasModel = org.sireum.awas.AADLBridge.AadlHandler.buildAwasModel(model);
-		
-		//String s = org.sireum.awas.ast.PrettyPrinter.apply(awasModel);
-		//System.out.println(s);
-		
 		org.sireum.awas.AADLBridge.AadlHandler.generateWitness(awasModel, outputPath, null);
 		String m2 = "Visulaizer generated at: " + outputPath + "/index.html";
 		Files.deleteIfExists(Paths.get(outputPath, "risk-analysis-report.html"));
