@@ -131,7 +131,8 @@ public
 	**};
 	
 private
-		
+	
+	
 	annex resolute {**
 
 		one_process() <=
@@ -246,7 +247,7 @@ private
 			
 		cakeml_threads_have_source() <=
 			** "Thread CakeML implementations should indicate location of source code or binary" **
-			forall (t : thread) . lint_check(t, (has_property(t, CASE_Properties::Component_Language) and property(t, CASE_Properties::Component_Language) = "CakeML") => has_property(t, Programming_Properties::Source_Text))
+			forall (t : thread) . lint_check(t, (has_property(t, CASE_Properties_Sireum::Component_Language) and property(t, CASE_Properties_Sireum::Component_Language) = "CakeML") => has_property(t, Programming_Properties::Source_Text))
 
 		processes_bound() <=
 			** "All processes must be bound to a processor" **
@@ -279,40 +280,13 @@ private
 		-- the CASE_Scheduling::Domain property value assignments must be sequential and non-repeating
 		consistent_sched_domain() <=
 			** "CASE_Scheduling::Domain property value assignments must be sequential and non-repeating" **
-			forall (p : processor) . lint_check(p, is_sel4_processor(p) =>
-				-- use domain mappings over the older style
-				if (uses_domain_mapping(p)) then consistent_domain_mappings(p)
-				else consistent_domains(p))
-			
+			forall (p : processor) . lint_check(p, is_sel4_processor(p) => consistent_domains(p))
+		
 		consistent_domains(p : processor) : bool =
 			let bound_processes : {process} = {proc for (proc : process) | is_bound_to(proc, p)};
 			let domains : {int} = {property(proc, CASE_Scheduling::Domain) for (proc : bound_processes) | has_property(proc, CASE_Scheduling::Domain)};
 			(length(domains) = length(bound_processes)) and ((length(domains) > 0) => min(as_list(domains)) >= 2)
-
-		contains(p : process, components : [aadl]): bool = 
-			p = head(components) or
-			if (length(components) = 1) then false
-			else contains(p, tail(components))
-	
-		uses_domain_mapping(p: processor) : bool =
-			has_parent(p) and -- note: domain mappings can only be applied to systems
-			has_property(parent(p), CASE_Scheduling::Domain_Mapping_Components) and
-			has_property(parent(p), CASE_Scheduling::Domain_Mapping_Domains)
-			
-		consistent_domain_mappings(p : processor) : bool =
-			let bound_processes : {process} = {proc for (proc : process) | is_bound_to(proc, p)};
-			let components: [aadl] = property(parent(p), CASE_Scheduling::Domain_Mapping_Components);
-			let domains : [int] =  property(parent(p), CASE_Scheduling::Domain_Mapping_Domains);
-			
-			-- convert list of ints to set to also ensure domains are unique
-			length(components) > 0 and length(components) = length(as_set(domains)) and
-			
-			min(domains) >= 2 and
-			
-			forall(bp : bound_processes) . contains(bp, components)
-			
-			--property_member(head(property(daparent, CASE_Scheduling::Domain_Mapping)), "Domain") = 2 
-			
+		
 		min_compute_exec_time() <=
 			** "All thread Compute_Execution_Time property values must be greater than or equal to 2 ms" **
 			forall (t : thread) . lint_check(t, has_property(t, Compute_Execution_Time) => lower_bound(property(t, Compute_Execution_Time)) >= 2ms)
@@ -342,7 +316,7 @@ private
 			forall (t : thread) . lint_check(t, (exists(p : processor) . processor_bound(t, p)) => has_property(t, Memory_Properties::Stack_Size))
 			
 		is_sel4_processor(p : processor) : bool =
-			has_property(p, CASE_Properties::OS) and property(p, CASE_Properties::OS) = "seL4"
+			has_property(p, CASE_Properties_Sireum::OS) and property(p, CASE_Properties_Sireum::OS) = "seL4"
 						
 	**};
 	

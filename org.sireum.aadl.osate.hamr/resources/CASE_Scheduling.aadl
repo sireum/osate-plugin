@@ -18,19 +18,17 @@ property set CASE_Scheduling is
 	--- rather than thread level.
 	Domain: aadlinteger applies to (thread, process);
 	
-  Domain_Entry: type record (
-    Component: reference (process);
-    Domain: aadlinteger;
-  );
-  
-  -- Alternative method for assigning domains to processes.  Only the mappings
-  -- assigned to the root system will be used (i.e. subsystems can define their
-  -- own mappings that would be used if the subsystem was used as the root of
-  -- an instantiation).  If an entry doesn't exist for a process then the process's 
-  -- Domain association will be used if present.
-  Domain_Mapping: list of CASE_Scheduling::Domain_Entry applies to (system);
-    
-  --- The maximum allowed domain identifier
+	Domain_Entry: type record (
+		Component: reference (process);
+		Domain: aadlinteger;
+	);
+	
+	-- Alternative method for assigning domains to processes.  Domain's attached
+	-- to processes will be ignored if this property is attached to the root 
+	-- system (mappings attached to sub-systems will be ignored).
+	Domain_Mapping: list of CASE_Scheduling::Domain_Entry applies to (system);
+	
+	--- The maximum allowed domain identifier
 	Max_Domain: aadlinteger applies to (processor, virtual processor);
 	
 	
