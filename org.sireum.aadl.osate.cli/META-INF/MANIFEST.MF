@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Sireum plug-in for CLI Air generation from OSATE
 Bundle-SymbolicName: org.sireum.aadl.osate.cli;singleton:=true
-Bundle-Version: 1.2022.08221314.qualifier
+Bundle-Version: 1.2023.03231646.qualifier
 Bundle-Activator: org.sireum.aadl.osate.cli.Activator
 Require-Bundle: org.osate.aadl2,
  org.osate.xtext.aadl2,
