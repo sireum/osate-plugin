@@ -29,6 +29,11 @@ public class GumboTest extends SireumTest {
 	}
 
 	@Test
+	public void compute_entrypoint() {
+		lexecute("compute-entrypoint", "Compute_Entrypoint.aadl", "s.impl");
+	}
+
+	@Test
 	public void enum_test() {
 		lexecute("enum-test", "Enum_Test.aadl", "s.impl");
 	}
