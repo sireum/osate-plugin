@@ -220,7 +220,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									//
 									experimentalOptions,
 
-									plugins,
+									plugins.toMSZ(),
 									
 									reporter);
 
