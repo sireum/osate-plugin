@@ -71,6 +71,14 @@
             id="org.sireum.aadl.osate.hamr.aadlcontribution.casescheduling">
       </aadlcontribution>
       <aadlcontribution
+            file="resources/CASE_Modeling_Guidelines_Sireum.aadl"
+            id="org.sireum.aadl.osate.hamr.aadlcontribution.casesmodelingguidelinessireum">
+      </aadlcontribution>
+      <aadlcontribution
+            file="resources/CASE_Properties_Sireum.aadl"
+            id="org.sireum.aadl.osate.hamr.aadlcontribution.casepropertiessireum">
+      </aadlcontribution>
+      <aadlcontribution
             file="resources/SB_SYS.aadl"
             id="org.sireum.aadl.osate.hamr.aadlcontribution.sbsys">
       </aadlcontribution>

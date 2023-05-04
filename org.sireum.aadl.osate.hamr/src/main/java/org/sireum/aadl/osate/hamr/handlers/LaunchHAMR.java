@@ -140,17 +140,19 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								? null
 								: new org.sireum.String(prompt.getOptionCOutputDirectory());
 
-						org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory().equals("") //
+						final org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory().equals("") //
 								? null
 								: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
-
+						
+						final File ideaDir = new File(_slangOutputDir.string() + File.separator + ".idea");
+						
 						toolRet = Util.callWrapper(getToolName(), console, () -> {
 
 							boolean verbose = PreferenceValues.HAMR_VERBOSE_OPT.getValue();
 							String platform = prompt.getOptionPlatform().hamrName();
 							Option<org.sireum.String> slangOutputDir = ArsitBridge.sireumOption(_slangOutputDir);
 							Option<org.sireum.String> slangPackageName = ArsitBridge.sireumOption(_base);
-							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue();
+							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue() || ideaDir.exists();
 							boolean noEmbedArt = !PreferenceValues.HAMR_EMBED_ART_OPT.getValue();
 							boolean devicesAsThreads = PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getValue();
 							boolean genSbtMill = PreferenceValues.HAMR_GEN_SBT_MILL_OPT.getValue();

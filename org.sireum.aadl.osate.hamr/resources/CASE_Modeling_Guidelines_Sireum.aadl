@@ -1,0 +1,323 @@
+package CASE_Modeling_Guidelines_Sireum
+public
+
+	with HAMR;
+	with CASE_Scheduling;
+	with CASE_Properties_Sireum;
+	
+	annex resolute {**
+			
+		ruleset HAMR_Guidelines_Sireum {
+			
+			-- The model must contain at least one process bound to a processor
+			error (one_process())
+			
+			-- A seL4 process must have at most one thread subcomponent
+			error (one_thread())
+			
+			-- AADL modes are not currently supported by CASE tools
+			warning (modes_ignored())
+			
+			-- AADL flows are not currently supported by CASE tools
+			warning (flows_ignored())
+			
+			-- Thread groups will be ignored for the seL4 target platform
+			warning (thread_groups_ignored())
+					
+			-- Threads should have the Dispatch_Protocol property specified
+			warning (dispatch_protocol_specified())
+			
+			-- Threads can only specify a dispatch_protocol property of periodic or sporadic
+			error (valid_dispatch_protocol())
+			
+			-- If a thread has a Dispatch_Protocol property value of "Periodic" 
+			-- then it must have a valid Period and Compute_Execution_Time property values set. 
+			warning (thread_periodic_protocol())
+			
+			-- If the thread subcomponents of a process are specified as Dispatch_Protocol "Periodic" 
+			-- then the process must have a CASE_Scheduling::Domain property value specified.
+			warning (process_periodic_protocol())
+			
+			-- For all thread subcomponents of processes bound to the same processor (via the Actual_Processor_Binding property), 
+			-- the Dispatch_Protocol property value assigned to the threads must be identical. 
+			-- For example, if one thread bound to a processor is "Periodic" 
+			-- then all threads bound to that processor must be "Periodic".
+			warning (consistent_dispatch_protocol())
+			
+			-- Integer types must be bounded (cannot use Base_Types::Integer)
+			error (bounded_integers())
+			
+			-- Float types must be bounded (cannot use Base_Types::Float)
+			error (bounded_floats())
+
+			-- Data types should be specified on ports
+			warning (data_type_specified())
+			
+			-- Subcomponent types should be specified
+			warning (subcomponent_type_specified())
+			
+			-- Array dimensions must be specified
+			error (array_dimension())
+			
+			-- Arrays can only have one dimension
+			error (one_dimensional_arrays())
+			
+			-- The array base type should be specified
+			warning (array_base_type())
+			
+			-- Enumeration data components must be non-empty
+			error (non_empty_enums())
+			
+			-- Connections between thread components must be uni-directional
+			error (unidirectional_connections())
+			
+			-- Ports must be in or out, but not both
+			error (unidirectional_ports())
+			
+			-- Multiple incoming connections to a single port are not allowed
+			error (no_fan_in())
+			
+			-- All ports should be connected
+			warning (ports_connected())
+			
+			-- Thread CakeML implementations should indicate location of source code or binary
+			warning (cakeml_threads_have_source())
+			
+			-- All processes must be bound to a processor
+			error (processes_bound())
+			
+			-- A processor's subcomponents may be ignored
+			warning (no_processor_subcomponents())	
+			
+			-- A virtual processor may host at most one process
+			warning (vm_host_one_process())
+			
+			-- A virtual processor may be bound to at most one processor
+			warning (vm_bound_to_one_processor())
+			
+			-- A virtual processor should not have the Dispatch_Protocol specified
+			warning (vm_no_dispatch_protocol())
+			
+			-- The value of a CASE_Scheduling::Domain property set on processes must be greater than or equal to 1
+			warning (valid_sched_domain())
+			
+			-- For all processes bound to the same processor (via the Actual_Processor_Binding property), 
+			-- the CASE_Scheduling::Domain property value assignments must be sequential and non-repeating
+			warning (consistent_sched_domain())
+			
+			-- All thread Compute_Execution_Time property values must be greater than or equal to 2 ms
+			warning (min_compute_exec_time())
+		
+			-- All thread Period property values must be greater than or equal to minimum Compute_Execution_Time
+			warning (min_period())
+		
+			-- All thread Period property values must be divisible by 2 ms
+			warning (period_div_by_tick())
+			
+			-- All thread Compute_Execution_Time property values must be divisible by 2 ms
+			warning (compute_exec_time_div_by_tick())
+			
+			-- A bound process should have the Timing_Properties::Frame_Period property set
+			warning (frame_period_property_set())
+			
+			-- A bound process should have the Timing_Properties::Clock_Period property set
+			warning (clock_period_property_set())
+			
+			-- The maximum stack size requirements for each thread should be specified using the Memory_Properties::Stack_Size property.
+			warning (thread_stack_size())
+			
+		}
+
+	**};
+	
+private
+	
+	
+	annex resolute {**
+
+		one_process() <=
+			** "The model must contain at least one process bound to a processor" **
+			let procs : {process} = {p for (p : process) | (exists(pr : processor) . is_bound_to(p, pr))};
+			size(procs) > 0
+			
+		one_thread() <=
+			** "A seL4 process must have at most one thread subcomponent" **
+			let procs : {process} = {p for (p : process) | size(subcomponents(p)) > 1 and exists(pr : processor) . (is_sel4_processor(pr) and processor_bound(p, pr))};
+			lint_check_set(procs, size(procs) = 0)
+			
+		modes_ignored() <=
+			** "AADL modes are not currently supported by CASE tools" **
+			forall (c : component) . lint_check(c, not has_modes(c))
+			
+		flows_ignored() <=
+			** "AADL flows are not currently supported by CASE tools" **
+			forall (c : component) . lint_check(c, not (size(flow_specifications(c)) + size(end_to_end_flows(c)) > 0))
+			
+		thread_groups_ignored() <=
+			** "Thread groups will be ignored for the seL4 target platform" **
+			forall (c : component) . lint_check(c, not is_thread_group(c))
+			
+		dispatch_protocol_specified() <=
+			** "Threads should have the Dispatch_Protocol property specified" **
+			forall (t : thread) . lint_check(t, has_property(t, Thread_Properties::Dispatch_Protocol))
+			
+		valid_dispatch_protocol() <=
+			** "Threads can only specify a dispatch_protocol property of periodic or sporadic" **
+			forall (t : thread) . lint_check(t, has_property(t, Thread_Properties::Dispatch_Protocol) => 
+				(property(t, Thread_Properties::Dispatch_Protocol) = "Sporadic" or property(t, Thread_Properties::Dispatch_Protocol) = "Periodic"))
+			
+		thread_periodic_protocol() <=
+			** "Periodic threads must be specified completely" **
+			forall (t : thread) . lint_check(t, (has_property(t, Thread_Properties::Dispatch_Protocol) and property(t, Thread_Properties::Dispatch_Protocol) = "Periodic") => (has_property(t, Period) and has_property(t, Compute_Execution_Time)))
+			
+		process_periodic_protocol() <=
+			** "Processes containing periodic threads must be specified completely" **
+			forall (p : process) . lint_check(p, (exists(pr : processor) . is_sel4_processor(pr) and processor_bound(p, pr)) => forall (t : subcomponents(p)) . (has_property(t, Thread_Properties::Dispatch_Protocol) and property(t, Thread_Properties::Dispatch_Protocol) = "Periodic") => has_property(p, CASE_Scheduling::Domain))
+			
+		consistent_dispatch_protocol() <=
+			** "All threads bound to a processor must have same Dispatch_Protocol" **
+			forall (p : processor) . lint_check(p, length(get_subcomponent_dispatch_protocols(p)) <= 1)
+						
+		get_subcomponent_dispatch_protocols(c : component) : {string} =
+			{property(s, Thread_Properties::Dispatch_Protocol) for (s : subcomponents(c)) | has_property(s, Thread_Properties::Dispatch_Protocol)}
+			
+		bounded_integers() <=
+			** "Integer types must be bounded (cannot use Base_Types::Integer)" **
+			let global_typed_elements : {aadl} = {a for (a : aadl) | has_type(a)};
+			forall (e : get_all_typed_elements(global_typed_elements)) . lint_check(e, not is_type(e, Base_Types::Integer))
+			
+		bounded_floats() <=
+			** "Float types must be bounded (cannot use Base_Types::Float)" **
+			let global_typed_elements : {aadl} = {a for (a : aadl) | has_type(a)};
+			forall (e : get_all_typed_elements(global_typed_elements)) . lint_check(e, not is_type(e, Base_Types::Float))
+			
+		get_all_typed_elements(curr : {aadl}) : {aadl} =
+			let element_types : {aadl} = {type(c) for (c : curr)};
+			let subs : {aadl} = {c for (e : element_types) (c : subcomponents(e)) | has_type(c)};
+			let next : {aadl} = union(curr, subs);
+			if next = curr then
+				curr
+			else
+				get_all_typed_elements(next)
+				
+		is_type(a : aadl, data_type : aadl) : bool =
+			has_type(a) and (type(a) = data_type) or
+			(has_property(a, Data_Model::Base_Type) and member(data_type, property(a, Data_Model::Base_Type)))
+			
+		data_type_specified() <=
+			** "Data types should be specified on process, thread, and thread group ports" **
+			forall (f : feature) . lint_check(f, (is_data_port(f) and (is_process(containing_component(f)) or is_thread(containing_component(f)) or is_thread_group(containing_component(f)))) => has_type(f))
+			
+		subcomponent_type_specified() <=
+			** "Subcomponent types should be specified" **
+			forall (c : component) . forall (s : subcomponents(c)) . lint_check(s, has_type(s))
+			
+		array_dimension() <=
+			** "Array dimensions must be specified" **
+			forall (d : data) . lint_check(d, (has_property(d, Data_Model::Data_Representation) and property(d, Data_Model::Data_Representation) = "Array") => has_property(d, Data_Model::Dimension))
+			
+		one_dimensional_arrays() <=
+			** "Arrays can only have one dimension" **
+			forall (d : data) . lint_check(d, (has_property(d, Data_Model::Data_Representation) and property(d, Data_Model::Data_Representation) = "Array") => (has_property(d, Data_Model::Dimension) and size(property(d, Data_Model::Dimension)) = 1))
+			
+		array_base_type() <=
+			** "The array base type should be specified" **
+			forall (d : data) . lint_check(d, (has_property(d, Data_Model::Data_Representation) and property(d, Data_Model::Data_Representation) = "Array") => has_property(d, Data_Model::Base_Type))
+			
+		non_empty_enums() <=
+			** "Enumeration data components must be non-empty" **
+			forall (d : data) . lint_check(d, (has_property(d, Data_Model::Data_Representation) and property(d, Data_Model::Data_Representation) = "Enum") => (has_property(d, Data_Model::Enumerators) and size(property(d, Data_Model::Enumerators)) > 0))
+			
+		unidirectional_connections() <=
+			** "Connections between thread components must be uni-directional" **
+			forall (c : connection) . lint_check(c, not is_bidirectional(c) or is_bus_access(c))
+			
+		unidirectional_ports() <=
+			** "Ports must be in or out, but not both" **
+			forall (p : port) . lint_check(p, direction(p) = "in" or direction(p) = "out")
+			
+		no_fan_in() <=
+			** "Multiple incoming connections to a single port are not allowed" **
+			forall (p : port) . lint_check(p, (direction(p) = "in") => (size(connections(p)) <= 1))
+			
+		ports_connected() <=
+			** "All ports should be connected" **
+			let sw_comps : {component} = {c for (c : component) | exists(p : processor) . processor_bound(c, p)};
+			forall (comp : sw_comps) (p : features(comp)) . lint_check(p, is_port(p) and length(connections(p)) > 0)
+			
+		cakeml_threads_have_source() <=
+			** "Thread CakeML implementations should indicate location of source code or binary" **
+			forall (t : thread) . lint_check(t, (has_property(t, CASE_Properties_Sireum::Component_Language) and property(t, CASE_Properties_Sireum::Component_Language) = "CakeML") => has_property(t, Programming_Properties::Source_Text))
+
+		processes_bound() <=
+			** "All processes must be bound to a processor" **
+			forall (p : process) . exists (proc : component) . (is_proc(proc) and lint_check(p, is_bound_to(p, proc)))
+			
+		is_proc(p : component) : bool =
+			is_processor(p) or is_virtual_processor(p)
+			
+		no_processor_subcomponents() <=
+			** "A processor's subcomponents may be ignored" **
+			forall (p : processor) . lint_check(p, size(subcomponents(p)) = 0)
+
+		vm_host_one_process() <=
+			** "A virtual processor may host at most one process" **
+			forall (vp : virtual_processor) . lint_check(vp, length({p for (p : process) | is_bound_to(p, vp)}) <= 1)
+		
+		vm_bound_to_one_processor() <=
+			** "A virtual processor may be bound to at most one processor" **
+			forall (vp : virtual_processor) . lint_check(vp, length({p for (p : processor) | is_bound_to(vp, p)}) <= 1)
+		
+		vm_no_dispatch_protocol() <=
+			** "A virtual processor should not have the Dispatch_Protocol specified" **
+			forall (vp : virtual_processor) . lint_check(vp, not has_property(vp, Thread_Properties::Dispatch_Protocol))
+		
+		valid_sched_domain() <=
+			** "The value of a CASE_Scheduling::Domain property set on processes must be greater than or equal to 1" **
+			forall (p : process) . lint_check(p, has_property(p, CASE_Scheduling::Domain) => property(p, CASE_Scheduling::Domain) >= 1)
+		
+		-- For all processes bound to the same seL4 processor (via the Actual_Processor_Binding property), 
+		-- the CASE_Scheduling::Domain property value assignments must be sequential and non-repeating
+		consistent_sched_domain() <=
+			** "CASE_Scheduling::Domain property value assignments must be sequential and non-repeating" **
+			forall (p : processor) . lint_check(p, is_sel4_processor(p) => consistent_domains(p))
+		
+		consistent_domains(p : processor) : bool =
+			let bound_processes : {process} = {proc for (proc : process) | is_bound_to(proc, p)};
+			let domains : {int} = {property(proc, CASE_Scheduling::Domain) for (proc : bound_processes) | has_property(proc, CASE_Scheduling::Domain)};
+			(length(domains) = length(bound_processes)) and ((length(domains) > 0) => min(as_list(domains)) >= 2)
+		
+		min_compute_exec_time() <=
+			** "All thread Compute_Execution_Time property values must be greater than or equal to 2 ms" **
+			forall (t : thread) . lint_check(t, has_property(t, Compute_Execution_Time) => lower_bound(property(t, Compute_Execution_Time)) >= 2ms)
+		
+		min_period() <=
+			** "All thread Period property values must be greater than or equal to minimum Compute_Execution_Time" **
+			forall (t : thread) . lint_check(t, has_property(t, Period) => (has_property(t, Compute_Execution_Time) and property(t, Period) >= lower_bound(property(t, Compute_Execution_Time))))
+		
+		period_div_by_tick() <=
+			** "All thread Period property values must be divisible by 2 ms" **
+			forall (t : thread) . lint_check(t, has_property(t, Period) => property(t, Period) % 2 = 0)
+			
+		compute_exec_time_div_by_tick() <=
+			** "All thread Compute_Execution_Time property values must be divisible by 2 ms" **
+				forall (t : thread) . lint_check(t, has_property(t, Compute_Execution_Time) => (lower_bound(property(t, Compute_Execution_Time)) % 2 = 0 and upper_bound(property(t, Compute_Execution_Time)) % 2 = 0))
+				
+		frame_period_property_set() <=
+			** "A bound process should have the Timing_Properties::Frame_Period property set" **
+			forall (p : processor) . lint_check(p, (is_sel4_processor(p) and (exists(proc : process) . processor_bound(proc, p))) => has_property(p, Timing_Properties::Frame_Period))
+			
+		clock_period_property_set() <=
+			** "A bound process should have the Timing_Properties::Clock_Period property set" **
+			forall (p : processor) . lint_check(p, (is_sel4_processor(p) and (exists(proc : process) . processor_bound(proc, p))) => has_property(p, Timing_Properties::Clock_Period))
+
+		thread_stack_size() <=
+			** "The maximum stack size requirements for each thread should be specified using the Memory_Properties::Stack_Size property" **
+			forall (t : thread) . lint_check(t, (exists(p : processor) . processor_bound(t, p)) => has_property(t, Memory_Properties::Stack_Size))
+			
+		is_sel4_processor(p : processor) : bool =
+			has_property(p, CASE_Properties_Sireum::OS) and property(p, CASE_Properties_Sireum::OS) = "seL4"
+						
+	**};
+	
+end CASE_Modeling_Guidelines_Sireum;
