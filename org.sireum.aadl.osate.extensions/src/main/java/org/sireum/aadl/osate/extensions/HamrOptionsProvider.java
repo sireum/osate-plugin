@@ -13,7 +13,7 @@ package org.sireum.aadl.osate.extensions;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface HamrOptionsProvider
+public abstract interface HamrOptionsProvider extends org.sireum.MSigTrait
   {
   
   void addOption(org.sireum.String o);

@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.Platform;
 import org.osate.aadl2.instance.SystemInstance;
 import org.sireum.aadl.osate.architecture.BlessBehaviorProvider;
 import org.sireum.aadl.osate.architecture.BlessEntrypointProvider;
+import org.sireum.aadl.osate.extensions.HamrOptionsProvider;
 import org.sireum.hamr.codegen.common.plugin.Plugin;
 
 public class HAMRPluginUtil
@@ -68,7 +69,19 @@ public class HAMRPluginUtil
     List<org.sireum.String> options = new ArrayList<org.sireum.String>();
     IExtensionRegistry reg = Platform.getExtensionRegistry();
     IConfigurationElement[] optionsElements = reg.getConfigurationElementsFor(OPTIONS_PROVIDER_ID);
-  
+    for (IConfigurationElement op : optionsElements)
+      {
+      org.sireum.aadl.osate.extensions.HamrOptionsProvider hop;
+      try
+        {
+        hop = (org.sireum.aadl.osate.extensions.HamrOptionsProvider) op.createExecutableExtension("class");
+        options.addAll(hop.getOptions());
+        }
+      catch (CoreException e)
+        {
+        e.printStackTrace();
+        }
+      }
     return options;
     }  //end of getHamrExperimentalOptions
   

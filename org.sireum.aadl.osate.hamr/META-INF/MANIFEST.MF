@@ -12,7 +12,8 @@ Require-Bundle: org.osate.aadl2,
  com.multitude.bless,
  com.multitude.aadl.bless,
  com.multitude.bless.codegeneration,
- org.sireum.aadl.osate.bless2Air
+ org.sireum.aadl.osate.bless2Air,
+ org.sireum.aadl.osate.extensions
 Automatic-Module-Name: HAMR
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
