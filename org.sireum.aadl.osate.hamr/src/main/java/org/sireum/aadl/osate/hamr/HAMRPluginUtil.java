@@ -24,6 +24,7 @@ public class HAMRPluginUtil
   static String BEHAVIOR_PROVIDER_ID = "org.sireum.aadl.osate.extensions.HamrBehaviorProvider";
   static String ENTRYPOINT_PROVIDER_ID = "org.sireum.aadl.osate.extensions.HamrEntrypointProvider";
   static String DATATYPE_PROVIDER_ID = "org.sireum.aadl.osate.extensions.HamrDatatypeProvider";
+  static String OPTIONS_PROVIDER_ID = "org.sireum.aadl.osate.extensions.HamrOptionsProvider";
   
   public static List<org.sireum.hamr.codegen.common.plugin.Plugin> getHamrPlugins(SystemInstance si)
     {
@@ -62,4 +63,13 @@ public class HAMRPluginUtil
     return plugins;
     }  //end of getHamrPlugins
   
-  }
+  public static List<org.sireum.String> getHamrExperimentalOptions()
+    {
+    List<org.sireum.String> options = new ArrayList<org.sireum.String>();
+    IExtensionRegistry reg = Platform.getExtensionRegistry();
+    IConfigurationElement[] optionsElements = reg.getConfigurationElementsFor(OPTIONS_PROVIDER_ID);
+  
+    return options;
+    }  //end of getHamrExperimentalOptions
+  
+  }  //end of HAMRPluginUtil

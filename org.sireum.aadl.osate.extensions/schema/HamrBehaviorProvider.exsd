@@ -6,7 +6,7 @@
          <meta.schema plugin="org.sireum.aadl.osate.extensions" id="HamrBehaviorProvider" name="HAMR Behavior Provider"/>
       </appinfo>
       <documentation>
-         [Enter description of this extension point.]
+         Provide behavior (in Slang) for generated code from an AADL architecture.
       </documentation>
    </annotation>
 
