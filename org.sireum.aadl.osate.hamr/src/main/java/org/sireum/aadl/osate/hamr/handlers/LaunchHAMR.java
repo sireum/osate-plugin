@@ -182,7 +182,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								exOptions.add(new org.sireum.String("GENERATE_REFINEMENT_PROOF"));
 							}
 
-							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
+							
 //add BLESS provider plugins
 //get plugins from Eclipse extension points							
 							IS<Z, org.sireum.hamr.codegen.common.plugin.Plugin> 
@@ -192,6 +192,11 @@ public class LaunchHAMR extends AbstractSireumHandler {
 //							      new BlessBehaviorProvider(si),
 //							      new BlessDatatypeProvider()
 							      );
+
+              //get optons from plugin(s)  like "ADD_PORT_IDS=X"
+              exOptions.addAll(HAMRPluginUtil.getHamrExperimentalOptions());
+
+              IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
 							
 							Z codegenRet = org.sireum.cli.HAMR.codeGenP( //
 									model, //
