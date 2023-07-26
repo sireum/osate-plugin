@@ -13,6 +13,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
+import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
@@ -41,9 +42,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		return "HAMR";
 	}
 
+	private NamedElement lastElem = null;
+
 	@Override
 	public IStatus runJob(Element elem, IProgressMonitor monitor) {
-
 		prompt = null;
 
 		MessageConsole console = displayConsole();
@@ -55,11 +57,29 @@ public class LaunchHAMR extends AbstractSireumHandler {
 			return Status.CANCEL_STATUS;
 		}
 
-		SystemInstance si = getSystemInstance(elem);
-		if (si == null) {
-			Dialog.showError(getToolName(), "Please select a system implementation or a system instance");
-			return Status.CANCEL_STATUS;
+		SystemInstance siTemp = getSystemInstance(elem);
+		if (siTemp == null) {
+			if (lastElem == null) {
+				Dialog.showError(getToolName(), "Please select a system implementation or a system instance");
+				return Status.CANCEL_STATUS;
+			} else {
+				writeToConsole(
+						"Could not generate a system instance from the current selection so re-running HAMR codegen on "
+								+ lastElem.getQualifiedName());
+
+				siTemp = getSystemInstance(lastElem);
+
+				if (siTemp == null) {
+					Dialog.showError(getToolName(),
+							"Could not generate a system instance from " + lastElem.getQualifiedName());
+					return Status.CANCEL_STATUS;
+				}
+			}
+		} else {
+			lastElem = (NamedElement) elem;
 		}
+
+		final SystemInstance si = siTemp;
 
 		writeToConsole("Generating AIR ...");
 
@@ -139,9 +159,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						final org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory().equals("") //
 								? null
 								: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
-						
+
 						final File ideaDir = new File(_slangOutputDir.string() + File.separator + ".idea");
-						
+
 						toolRet = Util.callWrapper(getToolName(), console, () -> {
 
 							boolean verbose = PreferenceValues.HAMR_VERBOSE_OPT.getValue();
