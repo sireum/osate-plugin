@@ -46,6 +46,7 @@ Export-Package:
  org.sireum.crypto,
  org.sireum.hamr.act,
  org.sireum.hamr.arsit,
+ org.sireum.hamr.codegen.common.resolvers,
  org.sireum.hamr.codegen.common.types,
  org.sireum.hamr.codegen.common.util,
  org.sireum.hamr.ir,
