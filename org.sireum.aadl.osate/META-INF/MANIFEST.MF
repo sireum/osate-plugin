@@ -101,7 +101,6 @@ Export-Package:
  scala.meta.internal.classpath,
  scala.meta.internal.cli,
  scala.meta.internal.dialects,
- scala.meta.internal.fastparse,
  scala.meta.internal.inputs,
  scala.meta.internal.io,
  scala.meta.internal.javacp,
