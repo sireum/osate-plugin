@@ -6,4 +6,3 @@ Bundle-Version: 1.0.0.qualifier
 Automatic-Module-Name: org.sireum.aadl.osate.extensions
 Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.sireum.aadl.osate
-Export-Package: org.sireum.aadl.osate.extensions
