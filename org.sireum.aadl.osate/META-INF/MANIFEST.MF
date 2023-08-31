@@ -46,7 +46,6 @@ Export-Package:
  org.sireum.crypto,
  org.sireum.hamr.act,
  org.sireum.hamr.arsit,
-<<<<<<< HEAD
  org.sireum.hamr.arsit.plugin,
  org.sireum.hamr.arsit.templates,
  org.sireum.hamr.codegen,
@@ -54,9 +53,7 @@ Export-Package:
  org.sireum.hamr.codegen.common.plugin,
  org.sireum.hamr.codegen.common.properties,
  org.sireum.hamr.codegen.common.symbols,
-=======
  org.sireum.hamr.codegen.common.resolvers,
->>>>>>> refs/heads/master
  org.sireum.hamr.codegen.common.types,
  org.sireum.hamr.codegen.common.util,
  org.sireum.hamr.ir,
