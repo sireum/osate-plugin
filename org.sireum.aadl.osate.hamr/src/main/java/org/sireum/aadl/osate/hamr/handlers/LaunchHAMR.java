@@ -74,7 +74,7 @@ public class LaunchHAMR extends AbstractSireumHandler
 
     writeToConsole("Generating AIR ...");
 
-	private NamedElement lastElem = null;
+//	NamedElement lastElem = null;
 
     Reporter reporter = Util.createReporter();
     Aadl     model    = Util.getAir(si, true, console, reporter);
@@ -98,7 +98,7 @@ public class LaunchHAMR extends AbstractSireumHandler
         return Status.CANCEL_STATUS;
         }
 
-		final SystemInstance si = siTemp;
+//		final SystemInstance si = siTemp;
 
       final int max_string_size = HAMRPropertyProvider.getDefaultMaxStringSizeFromElement(si);
       if (max_string_size < 0)
