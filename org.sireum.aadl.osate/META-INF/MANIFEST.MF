@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Sireum plug-in for OSATEv2
 Bundle-SymbolicName: org.sireum.aadl.osate;singleton:=true
-Bundle-Version: 1.2023.03231646.qualifier
+Bundle-Version: 1.2023.07271345.qualifier
 Bundle-Activator: org.sireum.aadl.osate.Activator
 Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.aadl2.errormodel.faulttree.edit;bundle-version="1.0.0",
@@ -46,6 +46,7 @@ Export-Package:
  org.sireum.crypto,
  org.sireum.hamr.act,
  org.sireum.hamr.arsit,
+<<<<<<< HEAD
  org.sireum.hamr.arsit.plugin,
  org.sireum.hamr.arsit.templates,
  org.sireum.hamr.codegen,
@@ -53,6 +54,9 @@ Export-Package:
  org.sireum.hamr.codegen.common.plugin,
  org.sireum.hamr.codegen.common.properties,
  org.sireum.hamr.codegen.common.symbols,
+=======
+ org.sireum.hamr.codegen.common.resolvers,
+>>>>>>> refs/heads/master
  org.sireum.hamr.codegen.common.types,
  org.sireum.hamr.codegen.common.util,
  org.sireum.hamr.ir,
@@ -107,7 +111,6 @@ Export-Package:
  scala.meta.internal.classpath,
  scala.meta.internal.cli,
  scala.meta.internal.dialects,
- scala.meta.internal.fastparse,
  scala.meta.internal.inputs,
  scala.meta.internal.io,
  scala.meta.internal.javacp,

@@ -13,6 +13,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.console.MessageConsole;
 import org.osate.aadl2.Element;
+import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
@@ -73,8 +74,9 @@ public class LaunchHAMR extends AbstractSireumHandler
 
     writeToConsole("Generating AIR ...");
 
-    Reporter reporter = Util.createReporter();
+	private NamedElement lastElem = null;
 
+    Reporter reporter = Util.createReporter();
     Aadl     model    = Util.getAir(si, true, console, reporter);
 
     if (model != null && !reporter.hasError())
@@ -95,6 +97,8 @@ public class LaunchHAMR extends AbstractSireumHandler
         displayPopup("Max sequence size must be greater than or equal to 0");
         return Status.CANCEL_STATUS;
         }
+
+		final SystemInstance si = siTemp;
 
       final int max_string_size = HAMRPropertyProvider.getDefaultMaxStringSizeFromElement(si);
       if (max_string_size < 0)
