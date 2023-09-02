@@ -1,7 +1,7 @@
 //HAMRPluginUtil.java
 
 // get Eclipse plugins to HAMR which have connected to entry points:
-// HamrBehaviorProviderPlugin, HamrEntrypointProviderPlugin, and HamrDatatypeProviderPlugin
+// HamrBehaviorProviderPlugin, HamrEntrypointProviderPlugin, HamrDatatypeProviderPlugin, and HamrPlatformProviderPlugin
 
 package org.sireum.aadl.osate.hamr;
 
@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.osate.aadl2.instance.SystemInstance;
-//import org.sireum.aadl.osate.extensions.HamrOptionsProvider;
 import org.sireum.hamr.codegen.common.plugin.Plugin;
 
 import com.multitude.bless.bless2hamr.BlessBehaviorProvider;
@@ -26,7 +25,7 @@ public class HAMRPluginUtil
   static String BEHAVIOR_PROVIDER_ID = "org.sireum.aadl.osate.extensions.HamrBehaviorProvider";
   static String ENTRYPOINT_PROVIDER_ID = "org.sireum.aadl.osate.extensions.HamrEntrypointProvider";
   static String DATATYPE_PROVIDER_ID = "org.sireum.aadl.osate.extensions.HamrDatatypeProvider";
-  static String OPTIONS_PROVIDER_ID = "org.sireum.aadl.osate.extensions.HamrOptionsProvider";
+  static String PLATFORM_PROVIDER_ID = "org.sireum.aadl.osate.extensions.HamrPlatformProvider";
   
   public static List<org.sireum.hamr.codegen.common.plugin.Plugin> getHamrPlugins(SystemInstance si)
     {
@@ -35,6 +34,7 @@ public class HAMRPluginUtil
     IConfigurationElement[] behaviorElements = reg.getConfigurationElementsFor(BEHAVIOR_PROVIDER_ID);
     IConfigurationElement[] entrypointElements = reg.getConfigurationElementsFor(ENTRYPOINT_PROVIDER_ID);
     IConfigurationElement[] datatypeElements = reg.getConfigurationElementsFor(DATATYPE_PROVIDER_ID);
+    IConfigurationElement[] platformElements = reg.getConfigurationElementsFor(PLATFORM_PROVIDER_ID);
     try
       {
       for (IConfigurationElement be : behaviorElements)
@@ -56,6 +56,8 @@ public class HAMRPluginUtil
         }
       for (IConfigurationElement de : datatypeElements)
         plugins.add((org.sireum.hamr.codegen.common.plugin.Plugin) de.createExecutableExtension("class"));
+      for (IConfigurationElement pe : platformElements)
+        plugins.add((org.sireum.hamr.codegen.common.plugin.Plugin) pe.createExecutableExtension("class"));
       }
     catch (CoreException e)
       {
