@@ -14,10 +14,11 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.osate.aadl2.instance.SystemInstance;
-import org.sireum.aadl.osate.architecture.BlessBehaviorProvider;
-import org.sireum.aadl.osate.architecture.BlessEntrypointProvider;
 //import org.sireum.aadl.osate.extensions.HamrOptionsProvider;
 import org.sireum.hamr.codegen.common.plugin.Plugin;
+
+import com.multitude.bless.bless2hamr.BlessBehaviorProvider;
+import com.multitude.bless.bless2hamr.BlessEntrypointProvider;
 
 public class HAMRPluginUtil
   {

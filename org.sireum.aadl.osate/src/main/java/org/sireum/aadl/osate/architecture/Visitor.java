@@ -128,7 +128,7 @@ public class Visitor {
 						+ " doesn't implement AnnexVisitor");
 			}
 		}
-
+/*
 		Bundle bless = Platform.getBundle("com.multitude.aadl.bless");
 		Bundle bless2Air = Platform.getBundle("org.sireum.aadl.osate.bless2Air");
 		if (bless != null && bless2Air != null && org.osate.annexsupport.AnnexModel.getAnnexEnabled("bless")) {
@@ -147,6 +147,7 @@ public class Visitor {
 						+ " doesn't implement AnnexVisitor");
 			}
 		}
+		*/
 	}
 
 	public Map<String, org.sireum.hamr.ir.Component> getDataComponents() {
