@@ -17,6 +17,7 @@ import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.IS;
+import org.sireum.MS;
 import org.sireum.Option;
 import org.sireum.Z;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
@@ -24,6 +25,7 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.ErrorReport;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.Report;
+import org.sireum.aadl.osate.hamr.plugin.HAMRPluginUtil;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
 import org.sireum.aadl.osate.util.ApiUtil;
 import org.sireum.aadl.osate.util.SlangUtil;
@@ -31,6 +33,8 @@ import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SeverityLevel;
 import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.arsit.ArsitBridge;
+import org.sireum.hamr.arsit.plugin.ArsitPlugin;
+import org.sireum.hamr.codegen.common.plugin.Plugin;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.message.Reporter;
 
@@ -118,6 +122,12 @@ public class LaunchHAMR extends AbstractSireumHandler {
 				writeToConsole("Wrote: " + f.getAbsolutePath());
 			}
 
+			// TODO: provide mechanism to disable gumbo plugin when bless2air is present
+			MS<Z, Plugin> eplugins = VisitorUtil.toISZ(HAMRPluginUtil.getHamrPlugins(si)).toMSZ();
+			final MS<Z, Plugin> hamrPlugins = eplugins.isEmpty() //
+					? ArsitPlugin.gumboEnhancedPlugins()
+					: eplugins.$plus$plus(ArsitPlugin.defaultPlugins());
+
 			Display.getDefault().syncExec(() -> {
 				prompt = new HAMRPrompt(getProject(si), getShell(), si.getComponentImplementation().getFullName(),
 						platforms, hardwares, bit_width, max_seq_size, max_string_size);
@@ -156,9 +166,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								? null
 								: new org.sireum.String(prompt.getOptionCOutputDirectory());
 
-						final org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory().equals("") //
-								? null
-								: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
+						final org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory()
+								.equals("") //
+										? null
+										: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
 
 						final File ideaDir = new File(_slangOutputDir.string() + File.separator + ".idea");
 
@@ -168,7 +179,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							String platform = prompt.getOptionPlatform().hamrName();
 							Option<org.sireum.String> slangOutputDir = ArsitBridge.sireumOption(_slangOutputDir);
 							Option<org.sireum.String> slangPackageName = ArsitBridge.sireumOption(_base);
-							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue() || ideaDir.exists();
+							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue()
+									|| ideaDir.exists();
 							boolean noEmbedArt = !PreferenceValues.HAMR_EMBED_ART_OPT.getValue();
 							boolean devicesAsThreads = PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getValue();
 							boolean genSbtMill = PreferenceValues.HAMR_GEN_SBT_MILL_OPT.getValue();
@@ -200,7 +212,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
 
-							Z codegenRet = org.sireum.cli.HAMR.codeGenR( //
+							Z codegenRet = org.sireum.cli.HAMR.codeGenP( //
 									model, //
 									//
 									verbose, //
@@ -226,7 +238,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									aadlRootDir, //
 									//
 									experimentalOptions,
-
+									//
+									hamrPlugins,
+									//
 									reporter);
 
 							// only propagate error messages to eclipse's problem view (all messages are emitted

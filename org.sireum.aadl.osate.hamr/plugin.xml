@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+   <extension-point 
+   	  id="HamrCodegenPluginProvider" 
+   	  name="HAMR Codegen Plugin Provider" 
+   	  schema="schema/HamrCodegenPluginProvider.exsd"/> 
    <extension point="org.eclipse.ui.commands">
       <command id="org.sireum.commands.launchhamr"
                name="Launch HAMR"
@@ -99,5 +103,5 @@
          <super type="org.eclipse.core.resources.problemmarker"></super>
          <super type="org.eclipse.core.resources.textmarker"></super>
          --<persistent value="false"></persistent>
-   </extension>     
+   </extension> 
 </plugin>

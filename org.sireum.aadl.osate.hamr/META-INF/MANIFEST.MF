@@ -16,3 +16,4 @@ Bundle-ClassPath: .,
  external:$org.sireum.home$/bin/sireum.jar
 Import-Package: org.osate.pluginsupport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: org.sireum.aadl.osate.hamr.plugin
