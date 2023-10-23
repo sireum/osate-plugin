@@ -46,6 +46,9 @@ public class HAMRPrompt extends TitleAreaDialog {
 	public final HAMROption OPTION_BASE_PACKAGE_NAME = new HAMROption("base.package.name", "Base Package Name",
 			"The root package name for the generated Slang project");
 
+	public final HAMROption OPTION_ENABLE_RUNTIME_MONITORING = new HAMROption("enable.runtime.monitoring",
+			"Enable Runtime Monitoring", "Enables runtime monitoring");
+
 	public final HAMROption OPTION_HW = new HAMROption("hw", "HW", "");
 
 	public final HAMROption OPTION_EXCLUDE_SLANG_IMPL = new HAMROption("exclude.slang.impl",
@@ -94,6 +97,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	public String getOptionBasePackageName() {
 		return getSavedStringOption(OPTION_BASE_PACKAGE_NAME);
+	}
+
+	public boolean getOptionEnableRuntimeMonitoring() {
+		return getSavedBooleanOption(OPTION_ENABLE_RUNTIME_MONITORING);
 	}
 
 	public int getOptionMaxSequenceSize() {
@@ -365,6 +372,25 @@ public class HAMRPrompt extends TitleAreaDialog {
 			registerOptionControl(key, txt);
 
 			// COL 3
+			registerViewControl(key, addColumnPad(container)); // col padding
+		}
+
+		fillerRow(container, numCols);
+
+		/****************************************************************
+		 * ROW
+		 ****************************************************************/
+		{
+			final HAMROption key = OPTION_ENABLE_RUNTIME_MONITORING;
+
+			// COL 1
+			Button btn = new Button(container, SWT.CHECK);
+			btn.setText(key.displayText);
+			btn.setToolTipText(key.toolTipText);
+			btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numCols, 1));
+			registerOptionControl(key, btn, false);
+
+			// COL 2
 			registerViewControl(key, addColumnPad(container)); // col padding
 		}
 
@@ -839,7 +865,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 		Platform p = HAMRPropertyProvider.Platform.valueOf(selection);
 
 		List<HAMREntry> JVM_controls = Arrays.asList( //
-				OPTION_PLATFORM, OPTION_SLANG_OUTPUT_DIRECTORY, OPTION_BASE_PACKAGE_NAME);
+				OPTION_PLATFORM, OPTION_SLANG_OUTPUT_DIRECTORY, OPTION_BASE_PACKAGE_NAME,
+				OPTION_ENABLE_RUNTIME_MONITORING);
 
 		List<HAMREntry> NIX_controls = addAll(JVM_controls, Arrays.asList( //
 				// OPTION_HW,

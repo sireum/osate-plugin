@@ -210,6 +210,12 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								exOptions.add(new org.sireum.String("GENERATE_REFINEMENT_PROOF"));
 							}
 
+
+							final boolean enableRuntimeMonitoring = prompt.getOptionEnableRuntimeMonitoring();
+							if (enableRuntimeMonitoring) {
+								exOptions.add(new org.sireum.String("enableRuntimeMonitoring"));
+							}
+
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
 
 							Z codegenRet = org.sireum.cli.HAMR.codeGenP( //
