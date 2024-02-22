@@ -50,3 +50,7 @@ models to [AIR](https://github.com/sireum/air) and then to downstream Sireum too
      ./sireum-v3/bin/sbt-launch.sh "project awasJar" assembly
      cp ./sireum-v3/awasJar/target/scala-2.12/awasJar-assembly-0.1.0-SNAPSHOT.jar <ostate-plugin-dir>/org.sireum.aadl.osate.awas/lib/awasJar-assembly-0.1.0-SNAPSHOT.jar
      ```
+
+## macOS 14 SWT Issue
+
+If the OSATE runtime instance looks like [this screenshot](https://github.com/eclipse-platform/eclipse.platform.swt/issues/1012#issuecomment-1914320902) then you need to use a JRE that was not built under macOS 14.  For example, [Zulu 17.0.10+7](https://www.azul.com/core-post-download/?endpoint=zulu&uuid=a8d7a419-71b6-4833-b155-0cf4b4936312) does not exhibit the issue and doing ``vtool -show java`` on it shows it was built under macOS 11.1 
