@@ -33,6 +33,7 @@ public class ApiUtil {
 					clsAadl, // model
 					//
 					clsBool, // verbose
+					clsBool, // runtimeMonitoring
 					clsPlatform, // platform
 					clsOption, // slangOutputDir
 					clsOption, // slangPackageName
