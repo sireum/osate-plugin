@@ -14,7 +14,6 @@ Require-Bundle: org.osate.xtext.aadl2.ui;bundle-version="1.0.0",
  org.osate.aadl2,
  org.osate.xtext.aadl2.errormodel,
  org.osate.annexsupport,
- org.sireum.aadl.osate.securitymodel;resolution:=optional,
  org.osate.ba;resolution:=optional,
  org.eclipse.mylyn.commons.ui;bundle-version="3.24.2"
 Bundle-ActivationPolicy: lazy

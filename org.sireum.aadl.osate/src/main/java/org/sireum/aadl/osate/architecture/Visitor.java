@@ -106,11 +106,6 @@ public class Visitor {
 			annexVisitors.add(new Emv2Visitor(this));
 		}
 
-		Bundle sm = Platform.getBundle("org.sireum.aadl.osate.securitymodel");
-		if (sm != null && org.osate.annexsupport.AnnexModel.getAnnexEnabled("smf")) {
-			annexVisitors.add(new SmfVisitor(this));
-		}
-
 		Bundle ba = Platform.getBundle("org.osate.ba");
 		if (ba != null && org.osate.annexsupport.AnnexModel.getAnnexEnabled("behavior_specification")) {
 			annexVisitors.add(new BAVisitor(this));
