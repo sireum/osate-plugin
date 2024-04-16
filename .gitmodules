@@ -1,6 +1,3 @@
-[submodule "aadl-security"]
-	path = aadl-security
-	url = https://github.com/sireum/aadl-security.git
 [submodule "aadl-gumbo"]
 	path = aadl-gumbo
 	url = https://github.com/sireum/aadl-gumbo.git
