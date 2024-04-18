@@ -20,6 +20,7 @@ import org.sireum.aadl.osate.util.IOUtil;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
 import org.sireum.aadl.osate.util.VisitorUtil;
+import org.sireum.hamr.ir.Aadl;
 import org.sireum.message.Reporter;
 
 import com.google.inject.Inject;
@@ -96,22 +97,24 @@ public class AirUpdater extends SireumTest {
 		assert instance != null : "System is null " + system.systemImplementationName;
 
 		Reporter reporter = Util.createReporter();
-		String air = Util.serialize(Util.getAir(instance, true, reporter), SerializerType.JSON);
+		Aadl model = Util.getAir(instance, true, reporter);
 
 		if (reporter.hasError()) {
 			reporter.printMessages();
 			assert false : "Reporter has errors";
+		} else {
+			String air = Util.serialize(model, SerializerType.JSON);
+
+			String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
+			String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ".json";
+
+			File slangDir = new File(system.projects.get(0).rootDirectory, File.separator + ".slang");
+			slangDir.mkdir();
+
+			assert slangDir.exists() && slangDir.isDirectory() : slangDir + " does not exist";
+
+			File outFile = new File(slangDir, fname);
+			IOUtil.writeFile(outFile, air);
 		}
-
-		String instanceFilename = Util.toIFile(instance.eResource().getURI()).getName();
-		String fname = instanceFilename.substring(0, instanceFilename.lastIndexOf(".")) + ".json";
-
-		File slangDir = new File(system.projects.get(0).rootDirectory, File.separator + ".slang");
-		slangDir.mkdir();
-
-		assert slangDir.exists() && slangDir.isDirectory() : slangDir + " does not exist";
-
-		File outFile = new File(slangDir, fname);
-		IOUtil.writeFile(outFile, air);
 	}
 }
