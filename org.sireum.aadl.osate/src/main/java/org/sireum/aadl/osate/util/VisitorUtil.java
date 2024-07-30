@@ -10,6 +10,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -182,6 +183,28 @@ public class VisitorUtil {
 	public static void reportError(boolean cond, EObject o, String msg, String msgKind, Reporter reporter) {
 		if (!cond) {
 			reporter.error(o == null ? SlangUtil.toNone() : buildPositionOpt(o), msgKind, msg);
+		}
+	}
+
+	protected static void addMessage(Resource.Diagnostic d, boolean isError, String toolName, Reporter reporter) {
+		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
+		Option<Position> p = SlangUtil
+				.toSome(factory.flatPos(d.getLocation(), d.getLine(), d.getColumn(), 0, d.getLine(), d.getColumn(), 0));
+		if (isError) {
+			reporter.error(p, toolName, d.getMessage());
+		} else {
+			reporter.warn(p, toolName, d.getMessage());
+		}
+	}
+
+	public static void translateMessages(ResourceSet rs, String toolName, Reporter reporter) {
+		for (Resource r : rs.getResources()) {
+			for (Resource.Diagnostic warning : r.getWarnings()) {
+				addMessage(warning, false, toolName, reporter);
+			}
+			for (Resource.Diagnostic error : r.getErrors()) {
+				addMessage(error, true, toolName, reporter);
+			}
 		}
 	}
 

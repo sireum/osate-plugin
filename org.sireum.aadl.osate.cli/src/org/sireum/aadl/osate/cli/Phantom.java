@@ -119,6 +119,16 @@ public class Phantom implements IApplication {
 			for (URI uri : contributed) {
 				resourceSet.getResource(uri, true);
 			}
+			
+			// convert any errors/warnings attached to resources into Sireum messages
+			Reporter reporter = Util.createReporter();
+			VisitorUtil.translateMessages(resourceSet, "Phantom", reporter);
+
+			reporter.printMessages();
+			
+			if (reporter.hasError()) {
+				return 1;
+			}
 
 			final Map<?, ?> args = context.getArguments();
 			final String[] appArgs = (String[]) args.get("application.args");

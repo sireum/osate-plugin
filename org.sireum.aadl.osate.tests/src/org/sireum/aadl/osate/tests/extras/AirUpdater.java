@@ -1,7 +1,6 @@
 package org.sireum.aadl.osate.tests.extras;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.eclipse.xtext.testing.InjectWith;
@@ -11,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.osate.aadl2.errormodel.tests.ErrorModelInjectorProvider;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.testsupport.TestResourceSetHelper;
-import org.sireum.Os;
-import org.sireum.Os.Path;
 import org.sireum.aadl.osate.tests.SireumTest;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
@@ -78,25 +75,28 @@ public class AirUpdater extends SireumTest {
 		}
 	}
 
-	@Test
-	public void syncGumbo() throws IOException {
-		Path srcPath = Os.path("./projects/org/sireum/aadl/osate/tests/gumbo");
-		Path destPath = Os.path(SIREUM_HOME() + "/hamr/codegen/jvm/src/test/resources/models/GumboTest");
-
-		srcPath.copyOverTo(destPath);
-
-		for (AadlSystem system : AadlProjectUtil.findSystems(new File(destPath.canon().value()))) {
-			System.out.println("Processing: " + system.projects.get(0).projectName);
-			regen(system);
-		}
-	}
+	/*
+	 * @Test
+	 * public void syncGumbo() throws IOException {
+	 * Path srcPath = Os.path("./projects/org/sireum/aadl/osate/tests/gumbo");
+	 * Path destPath = Os.path(SIREUM_HOME() + "/hamr/codegen/jvm/src/test/resources/models/GumboTest");
+	 * 
+	 * srcPath.copyOverTo(destPath);
+	 * 
+	 * for (AadlSystem system : AadlProjectUtil.findSystems(new File(destPath.canon().value()))) {
+	 * System.out.println("Processing: " + system.projects.get(0).projectName);
+	 * regen(system);
+	 * }
+	 * }
+	 */
 
 	void regen(AadlSystem system) {
 
-		SystemInstance instance = getSystemInstance(system);
+		Reporter reporter = Util.createReporter();
+
+		SystemInstance instance = getSystemInstance(system, reporter);
 		assert instance != null : "System is null " + system.systemImplementationName;
 
-		Reporter reporter = Util.createReporter();
 		Aadl model = Util.getAir(instance, true, reporter);
 
 		if (reporter.hasError()) {

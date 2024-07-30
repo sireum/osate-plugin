@@ -31,6 +31,7 @@ import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
 import org.sireum.aadl.osate.util.IOUtil;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
+import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.message.Reporter;
 
@@ -60,9 +61,15 @@ public abstract class SireumTest extends XtextTest {
 			AadlSystem system = AadlSystem.makeAadlSystem(sysImplName, Optional.of(sysImplFile), Arrays.asList(project),
 					null);
 
-			SystemInstance instance = getSystemInstance(system);
-
 			Reporter reporter = Util.createReporter();
+
+			SystemInstance instance = getSystemInstance(system, reporter);
+
+			if (reporter.hasError()) {
+				reporter.printMessages();
+				Assert.assertTrue("Reporter has errors", !reporter.hasError());
+			}
+
 			Aadl model = Util.getAir(instance, true, reporter, System.out);
 
 			if (reporter.hasError()) {
@@ -95,13 +102,20 @@ public abstract class SireumTest extends XtextTest {
 		}
 	}
 
-	protected SystemInstance getSystemInstance(AadlSystem system) {
+	protected SystemInstance getSystemInstance(AadlSystem system, Reporter reporter) {
 		try {
 			ResourceSet rset = createResourceSet(system.projects);
 
 			Resource sysImplResource = null;
 			String candURI = "platform:/resource/" + system.systemFileContainer.get().proj.projectName + "/"
 					+ system.systemFileContainer.get().projectRelativePath;
+
+			VisitorUtil.translateMessages(rset, "SireumTest", reporter);
+
+			if (reporter.hasError()) {
+				return null;
+			}
+
 			for (Resource rs : rset.getResources()) {
 				if (rs.getURI().toString().equals(candURI)) {
 					sysImplResource = rs;
