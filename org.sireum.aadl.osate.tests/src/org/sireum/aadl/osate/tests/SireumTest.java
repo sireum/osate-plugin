@@ -110,7 +110,7 @@ public abstract class SireumTest extends XtextTest {
 			String candURI = "platform:/resource/" + system.systemFileContainer.get().proj.projectName + "/"
 					+ system.systemFileContainer.get().projectRelativePath;
 
-			VisitorUtil.translateMessages(rset, "SireumTest", reporter);
+			VisitorUtil.validate(rset, "SireumTest", reporter);
 
 			if (reporter.hasError()) {
 				return null;

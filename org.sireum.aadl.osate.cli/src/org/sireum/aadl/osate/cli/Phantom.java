@@ -18,12 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.validation.IResourceValidator;
-import org.eclipse.xtext.validation.Issue;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.Classifier;
 import org.osate.aadl2.SystemImplementation;
@@ -118,16 +113,6 @@ public class Phantom implements IApplication {
 			List<URI> contributed = PluginSupportUtil.getContributedAadl();
 			for (URI uri : contributed) {
 				resourceSet.getResource(uri, true);
-			}
-			
-			// convert any errors/warnings attached to resources into Sireum messages
-			Reporter reporter = Util.createReporter();
-			VisitorUtil.translateMessages(resourceSet, "Phantom", reporter);
-
-			reporter.printMessages();
-			
-			if (reporter.hasError()) {
-				return 1;
 			}
 
 			final Map<?, ?> args = context.getArguments();
@@ -329,6 +314,13 @@ public class Phantom implements IApplication {
 
 	SystemInstance getSystemInstance(AadlSystem system, ResourceSet rset) {
 		try {
+			Reporter reporter = Util.createReporter();
+			VisitorUtil.validate(rset, "Phantom", reporter);
+			reporter.printMessages();
+			if (reporter.hasError()) {
+				return null;
+			}
+
 			populateResourceSet(system.projects, rset);
 
 			SystemImplementation sysImpl = null;
@@ -438,21 +430,6 @@ public class Phantom implements IApplication {
 		for (AadlProject project : projects) {
 			for (File f : project.aadlFiles) {
 				loadFile(project, f, rs);
-			}
-		}
-
-		for (Resource resource : rs.getResources()) {
-			IResourceValidator validator = ((XtextResource) resource).getResourceServiceProvider()
-					.getResourceValidator();
-			List<Issue> issues = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-
-			if (!issues.isEmpty()) {
-				addInfo("Issues detected for: " + resource);
-				for (Issue issue : issues) {
-					String pos = "  [" + issue.getLineNumber() + "," + issue.getColumn() + "] ";
-					addInfo(pos + issue.getMessage());
-				}
-				addInfo("");
 			}
 		}
 

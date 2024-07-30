@@ -80,9 +80,9 @@ public class AirUpdater extends SireumTest {
 	 * public void syncGumbo() throws IOException {
 	 * Path srcPath = Os.path("./projects/org/sireum/aadl/osate/tests/gumbo");
 	 * Path destPath = Os.path(SIREUM_HOME() + "/hamr/codegen/jvm/src/test/resources/models/GumboTest");
-	 * 
+	 *
 	 * srcPath.copyOverTo(destPath);
-	 * 
+	 *
 	 * for (AadlSystem system : AadlProjectUtil.findSystems(new File(destPath.canon().value()))) {
 	 * System.out.println("Processing: " + system.projects.get(0).projectName);
 	 * regen(system);
@@ -95,6 +95,12 @@ public class AirUpdater extends SireumTest {
 		Reporter reporter = Util.createReporter();
 
 		SystemInstance instance = getSystemInstance(system, reporter);
+
+		if (reporter.hasError()) {
+			reporter.printMessages();
+			assert false : "Reporter has errors";
+		}
+
 		assert instance != null : "System is null " + system.systemImplementationName;
 
 		Aadl model = Util.getAir(instance, true, reporter);

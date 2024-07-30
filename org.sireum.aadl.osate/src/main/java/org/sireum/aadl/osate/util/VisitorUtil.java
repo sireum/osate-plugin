@@ -14,7 +14,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.LineAndColumn;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.AnnexLibrary;
 import org.osate.aadl2.AnnexSubclause;
@@ -186,24 +191,29 @@ public class VisitorUtil {
 		}
 	}
 
-	protected static void addMessage(Resource.Diagnostic d, boolean isError, String toolName, Reporter reporter) {
+	public static void validate(ResourceSet rs, String toolName, Reporter reporter) {
 		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
-		Option<Position> p = SlangUtil
-				.toSome(factory.flatPos(d.getLocation(), d.getLine(), d.getColumn(), 0, d.getLine(), d.getColumn(), 0));
-		if (isError) {
-			reporter.error(p, toolName, d.getMessage());
-		} else {
-			reporter.warn(p, toolName, d.getMessage());
-		}
-	}
-
-	public static void translateMessages(ResourceSet rs, String toolName, Reporter reporter) {
 		for (Resource r : rs.getResources()) {
-			for (Resource.Diagnostic warning : r.getWarnings()) {
-				addMessage(warning, false, toolName, reporter);
-			}
-			for (Resource.Diagnostic error : r.getErrors()) {
-				addMessage(error, true, toolName, reporter);
+			IResourceValidator validator = ((XtextResource) r).getResourceServiceProvider().getResourceValidator();
+			List<Issue> issues = validator.validate(r, CheckMode.ALL, CancelIndicator.NullImpl);
+			for (Issue i : issues) {
+				Option<Position> p = SlangUtil.toSome(factory.flatPos(i.getUriToProblem().toString(), i.getLineNumber(),
+						i.getColumn(),
+						i.getLineNumberEnd(), i.getColumnEnd(), i.getOffset(), i.getLength()));
+				switch(i.getSeverity()) {
+				case INFO:
+					reporter.info(p, toolName, i.getMessage());
+					break;
+				case WARNING:
+					reporter.warn(p, toolName, i.getMessage());
+					break;
+				case ERROR:
+					reporter.error(p, toolName, i.getMessage());
+					break;
+				case IGNORE:
+					// I guess we'll ignore it
+					break;
+				}
 			}
 		}
 	}
