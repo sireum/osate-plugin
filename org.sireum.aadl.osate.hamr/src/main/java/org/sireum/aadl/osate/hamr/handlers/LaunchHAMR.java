@@ -20,6 +20,7 @@ import org.sireum.IS;
 import org.sireum.MS;
 import org.sireum.Option;
 import org.sireum.Z;
+import org.sireum.Cli.SireumTopOption;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
@@ -27,7 +28,6 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.ErrorReport;
 import org.sireum.aadl.osate.hamr.handlers.HAMRUtil.Report;
 import org.sireum.aadl.osate.hamr.plugin.HAMRPluginUtil;
 import org.sireum.aadl.osate.handlers.AbstractSireumHandler;
-import org.sireum.aadl.osate.util.ApiUtil;
 import org.sireum.aadl.osate.util.SlangUtil;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SeverityLevel;
@@ -35,6 +35,8 @@ import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.arsit.ArsitBridge;
 import org.sireum.hamr.arsit.plugin.ArsitPlugin;
 import org.sireum.hamr.codegen.common.plugin.Plugin;
+import org.sireum.hamr.codegen.LongKeys;
+import org.sireum.hamr.codegen.CodeGenJavaFactory;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.message.Reporter;
 
@@ -55,8 +57,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		MessageConsole console = displayConsole();
 		console.clearConsole();
 
-		if (!Util.emitSireumVersion(console) || //
-				!(ApiUtil.hamrCliApiCompatible(new PrintStream(console.newMessageStream())))) {
+		if (!Util.emitSireumVersion(console)) { 
+				//|| //
+				//!(ApiUtil.hamrCliApiCompatible(new PrintStream(console.newMessageStream())))) {
 			displayPopup("HAMR code generation was unsuccessful");
 			return Status.CANCEL_STATUS;
 		}
@@ -216,6 +219,93 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
 
+							// build the argument sequence 
+							IS<Z, org.sireum.String> args = VisitorUtil.toISZ();
+							args = args.$colon$plus(s("hamr")).$colon$plus(s("codegen"));
+
+							if (verbose) {
+								args = args.$colon$plus(s(LongKeys.verbose()));
+							}
+							if (runtimeMonitoring) {
+								args = args.$colon$plus(s(LongKeys.runtimeMonitoring()));
+							}
+							args = args.$colon$plus(s(LongKeys.platform())).$colon$plus(s(platform));
+							
+							// Slang Options
+							if (slangOutputDir.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.Slang_slangOutputDir())).$colon$plus(slangOutputDir.get());
+							}
+							if (slangPackageName.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.Slang_packageName())).$colon$plus(slangPackageName.get());
+							}
+							if (noProyekIve) {
+								args = args.$colon$plus(s(LongKeys.Slang_noProyekIve()));
+							}
+							if (noEmbedArt) {
+								args = args.$colon$plus(s(LongKeys.Slang_noEmbedArt()));
+							}
+							if (devicesAsThreads) {
+								args = args.$colon$plus(s(LongKeys.Slang_devicesAsThreads()));
+							}
+							if (genSbtMill) {
+								args = args.$colon$plus(s(LongKeys.Slang_genSbtMill()));
+							}
+							
+							// Transpiler Options
+							if (slangAuxCodeDirs.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.Transpiler_slangAuxCodeDirs())).$colon$plus(s(CodeGenJavaFactory.iszToST(slangAuxCodeDirs, File.pathSeparator).render()));
+							}
+							if (slangOutputCDirectory.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.Transpiler_slangOutputCDir())).$colon$plus(slangOutputCDirectory.get());
+							}
+							if(excludeComponentImpl) {
+								args = args.$colon$plus(s(LongKeys.Transpiler_excludeComponentImpl()));
+							}
+							args = args.$colon$plus(s(LongKeys.Transpiler_bitWidth())).$colon$plus(s(bitWidth.string()));
+							args = args.$colon$plus(s(LongKeys.Transpiler_maxStringSize())).$colon$plus(s(maxStringSize.string()));
+							args = args.$colon$plus(s(LongKeys.Transpiler_maxArraySize())).$colon$plus(s(maxArraySize.string()));
+							if (runTranspiler) {
+								args = args.$colon$plus(s(LongKeys.Transpiler_runTranspiler()));
+							}
+							
+							// CAmkES Options
+							if (camkesOutputDirectory.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.CAmkES_camkesOutputDir())).$colon$plus(camkesOutputDirectory.get());
+							}
+							if (camkesAuxCodeDirs.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.CAmkES_camkesAuxCodeDirs())).$colon$plus(s(CodeGenJavaFactory.iszToST(camkesAuxCodeDirs, File.pathSeparator).render()));
+							}
+							if (workspaceRootDir.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.CAmkES_workspaceRootDir())).$colon$plus(workspaceRootDir.get());
+							}
+							
+							// ROS2 Options
+							if (strictAadlMode) {
+								args = args.$colon$plus(s(LongKeys.ROS2_strictAadlMode()));
+							}
+							if (ros2OutputWorkspaceDir.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.ROS2_ros2OutputWorkspaceDir())).$colon$plus(ros2OutputWorkspaceDir.get());
+							}
+							if (ros2Dir.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.ROS2_ros2Dir())).$colon$plus(ros2Dir.get());
+							}
+							
+							if (experimentalOptions.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.Experimental_experimentalOptions())).$colon$plus(s(CodeGenJavaFactory.iszToST(experimentalOptions, ";").render()));
+							}
+
+							Z codegenRet = org.sireum.Z.apply(0);
+							
+							Option<SireumTopOption> opts = getOptions(args);
+							if (opts.nonEmpty() && opts.get() instanceof org.sireum.Cli.SireumHamrCodegenOption) {
+								org.sireum.cli.HAMR.codeGenReporterP(model, (org.sireum.Cli.SireumHamrCodegenOption) opts.get(), hamrPlugins, reporter);
+								if (reporter.hasError()) {
+									codegenRet = org.sireum.Z.apply(1);
+								}
+							} else {
+								codegenRet = org.sireum.Z.apply(2);
+							}
+							/*
 							Z codegenRet = org.sireum.cli.HAMR.codeGenP( //
 									model, //
 									//
@@ -253,7 +343,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									hamrPlugins,
 									//
 									reporter);
-
+							*/
+							
 							// only propagate error messages to eclipse's problem view (all messages are emitted
 							// to the console view)
 							Util.addMarkers(PreferenceValues.HAMR_MARKER_ID, VisitorUtil.toIList(SeverityLevel.Error),
@@ -309,5 +400,12 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 		return Status.OK_STATUS;
 	}
+	
+	org.sireum.String s(java.lang.String s) {
+		return SlangUtil.sireumString(s);
+	}
 
+	private Option<SireumTopOption> getOptions(IS<Z, org.sireum.String> appArgs) {
+		return org.sireum.Cli$.MODULE$.apply(File.pathSeparatorChar).parseSireum(appArgs, org.sireum.Z.apply(0));
+	}
 }
