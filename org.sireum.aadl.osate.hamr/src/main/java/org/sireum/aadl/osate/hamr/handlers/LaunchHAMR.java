@@ -200,11 +200,14 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							IS<Z, org.sireum.String> camkesAuxCodeDirs = prompt.getOptionCamkesAuxSrcDir().equals("")
 									? VisitorUtil.toISZ()
 									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionCamkesAuxSrcDir()));
-							Option<org.sireum.String> aadlRootDir = ArsitBridge
+							Option<org.sireum.String> workspaceRootDir = ArsitBridge
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 
-							List<org.sireum.String> exOptions = new ArrayList<>();
+							boolean strictAadlMode = false;
+							Option<org.sireum.String> ros2OutputWorkspaceDir = ArsitBridge.sireumOption(null);
+							Option<org.sireum.String> ros2Dir = ArsitBridge.sireumOption(null);
 
+							List<org.sireum.String> exOptions = new ArrayList<>();
 							exOptions.add(new org.sireum.String("PROCESS_BTS_NODES"));
 
 							if (PreferenceValues.HAMR_PROOF_GENERATE.getValue()) {
@@ -219,9 +222,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									verbose, //
 									runtimeMonitoring,
 									org.sireum.Cli.SireumHamrCodegenHamrPlatform$.MODULE$.byName(platform).get(), //
+									//
 									slangOutputDir, //
 									slangPackageName, //
-									//
 									noProyekIve, //
 									noEmbedArt, //
 									devicesAsThreads, //
@@ -237,7 +240,13 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									//
 									camkesOutputDirectory, //
 									camkesAuxCodeDirs, //
-									aadlRootDir, //
+									workspaceRootDir, //
+									//
+									strictAadlMode,
+									ros2OutputWorkspaceDir,
+									ros2Dir,
+									org.sireum.Cli.SireumHamrCodegenNodesCodeLanguage$.MODULE$.byName("Cpp").get(), //
+									org.sireum.Cli.SireumHamrCodegenLaunchCodeLanguage$.MODULE$.byName("Xml").get(), //
 									//
 									experimentalOptions,
 									//
