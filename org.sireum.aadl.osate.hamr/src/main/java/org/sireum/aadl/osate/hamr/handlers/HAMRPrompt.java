@@ -36,6 +36,8 @@ import org.osgi.service.prefs.BackingStoreException;
 import org.sireum.Option;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
+import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Ros2LaunchLanguage;
+import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Ros2NodesLanguage;
 
 public class HAMRPrompt extends TitleAreaDialog {
 
@@ -45,7 +47,6 @@ public class HAMRPrompt extends TitleAreaDialog {
 			"Directory where Slang resources will be written to");
 	public final HAMROption OPTION_BASE_PACKAGE_NAME = new HAMROption("base.package.name", "Base Package Name",
 			"The root package name for the generated Slang project");
-
 	public final HAMROption OPTION_ENABLE_RUNTIME_MONITORING = new HAMROption("enable.runtime.monitoring",
 			"Enable Runtime Monitoring", "Enables runtime monitoring");
 
@@ -67,10 +68,19 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	public final HAMROption OPTION_CAMKES_OUTPUT_DIRECTORY = new HAMROption("camkes.output.directory",
 			"seL4/CAmkES Output Directory", "Directory where CAmkES resources will be written to");
-
 	public final HAMROption OPTION_CAMKES_AUX_SRC_DIR = new HAMROption("camkes.aux.src.dir",
 			"Aux Code Directory for CAmkES", "Directory containing C code to be included in CAmkES project");
 
+	
+	public final HAMROption OPTION_ROS2_STRICT_AADL_MODE = new HAMROption("ros2.strict.aadl.mode",
+			"Strict AADL Mode", "Whether to generate strictly AADL-compliant code or not");
+	public final HAMROption OPTION_ROS2_OUTPUT_WORKSPACE_DIRECTORY = new HAMROption("ros2.output.workspace.directory",
+			"Output Workspace Directory", "The path to the ROS2 workspace to generate the packages intoDirectory where CAmkES resources will be written to");
+	public final HAMROption OPTION_ROS2_DIRECTORY = new HAMROption("ros2.directory",
+			"ROS2 Directory", "The path to your ROS2 installation, including the version");
+	public final HAMROption OPTION_ROS2_NODES_LANGUAGE = new HAMROption("ros2.nodes.language", "Nodes Language", "The programming language for the generated node files");
+	public final HAMROption OPTION_ROS2_LAUNCH_LANGUAGE = new HAMROption("ros2.launch.language", "Launch Language", "The programming language for the launch file");
+	
 	public Platform getOptionPlatform() {
 		return Platform.valueOf(getSavedStringOption(OPTION_PLATFORM));
 	}
@@ -122,6 +132,27 @@ public class HAMRPrompt extends TitleAreaDialog {
 	public String getOptionCamkesAuxSrcDir() {
 		return getSavedStringOption(OPTION_CAMKES_AUX_SRC_DIR);
 	}
+	
+	public boolean getOptionRos2StrictAadlMode() {
+		return getSavedBooleanOption(OPTION_ROS2_STRICT_AADL_MODE);
+	}
+	
+	public String getOptionRos2OutputWorkspaceDirectory() {
+		return getSavedStringOption(OPTION_ROS2_OUTPUT_WORKSPACE_DIRECTORY);
+	}
+	
+	public String getOptionRos2Directory() {
+		return getSavedStringOption(OPTION_ROS2_DIRECTORY);
+	}
+	
+	public Ros2NodesLanguage getOptionRos2NodesLanguage() {
+		return Ros2NodesLanguage.valueOf(getSavedStringOption(OPTION_ROS2_NODES_LANGUAGE));
+	}
+	
+	public Ros2LaunchLanguage getOptionRos2LaunchLanguage() {
+		return Ros2LaunchLanguage.valueOf(getSavedStringOption(OPTION_ROS2_LAUNCH_LANGUAGE));
+	}
+	
 
 	/* runs after controls have been created */
 	private void initControlValues() {
@@ -196,7 +227,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	private final HAMRGroup GROUP_TRANSPILER = new HAMRGroup("KEY_GROUP_TRANSPILER", "Transpiler Options", "");
 	private final HAMRGroup GROUP_CAMKES = new HAMRGroup("KEY_GROUP_CAMKES", "CAmkES Options", "");
-
+	private final HAMRGroup GROUP_ROS2 = new HAMRGroup("KEY_GROUP_ROS2", "ROS2 Options", "");
+	
 	// The image to display
 	private Image image;
 
@@ -624,6 +656,155 @@ public class HAMRPrompt extends TitleAreaDialog {
 				btn.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
 			}
 		}
+		
+		fillerRow(container, numCols);
+		
+		/****************************************************************
+		 * ROW
+		 ****************************************************************/
+		{
+			final HAMRGroup key = GROUP_ROS2;
+			final int numGroupCols = 3;
+
+			// COL 1
+			Group grpContainer = new Group(container, SWT.NONE);
+			grpContainer.setText(key.displayText);
+			grpContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, numCols, 1));
+			registerViewControl(key, grpContainer);
+
+			final GridLayout grpLayout = new GridLayout(numGroupCols, false);
+			grpContainer.setLayout(grpLayout);
+
+			/****************************************************************
+			 * GROUP ROW - ROS2 Strict AADL Mode
+			 ****************************************************************/
+			{
+				HAMROption subKey = OPTION_ROS2_STRICT_AADL_MODE;
+
+				Button btn = new Button(grpContainer, SWT.CHECK);
+				btn.setText(subKey.displayText);
+				btn.setToolTipText(subKey.toolTipText);
+				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
+				registerOptionControl(subKey, btn, false);
+			}
+
+			/****************************************************************
+			 * ROW - ROS2 Output Workspace Directory
+			 ****************************************************************/
+
+			{
+				final HAMROption subKey = OPTION_ROS2_OUTPUT_WORKSPACE_DIRECTORY;
+
+				// COL 1
+				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+				registerOptionControl(subKey, txt, false);
+
+				// COL 3
+				Button btn = new Button(grpContainer, SWT.NONE);
+				btn.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						String path = promptForDirectory("Select ROS2 Ouptut Workspace Directory",
+								getOptionCamkesAuxSrcDir());
+						if (path != null) {
+							txt.setText(path);
+						}
+					}
+				});
+				btn.setText("...");
+				btn.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
+			}
+			/****************************************************************
+			 * ROW - ROS2 Directory
+			 ****************************************************************/
+			{
+				final HAMROption subKey = OPTION_ROS2_DIRECTORY;
+
+				// COL 1
+				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+				registerOptionControl(subKey, txt, false);
+
+				// COL 3
+				Button btn = new Button(grpContainer, SWT.NONE);
+				btn.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						String path = promptForDirectory("Select ROS2 Directory",
+								getOptionCamkesAuxSrcDir());
+						if (path != null) {
+							txt.setText(path);
+						}
+					}
+				});
+				btn.setText("...");
+				btn.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
+			}
+			
+			/****************************************************************
+			 * ROW - ROS2 Nodes Language
+			 ****************************************************************/
+			{
+				final HAMROption subKey = OPTION_ROS2_NODES_LANGUAGE;
+
+				// COL 1
+				addLabel(subKey.displayText, grpContainer).setToolTipText(key.toolTipText);
+
+				// COL 2
+				Combo cmb = new Combo(grpContainer, SWT.READ_ONLY);
+				cmb.setItems(getRos2NodesLanguages());
+				GridData gd = new GridData(SWT.LEFT, SWT.CENTER, true, false);
+				gd.widthHint = 100;
+				cmb.setLayoutData(gd);
+				registerOptionControl(subKey, cmb, false);
+
+				//cmb.addSelectionListener(new SelectionAdapter() {
+				//	@Override
+				//	public void widgetSelected(SelectionEvent e) {
+				//		computeVisibilityAndPack(grpContainer);
+				//	}
+				//});
+
+				// COL 3
+				//registerViewControl(key, addColumnPad(grpContainer)); // col padding
+				addColumnPad(grpContainer);
+			}
+			/****************************************************************
+			 * ROW - ROS2 Launch Language
+			 ****************************************************************/
+			{
+				final HAMROption subKey = OPTION_ROS2_LAUNCH_LANGUAGE;
+
+				// COL 1
+				addLabel(subKey.displayText, grpContainer).setToolTipText(key.toolTipText);
+
+				// COL 2
+				Combo cmb = new Combo(grpContainer, SWT.READ_ONLY);
+				cmb.setItems(getRos2LaunchLanguages());
+				GridData gd = new GridData(SWT.LEFT, SWT.CENTER, true, false);
+				gd.widthHint = 100;
+				cmb.setLayoutData(gd);
+				registerOptionControl(subKey, cmb, false);
+
+				//cmb.addSelectionListener(new SelectionAdapter() {
+				//	@Override
+				//	public void widgetSelected(SelectionEvent e) {
+				//		computeVisibilityAndPack(grpContainer);
+				//	}
+				//});
+
+				// COL 3
+				//registerViewControl(key, addColumnPad(grpContainer)); // col padding
+				addColumnPad(grpContainer);
+			}
+		}
 
 		initControlValues();
 
@@ -804,6 +985,14 @@ public class HAMRPrompt extends TitleAreaDialog {
 			return thePlatforms.stream().map(f -> f.toString()).toArray(String[]::new);
 		}
 	}
+	
+	private String[] getRos2NodesLanguages() {
+		return Arrays.asList(HAMRPropertyProvider.Ros2NodesLanguage.values()).stream().map(f -> f.toString()).toArray(String[]::new);
+	}
+	
+	private String[] getRos2LaunchLanguages() {
+		return Arrays.asList(HAMRPropertyProvider.Ros2LaunchLanguage.values()).stream().map(f -> f.toString()).toArray(String[]::new);
+	}
 
 	private String[] filterHW(HW... validOption) {
 		return Arrays.asList(validOption)
@@ -875,7 +1064,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 		List<HAMREntry> SEL4_controls = addAll(NIX_controls, Arrays.asList( //
 				GROUP_CAMKES));
-
+		
 		List<HAMREntry> toShow = JVM_controls;
 
 		String[] hwItems = null;
@@ -905,6 +1094,11 @@ public class HAMRPrompt extends TitleAreaDialog {
 			// toShow = Arrays.asList(OPTION_PLATFORM, OPTION_HW, GROUP_CAMKES);
 			toShow = Arrays.asList(OPTION_PLATFORM, GROUP_CAMKES);
 			break;
+		case ros2:
+			hwItems = filterHW();
+			toShow = Arrays.asList(OPTION_PLATFORM, GROUP_ROS2);
+			break;
+			
 		default:
 			throw new RuntimeException("Not expecting platform " + p.name());
 		}

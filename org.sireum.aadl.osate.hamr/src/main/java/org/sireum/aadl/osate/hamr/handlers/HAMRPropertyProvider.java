@@ -27,18 +27,7 @@ public class HAMRPropertyProvider {
 
 	// should match Platform in HAMR.aadl
 	enum Platform {
-		JVM, Linux, macOS, Cygwin, seL4, seL4_Only, seL4_TB;
-
-		Platform() {
-			if (org.sireum.Cli.SireumHamrCodegenHamrPlatform$.MODULE$.byName(hamrName()).isEmpty()) {
-				throw new RuntimeException(hamrName() + " is not a valid HamrPlatform value");
-			}
-		}
-
-		public String hamrName() {
-			// first char in cli-gen'ed slang enum values are upper cased
-			return name().substring(0, 1).toUpperCase() + name().substring(1);
-		}
+		JVM, Linux, macOS, Cygwin, seL4, seL4_Only, seL4_TB, ros2;
 	}
 
 	// should match HW in HAMR.aadl
@@ -61,6 +50,14 @@ public class HAMRPropertyProvider {
 		} catch (PropertyLookupException e) {
 		}
 		return r;
+	}
+	
+	enum Ros2NodesLanguage {
+		Python, Cpp
+	}
+	
+	enum Ros2LaunchLanguage {
+		Python, Xml
 	}
 
 	public static List<Platform> getPlatformsFromElement(NamedElement ne) {

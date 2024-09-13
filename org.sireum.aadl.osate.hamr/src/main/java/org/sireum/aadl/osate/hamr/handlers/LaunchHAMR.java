@@ -173,14 +173,20 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								.equals("") //
 										? null
 										: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
-
+						final org.sireum.String _ros2OutputWorkspaceDir = prompt.getOptionRos2OutputWorkspaceDirectory().equals("") //
+								? null
+								: new org.sireum.String(prompt.getOptionRos2OutputWorkspaceDirectory());	
+						final org.sireum.String _ros2Ros2Dir = prompt.getOptionRos2Directory().equals("") //
+								? null
+										: new org.sireum.String(prompt.getOptionRos2Directory());
+						
 						final File ideaDir = new File(_slangOutputDir.string() + File.separator + ".idea");
 
 						toolRet = Util.callWrapper(getToolName(), console, () -> {
 
 							boolean verbose = PreferenceValues.HAMR_VERBOSE_OPT.getValue();
 							boolean runtimeMonitoring = prompt.getOptionEnableRuntimeMonitoring();
-							String platform = prompt.getOptionPlatform().hamrName();
+							String platform = prompt.getOptionPlatform().name();
 							Option<org.sireum.String> slangOutputDir = ArsitBridge.sireumOption(_slangOutputDir);
 							Option<org.sireum.String> slangPackageName = ArsitBridge.sireumOption(_base);
 							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue()
@@ -206,10 +212,12 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Option<org.sireum.String> workspaceRootDir = ArsitBridge
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 
-							boolean strictAadlMode = false;
-							Option<org.sireum.String> ros2OutputWorkspaceDir = ArsitBridge.sireumOption(null);
-							Option<org.sireum.String> ros2Dir = ArsitBridge.sireumOption(null);
-
+							boolean strictAadlMode = prompt.getOptionRos2StrictAadlMode();
+							Option<org.sireum.String> ros2OutputWorkspaceDir = ArsitBridge.sireumOption(_ros2OutputWorkspaceDir);
+							Option<org.sireum.String> ros2Dir = ArsitBridge.sireumOption(_ros2Ros2Dir);
+							String ros2NodesLanguage = prompt.getOptionRos2NodesLanguage().name();
+							String ros2LaunchLanguage = prompt.getOptionRos2LaunchLanguage().name();
+							
 							List<org.sireum.String> exOptions = new ArrayList<>();
 							exOptions.add(new org.sireum.String("PROCESS_BTS_NODES"));
 
@@ -289,6 +297,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							if (ros2Dir.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.ROS2_ros2Dir())).$colon$plus(ros2Dir.get());
 							}
+							args = args.$colon$plus(s(LongKeys.ROS2_ros2NodesLanguage())).$colon$plus(s(ros2NodesLanguage));
+							args = args.$colon$plus(s(LongKeys.ROS2_ros2LaunchLanguage())).$colon$plus(s(ros2LaunchLanguage));
 							
 							if (experimentalOptions.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.Experimental_experimentalOptions())).$colon$plus(s(CodeGenJavaFactory.iszToST(experimentalOptions, ";").render()));
@@ -305,45 +315,6 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							} else {
 								codegenRet = org.sireum.Z.apply(2);
 							}
-							/*
-							Z codegenRet = org.sireum.cli.HAMR.codeGenP( //
-									model, //
-									//
-									verbose, //
-									runtimeMonitoring,
-									org.sireum.Cli.SireumHamrCodegenHamrPlatform$.MODULE$.byName(platform).get(), //
-									//
-									slangOutputDir, //
-									slangPackageName, //
-									noProyekIve, //
-									noEmbedArt, //
-									devicesAsThreads, //
-									genSbtMill, //
-									//
-									slangAuxCodeDirs, //
-									slangOutputCDirectory, //
-									excludeComponentImpl, //
-									bitWidth, //
-									maxStringSize, //
-									maxArraySize, //
-									runTranspiler, //
-									//
-									camkesOutputDirectory, //
-									camkesAuxCodeDirs, //
-									workspaceRootDir, //
-									//
-									strictAadlMode,
-									ros2OutputWorkspaceDir,
-									ros2Dir,
-									org.sireum.Cli.SireumHamrCodegenNodesCodeLanguage$.MODULE$.byName("Cpp").get(), //
-									org.sireum.Cli.SireumHamrCodegenLaunchCodeLanguage$.MODULE$.byName("Xml").get(), //
-									//
-									experimentalOptions,
-									//
-									hamrPlugins,
-									//
-									reporter);
-							*/
 							
 							// only propagate error messages to eclipse's problem view (all messages are emitted
 							// to the console view)
