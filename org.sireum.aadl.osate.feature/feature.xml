@@ -2,7 +2,7 @@
 <feature
       id="org.sireum.aadl.osate.feature"
       label="Sireum OSATE Plugin"
-      version="1.2024.09121039.qualifier"
+      version="1.2024.09151015.qualifier"
       provider-name="SAnToS">
 
    <description>
