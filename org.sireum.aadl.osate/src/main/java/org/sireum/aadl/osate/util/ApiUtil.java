@@ -17,44 +17,45 @@ public class ApiUtil {
 	public static boolean hamrCliApiCompatible(PrintStream out) {
 
 		// Paste the following into a java program if you want to ensure the known keys match.
-		// To regenerate this, run '$SIREUM_HOME/hamr/codegen/build.cmd regen-cli'
+		// To regenerate this, run '$SIREUM_HOME/hamr/codegen/build.cmd regen-cli'.
 		// If this does fail then the CLI arguments being constructed for codegen will need
 		// to be updated (that could be delayed if only new options were added).
-		
+
 		scala.collection.Seq<org.sireum.String> seq = scala.jdk.javaapi.CollectionConverters
 				.asScala(new java.util.ArrayList<org.sireum.String>());
 		scala.collection.immutable.Seq<org.sireum.String> iseq = ((scala.collection.IterableOnceOps<org.sireum.String, ?, ?>) seq)
 				.toSeq();
 		org.sireum.IS<org.sireum.Z, org.sireum.String> knownKeys = org.sireum.IS$.MODULE$
 				.apply(iseq, org.sireum.Z$.MODULE$)
-				.$colon$plus(new org.sireum.String("msgpack"))
-				.$colon$plus(new org.sireum.String("verbose"))
-				.$colon$plus(new org.sireum.String("runtime-monitoring"))
-				.$colon$plus(new org.sireum.String("platform"))
-				.$colon$plus(new org.sireum.String("parseable-messages"))
-				.$colon$plus(new org.sireum.String("slang-output-dir"))
-				.$colon$plus(new org.sireum.String("package-name"))
-				.$colon$plus(new org.sireum.String("no-proyek-ive"))
-				.$colon$plus(new org.sireum.String("no-embed-art"))
-				.$colon$plus(new org.sireum.String("devices-as-thread"))
-				.$colon$plus(new org.sireum.String("sbt-mill"))
-				.$colon$plus(new org.sireum.String("aux-code-dirs"))
-				.$colon$plus(new org.sireum.String("output-c-dir"))
-				.$colon$plus(new org.sireum.String("exclude-component-impl"))
-				.$colon$plus(new org.sireum.String("bit-width"))
-				.$colon$plus(new org.sireum.String("max-string-size"))
-				.$colon$plus(new org.sireum.String("max-array-size"))
-				.$colon$plus(new org.sireum.String("run-transpiler"))
-				.$colon$plus(new org.sireum.String("camkes-output-dir"))
-				.$colon$plus(new org.sireum.String("camkes-aux-code-dirs"))
-				.$colon$plus(new org.sireum.String("workspace-root-dir"))
-				.$colon$plus(new org.sireum.String("strict-aadl-mode"))
-				.$colon$plus(new org.sireum.String("ros2-output-workspace-dir"))
-				.$colon$plus(new org.sireum.String("ros2-dir"))
-				.$colon$plus(new org.sireum.String("ros2-nodes-language"))
-				.$colon$plus(new org.sireum.String("ros2-launch-language"))
-				.$colon$plus(new org.sireum.String("experimental-options"));
-		boolean sameKeys = org.sireum.hamr.codegen.KeyUtil.allLongKeys().equals(knownKeys);
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.msgpack()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.verbose()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.runtimeMonitoring()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.platform()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.parseableMessages()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Slang_slangOutputDir()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Slang_packageName()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Slang_noProyekIve()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Slang_noEmbedArt()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Slang_devicesAsThreads()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Slang_genSbtMill()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_slangAuxCodeDirs()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_slangOutputCDir()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_excludeComponentImpl()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_bitWidth()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_maxStringSize()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_maxArraySize()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_runTranspiler()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.CAmkES_camkesOutputDir()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.CAmkES_camkesAuxCodeDirs()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.CAmkES_workspaceRootDir()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_strictAadlMode()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2OutputWorkspaceDir()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2Dir()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2NodesLanguage()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2LaunchLanguage()))
+				.$colon$plus(
+						new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Experimental_experimentalOptions()));
+		boolean sameKeys = org.sireum.hamr.codegen.LongKeys.sameKeys(knownKeys);
 
 		if (!sameKeys) {
 			out.println(
@@ -64,7 +65,7 @@ public class ApiUtil {
 			out.println("If that does not resolve the issue then please report it.\n");
 		}
 		return sameKeys;
-		
+
 		// old way of doing this
 		/*
 		 * String msg = null;
