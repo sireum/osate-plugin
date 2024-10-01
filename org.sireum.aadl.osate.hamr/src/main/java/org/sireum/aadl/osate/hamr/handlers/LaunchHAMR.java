@@ -57,7 +57,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 		MessageConsole console = displayConsole();
 		console.clearConsole();
 
-		if (!Util.emitSireumVersion(console)) { 
+		if (!Util.emitSireumVersion(console)) {
 				//|| //
 				//!(ApiUtil.hamrCliApiCompatible(new PrintStream(console.newMessageStream())))) {
 			displayPopup("HAMR code generation was unsuccessful");
@@ -175,11 +175,11 @@ public class LaunchHAMR extends AbstractSireumHandler {
 										: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
 						final org.sireum.String _ros2OutputWorkspaceDir = prompt.getOptionRos2OutputWorkspaceDirectory().equals("") //
 								? null
-								: new org.sireum.String(prompt.getOptionRos2OutputWorkspaceDirectory());	
+								: new org.sireum.String(prompt.getOptionRos2OutputWorkspaceDirectory());
 						final org.sireum.String _ros2Ros2Dir = prompt.getOptionRos2Directory().equals("") //
 								? null
 										: new org.sireum.String(prompt.getOptionRos2Directory());
-						
+
 						final File ideaDir = new File(_slangOutputDir.string() + File.separator + ".idea");
 
 						toolRet = Util.callWrapper(getToolName(), console, () -> {
@@ -217,7 +217,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Option<org.sireum.String> ros2Dir = ArsitBridge.sireumOption(_ros2Ros2Dir);
 							String ros2NodesLanguage = prompt.getOptionRos2NodesLanguage().name();
 							String ros2LaunchLanguage = prompt.getOptionRos2LaunchLanguage().name();
-							
+
 							List<org.sireum.String> exOptions = new ArrayList<>();
 							exOptions.add(new org.sireum.String("PROCESS_BTS_NODES"));
 
@@ -225,9 +225,15 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								exOptions.add(new org.sireum.String("GENERATE_REFINEMENT_PROOF"));
 							}
 
+							if (!PreferenceValues.HAMR_PROYEK_IVE_OPTIONS_OPT.getValue().isBlank()) {
+								exOptions.add(new org.sireum.String(
+										org.sireum.hamr.codegen.common.util.ExperimentalOptions.PROYEK_IVE_OPTIONS()
+												+ "=" + PreferenceValues.HAMR_PROYEK_IVE_OPTIONS_OPT.getValue()));
+							}
+
 							IS<Z, org.sireum.String> experimentalOptions = VisitorUtil.toISZ(exOptions);
 
-							// build the argument sequence 
+							// build the argument sequence
 							IS<Z, org.sireum.String> args = VisitorUtil.toISZ();
 							args = args.$colon$plus(s("hamr")).$colon$plus(s("codegen"));
 
@@ -238,7 +244,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								args = args.$colon$plus(s(LongKeys.runtimeMonitoring()));
 							}
 							args = args.$colon$plus(s(LongKeys.platform())).$colon$plus(s(platform));
-							
+
 							// Slang Options
 							if (slangOutputDir.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.Slang_slangOutputDir())).$colon$plus(slangOutputDir.get());
@@ -258,7 +264,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							if (genSbtMill) {
 								args = args.$colon$plus(s(LongKeys.Slang_genSbtMill()));
 							}
-							
+
 							// Transpiler Options
 							if (slangAuxCodeDirs.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.Transpiler_slangAuxCodeDirs())).$colon$plus(s(CodeGenJavaFactory.iszToST(slangAuxCodeDirs, File.pathSeparator).render()));
@@ -275,7 +281,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							if (runTranspiler) {
 								args = args.$colon$plus(s(LongKeys.Transpiler_runTranspiler()));
 							}
-							
+
 							// CAmkES Options
 							if (camkesOutputDirectory.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.CAmkES_camkesOutputDir())).$colon$plus(camkesOutputDirectory.get());
@@ -286,7 +292,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							if (workspaceRootDir.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.CAmkES_workspaceRootDir())).$colon$plus(workspaceRootDir.get());
 							}
-							
+
 							// ROS2 Options
 							if (strictAadlMode) {
 								args = args.$colon$plus(s(LongKeys.ROS2_strictAadlMode()));
@@ -299,13 +305,13 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							}
 							args = args.$colon$plus(s(LongKeys.ROS2_ros2NodesLanguage())).$colon$plus(s(ros2NodesLanguage));
 							args = args.$colon$plus(s(LongKeys.ROS2_ros2LaunchLanguage())).$colon$plus(s(ros2LaunchLanguage));
-							
+
 							if (experimentalOptions.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.Experimental_experimentalOptions())).$colon$plus(s(CodeGenJavaFactory.iszToST(experimentalOptions, ";").render()));
 							}
 
 							Z codegenRet = org.sireum.Z.apply(0);
-							
+
 							Option<SireumTopOption> opts = getOptions(args);
 							if (opts.nonEmpty() && opts.get() instanceof org.sireum.Cli.SireumHamrCodegenOption) {
 								org.sireum.cli.HAMR.codeGenReporterP(model, (org.sireum.Cli.SireumHamrCodegenOption) opts.get(), hamrPlugins, reporter);
@@ -315,7 +321,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							} else {
 								codegenRet = org.sireum.Z.apply(2);
 							}
-							
+
 							// only propagate error messages to eclipse's problem view (all messages are emitted
 							// to the console view)
 							Util.addMarkers(PreferenceValues.HAMR_MARKER_ID, VisitorUtil.toIList(SeverityLevel.Error),
@@ -371,7 +377,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 		return Status.OK_STATUS;
 	}
-	
+
 	org.sireum.String s(java.lang.String s) {
 		return SlangUtil.sireumString(s);
 	}

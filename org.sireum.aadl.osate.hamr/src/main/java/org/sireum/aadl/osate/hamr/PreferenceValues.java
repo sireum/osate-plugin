@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Optional;
 
 import org.eclipse.jface.preference.BooleanFieldEditor;
+import org.eclipse.jface.preference.DirectoryFieldEditor;
 import org.eclipse.jface.preference.FileFieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.IntegerFieldEditor;
@@ -18,7 +19,7 @@ public class PreferenceValues {
 
 	public static final BoolOption HAMR_GEN_SBT_MILL_OPT = new BoolOption(//
 			"HAMR_GEN_SBT_MILL_OPT", //
-			"Generate SBT and Mill projects in addition to Proyek", //
+			"Generate SBT project in addition to Proyek", //
 			Optional.empty(), //
 			false);
 
@@ -27,6 +28,19 @@ public class PreferenceValues {
 			"Generate IVE project", //
 			Optional.of("Generate IVE/IntelliJ IDEA project using Proyek IVE"), //
 			true);
+
+	public static final StringOption HAMR_PROYEK_IVE_OPTIONS_OPT = new StringOption(//
+			"HAMR_PROYEK_IVE_OPTIONS_OPT", //
+			"IVE Options", //
+			Optional.of("Options to pass to Proyek IVE"), //
+			"");
+
+	public static final DirectoryOption HAMR_ALT_SIREUM_HOME = new DirectoryOption(//
+			"HAMR_ALT_SIREUM_HOME", //
+			"Sireum Home", //
+			Optional.of("Path to sireum"), //
+			System.getProperty("org.sireum.home", "")
+	);
 
 	public static final BoolOption HAMR_DEVICES_AS_THREADS_OPT = new BoolOption(//
 			"HAMR_DEVICES_AS_THREADS_OPT", //
@@ -155,6 +169,37 @@ public class PreferenceValues {
 
 		public FileFieldEditor getEditor(Composite parent) {
 			FileFieldEditor ret = new FileFieldEditor(key, name, parent);
+			if (tooltip.isPresent()) {
+				ret.getTextControl(parent).setToolTipText(tooltip.get());
+				ret.getLabelControl(parent).setToolTipText(tooltip.get());
+			}
+			return ret;
+		}
+	}
+	
+	public static class DirectoryOption extends OsateOption {
+		final String defaultValue;
+
+		public DirectoryOption(String key, String name, Optional<String> tooltip, String defaultValue) {
+			this.key = key;
+			this.name = name;
+			this.tooltip = tooltip;
+			this.defaultValue = defaultValue;
+
+			store.setDefault(key, defaultValue);
+		}
+
+		public File getValue() {
+			File f = new File(store.getString(key));
+			if (f.exists() && f.isFile() && f.canExecute()) {
+				return f;
+			} else {
+				return null;
+			}
+		}
+
+		public DirectoryFieldEditor getEditor(Composite parent) {
+			DirectoryFieldEditor ret = new DirectoryFieldEditor(key, name, parent);
 			if (tooltip.isPresent()) {
 				ret.getTextControl(parent).setToolTipText(tooltip.get());
 				ret.getLabelControl(parent).setToolTipText(tooltip.get());

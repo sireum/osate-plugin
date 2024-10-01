@@ -146,11 +146,19 @@ public class HAMRPrompt extends TitleAreaDialog {
 	}
 	
 	public Ros2NodesLanguage getOptionRos2NodesLanguage() {
-		return Ros2NodesLanguage.valueOf(getSavedStringOption(OPTION_ROS2_NODES_LANGUAGE));
+		if (getSavedStringOption(OPTION_ROS2_NODES_LANGUAGE).isBlank()) {
+			return Ros2NodesLanguage.Python;
+		} else {
+			return Ros2NodesLanguage.valueOf(getSavedStringOption(OPTION_ROS2_NODES_LANGUAGE));
+		}
 	}
 	
 	public Ros2LaunchLanguage getOptionRos2LaunchLanguage() {
-		return Ros2LaunchLanguage.valueOf(getSavedStringOption(OPTION_ROS2_LAUNCH_LANGUAGE));
+		if (getSavedStringOption(OPTION_ROS2_LAUNCH_LANGUAGE).isBlank()) {
+			return Ros2LaunchLanguage.Python;
+		} else {
+			return Ros2LaunchLanguage.valueOf(getSavedStringOption(OPTION_ROS2_LAUNCH_LANGUAGE));
+		}
 	}
 	
 

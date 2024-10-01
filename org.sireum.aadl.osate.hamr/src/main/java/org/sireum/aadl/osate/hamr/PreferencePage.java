@@ -44,6 +44,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 
 		addField(PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getEditor(seGroup));
 
+		addField(PreferenceValues.HAMR_PROYEK_IVE_OPTIONS_OPT.getEditor(seGroup));
+
 		addField(PreferenceValues.HAMR_GEN_SBT_MILL_OPT.getEditor(seGroup));
 
 		addField(PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getEditor(seGroup));
@@ -51,6 +53,8 @@ public class PreferencePage extends FieldEditorPreferencePage implements IWorkbe
 		addField(PreferenceValues.HAMR_EMBED_ART_OPT.getEditor(seGroup));
 
 		addField(PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getEditor(seGroup));
+
+		addField(PreferenceValues.HAMR_ALT_SIREUM_HOME.getEditor(seGroup));
 
 		Group proofGroup = new Group(comp, SWT.BORDER);
 		proofGroup.setText("Proof Options");
