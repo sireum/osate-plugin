@@ -29,6 +29,7 @@ import org.osate.ge.internal.services.DiagramService;
 import org.osate.ge.internal.services.DiagramService.DiagramReference;
 import org.osate.ge.internal.ui.editor.InternalDiagramEditor;
 import org.osate.ge.internal.ui.util.EditorUtil;
+import org.osate.ui.UiUtil;
 import org.sireum.awas.ast.Node;
 import org.sireum.awas.awasfacade.Collector;
 import org.sireum.awas.collector.ResultType;
@@ -85,12 +86,16 @@ public class AwasUtil {
 
 		Set<InstanceObject> ios = awasUri2AadlInstObj(uris, st, resource);
 
+		final EObjectURIWrapper.Factory factory = new EObjectURIWrapper.Factory(UiUtil.getModelElementLabelProvider());
+
 		Set<URI> aadlUris = new HashSet<URI>();
 		if (isImpleDiagram) {
 			Set<Element> elems = instObjs2Elements(ios);
-			aadlUris.addAll(elems.stream().map(it -> new EObjectURIWrapper(it).getUri()).collect(Collectors.toSet()));
+			aadlUris.addAll(elems.stream()
+					.map(it -> factory.createWrapperFor(it).getUri())
+					.collect(Collectors.toSet()));
 		} else {
-			aadlUris.addAll(ios.stream().map(it -> new EObjectURIWrapper(it).getUri()).collect(Collectors.toSet()));
+			aadlUris.addAll(ios.stream().map(it -> factory.createWrapperFor(it).getUri()).collect(Collectors.toSet()));
 		}
 
 		Set<DiagramElement> des = new HashSet<DiagramElement>();
@@ -101,7 +106,7 @@ public class AwasUtil {
 
 		des.forEach(de -> {
 			if (de.getBusinessObject() instanceof EObject
-					&& aadlUris.contains(new EObjectURIWrapper((EObject) de.getBusinessObject()).getUri())) {
+					&& aadlUris.contains(factory.createWrapperFor((EObject) de.getBusinessObject()).getUri())) {
 				de.setStyle(StyleBuilder.create(de.getStyle()).backgroundColor(org.osate.ge.graphics.Color.ORANGE)
 						// .fontColor(org.osate.ge.graphics.Color.ORANGE)
 						.outlineColor(org.osate.ge.graphics.Color.MAGENTA)

@@ -49,6 +49,7 @@ import org.osate.ge.internal.services.ActionExecutor.ExecutionMode;
 import org.osate.ge.internal.services.DiagramService;
 import org.osate.ge.internal.services.DiagramService.DiagramReference;
 import org.osate.ge.internal.ui.util.EditorUtil;
+import org.osate.ui.UiUtil;
 import org.sireum.aadl.osate.awas.Activator;
 import org.sireum.aadl.osate.awas.util.AwasServer;
 import org.sireum.aadl.osate.awas.util.AwasUtil;
@@ -252,8 +253,11 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 
 			AwasUtil.getAllDiagramElements(ade.getDiagram()).forEach(de -> des.add(de));
 
+			final EObjectURIWrapper.Factory factory = new EObjectURIWrapper.Factory(
+					UiUtil.getModelElementLabelProvider());
+
 			des.forEach(de -> {
-				URI hUri = new EObjectURIWrapper((EObject) de.getBusinessObject()).getUri();
+				URI hUri = factory.createWrapperFor((EObject) de.getBusinessObject()).getUri();
 				if (de.getBusinessObject() instanceof EObject && uris.containsKey(hUri)) {
 					de.setStyle(StyleBuilder.create(de.getStyle()).backgroundColor(AwasUtil.hex2Rgb(uris.get(hUri)))
 							// .fontColor(org.osate.ge.graphics.Color.ORANGE)
@@ -290,8 +294,11 @@ public class AwasServerHandler extends AbstractSireumHandler implements IElement
 
 			AwasUtil.getAllDiagramElements(ade.getDiagram()).forEach(de -> des.add(de));
 
+			final EObjectURIWrapper.Factory factory = new EObjectURIWrapper.Factory(
+					UiUtil.getModelElementLabelProvider());
+
 			des.forEach(de -> {
-				URI hUri = new EObjectURIWrapper((EObject) de.getBusinessObject()).getUri();
+				URI hUri = factory.createWrapperFor((EObject) de.getBusinessObject()).getUri();
 				if (de.getBusinessObject() instanceof EObject && iUri.contains(hUri)) {
 					de.setStyle(Style.DEFAULT);
 				}

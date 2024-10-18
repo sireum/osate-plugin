@@ -18,6 +18,7 @@ import org.osate.aadl2.instance.InstanceObject;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.aadl2.modelsupport.EObjectURIWrapper;
 import org.osate.ge.internal.diagram.runtime.DiagramElement;
+import org.osate.ui.UiUtil;
 import org.sireum.aadl.osate.awas.handlers.AwasServerHandler;
 import org.sireum.awas.ast.AwasSerializer;
 import org.sireum.awas.ast.Model;
@@ -109,13 +110,15 @@ public class AwasServer extends PetiImpl {
 
 		Set<InstanceObject> ios = new HashSet<InstanceObject>();
 
+		final EObjectURIWrapper.Factory factory = new EObjectURIWrapper.Factory(UiUtil.getModelElementLabelProvider());
+
 		Map<URI, String> iUri = toHighlight.entrySet().stream().flatMap(kkk -> {
 			Option<org.sireum.awas.ast.Node> t = SymbolTableHelper.uri2Node(kkk.getKey(), st);
 			Map<URI, String> res = new HashMap<URI, String>();
 			if (t.isDefined() && t.get().auriFrag().isDefined()) {
 				EObject eo = resource.getResourceSet().getEObject(URI.createURI(t.get().auriFrag().get()), true);
 				if (eo instanceof InstanceObject) {
-					res.put(new EObjectURIWrapper(eo).getUri(), kkk.getValue());
+					res.put(factory.createWrapperFor(eo).getUri(), kkk.getValue());
 					ios.add((InstanceObject) eo);
 				}
 			}
@@ -147,13 +150,15 @@ public class AwasServer extends PetiImpl {
 		SymbolTable st = org.sireum.awas.symbol.SymbolTable$.MODULE$.apply(awasModel, new ConsoleTagReporter());
 		Resource resource = si.eResource();
 
+		final EObjectURIWrapper.Factory factory = new EObjectURIWrapper.Factory(UiUtil.getModelElementLabelProvider());
+
 		Set<URI> iUri = toClear.stream().flatMap(mapper -> {
 			Option<org.sireum.awas.ast.Node> t = SymbolTableHelper.uri2Node(mapper, st);
 			Set<URI> res = new HashSet();
 			if (t.isDefined() && t.get().auriFrag().isDefined()) {
 				EObject eo = resource.getResourceSet().getEObject(URI.createURI(t.get().auriFrag().get()), true);
 				if (eo instanceof InstanceObject) {
-					res.add(new EObjectURIWrapper(eo).getUri());
+					res.add(factory.createWrapperFor(eo).getUri());
 				}
 			}
 			return res.stream();
