@@ -31,6 +31,7 @@ public class ApiUtil {
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.verbose()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.runtimeMonitoring()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.platform()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.outputDir()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.parseableMessages()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Slang_slangOutputDir()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Slang_packageName()))
