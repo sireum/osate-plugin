@@ -42,8 +42,11 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Ros2NodesLanguag
 public class HAMRPrompt extends TitleAreaDialog {
 
 	public final HAMROption OPTION_PLATFORM = new HAMROption("platform", "Platform", "Target platform");
+	public final HAMROption OPTION_OUTPUT_DIRECTORY = new HAMROption("output.directory", "Output Directory",
+			"Default directory where resources will be written to");
 
-	public final HAMROption OPTION_SLANG_OUTPUT_DIRECTORY = new HAMROption("slang.output.directory", "Output Directory",
+	public final HAMROption OPTION_SLANG_OUTPUT_DIRECTORY = new HAMROption("slang.output.directory",
+			"Slang Output Directory",
 			"Directory where Slang resources will be written to");
 	public final HAMROption OPTION_BASE_PACKAGE_NAME = new HAMROption("base.package.name", "Base Package Name",
 			"The root package name for the generated Slang project");
@@ -71,7 +74,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 	public final HAMROption OPTION_CAMKES_AUX_SRC_DIR = new HAMROption("camkes.aux.src.dir",
 			"Aux Code Directory for CAmkES", "Directory containing C code to be included in CAmkES project");
 
-	
+
 	public final HAMROption OPTION_ROS2_STRICT_AADL_MODE = new HAMROption("ros2.strict.aadl.mode",
 			"Strict AADL Mode", "Whether to generate strictly AADL-compliant code or not");
 	public final HAMROption OPTION_ROS2_OUTPUT_WORKSPACE_DIRECTORY = new HAMROption("ros2.output.workspace.directory",
@@ -80,9 +83,13 @@ public class HAMRPrompt extends TitleAreaDialog {
 			"ROS2 Directory", "The path to your ROS2 installation, including the version");
 	public final HAMROption OPTION_ROS2_NODES_LANGUAGE = new HAMROption("ros2.nodes.language", "Nodes Language", "The programming language for the generated node files");
 	public final HAMROption OPTION_ROS2_LAUNCH_LANGUAGE = new HAMROption("ros2.launch.language", "Launch Language", "The programming language for the launch file");
-	
+
 	public Platform getOptionPlatform() {
 		return Platform.valueOf(getSavedStringOption(OPTION_PLATFORM));
+	}
+
+	public String getOptionOutputDirectory() {
+		return getSavedStringOption(OPTION_OUTPUT_DIRECTORY);
 	}
 
 	public HW getOptionHW() {
@@ -132,19 +139,19 @@ public class HAMRPrompt extends TitleAreaDialog {
 	public String getOptionCamkesAuxSrcDir() {
 		return getSavedStringOption(OPTION_CAMKES_AUX_SRC_DIR);
 	}
-	
+
 	public boolean getOptionRos2StrictAadlMode() {
 		return getSavedBooleanOption(OPTION_ROS2_STRICT_AADL_MODE);
 	}
-	
+
 	public String getOptionRos2OutputWorkspaceDirectory() {
 		return getSavedStringOption(OPTION_ROS2_OUTPUT_WORKSPACE_DIRECTORY);
 	}
-	
+
 	public String getOptionRos2Directory() {
 		return getSavedStringOption(OPTION_ROS2_DIRECTORY);
 	}
-	
+
 	public Ros2NodesLanguage getOptionRos2NodesLanguage() {
 		if (getSavedStringOption(OPTION_ROS2_NODES_LANGUAGE).isBlank()) {
 			return Ros2NodesLanguage.Python;
@@ -152,7 +159,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			return Ros2NodesLanguage.valueOf(getSavedStringOption(OPTION_ROS2_NODES_LANGUAGE));
 		}
 	}
-	
+
 	public Ros2LaunchLanguage getOptionRos2LaunchLanguage() {
 		if (getSavedStringOption(OPTION_ROS2_LAUNCH_LANGUAGE).isBlank()) {
 			return Ros2LaunchLanguage.Python;
@@ -160,7 +167,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			return Ros2LaunchLanguage.valueOf(getSavedStringOption(OPTION_ROS2_LAUNCH_LANGUAGE));
 		}
 	}
-	
+
 
 	/* runs after controls have been created */
 	private void initControlValues() {
@@ -179,11 +186,11 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 		// SPECIAL INIT CASES
 		{
-			String slangOutputDirectory = getSlangOptionOutputDirectory();
-			if (slangOutputDirectory.equals("")) {
-				slangOutputDirectory = project.getLocation().toString();
+			String outputDirectory = getOptionOutputDirectory();
+			if (outputDirectory.equals("")) {
+				outputDirectory = project.getLocation().toString();
 			}
-			getTextControl(OPTION_SLANG_OUTPUT_DIRECTORY).setText(slangOutputDirectory);
+			getTextControl(OPTION_OUTPUT_DIRECTORY).setText(outputDirectory);
 		}
 
 		if (getIntFromControl(OPTION_BIT_WIDTH).isEmpty()) {
@@ -233,10 +240,11 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	private final String PREF_KEY = "org.sireum.aadl.hamr";
 
+	private final HAMRGroup GROUP_SLANG = new HAMRGroup("KEY_GROUP_SLANG", "Slang Options", "");
 	private final HAMRGroup GROUP_TRANSPILER = new HAMRGroup("KEY_GROUP_TRANSPILER", "Transpiler Options", "");
 	private final HAMRGroup GROUP_CAMKES = new HAMRGroup("KEY_GROUP_CAMKES", "CAmkES Options", "");
 	private final HAMRGroup GROUP_ROS2 = new HAMRGroup("KEY_GROUP_ROS2", "ROS2 Options", "");
-	
+
 	// The image to display
 	private Image image;
 
@@ -341,6 +349,43 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 
 		/****************************************************************
+		 * ROW - Output Directory
+		 ****************************************************************/
+
+		{
+			final HAMROption key = OPTION_OUTPUT_DIRECTORY;
+
+			// COL 1
+			addLabel(key.displayText, container, key).setToolTipText(key.toolTipText);
+
+			// COL 2
+			Text txt = new Text(container, SWT.BORDER);
+			GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false);
+			gd.widthHint = 334;
+			txt.setLayoutData(gd);
+			registerOptionControl(key, txt);
+
+			// COL 3
+			Button btn = new Button(container, SWT.PUSH);
+			btn.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					String path = promptForDirectory("Select Default Output Directory",
+							getOptionOutputDirectory());
+					if (path != null) {
+						txt.setText(path);
+					}
+				}
+			});
+			btn.setText("...");
+			gd = new GridData(SWT.RIGHT, SWT.FILL, false, false);
+			btn.setLayoutData(gd);
+			registerViewControl(key, btn);
+		}
+
+		//fillerRow(container, numCols);
+
+		/****************************************************************
 		 * ROW - HW
 		 ****************************************************************/
 		/*
@@ -363,78 +408,93 @@ public class HAMRPrompt extends TitleAreaDialog {
 		 * }
 		 */
 
-		/****************************************************************
-		 * ROW - Slang Output Directory
-		 ****************************************************************/
-
 		{
-			final HAMROption key = OPTION_SLANG_OUTPUT_DIRECTORY;
+			final HAMRGroup key = GROUP_SLANG;
+			final int numGroupCols = 3;
 
 			// COL 1
-			addLabel(key.displayText, container, key).setToolTipText(key.toolTipText);
+			Group grpContainer = new Group(container, SWT.NONE);
+			grpContainer.setText(key.displayText);
+			grpContainer.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, numCols, 1));
+			registerViewControl(key, grpContainer);
 
-			// COL 2
-			Text txt = new Text(container, SWT.BORDER);
-			GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false);
-			gd.widthHint = 334;
-			txt.setLayoutData(gd);
-			registerOptionControl(key, txt);
+			final GridLayout grpLayout = new GridLayout(numGroupCols, false);
+			grpContainer.setLayout(grpLayout);
 
-			// COL 3
-			Button btn = new Button(container, SWT.PUSH);
-			btn.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					String path = promptForDirectory("Select Slang Output Directory", getSlangOptionOutputDirectory());
-					if (path != null) {
-						txt.setText(path);
+			/****************************************************************
+			 * ROW - Slang Output Directory
+			 ****************************************************************/
+
+			{
+				final HAMROption subkey = OPTION_SLANG_OUTPUT_DIRECTORY;
+
+				// COL 1
+				addLabel(subkey.displayText, grpContainer).setToolTipText(subkey.toolTipText);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				GridData gd = new GridData(SWT.FILL, SWT.CENTER, true, false);
+				gd.widthHint = 334;
+				txt.setLayoutData(gd);
+				registerOptionControl(subkey, txt, false);
+
+				// COL 3
+				Button btn = new Button(grpContainer, SWT.PUSH);
+				btn.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						String path = promptForDirectory("Select Slang Output Directory",
+								getSlangOptionOutputDirectory());
+						if (path != null) {
+							txt.setText(path);
+						}
 					}
-				}
-			});
-			btn.setText("...");
-			gd = new GridData(SWT.RIGHT, SWT.FILL, false, false);
-			btn.setLayoutData(gd);
-			registerViewControl(key, btn);
+				});
+				btn.setText("...");
+				gd = new GridData(SWT.RIGHT, SWT.FILL, false, false);
+				// btn.setLayoutData(gd);
+				// registerViewControl(key, btn);
+			}
+
+			/****************************************************************
+			 * ROW
+			 ****************************************************************/
+			{
+				final HAMROption subkey = OPTION_BASE_PACKAGE_NAME;
+
+				// COL 1
+				addLabel(subkey.displayText, grpContainer).setToolTipText(subkey.toolTipText);
+
+				// COL 2
+				Text txt = new Text(grpContainer, SWT.BORDER);
+				txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+				registerOptionControl(subkey, txt, false);
+
+				// COL 3
+				registerViewControl(subkey, addColumnPad(grpContainer)); // col padding
+			}
+
+			// fillerRow(container, numCols);
+
+			/****************************************************************
+			 * ROW
+			 ****************************************************************/
+			{
+				final HAMROption subkey = OPTION_ENABLE_RUNTIME_MONITORING;
+
+				// COL 1
+				Button btn = new Button(grpContainer, SWT.CHECK);
+				btn.setText(subkey.displayText);
+				btn.setToolTipText(subkey.toolTipText);
+				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numCols, 1));
+				registerOptionControl(subkey, btn, false);
+
+				// COL 2
+				// registerViewControl(key, addColumnPad(container)); // col padding
+			}
 		}
 
-		/****************************************************************
-		 * ROW
-		 ****************************************************************/
-		{
-			final HAMROption key = OPTION_BASE_PACKAGE_NAME;
-
-			// COL 1
-			addLabel(key.displayText, container, key).setToolTipText(key.toolTipText);
-
-			// COL 2
-			Text txt = new Text(container, SWT.BORDER);
-			txt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-			registerOptionControl(key, txt);
-
-			// COL 3
-			registerViewControl(key, addColumnPad(container)); // col padding
-		}
-
-		fillerRow(container, numCols);
-
-		/****************************************************************
-		 * ROW
-		 ****************************************************************/
-		{
-			final HAMROption key = OPTION_ENABLE_RUNTIME_MONITORING;
-
-			// COL 1
-			Button btn = new Button(container, SWT.CHECK);
-			btn.setText(key.displayText);
-			btn.setToolTipText(key.toolTipText);
-			btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numCols, 1));
-			registerOptionControl(key, btn, false);
-
-			// COL 2
-			registerViewControl(key, addColumnPad(container)); // col padding
-		}
-
-		fillerRow(container, numCols);
+		//fillerRow(container, numCols);
 
 		/****************************************************************
 		 * ROW
@@ -580,7 +640,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			}
 		}
 
-		fillerRow(container, numCols);
+		//fillerRow(container, numCols);
 
 		/****************************************************************
 		 * ROW
@@ -664,9 +724,9 @@ public class HAMRPrompt extends TitleAreaDialog {
 				btn.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
 			}
 		}
-		
-		fillerRow(container, numCols);
-		
+
+		//fillerRow(container, numCols);
+
 		/****************************************************************
 		 * ROW
 		 ****************************************************************/
@@ -755,7 +815,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 				btn.setText("...");
 				btn.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
 			}
-			
+
 			/****************************************************************
 			 * ROW - ROS2 Nodes Language
 			 ****************************************************************/
@@ -821,9 +881,11 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return area;
 	}
 
-	protected <T> List<T> addAll(List<T> controls, List<T> other) {
-		List<T> ret = new ArrayList<>(controls);
-		ret.addAll(other);
+	protected List<HAMREntry> addAll(List<HAMREntry> ... controls ) {
+		List<HAMREntry> ret = new ArrayList<>();
+		for (List<HAMREntry> l : controls) {
+			ret.addAll(l);
+		}
 		return ret;
 	}
 
@@ -993,11 +1055,11 @@ public class HAMRPrompt extends TitleAreaDialog {
 			return thePlatforms.stream().map(f -> f.toString()).toArray(String[]::new);
 		}
 	}
-	
+
 	private String[] getRos2NodesLanguages() {
 		return Arrays.asList(HAMRPropertyProvider.Ros2NodesLanguage.values()).stream().map(f -> f.toString()).toArray(String[]::new);
 	}
-	
+
 	private String[] getRos2LaunchLanguages() {
 		return Arrays.asList(HAMRPropertyProvider.Ros2LaunchLanguage.values()).stream().map(f -> f.toString()).toArray(String[]::new);
 	}
@@ -1061,52 +1123,59 @@ public class HAMRPrompt extends TitleAreaDialog {
 		String selection = cmb.getItem(cmb.getSelectionIndex());
 		Platform p = HAMRPropertyProvider.Platform.valueOf(selection);
 
-		List<HAMREntry> JVM_controls = Arrays.asList( //
-				OPTION_PLATFORM, OPTION_SLANG_OUTPUT_DIRECTORY, OPTION_BASE_PACKAGE_NAME,
-				OPTION_ENABLE_RUNTIME_MONITORING);
+		List<HAMREntry> Base_controls = Arrays.asList( //
+				OPTION_PLATFORM, // 
+				OPTION_OUTPUT_DIRECTORY);
 
-		List<HAMREntry> NIX_controls = addAll(JVM_controls, Arrays.asList( //
-				// OPTION_HW,
-				OPTION_C_OUTPUT_DIRECTORY, OPTION_C_AUX_SRC_DIRECTORY, //
-				OPTION_EXCLUDE_SLANG_IMPL, GROUP_TRANSPILER));
-
-		List<HAMREntry> SEL4_controls = addAll(NIX_controls, Arrays.asList( //
-				GROUP_CAMKES));
+		List<HAMREntry> Slang_controls = //
+				Arrays.asList(GROUP_SLANG);
 		
-		List<HAMREntry> toShow = JVM_controls;
+		List<HAMREntry> NIX_controls = Arrays.asList(
+						// OPTION_HW,
+						OPTION_C_OUTPUT_DIRECTORY, OPTION_C_AUX_SRC_DIRECTORY, //
+						OPTION_EXCLUDE_SLANG_IMPL, GROUP_TRANSPILER);
+
+		List<HAMREntry> SEL4_controls = 
+				Arrays.asList(GROUP_CAMKES);
+		
+		List<HAMREntry> ROS2_controls = 
+				Arrays.asList(GROUP_ROS2);
+
+		List<HAMREntry> toShow = Base_controls;
 
 		String[] hwItems = null;
 		switch (p) {
 		case JVM:
 			hwItems = filterHW();
+			toShow = addAll(Base_controls, Slang_controls);
 			break;
 		case Linux:
 			hwItems = filterHW(HW.x86, HW.amd64);
-			toShow = NIX_controls;
+			toShow = addAll(Base_controls, Slang_controls, NIX_controls);
 			break;
 		case macOS:
 			hwItems = filterHW(HW.amd64);
-			toShow = NIX_controls;
+			toShow = addAll(Base_controls, Slang_controls, NIX_controls);
 			break;
 		case Cygwin:
 			hwItems = filterHW(HW.x86, HW.amd64);
-			toShow = NIX_controls;
+			toShow =  addAll(Base_controls, Slang_controls, NIX_controls);
 			break;
 		case seL4:
 			hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
-			toShow = SEL4_controls;
+			toShow = addAll(Base_controls, Slang_controls, NIX_controls, SEL4_controls);
 			break;
 		case seL4_Only:
 		case seL4_TB:
 			hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
 			// toShow = Arrays.asList(OPTION_PLATFORM, OPTION_HW, GROUP_CAMKES);
-			toShow = Arrays.asList(OPTION_PLATFORM, GROUP_CAMKES);
+			toShow = addAll(Base_controls, SEL4_controls);
 			break;
 		case ros2:
 			hwItems = filterHW();
-			toShow = Arrays.asList(OPTION_PLATFORM, GROUP_ROS2);
+			toShow = addAll(Base_controls, ROS2_controls);
 			break;
-			
+
 		default:
 			throw new RuntimeException("Not expecting platform " + p.name());
 		}

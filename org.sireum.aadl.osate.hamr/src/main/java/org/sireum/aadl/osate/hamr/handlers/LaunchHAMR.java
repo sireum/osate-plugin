@@ -16,11 +16,11 @@ import org.osate.aadl2.Element;
 import org.osate.aadl2.NamedElement;
 import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
+import org.sireum.Cli.SireumTopOption;
 import org.sireum.IS;
 import org.sireum.MS;
 import org.sireum.Option;
 import org.sireum.Z;
-import org.sireum.Cli.SireumTopOption;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
@@ -32,11 +32,10 @@ import org.sireum.aadl.osate.util.SlangUtil;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SeverityLevel;
 import org.sireum.aadl.osate.util.VisitorUtil;
-import org.sireum.hamr.arsit.ArsitBridge;
-import org.sireum.hamr.arsit.plugin.ArsitPlugin;
-import org.sireum.hamr.codegen.common.plugin.Plugin;
-import org.sireum.hamr.codegen.LongKeys;
 import org.sireum.hamr.codegen.CodeGenJavaFactory;
+import org.sireum.hamr.codegen.LongKeys;
+import org.sireum.hamr.codegen.arsit.plugin.ArsitPlugin;
+import org.sireum.hamr.codegen.common.plugin.Plugin;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.message.Reporter;
 
@@ -156,13 +155,16 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 						final File workspaceRoot = getProjectPath(si).toFile();
 
-						final org.sireum.String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("") //
+						final org.sireum.String _outputDir = prompt.getOptionOutputDirectory().equals("") //
 								? new org.sireum.String(workspaceRoot.getAbsolutePath())
+								: new org.sireum.String(prompt.getOptionOutputDirectory());
+						
+						final org.sireum.String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("") //
+								? null
 								: new org.sireum.String(prompt.getSlangOptionOutputDirectory());
 
-						final org.sireum.String _base = prompt.getOptionBasePackageName().equals("") //
-								? new org.sireum.String(
-										HAMRUtil.cleanupPackageName(new File(_slangOutputDir.string()).getName()))
+						final org.sireum.String _slangPackageName = prompt.getOptionBasePackageName().equals("") //
+								? null
 								: new org.sireum.String(HAMRUtil.cleanupPackageName(prompt.getOptionBasePackageName()));
 
 						final org.sireum.String _cOutputDirectory = prompt.getOptionCOutputDirectory().equals("") //
@@ -173,48 +175,49 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								.equals("") //
 										? null
 										: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
+						
 						final org.sireum.String _ros2OutputWorkspaceDir = prompt.getOptionRos2OutputWorkspaceDirectory().equals("") //
 								? null
 								: new org.sireum.String(prompt.getOptionRos2OutputWorkspaceDirectory());
+						
 						final org.sireum.String _ros2Ros2Dir = prompt.getOptionRos2Directory().equals("") //
 								? null
 										: new org.sireum.String(prompt.getOptionRos2Directory());
-
-						final File ideaDir = new File(_slangOutputDir.string() + File.separator + ".idea");
 
 						toolRet = Util.callWrapper(getToolName(), console, () -> {
 
 							boolean verbose = PreferenceValues.HAMR_VERBOSE_OPT.getValue();
 							boolean runtimeMonitoring = prompt.getOptionEnableRuntimeMonitoring();
 							String platform = prompt.getOptionPlatform().name();
-							Option<org.sireum.String> slangOutputDir = ArsitBridge.sireumOption(_slangOutputDir);
-							Option<org.sireum.String> slangPackageName = ArsitBridge.sireumOption(_base);
-							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue()
-									|| ideaDir.exists();
+							Option<org.sireum.String> outputDir = CodeGenJavaFactory.sireumOption(_outputDir);
+							Option<org.sireum.String> slangOutputDir = CodeGenJavaFactory.sireumOption(_slangOutputDir);
+							Option<org.sireum.String> slangPackageName = CodeGenJavaFactory.sireumOption(_slangPackageName);
+							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue();
 							boolean noEmbedArt = !PreferenceValues.HAMR_EMBED_ART_OPT.getValue();
 							boolean devicesAsThreads = PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getValue();
 							boolean genSbtMill = PreferenceValues.HAMR_GEN_SBT_MILL_OPT.getValue();
 							IS<Z, org.sireum.String> slangAuxCodeDirs = prompt.getOptionCAuxSourceDirectory().equals("")
 									? VisitorUtil.toISZ()
 									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionCAuxSourceDirectory()));
-							Option<org.sireum.String> slangOutputCDirectory = ArsitBridge
+							Option<org.sireum.String> slangOutputCDirectory = CodeGenJavaFactory
 									.sireumOption(_cOutputDirectory);
 							boolean excludeComponentImpl = prompt.getOptionExcludesSlangImplementations();
 							Z bitWidth = SlangUtil.toZ(prompt.getOptionBitWidth());
 							Z maxStringSize = SlangUtil.toZ(prompt.getOptionMaxStringSize());
 							Z maxArraySize = SlangUtil.toZ(prompt.getOptionMaxSequenceSize());
 							boolean runTranspiler = PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getValue();
-							Option<org.sireum.String> camkesOutputDirectory = ArsitBridge
+							Option<org.sireum.String> camkesOutputDirectory = CodeGenJavaFactory
 									.sireumOption(_camkesOutputDir);
 							IS<Z, org.sireum.String> camkesAuxCodeDirs = prompt.getOptionCamkesAuxSrcDir().equals("")
 									? VisitorUtil.toISZ()
 									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionCamkesAuxSrcDir()));
-							Option<org.sireum.String> workspaceRootDir = ArsitBridge
+							Option<org.sireum.String> workspaceRootDir = CodeGenJavaFactory
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 
 							boolean strictAadlMode = prompt.getOptionRos2StrictAadlMode();
-							Option<org.sireum.String> ros2OutputWorkspaceDir = ArsitBridge.sireumOption(_ros2OutputWorkspaceDir);
-							Option<org.sireum.String> ros2Dir = ArsitBridge.sireumOption(_ros2Ros2Dir);
+							Option<org.sireum.String> ros2OutputWorkspaceDir = CodeGenJavaFactory
+									.sireumOption(_ros2OutputWorkspaceDir);
+							Option<org.sireum.String> ros2Dir = CodeGenJavaFactory.sireumOption(_ros2Ros2Dir);
 							String ros2NodesLanguage = prompt.getOptionRos2NodesLanguage().name();
 							String ros2LaunchLanguage = prompt.getOptionRos2LaunchLanguage().name();
 
@@ -244,7 +247,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								args = args.$colon$plus(s(LongKeys.runtimeMonitoring()));
 							}
 							args = args.$colon$plus(s(LongKeys.platform())).$colon$plus(s(platform));
-
+							if (outputDir.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.outputDir())).$colon$plus(outputDir.get());
+							}
+							
 							// Slang Options
 							if (slangOutputDir.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.Slang_slangOutputDir())).$colon$plus(slangOutputDir.get());
