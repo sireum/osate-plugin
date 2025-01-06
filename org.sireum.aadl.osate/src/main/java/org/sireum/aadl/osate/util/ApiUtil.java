@@ -46,9 +46,9 @@ public class ApiUtil {
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_maxStringSize()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_maxArraySize()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Transpiler_runTranspiler()))
-				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.CAmkES_camkesOutputDir()))
-				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.CAmkES_camkesAuxCodeDirs()))
-				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.CAmkES_workspaceRootDir()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.CAmkES_Microkit_sel4OutputDir()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.CAmkES_Microkit_sel4AuxCodeDirs()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.CAmkES_Microkit_workspaceRootDir()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_strictAadlMode()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2OutputWorkspaceDir()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2Dir()))
@@ -56,6 +56,7 @@ public class ApiUtil {
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2LaunchLanguage()))
 				.$colon$plus(
 						new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Experimental_experimentalOptions()));
+
 		boolean sameKeys = org.sireum.hamr.codegen.LongKeys.sameKeys(knownKeys);
 
 		if (!sameKeys) {

@@ -69,16 +69,17 @@ public class HAMRPrompt extends TitleAreaDialog {
 	public final HAMROption OPTION_C_AUX_SRC_DIRECTORY = new HAMROption("c.aux.src.directory", "Aux Code Directory",
 			"Directory containing C code to be included in HAMR project");
 
-	public final HAMROption OPTION_CAMKES_OUTPUT_DIRECTORY = new HAMROption("camkes.output.directory",
-			"seL4/CAmkES Output Directory", "Directory where CAmkES resources will be written to");
-	public final HAMROption OPTION_CAMKES_AUX_SRC_DIR = new HAMROption("camkes.aux.src.dir",
-			"Aux Code Directory for CAmkES", "Directory containing C code to be included in CAmkES project");
+	public final HAMROption OPTION_SEL4_OUTPUT_DIRECTORY = new HAMROption("sel4.output.directory",
+			"seL4 Output Directory", "Output directory for the generated CAmkES/Microkit project file");
+	public final HAMROption OPTION_SEL4_AUX_SRC_DIR = new HAMROption("sel4.aux.src.dir",
+			"seL4 Aux Code Directory", "Directories containing C files to be included in CAmkES/Microkit build");
 
 
 	public final HAMROption OPTION_ROS2_STRICT_AADL_MODE = new HAMROption("ros2.strict.aadl.mode",
 			"Strict AADL Mode", "Whether to generate strictly AADL-compliant code or not");
 	public final HAMROption OPTION_ROS2_OUTPUT_WORKSPACE_DIRECTORY = new HAMROption("ros2.output.workspace.directory",
-			"Output Workspace Directory", "The path to the ROS2 workspace to generate the packages intoDirectory where CAmkES resources will be written to");
+			"Output Workspace Directory",
+			"The path to the ROS2 workspace to generate the packages intoDirectory where ROS2 resources will be written to");
 	public final HAMROption OPTION_ROS2_DIRECTORY = new HAMROption("ros2.directory",
 			"ROS2 Directory", "The path to your ROS2 installation, including the version");
 	public final HAMROption OPTION_ROS2_NODES_LANGUAGE = new HAMROption("ros2.nodes.language", "Nodes Language", "The programming language for the generated node files");
@@ -132,12 +133,12 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return Integer.valueOf(getSavedStringOption(OPTION_BIT_WIDTH));
 	}
 
-	public String getOptionCamkesOptionOutputDirectory() {
-		return getSavedStringOption(OPTION_CAMKES_OUTPUT_DIRECTORY);
+	public String getOptionSel4OutputDirectory() {
+		return getSavedStringOption(OPTION_SEL4_OUTPUT_DIRECTORY);
 	}
 
-	public String getOptionCamkesAuxSrcDir() {
-		return getSavedStringOption(OPTION_CAMKES_AUX_SRC_DIR);
+	public String getOptionSel4AuxSrcDir() {
+		return getSavedStringOption(OPTION_SEL4_AUX_SRC_DIR);
 	}
 
 	public boolean getOptionRos2StrictAadlMode() {
@@ -242,7 +243,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	private final HAMRGroup GROUP_SLANG = new HAMRGroup("KEY_GROUP_SLANG", "Slang Options", "");
 	private final HAMRGroup GROUP_TRANSPILER = new HAMRGroup("KEY_GROUP_TRANSPILER", "Transpiler Options", "");
-	private final HAMRGroup GROUP_CAMKES = new HAMRGroup("KEY_GROUP_CAMKES", "CAmkES Options", "");
+	private final HAMRGroup GROUP_SEL4 = new HAMRGroup("KEY_GROUP_CAMKES", "CAmkES/Microkit Options", "");
 	private final HAMRGroup GROUP_ROS2 = new HAMRGroup("KEY_GROUP_ROS2", "ROS2 Options", "");
 
 	// The image to display
@@ -646,7 +647,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 		 * ROW
 		 ****************************************************************/
 		{
-			final HAMRGroup key = GROUP_CAMKES;
+			final HAMRGroup key = GROUP_SEL4;
 			final int numGroupCols = 3;
 
 			// COL 1
@@ -659,11 +660,11 @@ public class HAMRPrompt extends TitleAreaDialog {
 			grpContainer.setLayout(grpLayout);
 
 			/****************************************************************
-			 * ROW - Camkes Output Directory
+			 * ROW - seL4 Output Directory
 			 ****************************************************************/
 
 			{
-				final HAMROption subKey = OPTION_CAMKES_OUTPUT_DIRECTORY;
+				final HAMROption subKey = OPTION_SEL4_OUTPUT_DIRECTORY;
 
 				// COL 1
 				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
@@ -680,8 +681,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 				btn.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						String path = promptForDirectory("Select SeL4/CAmkES Output Directory",
-								getOptionCamkesOptionOutputDirectory());
+						String path = promptForDirectory("Select seL4 Output Directory",
+								getOptionSel4OutputDirectory());
 						if (path != null) {
 							txt.setText(path);
 						}
@@ -694,11 +695,11 @@ public class HAMRPrompt extends TitleAreaDialog {
 			}
 
 			/****************************************************************
-			 * ROW - Camkes Aux Source Directory
+			 * ROW - seL4 Aux Source Directory
 			 ****************************************************************/
 
 			{
-				final HAMROption subKey = OPTION_CAMKES_AUX_SRC_DIR;
+				final HAMROption subKey = OPTION_SEL4_AUX_SRC_DIR;
 
 				// COL 1
 				addLabel(subKey.displayText, grpContainer).setToolTipText(subKey.toolTipText);
@@ -713,8 +714,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 				btn.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						String path = promptForDirectory("Select Aux Source Directory Directory",
-								getOptionCamkesAuxSrcDir());
+						String path = promptForDirectory("Select seL4 Aux Source Directory Directory",
+								getOptionSel4AuxSrcDir());
 						if (path != null) {
 							txt.setText(path);
 						}
@@ -777,7 +778,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						String path = promptForDirectory("Select ROS2 Ouptut Workspace Directory",
-								getOptionCamkesAuxSrcDir());
+								getOptionSel4AuxSrcDir());
 						if (path != null) {
 							txt.setText(path);
 						}
@@ -806,7 +807,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						String path = promptForDirectory("Select ROS2 Directory",
-								getOptionCamkesAuxSrcDir());
+								getOptionSel4AuxSrcDir());
 						if (path != null) {
 							txt.setText(path);
 						}
@@ -1124,21 +1125,21 @@ public class HAMRPrompt extends TitleAreaDialog {
 		Platform p = HAMRPropertyProvider.Platform.valueOf(selection);
 
 		List<HAMREntry> Base_controls = Arrays.asList( //
-				OPTION_PLATFORM, // 
+				OPTION_PLATFORM, //
 				OPTION_OUTPUT_DIRECTORY);
 
 		List<HAMREntry> Slang_controls = //
 				Arrays.asList(GROUP_SLANG);
-		
+
 		List<HAMREntry> NIX_controls = Arrays.asList(
 						// OPTION_HW,
 						OPTION_C_OUTPUT_DIRECTORY, OPTION_C_AUX_SRC_DIRECTORY, //
 						OPTION_EXCLUDE_SLANG_IMPL, GROUP_TRANSPILER);
 
-		List<HAMREntry> SEL4_controls = 
-				Arrays.asList(GROUP_CAMKES);
-		
-		List<HAMREntry> ROS2_controls = 
+		List<HAMREntry> SEL4_controls =
+				Arrays.asList(GROUP_SEL4);
+
+		List<HAMREntry> ROS2_controls =
 				Arrays.asList(GROUP_ROS2);
 
 		List<HAMREntry> toShow = Base_controls;
@@ -1169,6 +1170,9 @@ public class HAMRPrompt extends TitleAreaDialog {
 		case seL4_TB:
 			hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
 			// toShow = Arrays.asList(OPTION_PLATFORM, OPTION_HW, GROUP_CAMKES);
+			toShow = addAll(Base_controls, SEL4_controls);
+			break;
+		case Microkit:
 			toShow = addAll(Base_controls, SEL4_controls);
 			break;
 		case ros2:

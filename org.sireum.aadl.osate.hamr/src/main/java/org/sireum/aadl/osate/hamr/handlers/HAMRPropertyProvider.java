@@ -27,7 +27,7 @@ public class HAMRPropertyProvider {
 
 	// should match Platform in HAMR.aadl
 	enum Platform {
-		JVM, Linux, macOS, Cygwin, seL4, seL4_Only, seL4_TB, ros2;
+		JVM, Linux, macOS, Cygwin, seL4, seL4_Only, seL4_TB, Microkit, ros2;
 	}
 
 	// should match HW in HAMR.aadl
@@ -51,11 +51,11 @@ public class HAMRPropertyProvider {
 		}
 		return r;
 	}
-	
+
 	enum Ros2NodesLanguage {
 		Python, Cpp
 	}
-	
+
 	enum Ros2LaunchLanguage {
 		Python, Xml
 	}

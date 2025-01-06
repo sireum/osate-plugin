@@ -158,7 +158,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 						final org.sireum.String _outputDir = prompt.getOptionOutputDirectory().equals("") //
 								? new org.sireum.String(workspaceRoot.getAbsolutePath())
 								: new org.sireum.String(prompt.getOptionOutputDirectory());
-						
+
 						final org.sireum.String _slangOutputDir = prompt.getSlangOptionOutputDirectory().equals("") //
 								? null
 								: new org.sireum.String(prompt.getSlangOptionOutputDirectory());
@@ -171,15 +171,15 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								? null
 								: new org.sireum.String(prompt.getOptionCOutputDirectory());
 
-						final org.sireum.String _camkesOutputDir = prompt.getOptionCamkesOptionOutputDirectory()
+						final org.sireum.String _sel4OutputDir = prompt.getOptionSel4OutputDirectory()
 								.equals("") //
 										? null
-										: new org.sireum.String(prompt.getOptionCamkesOptionOutputDirectory());
-						
+										: new org.sireum.String(prompt.getOptionSel4OutputDirectory());
+
 						final org.sireum.String _ros2OutputWorkspaceDir = prompt.getOptionRos2OutputWorkspaceDirectory().equals("") //
 								? null
 								: new org.sireum.String(prompt.getOptionRos2OutputWorkspaceDirectory());
-						
+
 						final org.sireum.String _ros2Ros2Dir = prompt.getOptionRos2Directory().equals("") //
 								? null
 										: new org.sireum.String(prompt.getOptionRos2Directory());
@@ -206,11 +206,11 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Z maxStringSize = SlangUtil.toZ(prompt.getOptionMaxStringSize());
 							Z maxArraySize = SlangUtil.toZ(prompt.getOptionMaxSequenceSize());
 							boolean runTranspiler = PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getValue();
-							Option<org.sireum.String> camkesOutputDirectory = CodeGenJavaFactory
-									.sireumOption(_camkesOutputDir);
-							IS<Z, org.sireum.String> camkesAuxCodeDirs = prompt.getOptionCamkesAuxSrcDir().equals("")
+							Option<org.sireum.String> sel4OutputDirectory = CodeGenJavaFactory
+									.sireumOption(_sel4OutputDir);
+							IS<Z, org.sireum.String> sel4AuxCodeDirs = prompt.getOptionSel4AuxSrcDir().equals("")
 									? VisitorUtil.toISZ()
-									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionCamkesAuxSrcDir()));
+									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionSel4AuxSrcDir()));
 							Option<org.sireum.String> workspaceRootDir = CodeGenJavaFactory
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 
@@ -250,7 +250,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							if (outputDir.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.outputDir())).$colon$plus(outputDir.get());
 							}
-							
+
 							// Slang Options
 							if (slangOutputDir.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.Slang_slangOutputDir())).$colon$plus(slangOutputDir.get());
@@ -288,15 +288,19 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								args = args.$colon$plus(s(LongKeys.Transpiler_runTranspiler()));
 							}
 
-							// CAmkES Options
-							if (camkesOutputDirectory.nonEmpty()) {
-								args = args.$colon$plus(s(LongKeys.CAmkES_camkesOutputDir())).$colon$plus(camkesOutputDirectory.get());
+							// CAmkES/Microkit Options
+							if (sel4OutputDirectory.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.CAmkES_Microkit_sel4OutputDir()))
+										.$colon$plus(sel4OutputDirectory.get());
 							}
-							if (camkesAuxCodeDirs.nonEmpty()) {
-								args = args.$colon$plus(s(LongKeys.CAmkES_camkesAuxCodeDirs())).$colon$plus(s(CodeGenJavaFactory.iszToST(camkesAuxCodeDirs, File.pathSeparator).render()));
+							if (sel4AuxCodeDirs.nonEmpty()) {
+								args = args.$colon$plus(s(LongKeys.CAmkES_Microkit_sel4AuxCodeDirs()))
+										.$colon$plus(s(CodeGenJavaFactory.iszToST(sel4AuxCodeDirs, File.pathSeparator)
+												.render()));
 							}
 							if (workspaceRootDir.nonEmpty()) {
-								args = args.$colon$plus(s(LongKeys.CAmkES_workspaceRootDir())).$colon$plus(workspaceRootDir.get());
+								args = args.$colon$plus(s(LongKeys.CAmkES_Microkit_workspaceRootDir()))
+										.$colon$plus(workspaceRootDir.get());
 							}
 
 							// ROS2 Options
@@ -342,8 +346,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							String sep = File.separator;
 							File smt2FileLocation = new File(new File(_slangOutputDir.string()),
 									"src" + sep + "c" + sep + "camkes" + sep + "proof" + sep + "smt2_case.smt2");
-							if (_camkesOutputDir != null) {
-								smt2FileLocation = new File(new File(_camkesOutputDir.string()),
+							if (_sel4OutputDir != null) {
+								smt2FileLocation = new File(new File(_sel4OutputDir.string()),
 										"proof" + sep + "smt2_case.smt2");
 							}
 
