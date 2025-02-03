@@ -42,14 +42,7 @@ public class AirUpdater extends SireumTest {
 	public void updateAirHamr() {
 
 		List<File> hamrModelsDirs = VisitorUtil.toIList(
-				new File(SIREUM_HOME() + "/hamr/codegen/jvm/src/test/resources/models"), //
-				new File(SIREUM_HOME() + "/hamr/codegen/arsit/jvm/src/test/scala/models"), //
-				new File(SIREUM_HOME()
-						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/sirfur_omnibus/gumbo/git_models/temp_control/simple_temp_aadl"), //
-				new File(SIREUM_HOME()
-						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/sirfur_omnibus/gumbo/git_models/temp_control/unit_temp_aadl"), //
-				new File(SIREUM_HOME()
-						+ "/hamr/codegen/jvm/src/test-ext/gumbo/resources/models/GumboAdventiumTest/simple_temp_aadl/aadl"));
+				new File(SIREUM_HOME() + "/hamr/codegen/jvm/src/test/resources/models"));
 
 		for (File hamrModelsDir : hamrModelsDirs) {
 			if (hamrModelsDir.exists()) {
@@ -59,19 +52,6 @@ public class AirUpdater extends SireumTest {
 			} else {
 				System.out.println("Directory does not exist: " + hamrModelsDir);
 			}
-		}
-	}
-
-	@Test
-	public void updateAirHamr2() {
-
-		File hamrModelsDir = new File("/home/vagrant/devel/case/case-loonwerks/TA5/tool-evaluation-4/HAMR/examples");
-		if (hamrModelsDir.exists()) {
-			for (AadlSystem system : AadlProjectUtil.findSystems(hamrModelsDir)) {
-				regen(system);
-			}
-		} else {
-			System.out.println("Directory does not exist: " + hamrModelsDir);
 		}
 	}
 
@@ -98,7 +78,7 @@ public class AirUpdater extends SireumTest {
 
 		if (reporter.hasError()) {
 			reporter.printMessages();
-			assert false : "Reporter has errors";
+			assert false : "Reporter has errors for " + system.systemImplementationName;
 		}
 
 		assert instance != null : "System is null " + system.systemImplementationName;

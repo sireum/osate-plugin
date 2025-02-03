@@ -58,9 +58,11 @@ public class AadlProjectUtil {
 				ret.addAll(findSystems(file));
 			}
 		} else {
-			if (f.getName().equals(".project")) {
+			if (f.getName().equals(".project") && !IOUtil.collectFiles(f.getParentFile(), ".aadl", true).isEmpty()) {
 
 				AadlProject project = createAadlProject(f.getParentFile());
+
+				boolean add = true;
 
 				String systemImplName = null;
 				Optional<File> systemImplFile = Optional.empty();
@@ -68,15 +70,20 @@ public class AadlProjectUtil {
 					for (String line : IOUtil.readFile(a).split("\n")) {
 						String SYS_IMPL = "system implementation";
 						if (line.toLowerCase().contains(SYS_IMPL)) {
-							assertHalt(!systemImplFile.isPresent(),
-									"Found multiple system implementations in " + f.getParent());
-							systemImplFile = Optional.of(a);
-							systemImplName = line.substring(line.indexOf(SYS_IMPL) + SYS_IMPL.length()).trim();
+							if (systemImplFile.isPresent()) {
+								addWarning("Found multiple system implementations, please provide a .system file for: " + f.getParent());
+								add = false;
+							} else {
+								systemImplFile = Optional.of(a);
+								systemImplName = line.substring(line.indexOf(SYS_IMPL) + SYS_IMPL.length()).trim();
+							}
 						}
 					}
 				}
 
-				ret.add(AadlSystem.makeAadlSystem(systemImplName, systemImplFile, Arrays.asList(project), null));
+				if (add) {
+					ret.add(AadlSystem.makeAadlSystem(systemImplName, systemImplFile, Arrays.asList(project), null));
+				}
 			} else if (f.getName().startsWith(".system")) {
 				ret.add(AadlProjectUtil.createAadlSystem(f));
 			}
