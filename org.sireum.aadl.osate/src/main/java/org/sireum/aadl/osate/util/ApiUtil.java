@@ -54,6 +54,7 @@ public class ApiUtil {
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2Dir()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2NodesLanguage()))
 				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_ros2LaunchLanguage()))
+				.$colon$plus(new org.sireum.String(org.sireum.hamr.codegen.LongKeys.ROS2_invertTopicBinding()))
 				.$colon$plus(
 						new org.sireum.String(org.sireum.hamr.codegen.LongKeys.Experimental_experimentalOptions()));
 

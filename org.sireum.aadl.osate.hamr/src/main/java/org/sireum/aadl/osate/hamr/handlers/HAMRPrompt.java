@@ -84,6 +84,9 @@ public class HAMRPrompt extends TitleAreaDialog {
 			"ROS2 Directory", "The path to your ROS2 installation, including the version");
 	public final HAMROption OPTION_ROS2_NODES_LANGUAGE = new HAMROption("ros2.nodes.language", "Nodes Language", "The programming language for the generated node files");
 	public final HAMROption OPTION_ROS2_LAUNCH_LANGUAGE = new HAMROption("ros2.launch.language", "Launch Language", "The programming language for the launch file");
+	public final HAMROption OPTION_ROS2_INVERT_TOPIC_BINDING = new HAMROption("ros2.invert.topic.binding",
+			"Invert Topic Binding",
+			"By default, topic names are based on in ports, and fan out ports would have multiple publishers.  This option inverts that behavior");
 
 	public Platform getOptionPlatform() {
 		return Platform.valueOf(getSavedStringOption(OPTION_PLATFORM));
@@ -167,6 +170,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 		} else {
 			return Ros2LaunchLanguage.valueOf(getSavedStringOption(OPTION_ROS2_LAUNCH_LANGUAGE));
 		}
+	}
+
+	public boolean getOptionRos2InvertTopicBinding() {
+		return getSavedBooleanOption(OPTION_ROS2_INVERT_TOPIC_BINDING);
 	}
 
 
@@ -749,6 +756,19 @@ public class HAMRPrompt extends TitleAreaDialog {
 			 ****************************************************************/
 			{
 				HAMROption subKey = OPTION_ROS2_STRICT_AADL_MODE;
+
+				Button btn = new Button(grpContainer, SWT.CHECK);
+				btn.setText(subKey.displayText);
+				btn.setToolTipText(subKey.toolTipText);
+				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
+				registerOptionControl(subKey, btn, false);
+			}
+
+			/****************************************************************
+			 * GROUP ROW - ROS2 Invert Topic Binding
+			 ****************************************************************/
+			{
+				HAMROption subKey = OPTION_ROS2_INVERT_TOPIC_BINDING;
 
 				Button btn = new Button(grpContainer, SWT.CHECK);
 				btn.setText(subKey.displayText);

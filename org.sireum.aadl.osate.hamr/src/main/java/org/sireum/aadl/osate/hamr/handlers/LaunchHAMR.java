@@ -215,6 +215,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 
 							boolean strictAadlMode = prompt.getOptionRos2StrictAadlMode();
+							boolean invertTopicBinding = prompt.getOptionRos2InvertTopicBinding();
 							Option<org.sireum.String> ros2OutputWorkspaceDir = CodeGenJavaFactory
 									.sireumOption(_ros2OutputWorkspaceDir);
 							Option<org.sireum.String> ros2Dir = CodeGenJavaFactory.sireumOption(_ros2Ros2Dir);
@@ -306,6 +307,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							// ROS2 Options
 							if (strictAadlMode) {
 								args = args.$colon$plus(s(LongKeys.ROS2_strictAadlMode()));
+							}
+							if (invertTopicBinding) {
+								args = args.$colon$plus(s(LongKeys.ROS2_invertTopicBinding()));
+
 							}
 							if (ros2OutputWorkspaceDir.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.ROS2_ros2OutputWorkspaceDir())).$colon$plus(ros2OutputWorkspaceDir.get());
