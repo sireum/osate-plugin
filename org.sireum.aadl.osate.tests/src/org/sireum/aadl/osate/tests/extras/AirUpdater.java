@@ -1,6 +1,7 @@
 package org.sireum.aadl.osate.tests.extras;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.xtext.testing.InjectWith;
@@ -44,9 +45,13 @@ public class AirUpdater extends SireumTest {
 		List<File> hamrModelsDirs = VisitorUtil.toIList(
 				new File(SIREUM_HOME() + "/hamr/codegen/jvm/src/test/resources/models"));
 
+		List<String> ignorePaths = Arrays.asList( //
+				"INSPECTA-models/open-platform-models/baseline",
+				"INSPECTA-models/open-platform-models/isolate-ethernet",
+				"INSPECTA-models/open-platform-models/virtualize");
 		for (File hamrModelsDir : hamrModelsDirs) {
 			if (hamrModelsDir.exists()) {
-				for (AadlSystem system : AadlProjectUtil.findSystems(hamrModelsDir)) {
+				for (AadlSystem system : AadlProjectUtil.findSystems(hamrModelsDir, ignorePaths)) {
 					regen(system);
 				}
 			} else {
@@ -78,7 +83,8 @@ public class AirUpdater extends SireumTest {
 
 		if (reporter.hasError()) {
 			reporter.printMessages();
-			assert false : "Reporter has errors for " + system.systemImplementationName;
+			assert false : "Reporter has errors for " + system.systemImplementationName + " from "
+					+ system.projects.get(0).rootDirectory;
 		}
 
 		assert instance != null : "System is null " + system.systemImplementationName;

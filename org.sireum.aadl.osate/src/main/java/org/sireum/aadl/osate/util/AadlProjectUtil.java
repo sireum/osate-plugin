@@ -1,6 +1,7 @@
 package org.sireum.aadl.osate.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,21 +42,31 @@ public class AadlProjectUtil {
 	}
 
 	public static List<AadlSystem> findSystems(File f) {
+		return findSystems(f, new ArrayList<>());
+	}
+
+	// @param ignorePaths f will be skipped/ignored if its canonical path contains any of the strings in ignorePaths
+	public static List<AadlSystem> findSystems(File f, List<String> ignorePaths) {
 		List<AadlSystem> ret = new ArrayList<>();
 		if (f.isDirectory()) {
+			try {
+				if (ignorePaths.stream().noneMatch(f.getCanonicalPath()::contains)) {
+					List<File> systems = IOUtil.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
+					if (!systems.isEmpty()) {
+						// found user provided .system file so use that
 
-			List<File> systems = IOUtil.collectFiles(f, ".system", false, SearchType.STARTS_WITH);
-			if (!systems.isEmpty()) {
-				// found user provided .system file so use that
+						for (File systemFile : systems) {
+							ret.add(AadlProjectUtil.createAadlSystem(systemFile));
+						}
+						return ret;
+					}
 
-				for (File systemFile : systems) {
-					ret.add(AadlProjectUtil.createAadlSystem(systemFile));
+					for (File file : f.listFiles()) {
+						ret.addAll(findSystems(file, ignorePaths));
+					}
 				}
-				return ret;
-			}
+			} catch (IOException e) {
 
-			for (File file : f.listFiles()) {
-				ret.addAll(findSystems(file));
 			}
 		} else {
 			if (f.getName().equals(".project") && !IOUtil.collectFiles(f.getParentFile(), ".aadl", true).isEmpty()) {
