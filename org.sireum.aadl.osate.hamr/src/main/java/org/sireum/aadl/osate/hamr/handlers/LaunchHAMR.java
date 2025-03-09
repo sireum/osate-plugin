@@ -18,7 +18,6 @@ import org.osate.aadl2.instance.SystemInstance;
 import org.osate.ui.dialogs.Dialog;
 import org.sireum.Cli.SireumTopOption;
 import org.sireum.IS;
-import org.sireum.MS;
 import org.sireum.Option;
 import org.sireum.Z;
 import org.sireum.aadl.osate.hamr.PreferenceValues;
@@ -35,6 +34,7 @@ import org.sireum.aadl.osate.util.VisitorUtil;
 import org.sireum.hamr.codegen.CodeGenJavaFactory;
 import org.sireum.hamr.codegen.LongKeys;
 import org.sireum.hamr.codegen.arsit.plugin.ArsitPlugin;
+import org.sireum.hamr.codegen.common.CommonUtil.StoreValue;
 import org.sireum.hamr.codegen.common.plugin.Plugin;
 import org.sireum.hamr.ir.Aadl;
 import org.sireum.message.Reporter;
@@ -125,8 +125,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 			}
 
 			// TODO: provide mechanism to disable gumbo plugin when bless2air is present
-			MS<Z, Plugin> eplugins = VisitorUtil.toISZ(HAMRPluginUtil.getHamrPlugins(si)).toMSZ();
-			final MS<Z, Plugin> hamrPlugins = eplugins.isEmpty() //
+			IS<Z, Plugin> eplugins = VisitorUtil.toISZ(HAMRPluginUtil.getHamrPlugins(si));
+			final IS<Z, Plugin> hamrPlugins = eplugins.isEmpty() //
 					? ArsitPlugin.gumboEnhancedPlugins()
 					: eplugins.$plus$plus(ArsitPlugin.defaultPlugins());
 
@@ -329,7 +329,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 
 							Option<SireumTopOption> opts = getOptions(args);
 							if (opts.nonEmpty() && opts.get() instanceof org.sireum.Cli.SireumHamrCodegenOption) {
-								org.sireum.cli.HAMR.codeGenReporterP(model, (org.sireum.Cli.SireumHamrCodegenOption) opts.get(), hamrPlugins, reporter);
+								org.sireum.Map<org.sireum.String, StoreValue> store = org.sireum.Map.empty();
+								org.sireum.cli.HAMR.codeGenReporterP(model, (org.sireum.Cli.SireumHamrCodegenOption) opts.get(), hamrPlugins, store, reporter);
 								if (reporter.hasError()) {
 									codegenRet = org.sireum.Z.apply(1);
 								}
