@@ -110,7 +110,7 @@ public class VisitorUtil {
 		return Collections.emptySet();
 	}
 
-	private static String getResourcePath(EObject component) {
+	public static String getResourcePath(EObject component) {
 		Resource res = component.eResource();
 		URI uri = res.getURI();
 		IPath path = Util.toIFile(uri).getFullPath();
@@ -127,8 +127,6 @@ public class VisitorUtil {
 	}
 
 	public static Position buildPosition(EObject elem) {
-
-		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 		EObject obj = elem;
 		if (obj == null) {
 			return null;
@@ -137,30 +135,13 @@ public class VisitorUtil {
 		INode node = NodeModelUtils.findActualNodeFor(obj);
 
 		if (node != null) {
-			int startOffset = node.getOffset();
-			int endOffset = node.getEndOffset();
-			INode rnode = node.getRootNode();
-
-			if (rnode.getSemanticElement() != null && //
-					(rnode.getSemanticElement() instanceof AnnexLibrary
-							|| rnode.getSemanticElement() instanceof AnnexSubclause)) {
-				AadlPackage pack = AadlUtil.getContainingPackage(node.getRootNode().getSemanticElement());
-				INode ccNode = NodeModelUtils.findActualNodeFor(pack);
-				rnode = ccNode.getRootNode();
-
-			}
-
-			LineAndColumn startLC = NodeModelUtils.getLineAndColumn(rnode, startOffset);
-			LineAndColumn endLC = NodeModelUtils.getLineAndColumn(rnode, endOffset);
-
-			return factory.flatPos(getResourcePath(elem), startLC.getLine(), startLC.getColumn(), endLC.getLine(),
-					endLC.getColumn(), node.getOffset(), node.getLength());
-
+			return buildPositionFromINode(node, getResourcePath(elem));
 		} else {
 			EObject defaultannex = AadlUtil.getContainingDefaultAnnex(obj);
 			if (defaultannex != null) {
 				node = NodeModelUtils.findActualNodeFor(obj);
 				if (node != null) {
+					final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 					return factory.flatPos(getResourcePath(elem), node.getTotalStartLine(), node.getOffset(),
 							node.getTotalEndLine(), node.getEndOffset(), node.getOffset(), node.getLength());
 				}
@@ -169,6 +150,28 @@ public class VisitorUtil {
 		return null;
 	}
 
+	public static Position buildPositionFromINode(INode node, String uri) {
+		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
+		int startOffset = node.getOffset();
+		int endOffset = node.getEndOffset();
+		INode rnode = node.getRootNode();
+
+		if (rnode.getSemanticElement() != null && //
+				(rnode.getSemanticElement() instanceof AnnexLibrary
+						|| rnode.getSemanticElement() instanceof AnnexSubclause)) {
+			AadlPackage pack = AadlUtil.getContainingPackage(node.getRootNode().getSemanticElement());
+			INode ccNode = NodeModelUtils.findActualNodeFor(pack);
+			rnode = ccNode.getRootNode();
+
+		}
+
+		LineAndColumn startLC = NodeModelUtils.getLineAndColumn(rnode, startOffset);
+		LineAndColumn endLC = NodeModelUtils.getLineAndColumn(rnode, endOffset);
+
+		return factory.flatPos(uri, startLC.getLine(), startLC.getColumn(), endLC.getLine(),
+				endLC.getColumn(), node.getOffset(), node.getLength());
+	}
+	
 	public static void reportError(String msg, String msgKind, Reporter reporter) {
 		reportError(false, null, msg, msgKind, reporter);
 	}
