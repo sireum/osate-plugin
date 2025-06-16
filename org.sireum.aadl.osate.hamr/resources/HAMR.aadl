@@ -50,6 +50,24 @@ property set HAMR is
   Default_Max_Sequence_Size : aadlinteger applies to (processor, virtual processor, system implementation);
   
   
+--- Specifies the kind of array size semantics for an array data type.
+--- <ul>
+---   <li><b>Fixed</b>: The array always has exactly the number of elements specified in
+---   the Data_Model::Dimension property. Both memory allocation and logical
+---   content size are fixed.
+---
+---   <li><b>Bounded</b>: The array may contain fewer elements than specified by
+---   Data_Model::Dimension, but never more. The full size may be allocated in
+---   memory, but only part of it is considered logically valid.
+---
+---   <li><b>Unbounded</b>: The array does not have a statically known size limit.
+---   If Data_Model::Dimension is provided then all dimensions must be equal to 0. 
+---   The array may grow arbitrarily, and size checks must be enforced at runtime.
+--- </ul>
+
+  Array_Size_Kind : enumeration (Fixed, Bounded, Unbounded) applies to (data);
+  
+  
 --- The <b>Max_String_Size</b> property specifies the the maximum size for Slang strings
 --- when transpiling to C.
 

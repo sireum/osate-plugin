@@ -47,7 +47,6 @@ public class AirUpdater extends SireumTest {
 
 		List<String> ignorePaths = Arrays.asList( //
 				"INSPECTA-models/open-platform-models/baseline",
-				"INSPECTA-models/open-platform-models/isolate-ethernet",
 				"INSPECTA-models/open-platform-models/virtualize");
 		for (File hamrModelsDir : hamrModelsDirs) {
 			if (hamrModelsDir.exists()) {
