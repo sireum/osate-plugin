@@ -197,25 +197,27 @@ public class VisitorUtil {
 	public static void validate(ResourceSet rs, String toolName, Reporter reporter) {
 		final org.sireum.hamr.ir.AadlASTFactory factory = new org.sireum.hamr.ir.AadlASTFactory();
 		for (Resource r : rs.getResources()) {
-			IResourceValidator validator = ((XtextResource) r).getResourceServiceProvider().getResourceValidator();
-			List<Issue> issues = validator.validate(r, CheckMode.ALL, CancelIndicator.NullImpl);
-			for (Issue i : issues) {
-				Option<Position> p = SlangUtil.toSome(factory.flatPos(i.getUriToProblem().toString(), i.getLineNumber(),
-						i.getColumn(),
-						i.getLineNumberEnd(), i.getColumnEnd(), i.getOffset(), i.getLength()));
-				switch(i.getSeverity()) {
-				case INFO:
-					reporter.info(p, toolName, i.getMessage());
-					break;
-				case WARNING:
-					reporter.warn(p, toolName, i.getMessage());
-					break;
-				case ERROR:
-					reporter.error(p, toolName, i.getMessage());
-					break;
-				case IGNORE:
-					// I guess we'll ignore it
-					break;
+			if (r.getURI().isPlatformResource()) {
+				IResourceValidator validator = ((XtextResource) r).getResourceServiceProvider().getResourceValidator();
+				List<Issue> issues = validator.validate(r, CheckMode.ALL, CancelIndicator.NullImpl);
+				for (Issue i : issues) {
+					Option<Position> p = SlangUtil.toSome(factory.flatPos(i.getUriToProblem().toString(), i.getLineNumber(),
+							i.getColumn(),
+							i.getLineNumberEnd(), i.getColumnEnd(), i.getOffset(), i.getLength()));
+					switch(i.getSeverity()) {
+					case INFO:
+						reporter.info(p, toolName, i.getMessage());
+						break;
+					case WARNING:
+						reporter.warn(p, toolName, i.getMessage());
+						break;
+					case ERROR:
+						reporter.error(p, toolName, i.getMessage());
+						break;
+					case IGNORE:
+						// I guess we'll ignore it
+						break;
+					}
 				}
 			}
 		}

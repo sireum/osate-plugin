@@ -314,15 +314,16 @@ public class Phantom implements IApplication {
 
 	SystemInstance getSystemInstance(AadlSystem system, ResourceSet rset) {
 		try {
+
+			populateResourceSet(system.projects, rset);
+			
 			Reporter reporter = Util.createReporter();
 			VisitorUtil.validate(rset, "Phantom", reporter);
 			reporter.printMessages();
 			if (reporter.hasError()) {
 				return null;
 			}
-
-			populateResourceSet(system.projects, rset);
-
+			
 			SystemImplementation sysImpl = null;
 
 			if (!system.systemFileContainer.isPresent()) {
