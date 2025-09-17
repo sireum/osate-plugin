@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -307,7 +308,7 @@ public class Phantom implements IApplication {
 			ret = org.sireum.cli.HAMR.codeGen(ho, reporter).toInt();
 		}
 
-		addInfo("HAMR Codegen was " + ((ret != 0) ? "un" : "") + "succesful");
+		addInfo("HAMR Codegen was " + ((ret != 0) ? "un" : "") + "successful");
 
 		return ret;
 	}
@@ -316,6 +317,8 @@ public class Phantom implements IApplication {
 		try {
 
 			populateResourceSet(system.projects, rset);
+			
+			EcoreUtil.resolveAll(rset);
 			
 			Reporter reporter = Util.createReporter();
 			VisitorUtil.validate(rset, "Phantom", reporter);
