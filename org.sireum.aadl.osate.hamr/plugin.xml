@@ -90,6 +90,10 @@
             file="resources/HAMR.aadl"
             id="org.sireum.aadl.osate.hamr.aadlcontribution.hamr">
       </aadlcontribution>
+     <aadlcontribution
+            file="resources/HAMR_Microkit.aadl"
+            id="org.sireum.aadl.osate.hamr.aadlcontribution.microkit">
+      </aadlcontribution>      
       <aadlcontribution
             file="resources/TB_SYS.aadl"
             id="org.sireum.aadl.osate.hamr.aadlcontribution.tbsys">

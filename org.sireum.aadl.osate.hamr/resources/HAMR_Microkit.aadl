@@ -1,0 +1,13 @@
+property set HAMR_Microkit is
+
+--- The <b>SMC</b> property allows a protection domain to give an SMC call for the kernel to perform. 
+--- Only available when the kernel has been configured with <b>KernelAllowSMCCalls</b>. Defaults to false.
+
+  SMC : inherit aadlboolean applies to ( process, thread );
+ 
+
+--- The <b>Passive</b> property indicates that the protection domain will be passive and 
+--- thus have its scheduling context removed after initialization; defaults to false
+
+  Passive : inherit aadlboolean applies to ( process, thread );
+end HAMR_Microkit;

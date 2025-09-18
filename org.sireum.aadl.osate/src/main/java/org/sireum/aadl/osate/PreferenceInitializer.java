@@ -10,7 +10,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 	public void initializeDefaultPreferences() {
 		IPreferenceStore store = Activator.getDefault().getPreferenceStore();
 
-		store.setDefault(PreferenceConstants.SERIALIZATION_METHOD_OPT, SerializerType.MSG_PACK.toString());
+		store.setDefault(PreferenceConstants.SERIALIZATION_METHOD_OPT, SerializerType.JSON.toString());
 
 	}
 
