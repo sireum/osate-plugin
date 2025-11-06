@@ -51,6 +51,7 @@ public class AirUpdater extends SireumTest {
 		for (File hamrModelsDir : hamrModelsDirs) {
 			if (hamrModelsDir.exists()) {
 				for (AadlSystem system : AadlProjectUtil.findSystems(hamrModelsDir, ignorePaths)) {
+					System.out.println("Processing: " + system.projects.get(0).rootDirectory);
 					regen(system);
 				}
 			} else {
