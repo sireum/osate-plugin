@@ -186,12 +186,16 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							boolean runtimeMonitoring = prompt.getOptionEnableRuntimeMonitoring();
 							String platform = prompt.getOptionPlatform().name();
 							Option<org.sireum.String> outputDir = CodeGenJavaFactory.sireumOption(_outputDir);
+							//
+							
 							Option<org.sireum.String> slangOutputDir = CodeGenJavaFactory.sireumOption(_slangOutputDir);
 							Option<org.sireum.String> slangPackageName = CodeGenJavaFactory.sireumOption(_slangPackageName);
 							boolean noProyekIve = !PreferenceValues.HAMR_RUN_PROYEK_IVE_OPT.getValue();
 							boolean noEmbedArt = !PreferenceValues.HAMR_EMBED_ART_OPT.getValue();
 							boolean devicesAsThreads = PreferenceValues.HAMR_DEVICES_AS_THREADS_OPT.getValue();
 							boolean genSbtMill = PreferenceValues.HAMR_GEN_SBT_MILL_OPT.getValue();
+							//
+							
 							IS<Z, org.sireum.String> slangAuxCodeDirs = prompt.getOptionCAuxSourceDirectory().equals("")
 									? VisitorUtil.toISZ()
 									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionCAuxSourceDirectory()));
@@ -202,6 +206,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Z maxStringSize = SlangUtil.toZ(prompt.getOptionMaxStringSize());
 							Z maxArraySize = SlangUtil.toZ(prompt.getOptionMaxSequenceSize());
 							boolean runTranspiler = PreferenceValues.HAMR_RUN_TRANSPILER_OPT.getValue();
+							//
+							
+							boolean verusAttributeSyntax = prompt.getOptionVerusAttributeSyntax();
+							String scheduling = prompt.getOptionScheduling().name();
 							Option<org.sireum.String> sel4OutputDirectory = CodeGenJavaFactory
 									.sireumOption(_sel4OutputDir);
 							IS<Z, org.sireum.String> sel4AuxCodeDirs = prompt.getOptionSel4AuxSrcDir().equals("")
@@ -209,7 +217,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionSel4AuxSrcDir()));
 							Option<org.sireum.String> workspaceRootDir = CodeGenJavaFactory
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
-
+							//
+							
 							boolean strictAadlMode = prompt.getOptionRos2StrictAadlMode();
 							boolean invertTopicBinding = prompt.getOptionRos2InvertTopicBinding();
 							Option<org.sireum.String> ros2OutputWorkspaceDir = CodeGenJavaFactory
@@ -217,7 +226,8 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							Option<org.sireum.String> ros2Dir = CodeGenJavaFactory.sireumOption(_ros2Ros2Dir);
 							String ros2NodesLanguage = prompt.getOptionRos2NodesLanguage().name();
 							String ros2LaunchLanguage = prompt.getOptionRos2LaunchLanguage().name();
-
+							//
+							
 							List<org.sireum.String> exOptions = new ArrayList<>();
 							exOptions.add(new org.sireum.String("PROCESS_BTS_NODES"));
 
@@ -286,6 +296,10 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							}
 
 							// CAmkES/Microkit Options
+							if (verusAttributeSyntax) {
+								args = args.$colon$plus(s(LongKeys.CAmkES_Microkit_verusAttributeSyntax()));
+							}
+							args = args.$colon$plus(s(LongKeys.CAmkES_Microkit_scheduling())).$colon$plus(s(scheduling));
 							if (sel4OutputDirectory.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.CAmkES_Microkit_sel4OutputDir()))
 										.$colon$plus(sel4OutputDirectory.get());

@@ -38,6 +38,7 @@ import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.HW;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Platform;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Ros2LaunchLanguage;
 import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Ros2NodesLanguage;
+import org.sireum.aadl.osate.hamr.handlers.HAMRPropertyProvider.Scheduling;
 
 public class HAMRPrompt extends TitleAreaDialog {
 
@@ -69,6 +70,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 	public final HAMROption OPTION_C_AUX_SRC_DIRECTORY = new HAMROption("c.aux.src.directory", "Aux Code Directory",
 			"Directory containing C code to be included in HAMR project");
 
+	public final HAMROption OPTION_VERUS_ATTRIBUTE_SYNTAX = new HAMROption("verus.attribute.syntax", "Verus Attribute Syntax",
+			"Use Verus attribute syntax (#[verus_spec], #[verus_verify]) instead of the verus! macro for exec functions");
+	public final HAMROption OPTION_SCHEDULING = new HAMROption("scheduling", "Scheduling",
+			"Scheduling type");
 	public final HAMROption OPTION_SEL4_OUTPUT_DIRECTORY = new HAMROption("sel4.output.directory",
 			"seL4 Output Directory", "Output directory for the generated CAmkES/Microkit project file");
 	public final HAMROption OPTION_SEL4_AUX_SRC_DIR = new HAMROption("sel4.aux.src.dir",
@@ -136,6 +141,18 @@ public class HAMRPrompt extends TitleAreaDialog {
 		return Integer.valueOf(getSavedStringOption(OPTION_BIT_WIDTH));
 	}
 
+	public boolean getOptionVerusAttributeSyntax() {
+		return getSavedBooleanOption(OPTION_VERUS_ATTRIBUTE_SYNTAX);
+	}
+	
+	public Scheduling getOptionScheduling() {
+		if (getSavedStringOption(OPTION_SCHEDULING).isBlank()) {
+			return Scheduling.Domain;
+		} else {
+			return Scheduling.valueOf(getSavedStringOption(OPTION_SCHEDULING));
+		}
+	}
+	
 	public String getOptionSel4OutputDirectory() {
 		return getSavedStringOption(OPTION_SEL4_OUTPUT_DIRECTORY);
 	}
@@ -393,6 +410,27 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 		//fillerRow(container, numCols);
 
+
+		/****************************************************************
+		 * ROW - RUNTIME MONITORING
+		 ****************************************************************/
+		{
+			final HAMROption subkey = OPTION_ENABLE_RUNTIME_MONITORING;
+
+			// COL 1
+			Button btn = new Button(container, SWT.CHECK);
+			btn.setText(subkey.displayText);
+			btn.setToolTipText(subkey.toolTipText);
+			btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numCols, 1));
+			registerOptionControl(subkey, btn, true);
+
+			// COL 2
+			// registerViewControl(key, addColumnPad(container)); // col padding
+		}
+		
+		
+		
+		
 		/****************************************************************
 		 * ROW - HW
 		 ****************************************************************/
@@ -484,22 +522,6 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 			// fillerRow(container, numCols);
 
-			/****************************************************************
-			 * ROW
-			 ****************************************************************/
-			{
-				final HAMROption subkey = OPTION_ENABLE_RUNTIME_MONITORING;
-
-				// COL 1
-				Button btn = new Button(grpContainer, SWT.CHECK);
-				btn.setText(subkey.displayText);
-				btn.setToolTipText(subkey.toolTipText);
-				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numCols, 1));
-				registerOptionControl(subkey, btn, false);
-
-				// COL 2
-				// registerViewControl(key, addColumnPad(container)); // col padding
-			}
 		}
 
 		//fillerRow(container, numCols);
@@ -666,6 +688,40 @@ public class HAMRPrompt extends TitleAreaDialog {
 			final GridLayout grpLayout = new GridLayout(numGroupCols, false);
 			grpContainer.setLayout(grpLayout);
 
+			
+			/****************************************************************
+			 * GROUP ROW - Verus Attribute Syntax
+			 ****************************************************************/
+			{
+				HAMROption subKey = OPTION_VERUS_ATTRIBUTE_SYNTAX;
+
+				Button btn = new Button(grpContainer, SWT.CHECK);
+				btn.setText(subKey.displayText);
+				btn.setToolTipText(subKey.toolTipText);
+				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
+				registerOptionControl(subKey, btn, false);
+			}
+			
+			/****************************************************************
+			 * ROW - Scheduling
+			 ****************************************************************/
+			{
+				final HAMROption subKey = OPTION_SCHEDULING;
+
+				// COL 1
+				addLabel(subKey.displayText, grpContainer).setToolTipText(key.toolTipText);
+
+				// COL 2
+				Combo cmb = new Combo(grpContainer, SWT.READ_ONLY);
+				cmb.setItems(getScheduling());
+				GridData gd = new GridData(SWT.LEFT, SWT.CENTER, true, false);
+				gd.widthHint = 100;
+				cmb.setLayoutData(gd);
+				registerOptionControl(subKey, cmb, false);
+
+				addColumnPad(grpContainer);
+			}
+			
 			/****************************************************************
 			 * ROW - seL4 Output Directory
 			 ****************************************************************/
@@ -954,7 +1010,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 	}
 
 	private Control registerOptionControl(HAMROption KEY, Control control, boolean addToViewControl) {
-		assert (!optionControls.containsKey(KEY));
+		assert !optionControls.containsKey(KEY) : "'" + KEY + "' already registered";
 		optionControls.put(KEY, control);
 		if (addToViewControl) {
 			registerViewControl(KEY, control);
@@ -1077,6 +1133,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 		}
 	}
 
+	private String[] getScheduling() {
+		return Arrays.asList(HAMRPropertyProvider.Scheduling.values()).stream().map(f -> f.toString()).toArray(String[]::new);
+	}
+	
 	private String[] getRos2NodesLanguages() {
 		return Arrays.asList(HAMRPropertyProvider.Ros2NodesLanguage.values()).stream().map(f -> f.toString()).toArray(String[]::new);
 	}
@@ -1147,6 +1207,9 @@ public class HAMRPrompt extends TitleAreaDialog {
 		List<HAMREntry> Base_controls = Arrays.asList( //
 				OPTION_PLATFORM, //
 				OPTION_OUTPUT_DIRECTORY);
+		
+		List<HAMREntry> RuntimeMonitoring_controls = Arrays.asList( //
+				OPTION_ENABLE_RUNTIME_MONITORING);
 
 		List<HAMREntry> Slang_controls = //
 				Arrays.asList(GROUP_SLANG);
@@ -1168,19 +1231,19 @@ public class HAMRPrompt extends TitleAreaDialog {
 		switch (p) {
 		case JVM:
 			hwItems = filterHW();
-			toShow = addAll(Base_controls, Slang_controls);
+			toShow = addAll(Base_controls, RuntimeMonitoring_controls, Slang_controls);
 			break;
 		case Linux:
 			hwItems = filterHW(HW.x86, HW.amd64);
-			toShow = addAll(Base_controls, Slang_controls, NIX_controls);
+			toShow = addAll(Base_controls, RuntimeMonitoring_controls, Slang_controls, NIX_controls);
 			break;
 		case macOS:
 			hwItems = filterHW(HW.amd64);
-			toShow = addAll(Base_controls, Slang_controls, NIX_controls);
+			toShow = addAll(Base_controls, RuntimeMonitoring_controls, Slang_controls, NIX_controls);
 			break;
 		case Cygwin:
 			hwItems = filterHW(HW.x86, HW.amd64);
-			toShow =  addAll(Base_controls, Slang_controls, NIX_controls);
+			toShow =  addAll(Base_controls, RuntimeMonitoring_controls, Slang_controls, NIX_controls);
 			break;
 		case seL4:
 			hwItems = filterHW(HW.QEMU, HW.ODROID_XU4);
@@ -1193,7 +1256,7 @@ public class HAMRPrompt extends TitleAreaDialog {
 			toShow = addAll(Base_controls, SEL4_controls);
 			break;
 		case Microkit:
-			toShow = addAll(Base_controls, SEL4_controls);
+			toShow = addAll(Base_controls, RuntimeMonitoring_controls, SEL4_controls);
 			break;
 		case ros2:
 			hwItems = filterHW();

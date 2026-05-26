@@ -52,6 +52,10 @@ public class HAMRPropertyProvider {
 		return r;
 	}
 
+	enum Scheduling {
+		Domain, UserLand
+	}
+	
 	enum Ros2NodesLanguage {
 		Python, Cpp
 	}
