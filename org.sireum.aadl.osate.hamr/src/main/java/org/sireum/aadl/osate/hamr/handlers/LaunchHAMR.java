@@ -215,6 +215,7 @@ public class LaunchHAMR extends AbstractSireumHandler {
 							IS<Z, org.sireum.String> sel4AuxCodeDirs = prompt.getOptionSel4AuxSrcDir().equals("")
 									? VisitorUtil.toISZ()
 									: VisitorUtil.toISZ(new org.sireum.String(prompt.getOptionSel4AuxSrcDir()));
+							boolean seL4AuxCodeSymlink = prompt.getOptionSel4AuxCodeSymlink();
 							Option<org.sireum.String> workspaceRootDir = CodeGenJavaFactory
 									.sireumOption(new org.sireum.String(workspaceRoot.getAbsolutePath()));
 							//
@@ -308,6 +309,9 @@ public class LaunchHAMR extends AbstractSireumHandler {
 								args = args.$colon$plus(s(LongKeys.CAmkES_Microkit_sel4AuxCodeDirs()))
 										.$colon$plus(s(CodeGenJavaFactory.iszToST(sel4AuxCodeDirs, File.pathSeparator)
 												.render()));
+							}
+							if (seL4AuxCodeSymlink) {
+								args = args.$colon$plus(s(LongKeys.CAmkES_Microkit_sel4AuxCodeSymlink()));
 							}
 							if (workspaceRootDir.nonEmpty()) {
 								args = args.$colon$plus(s(LongKeys.CAmkES_Microkit_workspaceRootDir()))

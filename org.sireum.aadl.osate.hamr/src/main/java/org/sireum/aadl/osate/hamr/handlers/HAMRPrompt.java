@@ -78,6 +78,8 @@ public class HAMRPrompt extends TitleAreaDialog {
 			"seL4 Output Directory", "Output directory for the generated CAmkES/Microkit project file");
 	public final HAMROption OPTION_SEL4_AUX_SRC_DIR = new HAMROption("sel4.aux.src.dir",
 			"seL4 Aux Code Directory", "Directories containing C files to be included in CAmkES/Microkit build");
+	public final HAMROption OPTION_SEL4_AUX_CODE_SYMLINK = new HAMROption("sel4.aux.code.symlink",
+			"seL4 Aux Code Symlink", "Symlink the aux code directories into the Microkit build rather than copying their C files");
 
 
 	public final HAMROption OPTION_ROS2_STRICT_AADL_MODE = new HAMROption("ros2.strict.aadl.mode",
@@ -159,6 +161,10 @@ public class HAMRPrompt extends TitleAreaDialog {
 
 	public String getOptionSel4AuxSrcDir() {
 		return getSavedStringOption(OPTION_SEL4_AUX_SRC_DIR);
+	}
+	
+	public Boolean getOptionSel4AuxCodeSymlink() {
+		return getSavedBooleanOption(OPTION_SEL4_AUX_CODE_SYMLINK);
 	}
 
 	public boolean getOptionRos2StrictAadlMode() {
@@ -786,6 +792,19 @@ public class HAMRPrompt extends TitleAreaDialog {
 				});
 				btn.setText("...");
 				btn.setLayoutData(new GridData(SWT.RIGHT, SWT.FILL, false, false));
+			}
+			
+			/****************************************************************
+			 * GROUP ROW - seL4 Aux Code Symlink
+			 ****************************************************************/
+			{
+				HAMROption subKey = OPTION_SEL4_AUX_CODE_SYMLINK;
+
+				Button btn = new Button(grpContainer, SWT.CHECK);
+				btn.setText(subKey.displayText);
+				btn.setToolTipText(subKey.toolTipText);
+				btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, numGroupCols, 1));
+				registerOptionControl(subKey, btn, false);
 			}
 		}
 

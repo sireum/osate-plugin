@@ -39,7 +39,6 @@ import org.sireum.SireumApi;
 import org.sireum.aadl.osate.util.AadlProjectUtil;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlProject;
 import org.sireum.aadl.osate.util.AadlProjectUtil.AadlSystem;
-import org.sireum.aadl.osate.util.ApiUtil;
 import org.sireum.aadl.osate.util.IOUtil;
 import org.sireum.aadl.osate.util.Util;
 import org.sireum.aadl.osate.util.Util.SerializerType;
@@ -105,8 +104,6 @@ public class Phantom implements IApplication {
 		}
 
 		XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
-
-		checkApiCompatibility();
 
 		if (resourceSet != null) {
 
@@ -510,16 +507,5 @@ public class Phantom implements IApplication {
 
 	void addWarning(String msg) {
 		System.out.println("Warning: " + msg);
-	}
-
-	void checkApiCompatibility() {
-		// HAMR Codegen's CI reg tests sets this environment variable.
-		if (System.getenv("CHECK_PHANTOM_HAMR_API_COMPATIBILITY") != null) {
-			// see javadoc for what this method is for
-			if (!ApiUtil.hamrCliApiCompatible(System.err)) {
-				throw new RuntimeException();
-			}
-			addInfo("HAMR plugin API compatibility check passed!");
-		}
 	}
 }
